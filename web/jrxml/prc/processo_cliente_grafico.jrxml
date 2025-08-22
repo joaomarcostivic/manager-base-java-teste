@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.3.1.final using JasperReports Library version 6.3.1  -->
+<!-- 2017-04-12T15:27:31 -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="processo_cliente_grafico" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="b585a798-47b7-4fa6-b465-64bfb12faed5">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="NM_CLIENTE" class="java.lang.String"/>
+	<parameter name="DT_INICIAL" class="java.lang.String"/>
+	<parameter name="IMG_LOGOMARCA" class="byte[]" isForPrompting="false"/>
+	<parameter name="NM_TP_PERIODO" class="java.lang.String"/>
+	<parameter name="NM_EMPRESA" class="java.lang.String"/>
+	<parameter name="DT_FINAL" class="java.lang.String"/>
+	<parameter name="NM_SITUACAO" class="java.lang.String"/>
+	<parameter name="NM_TIPO_ACAO" class="java.lang.String"/>
+	<parameter name="NM_RELATORIO" class="java.lang.String"/>
+	<parameter name="TP_RELATORIO" class="java.lang.Integer"/>
+	<parameter name="SUBREPORT_NAMES" class="java.util.ArrayList"/>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String"/>
+	<queryString language="SQL">
+		<![CDATA[]]>
+	</queryString>
+	<field name="rsmSituacoes" class="java.util.Collection"/>
+	<field name="CD_PESSOA" class="java.lang.Integer"/>
+	<field name="NM_PESSOA" class="java.lang.String"/>
+	<field name="rsmTipoAcao" class="java.util.Collection"/>
+	<group name="GroupCliente" keepTogether="true">
+		<groupExpression><![CDATA[$F{CD_PESSOA}]]></groupExpression>
+		<groupHeader>
+			<band height="411">
+				<rectangle>
+					<reportElement x="0" y="1" width="555" height="29" backcolor="#E8E8E8" uuid="5057c935-8090-4616-a4df-7c6853904066"/>
+					<graphicElement>
+						<pen lineWidth="0.0"/>
+					</graphicElement>
+				</rectangle>
+				<textField>
+					<reportElement x="1" y="0" width="553" height="28" backcolor="#BFBFBF" uuid="7a67e63c-4db9-498b-badf-ff583ff1d479">
+						<property name="local_mesure_unitheight" value="pixel"/>
+						<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					</reportElement>
+					<box topPadding="7" leftPadding="5" bottomPadding="7"/>
+					<textElement textAlignment="Center">
+						<font size="10" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{NM_PESSOA}]]></textFieldExpression>
+				</textField>
+				<subreport>
+					<reportElement isPrintRepeatedValues="false" x="0" y="31" width="555" height="135" uuid="264a3ac8-0872-4694-b215-445187e9ba30">
+						<property name="local_mesure_unitx" value="pixel"/>
+						<property name="com.jaspersoft.studio.unit.x" value="px"/>
+						<property name="local_mesure_unitwidth" value="pixel"/>
+						<property name="com.jaspersoft.studio.unit.width" value="px"/>
+						<property name="local_mesure_unitheight" value="pixel"/>
+						<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					</reportElement>
+					<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource($F{rsmSituacoes})]]></dataSourceExpression>
+					<subreportExpression><![CDATA[$P{SUBREPORT_DIR}+"/"+$P{SUBREPORT_NAMES}.get( 0 )+".jasper"]]></subreportExpression>
+				</subreport>
+				<subreport>
+					<reportElement isPrintRepeatedValues="false" x="0" y="240" width="553" height="170" uuid="76cb4774-ca36-4c1a-b69e-5297584d5738">
+						<property name="local_mesure_unitx" value="pixel"/>
+						<property name="com.jaspersoft.studio.unit.x" value="px"/>
+						<property name="local_mesure_unitwidth" value="pixel"/>
+						<property name="com.jaspersoft.studio.unit.width" value="px"/>
+						<property name="local_mesure_unitheight" value="pixel"/>
+						<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					</reportElement>
+					<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource($F{rsmTipoAcao})]]></dataSourceExpression>
+					<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "/" + $P{SUBREPORT_NAMES}.get( 1 ) + ".jasper"]]></subreportExpression>
+				</subreport>
+			</band>
+		</groupHeader>
+	</group>
+	<title>
+		<band height="51" splitType="Stretch">
+			<textField>
+				<reportElement x="104" y="0" width="372" height="25" uuid="006706fc-1218-4e42-bf73-52696800b466"/>
+				<textElement textAlignment="Center">
+					<font size="15"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{NM_EMPRESA}]]></textFieldExpression>
+			</textField>
+			<image scaleImage="RetainShape" hAlign="Center">
+				<reportElement x="1" y="0" width="103" height="47" isRemoveLineWhenBlank="true" uuid="658c84dc-73b2-4899-bfde-b3a72fd192d9"/>
+				<imageExpression><![CDATA[net.sf.jasperreports.engine.util.JRImageLoader.loadImage((byte[]) $P{IMG_LOGOMARCA})]]></imageExpression>
+			</image>
+			<textField>
+				<reportElement x="105" y="26" width="372" height="25" uuid="75a35633-bcbb-409e-a340-8ea05afc0423"/>
+				<textElement textAlignment="Center">
+					<font size="15"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Relatório de Gráfico por Cliente"]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="4">
+			<line>
+				<reportElement x="0" y="2" width="555" height="1" uuid="f90d8974-9b05-4f50-9561-76efddd5e7e0"/>
+			</line>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="15">
+			<line>
+				<reportElement x="0" y="14" width="555" height="1" uuid="14ffeb2f-4328-48fe-b044-74d1b325ca3a"/>
+			</line>
+			<line>
+				<reportElement x="0" y="0" width="555" height="1" uuid="43483376-aed1-435a-a60e-8ef958570164"/>
+			</line>
+		</band>
+	</columnHeader>
+	<pageFooter>
+		<band height="19" splitType="Stretch">
+			<textField pattern="dd/MM/yyyy HH:mm:ss">
+				<reportElement x="490" y="5" width="65" height="9" uuid="0d44b0be-dc37-41a9-a4da-de58394f126c"/>
+				<textElement>
+					<font size="7" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new SimpleDateFormat("dd/MM/yyyy").format(new java.util.Date())]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="35" y="5" width="13" height="9" uuid="49719f95-d9cc-4295-bfe1-4b837e61b3ec"/>
+				<textElement>
+					<font size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[ de]]></text>
+			</staticText>
+			<line>
+				<reportElement x="0" y="0" width="555" height="1" uuid="51f2970d-4e60-499f-8735-2224e3e89645">
+					<property name="local_mesure_unitheight" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<graphicElement>
+					<pen lineWidth="1.0"/>
+				</graphicElement>
+			</line>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement x="180" y="5" width="186" height="9" uuid="094729d9-6eaf-47fe-89ad-5511d6a90696"/>
+				<textElement textAlignment="Center">
+					<font size="7" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["JurisManager - Gestor de Processos Jurídicos"]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="5" width="25" height="9" uuid="191ec61a-bf76-4c77-ac89-3daedd7cba61"/>
+				<textElement>
+					<font size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Página]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true" pattern="">
+				<reportElement stretchType="RelativeToTallestObject" x="25" y="5" width="10" height="9" uuid="34f603b7-f070-4caf-8159-d4ddd7706394"/>
+				<textElement textAlignment="Right">
+					<font size="7" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="450" y="5" width="38" height="9" uuid="dd1d733e-adf4-4c58-bd3c-35eb2d153da5"/>
+				<textElement>
+					<font size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Emitido em ]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true" evaluationTime="Report" pattern="">
+				<reportElement x="48" y="5" width="12" height="9" uuid="307ae0f9-fbea-45cb-afd3-87673abd07d0">
+					<property name="local_mesure_unitwidth" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Left">
+					<font size="7" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="455" y="10" width="38" height="9" uuid="04b879b2-ff24-4899-baa6-c156e21d63fc"/>
+				<textElement>
+					<font size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Emitido em ]]></text>
+			</staticText>
+			<textField pattern="dd/MM/yyyy HH:mm:ss">
+				<reportElement x="495" y="10" width="65" height="9" uuid="6e44526b-6d28-4c86-9c01-162cf06d41cd"/>
+				<textElement>
+					<font size="7" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new SimpleDateFormat("dd/MM/yyyy").format(new java.util.Date())]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+</jasperReport>

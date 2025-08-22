@@ -1,0 +1,70 @@
+package com.tivic.manager.mob.lotes.service.impressao;
+
+import java.sql.SQLException;
+import java.util.List;
+
+import javax.ws.rs.core.NoContentException;
+import javax.ws.rs.sse.Sse;
+import javax.ws.rs.sse.SseEventSink;
+
+import com.tivic.manager.mob.Ait;
+import com.tivic.manager.mob.ServicoDetranDTO;
+import com.tivic.manager.mob.lotes.builders.impressao.LoteImpressaoSearch;
+import com.tivic.manager.mob.lotes.dto.impressao.AitDTO;
+import com.tivic.manager.mob.lotes.dto.impressao.CreateLoteImpressaoDTO;
+import com.tivic.manager.mob.lotes.dto.impressao.LoteImpressaoDTO;
+import com.tivic.manager.mob.lotes.dto.impressao.NipImpressaoDTO;
+import com.tivic.manager.mob.lotes.model.arquivo.Arquivo;
+import com.tivic.manager.mob.lotes.model.impressao.LoteImpressao;
+import com.tivic.manager.mob.lotes.model.impressao.LoteImpressaoAit;
+import com.tivic.manager.util.pagination.PagedResponse;
+import com.tivic.manager.wsdl.detran.mg.notificacao.alterarprazorecurso.AlteraPrazoRecursoDTO;
+import com.tivic.manager.wsdl.exceptions.ValidacaoException;
+import com.tivic.sol.connection.CustomConnection;
+import com.tivic.sol.search.SearchCriterios;
+
+public interface ILoteImpressaoService {
+	public LoteImpressao insert(CreateLoteImpressaoDTO loteImpressaoRequest) throws Exception;
+	public byte[] insertViaUnica(CreateLoteImpressaoDTO loteImpressaoRequest) throws Exception;
+	public LoteImpressao get(int cdLoteImpressao) throws Exception;
+	public List<LoteImpressao> find(SearchCriterios searchCriterios) throws Exception;
+	public byte[] processarLote(int cdLoteImpressao) throws Exception;
+	public PagedResponse<AitDTO> buscarAitsParaLoteImpressao(int tipoLote) throws ValidacaoException, Exception;
+	public void delete(int cdLoteImpressao) throws Exception;
+	public void delete(int cdLoteImpressao, CustomConnection customConnection) throws Exception;
+	public void iniciarGeracaoDocumentos(int cdLoteImpressao, int cdUsuario) throws Exception;
+	public void iniciarGeracaoDocumentos(int cdLoteImpressao, int cdUsuario, CustomConnection customConnection) throws Exception;
+	public void iniciarGeracaoDocumentosAit(int cdLoteImpressao, int cdUsuario, CustomConnection customConnection) throws Exception;
+	public void getStatusGeracaoDocumentos(SseEventSink sseEventSink, Sse sse, int cdLoteImpressao) throws Exception;
+	public PagedResponse<LoteImpressaoDTO> buscarLotes(LoteImpressaoSearch loteImpressaoSearch) throws ValidacaoException, Exception;
+	public byte[] imprimirLoteImpressao(int cdLoteImpressao) throws Exception;
+	public byte[] imprimirLoteImpressao(int cdLoteImpressao, CustomConnection customConnection) throws Exception;
+	public PagedResponse<LoteImpressaoDTO> buscarLotesAits(LoteImpressaoSearch loteImpressaoSearch) throws ValidacaoException, Exception;
+	public LoteImpressaoDTO buscarLote(LoteImpressaoSearch loteImpressaoSearch) throws Exception, NoContentException;
+	public byte[] gerarLoteNotificacaoNaiViaUnica(int cdAit, int cdUsuario) throws Exception;
+	public LoteImpressao save(LoteImpressao loteImpressao, CustomConnection customConnection) throws Exception;
+	public LoteImpressao gerarLoteNotificacaoAitViaUnica(List<Ait> aitList, int cdUsuario, int tipoLote) throws ValidacaoException, Exception;
+	public void gerarDocsLoteAitViaUnica(LoteImpressao loteImpressao, int cdUsuario, CustomConnection customConnection) throws Exception;
+	public Boolean verificarAitsComMesmoLote(int cdAit, int tpDocumento) throws Exception;
+	public byte[] imprimirLoteNotificacao(int cdLoteImpressao, CustomConnection customConnection) throws Exception;
+	public LoteImpressao gerarLoteNotificacaoAitViaUnica(CreateLoteImpressaoDTO createLoteImpressao, List<Ait> aitList) throws ValidacaoException, Exception;
+	public String getIdLote(int tpLoteImpressao);
+	public NipImpressaoDTO gerarLoteNotificacaoNipViaUnica(int cdAit, int cdUsuario) throws Exception;
+	public Ait atualizarDadosAit(Ait ait, CustomConnection customConnection) throws Exception;
+	public byte[] gerarNotificacaoNipComJuros(int cdAit, Boolean printPortal) throws Exception;
+	public byte[] gerarNotificacaoNicNipComJuros(int cdAit, Boolean printPortal) throws Exception;
+	public List<Ait> getAllAitsEmitirNAI() throws IllegalArgumentException, SQLException, Exception;
+	public List<Ait> getAllAitsEmitirNAI(CustomConnection customConnection) throws ValidacaoException, IllegalArgumentException, SQLException, Exception;
+	public List<ServicoDetranDTO> gerarMovimentoNotificacaoNaiLote(List<Ait> listAitsNais, int cdUsuario) throws Exception;
+	public List<Ait> getAllAitsEmitirFimPrazoDefesa() throws IllegalArgumentException, SQLException, Exception;
+	public List<Ait> getAllAitsEmitirFimPrazoDefesa(CustomConnection customConnection) throws Exception;
+	public List<ServicoDetranDTO> gerarMovimentoNotificacaoFimPrazoDefesa(List<Ait> listAitsNips, int cdUsuario) throws Exception;
+	public List<Ait> getAllAitsEmitirNIP() throws IllegalArgumentException, SQLException, Exception;
+	public List<Ait> getAllAitsEmitirNIP(CustomConnection customConnection) throws ValidacaoException, Exception;
+	public List<ServicoDetranDTO> gerarMovimentoNotificacaoNipLote(List<Ait> listAitsNips, int cdUsuario) throws ValidacaoException, Exception;
+	public List<LoteImpressaoAit> reiniciarGeracaoDocumentos(int cdLoteImpressao, int cdUsuario) throws Exception;
+	public Arquivo pegarArquivoLote(int cdLoteNotificacao, int tpArquivo) throws Exception;
+	public List<Ait> buscarAitLoteImpressao(int cdLoteImpressao, int tipoRecurso, CustomConnection customConnection) throws Exception;
+	public List<LoteImpressaoAit> excluirAitsLote(List<LoteImpressaoAit> loteImpressaoAitList, int cdUsuario) throws Exception;
+	public void atualizarLotePrazoRecurso(AlteraPrazoRecursoDTO alteraPrazoRecursoDTO, List<Ait> aits, List<LoteImpressaoAit> aitsNovoLote, CustomConnection customConnection) throws Exception;
+}

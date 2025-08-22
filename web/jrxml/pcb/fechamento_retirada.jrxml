@@ -1,0 +1,205 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="fechamento_retirada" language="groovy" pageWidth="555" pageHeight="802" columnWidth="555" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="dc8def0c-80d5-4bf2-8913-331cc550db80">
+	<property name="ireport.zoom" value="2.357947691000006"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<field name="NM_CONTA_FINANCEIRA" class="java.lang.String"/>
+	<field name="TP_CONTA" class="java.lang.String"/>
+	<field name="ID_EXTRATO" class="java.lang.String"/>
+	<field name="NM_RESPONSAVEL" class="java.lang.String"/>
+	<field name="DS_HISTORICO" class="java.lang.String"/>
+	<field name="VL_MOVIMENTO" class="java.lang.Double"/>
+	<variable name="vlTotalMovimento" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[$F{VL_MOVIMENTO}]]></variableExpression>
+		<initialValueExpression><![CDATA[new Double(0)]]></initialValueExpression>
+	</variable>
+	<columnHeader>
+		<band height="26" splitType="Stretch">
+			<staticText>
+				<reportElement uuid="30a7fd26-375b-4b42-886b-6af438191f55" x="1" y="0" width="553" height="13"/>
+				<textElement textAlignment="Center">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[RETIRADA/DEPÓSITO BANCÁRIO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="847d93c5-c4f5-4f4c-ba63-d3fe1535d55b" x="1" y="14" width="99" height="11"/>
+				<textElement textAlignment="Center">
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[Banco C/C]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="89098afe-bfb0-4802-94b9-97a57a71cf1d" x="101" y="14" width="87" height="11"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[Tipo]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="084c1fbc-d392-4045-8a32-b4d515267020" x="189" y="14" width="77" height="11"/>
+				<textElement textAlignment="Center">
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[DOC]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="56af5dbc-3e49-4724-8623-e7bac7d265ac" x="267" y="14" width="125" height="11"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[Responsavel]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="04f29870-68ce-47e0-97e4-db8ab054abb4" x="394" y="14" width="101" height="11"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[Observação]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="7c87c7c6-2b2f-45d0-ad25-552243d7e799" x="497" y="14" width="57" height="11"/>
+				<textElement textAlignment="Center">
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[Total]]></text>
+			</staticText>
+			<line>
+				<reportElement uuid="9292abce-ecde-4675-8d0b-daaa8cc07cad" x="0" y="-1" width="555" height="1"/>
+			</line>
+			<line>
+				<reportElement uuid="05293fef-59f2-4aa3-be53-22458fc820c0" x="554" y="0" width="1" height="13"/>
+			</line>
+			<line>
+				<reportElement uuid="f1942481-874b-40ee-9c0b-2e0eedd11808" x="0" y="13" width="555" height="1"/>
+			</line>
+			<line>
+				<reportElement uuid="8403c0fd-9ff7-4b00-b822-91efa6c4bc55" x="0" y="0" width="1" height="13"/>
+			</line>
+			<line>
+				<reportElement uuid="e6feff02-1c17-4446-aee0-17f9c19af89b" x="0" y="14" width="1" height="11"/>
+			</line>
+			<line>
+				<reportElement uuid="ffcee43d-3ccd-4409-977d-bbcadc9ca29a" x="0" y="25" width="555" height="1"/>
+			</line>
+			<line>
+				<reportElement uuid="06390a74-7f0d-4e73-8894-7db3119beacf" x="100" y="14" width="1" height="11"/>
+			</line>
+			<line>
+				<reportElement uuid="7cc7bbd3-cc23-450f-8256-7d0abffffd01" x="188" y="14" width="1" height="11"/>
+			</line>
+			<line>
+				<reportElement uuid="09038c9c-8b06-43d6-9996-3790ec5c52a8" x="266" y="14" width="1" height="11"/>
+			</line>
+			<line>
+				<reportElement uuid="d9c11d2f-68ce-4609-8fb2-42f814eb368e" x="392" y="14" width="1" height="11"/>
+			</line>
+			<line>
+				<reportElement uuid="1e635b4e-094d-45a7-a3b1-0b0449d90e52" x="496" y="14" width="1" height="12"/>
+			</line>
+			<line>
+				<reportElement uuid="d69ddb13-4b16-4baf-976f-68ffd74106a5" x="554" y="14" width="1" height="11"/>
+			</line>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="12" splitType="Stretch">
+			<line>
+				<reportElement uuid="e6feff02-1c17-4446-aee0-17f9c19af89b" x="0" y="0" width="1" height="12"/>
+			</line>
+			<line>
+				<reportElement uuid="e6feff02-1c17-4446-aee0-17f9c19af89b" x="554" y="0" width="1" height="12"/>
+			</line>
+			<line>
+				<reportElement uuid="1e635b4e-094d-45a7-a3b1-0b0449d90e52" x="496" y="0" width="1" height="12"/>
+			</line>
+			<line>
+				<reportElement uuid="d9c11d2f-68ce-4609-8fb2-42f814eb368e" x="392" y="0" width="1" height="12"/>
+			</line>
+			<line>
+				<reportElement uuid="09038c9c-8b06-43d6-9996-3790ec5c52a8" x="266" y="0" width="1" height="12"/>
+			</line>
+			<line>
+				<reportElement uuid="7cc7bbd3-cc23-450f-8256-7d0abffffd01" x="188" y="0" width="1" height="12"/>
+			</line>
+			<line>
+				<reportElement uuid="06390a74-7f0d-4e73-8894-7db3119beacf" x="100" y="0" width="1" height="12"/>
+			</line>
+			<textField isBlankWhenNull="true">
+				<reportElement uuid="04835273-f1dd-44fa-915c-c8e22d44ef07" x="2" y="2" width="97" height="9"/>
+				<textElement>
+					<font size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{NM_CONTA_FINANCEIRA}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="a82efc50-8ab8-4ff3-9cfa-cdb1550bfb80" x="102" y="2" width="86" height="9"/>
+				<textElement>
+					<font size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{TP_CONTA}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement uuid="6d0964fc-a1d8-4b6a-b68f-b7ce5328bae7" x="190" y="2" width="75" height="9"/>
+				<textElement textAlignment="Center">
+					<font size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{ID_EXTRATO}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement uuid="20ca9084-23d3-4430-bcf8-66943e468142" x="267" y="2" width="125" height="9"/>
+				<textElement>
+					<font size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{NM_RESPONSAVEL}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement uuid="759a77ee-d323-4ff4-982f-4b185898e1b5" x="394" y="2" width="102" height="9"/>
+				<textElement>
+					<font size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{DS_HISTORICO}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00">
+				<reportElement uuid="da2f18fe-b8fa-48a8-acac-6c87c3de2fbb" x="498" y="2" width="54" height="9"/>
+				<textElement textAlignment="Right">
+					<font size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{VL_MOVIMENTO}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="13" splitType="Stretch">
+			<line>
+				<reportElement uuid="9fcae4b0-bfad-4e94-a196-9c623b7db132" x="0" y="0" width="555" height="1"/>
+			</line>
+			<line>
+				<reportElement uuid="01b4ce73-e894-4daa-b7fd-b3b823707aa4" x="554" y="1" width="1" height="11"/>
+			</line>
+			<line>
+				<reportElement uuid="e3704694-177f-4eff-97ff-067f65bf27bf" x="0" y="1" width="1" height="11"/>
+			</line>
+			<line>
+				<reportElement uuid="143d5070-1b33-487c-aaea-9aab35a2dbd2" x="0" y="12" width="555" height="1"/>
+			</line>
+			<staticText>
+				<reportElement uuid="abeab7fc-4251-4cd4-97fe-6859cf346143" x="397" y="1" width="98" height="11"/>
+				<textElement textAlignment="Right">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[TOTAL]]></text>
+			</staticText>
+			<line>
+				<reportElement uuid="925aa322-38ec-4d3c-9a09-31ed54bfeaac" x="496" y="1" width="1" height="11"/>
+			</line>
+			<textField pattern="#,##0.00">
+				<reportElement uuid="9d9d21ae-ecc5-4a6e-88e6-06600b6c7994" x="498" y="2" width="54" height="9"/>
+				<textElement textAlignment="Right">
+					<font size="6" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{vlTotalMovimento}]]></textFieldExpression>
+			</textField>
+		</band>
+	</columnFooter>
+</jasperReport>

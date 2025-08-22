@@ -1,0 +1,253 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.1.1.final using JasperReports Library version 6.1.1  -->
+<!-- 2019-03-28T14:40:24 -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="ait" language="groovy" pageWidth="595" pageHeight="842" whenNoDataType="AllSectionsNoDetail" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="0e74f7ad-613a-458c-a899-d89044293d64">
+	<property name="com.jaspersoft.studio.unit." value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.pageHeight" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.pageWidth" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.topMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.bottomMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.leftMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.rightMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.columnWidth" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.columnSpacing" value="pixel"/>
+	<parameter name="nmUsuario" class="java.lang.String"/>
+	<parameter name="LOGO" class="java.lang.Object"/>
+	<parameter name="LOGO_DEV" class="java.lang.Object"/>
+	<parameter name="nmSistema" class="java.lang.String"/>
+	<parameter name="NR_VIA" class="java.lang.String"/>
+	<parameter name="NM_MUNICIPIO" class="java.lang.String"/>
+	<parameter name="NR_AIT" class="java.lang.String"/>
+	<parameter name="NM_UF" class="java.lang.String"/>
+	<parameter name="DT_LIMITE_RECURSO" class="java.lang.String"/>
+	<parameter name="NM_EMPRESA_AUTUADA" class="java.lang.String"/>
+	<parameter name="NM_PREFIXO_LINHA" class="java.lang.String"/>
+	<parameter name="NM_PREFIXO_VEICULO" class="java.lang.String"/>
+	<parameter name="NM_PREPOSTO" class="java.lang.String"/>
+	<parameter name="NM_LOCAL_INFRACAO" class="java.lang.String"/>
+	<parameter name="DT_INFRACAO" class="java.util.Date"/>
+	<parameter name="NM_AGENTE" class="java.lang.String"/>
+	<parameter name="NR_REGISTRO_AGENTE" class="java.lang.String"/>
+	<parameter name="ID_INFRACAO" class="java.lang.String"/>
+	<parameter name="DS_INFRACAO" class="java.lang.String"/>
+	<parameter name="VL_MULTA" class="java.lang.String"/>
+	<parameter name="DS_OBSERVACAO" class="java.lang.String"/>
+	<parameter name="DT_VENCIMENTO" class="java.lang.String"/>
+	<parameter name="NR_DOCUMENTO" class="java.lang.String"/>
+	<parameter name="NR_CODIGO_BARRAS" class="java.lang.String"/>
+	<parameter name="DS_PROVIDENCIA" class="java.lang.String"/>
+	<parameter name="DS_TESTEMUNHA" class="java.lang.String"/>
+	<parameter name="DT_PRAZO" class="java.lang.String"/>
+	<parameter name="NR_CONVENIO" class="java.lang.String"/>
+	<parameter name="VL_DOCUMENTO" class="java.lang.String"/>
+	<parameter name="VL_PAGAMENTO" class="java.lang.String"/>
+	<parameter name="NM_MOTIVO" class="java.lang.String"/>
+	<parameter name="NM_ENDERECO_TESTEMUNHA1" class="java.lang.String">
+		<parameterDescription><![CDATA[]]></parameterDescription>
+	</parameter>
+	<parameter name="NR_MATRICULA" class="java.lang.String"/>
+	<parameter name="NR_MOTIVO" class="java.lang.String"/>
+	<parameter name="NM_CONCESSIONARIO" class="java.lang.String"/>
+	<parameter name="NM_GRUPO_PARADA" class="java.lang.String"/>
+	<parameter name="NR_ORDEM_PARADA" class="java.lang.String"/>
+	<parameter name="NM_LOGRADOURO" class="java.lang.String"/>
+	<parameter name="NM_BAIRRO_2" class="java.lang.String"/>
+	<parameter name="NR_ENDERECO" class="java.lang.String"/>
+	<parameter name="NM_TIPO_LOGRADOURO" class="java.lang.String"/>
+	<parameter name="DS_HOJE" class="java.lang.String"/>
+	<parameter name="NM_COORDENADOR" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<field name="NR_ORDEM_PARADA" class="java.lang.String"/>
+	<variable name="NR_VIA" class="java.lang.Integer" incrementType="Report" calculation="Count">
+		<initialValueExpression><![CDATA[1]]></initialValueExpression>
+	</variable>
+	<title>
+		<band height="56" splitType="Stretch">
+			<staticText>
+				<reportElement x="1" y="1" width="554" height="20" uuid="b1befb19-431e-452d-8a2b-43bcec92a6f1">
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[PREFEITURA MUNICIPAL DE VITÓRIA DA CONQUISTA]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="1" y="17" width="554" height="20" uuid="72c46b50-5f5e-4271-abf1-7c6287cc337b">
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[Secretaria de Mobilidade Urbana - SEMOB]]></text>
+			</staticText>
+			<image scaleImage="RetainShape" hAlign="Center" vAlign="Middle">
+				<reportElement x="1" y="4" width="59" height="45" isRemoveLineWhenBlank="true" uuid="3f30c207-0250-4b89-b3b6-107f4f1f13fd">
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+				<imageExpression><![CDATA["../../mob/imagens/logos/brasao_vdc_128px.png"]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="1" y="31" width="554" height="20" uuid="bc40bfb9-2679-4dc9-aebf-66ec08bd8630"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[Coordenação de Transporte Público]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="589">
+			<textField isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToBandHeight" x="0" y="9" width="554" height="30" uuid="101ab42f-febe-465d-8fa2-48aacf2334fd"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["NOTIFICAÇÃO Nº " + $P{NR_AIT}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="5" y="50" width="543" height="20" uuid="c8f5e99d-1227-41dc-b2d5-e23dffe52907"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{DS_HOJE}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="50" y="80" width="504" height="20" uuid="21402748-ccf3-4c78-8f97-dc3652f34f82"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Sr.(a): " + $P{NM_CONCESSIONARIO}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="32" y="120" width="499" height="140" uuid="5ee83f77-5f0d-4253-b12c-aafc15622ae6"/>
+				<box topPadding="3" leftPadding="3" bottomPadding="3" rightPadding="3"/>
+				<textElement textAlignment="Justified" verticalAlignment="Middle">
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Em fiscalização realizada no dia " + new SimpleDateFormat("dd/MM/yyyy").format($P{DT_INFRACAO}) + ", V.S.ª foi notificado por infração conforme cópia da NIC nº " + $P{NR_AIT} + " – Notificação de Infração e Convocação anexa.\nContra a penalidade imposta, caberá recurso por escrito à Prefeitura, através da Coordenação de Transportes em primeira Instância, no prazo de 30 (trinta) dias contados da data do recebimento desta notificação. O recurso terá efeito suspensivo e poderá ser interposto somente pelo permissionário ou por procurador acompanhado no respectivo instrumento de mandato para representá-lo especificamente em relação ao recurso a ser interposto."]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="32" y="531" width="70" height="20" uuid="8b85f8ff-5d50-46d6-ba71-d3eb8a4963ac"/>
+				<textElement verticalAlignment="Middle">
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[Endereço:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="32" y="477" width="340" height="20" uuid="2a2bd40f-28a9-4f0f-941c-634dc3542afe"/>
+				<textElement verticalAlignment="Middle">
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[Por:___________________________________________]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="32" y="457" width="210" height="20" uuid="5d75db49-905c-4d34-8fc7-7a02b522d6f6"/>
+				<textElement verticalAlignment="Middle">
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[Recebido em:_____/_____/_____]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="32" y="438" width="80" height="20" uuid="8508ec66-150a-49ae-800a-6748e516d40a"/>
+				<textElement verticalAlignment="Middle">
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[Autorização:]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="70" y="419" width="186" height="20" uuid="90ec8ca5-5e1d-4242-8343-99a203572b49">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<textElement verticalAlignment="Middle">
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{NM_GRUPO_PARADA}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="32" y="419" width="50" height="20" uuid="30162ed0-2ef6-484f-be4b-ef9eea8fba2b"/>
+				<textElement verticalAlignment="Middle">
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[Ponto:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="32" y="400" width="50" height="20" uuid="6e5bef3b-4fb0-40a2-8778-2710dfc363a7"/>
+				<textElement verticalAlignment="Middle">
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[Nome:]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="71" y="400" width="400" height="20" uuid="a5c4d086-7a2a-475d-847d-3ab086171f59"/>
+				<textElement verticalAlignment="Middle">
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{NM_CONCESSIONARIO}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="143" y="343" width="268" height="30" uuid="a453588f-6a81-4c44-bed5-47270359f580"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[Coordenador de Transporte Público]]></text>
+			</staticText>
+			<line>
+				<reportElement x="130" y="334" width="300" height="1" uuid="5f69e6e9-ad93-4405-bdc3-a9c58cb41945"/>
+			</line>
+			<staticText>
+				<reportElement x="142" y="272" width="269" height="29" uuid="724669bb-3d6e-43e0-b574-ccfb28d76b21"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[Atenciosamente,]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="102" y="438" width="186" height="20" uuid="4f7658be-7cb8-4752-ab56-1b9427f3c955">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<textElement verticalAlignment="Middle">
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{NR_ORDEM_PARADA}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="92" y="531" width="418" height="20" uuid="adeafbb4-4e3c-47cf-9786-a5dd7004b5ad">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<textElement verticalAlignment="Middle">
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{NM_TIPO_LOGRADOURO} + " " +$P{NM_LOGRADOURO} + ", Nº " + $P{NR_ENDERECO} + ", " + $P{NM_BAIRRO_2}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="142" y="328" width="269" height="29" uuid="15e63a7d-361d-4501-820d-390e2fa9960a"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{NM_COORDENADOR}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<pageFooter>
+		<band height="59">
+			<image scaleImage="RetainShape" hAlign="Center" vAlign="Middle">
+				<reportElement x="460" y="2" width="93" height="57" isRemoveLineWhenBlank="true" uuid="53f2a535-9eea-40b3-899c-d821f1399385">
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+				<imageExpression><![CDATA["../../mob/imagens/logos/pmvc-logo.png"]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="0" y="0" width="281" height="59" uuid="da197a4f-da73-4c08-a220-6f620f572568"/>
+				<box leftPadding="2"/>
+				<text><![CDATA[Centro Cultural Glauber Rocha
+Avenida Brumada, S/N – Bairro Brasil.
+CEP 45051-000 – Vitória da Conquista – Bahia
+www.pmvc.ba.gov.br]]></text>
+			</staticText>
+		</band>
+	</pageFooter>
+</jasperReport>

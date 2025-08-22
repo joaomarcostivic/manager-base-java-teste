@@ -1,0 +1,458 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Comprovante de Matrícula" pageWidth="595" pageHeight="421" whenNoDataType="AllSectionsNoDetail" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="2b4c657d-6a4a-443f-845c-ba3295028507">
+	<property name="ireport.zoom" value="1.331000000000001"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<style name="Título" fontName="Times New Roman" fontSize="18" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Times-Bold"/>
+	<style name="Subtítulo" forecolor="#736343" fontName="Times New Roman" fontSize="16" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false"/>
+	<style name="Cabeçalho" forecolor="#666666" fontName="Arial" fontSize="12" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false"/>
+	<style name="Detalhe" fontName="Times New Roman" fontSize="10" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false"/>
+	<style name="Label" fontName="Times New Roman" fontSize="8" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false"/>
+	<queryString>
+		<![CDATA[SELECT A.*, C.nr_cpf, C.nr_rg, C.tp_sexo, C.dt_nascimento, C.sg_orgao_rg, H.sg_estado AS sg_estado_rg,
+       D.nm_pessoa AS nm_aluno, I.nm_produto_servico AS nm_curso, E.tp_contratacao, F.nm_turma, F.tp_turno,
+       F.st_turma, G.nm_area_interesse, M.nm_pessoa AS nm_funcionario, N.nm_periodo_letivo, D.nr_telefone1,
+       D.nr_telefone2, D.nr_celular, D.nr_fax, D.nm_email, J.cd_usuario,
+       P.ds_endereco, P.nm_logradouro, P.nm_bairro, P.nr_cep, P.nr_endereco, P.nm_complemento,
+       P.nm_ponto_referencia, Q.nm_tipo_logradouro, Q.sg_tipo_logradouro, R.nm_logradouro AS nm_logradouro_enderecamento,
+       S.nm_tipo_logradouro AS nm_tipo_logradouro_enderecamento, S.sg_tipo_logradouro AS sg_tipo_logradouro_enderecamento,
+       T.nm_bairro AS nm_bairro_enderecamento, U.nm_cidade, V.nm_estado, V.sg_estado,
+       U2.nm_cidade AS nm_naturalidade, V2.sg_estado AS sg_naturalidade
+FROM acd_matricula A
+LEFT OUTER JOIN acd_matricula_periodo_letivo J ON (A.cd_matricula = J.cd_matricula)
+LEFT OUTER JOIN seg_usuario L ON (J.cd_usuario = L.cd_usuario)
+LEFT OUTER JOIN grl_pessoa M ON (L.cd_pessoa = M.cd_pessoa)
+JOIN acd_aluno B ON (A.cd_aluno = B.cd_aluno)
+JOIN grl_pessoa_fisica C ON (B.cd_aluno = C.cd_pessoa)
+JOIN grl_pessoa D ON (C.cd_pessoa = D.cd_pessoa)
+LEFT OUTER JOIN grl_pessoa_endereco P ON (D.cd_pessoa = P.cd_pessoa AND P.lg_principal = 1)
+LEFT OUTER JOIN grl_tipo_logradouro Q ON (P.cd_tipo_logradouro = Q.cd_tipo_logradouro)
+LEFT OUTER JOIN grl_logradouro R ON (P.cd_logradouro = R.cd_logradouro)
+LEFT OUTER JOIN grl_tipo_logradouro S ON (R.cd_tipo_logradouro = S.cd_tipo_logradouro)
+LEFT OUTER JOIN grl_bairro T ON (P.cd_bairro = T.cd_bairro)
+LEFT OUTER JOIN grl_cidade U ON (P.cd_cidade = U.cd_cidade)
+LEFT OUTER JOIN grl_estado V ON (U.cd_estado = V.cd_estado)
+LEFT OUTER JOIN grl_cidade U2 ON (C.cd_naturalidade = U2.cd_cidade)
+LEFT OUTER JOIN grl_estado V2 ON (U2.cd_estado = V2.cd_estado)
+JOIN acd_curso E ON (A.cd_curso = E.cd_curso)
+JOIN grl_produto_servico I ON (E.cd_curso = I.cd_produto_servico)
+JOIN acd_turma F ON (A.cd_turma = F.cd_turma)
+LEFT OUTER JOIN acd_instituicao_periodo N ON (F.cd_periodo_letivo = N.cd_periodo_letivo)
+LEFT OUTER JOIN acd_area_interesse G ON (A.cd_area_interesse = G.cd_area_interesse)
+LEFT OUTER JOIN grl_estado H ON (C.cd_estado_rg = H.cd_estado)]]>
+	</queryString>
+	<field name="dt_matricula" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="st_matricula" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="tp_matricula" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="nr_matricula" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="txt_observacao" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="txt_documento_oficial" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="nr_cpf" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="nr_rg" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="tp_sexo" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="dt_nascimento" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="sg_orgao_rg" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="sg_estado_rg" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="nm_aluno" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="nm_curso" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="tp_contratacao" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="nm_turma" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="tp_turno" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="st_turma" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="nm_area_interesse" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="nm_funcionario" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="nm_periodo_letivo" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="nr_telefone1" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="nr_telefone2" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="nr_celular" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="nr_fax" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="nm_email" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="cd_usuario" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="ds_endereco" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="nm_logradouro" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="nm_bairro" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="nr_cep" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="nr_endereco" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="nm_complemento" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="nm_ponto_referencia" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="nm_tipo_logradouro" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="sg_tipo_logradouro" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="nm_logradouro_enderecamento" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="nm_tipo_logradouro_enderecamento" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="sg_tipo_logradouro_enderecamento" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="nm_bairro_enderecamento" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="nm_cidade" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="nm_estado" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="sg_estado" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="nm_naturalidade" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="sg_naturalidade" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="nm_disciplina" class="java.lang.String"/>
+	<field name="qt_carga_horaria" class="java.lang.String"/>
+	<field name="vl_conceito" class="java.lang.String"/>
+	<field name="tp_aprovacao" class="java.lang.String"/>
+	<field name="qt_carga_horaria_total" class="java.lang.String"/>
+	<variable name="nmSistema" class="java.lang.String"/>
+	<variable name="nmOrgao" class="java.lang.String"/>
+	<variable name="nmSubOrgao" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<pageHeader>
+		<band height="66" splitType="Stretch">
+			<image scaleImage="RetainShape">
+				<reportElement uuid="aa646465-a9f6-494b-8219-71c1d915ed50" stretchType="RelativeToTallestObject" x="0" y="0" width="51" height="66"/>
+				<imageExpression><![CDATA["/projetos/source/manager/web/acd/imagens/brasao_bahia.jpg"]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement uuid="c00d3dd3-74bd-4b36-9fb3-9972d4cf53e9" style="Título" x="86" y="0" width="387" height="22" forecolor="#000000"/>
+				<textElement textAlignment="Center">
+					<font fontName="Times New Roman" isBold="true" pdfFontName="Times-Roman"/>
+				</textElement>
+				<text><![CDATA[Prefeitura Municipal de Iuiú]]></text>
+			</staticText>
+			<image>
+				<reportElement uuid="13a6abfc-888d-4694-8a6d-32e2d37f77ea" stretchType="RelativeToTallestObject" x="486" y="0" width="69" height="54"/>
+				<imageExpression><![CDATA["C:\\projetos\\source\\manager\\web\\acd\\imagens\\brasao_republica.jpg"]]></imageExpression>
+			</image>
+			<line>
+				<reportElement uuid="ef70ef72-5ecb-46ef-86a6-6e75c6b8ef74" x="0" y="65" width="555" height="1"/>
+			</line>
+			<staticText>
+				<reportElement uuid="c2b0aea6-e768-4217-9b11-7c451a879f52" style="Subtítulo" x="86" y="22" width="387" height="22" forecolor="#000000"/>
+				<textElement textAlignment="Center">
+					<font fontName="Times New Roman" size="16" isBold="true" pdfFontName="Times-Roman"/>
+				</textElement>
+				<text><![CDATA[Secretaria Municipal de Educação]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="77147dff-7574-4f6f-8ef1-1f6a239b95af" style="Cabeçalho" x="86" y="44" width="387" height="22" forecolor="#000000"/>
+				<textElement textAlignment="Center">
+					<font fontName="Times New Roman" size="14" isBold="true" pdfFontName="Times-Roman"/>
+				</textElement>
+				<text><![CDATA[Escola Municipal Agrícola]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="34" splitType="Stretch">
+			<staticText>
+				<reportElement uuid="fa3befa1-9faa-4eba-b435-69961d932078" style="Título" x="2" y="2" width="552" height="32"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="20" pdfFontName="Times-Roman"/>
+				</textElement>
+				<text><![CDATA[BOLETIM DE NOTAS]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="50c61471-ddc4-4026-8fde-3bfa2e72aefc" x="391" y="1" width="100" height="20"/>
+				<textElement/>
+				<text><![CDATA[qt_carga_horaria_total]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="173" splitType="Stretch">
+			<line>
+				<reportElement uuid="10d3eea9-f03f-4ba0-8086-9bfbcf2a8ff2" x="2" y="0" width="552" height="3"/>
+				<graphicElement>
+					<pen lineWidth="2.0"/>
+				</graphicElement>
+			</line>
+			<textField>
+				<reportElement uuid="1c386e28-eeb8-4ba3-836a-4759705aaf38" x="7" y="18" width="100" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{nm_aluno}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="bc58deb7-1648-475e-bae4-74a9446b4c86" x="2" y="3" width="64" height="13"/>
+				<textElement textAlignment="Justified">
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[Nome do Aluno:]]></text>
+			</staticText>
+			<line>
+				<reportElement uuid="a3c7a5d0-d20b-4dc2-9f9e-41e80946781d" x="2" y="41" width="552" height="1"/>
+			</line>
+			<textField>
+				<reportElement uuid="dc45cbaa-efca-4f5f-a6fc-416e98ce128a" x="7" y="61" width="222" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{nm_curso}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="b1de7a71-ff86-4893-8e5b-81e54997d2d0" x="3" y="44" width="59" height="15"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[Curso / Grade:]]></text>
+			</staticText>
+			<line>
+				<reportElement uuid="af450656-305a-4045-8cc0-aba9c8742431" x="0" y="84" width="554" height="1"/>
+			</line>
+			<line>
+				<reportElement uuid="667c35f5-2189-4287-ae78-4d2da80fab10" x="239" y="43" width="1" height="41"/>
+			</line>
+			<textField>
+				<reportElement uuid="a2048bf9-d70a-411f-a1bc-38d4aca4f50f" x="246" y="61" width="175" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{nm_turma}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="cb19d37e-deb1-4674-a1fc-f1f3490f8f1b" x="242" y="45" width="28" height="14"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[Turma:]]></text>
+			</staticText>
+			<line>
+				<reportElement uuid="fc08cb2c-b9fb-4780-b82a-d883b1ecc58f" x="425" y="41" width="1" height="41"/>
+			</line>
+			<staticText>
+				<reportElement uuid="ebbc1146-0d38-4174-8bf9-c23f0d7f04fb" x="428" y="45" width="28" height="14"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[Turno:]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement uuid="8ff302ce-81c3-4dac-810c-f215815887bf" style="Detalhe" x="433" y="62" width="116" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{tp_turno}.intValue()==0?"Matutino":"Vespertino"]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement uuid="5a967dae-1258-47b6-a9f1-1a613359fe3e" x="0" y="92" width="554" height="3"/>
+				<graphicElement>
+					<pen lineWidth="2.0"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement uuid="be896a6b-ec03-4626-9c6a-07fc09c65084" x="0" y="120" width="554" height="3"/>
+				<graphicElement>
+					<pen lineWidth="2.0"/>
+				</graphicElement>
+			</line>
+			<staticText>
+				<reportElement uuid="ecdfafc1-10f4-4370-ab48-ec30139384c4" x="4" y="98" width="100" height="14"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Disciplinas]]></text>
+			</staticText>
+			<line>
+				<reportElement uuid="b3e28830-2c72-4c1e-82d5-a28b8c4cc283" x="369" y="93" width="1" height="28"/>
+				<graphicElement>
+					<pen lineWidth="2.0"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement uuid="6f33eca7-4754-4012-8236-449fa883626b" x="411" y="95" width="1" height="28"/>
+				<graphicElement>
+					<pen lineWidth="2.0"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement uuid="0914c5eb-3793-4475-9230-57b576620f98" x="486" y="95" width="1" height="28"/>
+				<graphicElement>
+					<pen lineWidth="2.0"/>
+				</graphicElement>
+			</line>
+			<staticText>
+				<reportElement uuid="a4c25cdf-71d1-4842-bd67-15c674efde83" x="376" y="101" width="27" height="19"/>
+				<textElement textAlignment="Center">
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[C.H.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="aafa93ad-d9fe-48fe-a99d-c4a092fbfb2e" x="423" y="101" width="53" height="19"/>
+				<textElement textAlignment="Center">
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Conceito]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="1bf05a4f-bb4d-463b-9a05-ca50c078dd9a" x="494" y="101" width="53" height="19"/>
+				<textElement textAlignment="Center">
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Resultado]]></text>
+			</staticText>
+			<line>
+				<reportElement uuid="956acf8e-6d96-444b-957a-7714511b7344" x="0" y="145" width="554" height="1"/>
+			</line>
+			<textField>
+				<reportElement uuid="06cd17c6-47ae-408a-8761-355c6c3805dc" x="4" y="123" width="100" height="20"/>
+				<textElement>
+					<font isItalic="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{nm_disciplina}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement uuid="b2814134-cad7-4022-9d55-3b7a3dff631d" x="369" y="121" width="1" height="24"/>
+			</line>
+			<line>
+				<reportElement uuid="af17f9db-24b1-4bd2-b1c9-33fc5aa51529" x="411" y="122" width="1" height="24"/>
+			</line>
+			<line>
+				<reportElement uuid="949a7696-2c6e-412d-b0dd-f4675c810abc" x="486" y="121" width="1" height="24"/>
+			</line>
+			<textField>
+				<reportElement uuid="6b26a846-3bd1-434b-b622-8dcaf8487485" x="375" y="125" width="29" height="18"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{qt_carga_horaria}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="8b7c543c-dceb-483f-a019-17504da1b115" x="425" y="125" width="48" height="18"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{vl_conceito}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="9ff0d33b-938d-4fc0-b7cd-eac52394a785" x="502" y="126" width="37" height="17"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{tp_aprovacao}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement uuid="61e44495-c6fa-4e28-9142-a24a19fa7a60" x="0" y="169" width="554" height="1"/>
+				<graphicElement>
+					<pen lineWidth="2.0"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement uuid="8d7648bb-986a-4363-a01c-fa88e01cccd6" x="0" y="149" width="554" height="1"/>
+				<graphicElement>
+					<pen lineWidth="2.0"/>
+				</graphicElement>
+			</line>
+			<staticText>
+				<reportElement uuid="4ce7d2a8-24da-4a6a-ace8-76cad1db95d8" x="269" y="153" width="100" height="20"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Carga Horária Total:]]></text>
+			</staticText>
+			<textField>
+				<reportElement uuid="40133fe4-522f-42dd-b0d2-59b33233e7e7" x="376" y="153" width="36" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{qt_carga_horaria_total}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="25" splitType="Stretch">
+			<line>
+				<reportElement uuid="5df53bd6-2d90-47eb-999f-b87dbcd79888" positionType="FixRelativeToBottom" x="0" y="3" width="555" height="1"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#999999"/>
+				</graphicElement>
+			</line>
+			<frame>
+				<reportElement uuid="bdc645e5-0508-43c1-9a69-5abdb4d4dbeb" mode="Opaque" x="0" y="0" width="555" height="24" forecolor="#D0B48E" backcolor="#F2EBDF"/>
+				<textField evaluationTime="Report">
+					<reportElement uuid="05306670-0f6d-4a70-ba9a-0408683037b1" style="Cabeçalho" x="345" y="4" width="210" height="20" forecolor="#736343"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font size="10" isBold="false"/>
+					</textElement>
+					<textFieldExpression><![CDATA[($V{PAGE_COUNT}.intValue()+1)+"/"+$V{PAGE_NUMBER}]]></textFieldExpression>
+				</textField>
+				<textField pattern="EEE, d MMM yyyy HH:mm">
+					<reportElement uuid="c731ede5-213f-4846-bc1e-a4c783319839" style="Cabeçalho" x="22" y="1" width="197" height="20" forecolor="#736343"/>
+					<textElement verticalAlignment="Middle">
+						<font size="10" isBold="false"/>
+					</textElement>
+					<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+				</textField>
+			</frame>
+		</band>
+	</pageFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>

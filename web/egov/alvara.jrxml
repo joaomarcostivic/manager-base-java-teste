@@ -1,0 +1,329 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="alvara" language="groovy" pageWidth="595" pageHeight="842" whenNoDataType="BlankPage" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="b095497e-a861-4a22-a283-3ad71bb25185">
+	<property name="ireport.zoom" value="1.5"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="nrInscricao" class="java.lang.String"/>
+	<parameter name="hrEmissao" class="java.lang.String"/>
+	<parameter name="nrControle" class="java.lang.String"/>
+	<parameter name="dtValidade" class="java.lang.String"/>
+	<parameter name="nmRazaoSocial2" class="java.lang.String"/>
+	<parameter name="nrCpfCnpj" class="java.lang.String"/>
+	<parameter name="dtEmissao" class="java.lang.String"/>
+	<parameter name="nrExercicio" class="java.lang.String"/>
+	<parameter name="dsFinalidade" class="java.lang.String"/>
+	<parameter name="nrAlvara" class="java.lang.String"/>
+	<parameter name="nrInscricaoAnterior" class="java.lang.String"/>
+	<parameter name="dsNaturezaJuridica" class="java.lang.String"/>
+	<parameter name="dsEndereco" class="java.lang.String"/>
+	<parameter name="nrInscricaoEstadual" class="java.lang.String"/>
+	<parameter name="nmBairro" class="java.lang.String"/>
+	<parameter name="nrAtividadePrincipal" class="java.lang.String"/>
+	<parameter name="dtInicioAtividade" class="java.lang.String"/>
+	<parameter name="nrCep" class="java.lang.String"/>
+	<parameter name="cdMunicipio" class="java.lang.String"/>
+	<parameter name="nmAtividadePrincipal" class="java.lang.String"/>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA["C:\\TIVIC\\manager\\web\\egov\\"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="path" class="java.lang.String"/>
+	<parameter name="rsmServicos" class="java.util.Collection"/>
+	<parameter name="nmFantasia2" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<detail>
+		<band height="800" splitType="Stretch">
+			<rectangle>
+				<reportElement x="36" y="54" width="482" height="698" uuid="0275e928-6846-46bc-9e1f-06a0f7ffc366"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="110" y="71" width="408" height="20" uuid="b7080be9-bac5-42de-94d0-3617a920e175"/>
+				<textElement textAlignment="Center">
+					<font fontName="SansSerif" size="14" isBold="true" pdfFontName="Times-Bold"/>
+				</textElement>
+				<text><![CDATA[PREFEITURA MUNICIPAL DE VITÓRIA DA CONQUISTA]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="97" y="101" width="442" height="18" uuid="1c595144-3d4a-4b52-abb3-ef2c6570a277"/>
+				<textElement textAlignment="Center">
+					<font fontName="SansSerif" size="11" isBold="true" pdfFontName="Times-Bold"/>
+				</textElement>
+				<text><![CDATA[SECRETARIA MUNICIPAL DE SERVIÇOS PÚBLICOS]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="52" y="624" width="452" height="40" uuid="25fc3fdf-9ce7-45d8-a0c9-8caa82cb61d3"/>
+				<textElement textAlignment="Justified">
+					<font fontName="SansSerif" size="12" pdfFontName="Times-Roman"/>
+					<paragraph lineSpacing="1_1_2"/>
+				</textElement>
+				<text><![CDATA[A aceitação deste Alvará está condicionada à verificação de sua autenticidade na Internet, no endereço <http://sefin.pmvc.ba.gov.br>.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="52" y="719" width="452" height="20" uuid="54f3a21b-4517-4dd3-8bb3-a01067e8f48e"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" size="12" pdfFontName="Times-Roman"/>
+				</textElement>
+				<text><![CDATA[Atenção: qualquer rasura ou emenda invalidará este documento.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="36" y="752" width="482" height="13" uuid="ad27902b-3fe4-403e-8133-fbf386261e07"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8" pdfFontName="Times-Roman"/>
+				</textElement>
+				<text><![CDATA[Desenvolvido por: TIVIC Tecnologia e Informação - (77) 4141-1683 - www.tivic.com.br ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="52" y="701" width="271" height="20" uuid="5e4377d2-270b-4c9e-8253-ed194b67ee59"/>
+				<textElement verticalAlignment="Middle" markup="none">
+					<font fontName="SansSerif" size="12" pdfFontName="Times-Roman"/>
+				</textElement>
+				<text><![CDATA[Código de Controle do Alvará:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="52" y="682" width="149" height="20" uuid="d322b33c-dfad-49db-9b11-88d059d221da"/>
+				<textElement verticalAlignment="Middle" markup="none">
+					<font fontName="SansSerif" size="12" pdfFontName="Times-Roman"/>
+				</textElement>
+				<text><![CDATA[Válido até:                                                                     .]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="52" y="663" width="452" height="20" uuid="814bb715-2913-44d3-a595-79e77c68626f"/>
+				<textElement verticalAlignment="Middle" markup="none">
+					<font fontName="SansSerif" size="12" pdfFontName="Times-Roman"/>
+				</textElement>
+				<text><![CDATA[Emitido às                   do dia                       <hora e data de Brasília>.]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="110" y="682" width="84" height="20" uuid="f8434b73-2215-4564-b762-bfd1d888f041"/>
+				<textElement verticalAlignment="Middle">
+					<font size="12" isBold="true" pdfFontName="Times-Bold"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{dtValidade}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="214" y="701" width="290" height="20" uuid="89ecb54d-6353-44fa-8088-cda45b32c75e"/>
+				<textElement verticalAlignment="Middle">
+					<font size="12" isBold="true" pdfFontName="Times-Bold"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{nrControle}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="108" y="663" width="100" height="20" uuid="fead8cc7-8558-45ef-b3c3-7305bc607710"/>
+				<textElement verticalAlignment="Middle">
+					<font size="12" isBold="true" pdfFontName="Times-Bold"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{hrEmissao}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="197" y="663" width="100" height="20" uuid="2e097448-23ff-4558-904e-2a1289a9da67"/>
+				<textElement verticalAlignment="Middle">
+					<font size="12" isBold="true" pdfFontName="Times-Bold"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{dtEmissao}]]></textFieldExpression>
+			</textField>
+			<image>
+				<reportElement x="52" y="71" width="69" height="83" uuid="4ee421e2-e0f2-4d78-a010-d4c470323c47"/>
+				<imageExpression><![CDATA[$P{path}+"/imagens/brasao.jpg"]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="52" y="187" width="160" height="20" uuid="49ba9225-14d0-4c42-b4cd-7b420bfb0413"/>
+				<textElement>
+					<font isBold="true" pdfFontName="Times-Bold"/>
+				</textElement>
+				<text><![CDATA[CÓDIGO MUNICÍPIO: ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="52" y="207" width="160" height="20" uuid="a71df2f0-d59f-4d00-ab58-38b566522528"/>
+				<textElement>
+					<font isBold="true" pdfFontName="Times-Bold"/>
+				</textElement>
+				<text><![CDATA[FINALIDADE DO ALVARÁ:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="212" y="187" width="75" height="20" uuid="9d84e22e-03d9-4bcd-80a8-a708a3c3b194"/>
+				<textFieldExpression><![CDATA[$P{cdMunicipio}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="287" y="187" width="120" height="20" uuid="da7d04e4-4edc-4778-a0ec-c13de042865b"/>
+				<textElement>
+					<font isBold="true" pdfFontName="Times-Bold"/>
+				</textElement>
+				<text><![CDATA[INSCRIÇÃO MUNICIPAL: ]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="407" y="187" width="97" height="20" uuid="5e4ffc1a-c4d6-48c2-a97a-501fb9a4103e"/>
+				<textFieldExpression><![CDATA[$P{nrInscricao}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="212" y="207" width="292" height="20" uuid="be6eb36a-2fe7-4937-84aa-ddcbd73a60ba"/>
+				<textFieldExpression><![CDATA[$P{dsFinalidade}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="52" y="227" width="160" height="20" uuid="75ae6153-5711-46d2-962c-c081b906ff49"/>
+				<textElement>
+					<font isBold="true" pdfFontName="Times-Bold"/>
+				</textElement>
+				<text><![CDATA[NÚMERO DO ALVARÁ: ]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="212" y="227" width="292" height="20" uuid="1f561c24-dff5-4ed5-8901-e9fdf6044533"/>
+				<textFieldExpression><![CDATA[$P{nrAlvara}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="52" y="247" width="160" height="20" uuid="c527e11e-f4ab-4fda-8cc1-c4c07059fcf7"/>
+				<textElement>
+					<font isBold="true" pdfFontName="Times-Bold"/>
+				</textElement>
+				<text><![CDATA[INSCRIÇÃO ANTERIOR: ]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="212" y="247" width="292" height="20" uuid="5720d1e5-6be7-401a-9a03-208b2ee53423"/>
+				<textFieldExpression><![CDATA[$P{nrInscricaoAnterior}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="52" y="267" width="160" height="20" uuid="f959519c-5593-4aaa-89cb-692207736869"/>
+				<textElement>
+					<font isBold="true" pdfFontName="Times-Bold"/>
+				</textElement>
+				<text><![CDATA[RAZÃO SOCIAL/NOME: ]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="212" y="267" width="292" height="20" uuid="9df68e3e-bf80-4130-9633-b6f1e6cc2028"/>
+				<textFieldExpression><![CDATA[$P{nmRazaoSocial2}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="52" y="287" width="160" height="20" uuid="a4ca79d3-bf79-4f44-97c2-6527291b6776"/>
+				<textElement>
+					<font isBold="true" pdfFontName="Times-Bold"/>
+				</textElement>
+				<text><![CDATA[NOME FANTASIA: ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="52" y="307" width="160" height="20" uuid="6eb5b68a-b759-4004-b368-eeb330de4f27"/>
+				<textElement>
+					<font isBold="true" pdfFontName="Times-Bold"/>
+				</textElement>
+				<text><![CDATA[NATUREZA JURÍDICA:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="212" y="307" width="292" height="20" uuid="15355b18-89cb-4eec-ad8f-273caf38b1e0"/>
+				<textFieldExpression><![CDATA[$P{dsNaturezaJuridica}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="52" y="327" width="160" height="20" uuid="9f9a2784-2d64-4495-9a45-9eb2ff11804b"/>
+				<textElement>
+					<font isBold="true" pdfFontName="Times-Bold"/>
+				</textElement>
+				<text><![CDATA[CNPJ/CPF: ]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="212" y="327" width="292" height="20" uuid="3727b505-a3a7-4578-9c52-bbdfd18b4b94"/>
+				<textFieldExpression><![CDATA[$P{nrCpfCnpj}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="52" y="347" width="160" height="20" uuid="e406bf86-575f-4da0-8d53-33472e2356f0"/>
+				<textElement>
+					<font isBold="true" pdfFontName="Times-Bold"/>
+				</textElement>
+				<text><![CDATA[INSCRIÇÃO ESTADUAL: ]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="212" y="347" width="292" height="20" uuid="431cdf3e-0405-4a00-a141-08074db24a8a"/>
+				<textFieldExpression><![CDATA[$P{nrInscricaoEstadual}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="52" y="367" width="160" height="20" uuid="3c5115ee-27b1-4a67-bd93-30baa5d793de"/>
+				<textElement>
+					<font isBold="true" pdfFontName="Times-Bold"/>
+				</textElement>
+				<text><![CDATA[ENDEREÇO CONTRIBUINTE: ]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="212" y="367" width="292" height="20" uuid="71c58087-4991-4968-86c3-8a1ba05c78f5"/>
+				<textFieldExpression><![CDATA[$P{dsEndereco}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="52" y="387" width="160" height="20" uuid="d180cffa-6ad8-417a-bc66-00164ff5f737"/>
+				<textElement>
+					<font isBold="true" pdfFontName="Times-Bold"/>
+				</textElement>
+				<text><![CDATA[BAIRRO/CEP:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="212" y="387" width="292" height="20" uuid="0f7f2966-f7b4-4ef1-8ab2-b1663cb64a06"/>
+				<textFieldExpression><![CDATA[$P{nmBairro}+" - "+$P{nrCep}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="52" y="407" width="160" height="20" uuid="5a05131b-b203-47db-96cc-f59f7d5dcc71"/>
+				<textElement>
+					<font isBold="true" pdfFontName="Times-Bold"/>
+				</textElement>
+				<text><![CDATA[CÓD. ATIVIDADE PRINCIPAL:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="212" y="407" width="75" height="20" uuid="ffb761fd-4b0b-4d96-b8d1-1b4acf732d8a"/>
+				<textFieldExpression><![CDATA[$P{nrAtividadePrincipal}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="287" y="407" width="102" height="20" uuid="7cba426f-02f6-4261-949a-85c3484448dd"/>
+				<textElement>
+					<font isBold="true" pdfFontName="Times-Bold"/>
+				</textElement>
+				<text><![CDATA[DATA DE INÍCIO:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="389" y="407" width="115" height="20" uuid="7176ec17-3d0b-498b-adc2-7f9bcdbd3376"/>
+				<textFieldExpression><![CDATA[$P{dtInicioAtividade}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="52" y="427" width="160" height="20" uuid="61d56413-fc2f-40fe-9841-9e75264b8287"/>
+				<textElement>
+					<font isBold="true" pdfFontName="Times-Bold"/>
+				</textElement>
+				<text><![CDATA[NOME ATIVIDADE PRINCIPAL:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="212" y="427" width="292" height="20" uuid="03c8701d-a446-47b5-a261-8822cabbdf53"/>
+				<textFieldExpression><![CDATA[$P{nmAtividadePrincipal}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="52" y="154" width="271" height="20" uuid="07cbaef6-5c6c-4809-95b5-82bfdd7e070f"/>
+				<textElement textAlignment="Right">
+					<font size="14" isBold="true" pdfFontName="Times-Bold"/>
+				</textElement>
+				<text><![CDATA[ALVARÁ - EXERCÍCIO ]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="328" y="154" width="176" height="20" uuid="fe884c54-2b49-48f5-ab09-286374611beb"/>
+				<textElement>
+					<font size="14" isBold="true" pdfFontName="Times-Bold"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{nrExercicio}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="52" y="447" width="160" height="20" uuid="61d56413-fc2f-40fe-9841-9e75264b8287"/>
+				<textElement>
+					<font isBold="true" pdfFontName="Times-Bold"/>
+				</textElement>
+				<text><![CDATA[ATIVIDADE(S) SECUNDÁRIA(S):]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="52" y="573" width="160" height="20" uuid="61d56413-fc2f-40fe-9841-9e75264b8287"/>
+				<textElement>
+					<font isBold="true" pdfFontName="Times-Bold"/>
+				</textElement>
+				<text><![CDATA[OBSERVAÇÕES:]]></text>
+			</staticText>
+			<subreport runToBottom="false">
+				<reportElement x="0" y="467" width="555" height="106" uuid="1d7143ea-931b-4fd9-8e26-b52c0afe3727"/>
+				<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource($P{rsmServicos})]]></dataSourceExpression>
+				<subreportExpression><![CDATA["alvara_atividades_secundarias.jasper"]]></subreportExpression>
+			</subreport>
+			<textField isBlankWhenNull="true">
+				<reportElement x="212" y="287" width="292" height="20" uuid="9df68e3e-bf80-4130-9633-b6f1e6cc2028"/>
+				<textFieldExpression><![CDATA[$P{nmFantasia2}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+</jasperReport>

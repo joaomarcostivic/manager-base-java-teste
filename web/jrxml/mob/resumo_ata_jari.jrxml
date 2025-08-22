@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.1.1.final using JasperReports Library version 6.1.1  -->
+<!-- 2025-03-06T15:21:02 -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="resumo_ata_jari" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="67532319-ce5e-428f-9e38-cfe8dc401118">
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
+	<parameter name="SESSAO" class="java.lang.String"/>
+	<parameter name="REGISTROS" class="java.lang.Integer"/>
+	<parameter name="DT_PROTOCOLO" class="java.sql.Timestamp"/>
+	<parameter name="DEFERIDO" class="java.lang.String"/>
+	<parameter name="INDEFERIDO" class="java.lang.String"/>
+	<parameter name="NM_CIDADE" class="java.lang.String"/>
+	<parameter name="PRESIDENTE_JARI" class="java.lang.String"/>
+	<parameter name="SG_UF" class="java.lang.String"/>
+	<parameter name="LISTA_RELATORES" class="java.lang.String"/>
+	<parameter name="SECRETARIO_JARI" class="java.lang.String"/>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String"/>
+	<parameter name="DATASET_LISTA_RELATORES" class="net.sf.jasperreports.engine.data.JRBeanCollectionDataSource"/>
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<field name="DT_MOVIMENTO" class="java.sql.Timestamp"/>
+	<field name="DT_ATA" class="java.sql.Timestamp"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="546" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="545" height="30" uuid="aed283b8-f926-45a9-a28a-a081968ae611"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Junta Administrativa de Recursos de Infrações
+]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="5" y="47" width="545" height="43" uuid="e84595f7-8c23-47b4-9c68-17e1f66f620a"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="11" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["ATA DE JULGAMENTO - " + $P{SESSAO} +"ª Sessão Ordinária da 1ª Junta de " + new SimpleDateFormat("Y").format($P{DT_PROTOCOLO})]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="15" y="107" width="524" height="60" uuid="8c70ab55-23f2-429f-bccd-93658d8a9be5"/>
+				<textElement markup="html"/>
+				<textFieldExpression><![CDATA["	Convocada de maneira usual e com a necessária antecedência, a 1ª Junta manteve-se reunida na sala de reuniões da JARI, nesta cidade, no dia <b>" + new SimpleDateFormat("dd").format($F{DT_ATA}) + " de " + new SimpleDateFormat("MMMM", new Locale("pt", "BR")).format($F{DT_ATA}) + " de " + new SimpleDateFormat("Y").format($F{DT_ATA}) + "</b>, para levar a efeito a sua <b>" + $P{SESSAO} + "ª Sessão Ordinária de " + new SimpleDateFormat("Y").format($F{DT_ATA}) + "</b>, que de conformidade com o Regimento Interno desa Junta, teve o seu transcurso disciplinado pela seguinte ordenação:"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="20" y="20" width="512" height="20" uuid="59c217c7-09b9-4e16-94af-60979d1380ee"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="11" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["JARI / " + $P{NM_CIDADE} + " - " + $P{SG_UF}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="19" y="248" width="523" height="30" uuid="af81fabc-fa0d-4101-9e18-2201aa0a251c"/>
+				<textElement verticalAlignment="Middle" markup="html"/>
+				<text><![CDATA[III - Leitura da ATA da Sessão Anterior feita pelo(a) Secretário(a), aprovada sem restrições e assinada pelo componentes desta Junta;
+]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="19" y="289" width="523" height="30" uuid="971396f6-3000-4321-8093-301a3f39fde0"/>
+				<textFieldExpression><![CDATA["IV - Constaram da pauta do dia, com os pareceres dos Senhores Relatores " + $P{REGISTROS} +" recursos, que receberam as seguintes decisões:"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="19" y="178" width="524" height="28" uuid="d0763008-57b9-4d70-ab2b-dd11e55c1d75"/>
+				<textElement textAlignment="Left" verticalAlignment="Top" markup="html">
+					<font size="10" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[($P{PRESIDENTE_JARI} == null || $P{PRESIDENTE_JARI}.equals("") ? "I - Abertura da sessão pelo(a) Presidente Sr.(a) <b>_________________________________________</b>;" 
+: "I - Abertura da sessão pelo(a) Presidente Sr.(a) <b> " + $P{PRESIDENTE_JARI}.trim() + "</b>;")]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="18" y="205" width="524" height="42" uuid="ff864cdd-a5cd-4600-ad80-d253dcb255e2"/>
+				<textElement textAlignment="Left" verticalAlignment="Top" markup="html">
+					<font size="10" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[($P{LISTA_RELATORES} != "") ? "II - Comprovação do quórum com a presença dos(as) Sr(a).  <b> " + $P{LISTA_RELATORES}.trim()  + "</b>" : "II - Comprovação do quórum com a presença dos membros subscritos."]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="15" y="326" width="80" height="19" uuid="b7d2c520-f76f-46f6-86e1-2eaee3179fb7"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[DEFERIDOS:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="15" y="345" width="524" height="50" uuid="bd5a47fe-bc32-468b-9d2e-defbd9681de2"/>
+				<textFieldExpression><![CDATA[$P{DEFERIDO} != null ? $P{DEFERIDO} : "Nenhum registro de recurso deferido"]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="15" y="394" width="80" height="19" uuid="70120cb7-dc98-4d5d-ad89-11b7abd7667a"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[INDEFERIDOS:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="15" y="415" width="524" height="50" uuid="e1b25baf-b952-43fa-b1e6-112323c8b0b2"/>
+				<textFieldExpression><![CDATA[$P{INDEFERIDO} != null ? $P{INDEFERIDO} : "Nenhum registro de recurso indeferido"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="98" y="516" width="356" height="30" uuid="4b4551ef-a3b7-43d5-8277-6dbdcf0ec591">
+					<printWhenExpression><![CDATA[$P{PRESIDENTE_JARI} != null]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Top" markup="none">
+					<font size="9" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{PRESIDENTE_JARI}+"\nPresidente"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="15" y="453" width="524" height="28" uuid="67365019-e4df-4e4c-9be7-315ecdefbee3"/>
+				<textElement textAlignment="Left" verticalAlignment="Top" markup="html">
+					<font size="10" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[($P{SECRETARIO_JARI} != "" ? "Para constar, eu, <b>" + $P{SECRETARIO_JARI}.trim() + "</b>, Secretário, redigi esta ATA da qual foi extraído o competente Boletim Informativo, para publicação no Jornal."
+: "Para constar, eu, <b> _________________________________________</b>, Secretário, redigi esta ATA da qual foi extraído o competente Boletim Informativo, para publicação no Jornal.")
+]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="151" y="496" width="260" height="24" uuid="edd9775f-5e4d-4175-b984-f293c8562df1"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="html"/>
+				<text><![CDATA[_________________________________________
+]]></text>
+			</staticText>
+		</band>
+	</title>
+	<detail>
+		<band height="24">
+			<subreport>
+				<reportElement x="-20" y="0" width="595" height="24" isRemoveLineWhenBlank="true" uuid="3bc18db2-2f07-4e47-8d66-37280d04b659"/>
+				<dataSourceExpression><![CDATA[$P{DATASET_LISTA_RELATORES}]]></dataSourceExpression>
+				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "//relatores_resumo_ata_subreport.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="45" splitType="Stretch">
+			<textField pattern="dd/MM/yyyy">
+				<reportElement x="3" y="2" width="550" height="38" isRemoveLineWhenBlank="true" uuid="b64e9f48-03ae-469e-9a45-c86adb44e696"/>
+				<textElement textAlignment="Center" verticalAlignment="Top" markup="none"/>
+				<textFieldExpression><![CDATA["Sala de Reuniões da Junta Administrativa de Recursos de Infrações  \n" +
+"em " + $P{NM_CIDADE} + ", " + new SimpleDateFormat("dd").format($F{DT_ATA}) + " de " + new SimpleDateFormat("MMMM", new Locale("pt", "BR")).format($F{DT_ATA}) + " de " + new SimpleDateFormat("Y").format($F{DT_ATA})]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+</jasperReport>

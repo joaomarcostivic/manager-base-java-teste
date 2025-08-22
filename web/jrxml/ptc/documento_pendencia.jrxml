@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Relação de Pendências" language="groovy" pageWidth="842" pageHeight="595" orientation="Landscape" whenNoDataType="BlankPage" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" whenResourceMissingType="Empty" uuid="276b7e70-ed18-463c-94da-1e8da567db06">
+	<property name="ireport.zoom" value="1.5"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<property name="net.sf.jasperreports.print.keep.full.text" value="true"/>
+	<style name="Default"/>
+	<field name="nr_documento" class="java.lang.String"/>
+	<field name="nm_tipo_pendencia" class="java.lang.String"/>
+	<field name="nm_tipo_documento" class="java.lang.String"/>
+	<field name="dt_protocolo" class="java.lang.String"/>
+	<field name="dt_pendencia" class="java.lang.String"/>
+	<field name="dt_baixa" class="java.lang.String"/>
+	<field name="nm_setor_atual" class="java.lang.String"/>
+	<field name="nm_fase" class="java.lang.String"/>
+	<field name="nm_solicitantes" class="java.lang.String"/>
+	<field name="nm_usuario_registro" class="java.lang.String"/>
+	<field name="nm_usuario_baixa" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="59" splitType="Stretch">
+			<staticText>
+				<reportElement uuid="0e90bfce-e578-4102-8404-6ef78b59bac1" x="112" y="22" width="288" height="20"/>
+				<textElement>
+					<font fontName="Arial" size="16" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Relatório de Pendências]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="6d59e141-c8f1-4b6f-8559-6d38fcb942f7" x="112" y="1" width="515" height="20"/>
+				<textElement>
+					<font fontName="Arial" size="16" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Bolsa de Negócios]]></text>
+			</staticText>
+			<textField pattern="dd/MM/yyyy HH:mm">
+				<reportElement uuid="4dd7b639-c636-495e-8ddd-ecbaecea4014" x="699" y="2" width="100" height="20"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<columnHeader>
+		<band height="16" splitType="Stretch">
+			<staticText>
+				<reportElement uuid="b9e0f9c4-36a5-4bc3-a72b-620216bc272e" x="0" y="0" width="111" height="15"/>
+				<textElement>
+					<font fontName="Arial" size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Tipo de Documento]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="8a0d582f-6a3e-4738-9e85-0fcac3fdeb53" x="642" y="1" width="147" height="15"/>
+				<textElement>
+					<font fontName="Arial" size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Baixada em - por]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="e9d431eb-f9d1-4e82-ad73-f9bb4302abd8" x="301" y="1" width="100" height="15"/>
+				<textElement>
+					<font fontName="Arial" size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Tipo de Pendência]]></text>
+			</staticText>
+			<line>
+				<reportElement uuid="7366b599-0e11-4d2e-9b0a-74e3bc87461e" x="0" y="15" width="802" height="1"/>
+			</line>
+			<line>
+				<reportElement uuid="e69ed4e5-72f5-49cd-adf2-6218eea436b4" x="1" y="1" width="802" height="1"/>
+			</line>
+			<staticText>
+				<reportElement uuid="4318978c-3b1b-4a4a-9375-cec1bdf38d52" x="111" y="1" width="97" height="15"/>
+				<textElement>
+					<font fontName="Arial" size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Solicitante / Cliente]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="d9b4d4ac-f1d6-41a2-afd8-b69b3891da52" x="474" y="0" width="97" height="15"/>
+				<textElement>
+					<font fontName="Arial" size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Registrada em - por]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="13" splitType="Prevent">
+			<textField isBlankWhenNull="true">
+				<reportElement uuid="633289a8-7d0e-420f-a040-3436673ec1e8" x="0" y="0" width="111" height="12"/>
+				<textElement>
+					<font fontName="Arial" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{nm_tipo_documento}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement uuid="f004b98b-4a7c-45c9-b5a5-54acbcae7e6b" x="301" y="0" width="170" height="12"/>
+				<textElement>
+					<font fontName="Arial" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{nm_tipo_pendencia}]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd/MM/yyyy hh:mm" isBlankWhenNull="true">
+				<reportElement uuid="9102471a-adb5-4e6c-954d-a8e5a0e85efa" x="474" y="0" width="66" height="12"/>
+				<textElement>
+					<font fontName="SansSerif" size="8" isStrikeThrough="false" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{dt_pendencia}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" pattern="" isBlankWhenNull="true">
+				<reportElement uuid="c408e6cb-bb62-4d67-ae82-50679cf3de09" style="Default" stretchType="RelativeToTallestObject" x="111" y="0" width="190" height="12"/>
+				<textElement>
+					<font fontName="Arial" size="8" isPdfEmbedded="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{nm_solicitantes}]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd/MM/yyyy hh:mm" isBlankWhenNull="true">
+				<reportElement uuid="fc3165f2-74f9-487c-a44c-ea22c0bdc55b" x="641" y="0" width="66" height="12"/>
+				<textElement>
+					<font fontName="Arial" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{dt_baixa}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement uuid="c349d1f2-e5ca-482e-ad19-d23d7d0d41fd" x="710" y="0" width="88" height="12" isPrintWhenDetailOverflows="true"/>
+				<textElement>
+					<font fontName="Arial" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{nm_usuario_baixa}.toUpperCase()]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement uuid="5cee567b-2ad2-445e-8c52-a95c1dd5725b" isPrintRepeatedValues="false" x="541" y="0" width="100" height="12" isPrintWhenDetailOverflows="true"/>
+				<textElement>
+					<font fontName="Arial" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{nm_usuario_registro}.toUpperCase()]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="17" splitType="Stretch">
+			<line>
+				<reportElement uuid="572852d7-4ab3-418d-92f3-467e58466d8f" x="0" y="1" width="802" height="1"/>
+			</line>
+			<staticText>
+				<reportElement uuid="9775d9f4-58a9-44a7-b247-1e39c273c864" x="37" y="2" width="725" height="15"/>
+				<textElement textAlignment="Center">
+					<font fontName="Arial" size="6" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Manager - Sistema de Apoio a Gestão]]></text>
+			</staticText>
+			<textField>
+				<reportElement uuid="b68989ab-fc63-4d9e-94b2-8d3b41af9cd8" x="677" y="2" width="83" height="15"/>
+				<textElement textAlignment="Right">
+					<font fontName="Arial" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Página "+$V{PAGE_NUMBER}+" de"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement uuid="b1322189-a765-4a07-9b81-d8dfa0aefee6" x="762" y="2" width="37" height="15"/>
+				<textElement>
+					<font fontName="Arial" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="22" splitType="Stretch">
+			<line>
+				<reportElement uuid="975bcc76-1235-4d61-9454-d6c52be4e698" x="0" y="1" width="802" height="1"/>
+			</line>
+			<textField>
+				<reportElement uuid="cce72aa1-13a0-4287-bbc5-ff9549b23e74" x="3" y="3" width="145" height="15"/>
+				<textElement>
+					<font fontName="Arial" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{REPORT_COUNT}+" Pendência(s)"]]></textFieldExpression>
+			</textField>
+		</band>
+	</summary>
+</jasperReport>

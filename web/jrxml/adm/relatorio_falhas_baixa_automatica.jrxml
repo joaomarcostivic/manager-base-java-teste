@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="relatorio_falhas_baixa_automatica" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="00dadbb0-eb97-4765-a726-93f00ca8fc8e">
+	<property name="ireport.zoom" value="1.6528925619834722"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="nmRazaoSocial" class="java.lang.String"/>
+	<field name="NR_CHEQUE" class="java.lang.String"/>
+	<field name="DS_ERRO" class="java.lang.String"/>
+	<pageHeader>
+		<band height="41">
+			<textField isBlankWhenNull="true">
+				<reportElement uuid="d95120a9-93ca-4e71-9e3d-5c51e6d2eb66" x="1" y="1" width="554" height="16"/>
+				<textElement textAlignment="Center" verticalAlignment="Bottom" markup="none">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{nmRazaoSocial}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="b0a975cb-8cac-4013-a9ac-c49406f0d5d5" x="1" y="17" width="554" height="22"/>
+				<textElement textAlignment="Center">
+					<font size="16" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Falhas de Baixa de Cheques]]></text>
+			</staticText>
+			<line>
+				<reportElement uuid="b22cbe36-06b3-4501-a505-99c9c259cab5" x="0" y="40" width="553" height="1"/>
+				<graphicElement>
+					<pen lineStyle="Solid"/>
+				</graphicElement>
+			</line>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="11" splitType="Stretch">
+			<staticText>
+				<reportElement uuid="b48bf75a-7a99-4125-b07f-18a0130efe51" x="2" y="0" width="102" height="10"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="6" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Nº do Cheque]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="78b22114-9693-43df-9544-922cfa6b7215" x="107" y="0" width="445" height="10"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="6" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Descrição do Erro]]></text>
+			</staticText>
+			<line>
+				<reportElement uuid="de574af3-0198-4d7b-88a1-ac33f0fe82d5" x="104" y="0" width="1" height="10"/>
+			</line>
+			<line>
+				<reportElement uuid="47989b77-57a5-4996-9d01-eb34866e4a00" x="553" y="-1" width="1" height="11"/>
+			</line>
+			<line>
+				<reportElement uuid="b22cbe36-06b3-4501-a505-99c9c259cab5" x="0" y="10" width="553" height="1"/>
+				<graphicElement>
+					<pen lineStyle="Solid"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement uuid="47989b77-57a5-4996-9d01-eb34866e4a00" x="0" y="-1" width="1" height="12"/>
+			</line>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="13" splitType="Stretch">
+			<line>
+				<reportElement uuid="45341c66-a582-4467-ab89-adaf506bfc4d" x="104" y="-1" width="1" height="12"/>
+			</line>
+			<textField>
+				<reportElement uuid="56094839-8e2c-469f-9fd7-3524d60bcaf1" x="5" y="1" width="99" height="9"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="6" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{NR_CHEQUE}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="592e0143-3b42-4aeb-9de1-91f27d13b243" x="107" y="0" width="447" height="10"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="6" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{DS_ERRO}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement uuid="b22cbe36-06b3-4501-a505-99c9c259cab5" x="1" y="11" width="553" height="1"/>
+				<graphicElement>
+					<pen lineStyle="Solid"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement uuid="f8bde992-bba9-4e3c-bee1-43be24b9f33d" x="553" y="-1" width="1" height="13"/>
+			</line>
+			<line>
+				<reportElement uuid="3f480ee4-c2b4-4f62-a45c-45ff18dac77b" x="0" y="-1" width="1" height="13"/>
+			</line>
+		</band>
+	</detail>
+</jasperReport>

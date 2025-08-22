@@ -1,0 +1,342 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.10.0.final using JasperReports Library version 6.10.0-unknown  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="relatorio_turmas" language="groovy" pageWidth="595" pageHeight="842" whenNoDataType="NoDataSection" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="685b275b-3095-430e-97ff-37d9f0e15d5c">
+	<property name="ireport.zoom" value="2.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="22"/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
+	<property name="com.jaspersoft.studio.layout" value="com.jaspersoft.studio.editor.layout.FreeLayout"/>
+	<parameter name="nmRazaoSocial" class="java.lang.String"/>
+	<parameter name="dtHoje" class="java.lang.String"/>
+	<parameter name="hrHoje" class="java.lang.String"/>
+	<parameter name="nmUsuario" class="java.lang.String"/>
+	<parameter name="dtEstoque" class="java.lang.String"/>
+	<parameter name="nmEmail" class="java.lang.String"/>
+	<parameter name="nmDesenvolvedor" class="java.lang.String"/>
+	<parameter name="NM_INSTITUICAO" class="java.lang.String"/>
+	<parameter name="NM_PERIODO_LETIVO" class="java.lang.String"/>
+	<parameter name="NM_PRODUTO_SERVICO" class="java.lang.String"/>
+	<parameter name="CL_TURNO" class="java.lang.String"/>
+	<parameter name="CL_TP_LOCALIZACAO_DIFERENCIADA" class="java.lang.String">
+		<parameterDescription><![CDATA[]]></parameterDescription>
+	</parameter>
+	<parameter name="CL_TP_TURMA_SEM_ALUNO" class="java.lang.String"/>
+	<parameter name="QT_TURMAS_ZONA_URBANA" class="java.lang.Integer"/>
+	<parameter name="QT_TURMAS_ZONA_RURAL" class="java.lang.Integer"/>
+	<parameter name="QT_TURMAS_MATRICULADOS_ZONA_URBANA" class="java.lang.Integer"/>
+	<parameter name="QT_TURMAS_MATRICULADOS_ZONA_RURAL" class="java.lang.Integer"/>
+	<parameter name="QT_TURMAS_CRECHE" class="java.lang.Integer"/>
+	<parameter name="QT_TURMAS_MATRICULADOS_CRECHE" class="java.lang.Integer"/>
+	<parameter name="NM_TIPO_MODALIDADE" class="java.lang.String"/>
+	<field name="NM_TURMA" class="java.lang.String"/>
+	<field name="NM_INSTITUICAO" class="java.lang.String"/>
+	<field name="NM_CURSO" class="java.lang.String"/>
+	<field name="QT_MATRICULADOS" class="java.lang.Integer"/>
+	<field name="NM_LOCALIZACAO" class="java.lang.String"/>
+	<field name="NM_PERIODO_LETIVO" class="java.lang.String"/>
+	<variable name="qtMatriculadosInstituicao" class="java.lang.Integer" resetType="Group" resetGroup="Instituicao" calculation="Sum">
+		<variableExpression><![CDATA[$F{QT_MATRICULADOS}]]></variableExpression>
+	</variable>
+	<variable name="qtMatriculadosZona" class="java.lang.Integer" resetType="Group" resetGroup="Zona" calculation="Sum">
+		<variableExpression><![CDATA[$F{QT_MATRICULADOS}]]></variableExpression>
+	</variable>
+	<variable name="qtMatriculados" class="java.lang.Integer" resetType="None">
+		<variableExpression><![CDATA[$P{QT_TURMAS_MATRICULADOS_ZONA_RURAL} + $P{QT_TURMAS_MATRICULADOS_ZONA_URBANA} + $P{QT_TURMAS_MATRICULADOS_CRECHE}]]></variableExpression>
+	</variable>
+	<group name="Zona" isStartNewPage="true">
+		<groupExpression><![CDATA[$F{NM_LOCALIZACAO}]]></groupExpression>
+		<groupHeader>
+			<band height="30">
+				<textField>
+					<reportElement x="0" y="0" width="556" height="30" uuid="bade2ae0-f572-4157-babf-f2e4b48562e5">
+						<property name="local_mesure_unitheight" value="pixel"/>
+						<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					</reportElement>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="SansSerif" size="14" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{NM_LOCALIZACAO}]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupHeader>
+		<groupFooter>
+			<band height="13">
+				<textField>
+					<reportElement positionType="Float" mode="Opaque" x="0" y="0" width="554" height="13" backcolor="#A6A6A6" uuid="1f2547d3-72f5-49ab-8496-3ce9bf61e86c">
+						<property name="local_mesure_unitheight" value="pixel"/>
+						<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					</reportElement>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font fontName="SansSerif" size="8" isBold="false"/>
+					</textElement>
+					<textFieldExpression><![CDATA["Total na "+$F{NM_LOCALIZACAO}+": " + $V{qtMatriculadosZona}]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupFooter>
+	</group>
+	<group name="Instituicao">
+		<groupExpression><![CDATA[$F{NM_INSTITUICAO}]]></groupExpression>
+		<groupHeader>
+			<band height="44">
+				<textField>
+					<reportElement x="0" y="0" width="556" height="30" uuid="98d34866-0b62-482a-b1f5-6299184a23d6">
+						<property name="local_mesure_unitheight" value="pixel"/>
+						<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					</reportElement>
+					<textElement verticalAlignment="Middle">
+						<font fontName="SansSerif" size="14" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{NM_INSTITUICAO}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="360" y="32" width="132" height="10" uuid="5f7cac15-3872-4998-8b06-6b28fcef39c9"/>
+					<textElement>
+						<font size="6"/>
+					</textElement>
+					<text><![CDATA[Turma]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="1" y="32" width="29" height="11" uuid="0855416d-e07a-49b0-bbcb-d006777c0b79"/>
+					<textElement>
+						<font size="6"/>
+					</textElement>
+					<text><![CDATA[Período]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="509" y="33" width="38" height="10" uuid="02d91383-fd25-4a62-a577-659c4d0d810d"/>
+					<textElement textAlignment="Right">
+						<font size="6"/>
+					</textElement>
+					<text><![CDATA[Matriculados]]></text>
+				</staticText>
+				<line>
+					<reportElement x="-1" y="31" width="555" height="2" uuid="132a3e33-24e6-46ff-84cb-583ba700b9b2"/>
+					<graphicElement>
+						<pen lineWidth="1.5"/>
+					</graphicElement>
+				</line>
+				<line>
+					<reportElement x="-2" y="42" width="555" height="2" uuid="05350190-e7be-4537-9ae9-2bd7a6d9295a"/>
+					<graphicElement>
+						<pen lineWidth="1.5"/>
+					</graphicElement>
+				</line>
+				<staticText>
+					<reportElement x="34" y="32" width="314" height="10" uuid="0b5145db-c593-42b9-b6b9-ef21c9c7dd78"/>
+					<textElement>
+						<font size="6"/>
+					</textElement>
+					<text><![CDATA[Curso]]></text>
+				</staticText>
+			</band>
+		</groupHeader>
+		<groupFooter>
+			<band height="13">
+				<textField>
+					<reportElement positionType="Float" mode="Opaque" x="0" y="0" width="554" height="13" backcolor="#A6A6A6" uuid="0e634606-35cf-4f30-a00f-2d2fe329fde8">
+						<property name="local_mesure_unitheight" value="pixel"/>
+						<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					</reportElement>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font fontName="SansSerif" size="8" isBold="false"/>
+					</textElement>
+					<textFieldExpression><![CDATA["Total: " +  $V{qtMatriculadosInstituicao}]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupFooter>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="85">
+			<textField isBlankWhenNull="true">
+				<reportElement x="-1" y="2" width="553" height="16" uuid="d95120a9-93ca-4e71-9e3d-5c51e6d2eb66"/>
+				<textElement textAlignment="Center" verticalAlignment="Bottom" markup="none">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{nmRazaoSocial}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="-1" y="18" width="555" height="21" uuid="b0a975cb-8cac-4013-a9ac-c49406f0d5d5"/>
+				<textElement textAlignment="Center">
+					<font size="16" isBold="true"/>
+				</textElement>
+				<text><![CDATA[RELATÓRIO TURMAS]]></text>
+			</staticText>
+			<line>
+				<reportElement x="0" y="42" width="553" height="1" uuid="aa412646-a800-43cd-a477-529d06a954e1"/>
+			</line>
+			<staticText>
+				<reportElement x="4" y="44" width="30" height="8" uuid="3ce3dec9-eef9-49cf-84f0-de9ab84c93c6"/>
+				<textElement>
+					<font size="6"/>
+				</textElement>
+				<text><![CDATA[Escola:]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="34" y="44" width="217" height="8" uuid="80c6d0b7-c85d-45cc-8f31-d12e65009f4e"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA[($P{NM_INSTITUICAO} != null && !$P{NM_INSTITUICAO}.equals("")  ? $P{NM_INSTITUICAO} : "Todas")]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="0" y="84" width="553" height="1" uuid="c2cb1aab-6711-4af7-80df-d8f3a96269ed"/>
+			</line>
+			<staticText>
+				<reportElement x="251" y="44" width="50" height="8" uuid="2d6d57c1-a89c-4301-8661-70c874402971"/>
+				<textElement>
+					<font size="6"/>
+				</textElement>
+				<text><![CDATA[Período Letivo:]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="305" y="44" width="36" height="8" uuid="8578ce6b-1a16-4f80-9f63-0e22412597ec"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA[($P{NM_PERIODO_LETIVO} != null && !$P{NM_PERIODO_LETIVO}.equals("")  ? $P{NM_PERIODO_LETIVO} : "Todas")]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="348" y="44" width="22" height="8" uuid="a875ee8b-724d-43ac-a913-f3075e5c25e5"/>
+				<textElement>
+					<font size="6"/>
+				</textElement>
+				<text><![CDATA[Curso:]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="370" y="44" width="93" height="8" uuid="63e91aaa-9a35-4f7c-a1f0-15fd072c6db9"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA[($P{NM_PRODUTO_SERVICO} != null && !$P{NM_PRODUTO_SERVICO}.equals("")  ? $P{NM_PRODUTO_SERVICO} : "Todos")]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="475" y="44" width="26" height="8" uuid="6204a7f9-ee8d-4576-93a3-0d35abfaa1a3"/>
+				<textElement>
+					<font size="6"/>
+				</textElement>
+				<text><![CDATA[Turno:]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="505" y="44" width="46" height="8" uuid="629909f4-e98d-43e4-b661-8decdf0a3246"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA[($P{CL_TURNO} != null && !$P{CL_TURNO}.equals("")  ? $P{CL_TURNO} : "Todas")]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="4" y="55" width="84" height="8" uuid="c589d678-3571-4b07-b366-30970b546a1d"/>
+				<textElement>
+					<font size="6"/>
+				</textElement>
+				<text><![CDATA[Localização Diferenciada:]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="88" y="55" width="163" height="8" uuid="1a123f8b-c96e-451c-8e9c-4afc6c182bf5"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA[($P{CL_TP_LOCALIZACAO_DIFERENCIADA} != null && !$P{CL_TP_LOCALIZACAO_DIFERENCIADA}.equals("")  ? $P{CL_TP_LOCALIZACAO_DIFERENCIADA} : "Ignorar")]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="251" y="55" width="83" height="8" uuid="07fb83f6-9f2c-40ee-a9c7-ce511971746f"/>
+				<textElement>
+					<font size="6"/>
+				</textElement>
+				<text><![CDATA[Turma sem aluno:]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="335" y="55" width="163" height="8" uuid="67ba9c21-17f8-4609-9986-1f64541b5069"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA[($P{CL_TP_TURMA_SEM_ALUNO} != null && !$P{CL_TP_TURMA_SEM_ALUNO}.equals("")  ? $P{CL_TP_TURMA_SEM_ALUNO} : "Ignorar")]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="4" y="66" width="55" height="8" uuid="566151ee-5dd2-4d8c-8b30-67bd3c446813"/>
+				<textElement>
+					<font size="6"/>
+				</textElement>
+				<text><![CDATA[Fundamental:]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="61" y="66" width="116" height="8" uuid="c78cdc5c-2e69-4891-9ad8-6f478f6e6554"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA[($P{NM_TIPO_MODALIDADE} != null ? $P{NM_TIPO_MODALIDADE} : "Todos")]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<detail>
+		<band height="11" splitType="Stretch">
+			<textField isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToBandHeight" mode="Opaque" x="1" y="1" width="29" height="8" backcolor="#FFFFFF" uuid="452eff7c-6999-426e-8d4d-25d795aaeccd"/>
+				<textElement>
+					<font size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{NM_PERIODO_LETIVO}]]></textFieldExpression>
+			</textField>
+			<textField pattern="" isBlankWhenNull="true">
+				<reportElement x="360" y="1" width="132" height="8" uuid="afd54f89-8e0a-4701-b6e1-53e9394a081a"/>
+				<textElement>
+					<font size="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{NM_TURMA}]]></textFieldExpression>
+			</textField>
+			<textField pattern="" isBlankWhenNull="true">
+				<reportElement positionType="FixRelativeToBottom" x="509" y="1" width="38" height="8" uuid="f9d7b509-7756-4b4b-86cf-b13397d8d5fd"/>
+				<textElement textAlignment="Right">
+					<font size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{QT_MATRICULADOS}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="-1" y="10" width="555" height="1" uuid="54a9fc9b-5d87-43ae-ad18-d1122b3b6395"/>
+				<graphicElement>
+					<pen lineWidth="1.0" lineStyle="Dotted"/>
+				</graphicElement>
+			</line>
+			<textField pattern="" isBlankWhenNull="true">
+				<reportElement x="34" y="1" width="314" height="8" uuid="55e6e474-9e61-44a0-a73c-a9013b688956"/>
+				<textElement>
+					<font size="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{NM_CURSO}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="15">
+			<textField>
+				<reportElement x="214" y="2" width="339" height="13" uuid="b4535353-a90a-4520-8dc4-8400a0e2fed5"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="5" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Emitido em " + $P{dtHoje} + " às " + $P{hrHoje} + " por " + $P{nmUsuario} + "   Página: " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="-1" y="1" width="555" height="1" uuid="6978ee43-d8c9-443b-9788-dffa5f623354"/>
+				<graphicElement>
+					<pen lineWidth="1.0"/>
+				</graphicElement>
+			</line>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="49" splitType="Stretch">
+			<textField isBlankWhenNull="true">
+				<reportElement mode="Opaque" x="-1" y="0" width="557" height="49" backcolor="#CCCCCC" uuid="e8e140a9-f8e6-4b53-ab2d-021ba35296b1"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["TOTAL ZONA URBANA: " + $P{QT_TURMAS_MATRICULADOS_ZONA_URBANA}+"\n" + 
+"TOTAL ZONA RURAL: " + $P{QT_TURMAS_MATRICULADOS_ZONA_RURAL}+"\n" +
+"TOTAL CRECHES: " + $P{QT_TURMAS_MATRICULADOS_CRECHE}+"\n" +
+"TOTAL: "+$V{qtMatriculados}]]></textFieldExpression>
+			</textField>
+		</band>
+	</summary>
+</jasperReport>

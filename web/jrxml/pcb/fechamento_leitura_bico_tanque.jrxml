@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="fechamento_leitura_bico_tanque" language="groovy" pageWidth="324" pageHeight="55" whenNoDataType="AllSectionsNoDetail" columnWidth="324" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="4697e8fb-039d-4172-80a1-153ebcf89ac3">
+	<property name="ireport.zoom" value="4.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<field name="CD_PRODUTO_SERVICO" class="java.lang.Integer"/>
+	<field name="CD_BICO" class="java.lang.Integer"/>
+	<field name="QT_LITROS" class="java.lang.Double"/>
+	<field name="VL_AFERICAO" class="java.lang.Double"/>
+	<field name="QT_ENCERRANTE_FINAL" class="java.lang.Double"/>
+	<field name="QT_ENCERRANTE_INICIAL" class="java.lang.Double"/>
+	<field name="ID_BICO" class="java.lang.String"/>
+	<field name="NM_PRODUTO_SERVICO" class="java.lang.String"/>
+	<field name="QT_ENCERRANTE_FINAL_M" class="java.lang.String"/>
+	<field name="QT_ENCERRANTE_INICIAL_M" class="java.lang.String"/>
+	<field name="QT_LITROS_M" class="java.lang.String"/>
+	<variable name="totalCombustivel" class="java.lang.Double" resetType="Group" resetGroup="nm_produto_servico" calculation="Sum">
+		<variableExpression><![CDATA[$F{QT_LITROS}]]></variableExpression>
+		<initialValueExpression><![CDATA[new Double(0)]]></initialValueExpression>
+	</variable>
+	<variable name="totalAfericao" class="java.lang.Double" resetType="Group" resetGroup="nm_produto_servico" calculation="Sum">
+		<variableExpression><![CDATA[$F{VL_AFERICAO}]]></variableExpression>
+		<initialValueExpression><![CDATA[new Double(0)]]></initialValueExpression>
+	</variable>
+	<group name="nm_produto_servico">
+		<groupExpression><![CDATA[$F{NM_PRODUTO_SERVICO}]]></groupExpression>
+	</group>
+	<columnHeader>
+		<band height="24" splitType="Stretch">
+			<staticText>
+				<reportElement uuid="7eec724e-fbe3-4439-a508-93f82a5ce21c" x="1" y="0" width="322" height="13"/>
+				<textElement textAlignment="Center">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Leitura dos Bicos]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="dd7def07-d62b-44ab-9307-e0108e7566eb" x="3" y="14" width="55" height="8"/>
+				<textElement>
+					<font size="6" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Combustivel]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="a58cd5a7-853c-46e8-ab37-395cc25c6a0a" x="63" y="14" width="27" height="8"/>
+				<textElement>
+					<font size="6" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Bico]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="d1a17c28-cd01-4c7b-922b-c71058f7a78e" x="95" y="14" width="53" height="8"/>
+				<textElement textAlignment="Right">
+					<font size="6" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Fechamento]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="85c973a6-147b-49d8-8243-5d548f31ba63" x="151" y="14" width="62" height="8"/>
+				<textElement textAlignment="Right">
+					<font size="6" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Abertura]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="b8b155b7-3fba-4f7b-9d17-0395c634e7a2" x="216" y="14" width="34" height="8"/>
+				<textElement textAlignment="Right">
+					<font size="6" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Aferição]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="92481f0a-3cdd-4eed-8435-e0cefba805d1" x="253" y="14" width="67" height="8"/>
+				<textElement textAlignment="Right">
+					<font size="6" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Total]]></text>
+			</staticText>
+			<line>
+				<reportElement uuid="c386d427-2a30-4c3f-9f53-0f82b9219e02" x="0" y="14" width="324" height="1"/>
+			</line>
+			<line>
+				<reportElement uuid="b9d2693f-6ad9-41c8-8ebc-10de511b9f37" x="94" y="15" width="1" height="9"/>
+			</line>
+			<line>
+				<reportElement uuid="d0382dec-733c-49ee-8e30-6635fcc9c551" x="150" y="15" width="1" height="9"/>
+			</line>
+			<line>
+				<reportElement uuid="fdaa5ac3-2b93-4249-a77e-30c4da0d6362" x="215" y="15" width="1" height="9"/>
+			</line>
+			<line>
+				<reportElement uuid="c8420546-1636-4ad2-b0df-d525fb107a48" x="252" y="15" width="1" height="9"/>
+			</line>
+			<line>
+				<reportElement uuid="650e75f9-419b-4ad1-a45b-e92864357597" x="0" y="1" width="1" height="13"/>
+			</line>
+			<line>
+				<reportElement uuid="bcee8756-0443-4f90-8cd5-4bb9c6e06985" x="323" y="1" width="1" height="13"/>
+			</line>
+			<line>
+				<reportElement uuid="c386d427-2a30-4c3f-9f53-0f82b9219e02" x="0" y="0" width="324" height="1"/>
+			</line>
+			<line>
+				<reportElement uuid="05a42df8-1d16-4231-997e-0832f6bfad70" x="0" y="15" width="1" height="9"/>
+			</line>
+			<line>
+				<reportElement uuid="cc796712-eb5e-4e0f-be1e-13e77bd7da17" x="323" y="15" width="1" height="9"/>
+			</line>
+			<line>
+				<reportElement uuid="c386d427-2a30-4c3f-9f53-0f82b9219e02" x="0" y="22" width="323" height="1"/>
+			</line>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="8" splitType="Stretch">
+			<textField>
+				<reportElement uuid="bcd9a57b-ab76-4d24-afda-70ca46729083" x="3" y="0" width="60" height="8"/>
+				<textElement>
+					<font size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{NM_PRODUTO_SERVICO}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="a549459d-5333-4145-bc66-a9deebd0f8a2" x="63" y="0" width="31" height="8"/>
+				<textElement>
+					<font size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{ID_BICO}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="c0d376f2-1599-4935-b6d5-cfba29669dd3" x="216" y="0" width="34" height="8"/>
+				<textElement textAlignment="Right">
+					<font size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{VL_AFERICAO}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement uuid="1f3a44d3-b886-4dd9-b577-a31154dbaa2b" x="94" y="0" width="1" height="8"/>
+			</line>
+			<line>
+				<reportElement uuid="0337d5eb-4869-4d29-952c-d349fc3b2749" x="150" y="0" width="1" height="8"/>
+			</line>
+			<line>
+				<reportElement uuid="93068f3b-9915-467e-a875-d679513b3dd6" x="215" y="0" width="1" height="8"/>
+			</line>
+			<line>
+				<reportElement uuid="265747ca-558c-45d3-89eb-986c06bf9783" x="252" y="0" width="1" height="8"/>
+			</line>
+			<line>
+				<reportElement uuid="39c5878b-d1ff-44b9-a49c-aff581890f3c" x="0" y="0" width="1" height="8"/>
+			</line>
+			<line>
+				<reportElement uuid="845c2105-3dfe-437b-8333-e74db0ed6b1e" x="323" y="0" width="1" height="8"/>
+			</line>
+			<textField isBlankWhenNull="true">
+				<reportElement uuid="2eafa46d-190e-4d9e-b3b9-71bba46b0a1a" x="95" y="0" width="53" height="8"/>
+				<textElement textAlignment="Right">
+					<font size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{QT_ENCERRANTE_FINAL_M}]]></textFieldExpression>
+			</textField>
+			<textField pattern="" isBlankWhenNull="true">
+				<reportElement uuid="17f08747-594f-42e8-a411-93a480a010c7" x="151" y="0" width="62" height="8"/>
+				<textElement textAlignment="Right">
+					<font size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{QT_ENCERRANTE_INICIAL_M}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="1a366148-acfb-422e-8609-4049849a8546" x="253" y="0" width="67" height="8"/>
+				<textElement textAlignment="Right">
+					<font size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{QT_LITROS_M}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="1">
+			<line>
+				<reportElement uuid="56881ee6-01ca-4d4f-a8dd-501c4613cde1" x="0" y="0" width="324" height="1"/>
+			</line>
+		</band>
+	</columnFooter>
+</jasperReport>

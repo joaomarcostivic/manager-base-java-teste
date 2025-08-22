@@ -1,0 +1,476 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+	Mapeador de classes e mÃ©todos
+	
+		Para mapear uma classe Ã© necessÃ¡rio criar um novo elemento "class" contendo seu identificador Ãºnico (Atributo: id) e logo 
+		em seguida o nome da classe que serÃ¡ instanciada (Atributo: name), logo em seguida terÃ¡ que instanciar os mÃ©todos da classe instanciada.
+		Ao instanciar o mÃ©todo deverÃ¡ informar tambÃ©m identificador Ãºnico dele no elemento "class" (Atributo: id), o nome do mÃ©todo (Atributo: name), o nome de quem instanciou o mÃ©todo no arquivo (Atributo author).
+		
+		Obs: Para boas prÃ¡ticas e melhor compreensÃ£o de seus amiguinhos de trabalho, nÃ£o faÃ§a daqui seu xgh ou a casa da mÃ£e Joana, os atributos devem ser inseridos um por linha.
+		
+		Exemplo prÃ¡tico: 		
+		<class 
+			id="0001" 
+			name="pacote.nome.Classe">
+			
+			<method 
+				id="0001" (obrigatÃ³rio)
+				name="metodo1" (obrigatÃ³rio) 
+				author="Nome do autor" (obrigatÃ³rio)
+				description="Um breve resumo do que o mÃ©todo faz" (opcional)
+				date="Data de instanciamento do mÃ©todo neste arquivo. Ex: yyyy-mm-dd" (obrigatÃ³rio)
+			/>
+			
+		</class>		
+-->
+
+<services>
+
+	<!-- Identificador da classe pacote.nome.Classe -->
+	<class 
+		id="0001" 
+		name="com.tivic.manager.seg.UsuarioServices">
+			
+		<method 
+			id="0001"
+			name="autenticar"
+			author="Edgard"
+			date="2016-03-15" />
+			
+	</class>
+	
+	<class 
+		id="0002" 
+		name="com.tivic.manager.mob.CartaoDocumentoServices">
+			
+		<method 
+			id="0001"
+			name="getAll"
+			author="Edgard"
+			date="2016-03-10" />
+			
+	</class>
+	
+	<!-- 
+	
+		CLASSES DO EDF
+		- Ãrea separada para registrar classes do educaÃ§Ã£o
+	
+	 -->
+	
+	<class 
+		id="0003" 
+		name="com.tivic.manager.acd.AulaServices">
+			
+		<method 
+			id="0001"
+			name="getAulasByProfessor"
+			author="Edgard"
+			date="2016-03-10" />
+			
+	</class>
+	<class 
+		id="0004" 
+		name="com.tivic.manager.mob.AgenteServices">
+		<method 
+			id="0001"
+			name="autenticar"
+			author="Alvaro"
+			date="2016-03-28" />
+			
+	</class>
+	
+	<class 
+		id="0005" 
+		name="com.tivic.manager.mob.ConcessaoServices">
+		<method 
+			id="0001"
+			name="getConcessionariosColetivoUrbano"
+			author="Alvaro"
+			date="2016-03-29" />
+		<method 
+			id="0002"
+			name="findCondutoresTaxi"
+			author="Alvaro"
+			date="2016-09-23" />
+		<method 
+			id="0003"
+			name="saveCondutorTaxiDocumentacao"
+			author="Alvaro"
+			date="2016-09-29" />
+		<method 
+			id="0004"
+			name="getAllArquivoDocumetacaoCondutor"
+			author="Alvaro"
+			date="2016-10-05" />
+		<method 
+			id="0005"
+			name="getPermissionarioTaxi"
+			author="Alvaro"
+			date="2016-11-25" />
+		<method 
+			id="0006"
+			name="findCondutoresContratados"
+			author="Alvaro"
+			date="2017-01-19" />
+		<method 
+			id="0007"
+			name="save"
+			author="Alvaro"
+			date="2017-01-19" />
+			
+	</class>
+	
+	<class 
+		id="0006" name="com.tivic.manager.mob.ConcessaoVeiculoServices">
+		<method 
+			id="0001"
+			name="getByPrefixo"
+			author="Alvaro"
+			date="2016-03-29" />
+		<method 
+			id="0002"
+			name="findByConcessao"
+			author="Alvaro"
+			date="2016-03-29" />
+		<method 
+			id="0003"
+			name="getVeiculosAferidos"
+			author="Alvaro"
+			date="2016-03-31" />
+		<method 
+			id="0004"
+			name="getNaoVinculados"
+			author="Alvaro"
+			date="2016-05-24" />
+		<method 
+			id="0005"
+			name="find"
+			author="Alvaro"
+			date="2016-05-31" />
+	</class>
+	
+	<class 
+		id="0007" name="com.tivic.manager.mob.AfericaoCatracaServices">
+		<method 
+			id="0001"
+			name="save"
+			author="Alvaro"
+			date="2016-03-29" />
+		<method 
+			id="0002"
+			name="remove"
+			author="Alvaro"
+			date="2016-04-27" />
+	</class>
+		
+	<class 
+		id="0008" 
+		name="com.tivic.manager.acd.TurmaServices">
+			
+		<method 
+			id="0001"
+			name="getAlunosByDisciplinaAtivosOf"
+			author="Edgard"
+			date="2016-03-24" />
+			
+		<method 
+			id="0002"
+			name="getTurma"
+			author="Edgard"
+			date="2016-03-29" />
+			
+		<method 
+			id="0003"
+			name="getAllTurmas"
+			author="Edgard"
+			date="2016-03-29" />
+			
+		<method 
+			id="0004"
+			name="getAlunosAtivosOf"
+			author="Edgard"
+			date="2016-05-10" />	
+			
+	</class>
+	
+	<class 
+		id="0009" 
+		name="com.tivic.manager.acd.AulaMatriculaServices">
+			
+		<method 
+			id="0001"
+			name="updatePresenca"
+			author="Edgard"
+			date="2016-01-06" />
+			
+			
+	</class>
+	
+	<class 
+		id="0010" 
+		name="com.tivic.manager.acd.InstituicaoServices">
+			
+		<method 
+			id="0001"
+			name="getAllSimplificado"
+			author="Edgard"
+			date="2016-05-05" />
+			
+		<method 
+			id="0002"
+			name="getAllTurmasByInstituicaoPeriodo"
+			author="Edgard"
+			date="2016-05-0*" />
+			
+		<method 
+			id="0003"
+			name="getAllPeriodos"
+			author="Edgard"
+			date="2016-05-09" />	
+			
+		<method 
+			id="0004"
+			name="getUnidadeByCodigo"
+			author="Edgard"
+			date="2016-05-13" />		
+			
+		<method 
+			id="0005"
+			name="getAllProfissionaisByInstituicao"
+			author="Edgard"
+			date="2016-05-13" />			
+			
+		<method 
+			id="0006"
+			name="getLocalizacao"
+			author="Edgard"
+			date="2016-05-13" />		
+			
+		<method 
+			id="0007"
+			name="findInstituicaoByNome"
+			author="Edgard"
+			date="2016-05-30" />	
+			
+		<method 
+			id="0008"
+			name="getReferenciasByCamada"
+			author="Edgard"
+			date="2016-07-27" />
+			date="2016-05-30" />	
+			
+		<method 
+			id="0009"
+			name="getInstituicaoCompleto"
+			author="Edgard"
+			date="2016-08-29" />
+			
+		<method 
+			id="0010"
+			name="getAllProfessoresLotados"
+			author="Gabriel"
+			date="2016-12-33" />	
+			
+		<method 
+			id="0011"
+			name="getAllMatriculasInstituicao"
+			author="Edgard"
+			date="2017-01-24" />			
+			
+	</class>
+	
+	<class 
+		id="0011" name="com.tivic.manager.mob.LacreCatracaServices">
+		<method 
+			id="0001"
+			name="save"
+			author="Alvaro"
+			date="2016-05-27" />
+	</class>
+	
+	<class 
+		id="0012" name="com.tivic.manager.grl.PessoaServices">
+		<method 
+			id="0001"
+			name="find"
+			author="Edgard"
+			date="2016-05-30" />
+			
+		<method 
+			id="0002"
+			name="findPessoaByNome"
+			description="Foi eu mesmo, nÃ£o ligo."
+			author="Edgard"
+			date="2016-05-30" />
+	</class>
+
+	<class 
+		id="0013" name="com.tivic.manager.agd.AgendaItemServices">
+		<method 
+			id="0001"
+			name="getListByParameters"
+			author="Edgard"
+			date="2016-05-30" />
+			
+		<method 
+			id="0002"
+			name="getEstatisticaDashboard"
+			author="Edgard"
+			date="2016-06-17" />
+
+	</class>
+	
+	<class 
+		id="0014" name="com.tivic.manager.mob.VistoriaServices">
+		<method 
+			id="0001"
+			name="find"
+			author="Alvaro"
+			date="2016-06-13" />
+		<method 
+			id="0002"
+			name="save"
+			author="Alvaro"
+			date="2016-11-13" />
+		<method 
+			id="0003"
+			name="getResultadoVistoria"
+			author="Alvaro"
+			date="2016-11-13" />
+	</class>
+	
+	<class 
+		id="0015" name="com.tivic.manager.mob.ImpedimentoAfericaoServices">
+		<method 
+			id="0001"
+			name="getAll"
+			author="Alvaro"
+			date="2016-06-16" />
+	</class>
+	
+	<class 
+		id="0016" name="com.tivic.manager.grl.ParametroServices">
+		<method 
+			id="0001"
+			name="getValorOfParametroAsInteger"
+			author="Edgard"
+			date="2016-08-29" />
+		<method 
+			id="0002"
+			name="getParamsValues"
+			author="Alvaro"
+			date="2016-10-05" />
+	</class>
+	
+	<class 
+		id="0017" name="com.tivic.manager.seg.ReleaseServices">
+		<method 
+			id="0001"
+			name="getLastRelease"
+			author="Edgard"
+			date="2016-08-31" />
+	</class>
+	<class 
+		id="0018" name="com.tivic.manager.mob.PlanoVistoriaServices">
+		<method 
+			id="0001"
+			name="getAll"
+			author="Alvaro"
+			date="2016-09-13" />
+	</class>
+	<class 
+		id="0019" name="com.tivic.manager.grl.PessoaArquivoServices">
+		<method 
+			id="0001"
+			name="save"
+			author="Alvaro"
+			date="2016-09-30" />
+	</class>
+	<class 
+		id="0021" name="com.tivic.manager.mob.PlanoVistoriaItemServices">
+		<method 
+			id="0001"
+			name="getAllByPlanoVistoria"
+			author="Alvaro"
+			date="2016-09-13" />
+	</class>
+	
+	
+	
+	<!--################################-->
+	<!-- GESTAO DE PROCESSO DE NEGOCIOS -->
+	<!--################################-->
+	
+	<class 
+		id="GRL0020" name="com.tivic.manager.grl.ModeloDocumentoServices">
+		<method 
+			id="0001"
+			name="getAll"
+			author="Sapucaia"
+			date="2016-10-31" />
+		<method 
+			id="0002"
+			name="getBlbModelo"
+			author="Sapucaia"
+			date="2016-11-01" />
+		<method 
+			id="0003"
+			name="remove"
+			author="Sapucaia"
+			date="2017-01-19" />
+	</class>
+	
+	<class 
+		id="PRC0030" name="com.tivic.manager.prc.ProcessoServices">
+		<method 
+			id="0001"
+			name="find"
+			author="Sapucaia"
+			date="2017-01-04" />
+		<method 
+			id="0002"
+			name="getFieldsMapByProcesso"
+			author="Sapucaia"
+			date="2017-01-04" />
+		<method 
+			id="0003"
+			name="getPlaceholders"
+			author="Sapucaia"
+			date="2017-01-20" />
+	</class>
+	
+	<class 
+		id="GPN0010" name="com.tivic.manager.gpn.TipoDocumentoServices">
+		<method 
+			id="0001"
+			name="getAll"
+			author="Sapucaia"
+			date="2017-01-09" />
+	</class>
+	
+	<!--################################-->
+	<!--        ALMOXARIFADO/CAE        -->
+	<!--################################-->
+	
+	<class 
+		id="CAE0021" name="com.tivic.manager.cae.CardapioGrupoServices">
+		<method 
+			id="0001"
+			name="getIngredientesByModalidade"
+			author="Edgard"
+			date="2017-01-24" />
+	</class>
+	
+	<class 
+		id="ACD0022" name="com.tivic.manager.acd.InstituicaoCirculoServices">
+		<method 
+			id="0001"
+			name="getAllByCirculoModalidade"
+			author="Edgard"
+			date="2017-01-24" />
+	</class>
+		
+</services>
+	

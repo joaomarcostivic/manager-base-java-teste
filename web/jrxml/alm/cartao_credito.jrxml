@@ -1,0 +1,328 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="cartao_credito" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="9dd053b6-3254-4d8a-bbae-6d3cc1ae6068">
+	<property name="ireport.zoom" value="2.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="LOGO" class="java.lang.String"/>
+	<parameter name="nmRazaoSocial" class="java.lang.String"/>
+	<parameter name="dtInicial" class="java.lang.String"/>
+	<parameter name="dtFinal" class="java.lang.String"/>
+	<parameter name="dtHoje" class="java.lang.String"/>
+	<parameter name="hrHoje" class="java.lang.String"/>
+	<parameter name="nmUsuario" class="java.lang.String"/>
+	<field name="tpTurno" class="java.lang.String"/>
+	<field name="tpCartao" class="java.lang.String"/>
+	<field name="NM_TOTAL" class="java.lang.String"/>
+	<field name="DT_DEPOSITO" class="java.lang.String"/>
+	<field name="TP_TN" class="java.lang.String"/>
+	<field name="VL_BRUTO" class="java.lang.String"/>
+	<field name="VL_OPERACAO" class="java.lang.String"/>
+	<field name="VL_TAXA_ADM" class="java.lang.String"/>
+	<field name="DT_MOVIMENTO" class="java.lang.String"/>
+	<field name="VL_LIQUIDO" class="java.lang.String"/>
+	<field name="NM_CARTAO" class="java.lang.String"/>
+	<field name="DS_OBSERVACAO" class="java.lang.String"/>
+	<field name="NM_SUB_TOTAL" class="java.lang.String"/>
+	<variable name="vlSubTotalBruto" class="java.lang.Double" resetType="Group" resetGroup="depositos" calculation="Sum">
+		<variableExpression><![CDATA[$F{VL_BRUTO}]]></variableExpression>
+	</variable>
+	<variable name="vlSubTotalTaxaAdm" class="java.lang.Double" resetType="Group" resetGroup="depositos" calculation="Sum">
+		<variableExpression><![CDATA[$F{VL_TAXA_ADM}]]></variableExpression>
+	</variable>
+	<variable name="vlSubTotalOperacao" class="java.lang.Double" resetType="Group" resetGroup="depositos" calculation="Sum">
+		<variableExpression><![CDATA[$F{VL_OPERACAO}]]></variableExpression>
+	</variable>
+	<variable name="vlSubTotalLiquido" class="java.lang.Double" resetType="Group" resetGroup="depositos" calculation="Sum">
+		<variableExpression><![CDATA[$F{VL_LIQUIDO}]]></variableExpression>
+	</variable>
+	<variable name="vlTotalBruto" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[$F{VL_BRUTO}]]></variableExpression>
+	</variable>
+	<variable name="vlTotalTaxaAdm" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[$F{VL_TAXA_ADM}]]></variableExpression>
+	</variable>
+	<variable name="vlTotalOperacao" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[$F{VL_OPERACAO}]]></variableExpression>
+	</variable>
+	<variable name="vlTotalLiquido" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[$F{VL_LIQUIDO}]]></variableExpression>
+	</variable>
+	<group name="depositos">
+		<groupExpression><![CDATA[$F{DT_DEPOSITO}]]></groupExpression>
+		<groupFooter>
+			<band height="8">
+				<textField>
+					<reportElement uuid="e8e140a9-f8e6-4b53-ab2d-021ba35296b1" mode="Opaque" x="480" y="0" width="75" height="8" backcolor="#CCCCCC"/>
+					<textElement textAlignment="Right">
+						<font size="6"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$V{vlSubTotalLiquido}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement uuid="e8e140a9-f8e6-4b53-ab2d-021ba35296b1" mode="Opaque" x="375" y="0" width="56" height="8" backcolor="#CCCCCC"/>
+					<textElement textAlignment="Right">
+						<font size="6"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$V{vlSubTotalTaxaAdm}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement uuid="e8e140a9-f8e6-4b53-ab2d-021ba35296b1" mode="Opaque" x="329" y="0" width="46" height="8" backcolor="#CCCCCC"/>
+					<textElement textAlignment="Right">
+						<font size="6"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$V{vlSubTotalBruto}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement uuid="e8e140a9-f8e6-4b53-ab2d-021ba35296b1" mode="Opaque" x="431" y="0" width="49" height="8" backcolor="#CCCCCC"/>
+					<textElement textAlignment="Right">
+						<font size="6"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$V{vlSubTotalOperacao}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement uuid="e8e140a9-f8e6-4b53-ab2d-021ba35296b1" mode="Opaque" x="1" y="0" width="327" height="8" backcolor="#CCCCCC"/>
+					<textElement>
+						<font size="6"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{NM_SUB_TOTAL} + "   " + $V{depositos_COUNT} + " - cheques"]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupFooter>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="113" splitType="Stretch">
+			<textField>
+				<reportElement uuid="c6158799-fb61-41c2-8585-38acabdc702c" x="143" y="73" width="411" height="20"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[($F{tpTurno} == null || $F{tpTurno}.equals("")) ? "Turno: todos" : "Turno: " + $F{tpTurno}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="56a449de-2f82-4c52-8016-06dcb96aab9f" x="143" y="53" width="411" height="20"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA["Data de Movimentação " + $P{dtInicial} + " até " + $P{dtFinal}]]></textFieldExpression>
+			</textField>
+			<image scaleImage="FillFrame" hAlign="Center" vAlign="Middle" onErrorType="Blank" evaluationTime="Report">
+				<reportElement uuid="8c074d58-4f9a-4d93-8a2a-75274a8279a4" x="1" y="2" width="142" height="111"/>
+				<imageExpression><![CDATA[net.sf.jasperreports.engine.util.JRImageLoader.loadImage((byte[]) $P{LOGO})]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement uuid="b0a975cb-8cac-4013-a9ac-c49406f0d5d5" x="143" y="17" width="411" height="35"/>
+				<textElement textAlignment="Center">
+					<font size="16" isBold="true"/>
+				</textElement>
+				<text><![CDATA[CARTÃO CRÉDITO - EM ABERTO]]></text>
+			</staticText>
+			<textField>
+				<reportElement uuid="c6158799-fb61-41c2-8585-38acabdc702c" x="143" y="93" width="411" height="20"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[($F{tpCartao} == null || $F{tpCartao}.equals("")) ? "Cartões: todos" : "Cartões " + $F{tpCartao}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement uuid="d95120a9-93ca-4e71-9e3d-5c51e6d2eb66" x="143" y="1" width="411" height="16"/>
+				<textElement textAlignment="Center" verticalAlignment="Bottom" markup="none">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{nmRazaoSocial}]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<columnHeader>
+		<band height="16" splitType="Stretch">
+			<line>
+				<reportElement uuid="6978ee43-d8c9-443b-9788-dffa5f623354" x="0" y="2" width="555" height="2"/>
+				<graphicElement>
+					<pen lineWidth="1.5"/>
+				</graphicElement>
+			</line>
+			<staticText>
+				<reportElement uuid="0eb26ccb-5c8e-4eed-9b34-f97ad899d619" x="107" y="4" width="20" height="11"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[TN]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="041ea3b4-5374-4975-96fe-06f9aee1837c" x="1" y="4" width="49" height="11"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[DEPÓSITO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="041ea3b4-5374-4975-96fe-06f9aee1837c" x="50" y="4" width="57" height="11"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[MOVIMENTO]]></text>
+			</staticText>
+			<line>
+				<reportElement uuid="aee11a31-3b64-4f9d-acbc-a13b496e51db" x="0" y="14" width="555" height="2"/>
+				<graphicElement>
+					<pen lineWidth="1.5"/>
+				</graphicElement>
+			</line>
+			<staticText>
+				<reportElement uuid="16e51332-16ef-4fc3-a126-23e10ee70b65" x="127" y="4" width="80" height="11"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[CARTÃO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="16e51332-16ef-4fc3-a126-23e10ee70b65" x="207" y="4" width="121" height="11"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[OBSERVAÇÃO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="16e51332-16ef-4fc3-a126-23e10ee70b65" x="329" y="4" width="46" height="11"/>
+				<textElement textAlignment="Right">
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[BRUTO (R$)]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="16e51332-16ef-4fc3-a126-23e10ee70b65" x="375" y="4" width="56" height="11"/>
+				<textElement textAlignment="Right">
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[TX. ADM (R$)]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="16e51332-16ef-4fc3-a126-23e10ee70b65" x="431" y="4" width="49" height="11"/>
+				<textElement textAlignment="Right">
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[OPER. (R$)]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="16e51332-16ef-4fc3-a126-23e10ee70b65" x="480" y="4" width="75" height="11"/>
+				<textElement textAlignment="Right">
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[LIQUIDO (R$)]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="8" splitType="Stretch">
+			<textField>
+				<reportElement uuid="e8e140a9-f8e6-4b53-ab2d-021ba35296b1" x="375" y="0" width="56" height="8"/>
+				<textElement textAlignment="Right">
+					<font size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{VL_TAXA_ADM}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="e8e140a9-f8e6-4b53-ab2d-021ba35296b1" x="431" y="0" width="49" height="8"/>
+				<textElement textAlignment="Right">
+					<font size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{VL_OPERACAO}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="e8e140a9-f8e6-4b53-ab2d-021ba35296b1" x="207" y="0" width="121" height="8"/>
+				<textElement>
+					<font size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{DS_OBSERVACAO}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="e8e140a9-f8e6-4b53-ab2d-021ba35296b1" x="127" y="0" width="80" height="8"/>
+				<textElement>
+					<font size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{NM_CARTAO}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="e8e140a9-f8e6-4b53-ab2d-021ba35296b1" x="480" y="0" width="75" height="8"/>
+				<textElement textAlignment="Right">
+					<font size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{VL_LIQUIDO}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="e8e140a9-f8e6-4b53-ab2d-021ba35296b1" x="329" y="0" width="46" height="8"/>
+				<textElement textAlignment="Right">
+					<font size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{VL_BRUTO}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="e8e140a9-f8e6-4b53-ab2d-021ba35296b1" x="50" y="0" width="57" height="8"/>
+				<textElement>
+					<font size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{DT_MOVIMENTO}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="e8e140a9-f8e6-4b53-ab2d-021ba35296b1" x="1" y="0" width="49" height="8"/>
+				<textElement>
+					<font size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{DT_DEPOSITO}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="e8e140a9-f8e6-4b53-ab2d-021ba35296b1" x="107" y="0" width="20" height="8"/>
+				<textElement>
+					<font size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{TP_TN}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="13">
+			<textField>
+				<reportElement uuid="b4535353-a90a-4520-8dc4-8400a0e2fed5" x="2" y="0" width="554" height="13"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Arial" size="7" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Emitido em " + $P{dtHoje} + " às " + $P{hrHoje} + " por " + $P{nmUsuario} + "   Página: " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="11" splitType="Stretch">
+			<textField>
+				<reportElement uuid="e8e140a9-f8e6-4b53-ab2d-021ba35296b1" mode="Opaque" x="328" y="0" width="46" height="11" backcolor="#CCCCCC"/>
+				<textElement textAlignment="Right">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{vlTotalBruto}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="e8e140a9-f8e6-4b53-ab2d-021ba35296b1" mode="Opaque" x="430" y="0" width="49" height="11" backcolor="#CCCCCC"/>
+				<textElement textAlignment="Right">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{vlTotalOperacao}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="e8e140a9-f8e6-4b53-ab2d-021ba35296b1" mode="Opaque" x="374" y="0" width="56" height="11" backcolor="#CCCCCC"/>
+				<textElement textAlignment="Right">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{vlTotalTaxaAdm}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="e8e140a9-f8e6-4b53-ab2d-021ba35296b1" mode="Opaque" x="479" y="0" width="75" height="11" backcolor="#CCCCCC"/>
+				<textElement textAlignment="Right">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{vlTotalLiquido}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="e8e140a9-f8e6-4b53-ab2d-021ba35296b1" mode="Opaque" x="1" y="0" width="327" height="11" backcolor="#CCCCCC"/>
+				<textElement>
+					<font size="8" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["TOTAL GERAL   " + $V{REPORT_COUNT} + " - cheques"]]></textFieldExpression>
+			</textField>
+		</band>
+	</summary>
+</jasperReport>

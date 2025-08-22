@@ -1,0 +1,29 @@
+package com.tivic.manager.mob.boat;
+
+import java.util.List;
+
+import javax.ws.rs.BadRequestException;
+
+import com.tivic.manager.mob.boat.dto.BoatEstatisticaCategoriaVeiculoDTO;
+import com.tivic.manager.mob.boat.dto.BoatEstatisticaCidadeDTO;
+import com.tivic.manager.mob.boat.dto.BoatEstatisticaEspecieVeiculoDTO;
+import com.tivic.manager.mob.boat.dto.BoatEstatisticaGeneroDTO;
+import com.tivic.manager.mob.boat.dto.BoatEstatisticaIdadeDTO;
+import com.tivic.manager.mob.edat.dto.EDatEstatisticaCategoriaVeiculoDTO;
+import com.tivic.manager.mob.edat.dto.EDatEstatisticaCidadeDTO;
+import com.tivic.manager.mob.edat.dto.EdatEstatisticaEspecieVeiculoDTO;
+import com.tivic.manager.mob.edat.dto.EdatEstatisticaGeneroDTO;
+import com.tivic.manager.mob.edat.dto.EdatEstatisticaIdadeDTO;
+import com.tivic.sol.connection.CustomConnection;
+import com.tivic.sol.search.SearchCriterios;
+
+public interface IBoatService {
+	public Boat insert(Boat boat) throws BadRequestException, Exception;
+	public Boat insert(Boat boat, CustomConnection customConnection) throws BadRequestException, Exception;
+	public Boat update(Boat boat) throws Exception;
+	public Boat update(Boat boat, CustomConnection customConnection) throws Exception;
+	public Boat get(int cdBoat) throws Exception;
+	public Boat get(int cdBoat, CustomConnection customConnection) throws Exception;
+	public List<Boat> find(SearchCriterios searchCriterios) throws Exception;
+	public List<Boat> find(SearchCriterios searchCriterios, CustomConnection customConnection) throws Exception;
+}

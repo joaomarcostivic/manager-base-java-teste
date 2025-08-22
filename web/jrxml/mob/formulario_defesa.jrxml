@@ -1,0 +1,823 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.19.1.final using JasperReports Library version 6.19.1-867c00bf88cd4d784d404379d6c05e1b419e8a4c  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report1" language="groovy" pageWidth="595" pageHeight="842" columnWidth="515" leftMargin="40" rightMargin="40" topMargin="20" bottomMargin="20" uuid="99d93beb-bdfc-407b-88a5-f9145b636a99">
+	<property name="ireport.zoom" value="0.75"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="NM_MUNICIPIO" class="java.lang.String"/>
+	<parameter name="NM_ORGAO_AUTUADOR" class="java.lang.String"/>
+	<parameter name="NM_SUBORGAO" class="java.lang.String"/>
+	<parameter name="LOGO_2" class="java.lang.Object"/>
+	<parameter name="DS_TITULO_1" class="java.lang.String"/>
+	<parameter name="DS_ENDERECO" class="java.lang.String"/>
+	<parameter name="DS_TITULO_2" class="java.lang.String"/>
+	<parameter name="DS_TITULO_3" class="java.lang.String">
+		<defaultValueExpression><![CDATA[$P{DS_TITULO_3}!=null]]></defaultValueExpression>
+	</parameter>
+	<parameter name="LOGO_1" class="java.lang.Object"/>
+	<parameter name="NM_CIDADE" class="java.lang.String">
+		<defaultValueExpression><![CDATA[$P{NM_CIDADE}!=null]]></defaultValueExpression>
+	</parameter>
+	<parameter name="NM_LOGRADOURO" class="java.lang.String">
+		<defaultValueExpression><![CDATA[$P{NM_LOGRADOURO}!=null]]></defaultValueExpression>
+	</parameter>
+	<parameter name="NR_ENDERECO" class="java.lang.String">
+		<defaultValueExpression><![CDATA[$P{NR_ENDERECO}!=null]]></defaultValueExpression>
+	</parameter>
+	<parameter name="NM_BAIRRO" class="java.lang.String">
+		<defaultValueExpression><![CDATA[$P{NM_BAIRRO}!=null]]></defaultValueExpression>
+	</parameter>
+	<parameter name="NR_CEP" class="java.lang.String">
+		<defaultValueExpression><![CDATA[$F{NR_CEP}.length() == 8 ? ($F{NR_CEP}.substring(0, 2) + "." + $F{NR_CEP}.substring(2, 5) + "-" + $F{NR_CEP}.substring(5, 8)) : "CEP INCORRETO"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="NR_TELEFONE" class="java.lang.String"/>
+	<parameter name="SG_UF" class="java.lang.String">
+		<defaultValueExpression><![CDATA[$P{SG_UF} != null]]></defaultValueExpression>
+	</parameter>
+	<parameter name="NM_EMAIL" class="java.lang.String">
+		<defaultValueExpression><![CDATA[$P{NM_EMAIL}!=null]]></defaultValueExpression>
+	</parameter>
+	<parameter name="NM_COMPLEMENTO" class="java.lang.String">
+		<defaultValueExpression><![CDATA[$P{NM_COMPLEMENTO}!=null]]></defaultValueExpression>
+	</parameter>
+	<field name="NR_AIT" class="java.lang.String"/>
+	<field name="NR_CONTROLE" class="java.lang.String"/>
+	<field name="NR_PLACA" class="java.lang.String"/>
+	<field name="NM_UF" class="java.lang.String"/>
+	<field name="NM_MARCA" class="java.lang.String"/>
+	<field name="DS_ESPECIE" class="java.lang.String"/>
+	<field name="NM_CATEGORIA" class="java.lang.String"/>
+	<field name="NM_PROPRIETARIO" class="java.lang.String"/>
+	<field name="NR_CPF_CNPJ_PROPRIETARIO" class="java.lang.String"/>
+	<field name="NM_CONDUTOR" class="java.lang.String"/>
+	<field name="NR_CPF_CONDUTOR" class="java.lang.String"/>
+	<field name="NR_CNH_CONDUTOR" class="java.lang.String"/>
+	<field name="UF_CNH_CONDUTOR" class="java.lang.String"/>
+	<field name="DS_LOCAL_INFRACAO" class="java.lang.String"/>
+	<field name="DS_PONTO_REFERENCIA" class="java.lang.String"/>
+	<field name="DT_INFRACAO" class="java.util.Date"/>
+	<field name="NR_COD_DETRAN" class="java.lang.Integer"/>
+	<field name="DS_INFRACAO" class="java.lang.String"/>
+	<field name="NR_ARTIGO" class="java.lang.String"/>
+	<field name="NR_INCISO" class="java.lang.String"/>
+	<field name="NR_PARAGRAFO" class="java.lang.String"/>
+	<field name="NR_ALINEA" class="java.lang.String"/>
+	<field name="NM_NATUREZA" class="java.lang.String"/>
+	<field name="NR_PONTUACAO" class="java.lang.Integer"/>
+	<field name="VL_MULTA" class="java.lang.Float"/>
+	<field name="VL_VELOCIDADE_PERMITIDA" class="java.lang.Float"/>
+	<field name="VL_VELOCIDADE_AFERIDA" class="java.lang.Float"/>
+	<field name="VL_VELOCIDADE_PENALIDADE" class="java.lang.Float"/>
+	<field name="NM_MUNICIPIO" class="java.lang.String"/>
+	<field name="CD_MUNICIPIO_AUTUADOR" class="java.lang.String"/>
+	<field name="NR_RENAVAN" class="java.lang.String"/>
+	<field name="NM_EQUIPAMENTO" class="java.lang.String"/>
+	<field name="NR_MATRICULA" class="java.lang.String"/>
+	<field name="DT_VENCIMENTO" class="java.util.Date"/>
+	<field name="DT_AFERICAO" class="java.util.Date"/>
+	<field name="ID_IDENTIFICACAO_INMETRO" class="java.lang.String"/>
+	<field name="SG_UF_VEICULO" class="java.lang.String"/>
+	<field name="DS_ENDERECO_CONDUTOR" class="java.lang.String"/>
+	<field name="NR_CEP" class="java.lang.String"/>
+	<field name="NR_CORREIOS" class="java.lang.String"/>
+	<field name="DS_BAIRRO_PROPRIETARIO" class="java.lang.String"/>
+	<field name="IMG_VEICULO" class="java.lang.Object"/>
+	<field name="ID_EQUIPAMENTO" class="java.lang.String"/>
+	<field name="MARCA_EQUIPAMENTO" class="java.lang.String"/>
+	<field name="MODELO_EQUIPAMENTO" class="java.lang.String"/>
+	<field name="DS_BAIRRO_CONDUTOR" class="java.lang.String"/>
+	<field name="NR_CEP_CONDUTOR" class="java.lang.String"/>
+	<field name="TP_PESSOA_PROPRIETARIO" class="java.lang.Integer"/>
+	<field name="TP_EQUIPAMENTO" class="java.lang.Integer"/>
+	<field name="NOME_EQUIPAMENTO" class="java.lang.String"/>
+	<field name="DT_MOVIMENTO" class="java.util.Date"/>
+	<field name="ID_AIT" class="java.lang.String"/>
+	<field name="NM_MODELO" class="java.lang.String"/>
+	<field name="DS_LOGRADOURO" class="java.lang.String"/>
+	<field name="NM_BAIRRO" class="java.lang.String"/>
+	<field name="DS_NR_IMOVEL" class="java.lang.String"/>
+	<field name="DT_APRESENTACAO" class="java.util.Date"/>
+	<field name="Field_1" class="java.lang.String"/>
+	<field name="LABELVIA" class="java.lang.String"/>
+	<field name="DT_EMISSAO" class="java.util.Date"/>
+	<field name="TXT_CONDUTOR" class="java.lang.String"/>
+	<field name="LG_SUSPENSAO_CNH" class="java.lang.Integer"/>
+	<field name="DS_OBSERVACAO" class="java.lang.String"/>
+	<field name="NR_LACRE" class="java.lang.String"/>
+	<field name="DT_PRAZO_DEFESA" class="java.util.Date"/>
+	<field name="LG_AUTO_ASSINADO" class="java.lang.Integer"/>
+	<variable name="identifica-pfisica-pjuridica" class="java.lang.String">
+		<variableExpression><![CDATA[$F{TP_PESSOA_PROPRIETARIO} == 1 ? "Preencher de forma legível o formulário abaixo que deverá conter assinaturas da pessoa responsável em contrato social pela empresa e do condutor ou procurador devidamente identificado. Anexar cópia da carteira de habilitação ou Permissão para dirigir do condutor, cópia do contrato social atualizado, cópia do RG do responsável pela empresa, comprovante de residência do condutor e enviar ao órgão autuador. Na impossibilidade da coleta da assinatura do condutor infrator, V. Sª poderá anexar cópia de documento onde conste cláusula de responsabilidade por quaisquer infrações cometidas na condução do veículo, bem como pela pontuação delas decorrentes. A identificação do condutor infrator só surtirá efeito se estiver corretamente preenchida, dentro do prazo, assinada e acompanhada de cópia legível dos documentos relacionados." : " Preencher de forma legível o formulário abaixo que deverá conter assinaturas  e cópias de documentos (Cópias do RG, CNH ou Permissão para dirigir e comprovante de endereço) do proprietário e do condutor ou procurador devidamente identificado e enviar ao órgão autuador. Na impossibilidade da coleta da assinatura do condutor infrator, V. Sª poderá anexar cópia de documento onde conste cláusula de responsabilidade por quaisquer infrações cometidas na condução do veículo, bem como pela pontuação delas decorrentes. A identificação do condutor infrator só surtirá efeito se estiver corretamente preenchida, dentro do prazo, assinada e acompanhada de cópia legível dos documentos relacionados. É imprescindível a assinatura do condutor e proprietário e apresentação de documentos que comprovem a assinatura de ambos"]]></variableExpression>
+	</variable>
+	<variable name="DS_BAIRRO_CONDUTOR" class="java.lang.String"/>
+	<variable name="TP_EQUIPAMENTO" class="java.lang.String"/>
+	<variable name="dt_limite" class="java.lang.String">
+		<variableExpression><![CDATA[$F{DT_MOVIMENTO} + 30]]></variableExpression>
+	</variable>
+	<variable name="identificar_txt_condutor" class="java.lang.String">
+		<variableExpression><![CDATA[$F{TXT_CONDUTOR} != null ? $F{TXT_CONDUTOR} : "DATA LIMITE P/ AP DEFESA PRÉVIA: " + $F{DT_APRESENTACAO}]]></variableExpression>
+	</variable>
+	<detail>
+		<band height="802" splitType="Stretch">
+			<image hAlign="Center" vAlign="Middle">
+				<reportElement x="0" y="10" width="60" height="59" uuid="bfc76e86-5883-4473-8eb2-b50d0f50f7b9">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<printWhenExpression><![CDATA[$P{LOGO_1} != null]]></printWhenExpression>
+				</reportElement>
+				<box padding="5"/>
+				<imageExpression><![CDATA[net.sf.jasperreports.engine.util.JRImageLoader.getInstance(new SimpleJasperReportsContext()).loadAwtImageFromBytes(javax.xml.bind.DatatypeConverter.parseBase64Binary($P{LOGO_1}))]]></imageExpression>
+			</image>
+			<image hAlign="Center" vAlign="Middle">
+				<reportElement x="450" y="9" width="60" height="59" uuid="c8b1e5b8-7e09-4d60-bc04-06841c124bc7">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<printWhenExpression><![CDATA[$P{LOGO_2} != null]]></printWhenExpression>
+				</reportElement>
+				<box padding="5"/>
+				<imageExpression><![CDATA[net.sf.jasperreports.engine.util.JRImageLoader.getInstance(new SimpleJasperReportsContext()).loadAwtImageFromBytes(javax.xml.bind.DatatypeConverter.parseBase64Binary($P{LOGO_2}))]]></imageExpression>
+			</image>
+			<textField>
+				<reportElement x="64" y="43" width="384" height="28" uuid="1c506299-1922-44ea-ac20-ac0ac3773371"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="7" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["  " + $P{NM_LOGRADOURO} + ",  Nº: " + $P{NR_ENDERECO} + ", COMPLEMENTO: " + ( $P{NM_COMPLEMENTO} != null ? $P{NM_COMPLEMENTO} : ""  )   +",  BAIRRO: " + $P{NM_BAIRRO} + ",  CEP: " +( $P{NR_CEP}.length() == 8 ? ($P{NR_CEP}.substring(0, 2) + "." + $P{NR_CEP}.substring(2, 5) + "-" + $P{NR_CEP}.substring(5, 8)) : "CEP INCORRETO" ) + ", " + $P{NM_CIDADE} + " - " + $P{SG_UF} + " - E-MAIL: " + $P{NM_EMAIL}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="79" y="4" width="358" height="24" uuid="6a8235fa-d504-4182-9b27-6f1f527ef019">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{DS_TITULO_1}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="81" y="23" width="358" height="20" uuid="88d90548-b9fe-47bb-8a97-0d4018203ee6">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{DS_TITULO_3}]]></textFieldExpression>
+			</textField>
+			<rectangle>
+				<reportElement mode="Transparent" x="-18" y="78" width="553" height="19" uuid="d3f068f0-30ba-42f2-b031-f7076f19336e"/>
+				<graphicElement>
+					<pen lineWidth="1.5" lineColor="#000000"/>
+				</graphicElement>
+			</rectangle>
+			<staticText>
+				<reportElement x="-11" y="81" width="534" height="18" uuid="fbfca7a0-3388-4794-a2e1-10ca4b57c18d">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Justified">
+					<font size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[            DEFESA DE AUTUAÇÃO                          RECURSO                               JARI RECURSO CETRAN
+]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="368" y="84" width="10" height="10" uuid="68da620e-491f-417d-81cd-b3daa05ff266">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+			</rectangle>
+			<rectangle>
+				<reportElement x="219" y="84" width="10" height="10" uuid="6fe99df2-fcc3-4cbf-8b8d-37eae448557f">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+			</rectangle>
+			<rectangle>
+				<reportElement x="11" y="84" width="10" height="10" uuid="dabf2159-6b11-4af3-b2bc-75b656f774d9">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+			</rectangle>
+			<staticText>
+				<reportElement x="-18" y="460" width="553" height="214" uuid="7d8a29ae-43f7-4095-ac6e-d5bf6bf76e82"/>
+				<box padding="3"/>
+				<textElement textAlignment="Justified" markup="styled">
+					<font size="10"/>
+					<paragraph lineSpacing="1_1_2" lineSpacingSize="2.0"/>
+				</textElement>
+				<text><![CDATA[_________________________________________________________________________________________________
+_________________________________________________________________________________________________
+_________________________________________________________________________________________________
+_________________________________________________________________________________________________
+_________________________________________________________________________________________________
+_________________________________________________________________________________________________
+_________________________________________________________________________________________________
+_________________________________________________________________________________________________
+_________________________________________________________________________________________________
+_________________________________________________________________________________________________
+_________________________________________________________________________________________________
+_________________________________________________________________________________________________]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement mode="Transparent" x="427" y="340" width="107" height="30" uuid="2e082da6-c250-4154-bb02-8967fc43e3d3"/>
+				<graphicElement>
+					<pen lineWidth="1.25" lineColor="#000000"/>
+				</graphicElement>
+			</rectangle>
+			<rectangle>
+				<reportElement mode="Transparent" x="210" y="340" width="217" height="30" uuid="eccbd5ba-ca6a-48e3-b53c-42525e7021c5"/>
+				<graphicElement>
+					<pen lineWidth="1.25" lineColor="#000000"/>
+				</graphicElement>
+			</rectangle>
+			<rectangle>
+				<reportElement mode="Transparent" x="-21" y="340" width="231" height="30" uuid="77553ac8-a7ab-4ce2-be6d-59152d3bd706"/>
+				<graphicElement>
+					<pen lineWidth="1.25" lineColor="#000000"/>
+				</graphicElement>
+			</rectangle>
+			<rectangle>
+				<reportElement mode="Transparent" x="-21" y="250" width="407" height="30" uuid="f6b2e345-8c72-4d6f-9309-b13c8eae1a16"/>
+				<graphicElement>
+					<pen lineWidth="1.25" lineColor="#000000"/>
+				</graphicElement>
+			</rectangle>
+			<rectangle>
+				<reportElement mode="Transparent" x="459" y="250" width="75" height="30" uuid="7cdd72df-d3ca-49eb-9ef6-6d62673104b5"/>
+				<graphicElement>
+					<pen lineWidth="1.25" lineColor="#000000"/>
+				</graphicElement>
+			</rectangle>
+			<staticText>
+				<reportElement x="6" y="120" width="280" height="100" uuid="73ef098e-244a-4db4-bbfe-d78770bec460"/>
+				<box padding="3"/>
+				<textElement textAlignment="Justified" markup="styled">
+					<font size="10"/>
+					<paragraph lineSpacing="1_1_2" lineSpacingSize="1.0"/>
+				</textElement>
+				<text><![CDATA[Carteira Nacional de Habilitação (CNH) / Permissão
+Carteira Nacional de Habilitação (CNH) / Permissão
+Certificado de Registro e Licenciamento de Veículo (CRLV)
+Carteira de Identidade (RG) / CPF / CNPJ
+Carteira de Identidade (RG) / CPF / CNPJ]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement mode="Transparent" x="-21" y="220" width="357" height="30" uuid="bd23eb26-2d1a-4b10-8b31-d50f01c25156"/>
+				<graphicElement>
+					<pen lineWidth="1.25" lineColor="#000000"/>
+				</graphicElement>
+			</rectangle>
+			<rectangle>
+				<reportElement mode="Transparent" x="336" y="220" width="198" height="30" uuid="f6bcac8c-2ea1-4a1c-8416-b5a97d7a2d31"/>
+				<graphicElement>
+					<pen lineWidth="1.25" lineColor="#000000"/>
+				</graphicElement>
+			</rectangle>
+			<staticText>
+				<reportElement x="-16" y="222" width="164" height="15" uuid="4a08cdf9-4593-4a94-94db-e9da458613f6">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement>
+					<font size="9" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Nome ou Razão Social do Requerente:
+]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="379" y="229" width="38" height="15" uuid="535103d3-8e30-4a66-9bfc-00a0fcf882ed">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement>
+					<font size="9" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Condutor]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement mode="Transparent" x="-21" y="280" width="279" height="30" uuid="b67bebd7-a83c-4bf5-9020-6e4f01479f1c"/>
+				<graphicElement>
+					<pen lineWidth="1.25" lineColor="#000000"/>
+				</graphicElement>
+			</rectangle>
+			<rectangle>
+				<reportElement mode="Transparent" x="459" y="280" width="75" height="30" uuid="17bbea60-152b-482e-a245-c433d9f65b4c"/>
+				<graphicElement>
+					<pen lineWidth="1.25" lineColor="#000000"/>
+				</graphicElement>
+			</rectangle>
+			<rectangle>
+				<reportElement mode="Transparent" x="-21" y="310" width="279" height="30" uuid="ddc1dc1b-414f-4452-80b4-318c21d93c1b"/>
+				<graphicElement>
+					<pen lineWidth="1.25" lineColor="#000000"/>
+				</graphicElement>
+			</rectangle>
+			<rectangle>
+				<reportElement mode="Transparent" x="258" y="310" width="276" height="30" uuid="9bffd738-d345-40b4-bf2e-9fc295467ef0"/>
+				<graphicElement>
+					<pen lineWidth="1.25" lineColor="#000000"/>
+				</graphicElement>
+			</rectangle>
+			<line>
+				<reportElement x="-21" y="684" width="554" height="1" uuid="c9742941-b4ab-443c-9046-2b5b37e6cdb4">
+					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<graphicElement>
+					<pen lineWidth="1.0" lineStyle="Dotted"/>
+				</graphicElement>
+			</line>
+			<image>
+				<reportElement x="-20" y="672" width="16" height="16" uuid="83868a72-6426-4ecd-ba0e-0ecbcdae71ab">
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<imageExpression><![CDATA["C:/Users/usuario/Downloads/57499.png"]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="-21" y="102" width="223" height="20" uuid="30e8104f-68ab-4cfa-8394-df9e3bc0a175"/>
+				<box padding="3"/>
+				<textElement textAlignment="Justified" markup="styled">
+					<font size="10"/>
+					<paragraph lineSpacing="1_1_2" lineSpacingSize="1.0"/>
+				</textElement>
+				<text><![CDATA[CÓPIAS DE DOCUMENTOS NECESSÁRIOS: 
+]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="-7" y="126" width="10" height="10" uuid="fcae8235-3705-47f3-b7ca-cb9ed6d96ead">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+			</rectangle>
+			<rectangle>
+				<reportElement x="-7" y="143" width="10" height="10" uuid="484d019d-56c5-49d8-bb47-a6b681465d6c">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+			</rectangle>
+			<rectangle>
+				<reportElement x="-7" y="178" width="10" height="10" uuid="b2bf5fea-c604-40d8-bb0f-04e431ade3be">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+			</rectangle>
+			<rectangle>
+				<reportElement x="-7" y="161" width="10" height="10" uuid="343db822-4032-48fc-b479-7e2b433d5713">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+			</rectangle>
+			<rectangle>
+				<reportElement x="-7" y="196" width="10" height="10" uuid="b5377194-9041-4235-9b65-191136d6aeef">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+			</rectangle>
+			<rectangle>
+				<reportElement x="287" y="125" width="10" height="10" uuid="67d69e84-6bd7-4ec2-b91c-cae4a2646c01">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+			</rectangle>
+			<staticText>
+				<reportElement x="299" y="120" width="236" height="25" uuid="5b32847f-0b37-433a-a9ae-e430ec893e64"/>
+				<box padding="3"/>
+				<textElement textAlignment="Justified" markup="styled">
+					<font size="10"/>
+					<paragraph lineSpacing="1_1_2" lineSpacingSize="1.0"/>
+				</textElement>
+				<text><![CDATA[Outros documentos de comprovação de defesa:
+]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="299" y="136" width="234" height="84" uuid="b433bac1-132d-43c1-bd88-3e582bac549f"/>
+				<box padding="3"/>
+				<textElement textAlignment="Justified" markup="styled">
+					<font size="10"/>
+					<paragraph lineSpacing="1_1_2" lineSpacingSize="1.0"/>
+				</textElement>
+				<text><![CDATA[________________________________________________________________________________________________________________________________________________________________]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="361" y="230" width="10" height="10" uuid="9d5b747a-6fcb-4857-97ab-011074e3abe2">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+			</rectangle>
+			<rectangle>
+				<reportElement x="444" y="230" width="10" height="10" uuid="6ad3714c-bbb2-487c-b814-4d7dd73ae2c3">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+			</rectangle>
+			<staticText>
+				<reportElement x="463" y="229" width="48" height="15" uuid="0e37ad83-3b4f-4822-a9ff-2ee2e4c8efba">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement>
+					<font size="9" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Proprietário]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement mode="Transparent" x="386" y="250" width="73" height="30" uuid="38227d60-805f-43a9-8d24-fd235d5def87"/>
+				<graphicElement>
+					<pen lineWidth="1.25" lineColor="#000000"/>
+				</graphicElement>
+			</rectangle>
+			<rectangle>
+				<reportElement mode="Transparent" x="119" y="310" width="139" height="30" uuid="8ee41766-9587-4060-9711-336441d0f42a"/>
+				<graphicElement>
+					<pen lineWidth="1.25" lineColor="#000000"/>
+				</graphicElement>
+			</rectangle>
+			<rectangle>
+				<reportElement mode="Transparent" x="210" y="370" width="324" height="30" uuid="d0522b26-d216-46d1-b326-3e349447c84e"/>
+				<graphicElement>
+					<pen lineWidth="1.25" lineColor="#000000"/>
+				</graphicElement>
+			</rectangle>
+			<rectangle>
+				<reportElement mode="Transparent" x="-21" y="370" width="231" height="30" uuid="c5a63548-f7be-4863-be42-9f92ffb479b4"/>
+				<graphicElement>
+					<pen lineWidth="1.25" lineColor="#000000"/>
+				</graphicElement>
+			</rectangle>
+			<staticText>
+				<reportElement x="-15" y="251" width="96" height="15" uuid="3691338c-0cce-477b-9552-690eb49b024a">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement>
+					<font size="9" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Endereço (Av./Rua):
+]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="392" y="251" width="26" height="15" uuid="974084c3-1a51-4295-a0f7-f6d52160003e">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement>
+					<font size="9" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Nº:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="466" y="251" width="26" height="15" uuid="5d249507-073d-49d3-acbe-297cc97eb674">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement>
+					<font size="9" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Aptº]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="-16" y="282" width="38" height="15" uuid="ef6bc5df-7161-4b58-b994-c80ba3fd75de">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement>
+					<font size="9" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Bairro:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="265" y="282" width="46" height="15" uuid="23fa4848-2000-4ffb-a93e-b52ed63d073c">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement>
+					<font size="9" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Município:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="465" y="282" width="28" height="15" uuid="6ce78cd8-7cf8-4067-b790-aed329165d80">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement>
+					<font size="9" isBold="false"/>
+				</textElement>
+				<text><![CDATA[UF:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="-15" y="313" width="38" height="15" uuid="7c3ce2cb-4d20-4f5b-8049-601789954438">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement>
+					<font size="9" isBold="false"/>
+				</textElement>
+				<text><![CDATA[CEP:
+]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="126" y="313" width="46" height="15" uuid="2206641c-cafa-4c64-820e-abc145ae8c03">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement>
+					<font size="9" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Telefone:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="265" y="313" width="46" height="15" uuid="9764cd57-dabd-4ee4-92f5-70ef7176db28">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement>
+					<font size="9" isBold="false"/>
+				</textElement>
+				<text><![CDATA[AIT:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="-15" y="343" width="38" height="15" uuid="265642f3-2292-4b4d-bf4d-352565831be1">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement>
+					<font size="9" isBold="false"/>
+				</textElement>
+				<text><![CDATA[PLACA:
+]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="219" y="343" width="46" height="15" uuid="7cafd47d-b77a-4fff-89ff-69aaa1830d60">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement>
+					<font size="9" isBold="false"/>
+				</textElement>
+				<text><![CDATA[MARCA: ANO:
+]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="434" y="343" width="46" height="15" uuid="2b339520-b8e5-45f9-b697-7c74f7c11bef">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement>
+					<font size="9" isBold="false"/>
+				</textElement>
+				<text><![CDATA[ANO:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="-14" y="374" width="38" height="15" uuid="a6bf4013-ac39-4eb5-9f36-de36acf7536c">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement>
+					<font size="9" isBold="false"/>
+				</textElement>
+				<text><![CDATA[COR:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="218" y="373" width="64" height="15" uuid="e6f7ec0c-179a-4790-9078-7b2e68b47783">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement>
+					<font size="9" isBold="false"/>
+				</textElement>
+				<text><![CDATA[RENAVAM Nº:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="-20" y="406" width="553" height="50" uuid="1daa4986-f87c-4648-a69d-39af4b011900"/>
+				<box padding="3"/>
+				<textElement textAlignment="Justified" markup="styled">
+					<font size="10"/>
+					<paragraph lineSpacing="Single" lineSpacingSize="2.0"/>
+				</textElement>
+				<text><![CDATA[Vem apresentar defesa de autuação em face da         Notificação de Autuação de Infração ( NAI ) ou       Notificação de 
+Imposição de Penalidade (NIP) correspondente a lavratura do Auto de Infração de Trânsito ( AIT ) acima especificado, 
+requerendo o seu arquivamento pelos motivos expostos a seguir:]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="205" y="411" width="10" height="10" uuid="0487e8dd-f7bd-4c18-af31-aad46e88ac95">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+			</rectangle>
+			<rectangle>
+				<reportElement x="433" y="411" width="10" height="10" uuid="12fc8b66-ce50-4c31-ac24-430ea2d6e1c2">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+			</rectangle>
+			<image>
+				<reportElement x="-20" y="688" width="553" height="86" uuid="6d918da9-1c04-49b5-8e62-6c64463081e3"/>
+				<imageExpression><![CDATA["C:/Users/usuario/Downloads/tarja.png"]]></imageExpression>
+			</image>
+			<textField>
+				<reportElement x="-18" y="767" width="548" height="28" uuid="493d5399-5e8f-4078-9238-30a602a17fab"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="7" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA["  " + $P{NM_LOGRADOURO} + ",  Nº: " + $P{NR_ENDERECO} + ", COMPLEMENTO: " + ( $P{NM_COMPLEMENTO} != null ? $P{NM_COMPLEMENTO} : ""  )   +",  BAIRRO: " + $P{NM_BAIRRO} + ",  CEP: " +( $P{NR_CEP}.length() == 8 ? ($P{NR_CEP}.substring(0, 2) + "." + $P{NR_CEP}.substring(2, 5) + "-" + $P{NR_CEP}.substring(5, 8)) : "CEP INCORRETO" ) + ", " + $P{NM_CIDADE} + " - " + $P{SG_UF} + " - E-MAIL: " + $P{NM_EMAIL}]]></textFieldExpression>
+			</textField>
+		</band>
+		<band height="802">
+			<staticText>
+				<reportElement x="292" y="520" width="200" height="40" uuid="b13f295c-f241-444a-bd78-5349a9cd6968"/>
+				<box>
+					<pen lineWidth="2.0"/>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[ASSINATURA DO CONDUTOR INFRATOR 
+(Igual ao documento apresentado) ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="-17" y="520" width="210" height="40" uuid="6f89f4a2-e8d2-4a4d-9182-1d69dc36e199"/>
+				<box>
+					<pen lineWidth="2.0"/>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[ASSINATURA DO PROPRIETÁRIO DO VEÍCULO
+(Igual ao documento apresentado) ]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement mode="Transparent" x="-17" y="590" width="553" height="90" uuid="af8cb8b4-e39f-4a93-8961-ab9c618f2d44"/>
+				<graphicElement>
+					<pen lineWidth="1.25" lineColor="#000000"/>
+				</graphicElement>
+			</rectangle>
+			<staticText>
+				<reportElement x="318" y="620" width="110" height="15" uuid="684f7cb9-0774-4545-ac95-7cd93e022a8d">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement>
+					<font size="10" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Nº PROCESSAMENTO:
+]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="-9" y="650" width="70" height="15" uuid="91eb03ae-6390-42a7-b635-418d0a2b4bf3">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement>
+					<font size="10" isBold="false"/>
+				</textElement>
+				<text><![CDATA[ASSINATURA:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="428" y="619" width="100" height="15" uuid="ee75ee14-7323-4710-bc14-dd5a87a52780">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement>
+					<font size="10" isBold="false"/>
+				</textElement>
+				<text><![CDATA[________________________]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="136" y="620" width="82" height="15" uuid="5325fdbf-8391-4b45-bee2-5f97ce9c09f7">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement>
+					<font size="10" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Nº PROTOCOLO: ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="-9" y="620" width="32" height="15" uuid="1e23d128-9fc5-4eb5-b506-f56461b17b67">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement>
+					<font size="10" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Nº AIT:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="428" y="649" width="98" height="15" uuid="bb68d957-7230-4aa5-b607-365df5302554">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement>
+					<font size="10" isBold="false"/>
+				</textElement>
+				<text><![CDATA[____/____/_________]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="25" y="619" width="108" height="15" uuid="98fd6377-e731-4e4d-974b-e711d90f9613">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement>
+					<font size="10" isBold="false"/>
+				</textElement>
+				<text><![CDATA[____________________]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="218" y="619" width="100" height="15" uuid="180ac09e-69f4-4122-88b6-aae4a9168b71">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement>
+					<font size="10" isBold="false"/>
+				</textElement>
+				<text><![CDATA[________________________]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="62" y="649" width="190" height="15" uuid="64510b79-fed7-4377-acc8-27e032d5482d">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement>
+					<font size="10" isBold="false"/>
+				</textElement>
+				<text><![CDATA[__________________________________________]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="-9" y="600" width="92" height="15" uuid="fda3f637-c71d-402e-bdb1-7f66a49e30af">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement>
+					<font size="10" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Para uso do Órgão]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="397" y="650" width="30" height="15" uuid="05edb3bf-75f6-4753-890d-64fa8378c299">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement>
+					<font size="10" isBold="false"/>
+				</textElement>
+				<text><![CDATA[DATA: ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="-8" y="460" width="170" height="15" uuid="c10d6e21-3b06-41ca-b188-6d0f30126f6b">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement>
+					<font size="10" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Nestes termos, pede deferimento]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="107" y="475" width="116" height="15" uuid="a98d8a28-97e8-4c5f-b508-04f587bbc640">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement>
+					<font size="10" isBold="false"/>
+				</textElement>
+				<text><![CDATA[DE                              DE]]></text>
+			</staticText>
+			<line>
+				<reportElement x="-18" y="580" width="554" height="1" uuid="3d1c0c30-5ca1-459d-bf3c-2a623079866b">
+					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<graphicElement>
+					<pen lineWidth="1.0" lineStyle="Dotted"/>
+				</graphicElement>
+			</line>
+			<image>
+				<reportElement x="-17" y="568" width="16" height="16" uuid="df76fd6f-3290-40d6-8e91-417a1a4694bb">
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<imageExpression><![CDATA["C:/Users/usuario/Downloads/57499.png"]]></imageExpression>
+			</image>
+			<textField>
+				<reportElement x="-15" y="691" width="548" height="28" uuid="bde85c55-401f-407d-a2a7-fd1eb904ba58"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="7" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA["  " + $P{NM_LOGRADOURO} + ",  Nº: " + $P{NR_ENDERECO} + ", COMPLEMENTO: " + ( $P{NM_COMPLEMENTO} != null ? $P{NM_COMPLEMENTO} : ""  )   +",  BAIRRO: " + $P{NM_BAIRRO} + ",  CEP: " +( $P{NR_CEP}.length() == 8 ? ($P{NR_CEP}.substring(0, 2) + "." + $P{NR_CEP}.substring(2, 5) + "-" + $P{NR_CEP}.substring(5, 8)) : "CEP INCORRETO" ) + ", " + $P{NM_CIDADE} + " - " + $P{SG_UF} + " - E-MAIL: " + $P{NM_EMAIL}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="-16" y="9" width="553" height="441" uuid="f1fc0796-cbf6-4e93-8221-b22b910ac086"/>
+				<box padding="3"/>
+				<textElement textAlignment="Justified" markup="styled">
+					<font size="10"/>
+					<paragraph lineSpacing="1_1_2" lineSpacingSize="2.0"/>
+				</textElement>
+				<text><![CDATA[_________________________________________________________________________________________________
+_________________________________________________________________________________________________
+_________________________________________________________________________________________________
+_________________________________________________________________________________________________
+_________________________________________________________________________________________________
+_________________________________________________________________________________________________
+_________________________________________________________________________________________________
+__________________________________________________________________________________________________________________________________________________________________________________________________
+_________________________________________________________________________________________________
+_________________________________________________________________________________________________
+_________________________________________________________________________________________________
+_________________________________________________________________________________________________
+_________________________________________________________________________________________________
+_________________________________________________________________________________________________
+__________________________________________________________________________________________________________________________________________________________________________________________________
+_________________________________________________________________________________________________
+_________________________________________________________________________________________________
+_________________________________________________________________________________________________
+_________________________________________________________________________________________________
+_________________________________________________________________________________________________
+_________________________________________________________________________________________________
+_________________________________________________________________________________________________
+_________________________________________________________________________________________________
+
+]]></text>
+			</staticText>
+		</band>
+	</detail>
+</jasperReport>

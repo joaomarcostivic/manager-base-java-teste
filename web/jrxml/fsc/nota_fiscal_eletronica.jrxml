@@ -1,0 +1,383 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="nota_fiscal_eletronica" language="groovy" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="4dc88994-5790-4a5f-990a-364916798725">
+	<property name="ireport.zoom" value="1.5"/>
+	<property name="ireport.x" value="252"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="LOGO" class="java.lang.Object"/>
+	<parameter name="nmFantasia" class="java.lang.String"/>
+	<parameter name="nmRazaoSocial" class="java.lang.String"/>
+	<parameter name="dtInicial" class="java.lang.String"/>
+	<parameter name="dtFinal" class="java.lang.String"/>
+	<parameter name="dtHoje" class="java.lang.String"/>
+	<parameter name="hrHoje" class="java.lang.String"/>
+	<parameter name="nmUsuario" class="java.lang.String"/>
+	<field name="NR_SERIE" class="java.lang.String"/>
+	<field name="NR_NOTA_FISCAL" class="java.lang.String"/>
+	<field name="DT_EMISSAO" class="java.lang.String"/>
+	<field name="DT_AUTORIZACAO" class="java.lang.String"/>
+	<field name="VL_TOTAL_PRODUTO" class="java.lang.Double"/>
+	<field name="VL_DESCONTO" class="java.lang.Double"/>
+	<field name="VL_TOTAL_NOTA" class="java.lang.Double"/>
+	<field name="NM_DESTINATARIO" class="java.lang.String"/>
+	<field name="NR_CPF_CNPJ" class="java.lang.String"/>
+	<field name="NM_ST_NOTA_FISCAL" class="java.lang.String"/>
+	<field name="VL_FRETE" class="java.lang.Double"/>
+	<field name="VL_SEGURO" class="java.lang.Double"/>
+	<field name="VL_OUTRAS_DESPESAS" class="java.lang.Double"/>
+	<field name="VL_ICMS_ST" class="java.lang.Double"/>
+	<field name="VL_IPI" class="java.lang.Double"/>
+	<field name="VL_II" class="java.lang.Double"/>
+	<field name="NR_CODIGO_FISCAL" class="java.lang.String"/>
+	<variable name="qtRegistros" class="java.lang.Integer" calculation="Count">
+		<variableExpression><![CDATA[$F{NR_SERIE}]]></variableExpression>
+	</variable>
+	<variable name="vlTotalNota" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[$F{VL_TOTAL_NOTA}]]></variableExpression>
+	</variable>
+	<variable name="vlTotalDesconto" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[$F{VL_DESCONTO}]]></variableExpression>
+	</variable>
+	<variable name="vlTotalProdutos" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[$F{VL_TOTAL_PRODUTO}]]></variableExpression>
+	</variable>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="63" splitType="Stretch">
+			<image hAlign="Center">
+				<reportElement uuid="600a23b6-10b6-4e33-8cae-beb11fc79035" x="0" y="2" width="75" height="60"/>
+				<imageExpression><![CDATA[net.sf.jasperreports.engine.util.JRImageLoader.loadImage((byte[]) $P{LOGO})]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement uuid="b0a975cb-8cac-4013-a9ac-c49406f0d5d5" x="75" y="18" width="727" height="18"/>
+				<textElement textAlignment="Center">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[NOTA FISCAL ELETRÔNICA]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement uuid="d95120a9-93ca-4e71-9e3d-5c51e6d2eb66" x="75" y="3" width="727" height="16"/>
+				<textElement textAlignment="Center" verticalAlignment="Bottom" markup="none">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{nmFantasia}!=null && !$P{nmFantasia}.equals("")? $P{nmFantasia} : $P{nmRazaoSocial}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="56a449de-2f82-4c52-8016-06dcb96aab9f" x="75" y="35" width="727" height="14"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[(($P{dtInicial} != null && $P{dtFinal} != null) ? "Periodo de " + $P{dtInicial} + " até " + $P{dtFinal} :
+($P{dtInicial} != null) ? "Periodo de " + $P{dtInicial} :
+($P{dtFinal} != null) ? "Periodo de " + $P{dtFinal} :
+"")]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<columnHeader>
+		<band height="14" splitType="Stretch">
+			<line>
+				<reportElement uuid="6978ee43-d8c9-443b-9788-dffa5f623354" x="0" y="2" width="802" height="1"/>
+				<graphicElement>
+					<pen lineWidth="1.0"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement uuid="aee11a31-3b64-4f9d-acbc-a13b496e51db" x="0" y="12" width="802" height="2"/>
+				<graphicElement>
+					<pen lineWidth="1.0"/>
+				</graphicElement>
+			</line>
+			<staticText>
+				<reportElement uuid="041ea3b4-5374-4975-96fe-06f9aee1837c" x="0" y="2" width="27" height="11"/>
+				<textElement textAlignment="Center">
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[Série]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="0eb26ccb-5c8e-4eed-9b34-f97ad899d619" x="27" y="2" width="37" height="11"/>
+				<textElement textAlignment="Center">
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[Nº Nota]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="16e51332-16ef-4fc3-a126-23e10ee70b65" x="103" y="2" width="37" height="11"/>
+				<textElement textAlignment="Center">
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[Emissão]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="ef159d9e-b6f5-4799-9d6e-faa1f4ed3242" x="140" y="2" width="46" height="11"/>
+				<textElement textAlignment="Center">
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[Autorização]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="526b3118-0ba9-4517-82be-27a1cbd433d5" x="187" y="2" width="46" height="11"/>
+				<textElement textAlignment="Right">
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[Produtos]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="2b12f8c4-1a3f-40c9-89f6-8341314ce241" x="235" y="2" width="49" height="11"/>
+				<textElement textAlignment="Right">
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[Descontos]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="1b9447bf-a604-460b-a27f-bcaade11598f" x="532" y="2" width="57" height="11"/>
+				<textElement textAlignment="Right">
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[Total da nota]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="29da1150-c368-469f-beb2-f687eefc54bc" x="596" y="2" width="77" height="11"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[Destinatário]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="6a464a92-3a02-4358-ab2b-404edc30d1fa" x="673" y="2" width="69" height="11"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[CPF/CNPJ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="6a464a92-3a02-4358-ab2b-404edc30d1fa" x="742" y="3" width="58" height="11"/>
+				<textElement textAlignment="Center">
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[Status]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="2b12f8c4-1a3f-40c9-89f6-8341314ce241" x="286" y="2" width="38" height="11"/>
+				<textElement textAlignment="Right">
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[Frete]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="2b12f8c4-1a3f-40c9-89f6-8341314ce241" x="324" y="2" width="36" height="11"/>
+				<textElement textAlignment="Right">
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[Seguro]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="2b12f8c4-1a3f-40c9-89f6-8341314ce241" x="360" y="2" width="49" height="11"/>
+				<textElement textAlignment="Right">
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[Out. Desp.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="2b12f8c4-1a3f-40c9-89f6-8341314ce241" x="409" y="2" width="49" height="11"/>
+				<textElement textAlignment="Right">
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[ICMS/ST]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="2b12f8c4-1a3f-40c9-89f6-8341314ce241" x="461" y="2" width="32" height="11"/>
+				<textElement textAlignment="Right">
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[IPI]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="2b12f8c4-1a3f-40c9-89f6-8341314ce241" x="493" y="2" width="39" height="11"/>
+				<textElement textAlignment="Right">
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[II]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="16e51332-16ef-4fc3-a126-23e10ee70b65" x="66" y="2" width="37" height="11"/>
+				<textElement textAlignment="Center">
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[CFOP]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="10" splitType="Stretch">
+			<textField isBlankWhenNull="true">
+				<reportElement uuid="9da3f997-1d3d-4de6-a10c-232a2d80e8bd" x="0" y="0" width="27" height="10"/>
+				<textElement textAlignment="Center">
+					<font size="7" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{NR_SERIE}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement uuid="9da3f997-1d3d-4de6-a10c-232a2d80e8bd" x="27" y="0" width="37" height="10"/>
+				<textElement textAlignment="Center">
+					<font size="7" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{NR_NOTA_FISCAL}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement uuid="9da3f997-1d3d-4de6-a10c-232a2d80e8bd" x="103" y="0" width="37" height="10"/>
+				<textElement textAlignment="Center">
+					<font size="7" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{DT_EMISSAO}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement uuid="9da3f997-1d3d-4de6-a10c-232a2d80e8bd" x="140" y="0" width="46" height="10"/>
+				<textElement textAlignment="Center">
+					<font size="7" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{DT_AUTORIZACAO}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement uuid="9da3f997-1d3d-4de6-a10c-232a2d80e8bd" x="187" y="0" width="46" height="10"/>
+				<textElement textAlignment="Right">
+					<font size="7" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new DecimalFormat("#,##0.00;", new java.text.DecimalFormatSymbols(new java.util.Locale("pt", "BR"))).format($F{VL_TOTAL_PRODUTO})]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement uuid="9da3f997-1d3d-4de6-a10c-232a2d80e8bd" x="235" y="0" width="49" height="10"/>
+				<textElement textAlignment="Right">
+					<font size="7" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new DecimalFormat("#,##0.00;", new java.text.DecimalFormatSymbols(new java.util.Locale("pt", "BR"))).format((($F{VL_DESCONTO} != null) ? $F{VL_DESCONTO} : 0))]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement uuid="9da3f997-1d3d-4de6-a10c-232a2d80e8bd" x="532" y="0" width="57" height="10"/>
+				<textElement textAlignment="Right">
+					<font size="7" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new DecimalFormat("#,##0.00;", new java.text.DecimalFormatSymbols(new java.util.Locale("pt", "BR"))).format($F{VL_TOTAL_NOTA})]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement uuid="9da3f997-1d3d-4de6-a10c-232a2d80e8bd" x="596" y="0" width="77" height="10"/>
+				<textElement>
+					<font size="7" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{NM_DESTINATARIO}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement uuid="9da3f997-1d3d-4de6-a10c-232a2d80e8bd" x="673" y="0" width="68" height="10"/>
+				<textElement>
+					<font size="7" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{NR_CPF_CNPJ}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement uuid="9da3f997-1d3d-4de6-a10c-232a2d80e8bd" x="742" y="0" width="58" height="10"/>
+				<textElement textAlignment="Center">
+					<font size="7" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{NM_ST_NOTA_FISCAL}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement uuid="9da3f997-1d3d-4de6-a10c-232a2d80e8bd" x="286" y="0" width="38" height="10"/>
+				<textElement textAlignment="Right">
+					<font size="7" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new DecimalFormat("#,##0.00;", new java.text.DecimalFormatSymbols(new java.util.Locale("pt", "BR"))).format((($F{VL_FRETE} != null) ? $F{VL_FRETE} : 0))]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement uuid="9da3f997-1d3d-4de6-a10c-232a2d80e8bd" x="324" y="0" width="36" height="10"/>
+				<textElement textAlignment="Right">
+					<font size="7" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new DecimalFormat("#,##0.00;", new java.text.DecimalFormatSymbols(new java.util.Locale("pt", "BR"))).format((($F{VL_SEGURO} != null) ? $F{VL_SEGURO} : 0))]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement uuid="9da3f997-1d3d-4de6-a10c-232a2d80e8bd" x="360" y="0" width="49" height="10"/>
+				<textElement textAlignment="Right">
+					<font size="7" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new DecimalFormat("#,##0.00;", new java.text.DecimalFormatSymbols(new java.util.Locale("pt", "BR"))).format((($F{VL_OUTRAS_DESPESAS} != null) ? $F{VL_OUTRAS_DESPESAS} : 0))]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement uuid="9da3f997-1d3d-4de6-a10c-232a2d80e8bd" x="409" y="0" width="49" height="10"/>
+				<textElement textAlignment="Right">
+					<font size="7" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new DecimalFormat("#,##0.00;", new java.text.DecimalFormatSymbols(new java.util.Locale("pt", "BR"))).format((($F{VL_ICMS_ST} != null) ? $F{VL_ICMS_ST} : 0))]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement uuid="9da3f997-1d3d-4de6-a10c-232a2d80e8bd" x="461" y="0" width="32" height="10"/>
+				<textElement textAlignment="Right">
+					<font size="7" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new DecimalFormat("#,##0.00;", new java.text.DecimalFormatSymbols(new java.util.Locale("pt", "BR"))).format((($F{VL_IPI} != null) ? $F{VL_IPI} : 0))]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement uuid="9da3f997-1d3d-4de6-a10c-232a2d80e8bd" x="493" y="0" width="39" height="10"/>
+				<textElement textAlignment="Right">
+					<font size="7" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new DecimalFormat("#,##0.00;", new java.text.DecimalFormatSymbols(new java.util.Locale("pt", "BR"))).format((($F{VL_II} != null) ? $F{VL_II} : 0))]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement uuid="9da3f997-1d3d-4de6-a10c-232a2d80e8bd" x="65" y="0" width="38" height="10"/>
+				<textElement textAlignment="Center">
+					<font size="7" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{NR_CODIGO_FISCAL}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="13" splitType="Stretch">
+			<textField>
+				<reportElement uuid="b4535353-a90a-4520-8dc4-8400a0e2fed5" x="1" y="2" width="801" height="10"/>
+				<textElement textAlignment="Right" verticalAlignment="Top">
+					<font fontName="SansSerif" size="6" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Emitido em " + $P{dtHoje} + " às " + $P{hrHoje} + " por " + $P{nmUsuario} + "   Página: " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement uuid="507005cc-8e92-4947-a3a3-75146fa8df34" x="1" y="1" width="801" height="1"/>
+			</line>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="12">
+			<line>
+				<reportElement uuid="a1995a61-3f5e-4888-9311-5fd9ac31e179" x="1" y="0" width="801" height="1"/>
+			</line>
+			<textField>
+				<reportElement uuid="d3f02cfe-3555-4a0a-af83-eb72c296b66c" x="0" y="0" width="100" height="11"/>
+				<textElement>
+					<font size="8" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{qtRegistros}+" nota(s) "]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="32376a23-fcbd-4d8e-8e01-042aea5db087" x="147" y="0" width="79" height="11"/>
+				<textElement textAlignment="Right">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new DecimalFormat("#,##0.00;", new java.text.DecimalFormatSymbols(new java.util.Locale("pt", "BR"))).format($V{vlTotalProdutos})]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="a84d8278-d73f-40b7-bf20-37180875e980" x="226" y="0" width="46" height="11"/>
+				<textElement textAlignment="Right">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new DecimalFormat("#,##0.00;", new java.text.DecimalFormatSymbols(new java.util.Locale("pt", "BR"))).format($V{vlTotalDesconto})]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="a856b93b-8391-4678-b3b4-c0a1fa57589d" x="272" y="0" width="56" height="11"/>
+				<textElement textAlignment="Right">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new DecimalFormat("#,##0.00;", new java.text.DecimalFormatSymbols(new java.util.Locale("pt", "BR"))).format($V{vlTotalNota})]]></textFieldExpression>
+			</textField>
+		</band>
+	</summary>
+</jasperReport>

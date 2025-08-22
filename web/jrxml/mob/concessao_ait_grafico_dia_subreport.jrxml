@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.1.1.final using JasperReports Library version 6.1.1  -->
+<!-- 2017-05-26T11:12:55 -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="concessao_ait_grafico_dia_subreport" pageWidth="687" pageHeight="300" columnWidth="687" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" isTitleNewPage="true" uuid="cd933845-a5f9-4396-8f6b-649e8b6cde6c">
+	<property name="com.jaspersoft.studio.unit." value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.pageHeight" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.pageWidth" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.topMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.bottomMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.leftMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.rightMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.columnWidth" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.columnSpacing" value="pixel"/>
+	<parameter name="Parameter1" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<field name="QTD_AITS" class="java.lang.Integer"/>
+	<field name="DT_INFRACAO" class="java.util.Date"/>
+	<field name="TOTAL_AITS" class="java.lang.Integer"/>
+	<title>
+		<band height="299">
+			<bar3DChart>
+				<chart isShowLegend="true" evaluationTime="Report">
+					<reportElement positionType="Float" x="0" y="9" width="680" height="289" uuid="1361324a-664a-4cc7-8b66-06a96fbbb363">
+						<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					</reportElement>
+					<chartTitle>
+						<font size="14"/>
+					</chartTitle>
+					<chartSubtitle>
+						<font fontName="DejaVu Sans"/>
+					</chartSubtitle>
+					<chartLegend position="Bottom"/>
+				</chart>
+				<categoryDataset>
+					<categorySeries>
+						<seriesExpression><![CDATA[new SimpleDateFormat("dd").format($F{DT_INFRACAO}) + ": " + $F{QTD_AITS}]]></seriesExpression>
+						<categoryExpression><![CDATA[new SimpleDateFormat("dd").format($F{DT_INFRACAO})]]></categoryExpression>
+						<valueExpression><![CDATA[$F{QTD_AITS}]]></valueExpression>
+						<labelExpression><![CDATA[$F{QTD_AITS}.toString()]]></labelExpression>
+					</categorySeries>
+				</categoryDataset>
+				<bar3DPlot isShowLabels="true" xOffset="20.0" yOffset="20.0">
+					<plot backcolor="#D1C9C9"/>
+					<itemLabel color="#966D6C" backgroundColor="#A65655">
+						<font size="14"/>
+					</itemLabel>
+					<categoryAxisFormat>
+						<axisFormat labelColor="#050505" verticalTickLabels="true" axisLineColor="#C22D2B">
+							<labelFont>
+								<font size="10"/>
+							</labelFont>
+							<tickLabelFont>
+								<font size="10"/>
+							</tickLabelFont>
+						</axisFormat>
+					</categoryAxisFormat>
+					<valueAxisFormat>
+						<axisFormat verticalTickLabels="true"/>
+					</valueAxisFormat>
+				</bar3DPlot>
+			</bar3DChart>
+		</band>
+	</title>
+</jasperReport>

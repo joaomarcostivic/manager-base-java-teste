@@ -1,0 +1,24 @@
+name: git tag release
+on:
+  push:
+    branches:
+      - master
+jobs:
+  publish_tag_package:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        fetch-depth: '0'
+    - name: Bump version and push tag
+      id: bump_version
+      uses: anothrNick/github-tag-action@1.38.0
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        WITH_V: true
+        RELEASE_BRANCHES: master
+    - name: Discord Webhook
+      uses: joelwmale/webhook-action@master
+      with:
+        url: ${{ secrets.DISCORD_TINO_MARCOS_WEBOOK }}
+        body: '{"content": "Galvão, vai mudar...\n[${{ steps.bump_version.outputs.tag }}](<https://github.com/tivic-team/manager-base-java/releases/tag/${{ steps.bump_version.outputs.tag }}>) publicada para o [@tivic-team/manager-base-java](<https://github.com/orgs/tivic-team/packages?repo_name=manager-base-java>), por [@${{ github.actor }}](<https://github.com/${{ github.actor }}).\nConfira a [súmula](https://github.com/tivic-team/manager-base-java/wiki/changelog>)!"}'

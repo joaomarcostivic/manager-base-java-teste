@@ -1,0 +1,362 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.10.0.final using JasperReports Library version 6.10.0-unknown  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="estoque_produtos" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="685b275b-3095-430e-97ff-37d9f0e15d5c">
+	<property name="ireport.zoom" value="2.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="22"/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
+	<parameter name="LOGO" class="java.lang.Object"/>
+	<parameter name="nmRazaoSocial" class="java.lang.String"/>
+	<parameter name="dtHoje" class="java.lang.String"/>
+	<parameter name="hrHoje" class="java.lang.String"/>
+	<parameter name="nmUsuario" class="java.lang.String"/>
+	<parameter name="dtEstoque" class="java.lang.String"/>
+	<parameter name="LOGO_DEV" class="java.lang.Object"/>
+	<parameter name="nmEmail" class="java.lang.String"/>
+	<parameter name="nmDesenvolvedor" class="java.lang.String"/>
+	<parameter name="NM_INSTITUICAO" class="java.lang.String"/>
+	<parameter name="NM_TP_LOCALIZACAO_DIFERENCIADA" class="java.lang.String"/>
+	<parameter name="CL_SITUACAO" class="java.lang.String"/>
+	<parameter name="NM_LOGRADOURO" class="java.lang.String"/>
+	<parameter name="CL_TP_LOCALIZACAO" class="java.lang.String"/>
+	<parameter name="QT_MAX_ALUNOS" class="java.lang.String"/>
+	<parameter name="CL_FAIXA_ETARIA" class="java.lang.String"/>
+	<parameter name="QT_ESCOLAS_ZONA_URBANA" class="java.lang.Integer"/>
+	<parameter name="QT_ESCOLAS_ZONA_RURAL" class="java.lang.Integer"/>
+	<parameter name="QT_ESCOLAS_MATRICULADOS_ZONA_URBANA" class="java.lang.Integer"/>
+	<parameter name="QT_ESCOLAS_MATRICULADOS_ZONA_RURAL" class="java.lang.Integer"/>
+	<parameter name="QT_ESCOLAS_CRECHE" class="java.lang.Integer"/>
+	<parameter name="QT_ESCOLAS_MATRICULADOS_CRECHE" class="java.lang.Integer"/>
+	<field name="NR_INEP" class="java.lang.String"/>
+	<field name="NM_INSTITUICAO" class="java.lang.String"/>
+	<field name="PR_ALUNOS_DIVERGENCIA" class="java.lang.Float"/>
+	<field name="NR_ALUNOS_DIVERGENCIA" class="java.lang.Integer"/>
+	<field name="NR_MATRICULADOS" class="java.lang.Integer"/>
+	<field name="CL_PR_ALUNOS_DIVERGENCIA" class="java.lang.String"/>
+	<field name="TP_LOCALIZACAO" class="java.lang.Integer"/>
+	<field name="NM_LOCALIZACAO" class="java.lang.String"/>
+	<variable name="qtMatriculados" class="java.lang.Integer" calculation="Sum">
+		<variableExpression><![CDATA[$F{NR_MATRICULADOS}]]></variableExpression>
+	</variable>
+	<variable name="qtAlunosDivergencia" class="java.lang.Integer" calculation="Sum">
+		<variableExpression><![CDATA[$F{NR_ALUNOS_DIVERGENCIA}]]></variableExpression>
+	</variable>
+	<variable name="qtMatriculadosZona" class="java.lang.Integer" resetType="Group" resetGroup="Group1" calculation="Sum">
+		<variableExpression><![CDATA[$F{NR_MATRICULADOS}]]></variableExpression>
+	</variable>
+	<variable name="qtAlunosDivergenciaZona" class="java.lang.Integer" resetType="Group" resetGroup="Group1" calculation="Sum">
+		<variableExpression><![CDATA[$F{NR_ALUNOS_DIVERGENCIA}]]></variableExpression>
+	</variable>
+	<group name="Group1">
+		<groupExpression><![CDATA[$F{TP_LOCALIZACAO}]]></groupExpression>
+		<groupHeader>
+			<band height="52">
+				<staticText>
+					<reportElement x="292" y="41" width="81" height="11" uuid="340da15b-c083-41d3-942d-1d77fbd68314"/>
+					<textElement textAlignment="Left">
+						<font size="6"/>
+					</textElement>
+					<text><![CDATA[Alunos]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="0" y="40" width="70" height="10" uuid="0b5a4e8e-b7f8-4b5c-82c4-c34c987216ff"/>
+					<textElement>
+						<font size="6"/>
+					</textElement>
+					<text><![CDATA[INEP]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="374" y="41" width="82" height="11" uuid="e1503df2-dc62-4464-b17f-31469cecae18"/>
+					<textElement textAlignment="Left">
+						<font size="6"/>
+					</textElement>
+					<text><![CDATA[Alunos Divergência]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="73" y="41" width="218" height="10" uuid="2120677d-028c-4650-829b-a68066a06dbf"/>
+					<textElement textAlignment="Left">
+						<font size="6"/>
+					</textElement>
+					<text><![CDATA[Instituição]]></text>
+				</staticText>
+				<line>
+					<reportElement x="-2" y="50" width="555" height="2" uuid="f30bcaa2-d5f1-4197-8b8c-c9aac7597167"/>
+					<graphicElement>
+						<pen lineWidth="1.5"/>
+					</graphicElement>
+				</line>
+				<staticText>
+					<reportElement x="458" y="41" width="92" height="11" uuid="7fe534fe-f400-47e9-88f6-96b514ca4008"/>
+					<textElement textAlignment="Left">
+						<font size="6"/>
+					</textElement>
+					<text><![CDATA[Percentual Divergência]]></text>
+				</staticText>
+				<line>
+					<reportElement x="0" y="40" width="555" height="2" uuid="4be97598-9680-44d8-a8a9-babae03b030a"/>
+					<graphicElement>
+						<pen lineWidth="1.5"/>
+					</graphicElement>
+				</line>
+				<textField pattern="" isBlankWhenNull="true">
+					<reportElement x="0" y="10" width="180" height="20" uuid="61956443-998b-44ff-9945-e03f4abe2349"/>
+					<textElement>
+						<font size="13"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{NM_LOCALIZACAO}]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupHeader>
+		<groupFooter>
+			<band height="13">
+				<textField pattern="" isBlankWhenNull="true">
+					<reportElement x="293" y="5" width="82" height="8" uuid="1320d14f-1950-49d6-afc7-3eee65d90b77"/>
+					<textElement>
+						<font size="5"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$V{qtMatriculadosZona}]]></textFieldExpression>
+				</textField>
+				<textField pattern="" isBlankWhenNull="true">
+					<reportElement x="375" y="5" width="83" height="8" uuid="18ff1e6a-e326-40d2-9b08-09b302a41204"/>
+					<textElement>
+						<font size="5"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$V{qtAlunosDivergenciaZona}]]></textFieldExpression>
+				</textField>
+				<textField pattern="0.00%" isBlankWhenNull="true">
+					<reportElement x="460" y="5" width="94" height="8" uuid="430e48df-11db-435f-877b-3c13e2acd950"/>
+					<textElement>
+						<font size="5"/>
+					</textElement>
+					<textFieldExpression><![CDATA[new DecimalFormat("#,##0.00;", new java.text.DecimalFormatSymbols(new java.util.Locale("pt", "BR"))).format((((float)$V{qtAlunosDivergenciaZona}/(float)$V{qtMatriculadosZona}*(float)100))) + "%"]]></textFieldExpression>
+				</textField>
+				<textField isBlankWhenNull="true">
+					<reportElement mode="Opaque" x="-1" y="5" width="294" height="8" backcolor="#FFFFFF" uuid="2b029bf8-30cc-49ef-8523-306cd71a049d"/>
+					<textElement textAlignment="Left">
+						<font size="6" isBold="false"/>
+					</textElement>
+					<textFieldExpression><![CDATA["Total "+ $F{NM_LOCALIZACAO}]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupFooter>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="76">
+			<textField isBlankWhenNull="true">
+				<reportElement x="3" y="2" width="550" height="16" uuid="d95120a9-93ca-4e71-9e3d-5c51e6d2eb66"/>
+				<textElement textAlignment="Center" verticalAlignment="Bottom" markup="none">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{nmRazaoSocial}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="3" y="18" width="552" height="21" uuid="b0a975cb-8cac-4013-a9ac-c49406f0d5d5"/>
+				<textElement textAlignment="Center">
+					<font size="16" isBold="true"/>
+				</textElement>
+				<text><![CDATA[RELATÓRIO UNIDADES ESCOLARES - DIVERGÊNCIA]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="34" y="44" width="146" height="8" uuid="bcbb8ea9-a929-42e7-995d-d059a4ed77ef"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA[($P{NM_INSTITUICAO} != null && !$P{NM_INSTITUICAO}.equals("")  ? $P{NM_INSTITUICAO} : "Todas")]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="4" y="44" width="30" height="8" uuid="865fcd48-463f-46f8-bfb6-36f191553d9c"/>
+				<textElement>
+					<font size="6"/>
+				</textElement>
+				<text><![CDATA[Escola:]]></text>
+			</staticText>
+			<line>
+				<reportElement x="0" y="42" width="553" height="1" uuid="ba606648-fb05-41c7-ba43-b9cf473c8ece"/>
+			</line>
+			<textField isBlankWhenNull="true">
+				<reportElement x="60" y="65" width="120" height="8" uuid="f4ff8703-9c2a-46ea-add7-d99ce04d09be"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA[($P{QT_MAX_ALUNOS} != null ? $P{QT_MAX_ALUNOS} : "Todas")]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="276" y="44" width="74" height="8" uuid="9d2530e0-5217-41f5-94ef-d59f1ee3627a"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA[($P{CL_TP_LOCALIZACAO} != null && !$P{CL_TP_LOCALIZACAO}.equals("")  ? $P{CL_TP_LOCALIZACAO} : "Ignorar")]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="186" y="54" width="41" height="8" uuid="0e0111bf-ae8f-412f-8667-5f847f5d5ba4"/>
+				<textElement>
+					<font size="6"/>
+				</textElement>
+				<text><![CDATA[Logradouro:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="4" y="54" width="40" height="8" uuid="f25d76ac-6b0a-4210-934c-6e852899c916"/>
+				<textElement>
+					<font size="6"/>
+				</textElement>
+				<text><![CDATA[Situação:]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="230" y="54" width="100" height="8" uuid="af6e269e-9804-471a-ba28-04744b88ab9f"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA[($P{NM_LOGRADOURO} != null && !$P{NM_LOGRADOURO}.equals("") ? $P{NM_LOGRADOURO} : "Todos")]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="5" y="65" width="54" height="8" uuid="e928b7df-a477-4451-a4b6-6e8074f0be5e"/>
+				<textElement>
+					<font size="6"/>
+				</textElement>
+				<text><![CDATA[Max. de Alunos:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="351" y="44" width="83" height="8" uuid="7688a7f6-0dbe-49d0-837d-9620d2e188f7"/>
+				<textElement>
+					<font size="6"/>
+				</textElement>
+				<text><![CDATA[Localização Diferenciada:]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="242" y="64" width="88" height="8" uuid="9e52653f-d6d7-485a-b14f-e7c04b029fe6"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA[($P{CL_FAIXA_ETARIA} != null ? $P{CL_FAIXA_ETARIA} : "Não Informado")]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="186" y="64" width="56" height="8" uuid="1a478305-e52c-473f-a129-e8834e2b58d9"/>
+				<textElement>
+					<font size="6"/>
+				</textElement>
+				<text><![CDATA[Faixa Etária:]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="437" y="44" width="86" height="8" uuid="ef80b1b4-f682-4495-be74-2125b48028b4"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA[($P{NM_TP_LOCALIZACAO_DIFERENCIADA} != null && !$P{NM_TP_LOCALIZACAO_DIFERENCIADA}.equals("")  ? $P{NM_TP_LOCALIZACAO_DIFERENCIADA} : "Ignorar")]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="0" y="75" width="553" height="1" uuid="b5744cfd-861f-4b88-8990-537d1fe438c7"/>
+			</line>
+			<textField isBlankWhenNull="true">
+				<reportElement x="45" y="54" width="134" height="8" uuid="031f58ca-debb-4092-a36d-fda51875dc4b"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA[($P{CL_SITUACAO} != null && !$P{CL_SITUACAO}.equals("") ? $P{CL_SITUACAO} : "Todas")]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="186" y="44" width="86" height="8" uuid="7c73c00f-ad8f-49a0-ab1d-a1bb81958d18"/>
+				<textElement>
+					<font size="6"/>
+				</textElement>
+				<text><![CDATA[Localização:]]></text>
+			</staticText>
+		</band>
+	</title>
+	<detail>
+		<band height="11" splitType="Stretch">
+			<textField pattern="" isBlankWhenNull="true">
+				<reportElement x="72" y="0" width="221" height="8" uuid="e8e140a9-f8e6-4b53-ab2d-021ba35296b1"/>
+				<textElement>
+					<font size="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{NM_INSTITUICAO}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="-1" y="10" width="555" height="1" uuid="1e3dfad8-6f54-48b1-b7e6-9aedbf29545d"/>
+				<graphicElement>
+					<pen lineWidth="1.0" lineStyle="Dotted"/>
+				</graphicElement>
+			</line>
+			<textField pattern="" isBlankWhenNull="true">
+				<reportElement x="-1" y="0" width="73" height="8" uuid="66b6c22c-6ecb-44cf-addd-be907bf02020"/>
+				<textElement>
+					<font size="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{NR_INEP}]]></textFieldExpression>
+			</textField>
+			<textField pattern="" isBlankWhenNull="true">
+				<reportElement x="376" y="0" width="82" height="8" uuid="9b9320dd-65c3-4f81-82ca-9d5baf021f6a"/>
+				<textElement>
+					<font size="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{NR_ALUNOS_DIVERGENCIA}]]></textFieldExpression>
+			</textField>
+			<textField pattern="" isBlankWhenNull="true">
+				<reportElement x="460" y="0" width="92" height="8" uuid="1bce8346-7b39-4700-9dd8-9b70a90b1b23"/>
+				<textElement>
+					<font size="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{CL_PR_ALUNOS_DIVERGENCIA} + "%"]]></textFieldExpression>
+			</textField>
+			<textField pattern="" isBlankWhenNull="true">
+				<reportElement x="293" y="0" width="82" height="8" uuid="b6737f9f-572f-46cc-9c15-790df4481dfb"/>
+				<textElement>
+					<font size="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{NR_MATRICULADOS}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="15">
+			<textField>
+				<reportElement x="214" y="2" width="339" height="13" uuid="b4535353-a90a-4520-8dc4-8400a0e2fed5"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="5" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Emitido em " + $P{dtHoje} + " às " + $P{hrHoje} + " por " + $P{nmUsuario} + "   Página: " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="-1" y="1" width="555" height="1" uuid="6978ee43-d8c9-443b-9788-dffa5f623354"/>
+				<graphicElement>
+					<pen lineWidth="1.0"/>
+				</graphicElement>
+			</line>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="26">
+			<textField pattern="" isBlankWhenNull="true">
+				<reportElement mode="Opaque" x="293" y="14" width="82" height="12" backcolor="#918C8C" uuid="1fa64d45-09ea-499d-827d-b1e5ff317678"/>
+				<textElement>
+					<font size="8" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{qtMatriculados}]]></textFieldExpression>
+			</textField>
+			<textField pattern="" isBlankWhenNull="true">
+				<reportElement mode="Opaque" x="375" y="14" width="85" height="12" backcolor="#8C8888" uuid="dc4b0f38-2552-4f4f-baa4-a279fd8422ec"/>
+				<textElement>
+					<font size="8" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{qtAlunosDivergencia}]]></textFieldExpression>
+			</textField>
+			<textField pattern="0.00%" isBlankWhenNull="true">
+				<reportElement mode="Opaque" x="460" y="14" width="94" height="12" backcolor="#8C8888" uuid="5abe5155-66f1-40e3-904d-ef8ec0b16198"/>
+				<textElement>
+					<font size="8" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new DecimalFormat("#,##0.00;", new java.text.DecimalFormatSymbols(new java.util.Locale("pt", "BR"))).format((((float)$V{qtAlunosDivergencia}/(float)$V{qtMatriculados}*(float)100))) + "%"]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement mode="Opaque" x="-1" y="14" width="294" height="12" backcolor="#918C8C" uuid="76fc321a-614a-4ed1-a710-9c532c55489a"/>
+				<textElement textAlignment="Left">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Total"]]></textFieldExpression>
+			</textField>
+		</band>
+	</summary>
+</jasperReport>

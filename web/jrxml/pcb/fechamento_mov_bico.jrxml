@@ -1,0 +1,509 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="fechamento_mov_bico" language="groovy" pageWidth="555" pageHeight="802" columnWidth="555" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="a69173aa-ae20-4e9e-8f02-e85599d671bf">
+	<property name="ireport.zoom" value="1.5827573512010844"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="BY_PERIODO" class="java.lang.Number">
+		<defaultValueExpression><![CDATA[0]]></defaultValueExpression>
+	</parameter>
+	<field name="NM_PRODUTO_SERVICO" class="java.lang.String"/>
+	<field name="QT_SAIDA_TOTAL" class="java.lang.Double"/>
+	<field name="VL_UNITARIO" class="java.lang.Double"/>
+	<field name="QT_SAIDA" class="java.lang.Double"/>
+	<field name="VL_TOTAL_LIQUIDO" class="java.lang.Double"/>
+	<field name="QT_ESTOQUE_INICIAL" class="java.lang.Double"/>
+	<field name="QT_COMPRA" class="java.lang.Double"/>
+	<field name="QT_VENDAS" class="java.lang.Double"/>
+	<field name="VL_TOTAL_DESCONTOS" class="java.lang.Double"/>
+	<field name="QT_SAIDA_MES" class="java.lang.Double"/>
+	<field name="QT_TOTAL_SAIDA" class="java.lang.Double"/>
+	<field name="VL_PRECO" class="java.lang.Double"/>
+	<field name="QT_LITROS" class="java.lang.Double"/>
+	<field name="QT_VENDAS_DIA" class="java.lang.Double"/>
+	<field name="QT_MEDICAO_FINAL" class="java.lang.Double"/>
+	<variable name="VL_TOTAL_ESCRITURAL" class="java.lang.Double">
+		<variableExpression><![CDATA[($F{QT_ESTOQUE_INICIAL}-$F{QT_VENDAS_DIA})+$F{QT_COMPRA}]]></variableExpression>
+	</variable>
+	<variable name="QT_TOTAL_SAIDA_1" class="java.lang.Double" resetType="Column" calculation="Sum">
+		<variableExpression><![CDATA[$F{QT_LITROS}]]></variableExpression>
+		<initialValueExpression><![CDATA[new Double(0)]]></initialValueExpression>
+	</variable>
+	<variable name="VL_TOTAL_LIQUIDO_1" class="java.lang.Double" resetType="Column" calculation="Sum">
+		<variableExpression><![CDATA[$V{vlTurno}]]></variableExpression>
+		<initialValueExpression><![CDATA[new Double(0)]]></initialValueExpression>
+	</variable>
+	<variable name="QT_ESTOQUE_INICIAL_1" class="java.lang.Double" resetType="Column" calculation="Sum">
+		<variableExpression><![CDATA[$F{QT_ESTOQUE_INICIAL}]]></variableExpression>
+	</variable>
+	<variable name="QT_VENDAS_1" class="java.lang.Double" resetType="Column" calculation="Sum">
+		<variableExpression><![CDATA[$F{QT_VENDAS_DIA}]]></variableExpression>
+	</variable>
+	<variable name="QT_COMPRA_1" class="java.lang.Double" resetType="Column" calculation="Sum">
+		<variableExpression><![CDATA[$F{QT_COMPRA}]]></variableExpression>
+	</variable>
+	<variable name="vlTotalTotalEscritural" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[$V{VL_TOTAL_ESCRITURAL}]]></variableExpression>
+		<initialValueExpression><![CDATA[new Double(0)]]></initialValueExpression>
+	</variable>
+	<variable name="QT_SAIDA_MES_1" class="java.lang.Double" resetType="Column" calculation="Sum">
+		<variableExpression><![CDATA[$F{QT_SAIDA_MES}]]></variableExpression>
+	</variable>
+	<variable name="vlTurno" class="java.lang.Double">
+		<variableExpression><![CDATA[$F{QT_LITROS}*$F{VL_PRECO}]]></variableExpression>
+	</variable>
+	<variable name="difL" class="java.lang.Double">
+		<variableExpression><![CDATA[$F{QT_MEDICAO_FINAL} - $V{VL_TOTAL_ESCRITURAL}]]></variableExpression>
+	</variable>
+	<variable name="totalDifL" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[$V{difL}]]></variableExpression>
+		<initialValueExpression><![CDATA[new Double(0)]]></initialValueExpression>
+	</variable>
+	<variable name="percentual" class="java.lang.Double">
+		<variableExpression><![CDATA[($V{difL} * 100) / $F{QT_MEDICAO_FINAL}]]></variableExpression>
+	</variable>
+	<variable name="totalPercentual" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[$V{percentual}]]></variableExpression>
+	</variable>
+	<variable name="vlTotalTurno" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[$V{vlTurno}]]></variableExpression>
+		<initialValueExpression><![CDATA[new Double(0)]]></initialValueExpression>
+	</variable>
+	<variable name="QT_TOTAL_MEDICAO_FINAL" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[$F{QT_MEDICAO_FINAL}]]></variableExpression>
+	</variable>
+	<columnHeader>
+		<band height="26" splitType="Stretch">
+			<line>
+				<reportElement uuid="8814a0ef-38e2-4a1b-9771-000ddccce075" x="102" y="14" width="1" height="11"/>
+			</line>
+			<staticText>
+				<reportElement uuid="e829128d-78e2-4eab-837e-4ed59a6ab6b9" x="186" y="14" width="47" height="11"/>
+				<textElement textAlignment="Right">
+					<font size="7" isBold="true" pdfFontName="Times-Roman"/>
+				</textElement>
+				<text><![CDATA[Valor(R$)]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="93b3f027-d957-48a8-9d76-f6cbe5f88b6e" x="144" y="14" width="40" height="11"/>
+				<textElement textAlignment="Right">
+					<font size="7" isBold="true" pdfFontName="Times-Roman"/>
+				</textElement>
+				<text><![CDATA[Preço(R$)]]></text>
+			</staticText>
+			<line>
+				<reportElement uuid="52fd3251-c5af-4d1b-8f67-13c701065535" x="185" y="14" width="1" height="11"/>
+			</line>
+			<line>
+				<reportElement uuid="5d4354fb-4443-46ec-8cc7-f6112b2d9c2d" x="0" y="25" width="233" height="1"/>
+			</line>
+			<line>
+				<reportElement uuid="eea2e7ff-53a6-4117-a31f-cde1f07e1085" x="233" y="13" width="1" height="12"/>
+			</line>
+			<line>
+				<reportElement uuid="ae85e782-c30a-44f1-affd-72e23f88659d" x="143" y="14" width="1" height="11"/>
+			</line>
+			<line>
+				<reportElement uuid="543af8fb-1c89-4429-9135-77f070a204e0" x="0" y="14" width="1" height="11"/>
+			</line>
+			<staticText>
+				<reportElement uuid="304ade38-f0cb-4150-8f35-63ec788dbdb0" x="2" y="14" width="99" height="11"/>
+				<textElement>
+					<font size="7" isBold="true" pdfFontName="Times-Roman"/>
+				</textElement>
+				<text><![CDATA[Combustível]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="2b063eba-79e3-4291-af3d-6b0a7544ae08" x="103" y="14" width="39" height="11"/>
+				<textElement textAlignment="Right">
+					<font size="7" isBold="true" pdfFontName="Times-Roman"/>
+				</textElement>
+				<text><![CDATA[Qtde(L)]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="cd6550d4-c996-4b31-b48b-09c93b235b0f" x="1" y="0" width="232" height="13"/>
+				<textElement textAlignment="Center">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[MOVIMENTAÇÃO NO(s) TURNO(s)]]></text>
+			</staticText>
+			<line>
+				<reportElement uuid="543af8fb-1c89-4429-9135-77f070a204e0" x="0" y="0" width="1" height="13"/>
+			</line>
+			<line>
+				<reportElement uuid="543af8fb-1c89-4429-9135-77f070a204e0" x="233" y="0" width="1" height="13"/>
+			</line>
+			<line>
+				<reportElement uuid="28b09059-40c4-4523-a787-78fedc986092" x="0" y="13" width="233" height="1"/>
+			</line>
+			<line>
+				<reportElement uuid="543af8fb-1c89-4429-9135-77f070a204e0" x="554" y="0" width="1" height="13"/>
+			</line>
+			<line>
+				<reportElement uuid="28b09059-40c4-4523-a787-78fedc986092" x="239" y="13" width="316" height="1"/>
+			</line>
+			<line>
+				<reportElement uuid="543af8fb-1c89-4429-9135-77f070a204e0" x="239" y="0" width="1" height="13"/>
+			</line>
+			<line>
+				<reportElement uuid="eea2e7ff-53a6-4117-a31f-cde1f07e1085" x="239" y="14" width="1" height="12"/>
+			</line>
+			<staticText>
+				<reportElement uuid="c164992a-618d-4ec1-89fc-3324e93e6ca6" x="240" y="14" width="40" height="11"/>
+				<textElement textAlignment="Center">
+					<font size="7" isBold="true" pdfFontName="Times-Roman"/>
+				</textElement>
+				<text><![CDATA[EST. INIC]]></text>
+			</staticText>
+			<line>
+				<reportElement uuid="3c5a5e86-1ebc-4c8a-82ce-f45761199b9b" x="240" y="25" width="314" height="1"/>
+			</line>
+			<line>
+				<reportElement uuid="543af8fb-1c89-4429-9135-77f070a204e0" x="554" y="14" width="1" height="12"/>
+			</line>
+			<line>
+				<reportElement uuid="eea2e7ff-53a6-4117-a31f-cde1f07e1085" x="281" y="14" width="1" height="12"/>
+			</line>
+			<staticText>
+				<reportElement uuid="46e6a297-4e3c-4e24-a8c0-9ce66386ad64" x="282" y="14" width="34" height="11"/>
+				<textElement textAlignment="Center">
+					<font size="7" isBold="true" pdfFontName="Times-Roman"/>
+				</textElement>
+				<text><![CDATA[VENDA]]></text>
+			</staticText>
+			<line>
+				<reportElement uuid="eea2e7ff-53a6-4117-a31f-cde1f07e1085" x="317" y="14" width="1" height="12"/>
+			</line>
+			<staticText>
+				<reportElement uuid="0c01d0fa-7012-4170-b95d-146a8644eb7f" x="318" y="14" width="41" height="11"/>
+				<textElement textAlignment="Center">
+					<font size="7" isBold="true" pdfFontName="Times-Roman"/>
+				</textElement>
+				<text><![CDATA[COMPRA]]></text>
+			</staticText>
+			<line>
+				<reportElement uuid="eea2e7ff-53a6-4117-a31f-cde1f07e1085" x="360" y="14" width="1" height="12"/>
+			</line>
+			<line>
+				<reportElement uuid="eea2e7ff-53a6-4117-a31f-cde1f07e1085" x="412" y="14" width="1" height="12"/>
+			</line>
+			<staticText>
+				<reportElement uuid="9f4e35d6-2550-4782-bb04-5403c492c16c" x="361" y="14" width="50" height="11"/>
+				<textElement textAlignment="Center">
+					<font size="7" isBold="true" pdfFontName="Times-Roman"/>
+				</textElement>
+				<text><![CDATA[ESCRITURAL]]></text>
+			</staticText>
+			<line>
+				<reportElement uuid="eea2e7ff-53a6-4117-a31f-cde1f07e1085" x="514" y="14" width="1" height="11"/>
+			</line>
+			<staticText>
+				<reportElement uuid="99f094aa-fdf6-434a-bbf6-3ad47e045092" x="515" y="14" width="38" height="11"/>
+				<textElement textAlignment="Center">
+					<font size="7" isBold="true" pdfFontName="Times-Roman"/>
+				</textElement>
+				<text><![CDATA[MENSAL]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="9f4e35d6-2550-4782-bb04-5403c492c16c" x="413" y="14" width="43" height="11"/>
+				<textElement textAlignment="Center">
+					<font size="7" isBold="true" pdfFontName="Times-Roman"/>
+				</textElement>
+				<text><![CDATA[EST. FINAL]]></text>
+			</staticText>
+			<line>
+				<reportElement uuid="eea2e7ff-53a6-4117-a31f-cde1f07e1085" x="457" y="13" width="1" height="12"/>
+			</line>
+			<line>
+				<reportElement uuid="eea2e7ff-53a6-4117-a31f-cde1f07e1085" x="497" y="14" width="1" height="12"/>
+			</line>
+			<staticText>
+				<reportElement uuid="9f4e35d6-2550-4782-bb04-5403c492c16c" x="458" y="14" width="38" height="11"/>
+				<textElement textAlignment="Center">
+					<font size="7" isBold="true" pdfFontName="Times-Roman"/>
+				</textElement>
+				<text><![CDATA[DIF (L)]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="9f4e35d6-2550-4782-bb04-5403c492c16c" x="498" y="14" width="15" height="11"/>
+				<textElement textAlignment="Center">
+					<font size="7" isBold="true" pdfFontName="Times-Roman"/>
+				</textElement>
+				<text><![CDATA[(%)]]></text>
+			</staticText>
+			<textField pattern="#,##0.000" isBlankWhenNull="true">
+				<reportElement uuid="4e943af9-eb25-4811-8281-275465ee5fde" x="240" y="0" width="313" height="13"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="7" pdfFontName="Times-Roman"/>
+				</textElement>
+				<textFieldExpression><![CDATA[($P{BY_PERIODO} == 1)
+    ?"MOVIMENTAÇÃO GERAL DO PERÍODO (EM LITROS)"
+    :"MOVIMENTAÇÃO GERAL DO DIA (EM LITROS)"]]></textFieldExpression>
+			</textField>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="11" splitType="Stretch">
+			<line>
+				<reportElement uuid="eea2e7ff-53a6-4117-a31f-cde1f07e1085" x="497" y="-1" width="1" height="12"/>
+			</line>
+			<textField pattern="#,##0.000" isBlankWhenNull="true">
+				<reportElement uuid="bff5046c-239f-491a-a574-82672852db79" x="361" y="0" width="50" height="11"/>
+				<textElement textAlignment="Right">
+					<font size="7" pdfFontName="Times-Roman"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{VL_TOTAL_ESCRITURAL}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement uuid="eea2e7ff-53a6-4117-a31f-cde1f07e1085" x="412" y="-1" width="1" height="12"/>
+			</line>
+			<line>
+				<reportElement uuid="eea2e7ff-53a6-4117-a31f-cde1f07e1085" x="514" y="0" width="1" height="11"/>
+			</line>
+			<line>
+				<reportElement uuid="ae85e782-c30a-44f1-affd-72e23f88659d" x="143" y="0" width="1" height="11"/>
+			</line>
+			<line>
+				<reportElement uuid="52fd3251-c5af-4d1b-8f67-13c701065535" x="185" y="0" width="1" height="11"/>
+			</line>
+			<line>
+				<reportElement uuid="8814a0ef-38e2-4a1b-9771-000ddccce075" x="102" y="0" width="1" height="11"/>
+			</line>
+			<line>
+				<reportElement uuid="eea2e7ff-53a6-4117-a31f-cde1f07e1085" x="233" y="-1" width="1" height="12"/>
+			</line>
+			<line>
+				<reportElement uuid="543af8fb-1c89-4429-9135-77f070a204e0" x="0" y="0" width="1" height="11"/>
+			</line>
+			<line>
+				<reportElement uuid="eea2e7ff-53a6-4117-a31f-cde1f07e1085" x="239" y="-1" width="1" height="12"/>
+			</line>
+			<line>
+				<reportElement uuid="543af8fb-1c89-4429-9135-77f070a204e0" x="554" y="-1" width="1" height="12"/>
+			</line>
+			<line>
+				<reportElement uuid="eea2e7ff-53a6-4117-a31f-cde1f07e1085" x="360" y="-1" width="1" height="12"/>
+			</line>
+			<textField>
+				<reportElement uuid="04ec9779-1cb8-4344-8310-3c8872a45472" x="3" y="0" width="98" height="11"/>
+				<textElement>
+					<font size="8" pdfFontName="Times-Roman"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{NM_PRODUTO_SERVICO}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.000" isBlankWhenNull="true">
+				<reportElement uuid="4e943af9-eb25-4811-8281-275465ee5fde" x="240" y="0" width="40" height="11"/>
+				<textElement textAlignment="Right">
+					<font size="7" pdfFontName="Times-Roman"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{QT_ESTOQUE_INICIAL}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.000" isBlankWhenNull="true">
+				<reportElement uuid="84d7f975-e662-4d3e-a9b7-adc28ed93d83" x="515" y="0" width="38" height="11"/>
+				<textElement textAlignment="Right">
+					<font size="7" pdfFontName="Times-Roman"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{QT_SAIDA_MES}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.000">
+				<reportElement uuid="95a274b8-8e1e-44f8-a6c1-c270756530df" x="144" y="0" width="40" height="11"/>
+				<textElement textAlignment="Right">
+					<font size="7" pdfFontName="Times-Roman"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{VL_PRECO}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.000">
+				<reportElement uuid="e5b2f465-685b-4e28-a717-ca39755f5be5" x="103" y="0" width="39" height="11"/>
+				<textElement textAlignment="Right">
+					<font size="7" pdfFontName="Times-Roman"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{QT_LITROS}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.000">
+				<reportElement uuid="0e5c5e2e-8648-4d0c-a1c5-2d442d985336" x="186" y="0" width="46" height="11"/>
+				<textElement textAlignment="Right">
+					<font size="7" pdfFontName="Times-Roman"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{vlTurno}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.000" isBlankWhenNull="true">
+				<reportElement uuid="757a6591-c561-44bc-9db7-987a836d21b1" x="282" y="0" width="34" height="11"/>
+				<textElement textAlignment="Right">
+					<font size="7" pdfFontName="Times-Roman"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{QT_VENDAS_DIA}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement uuid="eea2e7ff-53a6-4117-a31f-cde1f07e1085" x="281" y="-1" width="1" height="12"/>
+			</line>
+			<textField pattern="#,##0.000" isBlankWhenNull="true">
+				<reportElement uuid="8ff0f989-ac22-41c5-90df-10f58eb37f15" x="318" y="0" width="41" height="11"/>
+				<textElement textAlignment="Right">
+					<font size="7" pdfFontName="Times-Roman"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{QT_COMPRA}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement uuid="eea2e7ff-53a6-4117-a31f-cde1f07e1085" x="317" y="-1" width="1" height="12"/>
+			</line>
+			<line>
+				<reportElement uuid="eea2e7ff-53a6-4117-a31f-cde1f07e1085" x="457" y="-1" width="1" height="12"/>
+			</line>
+			<textField pattern="#,##0.000" isBlankWhenNull="true">
+				<reportElement uuid="c3c732a0-888a-4fc7-a040-f4317f3a986d" x="413" y="0" width="43" height="11"/>
+				<textElement textAlignment="Right">
+					<font size="7" pdfFontName="Times-Roman"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{QT_MEDICAO_FINAL}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.000" isBlankWhenNull="true">
+				<reportElement uuid="0a68e555-9b4f-44ab-85e7-fbfc38d7769c" x="458" y="0" width="38" height="11"/>
+				<textElement textAlignment="Right">
+					<font size="7" pdfFontName="Times-Roman"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{difL}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.0" isBlankWhenNull="true">
+				<reportElement uuid="a6276e4a-85fa-4392-859c-c5c61ece8c6f" x="498" y="0" width="15" height="11"/>
+				<textElement textAlignment="Right">
+					<font size="7" pdfFontName="Times-Roman"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{percentual}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="13" splitType="Stretch">
+			<line>
+				<reportElement uuid="803a1bd1-d3a2-4ab8-9b93-a1c2fcd11d16" x="0" y="0" width="233" height="1"/>
+			</line>
+			<line>
+				<reportElement uuid="e081cd3e-bd04-4073-984e-9aa61b64bcc0" x="239" y="0" width="316" height="1"/>
+			</line>
+			<line>
+				<reportElement uuid="543af8fb-1c89-4429-9135-77f070a204e0" x="0" y="1" width="1" height="11"/>
+			</line>
+			<line>
+				<reportElement uuid="543af8fb-1c89-4429-9135-77f070a204e0" x="102" y="1" width="1" height="11"/>
+			</line>
+			<line>
+				<reportElement uuid="ae85e782-c30a-44f1-affd-72e23f88659d" x="143" y="1" width="1" height="11"/>
+			</line>
+			<line>
+				<reportElement uuid="52fd3251-c5af-4d1b-8f67-13c701065535" x="185" y="1" width="1" height="11"/>
+			</line>
+			<line>
+				<reportElement uuid="eea2e7ff-53a6-4117-a31f-cde1f07e1085" x="233" y="0" width="1" height="13"/>
+			</line>
+			<line>
+				<reportElement uuid="eea2e7ff-53a6-4117-a31f-cde1f07e1085" x="317" y="1" width="1" height="12"/>
+			</line>
+			<line>
+				<reportElement uuid="eea2e7ff-53a6-4117-a31f-cde1f07e1085" x="239" y="1" width="1" height="12"/>
+			</line>
+			<line>
+				<reportElement uuid="eea2e7ff-53a6-4117-a31f-cde1f07e1085" x="360" y="1" width="1" height="12"/>
+			</line>
+			<line>
+				<reportElement uuid="eea2e7ff-53a6-4117-a31f-cde1f07e1085" x="412" y="1" width="1" height="12"/>
+			</line>
+			<line>
+				<reportElement uuid="543af8fb-1c89-4429-9135-77f070a204e0" x="554" y="1" width="1" height="12"/>
+			</line>
+			<line>
+				<reportElement uuid="eea2e7ff-53a6-4117-a31f-cde1f07e1085" x="281" y="1" width="1" height="12"/>
+			</line>
+			<line>
+				<reportElement uuid="eea2e7ff-53a6-4117-a31f-cde1f07e1085" x="514" y="1" width="1" height="11"/>
+			</line>
+			<line>
+				<reportElement uuid="803a1bd1-d3a2-4ab8-9b93-a1c2fcd11d16" x="0" y="12" width="233" height="1"/>
+			</line>
+			<line>
+				<reportElement uuid="e081cd3e-bd04-4073-984e-9aa61b64bcc0" x="240" y="12" width="316" height="1"/>
+			</line>
+			<staticText>
+				<reportElement uuid="dc6bcb12-138c-405d-aa62-6086a6cbe2b6" x="1" y="1" width="100" height="11"/>
+				<textElement textAlignment="Right">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[TOTAL]]></text>
+			</staticText>
+			<textField pattern="#,##0.000">
+				<reportElement uuid="75467b10-f8a4-4aa3-ae4e-19b64790bb50" x="103" y="1" width="39" height="11"/>
+				<textElement textAlignment="Right">
+					<font size="7" isBold="true" pdfFontName="Times-Roman"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{QT_TOTAL_SAIDA_1}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.000" isBlankWhenNull="true">
+				<reportElement uuid="f0ddaddd-a7ec-4927-a26f-6f7ed8c11a74" x="240" y="1" width="40" height="11"/>
+				<textElement textAlignment="Right">
+					<font size="7" isBold="true" pdfFontName="Times-Roman"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{QT_ESTOQUE_INICIAL_1}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.000">
+				<reportElement uuid="f9169e9d-ac7f-4296-a0b8-56f6fad1b3d1" x="282" y="1" width="34" height="11"/>
+				<textElement textAlignment="Right">
+					<font size="7" isBold="true" pdfFontName="Times-Roman"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{QT_VENDAS_1}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.000">
+				<reportElement uuid="83975617-f15b-4adf-8862-7c908292e082" x="318" y="1" width="41" height="11"/>
+				<textElement textAlignment="Right">
+					<font size="7" isBold="true" pdfFontName="Times-Roman"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{QT_COMPRA_1}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.000">
+				<reportElement uuid="c111a285-6927-4e6a-b534-0cd55e962e28" x="361" y="1" width="50" height="11"/>
+				<textElement textAlignment="Right">
+					<font size="7" isBold="true" pdfFontName="Times-Roman"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{vlTotalTotalEscritural}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.000">
+				<reportElement uuid="68245492-de7f-4e0b-99b7-3bffaf7612bb" x="515" y="1" width="38" height="11"/>
+				<textElement textAlignment="Right">
+					<font size="7" isBold="true" pdfFontName="Times-Roman"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{QT_SAIDA_MES_1}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement uuid="eea2e7ff-53a6-4117-a31f-cde1f07e1085" x="457" y="1" width="1" height="12"/>
+			</line>
+			<textField pattern="#,##0.000">
+				<reportElement uuid="ea3bee02-fc8e-4e83-8711-5bc53bc2ac3f" x="413" y="1" width="43" height="11"/>
+				<textElement textAlignment="Right">
+					<font size="7" isBold="true" pdfFontName="Times-Roman"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{QT_TOTAL_MEDICAO_FINAL}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.000">
+				<reportElement uuid="c2f710ce-580b-415b-9037-e15a73a4b43b" x="458" y="1" width="38" height="11"/>
+				<textElement textAlignment="Right">
+					<font size="7" isBold="true" pdfFontName="Times-Roman"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{totalDifL}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement uuid="eea2e7ff-53a6-4117-a31f-cde1f07e1085" x="497" y="1" width="1" height="12"/>
+			</line>
+			<textField pattern="#,##0.0">
+				<reportElement uuid="c2b645bf-8a5d-42b9-b992-98192f35697e" x="498" y="1" width="15" height="11"/>
+				<textElement textAlignment="Right">
+					<font size="7" pdfFontName="Times-Roman"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{totalPercentual}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.000" isBlankWhenNull="true">
+				<reportElement uuid="6d4dc288-5d06-4d72-b5c0-795fdc6e4361" x="186" y="1" width="46" height="11"/>
+				<textElement textAlignment="Right">
+					<font size="7" isBold="true" pdfFontName="Times-Roman"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{vlTotalTurno}]]></textFieldExpression>
+			</textField>
+		</band>
+	</columnFooter>
+</jasperReport>

@@ -1,0 +1,235 @@
+package com.tivic.manager.acd;
+
+import java.sql.*;
+import com.tivic.sol.connection.Conexao;
+import sol.dao.ResultSetMap;
+import sol.dao.ItemComparator;
+import sol.dao.Search;
+import java.util.ArrayList;
+
+public class TipoProfissionaisEscolaresDAO{
+
+	public static int insert(TipoProfissionaisEscolares objeto) {
+		return insert(objeto, null);
+	}
+
+	public static int insert(TipoProfissionaisEscolares objeto, Connection connect){
+		boolean isConnectionNull = connect==null;
+		try {
+			if (isConnectionNull)
+				connect = Conexao.conectar();
+			int code = Conexao.getSequenceCode("acd_tipo_profissionais_escolares", connect);
+			if (code <= 0) {
+				if (isConnectionNull)
+					Conexao.rollback(connect);
+				return -1;
+			}
+			objeto.setCdTipoProfissionaisEscolares(code);
+			PreparedStatement pstmt = connect.prepareStatement("INSERT INTO acd_tipo_profissionais_escolares (cd_tipo_profissionais_escolares,"+
+			                                  "nm_tipo_profissionais_escolares,"+
+			                                  "id_tipo_profissionais_escolares,"+
+			                                  "st_tipo_profissionais_escolares) VALUES (?, ?, ?, ?)");
+			pstmt.setInt(1, code);
+			pstmt.setString(2,objeto.getNmTipoProfissionaisEscolares());
+			pstmt.setString(3,objeto.getIdTipoProfissionaisEscolares());
+			pstmt.setInt(4,objeto.getStTipoProfissionaisEscolares());
+			pstmt.executeUpdate();
+			return code;
+		}
+		catch(SQLException sqlExpt){
+			sqlExpt.printStackTrace(System.out);
+			System.err.println("Erro! TipoProfissionaisEscolaresDAO.insert: " + sqlExpt);
+			return (-1)*sqlExpt.getErrorCode();
+		}
+		catch(Exception e){
+			e.printStackTrace(System.out);
+			System.err.println("Erro! TipoProfissionaisEscolaresDAO.insert: " +  e);
+			return -1;
+		}
+		finally{
+			if (isConnectionNull)
+				Conexao.desconectar(connect);
+		}
+	}
+
+	public static int update(TipoProfissionaisEscolares objeto) {
+		return update(objeto, 0, null);
+	}
+
+	public static int update(TipoProfissionaisEscolares objeto, int cdTipoProfissionaisEscolaresOld) {
+		return update(objeto, cdTipoProfissionaisEscolaresOld, null);
+	}
+
+	public static int update(TipoProfissionaisEscolares objeto, Connection connect) {
+		return update(objeto, 0, connect);
+	}
+
+	public static int update(TipoProfissionaisEscolares objeto, int cdTipoProfissionaisEscolaresOld, Connection connect){
+		boolean isConnectionNull = connect==null;
+		try {
+			if (isConnectionNull)
+				connect = Conexao.conectar();
+			PreparedStatement pstmt = connect.prepareStatement("UPDATE acd_tipo_profissionais_escolares SET cd_tipo_profissionais_escolares=?,"+
+												      		   "nm_tipo_profissionais_escolares=?,"+
+												      		   "id_tipo_profissionais_escolares=?,"+
+												      		   "st_tipo_profissionais_escolares=? WHERE cd_tipo_profissionais_escolares=?");
+			pstmt.setInt(1,objeto.getCdTipoProfissionaisEscolares());
+			pstmt.setString(2,objeto.getNmTipoProfissionaisEscolares());
+			pstmt.setString(3,objeto.getIdTipoProfissionaisEscolares());
+			pstmt.setInt(4,objeto.getStTipoProfissionaisEscolares());
+			pstmt.setInt(5, cdTipoProfissionaisEscolaresOld!=0 ? cdTipoProfissionaisEscolaresOld : objeto.getCdTipoProfissionaisEscolares());
+			pstmt.executeUpdate();
+			return 1;
+		}
+		catch(SQLException sqlExpt){
+			sqlExpt.printStackTrace(System.out);
+			System.err.println("Erro! TipoProfissionaisEscolaresDAO.update: " + sqlExpt);
+			return (-1)*sqlExpt.getErrorCode();
+		}
+		catch(Exception e){
+			e.printStackTrace(System.out);
+			System.err.println("Erro! TipoProfissionaisEscolaresDAO.update: " +  e);
+			return -1;
+		}
+		finally{
+			if (isConnectionNull)
+				Conexao.desconectar(connect);
+		}
+	}
+
+	public static int delete(int cdTipoProfissionaisEscolares) {
+		return delete(cdTipoProfissionaisEscolares, null);
+	}
+
+	public static int delete(int cdTipoProfissionaisEscolares, Connection connect){
+		boolean isConnectionNull = connect==null;
+		try {
+			if (isConnectionNull)
+				connect = Conexao.conectar();
+			PreparedStatement pstmt = connect.prepareStatement("DELETE FROM acd_tipo_profissionais_escolares WHERE cd_tipo_profissionais_escolares=?");
+			pstmt.setInt(1, cdTipoProfissionaisEscolares);
+			pstmt.executeUpdate();
+			return 1;
+		}
+		catch(SQLException sqlExpt){
+			sqlExpt.printStackTrace(System.out);
+			System.err.println("Erro! TipoProfissionaisEscolaresDAO.delete: " + sqlExpt);
+			return (-1)*sqlExpt.getErrorCode();
+		}
+		catch(Exception e){
+			e.printStackTrace(System.out);
+			System.err.println("Erro! TipoProfissionaisEscolaresDAO.delete: " +  e);
+			return -1;
+		}
+		finally{
+			if (isConnectionNull)
+				Conexao.desconectar(connect);
+		}
+	}
+
+	public static TipoProfissionaisEscolares get(int cdTipoProfissionaisEscolares) {
+		return get(cdTipoProfissionaisEscolares, null);
+	}
+
+	public static TipoProfissionaisEscolares get(int cdTipoProfissionaisEscolares, Connection connect){
+		boolean isConnectionNull = connect==null;
+		if (isConnectionNull)
+			connect = Conexao.conectar();
+		PreparedStatement pstmt;
+		ResultSet rs;
+		try {
+			pstmt = connect.prepareStatement("SELECT * FROM acd_tipo_profissionais_escolares WHERE cd_tipo_profissionais_escolares=?");
+			pstmt.setInt(1, cdTipoProfissionaisEscolares);
+			rs = pstmt.executeQuery();
+			if(rs.next()){
+				return new TipoProfissionaisEscolares(rs.getInt("cd_tipo_profissionais_escolares"),
+						rs.getString("nm_tipo_profissionais_escolares"),
+						rs.getString("id_tipo_profissionais_escolares"),
+						rs.getInt("st_tipo_profissionais_escolares"));
+			}
+			else{
+				return null;
+			}
+		}
+		catch(SQLException sqlExpt) {
+			sqlExpt.printStackTrace(System.out);
+			System.err.println("Erro! TipoProfissionaisEscolaresDAO.get: " + sqlExpt);
+			return null;
+		}
+		catch(Exception e) {
+			e.printStackTrace(System.out);
+			System.err.println("Erro! TipoProfissionaisEscolaresDAO.get: " + e);
+			return null;
+		}
+		finally {
+			if (isConnectionNull)
+				Conexao.desconectar(connect);
+		}
+	}
+
+	public static ResultSetMap getAll() {
+		return getAll(null);
+	}
+
+	public static ResultSetMap getAll(Connection connect) {
+		boolean isConnectionNull = connect==null;
+		if (isConnectionNull)
+			connect = Conexao.conectar();
+		PreparedStatement pstmt;
+		try {
+			pstmt = connect.prepareStatement("SELECT * FROM acd_tipo_profissionais_escolares");
+			return new ResultSetMap(pstmt.executeQuery());
+		}
+		catch(SQLException sqlExpt) {
+			sqlExpt.printStackTrace(System.out);
+			System.err.println("Erro! TipoProfissionaisEscolaresDAO.getAll: " + sqlExpt);
+			return null;
+		}
+		catch(Exception e) {
+			e.printStackTrace(System.out);
+			System.err.println("Erro! TipoProfissionaisEscolaresDAO.getAll: " + e);
+			return null;
+		}
+		finally {
+			if (isConnectionNull)
+				Conexao.desconectar(connect);
+		}
+	}
+
+	public static ArrayList<TipoProfissionaisEscolares> getList() {
+		return getList(null);
+	}
+
+	public static ArrayList<TipoProfissionaisEscolares> getList(Connection connect) {
+		boolean isConnectionNull = connect==null;
+		if (isConnectionNull)
+			connect = Conexao.conectar();
+		try {
+			ArrayList<TipoProfissionaisEscolares> list = new ArrayList<TipoProfissionaisEscolares>();
+			ResultSetMap rsm = getAll(connect);
+			while(rsm.next()){
+				TipoProfissionaisEscolares obj = TipoProfissionaisEscolaresDAO.get(rsm.getInt("cd_tipo_profissionais_escolares"), connect);
+				list.add(obj);
+			}
+			return list;
+		}
+		catch(Exception e) {
+			e.printStackTrace(System.out);
+			System.err.println("Erro! TipoProfissionaisEscolaresDAO.getList: " + e);
+			return null;
+		}
+		finally {
+			if (isConnectionNull)
+				Conexao.desconectar(connect);
+		}
+	}
+
+	public static ResultSetMap find(ArrayList<ItemComparator> criterios) {
+		return find(criterios, null);
+	}
+
+	public static ResultSetMap find(ArrayList<ItemComparator> criterios, Connection connect) {
+		return Search.find("SELECT * FROM acd_tipo_profissionais_escolares", criterios, connect!=null ? connect : Conexao.conectar(), connect==null);
+	}
+
+}

@@ -1,0 +1,687 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.0.3.final using JasperReports Library version 6.0.3  -->
+<!-- 2017-09-18T11:09:18 -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="relatorio_detalhamento_contas" language="groovy" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="00dadbb0-eb97-4765-a726-93f00ca8fc8e">
+	<property name="ireport.zoom" value="2.662000000000014"/>
+	<property name="ireport.x" value="72"/>
+	<property name="ireport.y" value="0"/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
+	<parameter name="nmRazaoSocial" class="java.lang.String"/>
+	<parameter name="LOGO" class="java.lang.Object"/>
+	<parameter name="nmSistema" class="java.lang.String"/>
+	<parameter name="nmUsuario" class="java.lang.String"/>
+	<parameter name="TP_CONTA" class="java.lang.String"/>
+	<parameter name="VL_TOTAL_CONTA" class="java.lang.Double"/>
+	<parameter name="VL_TOTAL_ACRESCIMO" class="java.lang.Double"/>
+	<parameter name="VL_TOTAL_RECEBIDO" class="java.lang.Double"/>
+	<parameter name="VL_TOTAL_A_RECEBER" class="java.lang.Double"/>
+	<parameter name="VL_TOTAL_PAGO" class="java.lang.Double"/>
+	<parameter name="VL_TOTAL_A_PAGAR" class="java.lang.Double"/>
+	<parameter name="VL_TOTAL_ABATIMENTO" class="java.lang.Double"/>
+	<field name="NM_PESSOA" class="java.lang.String"/>
+	<field name="DS_CATEGORIA_ECONOMICA" class="java.lang.String"/>
+	<field name="NM_TIPO_DOCUMENTO" class="java.lang.String"/>
+	<field name="NR_DOCUMENTO" class="java.lang.String"/>
+	<field name="NM_CENTRO_CUSTO" class="java.lang.String"/>
+	<field name="VL_CONTA_CATEGORIA" class="java.lang.String"/>
+	<field name="NM_CONTA" class="java.lang.String"/>
+	<field name="DT_EMISSAO" class="java.lang.String"/>
+	<field name="DT_VENCIMENTO" class="java.lang.String"/>
+	<field name="DT_RECEBIMENTO" class="java.lang.String"/>
+	<field name="DT_PAGAMENTO" class="java.lang.String"/>
+	<field name="VL_CONTA" class="java.lang.String"/>
+	<field name="VL_ABATIMENTO" class="java.lang.String"/>
+	<field name="VL_ACRESCIMO" class="java.lang.String"/>
+	<field name="VL_RECEBIDO" class="java.lang.String"/>
+	<field name="VL_PAGO" class="java.lang.String"/>
+	<field name="VL_ARECEBER" class="java.lang.String"/>
+	<field name="VL_APAGAR" class="java.lang.String"/>
+	<field name="DS_HISTORICO" class="java.lang.String"/>
+	<field name="CD_CATEGORIA_ECONOMICA" class="java.lang.String"/>
+	<field name="NM_ST_CONTA" class="java.lang.String"/>
+	<variable name="vlTotalConta" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[Double.parseDouble($F{VL_CONTA})]]></variableExpression>
+	</variable>
+	<variable name="vlTotalAbatimento" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[Double.parseDouble($F{VL_ABATIMENTO})]]></variableExpression>
+	</variable>
+	<variable name="vlTotalAcrescimo" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[Double.parseDouble($F{VL_ACRESCIMO})]]></variableExpression>
+	</variable>
+	<variable name="vlTotalRecebido" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[Double.parseDouble($F{VL_RECEBIDO})]]></variableExpression>
+	</variable>
+	<variable name="vlTotalAReceber" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[Double.parseDouble($F{VL_ARECEBER})]]></variableExpression>
+	</variable>
+	<title>
+		<band height="50">
+			<textField isBlankWhenNull="true">
+				<reportElement x="3" y="5" width="799" height="21" uuid="d95120a9-93ca-4e71-9e3d-5c51e6d2eb66"/>
+				<textElement textAlignment="Center" verticalAlignment="Top" markup="none">
+					<font fontName="SansSerif" size="16" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{nmRazaoSocial}]]></textFieldExpression>
+			</textField>
+			<image scaleImage="RetainShape" hAlign="Center">
+				<reportElement x="1" y="0" width="119" height="50" isRemoveLineWhenBlank="true" uuid="4fb4d3f3-0010-4477-98ee-8c40820de03a"/>
+				<imageExpression><![CDATA[net.sf.jasperreports.engine.util.JRImageLoader.loadImage((byte[]) $P{LOGO})]]></imageExpression>
+			</image>
+			<textField>
+				<reportElement x="3" y="26" width="798" height="23" uuid="97ba4b21-2d1c-434b-aa8b-8b724cf99a90"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["DETALHAMENTO DE CONTAS A "+(($P{TP_CONTA}.equals("0"))?"RECEBER":"PAGAR" )]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<columnHeader>
+		<band height="10" splitType="Stretch">
+			<property name="local_mesure_unitheight" value="pixel"/>
+			<staticText>
+				<reportElement x="173" y="0" width="47" height="10" uuid="07613e5c-94d1-477a-b48b-95a05a19961a">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" size="6" isBold="true"/>
+					<paragraph leftIndent="2" spacingBefore="0" spacingAfter="0"/>
+				</textElement>
+				<text><![CDATA[Tipo Doc.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="230" y="0" width="45" height="10" uuid="085906ff-f6bd-4a05-b331-46da77a0f03d">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="6" isBold="true" isStrikeThrough="false"/>
+					<paragraph leftIndent="2" spacingBefore="0" spacingAfter="0"/>
+				</textElement>
+				<text><![CDATA[N° Doc]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="740" y="0" width="61" height="10" uuid="1f3429a8-c31a-41fb-a136-1b90fae6109a">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="6" isBold="true" isStrikeThrough="false"/>
+					<paragraph leftIndent="2" spacingBefore="0" spacingAfter="0"/>
+				</textElement>
+				<text><![CDATA[Centro de Custo]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="700" y="0" width="40" height="10" uuid="085906ff-f6bd-4a05-b331-46da77a0f03d">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="6" isBold="true" isStrikeThrough="false"/>
+					<paragraph leftIndent="2" rightIndent="2" spacingBefore="0" spacingAfter="0"/>
+				</textElement>
+				<text><![CDATA[Valor Cat.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="100" y="0" width="73" height="10" uuid="39ad4191-d171-4f32-8dd0-58314cfd7d70">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" size="6" isBold="true"/>
+					<paragraph leftIndent="2" spacingBefore="0" spacingAfter="0"/>
+				</textElement>
+				<text><![CDATA[Conta]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="35" y="0" width="65" height="10" uuid="16c0db94-9ff7-4346-8d08-d8e3a17c445d">
+					<property name="local_mesure_unitx" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					<property name="local_mesure_unitheight" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement verticalAlignment="Middle">
+					<font size="6" isBold="true"/>
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<textFieldExpression><![CDATA[($P{TP_CONTA}.equals("0"))?"Sacado":"Favorecido"]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="633" y="0" width="67" height="10" uuid="850196c8-a9cd-4f94-bb6f-cbcdf34784a6">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" size="6" isBold="true" isStrikeThrough="false"/>
+					<paragraph leftIndent="2" spacingBefore="0" spacingAfter="0"/>
+				</textElement>
+				<text><![CDATA[Nome Cat.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="600" y="0" width="33" height="10" uuid="1c4b76d2-dc13-49dc-a594-413fe622f181">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" size="6" isBold="true" isStrikeThrough="false"/>
+					<paragraph leftIndent="2" spacingBefore="0" spacingAfter="0"/>
+				</textElement>
+				<text><![CDATA[Cód. Cat.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="551" y="0" width="48" height="10" uuid="a7b9a4dd-d8eb-42e7-8287-084514794e6c">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" size="6" isBold="true" isStrikeThrough="false"/>
+					<paragraph leftIndent="2" spacingBefore="0" spacingAfter="0"/>
+				</textElement>
+				<text><![CDATA[Hist.]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="500" y="0" width="50" height="10" uuid="245de3d5-573b-4d3a-82fe-cc956b6b01e2">
+					<property name="local_mesure_unitx" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="6" isBold="true"/>
+					<paragraph leftIndent="2" rightIndent="2"/>
+				</textElement>
+				<textFieldExpression><![CDATA[($P{TP_CONTA}.equals("0"))?"A Rec.":"A Pag."]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="470" y="0" width="30" height="10" uuid="75a834b8-d96e-4ab8-8490-1689628d17fa">
+					<property name="local_mesure_unitx" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="6" isBold="true"/>
+					<paragraph leftIndent="2" rightIndent="2"/>
+				</textElement>
+				<textFieldExpression><![CDATA[($P{TP_CONTA}.equals("0"))?"Rec.":"Pago"]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="440" y="0" width="30" height="10" uuid="bf691539-8275-45c3-8763-0ac5f9e9fa0f">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="6" isBold="true" isStrikeThrough="false"/>
+					<paragraph leftIndent="2" rightIndent="2" spacingBefore="0" spacingAfter="0"/>
+				</textElement>
+				<text><![CDATA[Acres.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="410" y="0" width="30" height="10" uuid="1763eb4d-2189-4268-9bd4-1cece3007b74">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="6" isBold="true" isStrikeThrough="false"/>
+					<paragraph leftIndent="2" rightIndent="2" spacingBefore="0" spacingAfter="0"/>
+				</textElement>
+				<text><![CDATA[Abat.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="310" y="0" width="35" height="10" uuid="8b4cf1e7-3800-4d7d-bfd4-09ef20d9c59d">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="6" isBold="true" isStrikeThrough="false"/>
+					<paragraph leftIndent="2" spacingBefore="0" spacingAfter="0"/>
+				</textElement>
+				<text><![CDATA[Venc.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="275" y="0" width="35" height="10" uuid="66d7157e-8e2f-451c-bfbd-62726e2359c5">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="6" isBold="true" isStrikeThrough="false"/>
+					<paragraph leftIndent="2" spacingBefore="0" spacingAfter="0"/>
+				</textElement>
+				<text><![CDATA[Emissao]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="345" y="0" width="35" height="10" uuid="a68be524-8c02-4165-8194-2dd4a1a372e0">
+					<property name="local_mesure_unitx" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="6" isBold="true"/>
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<textFieldExpression><![CDATA[($P{TP_CONTA}.equals("0"))?"Rec. em":"Pag. em"]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="0" width="35" height="10" uuid="6e2e27bd-0fe7-441c-bbfd-7016fe09d1e0">
+					<property name="local_mesure_unitheight" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement verticalAlignment="Middle">
+					<font size="6" isBold="true"/>
+					<paragraph leftIndent="2" rightIndent="2"/>
+				</textElement>
+				<text><![CDATA[Situação]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="380" y="0" width="30" height="10" uuid="402302a9-7fa4-4c4b-9a4e-63f5de433d47">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="6" isBold="true" isStrikeThrough="false"/>
+					<paragraph leftIndent="2" rightIndent="2" spacingBefore="0" spacingAfter="0"/>
+				</textElement>
+				<text><![CDATA[Conta]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="7" splitType="Stretch">
+			<property name="local_mesure_unitheight" value="pixel"/>
+			<property name="com.jaspersoft.studio.unit.height" value="px"/>
+			<frame>
+				<reportElement x="0" y="0" width="802" height="7" uuid="c86a00b1-66c2-4019-a94b-6f9543df297a">
+					<property name="local_mesure_unitheight" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="0.3"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.3"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textField isBlankWhenNull="true">
+					<reportElement x="35" y="0" width="65" height="7" uuid="6a0e9493-4335-4778-b2da-19c91c5775b8">
+						<property name="com.jaspersoft.studio.unit.height" value="px"/>
+						<property name="local_mesure_unitheight" value="pixel"/>
+					</reportElement>
+					<textElement textAlignment="Left" verticalAlignment="Middle">
+						<font fontName="SansSerif" size="5" isBold="false"/>
+						<paragraph leftIndent="2"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{NM_PESSOA}]]></textFieldExpression>
+				</textField>
+				<textField isBlankWhenNull="true">
+					<reportElement x="173" y="0" width="47" height="7" uuid="c9f8e56f-f33c-422e-92da-57c7d1284fb3">
+						<property name="com.jaspersoft.studio.unit.height" value="px"/>
+						<property name="local_mesure_unity" value="pixel"/>
+						<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					</reportElement>
+					<textElement textAlignment="Left" verticalAlignment="Middle">
+						<font fontName="SansSerif" size="5" isBold="false"/>
+						<paragraph leftIndent="2"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{NM_TIPO_DOCUMENTO}]]></textFieldExpression>
+				</textField>
+				<textField isBlankWhenNull="true">
+					<reportElement x="230" y="0" width="45" height="7" uuid="103ba23c-d2a3-4e72-bd8e-ff463e1650b8">
+						<property name="com.jaspersoft.studio.unit.height" value="px"/>
+						<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					</reportElement>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="SansSerif" size="5" isBold="false"/>
+						<paragraph leftIndent="2"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{NR_DOCUMENTO}]]></textFieldExpression>
+				</textField>
+				<textField isBlankWhenNull="true">
+					<reportElement x="740" y="0" width="60" height="7" uuid="0073f25b-f04b-496c-b809-e65273962848">
+						<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					</reportElement>
+					<textElement textAlignment="Left" verticalAlignment="Middle">
+						<font fontName="SansSerif" size="5" isBold="false"/>
+						<paragraph leftIndent="2"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{NM_CENTRO_CUSTO}]]></textFieldExpression>
+				</textField>
+				<textField isBlankWhenNull="true">
+					<reportElement x="700" y="0" width="40" height="7" uuid="43463a2b-7008-4b99-b9fb-3bddac1d7d95">
+						<property name="com.jaspersoft.studio.unit.height" value="px"/>
+						<property name="local_mesure_unity" value="pixel"/>
+					</reportElement>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font fontName="SansSerif" size="5" isBold="false"/>
+						<paragraph leftIndent="2" rightIndent="2"/>
+					</textElement>
+					<textFieldExpression><![CDATA[new DecimalFormat("###,###,##0.00", new DecimalFormatSymbols(new Locale("pt", "BR"))).format( Double.parseDouble( $F{VL_CONTA_CATEGORIA} ) )]]></textFieldExpression>
+				</textField>
+				<textField isBlankWhenNull="true">
+					<reportElement x="633" y="0" width="67" height="7" uuid="a82b90f8-edb6-45cb-8b51-f0e9cdc3b758">
+						<property name="com.jaspersoft.studio.unit.height" value="px"/>
+						<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+					</reportElement>
+					<textElement textAlignment="Left" verticalAlignment="Middle">
+						<font fontName="SansSerif" size="5" isBold="false"/>
+						<paragraph leftIndent="2"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{DS_CATEGORIA_ECONOMICA}]]></textFieldExpression>
+				</textField>
+				<textField isBlankWhenNull="true">
+					<reportElement x="100" y="0" width="73" height="7" uuid="d003e7b1-0c2a-4d47-9035-74c35c1cadf7">
+						<property name="com.jaspersoft.studio.unit.height" value="px"/>
+						<property name="local_mesure_unity" value="pixel"/>
+						<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					</reportElement>
+					<textElement textAlignment="Left" verticalAlignment="Middle">
+						<font fontName="SansSerif" size="5" isBold="false"/>
+						<paragraph leftIndent="2"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{NM_CONTA}]]></textFieldExpression>
+				</textField>
+				<textField isBlankWhenNull="true">
+					<reportElement x="275" y="0" width="35" height="7" uuid="0aac87d3-08d0-4ebc-ae45-04a2ede213d8">
+						<property name="com.jaspersoft.studio.unit.height" value="px"/>
+						<property name="local_mesure_unitwidth" value="pixel"/>
+						<property name="com.jaspersoft.studio.unit.width" value="px"/>
+						<property name="local_mesure_unity" value="pixel"/>
+						<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					</reportElement>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="SansSerif" size="5" isBold="false"/>
+						<paragraph leftIndent="2"/>
+					</textElement>
+					<textFieldExpression><![CDATA[new SimpleDateFormat("dd/MM/yyyy")
+            .format(
+                   new SimpleDateFormat("yyyy-MM-dd HH:mm:ss")
+                   .parse($F{DT_EMISSAO}))]]></textFieldExpression>
+				</textField>
+				<textField isBlankWhenNull="true">
+					<reportElement x="310" y="0" width="35" height="7" uuid="89bea801-c9bf-4fb9-a1c9-26104525a52a">
+						<property name="com.jaspersoft.studio.unit.height" value="px"/>
+						<property name="local_mesure_unity" value="pixel"/>
+						<property name="com.jaspersoft.studio.unit.y" value="px"/>
+						<property name="local_mesure_unitwidth" value="pixel"/>
+						<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					</reportElement>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="SansSerif" size="5" isBold="false"/>
+						<paragraph leftIndent="2"/>
+					</textElement>
+					<textFieldExpression><![CDATA[new SimpleDateFormat("dd/MM/yyyy")
+            .format(
+                   new SimpleDateFormat("yyyy-MM-dd HH:mm:ss")
+                   .parse($F{DT_VENCIMENTO})
+            )]]></textFieldExpression>
+				</textField>
+				<textField isBlankWhenNull="true">
+					<reportElement x="345" y="0" width="35" height="7" uuid="805e2d0d-8065-480e-8f0f-c47b6f24f271">
+						<property name="com.jaspersoft.studio.unit.height" value="px"/>
+						<property name="local_mesure_unity" value="pixel"/>
+						<property name="com.jaspersoft.studio.unit.y" value="px"/>
+						<property name="local_mesure_unitwidth" value="pixel"/>
+						<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					</reportElement>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="SansSerif" size="5" isBold="false"/>
+						<paragraph leftIndent="2"/>
+					</textElement>
+					<textFieldExpression><![CDATA[new SimpleDateFormat("dd/MM/yyyy")
+            .format(
+                   new SimpleDateFormat("yyyy-MM-dd HH:mm:ss")
+                   .parse(($P{TP_CONTA}.equals("0"))
+                   			?$F{DT_RECEBIMENTO}
+                   			:$F{DT_PAGAMENTO}
+                   )
+            )]]></textFieldExpression>
+				</textField>
+				<textField isBlankWhenNull="true">
+					<reportElement x="410" y="0" width="30" height="7" uuid="95146ac3-34c8-4a9c-83bd-4a3154d97111">
+						<property name="com.jaspersoft.studio.unit.height" value="px"/>
+						<property name="local_mesure_unity" value="pixel"/>
+						<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					</reportElement>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font fontName="SansSerif" size="5" isBold="false"/>
+						<paragraph leftIndent="2" rightIndent="2"/>
+					</textElement>
+					<textFieldExpression><![CDATA[new DecimalFormat("###,###,##0.00", new DecimalFormatSymbols(new Locale("pt", "BR"))).format( Double.parseDouble( $F{VL_ABATIMENTO} ) )]]></textFieldExpression>
+				</textField>
+				<textField isBlankWhenNull="true">
+					<reportElement x="440" y="0" width="30" height="7" uuid="4537a589-4fff-4e21-9687-95a3b432c9a0">
+						<property name="com.jaspersoft.studio.unit.height" value="px"/>
+						<property name="local_mesure_unity" value="pixel"/>
+					</reportElement>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font fontName="SansSerif" size="5" isBold="false"/>
+						<paragraph leftIndent="2" rightIndent="2"/>
+					</textElement>
+					<textFieldExpression><![CDATA[new DecimalFormat("###,###,##0.00", new DecimalFormatSymbols(new Locale("pt", "BR"))).format( Double.parseDouble( $F{VL_ACRESCIMO} ) )]]></textFieldExpression>
+				</textField>
+				<textField isBlankWhenNull="true">
+					<reportElement x="470" y="0" width="30" height="7" uuid="4b0bde5a-830a-4f9e-af0e-39571cb699da">
+						<property name="com.jaspersoft.studio.unit.height" value="px"/>
+						<property name="local_mesure_unity" value="pixel"/>
+						<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					</reportElement>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font fontName="SansSerif" size="5" isBold="false"/>
+						<paragraph leftIndent="2" rightIndent="2"/>
+					</textElement>
+					<textFieldExpression><![CDATA[new DecimalFormat("###,###,##0.00", new DecimalFormatSymbols(new Locale("pt", "BR"))).format( Double.parseDouble( ($P{TP_CONTA}.equals("0"))?$F{VL_RECEBIDO}:$F{VL_PAGO}
+	
+) )]]></textFieldExpression>
+				</textField>
+				<textField isBlankWhenNull="true">
+					<reportElement x="500" y="0" width="50" height="7" uuid="e89b6fcc-6f66-4824-b57d-bccaeaefe5ad">
+						<property name="com.jaspersoft.studio.unit.height" value="px"/>
+						<property name="local_mesure_unity" value="pixel"/>
+						<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					</reportElement>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font fontName="SansSerif" size="5" isBold="false"/>
+						<paragraph leftIndent="2" rightIndent="2"/>
+					</textElement>
+					<textFieldExpression><![CDATA[new DecimalFormat("###,###,##0.00", new DecimalFormatSymbols(new Locale("pt", "BR"))).format( Double.parseDouble( ($P{TP_CONTA}.equals("0"))?$F{VL_ARECEBER}:$F{VL_APAGAR}
+	
+) )]]></textFieldExpression>
+				</textField>
+				<textField isBlankWhenNull="true">
+					<reportElement x="551" y="0" width="48" height="7" uuid="b9c1a16e-d37d-475d-9332-729416b9c535">
+						<property name="com.jaspersoft.studio.unit.height" value="px"/>
+						<property name="local_mesure_unity" value="pixel"/>
+						<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					</reportElement>
+					<textElement textAlignment="Left" verticalAlignment="Middle">
+						<font fontName="SansSerif" size="5" isBold="false"/>
+						<paragraph leftIndent="2"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{DS_HISTORICO}]]></textFieldExpression>
+				</textField>
+				<textField isBlankWhenNull="true">
+					<reportElement x="600" y="0" width="33" height="7" uuid="032a3601-a31a-48aa-8359-c5b91af6ddc0">
+						<property name="com.jaspersoft.studio.unit.height" value="px"/>
+						<property name="local_mesure_unity" value="pixel"/>
+						<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					</reportElement>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="SansSerif" size="5" isBold="false"/>
+						<paragraph leftIndent="2"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{CD_CATEGORIA_ECONOMICA}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="0" y="0" width="35" height="7" uuid="5843ba5e-22ae-4f64-bc3f-b2934f0b6fdc">
+						<property name="local_mesure_unitheight" value="pixel"/>
+						<property name="com.jaspersoft.studio.unit.height" value="px"/>
+						<property name="local_mesure_unity" value="pixel"/>
+						<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					</reportElement>
+					<textElement verticalAlignment="Middle">
+						<font size="5"/>
+						<paragraph leftIndent="2" rightIndent="2"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{NM_ST_CONTA}]]></textFieldExpression>
+				</textField>
+				<textField isBlankWhenNull="true">
+					<reportElement x="380" y="0" width="30" height="7" uuid="0d11d8cd-0b0f-4113-8ec6-98e7e5b830c8">
+						<property name="com.jaspersoft.studio.unit.height" value="px"/>
+						<property name="local_mesure_unity" value="pixel"/>
+					</reportElement>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font fontName="SansSerif" size="5" isBold="false"/>
+						<paragraph leftIndent="2" rightIndent="2"/>
+					</textElement>
+					<textFieldExpression><![CDATA[new DecimalFormat("###,###,##0.00", new DecimalFormatSymbols(new Locale("pt", "BR"))).format( Double.parseDouble( $F{VL_CONTA} ) )]]></textFieldExpression>
+				</textField>
+			</frame>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="40">
+			<property name="local_mesure_unitheight" value="pixel"/>
+			<property name="com.jaspersoft.studio.unit.height" value="px"/>
+			<textField pattern="dd/MM/yyyy HH:mm:ss">
+				<reportElement x="654" y="3" width="65" height="9" uuid="bcfa085b-6289-4176-a453-ecb404d1b8a2"/>
+				<textElement>
+					<font size="7" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new SimpleDateFormat("dd/MM/yyyy").format(new java.util.Date())]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="35" y="3" width="13" height="9" uuid="f51aa41c-27a8-461a-87a6-ce0e1fd061ce"/>
+				<textElement>
+					<font size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[ de]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true" evaluationTime="Report" pattern="">
+				<reportElement x="48" y="3" width="12" height="9" uuid="c43e6f5d-fc8e-4eb3-93c9-c83268f8f7cb">
+					<property name="local_mesure_unitwidth" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Left">
+					<font size="7" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="614" y="3" width="40" height="9" uuid="118b0c71-0ba5-48f5-b7b8-8cfd893ba2f4"/>
+				<textElement>
+					<font size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Emitido em ]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement x="60" y="3" width="108" height="9" uuid="f86b7cd4-8b3c-4adf-ae62-dc5f322df907"/>
+				<textElement textAlignment="Center">
+					<font size="7" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{nmSistema}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="719" y="3" width="83" height="9" uuid="4f58079f-bcb5-4d32-9f71-4347707b17f8"/>
+				<textElement textAlignment="Right">
+					<font size="7" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{nmUsuario}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" pattern="">
+				<reportElement stretchType="RelativeToTallestObject" x="25" y="3" width="10" height="9" uuid="1284c33f-64a3-4dce-80eb-f0173f82c3af"/>
+				<textElement textAlignment="Right">
+					<font size="7" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="3" width="25" height="9" uuid="488bc32e-6bec-46eb-8ecd-613b2a36dab3"/>
+				<textElement>
+					<font size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Página]]></text>
+			</staticText>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="50">
+			<staticText>
+				<reportElement mode="Opaque" x="1" y="0" width="139" height="10" forecolor="#000000" backcolor="#FFFFFF" uuid="cd4716e5-e0ed-447c-a485-a22c76dc0adf">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="5" isBold="true" isStrikeThrough="false"/>
+					<paragraph leftIndent="2" spacingBefore="0" spacingAfter="0"/>
+				</textElement>
+				<text><![CDATA[TOTAL]]></text>
+			</staticText>
+			<textField isBlankWhenNull="false">
+				<reportElement mode="Opaque" x="140" y="0" width="100" height="10" forecolor="#000000" backcolor="#FFFFFF" uuid="c2c84c9b-b09a-4e18-ba56-3ae21c6be035">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<property name="local_mesure_unitwidth" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="local_mesure_unity" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="7" isBold="false"/>
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Conta: " + new DecimalFormat("###,###,##0.00", new DecimalFormatSymbols(new Locale("pt", "BR"))).format($P{VL_TOTAL_CONTA}.doubleValue())]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement mode="Opaque" x="240" y="0" width="100" height="10" forecolor="#000000" backcolor="#FFFFFF" uuid="326f7e49-e25a-4949-bc0a-fece39ebd797">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<property name="local_mesure_unitwidth" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="local_mesure_unity" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="7" isBold="false"/>
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Abatimento: " + new DecimalFormat("###,###,##0.00", new DecimalFormatSymbols(new Locale("pt", "BR"))).format($P{VL_TOTAL_ABATIMENTO}.doubleValue())]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement mode="Opaque" x="440" y="0" width="100" height="10" forecolor="#000000" backcolor="#FFFFFF" uuid="a650d514-5d57-418b-a331-b5a5f3a47838">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<property name="local_mesure_unitwidth" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="local_mesure_unity" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="7" isBold="false"/>
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Recebido: " + new DecimalFormat("###,###,##0.00", new DecimalFormatSymbols(new Locale("pt", "BR"))).format((($P{TP_CONTA}.equals("0"))?$P{VL_TOTAL_A_RECEBER}.doubleValue():$P{VL_TOTAL_A_PAGAR}.doubleValue() ))]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement mode="Opaque" x="340" y="0" width="100" height="10" forecolor="#000000" backcolor="#FFFFFF" uuid="a7c508e8-0e71-45bc-8d72-112ceb7c8a7d">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<property name="local_mesure_unitwidth" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="local_mesure_unity" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="7" isBold="false"/>
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Acréscimo: " + new DecimalFormat("###,###,##0.00", new DecimalFormatSymbols(new Locale("pt", "BR"))).format($P{VL_TOTAL_ACRESCIMO}.doubleValue())]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement mode="Opaque" x="540" y="0" width="100" height="10" forecolor="#000000" backcolor="#FFFFFF" uuid="39e90177-6a42-48c7-baf8-c0bf579e0548">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<property name="local_mesure_unitwidth" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="local_mesure_unity" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="7" isBold="false"/>
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<textFieldExpression><![CDATA["A Receber: " + new DecimalFormat("###,###,##0.00", new DecimalFormatSymbols(new Locale("pt", "BR"))).format((($P{TP_CONTA}.equals("0"))?$P{VL_TOTAL_A_RECEBER}.doubleValue():$P{VL_TOTAL_A_PAGAR}.doubleValue()))]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement mode="Opaque" x="640" y="0" width="162" height="10" forecolor="#000000" backcolor="#FFFFFF" uuid="706ba313-5e1f-4d15-b4ab-0c93ba596bd1">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<property name="local_mesure_unitwidth" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="local_mesure_unity" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="7" isBold="false"/>
+					<paragraph leftIndent="2"/>
+				</textElement>
+			</textField>
+		</band>
+	</summary>
+</jasperReport>

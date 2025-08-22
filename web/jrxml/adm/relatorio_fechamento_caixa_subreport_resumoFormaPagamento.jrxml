@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.1.1.final using JasperReports Library version 6.1.1  -->
+<!-- 2016-12-07T17:41:57 -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="relatorio_fechamento_caixa_subreport_resumoFormaPagamento" language="groovy" pageWidth="555" pageHeight="802" whenNoDataType="AllSectionsNoDetail" columnWidth="555" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="75d68608-4555-4ac2-b89e-275d28233de1">
+	<property name="ireport.zoom" value="2.5937424601000028"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<property name="com.jaspersoft.studio.unit." value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.pageHeight" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.pageWidth" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.topMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.bottomMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.leftMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.rightMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.columnWidth" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.columnSpacing" value="pixel"/>
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<field name="CD_FORMA_PAGAMENTO" class="java.lang.Integer"/>
+	<field name="NM_FORMA_PAGAMENTO" class="java.lang.String"/>
+	<field name="NM_PLANO_PAGAMENTO" class="java.lang.String"/>
+	<field name="QT_PAGAMENTO" class="java.lang.String"/>
+	<field name="VL_MOVIMENTO" class="java.lang.Double"/>
+	<field name="TP_MOVIMENTO" class="java.lang.String"/>
+	<variable name="qt" class="java.lang.String">
+		<variableExpression><![CDATA[$F{QT_PAGAMENTO}]]></variableExpression>
+	</variable>
+	<variable name="totalPagamento" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[$F{VL_MOVIMENTO}]]></variableExpression>
+		<initialValueExpression><![CDATA[new Double(0)]]></initialValueExpression>
+	</variable>
+	<variable name="vlSaldo" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[($F{TP_MOVIMENTO} == "0")?$F{VL_MOVIMENTO}:$F{VL_MOVIMENTO}*(-1)]]></variableExpression>
+	</variable>
+	<group name="formaPagamento">
+		<groupExpression><![CDATA[$F{CD_FORMA_PAGAMENTO}]]></groupExpression>
+	</group>
+	<columnHeader>
+		<band height="29" splitType="Stretch">
+			<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+			<rectangle>
+				<reportElement x="0" y="0" width="555" height="16" forecolor="#FFFFFF" backcolor="#CCCCCC" uuid="4121a6cd-d3ca-473d-9fca-07e906e0a3f7">
+					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+				<graphicElement>
+					<pen lineStyle="Solid" lineColor="#030000"/>
+				</graphicElement>
+			</rectangle>
+			<staticText>
+				<reportElement x="5" y="0" width="550" height="16" uuid="50ef43dc-15f6-4034-bb97-c129fe690735">
+					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+				<textElement verticalAlignment="Middle">
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[RESUMO POR FORMA/PLANO DE PAGAMENTO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="5" y="17" width="115" height="12" uuid="f963aa28-00de-477f-9be9-3c65fd9e8724">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<textElement>
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Forma de Pagamento]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="210" y="17" width="172" height="12" uuid="998481ed-4a76-4c0d-9183-e00c4dd7274f">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<textElement>
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Plano de Pagamento]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="390" y="17" width="44" height="12" uuid="ee8010aa-a40c-4217-af25-133be6ec9c14">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+				</reportElement>
+				<textElement textAlignment="Right">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Qtd.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="446" y="17" width="104" height="12" uuid="a1aa0938-33f5-4b39-b067-26c09ec63a72">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<textElement textAlignment="Right">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Valor]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="121" y="17" width="88" height="12" uuid="197bbeb1-04c2-4038-8858-e833362f6b6c">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<textElement>
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Tipo]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="12" splitType="Stretch">
+			<textField>
+				<reportElement x="5" y="0" width="115" height="12" uuid="3f95207e-1485-4cba-9c18-a6b5367e3dae">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+				</reportElement>
+				<textElement verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{NM_FORMA_PAGAMENTO}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="210" y="0" width="172" height="12" uuid="ebba5b4f-9695-42f7-bb8c-8a18b4cec8dc">
+					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+				</reportElement>
+				<textElement verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{NM_PLANO_PAGAMENTO}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="390" y="0" width="44" height="12" uuid="b742be71-31e9-4603-94ff-979a9ea25361">
+					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+				</reportElement>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{qt}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00">
+				<reportElement x="446" y="0" width="104" height="12" uuid="1704461b-3a4b-4d1d-95af-ae719bfd64a4"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{VL_MOVIMENTO}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="5" y="0" width="545" height="1" uuid="9a926c22-76f7-4dc8-a79e-b86b9d933df0">
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+				</reportElement>
+				<graphicElement>
+					<pen lineWidth="0.5"/>
+				</graphicElement>
+			</line>
+			<textField>
+				<reportElement x="121" y="1" width="88" height="11" uuid="92140fb2-98a5-4a63-8b49-7747ae6df5a9"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[( $F{TP_MOVIMENTO} == "0")?"Crédito":"Débito" ]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<summary>
+		<band height="13">
+			<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+			<textField pattern="#,##0.00">
+				<reportElement x="474" y="1" width="76" height="12" uuid="49c5ea04-eeff-4190-801a-aa46ea90911d">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+				</reportElement>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{vlSaldo}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="0" y="0" width="555" height="1" uuid="851e1b6b-28a5-4650-8bcc-6c45d565b12f">
+					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+			</line>
+			<staticText>
+				<reportElement x="434" y="1" width="38" height="12" uuid="5f2c0b87-4020-40ee-bf9e-ace71e578a5e"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Saldo]]></text>
+			</staticText>
+		</band>
+	</summary>
+</jasperReport>

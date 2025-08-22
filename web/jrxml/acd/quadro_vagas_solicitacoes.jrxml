@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.1.1.final using JasperReports Library version 6.1.1  -->
+<!-- 2015-11-15T16:10:57 -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="quadro_vagas_solicitacao" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="685b275b-3095-430e-97ff-37d9f0e15d5c">
+	<property name="ireport.zoom" value="2.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="22"/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
+	<property name="com.jaspersoft.studio.unit." value="pixel"/>
+	<parameter name="IMG_LOGOMARCA" class="byte[]" isForPrompting="false"/>
+	<parameter name="NM_INSTITUICAO" class="java.lang.String"/>
+	<parameter name="NM_PERIODO_LETIVO" class="java.lang.String"/>
+	<field name="NM_SOLICITANTE" class="java.lang.String"/>
+	<field name="DT_OCORRENCIA" class="java.util.Date"/>
+	<field name="ST_OCORRENCIA" class="java.lang.Integer"/>
+	<field name="TXT_OCORRENCIA" class="java.lang.String"/>
+	<field name="NM_INSTITUICAO" class="java.lang.String"/>
+	<sortField name="NM_INSTITUICAO"/>
+	<sortField name="DT_OCORRENCIA"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="68">
+			<textField>
+				<reportElement x="352" y="45" width="190" height="18" uuid="4ca18439-1f1a-436c-a560-36c6024b9fe8"/>
+				<textElement textAlignment="Center">
+					<font size="14" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{NM_PERIODO_LETIVO}]]></textFieldExpression>
+			</textField>
+			<image scaleImage="RetainShape" hAlign="Left">
+				<reportElement x="1" y="0" width="59" height="57" isRemoveLineWhenBlank="true" uuid="fe1286ce-e4e0-4542-a5c3-49b997041c31"/>
+				<imageExpression><![CDATA[net.sf.jasperreports.engine.util.JRImageLoader.loadImage((byte[]) $P{IMG_LOGOMARCA})]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="60" y="13" width="280" height="36" uuid="82771fad-c1f1-424b-a94a-1c18ff01b5df"/>
+				<textElement textAlignment="Center">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[PREFEITURA DE VITÓRIA DA CONQUISTA
+SECRETARIA MUNICIPAL DE EDUCAÇÃO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="352" y="9" width="190" height="40" uuid="9c300c89-2e3b-44fc-8422-7a2464e039c3"/>
+				<textElement textAlignment="Center">
+					<font size="14" isBold="false"/>
+				</textElement>
+				<text><![CDATA[SOLICITAÇÕES POR
+QUADRO DE VAGAS]]></text>
+			</staticText>
+			<line>
+				<reportElement x="0" y="67" width="555" height="1" uuid="e461730f-152e-4dec-bd40-1f9b580fb231">
+					<property name="local_mesure_unitheight" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<graphicElement>
+					<pen lineWidth="1.0" lineStyle="Solid"/>
+				</graphicElement>
+			</line>
+		</band>
+	</title>
+	<detail>
+		<band height="81" splitType="Stretch">
+			<textField pattern="" isBlankWhenNull="true">
+				<reportElement x="89" y="30" width="115" height="12" uuid="afd54f89-8e0a-4701-b6e1-53e9394a081a">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{ST_OCORRENCIA} == 0 ? "Pendente" : "Respondido"]]></textFieldExpression>
+			</textField>
+			<textField pattern="" isBlankWhenNull="true">
+				<reportElement x="1" y="30" width="88" height="12" uuid="9990e1a5-6136-4e48-9ef6-a87e91660cd9">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new SimpleDateFormat("dd/MM/yyyy HH:mm").format($F{DT_OCORRENCIA})]]></textFieldExpression>
+			</textField>
+			<textField pattern="" isBlankWhenNull="true">
+				<reportElement x="204" y="30" width="352" height="12" uuid="bd6deedf-171a-4a8a-9b2c-2fe50b8e37a5">
+					<property name="local_mesure_unitwidth" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="local_mesure_unitheight" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{NM_SOLICITANTE}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="204" y="19" width="352" height="15" uuid="d623d03f-439a-42be-a985-4edc07ce249f">
+					<property name="local_mesure_unitheight" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Left">
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Solicitante]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="1" y="19" width="88" height="15" uuid="16e51332-16ef-4fc3-a126-23e10ee70b65">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Left">
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Data]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="89" y="19" width="115" height="15" uuid="9326634c-2159-49a0-bec8-d051e2933a66">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement>
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Situação]]></text>
+			</staticText>
+			<line>
+				<reportElement positionType="FixRelativeToBottom" x="0" y="80" width="555" height="1" uuid="6978ee43-d8c9-443b-9788-dffa5f623354">
+					<property name="local_mesure_unitheight" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<graphicElement>
+					<pen lineWidth="0.5" lineStyle="Dotted"/>
+				</graphicElement>
+			</line>
+			<staticText>
+				<reportElement x="0" y="47" width="555" height="15" uuid="2d030329-ac30-4d75-acfd-11aceed271d9">
+					<property name="local_mesure_unitheight" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Left">
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Solicitação]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true" pattern="" isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToBandHeight" x="0" y="58" width="555" height="18" uuid="3601b7a3-9fd2-4778-9ed1-680e1a507962">
+					<property name="local_mesure_unitwidth" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="local_mesure_unitheight" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{TXT_OCORRENCIA}.trim()]]></textFieldExpression>
+			</textField>
+			<textField pattern="" isBlankWhenNull="true">
+				<reportElement x="0" y="4" width="555" height="15" uuid="75d3dbaa-4edd-4003-9a69-255aa416c9ad">
+					<property name="local_mesure_unitwidth" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="local_mesure_unitheight" value="pixel"/>
+				</reportElement>
+				<textElement>
+					<font size="10" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{NM_INSTITUICAO}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+</jasperReport>

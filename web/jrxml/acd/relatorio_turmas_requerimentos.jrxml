@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version last-->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="relatorio_turmas" language="groovy" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="842" leftMargin="0" rightMargin="0" topMargin="10" bottomMargin="0" uuid="685b275b-3095-430e-97ff-37d9f0e15d5c">
+	<property name="ireport.zoom" value="2.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="22"/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
+	<property name="com.jaspersoft.studio.unit." value="pixel"/>
+	<parameter name="nmRazaoSocial" class="java.lang.String"/>
+	<parameter name="dtHoje" class="java.lang.String"/>
+	<parameter name="hrHoje" class="java.lang.String"/>
+	<parameter name="nmUsuario" class="java.lang.String"/>
+	<parameter name="dtEstoque" class="java.lang.String"/>
+	<parameter name="nmEmail" class="java.lang.String"/>
+	<parameter name="nmDesenvolvedor" class="java.lang.String"/>
+	<field name="NR_INEP" class="java.lang.String"/>
+	<field name="ID_TURMA" class="java.lang.String"/>
+	<field name="NM_TURMA" class="java.lang.String"/>
+	<field name="NM_INSTITUICAO" class="java.lang.String"/>
+	<field name="CL_TP_TURNO" class="java.lang.String"/>
+	<field name="NM_CURSO" class="java.lang.String"/>
+	<field name="QT_VAGAS" class="java.lang.String"/>
+	<field name="NR_MATRICULADOS" class="java.lang.String"/>
+	<field name="CL_TP_MODALIDADE_ENSINO" class="java.lang.String"/>
+	<field name="CL_ST_TURMA" class="java.lang.String"/>
+	<field name="NM_PRODUTO_SERVICO" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<detail>
+		<band height="33" splitType="Stretch">
+			<staticText>
+				<reportElement x="436" y="0" width="65" height="15" uuid="2687f19f-055c-4fe9-bc6b-3192a14426c5">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Right">
+					<font fontName="SansSerif" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[INSTITUIÇÃO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="436" y="13" width="65" height="15" uuid="6a68706a-11b3-40b3-aa49-ed3d68780295">
+					<property name="local_mesure_unitheight" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Right">
+					<font fontName="SansSerif" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[TURMA]]></text>
+			</staticText>
+			<textField pattern="" isBlankWhenNull="true">
+				<reportElement x="505" y="0" width="335" height="15" uuid="128fa60a-97a4-4173-b759-923ecaeaaa65">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{NM_INSTITUICAO}]]></textFieldExpression>
+			</textField>
+			<textField pattern="" isBlankWhenNull="true">
+				<reportElement x="505" y="13" width="335" height="15" uuid="b4454526-f773-4c52-8dd0-a6e709a21d37">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{NM_PRODUTO_SERVICO} + " " + $F{CL_TP_TURNO} + " " + $F{NM_TURMA}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="0" y="28" width="841" height="1" uuid="6f2698e6-6163-4b0c-979f-980021fe68be">
+					<property name="local_mesure_unitheight" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<graphicElement>
+					<pen lineStyle="Dotted"/>
+				</graphicElement>
+			</line>
+		</band>
+	</detail>
+</jasperReport>

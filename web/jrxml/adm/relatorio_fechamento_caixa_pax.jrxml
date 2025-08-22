@@ -1,0 +1,219 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.1.1.final using JasperReports Library version 6.1.1  -->
+<!-- 2016-12-05T10:31:02 -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="relatorio_fechamento_caixa_pax" pageWidth="595" pageHeight="842" whenNoDataType="AllSectionsNoDetail" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="3e76cb13-a818-44f7-a94f-1577a17c75b6">
+	<property name="ireport.zoom" value="1.4641000000000037"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="nmEmpresa" class="java.lang.String"/>
+	<parameter name="nmConta" class="java.lang.String"/>
+	<parameter name="dtFechamento" class="java.util.Date"/>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA["C:\\Users\\Ricardo\\TiVic\\workspace\\manager\\web\\adm\\"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="rsmRecebimentos" class="java.util.List"/>
+	<parameter name="rsmPagamentos" class="java.util.List"/>
+	<parameter name="rsmResumo" class="java.util.List"/>
+	<parameter name="rsmTransferencias" class="java.util.List"/>
+	<parameter name="rsmEncerrantes" class="java.util.List"/>
+	<parameter name="rsmMedicao" class="java.util.List"/>
+	<parameter name="LG_SHOW_ESTOQUE" class="java.lang.Boolean">
+		<defaultValueExpression><![CDATA[true]]></defaultValueExpression>
+	</parameter>
+	<parameter name="LG_SHOW_VENDA_DIA" class="java.lang.Boolean">
+		<defaultValueExpression><![CDATA[true]]></defaultValueExpression>
+	</parameter>
+	<parameter name="vlSaldoInicial" class="java.lang.String"/>
+	<parameter name="vlTransferencia" class="java.lang.String"/>
+	<parameter name="vlTotalEntradas" class="java.lang.String"/>
+	<parameter name="vlRecebimento" class="java.lang.String"/>
+	<parameter name="vlDespesas" class="java.lang.String"/>
+	<parameter name="LOGO" class="java.lang.Object"/>
+	<parameter name="nmResponsavel" class="java.lang.String"/>
+	<parameter name="nmSupervisor" class="java.lang.String"/>
+	<parameter name="nmTurno" class="java.lang.String"/>
+	<parameter name="nmUsuario" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<field name="NR_DOCUMENTO_SAIDA" class="java.lang.String"/>
+	<field name="NM_CLIENTE" class="java.lang.String"/>
+	<field name="NM_VENDEDOR" class="java.lang.String"/>
+	<field name="VL_TOTAL_DESCONTOS" class="java.lang.Double"/>
+	<field name="VL_TOTAL_LIQUIDO" class="java.lang.Double"/>
+	<field name="VL_TOTAL_SAIDA" class="java.lang.Double"/>
+	<field name="ID_PRODUTO_SERVICO" class="java.lang.String"/>
+	<field name="NM_PRODUTO_SERVICO" class="java.lang.String"/>
+	<field name="QT_SAIDA" class="java.lang.Double"/>
+	<field name="VL_UNITARIO" class="java.lang.Double"/>
+	<field name="VL_DESCONTO" class="java.lang.Double"/>
+	<field name="VL_PAGAMENTO" class="java.lang.Double"/>
+	<field name="NM_FORMA_PAGAMENTO" class="java.lang.String"/>
+	<field name="NM_PLANO_PAGAMENTO" class="java.lang.String"/>
+	<variable name="totalProduto" class="java.lang.Double">
+		<variableExpression><![CDATA[($F{QT_SAIDA}*$F{VL_UNITARIO})-$F{VL_DESCONTO}]]></variableExpression>
+		<initialValueExpression><![CDATA[new Double(0)]]></initialValueExpression>
+	</variable>
+	<variable name="planoFormaPagamento" class="java.lang.String">
+		<variableExpression><![CDATA[$F{NM_FORMA_PAGAMENTO}==null?$F{NM_PLANO_PAGAMENTO}:$F{NM_PLANO_PAGAMENTO}+"/"+$F{NM_FORMA_PAGAMENTO}]]></variableExpression>
+	</variable>
+	<variable name="totalRecebido" class="java.lang.Double"/>
+	<group name="saida_group">
+		<groupExpression><![CDATA[$F{NR_DOCUMENTO_SAIDA}]]></groupExpression>
+		<groupFooter>
+			<band height="7">
+				<printWhenExpression><![CDATA[$P{LG_SHOW_VENDA_DIA}]]></printWhenExpression>
+				<line>
+					<reportElement x="2" y="1" width="552" height="1" uuid="06bac373-b037-47f5-9033-d88232d7166f"/>
+				</line>
+			</band>
+		</groupFooter>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="103" splitType="Stretch">
+			<textField pattern="" isBlankWhenNull="true">
+				<reportElement x="122" y="0" width="310" height="21" uuid="a026b702-972f-4e45-b57b-937598773730">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+				</reportElement>
+				<textElement textAlignment="Center">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{nmEmpresa}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="122" y="21" width="310" height="18" uuid="7809eb63-d07c-4768-b35c-437c493b9981">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<textElement textAlignment="Center">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{nmConta}]]></textFieldExpression>
+			</textField>
+			<textField pattern="">
+				<reportElement x="122" y="39" width="310" height="13" uuid="376652df-afb1-4f1d-bb18-06db255b02a0">
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="10" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Fechamento do dia "+( 
+	new SimpleDateFormat("d 'de' MMMM, yyyy").format($P{dtFechamento})
+)]]></textFieldExpression>
+			</textField>
+			<image scaleImage="RetainShape" hAlign="Center">
+				<reportElement mode="Opaque" x="1" y="0" width="74" height="50" isRemoveLineWhenBlank="true" uuid="80d2b944-e14b-4eec-80da-377ee70b1dd1">
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+				<imageExpression><![CDATA[net.sf.jasperreports.engine.util.JRImageLoader.loadImage((byte[]) $P{LOGO})]]></imageExpression>
+			</image>
+			<textField>
+				<reportElement x="60" y="83" width="119" height="8" uuid="006acad2-c488-4429-b3a3-87d25ad3300b">
+					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<textElement verticalAlignment="Middle">
+					<font size="6" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{nmResponsavel}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="2" y="83" width="58" height="8" uuid="6ad5c802-3def-4592-b1e4-d83d04533a24">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="6" isBold="true"/>
+				</textElement>
+				<text><![CDATA[RESPONSÁVEL:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="2" y="92" width="58" height="8" uuid="55be163a-36d5-4925-a283-5711f186fde0">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+				</reportElement>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="6" isBold="true"/>
+				</textElement>
+				<text><![CDATA[SUPERVISOR:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="60" y="92" width="119" height="8" uuid="ebbc73fc-11ac-45e7-b9eb-05d5f79053f4"/>
+				<textElement verticalAlignment="Middle">
+					<font size="6" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{nmSupervisor}]]></textFieldExpression>
+			</textField>
+			<textField pattern="">
+				<reportElement x="122" y="52" width="310" height="13" uuid="c8befb3b-6dc9-4cb4-a16d-8e39ea6e272e">
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{nmTurno}]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<pageFooter>
+		<band height="15">
+			<line>
+				<reportElement x="0" y="0" width="555" height="1" uuid="362650d7-8cd6-4ca1-9a27-d995df1d00d2">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+			</line>
+			<textField>
+				<reportElement x="1" y="1" width="399" height="10" uuid="2071e188-e6d4-4692-bc59-40d167568efa">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Emitido em "+
+( new SimpleDateFormat("d 'de' MMMM, yyyy  'às' HH:mm ", new Locale("pt", "BR")).format( new java.util.Date() ))+", por "+$P{nmUsuario}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" evaluationTime="Report">
+				<reportElement x="430" y="1" width="124" height="10" uuid="74393a1c-7300-4e28-a07a-7c246ac3bc11"/>
+				<textElement textAlignment="Right">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Pág. " +($V{PAGE_COUNT}+1)+" de " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="282" splitType="Stretch">
+			<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+			<subreport>
+				<reportElement positionType="Float" x="1" y="70" width="554" height="48" isRemoveLineWhenBlank="true" uuid="e145cff7-9a92-4faa-be75-82669627bcdb">
+					<printWhenExpression><![CDATA[$P{rsmResumo}!=null]]></printWhenExpression>
+				</reportElement>
+				<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource($P{rsmResumo})]]></dataSourceExpression>
+				<subreportExpression><![CDATA[$P{SUBREPORT_DIR}+"relatorio_fechamento_caixa_subreport_resumoFormaPagamento.jasper"]]></subreportExpression>
+			</subreport>
+			<subreport>
+				<reportElement positionType="Float" stretchType="RelativeToTallestObject" mode="Opaque" x="1" y="130" width="554" height="48" uuid="3bfbb55e-b743-4447-a511-8137f4611030"/>
+				<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource($P{rsmTransferencias})]]></dataSourceExpression>
+				<subreportExpression><![CDATA[$P{SUBREPORT_DIR}+"relatorio_fechamento_caixa_subreportTransferencias.jasper"]]></subreportExpression>
+			</subreport>
+			<subreport>
+				<reportElement positionType="Float" isPrintRepeatedValues="false" mode="Opaque" x="1" y="10" width="554" height="48" forecolor="#030000" uuid="ed20938f-4cef-4a0e-8f29-750200098a8a">
+					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+					<printWhenExpression><![CDATA[$P{rsmRecebimentos}!=null]]></printWhenExpression>
+				</reportElement>
+				<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource($P{rsmRecebimentos})]]></dataSourceExpression>
+				<subreportExpression><![CDATA[$P{SUBREPORT_DIR}+"relatorio_fechamento_caixa_recebimentos_pax.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+	</summary>
+</jasperReport>

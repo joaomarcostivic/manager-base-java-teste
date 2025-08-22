@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.1.1.final using JasperReports Library version 6.1.1  -->
+<!-- 2025-02-06T16:22:55 -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="relatorio_estatistico_grafico" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="67532319-ce5e-428f-9e38-cfe8dc401118">
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
+	<parameter name="DS_TITULO_1" class="java.lang.String"/>
+	<parameter name="DS_TITULO_2" class="java.lang.String"/>
+	<parameter name="LOGO_2" class="java.lang.Object"/>
+	<parameter name="LOGO_1" class="java.lang.Object"/>
+	<parameter name="DS_TITULO_3" class="java.lang.String"/>
+	<parameter name="DT_INICIAL" class="java.lang.String"/>
+	<parameter name="DT_FINAL" class="java.lang.String">
+		<parameterDescription><![CDATA[]]></parameterDescription>
+	</parameter>
+	<parameter name="TP_CONSULTA" class="java.lang.Integer"/>
+	<parameter name="TP_GRAFICO" class="java.lang.Integer"/>
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<field name="DT_NOTIFICACAO" class="java.util.Date"/>
+	<field name="QT_NOTIFICACAO" class="java.lang.Integer"/>
+	<field name="MES_NOTIFICACAO" class="java.lang.Integer"/>
+	<field name="ANO_NOTIFICACAO" class="java.lang.Integer"/>
+	<field name="PR_DEFERIMENTO" class="java.lang.Float"/>
+	<field name="PR_INDEFERIMENTO" class="java.lang.Float"/>
+	<field name="TEMPO_JULGAMENTO" class="java.lang.Integer"/>
+	<field name="CATEGORY_AXIS" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="62" splitType="Stretch">
+			<textField>
+				<reportElement x="79" y="12" width="396" height="16" uuid="ef7a80e3-7214-4da0-ab84-ed24b523225e">
+					<printWhenExpression><![CDATA[$P{DS_TITULO_1} != null]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Center">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{DS_TITULO_1}]]></textFieldExpression>
+			</textField>
+			<image onErrorType="Blank">
+				<reportElement x="484" y="6" width="55" height="55" uuid="de727198-68f4-4ff6-8a17-221f79c746cd">
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+					<printWhenExpression><![CDATA[$P{LOGO_1} != null]]></printWhenExpression>
+				</reportElement>
+				<imageExpression><![CDATA[net.sf.jasperreports.engine.util.JRImageLoader.getInstance(new SimpleJasperReportsContext()).loadAwtImageFromBytes(javax.xml.bind.DatatypeConverter.parseBase64Binary($P{LOGO_2}))]]></imageExpression>
+			</image>
+			<image onErrorType="Blank">
+				<reportElement x="18" y="6" width="57" height="56" uuid="b2e7e7d3-de32-4e64-a0fb-758942a7c11b">
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<printWhenExpression><![CDATA[$P{LOGO_1} != null]]></printWhenExpression>
+				</reportElement>
+				<imageExpression><![CDATA[net.sf.jasperreports.engine.util.JRImageLoader.getInstance(new SimpleJasperReportsContext()).loadAwtImageFromBytes(javax.xml.bind.DatatypeConverter.parseBase64Binary($P{LOGO_1}))]]></imageExpression>
+			</image>
+			<textField>
+				<reportElement x="79" y="29" width="396" height="16" uuid="ad4f51c3-9160-497d-be79-4dce76335b3a">
+					<printWhenExpression><![CDATA[$P{DS_TITULO_2} != null]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Center">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{DS_TITULO_2}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="79" y="46" width="396" height="16" uuid="6a3d534a-c5f6-4feb-9cc3-9176d8405775">
+					<printWhenExpression><![CDATA[$P{DS_TITULO_3} != null]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Center">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{DS_TITULO_3}]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="70">
+			<printWhenExpression><![CDATA[new Boolean($V{PAGE_NUMBER}.intValue() == 1)]]></printWhenExpression>
+			<line>
+				<reportElement x="18" y="8" width="511" height="1" uuid="0b42b3f5-71b6-4394-9904-6d1068724048">
+					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+				</reportElement>
+				<graphicElement>
+					<pen lineWidth="2.0"/>
+				</graphicElement>
+			</line>
+			<textField>
+				<reportElement x="8" y="49" width="521" height="21" uuid="ab0a9613-f92b-4142-bf06-369ae8502280">
+					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+				</reportElement>
+				<textElement verticalAlignment="Middle" markup="html"/>
+				<textFieldExpression><![CDATA[$P{TP_CONSULTA} == 1 ? "<b>Data inicial de entrada: </b>" + $P{DT_INICIAL} + "&nbsp;&nbsp; <b>Data final de entrada: </b>" + $P{DT_FINAL} : $P{TP_CONSULTA} == 2 ? "<b>Data inicial de julgamento: </b>" + $P{DT_INICIAL} + "&nbsp;&nbsp; <b>Data final de julgamento: </b>" + $P{DT_FINAL} : "<b>Data inicial: </b>" + $P{DT_INICIAL} + "&nbsp;&nbsp; <b>Data final: </b>" + $P{DT_FINAL}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="16" width="555" height="30" uuid="8473c1de-230c-437e-b424-60448b30cc66"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{TP_CONSULTA} == 1 ? "RELATÓRIO DE ENTRADAS DE NOTIFICAÇÕES DE INFRAÇÃO (NA)" : $P{TP_CONSULTA} == 2 ? "RELATÓRIO DE JULGAMENTOS DE DEFESA" : "RELATÓRIO DE NOTIFICAÇÕES DE INFRAÇÃO (NA)"]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<summary>
+		<band height="563">
+			<barChart>
+				<chart isShowLegend="false" evaluationTime="Report">
+					<reportElement x="0" y="20" width="555" height="320" uuid="6a003940-04cc-4b0f-83bb-4d67171ff2ff">
+						<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+						<printWhenExpression><![CDATA[$P{TP_GRAFICO} != null && $P{TP_GRAFICO} == 1]]></printWhenExpression>
+					</reportElement>
+					<chartTitle>
+						<font size="14"/>
+						<titleExpression><![CDATA[$P{TP_CONSULTA} == 1 ? "Quantidade de entrada de NAs" : "Quantidade de julgamentos de defesa"]]></titleExpression>
+					</chartTitle>
+					<chartSubtitle/>
+					<chartLegend/>
+				</chart>
+				<categoryDataset>
+					<categorySeries>
+						<seriesExpression><![CDATA["SERIES 1"]]></seriesExpression>
+						<categoryExpression><![CDATA[$F{CATEGORY_AXIS}]]></categoryExpression>
+						<valueExpression><![CDATA[$F{QT_NOTIFICACAO}]]></valueExpression>
+					</categorySeries>
+				</categoryDataset>
+				<barPlot isShowLabels="true" isShowTickLabels="true" isShowTickMarks="true">
+					<plot backgroundAlpha="1.0" foregroundAlpha="1.0" labelRotation="45.0">
+						<seriesColor seriesOrder="0" color="#72C2EE"/>
+					</plot>
+					<itemLabel/>
+					<categoryAxisFormat labelRotation="45.0">
+						<axisFormat labelColor="#57A5F3">
+							<labelFont>
+								<font isBold="true"/>
+							</labelFont>
+						</axisFormat>
+					</categoryAxisFormat>
+					<valueAxisFormat>
+						<axisFormat/>
+					</valueAxisFormat>
+				</barPlot>
+			</barChart>
+			<pieChart>
+				<chart evaluationTime="Report">
+					<reportElement x="0" y="20" width="555" height="320" uuid="c6c200d0-c12e-49e0-8f33-3eced8ad96e7">
+						<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+						<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+						<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+						<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+						<printWhenExpression><![CDATA[$P{TP_GRAFICO} != null && $P{TP_GRAFICO} == 2]]></printWhenExpression>
+					</reportElement>
+					<chartTitle>
+						<font size="14"/>
+						<titleExpression><![CDATA[$P{TP_CONSULTA} == 1 ? "Quantidade de entrada de NAs" : "Quantidade de julgamentos de defesa"]]></titleExpression>
+					</chartTitle>
+					<chartSubtitle>
+						<font size="14"/>
+					</chartSubtitle>
+					<chartLegend/>
+				</chart>
+				<pieDataset>
+					<keyExpression><![CDATA[$F{CATEGORY_AXIS}]]></keyExpression>
+					<valueExpression><![CDATA[$F{QT_NOTIFICACAO}]]></valueExpression>
+					<labelExpression><![CDATA[$F{QT_NOTIFICACAO}.toString()]]></labelExpression>
+				</pieDataset>
+				<piePlot>
+					<plot/>
+					<itemLabel/>
+				</piePlot>
+			</pieChart>
+		</band>
+	</summary>
+</jasperReport>

@@ -1,0 +1,237 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.2.0.final using JasperReports Library version 6.2.0  -->
+<!-- 2016-03-01T15:46:49 -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="relatorio_atendimento" pageWidth="595" pageHeight="842" columnWidth="515" leftMargin="40" rightMargin="40" topMargin="30" bottomMargin="30" uuid="75c496e7-d97c-42fe-ae01-056ae651df0c">
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
+	<property name="net.sf.jasperreports.export.pdf.force.linebreak.policy" value="true"/>
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="96"/>
+	<property name="com.jaspersoft.studio.unit." value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.pageHeight" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.pageWidth" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.topMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.bottomMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.leftMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.rightMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.columnWidth" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.columnSpacing" value="pixel"/>
+	<parameter name="nmRazaoSocial" class="java.lang.String"/>
+	<parameter name="LOGO" class="java.lang.Object"/>
+	<parameter name="NM_SISTEMA" class="java.lang.String"/>
+	<parameter name="nrTelefone" class="java.lang.String"/>
+	<parameter name="nmTitulo" class="java.lang.String"/>
+	<parameter name="nmEmail" class="java.lang.String"/>
+	<parameter name="LOGO_PATH" class="java.lang.String"/>
+	<parameter name="QT_TOTAL_PESSOA" class="java.lang.Integer"/>
+	<parameter name="nrRegistros" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<field name="QT_PESSOA" class="java.lang.Integer"/>
+	<field name="NM_PESSOA" class="java.lang.String"/>
+	<field name="QT_TOTAL_PESSOAS" class="java.lang.Integer"/>
+	<field name="QT_RECLAMACOES" class="java.lang.String"/>
+	<field name="QT_TOTAL_RECLAMACOES" class="java.lang.String"/>
+	<variable name="QT_TOTAL_RECLAMACOES_PAGINA" class="java.lang.Double" resetType="Page" calculation="Sum">
+		<variableExpression><![CDATA[$F{QT_PESSOA}]]></variableExpression>
+	</variable>
+	<variable name="VL_PERCENTUAL" class="java.lang.Double" resetType="None" calculation="Sum"/>
+	<variable name="QT_TOTAL_RECLAMACOES_REPORT" class="java.lang.Double" resetType="Page" calculation="Sum">
+		<variableExpression><![CDATA[$F{QT_PESSOA}]]></variableExpression>
+	</variable>
+	<title>
+		<band height="113">
+			<textField>
+				<reportElement stretchType="RelativeToTallestObject" mode="Transparent" x="-4" y="73" width="265" height="15" forecolor="#000000" backcolor="#FFFFFF" uuid="e687d93a-1797-4088-be1b-6299b5bac7f2">
+					<property name="local_mesure_unitx" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+				</reportElement>
+				<box padding="0" topPadding="0" leftPadding="0" bottomPadding="0" rightPadding="0"/>
+				<textElement textAlignment="Left" verticalAlignment="Top" rotation="None" markup="none">
+					<font fontName="SansSerif" size="10" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false"/>
+					<paragraph lineSpacing="Single" lineSpacingSize="1.0" firstLineIndent="0" leftIndent="0" rightIndent="0" spacingBefore="0" spacingAfter="0" tabStopWidth="40"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Vitória da Conquista-BA, " + new SimpleDateFormat("dd/MM/yyyy").format(new Date())]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="1" y="25" width="513" height="13" uuid="9fbfe06e-a982-4be2-a6e7-48ecfba39c7e"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{nmRazaoSocial}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="1" y="0" width="513" height="25" uuid="cbcbd31b-dd3a-412a-beff-5d5f53f29608"/>
+				<textElement textAlignment="Center">
+					<font size="15"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{nmTitulo}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="1" y="54" width="513" height="13" uuid="4073f9d2-76ee-4ebf-a34e-aa9c553c8b63"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{nrTelefone}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="1" y="40" width="513" height="13" uuid="999ca8a5-9531-4b37-b558-5a0e1004d19d"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{nmEmail}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="1" y="67" width="513" height="1" uuid="9cf9fa20-4a81-4c98-857d-405e642c893a">
+					<property name="local_mesure_unitheight" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+			</line>
+			<image scaleImage="RetainShape" hAlign="Left" onErrorType="Blank">
+				<reportElement x="6" y="0" width="119" height="50" isRemoveLineWhenBlank="true" uuid="5e56db0f-5dac-47a1-90c7-7e8ad6490d4c"/>
+				<imageExpression><![CDATA[net.sf.jasperreports.engine.util.JRImageLoader.loadImage((byte[]) $P{LOGO})]]></imageExpression>
+			</image>
+			<image hAlign="Right" vAlign="Middle" onErrorType="Blank">
+				<reportElement x="401" y="0" width="113" height="50" uuid="3ff6b7bb-d00f-49f6-8adb-bba9f32fbed4">
+					<property name="local_mesure_unitwidth" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<imageExpression><![CDATA[$P{LOGO_PATH} + "procon_logo.png"]]></imageExpression>
+			</image>
+			<textField>
+				<reportElement mode="Transparent" x="1" y="90" width="513" height="23" forecolor="#000000" backcolor="#FFFFFF" uuid="128de1af-1b0a-49e3-a217-f53c6a2cc554"/>
+				<box padding="0" topPadding="0" leftPadding="0" bottomPadding="0" rightPadding="0"/>
+				<textElement textAlignment="Center" verticalAlignment="Top" rotation="None" markup="none">
+					<font fontName="SansSerif" size="14" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false"/>
+					<paragraph lineSpacing="Single" lineSpacingSize="1.0" firstLineIndent="0" leftIndent="0" rightIndent="0" spacingBefore="0" spacingAfter="0" tabStopWidth="40"/>
+				</textElement>
+				<textFieldExpression><![CDATA["RANKING DOS " + $P{nrRegistros} + " MAIS RECLAMADOS"]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<columnHeader>
+		<band height="49">
+			<staticText>
+				<reportElement x="20" y="20" width="150" height="18" uuid="f3e5a06b-3c27-4262-8e6d-bc4620900fb7">
+					<property name="local_mesure_unitwidth" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="local_mesure_unitheight" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement>
+					<font size="13" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Reclamado]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="170" y="20" width="150" height="18" uuid="260c4009-87b3-425d-9f72-b767246eafab">
+					<property name="local_mesure_unitwidth" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="local_mesure_unitheight" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Right">
+					<font size="13" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Quantidade]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="320" y="20" width="150" height="18" uuid="21357480-9d81-49ef-a704-70e9ceaaa46b">
+					<property name="local_mesure_unitwidth" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="local_mesure_unitheight" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Right">
+					<font size="13" isBold="true"/>
+				</textElement>
+				<text><![CDATA[%]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="21" splitType="Stretch">
+			<textField>
+				<reportElement mode="Transparent" x="20" y="3" width="150" height="18" forecolor="#000000" backcolor="#FFFFFF" uuid="1900eda0-b13a-42ac-8968-d675c93bdcb9"/>
+				<box padding="0" topPadding="0" leftPadding="0" bottomPadding="0" rightPadding="0"/>
+				<textElement textAlignment="Left" verticalAlignment="Top" rotation="None" markup="none">
+					<font fontName="SansSerif" size="10" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false"/>
+					<paragraph lineSpacing="Single" lineSpacingSize="1.0" firstLineIndent="0" leftIndent="0" rightIndent="0" spacingBefore="0" spacingAfter="0" tabStopWidth="40"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{NM_PESSOA}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement mode="Transparent" x="170" y="3" width="150" height="18" forecolor="#000000" backcolor="#FFFFFF" uuid="9697b7e9-2dbd-4e5c-88b9-1428729a7045"/>
+				<box padding="0" topPadding="0" leftPadding="0" bottomPadding="0" rightPadding="0"/>
+				<textElement textAlignment="Right" verticalAlignment="Top" rotation="None" markup="none">
+					<font fontName="SansSerif" size="10" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false"/>
+					<paragraph lineSpacing="Single" lineSpacingSize="1.0" firstLineIndent="0" leftIndent="0" rightIndent="0" spacingBefore="0" spacingAfter="0" tabStopWidth="40"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{QT_PESSOA}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,###.###">
+				<reportElement mode="Transparent" x="320" y="3" width="150" height="18" forecolor="#000000" backcolor="#FFFFFF" uuid="bf5074ed-fd35-4604-94be-98004a8ee891"/>
+				<box padding="0" topPadding="0" leftPadding="0" bottomPadding="0" rightPadding="0"/>
+				<textElement textAlignment="Right" verticalAlignment="Top" rotation="None" markup="none">
+					<font fontName="SansSerif" size="10" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false"/>
+					<paragraph lineSpacing="Single" lineSpacingSize="1.0" firstLineIndent="0" leftIndent="0" rightIndent="0" spacingBefore="0" spacingAfter="0" tabStopWidth="40"/>
+				</textElement>
+				<textFieldExpression><![CDATA[($F{QT_PESSOA} * 100) / $P{QT_TOTAL_PESSOA} + "%"]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="50">
+			<staticText>
+				<reportElement mode="Transparent" x="110" y="20" width="150" height="18" forecolor="#000000" backcolor="#FFFFFF" uuid="f86cc6f7-175b-4884-91d3-67cf414802c9"/>
+				<box padding="0" topPadding="0" leftPadding="0" bottomPadding="0" rightPadding="0"/>
+				<textElement textAlignment="Right" verticalAlignment="Top" rotation="None" markup="none">
+					<font fontName="SansSerif" size="13" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false"/>
+					<paragraph lineSpacing="Single" lineSpacingSize="1.0" firstLineIndent="0" leftIndent="0" rightIndent="0" spacingBefore="0" spacingAfter="0" tabStopWidth="40"/>
+				</textElement>
+				<text><![CDATA[Total de Reclamações:]]></text>
+			</staticText>
+			<textField pattern="#,###.###;(#,###.###-)">
+				<reportElement mode="Transparent" x="260" y="20" width="60" height="18" forecolor="#000000" backcolor="#FFFFFF" uuid="cc7f36b7-0fec-48a4-b633-0f50df23fe98"/>
+				<box padding="0" topPadding="0" leftPadding="0" bottomPadding="0" rightPadding="0"/>
+				<textElement textAlignment="Right" verticalAlignment="Top" rotation="None" markup="none">
+					<font fontName="SansSerif" size="13" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false"/>
+					<paragraph lineSpacing="Single" lineSpacingSize="1.0" firstLineIndent="0" leftIndent="0" rightIndent="0" spacingBefore="0" spacingAfter="0" tabStopWidth="40"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{QT_TOTAL_RECLAMACOES_PAGINA}]]></textFieldExpression>
+			</textField>
+		</band>
+	</columnFooter>
+	<pageFooter>
+		<band height="14">
+			<textField pattern="dd/MM/yyyy HH:mm:ss">
+				<reportElement x="456" y="5" width="64" height="9" uuid="fa64f976-17f4-435b-880d-6b05a8d1e720"/>
+				<textElement>
+					<font size="7" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new SimpleDateFormat("dd/MM/yyyy").format(new java.util.Date())]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement x="181" y="5" width="151" height="9" uuid="bc405095-e41f-4c37-ac66-57f613865d41"/>
+				<textElement textAlignment="Center">
+					<font size="7" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{NM_SISTEMA}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="440" y="5" width="11" height="9" uuid="a4619d54-93ef-4084-b108-b405f706d59e"/>
+				<textElement>
+					<font size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Emitido em ]]></text>
+			</staticText>
+			<line>
+				<reportElement x="1" y="0" width="520" height="1" uuid="40391cd5-262a-4b5f-b14f-874366da9a56">
+					<property name="local_mesure_unitheight" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+			</line>
+		</band>
+	</pageFooter>
+</jasperReport>

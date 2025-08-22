@@ -1,0 +1,478 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.0.3.final using JasperReports Library version 6.0.3  -->
+<!-- 2017-02-20T04:48:02 -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="estoque_produtos" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="685b275b-3095-430e-97ff-37d9f0e15d5c">
+	<property name="ireport.zoom" value="2.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="22"/>
+	<parameter name="nmRazaoSocial" class="java.lang.String"/>
+	<parameter name="dtHoje" class="java.lang.String"/>
+	<parameter name="hrHoje" class="java.lang.String"/>
+	<parameter name="nmUsuario" class="java.lang.String"/>
+	<parameter name="dtEstoque" class="java.lang.String"/>
+	<parameter name="nmEmail" class="java.lang.String"/>
+	<parameter name="nmDesenvolvedor" class="java.lang.String"/>
+	<parameter name="NM_INSTITUICAO" class="java.lang.String"/>
+	<parameter name="NM_ALUNO" class="java.lang.String"/>
+	<parameter name="NM_LOGRADOURO" class="java.lang.String"/>
+	<parameter name="CL_FAIXA_ETARIA" class="java.lang.String"/>
+	<parameter name="NM_MODALIDADE_CURSO" class="java.lang.String"/>
+	<parameter name="CL_SEXO" class="java.lang.String"/>
+	<parameter name="CL_RACA" class="java.lang.String"/>
+	<parameter name="CL_NOME_PAI_DECLARADO" class="java.lang.String"/>
+	<parameter name="CL_RECEBE_BOLSA_FAMILIA" class="java.lang.String"/>
+	<parameter name="CL_TRANSPORTADO" class="java.lang.String"/>
+	<parameter name="NM_DEFICIENCIA" class="java.lang.String"/>
+	<parameter name="NM_DOENCA" class="java.lang.String"/>
+	<parameter name="NM_ALERGIA" class="java.lang.String"/>
+	<parameter name="NM_PERIODO_LETIVO" class="java.lang.String"/>
+	<parameter name="CL_TURNO" class="java.lang.String"/>
+	<parameter name="CL_TP_LOCALIZACAO_DIFERENCIADA" class="java.lang.String"/>
+	<parameter name="NM_TITULO_RELATORIO" class="java.lang.String"/>
+	<parameter name="CL_MODALIDADE" class="java.lang.String"/>
+	<parameter name="QT_MATRICULADOS_ZONA_URBANA" class="java.lang.Integer"/>
+	<parameter name="QT_MATRICULADOS_ZONA_RURAL" class="java.lang.Integer"/>
+	<parameter name="QT_MATRICULADOS_CRECHE" class="java.lang.Integer"/>
+	<parameter name="NM_TIPO_MODALIDADE" class="java.lang.String"/>
+	<parameter name="LOGO" class="java.lang.Object"/>
+	<parameter name="LOGO_DEV" class="java.lang.Object"/>
+	<parameter name="LOGO_SUP" class="java.lang.Object"/>
+	<field name="DT_NM_NASCIMENTO" class="java.lang.String"/>
+	<field name="NM_ALUNO" class="java.lang.String"/>
+	<field name="NM_MAE" class="java.lang.String"/>
+	<field name="NR_MATRICULA" class="java.lang.String"/>
+	<field name="NM_TURMA_COMPLETO" class="java.lang.String"/>
+	<field name="NM_DEFICIENCIA" class="java.lang.String"/>
+	<group name="groupDeficiencia">
+		<groupExpression><![CDATA[$F{NM_DEFICIENCIA}]]></groupExpression>
+		<groupHeader>
+			<band height="41">
+				<line>
+					<reportElement x="0" y="29" width="553" height="1" uuid="618e4e35-7abc-400c-af9f-30e1303885bd"/>
+				</line>
+				<staticText>
+					<reportElement x="50" y="31" width="130" height="10" uuid="041ea3b4-5374-4975-96fe-06f9aee1837c"/>
+					<textElement>
+						<font size="6"/>
+					</textElement>
+					<text><![CDATA[Aluno]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="389" y="30" width="161" height="10" uuid="09b9815e-2652-484f-ae30-6e9d0e56dc43"/>
+					<textElement textAlignment="Left">
+						<font size="6"/>
+					</textElement>
+					<text><![CDATA[Turma]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="189" y="30" width="70" height="10" uuid="9326634c-2159-49a0-bec8-d051e2933a66"/>
+					<textElement>
+						<font size="6"/>
+					</textElement>
+					<text><![CDATA[Nascimento]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="-1" y="30" width="44" height="10" uuid="8a70e5b8-8b1b-40a4-86d3-d13aa407b33f"/>
+					<textElement>
+						<font size="6"/>
+					</textElement>
+					<text><![CDATA[Matrícula]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="265" y="30" width="120" height="10" uuid="16e51332-16ef-4fc3-a126-23e10ee70b65"/>
+					<textElement textAlignment="Left">
+						<font size="6"/>
+					</textElement>
+					<text><![CDATA[Nome da Mãe]]></text>
+				</staticText>
+				<line>
+					<reportElement x="-1" y="39" width="555" height="2" uuid="aee11a31-3b64-4f9d-acbc-a13b496e51db"/>
+					<graphicElement>
+						<pen lineWidth="1.5"/>
+					</graphicElement>
+				</line>
+				<textField>
+					<reportElement x="0" y="0" width="556" height="30" uuid="260766a4-6a72-40f4-867e-f8d016524736">
+						<property name="local_mesure_unitheight" value="pixel"/>
+						<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					</reportElement>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="SansSerif" size="14" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{NM_DEFICIENCIA}]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupHeader>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="138">
+			<textField isBlankWhenNull="true">
+				<reportElement x="80" y="2" width="400" height="16" uuid="d95120a9-93ca-4e71-9e3d-5c51e6d2eb66"/>
+				<textElement textAlignment="Center" verticalAlignment="Bottom" markup="none">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{nmRazaoSocial}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="80" y="18" width="400" height="25" uuid="543e00b0-e035-4cd0-90ad-2a131880be2b">
+					<property name="local_mesure_unitheight" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="14" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{NM_TITULO_RELATORIO}]]></textFieldExpression>
+			</textField>
+			<image scaleImage="FillFrame" hAlign="Center" vAlign="Middle" onErrorType="Blank" evaluationTime="Report">
+				<reportElement x="11" y="3" width="60" height="59" uuid="2a64c63d-36ee-4bfa-b34a-57c3fd0f1930"/>
+				<imageExpression><![CDATA[net.sf.jasperreports.engine.util.JRImageLoader.loadImage((byte[]) $P{LOGO})]]></imageExpression>
+			</image>
+			<textField isBlankWhenNull="true">
+				<reportElement x="268" y="106" width="100" height="8" uuid="5fa3514e-5979-4749-bfc4-007f04f56fad"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA[($P{CL_SEXO} != null ? $P{CL_SEXO} : "Não Informado")]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="208" y="74" width="56" height="8" uuid="f3dafda7-6076-48f9-841c-cf3cea1078e7"/>
+				<textElement>
+					<font size="6"/>
+				</textElement>
+				<text><![CDATA[Período Letivo:]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="463" y="127" width="89" height="8" uuid="c00dbe65-1fda-4cdb-8bc7-69e744037b0d"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA[($P{NM_ALERGIA} != null ? $P{NM_ALERGIA} : "Não Informada")]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="59" y="127" width="142" height="8" uuid="4218b5fb-4de3-4532-b187-a7b0654aba6b"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA[($P{NM_DEFICIENCIA} != null ? $P{NM_DEFICIENCIA} : "Não Informado")]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="-1" y="137" width="553" height="1" uuid="5616dbfc-b4e7-4a48-b78d-65d55d031481"/>
+			</line>
+			<staticText>
+				<reportElement x="209" y="106" width="54" height="8" uuid="849703f0-e4a9-43a4-8113-b2beaa0aa4ba"/>
+				<textElement>
+					<font size="6"/>
+				</textElement>
+				<text><![CDATA[Sexo:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="3" y="117" width="54" height="8" uuid="6a632866-da5c-4e03-93f8-587d56f1d13c"/>
+				<textElement>
+					<font size="6"/>
+				</textElement>
+				<text><![CDATA[Pai declarado:]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="58" y="84" width="142" height="8" uuid="fadb84e5-cf91-4c15-9400-da7d887d1c4a"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA[($P{NM_ALUNO} != null && !$P{NM_ALUNO}.equals("") ? $P{NM_ALUNO} : "Todos")]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="463" y="117" width="88" height="8" uuid="65e0e61d-426f-4132-a604-ffe9223b8c4a"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA[($P{CL_TRANSPORTADO} != null ? $P{CL_TRANSPORTADO} : "Não Informado")]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="-1" y="74" width="555" height="1" uuid="ff5c48e9-b423-465e-b098-591f342bbf2e"/>
+			</line>
+			<textField isBlankWhenNull="true">
+				<reportElement x="463" y="84" width="88" height="8" uuid="ffb1cc95-315c-40b9-aa3e-db51c5a6fffb"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA[($P{CL_TP_LOCALIZACAO_DIFERENCIADA} != null && !$P{CL_TP_LOCALIZACAO_DIFERENCIADA}.equals("")  ? $P{CL_TP_LOCALIZACAO_DIFERENCIADA} : "Ignorar")]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="59" y="117" width="142" height="8" uuid="0f1bdf0e-51fa-4814-98ee-e5ba2aedee0a"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA[($P{CL_NOME_PAI_DECLARADO} != null ? $P{CL_NOME_PAI_DECLARADO} : "Não Informado")]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="377" y="106" width="82" height="8" uuid="b4baff07-1450-491e-b280-e3a642f18a58"/>
+				<textElement>
+					<font size="6"/>
+				</textElement>
+				<text><![CDATA[Raça:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="3" y="84" width="54" height="8" uuid="7f5d3180-ee8d-49cc-8c77-8af521346f5f"/>
+				<textElement>
+					<font size="6"/>
+				</textElement>
+				<text><![CDATA[Aluno:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="3" y="74" width="54" height="8" uuid="33b0b4f4-48e7-412f-9730-a22aef52285e"/>
+				<textElement>
+					<font size="6"/>
+				</textElement>
+				<text><![CDATA[Escola:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="377" y="127" width="82" height="8" uuid="2284f811-4713-4302-b62f-fcaf2a76bd90"/>
+				<textElement>
+					<font size="6"/>
+				</textElement>
+				<text><![CDATA[Alergia:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="208" y="95" width="56" height="8" uuid="b5dff0ca-0674-4462-9c41-00f886abcf75"/>
+				<textElement>
+					<font size="6"/>
+				</textElement>
+				<text><![CDATA[Curso:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="377" y="84" width="83" height="8" uuid="fd348108-b2a1-4fb9-aea0-7c9c11816911"/>
+				<textElement>
+					<font size="6"/>
+				</textElement>
+				<text><![CDATA[Localização Diferenciada:]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="59" y="106" width="142" height="8" uuid="2c60d90c-b501-4c73-a789-35cc349df9ee"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA[($P{CL_RECEBE_BOLSA_FAMILIA} != null ? $P{CL_RECEBE_BOLSA_FAMILIA} : "Não Informado")]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="268" y="84" width="100" height="8" uuid="a3c6f3bf-cf5d-4abb-8fa0-d52d83de3933"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA[($P{NM_LOGRADOURO} != null && !$P{NM_LOGRADOURO}.equals("") ? $P{NM_LOGRADOURO} : "Todos")]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="268" y="74" width="100" height="8" uuid="1327d604-6f6f-44ae-ac7e-d6c1815da1a1"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA[($P{NM_PERIODO_LETIVO} != null && !$P{NM_PERIODO_LETIVO}.equals("")  ? $P{NM_PERIODO_LETIVO} : "Atual")]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="3" y="106" width="55" height="8" uuid="d0b59918-1bdf-4720-9ab2-d45345975acf"/>
+				<textElement>
+					<font size="6"/>
+				</textElement>
+				<text><![CDATA[Bolsa Família:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="208" y="117" width="56" height="8" uuid="be733bd7-9bef-4da3-b772-968d2b0606d6"/>
+				<textElement>
+					<font size="6"/>
+				</textElement>
+				<text><![CDATA[Faixa Etária:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="3" y="95" width="55" height="8" uuid="618557f1-2d32-4bf3-9e36-1bd1be9ef05d"/>
+				<textElement>
+					<font size="6"/>
+				</textElement>
+				<text><![CDATA[Modalidade:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="208" y="127" width="54" height="8" uuid="bdb9b25b-ccf7-4e16-8bf5-8504d2a7d1d5"/>
+				<textElement>
+					<font size="6"/>
+				</textElement>
+				<text><![CDATA[Doença:]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="463" y="106" width="86" height="8" uuid="3ee0906d-14c6-4fb0-9bc3-851caf6914a3"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA[($P{CL_RACA} != null ? $P{CL_RACA} : "Não Informada")]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="377" y="74" width="82" height="8" uuid="e7bd8198-3d2d-4673-98b5-dc6689a94306"/>
+				<textElement>
+					<font size="6"/>
+				</textElement>
+				<text><![CDATA[Turno:]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="59" y="95" width="142" height="8" uuid="d0f83686-2f7e-4e8e-b61f-03392e7880f9"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA[($P{CL_MODALIDADE} != null ? $P{CL_MODALIDADE} : "Todas")]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="463" y="74" width="86" height="8" uuid="f24fcfb7-e219-4cb6-b0d3-540713afaf0e"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA[($P{CL_TURNO} != null && !$P{CL_TURNO}.equals("")  ? $P{CL_TURNO} : "Todos")]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="269" y="127" width="98" height="8" uuid="3c727e4b-2e4e-4eb6-a349-d04d9d67c889"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA[($P{NM_DOENCA} != null ? $P{NM_DOENCA} : "Não Informada")]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="59" y="74" width="142" height="8" uuid="444a27f2-4ec9-4cab-82e5-b32b16dbbe77"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA[($P{NM_INSTITUICAO} != null && !$P{NM_INSTITUICAO}.equals("")  ? $P{NM_INSTITUICAO} : "Todas")]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="269" y="117" width="98" height="8" uuid="25931b59-df69-40f5-8f8a-600722a4a1aa"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA[($P{CL_FAIXA_ETARIA} != null ? $P{CL_FAIXA_ETARIA} : "Não Informado")]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="208" y="84" width="56" height="8" uuid="83d4867c-3f06-4e79-99f0-59fba2fe4978"/>
+				<textElement>
+					<font size="6"/>
+				</textElement>
+				<text><![CDATA[Logradouro:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="377" y="117" width="82" height="8" uuid="8e6f000f-bcf1-435d-90e1-e73540309091"/>
+				<textElement>
+					<font size="6"/>
+				</textElement>
+				<text><![CDATA[Transportado:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="3" y="127" width="54" height="8" uuid="b093709d-1723-4c61-ac1c-915e79238193"/>
+				<textElement>
+					<font size="6"/>
+				</textElement>
+				<text><![CDATA[Deficiência:]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="268" y="95" width="283" height="8" uuid="49b45d66-af64-4783-b150-d4b64f2e1f8b"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA[($P{NM_MODALIDADE_CURSO} != null ? $P{NM_MODALIDADE_CURSO} : "Todas")]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="66">
+			<printWhenExpression><![CDATA[$V{PAGE_NUMBER} > 1]]></printWhenExpression>
+			<textField>
+				<reportElement x="79" y="22" width="400" height="25" uuid="6ca1b00a-aeb3-4a54-a60e-4576a662ea0c">
+					<property name="local_mesure_unitheight" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="14" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{NM_TITULO_RELATORIO}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="79" y="6" width="400" height="16" uuid="f34df897-1f66-492c-a782-1fdc3b81ccb0"/>
+				<textElement textAlignment="Center" verticalAlignment="Bottom" markup="none">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{nmRazaoSocial}]]></textFieldExpression>
+			</textField>
+			<image scaleImage="FillFrame" hAlign="Center" vAlign="Middle" onErrorType="Blank" evaluationTime="Report">
+				<reportElement x="10" y="7" width="60" height="59" uuid="db11b35f-4a06-4bf0-85ef-92775771ffe7"/>
+				<imageExpression><![CDATA[net.sf.jasperreports.engine.util.JRImageLoader.loadImage((byte[]) $P{LOGO})]]></imageExpression>
+			</image>
+		</band>
+	</pageHeader>
+	<detail>
+		<band height="11" splitType="Stretch">
+			<textField isBlankWhenNull="true">
+				<reportElement x="50" y="1" width="130" height="8" uuid="e8e140a9-f8e6-4b53-ab2d-021ba35296b1"/>
+				<textElement>
+					<font size="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{NM_ALUNO}]]></textFieldExpression>
+			</textField>
+			<textField pattern="" isBlankWhenNull="true">
+				<reportElement x="190" y="1" width="70" height="8" uuid="afd54f89-8e0a-4701-b6e1-53e9394a081a"/>
+				<textElement>
+					<font size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{DT_NM_NASCIMENTO}]]></textFieldExpression>
+			</textField>
+			<textField pattern="" isBlankWhenNull="true">
+				<reportElement x="266" y="2" width="120" height="8" uuid="9990e1a5-6136-4e48-9ef6-a87e91660cd9"/>
+				<textElement>
+					<font size="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{NM_MAE}]]></textFieldExpression>
+			</textField>
+			<textField pattern="" isBlankWhenNull="true">
+				<reportElement x="390" y="2" width="161" height="8" uuid="5f6b0347-977f-488f-b5db-ff7d36cb0016"/>
+				<textElement>
+					<font size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{NM_TURMA_COMPLETO}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="-1" y="1" width="45" height="8" uuid="77ddd59f-190e-4171-ab78-a70bfa2ef7bd"/>
+				<textElement>
+					<font size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{NR_MATRICULA}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="-1" y="10" width="555" height="1" uuid="6eb096cd-26a0-4802-b68b-0a19eb537a24"/>
+				<graphicElement>
+					<pen lineWidth="1.0" lineStyle="Dotted"/>
+				</graphicElement>
+			</line>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="20">
+			<textField>
+				<reportElement x="214" y="2" width="339" height="18" uuid="b4535353-a90a-4520-8dc4-8400a0e2fed5"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="5" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Emitido em " + $P{dtHoje} + " às " + $P{hrHoje} + " por " + $P{nmUsuario} + "   Página: " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="-1" y="1" width="555" height="1" uuid="6978ee43-d8c9-443b-9788-dffa5f623354"/>
+				<graphicElement>
+					<pen lineWidth="1.0"/>
+				</graphicElement>
+			</line>
+			<image scaleImage="FillFrame" hAlign="Center" vAlign="Middle" onErrorType="Blank" evaluationTime="Report">
+				<reportElement x="1" y="2" width="18" height="18" uuid="7edb9a71-74fb-4851-af9e-3ad35d915615"/>
+				<imageExpression><![CDATA[net.sf.jasperreports.engine.util.JRImageLoader.loadImage((byte[]) $P{LOGO_SUP})]]></imageExpression>
+			</image>
+			<textField>
+				<reportElement x="20" y="2" width="194" height="18" uuid="f8f3d2c3-65de-4dbb-b8c6-77bb8e423598"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="5" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Desenvolvido por TIVIC - Tecnologia, Informação e Inovação"]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+</jasperReport>

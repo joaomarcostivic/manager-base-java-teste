@@ -1,0 +1,536 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.0.3.final using JasperReports Library version 6.0.3  -->
+<!-- 2015-10-14T23:12:29 -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Comprovante de Matrícula" pageWidth="595" pageHeight="800" whenNoDataType="AllSectionsNoDetail" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="f5a745df-08a6-42fd-ab1a-51b5a0966577">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<style name="Título" fontName="Times New Roman" fontSize="18" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Times-Bold"/>
+	<style name="Subtítulo" forecolor="#736343" fontName="Times New Roman" fontSize="16" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false"/>
+	<style name="Cabeçalho" forecolor="#666666" fontName="Arial" fontSize="12" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false"/>
+	<style name="Detalhe" fontName="Times New Roman" fontSize="10" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false"/>
+	<style name="Label" fontName="Times New Roman" fontSize="8" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false"/>
+	<style name="table">
+		<box>
+			<pen lineWidth="1.0" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_TH" mode="Opaque" backcolor="#8FAFCC">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_CH" mode="Opaque" backcolor="#CFDBE6">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="Crosstab Data Text"/>
+	<subDataset name="Table Dataset 1" uuid="5f48a79c-0f2b-440d-8eb8-3cd9092ebd7a"/>
+	<parameter name="NM_ORGAO" class="java.lang.String"/>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String"/>
+	<field name="DT_MATRICULA" class="java.lang.String"/>
+	<field name="ST_MATRICULA" class="java.lang.Integer"/>
+	<field name="TP_MATRICULA" class="java.lang.Integer"/>
+	<field name="NR_MATRICULA" class="java.lang.String"/>
+	<field name="TXT_OBSERVACAO" class="java.lang.String"/>
+	<field name="TXT_DOCUMENTO_OFICIAL" class="java.lang.String"/>
+	<field name="NR_CPF" class="java.lang.String"/>
+	<field name="NR_RG" class="java.lang.String"/>
+	<field name="TP_SEXO" class="java.lang.Integer"/>
+	<field name="DT_NASCIMENTO" class="java.lang.String"/>
+	<field name="SG_ORGAO_RG" class="java.lang.String"/>
+	<field name="SG_ESTADO_RG" class="java.lang.String"/>
+	<field name="NM_ALUNO" class="java.lang.String"/>
+	<field name="NM_CURSO" class="java.lang.String"/>
+	<field name="TP_CONTRATACAO" class="java.lang.Integer"/>
+	<field name="NM_TURMA" class="java.lang.String"/>
+	<field name="TP_TURNO" class="java.lang.Integer"/>
+	<field name="ST_TURMA" class="java.lang.Integer"/>
+	<field name="NM_AREA_INTERESSE" class="java.lang.String"/>
+	<field name="NM_FUNCIONARIO" class="java.lang.String"/>
+	<field name="NM_PERIODO_LETIVO" class="java.lang.String"/>
+	<field name="NR_TELEFONE1" class="java.lang.String"/>
+	<field name="NR_TELEFONE2" class="java.lang.String"/>
+	<field name="NR_CELULAR" class="java.lang.String"/>
+	<field name="NR_FAX" class="java.lang.String"/>
+	<field name="NM_EMAIL" class="java.lang.String"/>
+	<field name="CD_USUARIO" class="java.lang.Integer"/>
+	<field name="DS_ENDERECO" class="java.lang.String"/>
+	<field name="NM_LOGRADOURO" class="java.lang.String"/>
+	<field name="NM_BAIRRO" class="java.lang.String"/>
+	<field name="NR_CEP" class="java.lang.String"/>
+	<field name="NR_ENDERECO" class="java.lang.String"/>
+	<field name="NM_COMPLEMENTO" class="java.lang.String"/>
+	<field name="NM_PONTO_REFERENCIA" class="java.lang.String"/>
+	<field name="NM_TIPO_LOGRADOURO" class="java.lang.String"/>
+	<field name="SG_TIPO_LOGRADOURO" class="java.lang.String"/>
+	<field name="NM_LOGRADOURO_ENDERECAMENTO" class="java.lang.String"/>
+	<field name="NM_TIPO_LOGRADOURO_ENDERECAMENTO" class="java.lang.String"/>
+	<field name="SG_TIPO_LOGRADOURO_ENDERECAMENTO" class="java.lang.String"/>
+	<field name="NM_BAIRRO_ENDERECAMENTO" class="java.lang.String"/>
+	<field name="NM_CIDADE" class="java.lang.String"/>
+	<field name="NM_ESTADO" class="java.lang.String"/>
+	<field name="SG_ESTADO" class="java.lang.String"/>
+	<field name="NM_NATURALIDADE" class="java.lang.String"/>
+	<field name="SG_ESTADO_NATURALIDADE" class="java.lang.String"/>
+	<field name="NM_INSTITUICAO" class="java.lang.String"/>
+	<field name="NM_PREFEITURA" class="java.lang.String"/>
+	<field name="NR_HORARIO" class="java.lang.String"/>
+	<field name="NM_DISICIPLINA" class="java.lang.String"/>
+	<field name="RSM_HORARIOS" class="java.util.List"/>
+	<variable name="nmSistema" class="java.lang.String"/>
+	<variable name="nmOrgao" class="java.lang.String"/>
+	<variable name="nmSubOrgao" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<pageHeader>
+		<band height="72" splitType="Stretch">
+			<textField isBlankWhenNull="true">
+				<reportElement style="Título" x="2" y="0" width="551" height="22" isPrintWhenDetailOverflows="true" forecolor="#000000" uuid="d8dccb07-13e4-4afb-a359-5563516b0714"/>
+				<textElement textAlignment="Center" markup="none">
+					<font fontName="SansSerif" size="16" isBold="true" pdfFontName="Times-Roman"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{NM_PREFEITURA}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="85" y="66" width="395" height="1" uuid="05e7f83e-ed0e-4d49-9d5d-1fa848477b5d"/>
+			</line>
+			<textField isBlankWhenNull="true">
+				<reportElement style="Subtítulo" x="2" y="22" width="551" height="22" isPrintWhenDetailOverflows="true" forecolor="#000000" uuid="27a4d49b-2b9f-4847-b17b-d426b394484f"/>
+				<textElement textAlignment="Center" markup="none">
+					<font fontName="SansSerif" size="14" isBold="true" pdfFontName="Times-Roman"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{NM_ORGAO}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement style="Cabeçalho" x="2" y="44" width="551" height="22" isPrintWhenDetailOverflows="true" forecolor="#000000" uuid="a091a1fa-dae3-4720-ad9c-b04b315d8c9f"/>
+				<textElement textAlignment="Center" markup="none">
+					<font fontName="SansSerif" size="12" isBold="true" pdfFontName="Times-Roman"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{NM_INSTITUICAO}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="35" splitType="Stretch">
+			<staticText>
+				<reportElement style="Título" x="2" y="2" width="552" height="32" uuid="4b995606-5a15-497b-ba61-4e6d0c92ea16"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="20" pdfFontName="Times-Roman"/>
+				</textElement>
+				<text><![CDATA[Comprovante de Matrícula]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="390" splitType="Stretch">
+			<line>
+				<reportElement x="15" y="89" width="1" height="25" uuid="18ccf242-5a7f-4a3d-a327-d2411a0d8323"/>
+			</line>
+			<line>
+				<reportElement style="Detalhe" x="15" y="80" width="102" height="1" uuid="24a11da8-d114-40ea-8d33-7604d10c2b2c"/>
+			</line>
+			<staticText>
+				<reportElement style="Label" x="130" y="54" width="198" height="12" uuid="840f1c64-8491-409f-b7de-c737b57eb88d"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Naturalidade - Estado]]></text>
+			</staticText>
+			<line>
+				<reportElement x="283" y="143" width="1" height="25" uuid="1ab28fe6-ae66-4034-8bda-90c68ef54c93"/>
+			</line>
+			<line>
+				<reportElement x="15" y="168" width="256" height="1" uuid="ff2f6593-cd63-488d-a0da-5fc4b878be48"/>
+			</line>
+			<line>
+				<reportElement x="15" y="143" width="1" height="25" uuid="8a55941e-e210-4c88-b91a-a8a0b42641a9"/>
+			</line>
+			<line>
+				<reportElement x="452" y="55" width="1" height="26" uuid="4acf0a8e-3859-4e1d-bfba-7b440cbb54a6"/>
+			</line>
+			<textField isBlankWhenNull="true">
+				<reportElement style="Detalhe" x="131" y="33" width="311" height="14" isPrintWhenDetailOverflows="true" uuid="da89949f-bbab-4673-ad22-59913df91c02"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="10" isBold="false" pdfFontName="Times-Roman"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{NM_ALUNO}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement style="Label" x="18" y="20" width="100" height="12" uuid="f7016dae-f2f3-4122-b941-1a1ec5376637"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Nº de Matrícula]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Label" x="455" y="54" width="99" height="12" uuid="1558bb35-d8eb-4d0d-91c9-f06b00ca4b36"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Nº do CPF]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Label" x="130" y="20" width="100" height="12" uuid="d49b1253-8826-40d4-9857-1f81eed41c24"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Nome do Aluno]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Label" x="18" y="142" width="198" height="12" uuid="ffeeafcd-3203-43a8-8c0f-a86317f1df73"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Curso / Etapa / Série]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement style="Detalhe" x="19" y="101" width="238" height="14" isPrintWhenDetailOverflows="true" uuid="6490cc54-4e67-4c30-9fe2-e7613355f145"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="10" isBold="false" pdfFontName="Times-Roman"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{NM_LOGRADOURO}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement style="Label" x="455" y="20" width="100" height="12" uuid="0ca66cf8-a90c-4383-93a1-5f15e510cdf5"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Data de Nascimento]]></text>
+			</staticText>
+			<line>
+				<reportElement x="283" y="114" width="102" height="1" uuid="618c9072-a7eb-4323-8110-f232fb46bd86"/>
+			</line>
+			<staticText>
+				<reportElement style="Cabeçalho" x="0" y="175" width="457" height="18" uuid="ab0c0257-0bbf-4f22-97a7-0d5ea13d9e8a"/>
+				<textElement textAlignment="Left">
+					<font fontName="SansSerif" size="14"/>
+				</textElement>
+				<text><![CDATA[Horários]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Label" x="18" y="54" width="100" height="12" uuid="6d7465c2-518f-4c0e-9053-2b602e2f1f2e"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Nº do RG]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Cabeçalho" x="0" y="120" width="457" height="18" uuid="060a53b3-498d-4b8c-928c-ae39b307d753"/>
+				<textElement textAlignment="Left">
+					<font fontName="SansSerif" size="14"/>
+				</textElement>
+				<text><![CDATA[Identificação do Curso]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement style="Detalhe" x="400" y="155" width="154" height="13" isPrintWhenDetailOverflows="true" uuid="ab871b78-48b4-4f46-af22-82bfe21beac9"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="10" isBold="false" pdfFontName="Times-Roman"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{TP_TURNO}.intValue()==0?"Matutino":"Vespertino"]]></textFieldExpression>
+			</textField>
+			<textField pattern="" isBlankWhenNull="true">
+				<reportElement style="Detalhe" x="18" y="33" width="98" height="14" isPrintWhenDetailOverflows="true" uuid="9cc6974a-fecb-44b3-a836-48934c732d11"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="10" isBold="false" pdfFontName="Times-Roman"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{NR_MATRICULA}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="396" y="114" width="158" height="1" uuid="0baa2a3b-5c0c-475a-9334-4930fac29c24"/>
+			</line>
+			<line>
+				<reportElement x="15" y="21" width="1" height="25" uuid="de113d5f-4c4c-4537-89bf-80ef4fa68ec8"/>
+			</line>
+			<line>
+				<reportElement x="283" y="168" width="102" height="1" uuid="78962403-fa56-48f7-9875-62185965575d"/>
+			</line>
+			<staticText>
+				<reportElement style="Label" x="286" y="142" width="100" height="12" uuid="8a55c4bf-7f76-44c8-910b-ddaca50a0429"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Turma]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Cabeçalho" x="0" y="0" width="457" height="18" uuid="6c224ce6-8c35-48bd-b70d-579a05365e42"/>
+				<textElement textAlignment="Left">
+					<font fontName="SansSerif" size="14"/>
+				</textElement>
+				<text><![CDATA[Identificação do Aluno]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Label" x="18" y="88" width="198" height="12" uuid="0fc75cbc-72db-480a-b77e-719311b000ad"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Endereço]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Label" x="399" y="88" width="100" height="12" uuid="fc51ed6a-6629-45fe-929b-a468079057d8"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Bairro]]></text>
+			</staticText>
+			<line>
+				<reportElement x="452" y="80" width="102" height="1" uuid="8529bd7d-0a57-4ae5-9828-606ef9887b7f"/>
+			</line>
+			<line>
+				<reportElement x="127" y="46" width="315" height="1" uuid="c3e1df44-d2c1-4598-ae18-1b0e13da1979"/>
+			</line>
+			<line>
+				<reportElement x="127" y="55" width="1" height="25" uuid="74d4341e-069d-4dc9-9ed0-ea5c59e067b9"/>
+			</line>
+			<line>
+				<reportElement x="452" y="46" width="102" height="1" uuid="36bc352f-67a3-44d8-a8d0-49a3901e7624"/>
+			</line>
+			<textField isBlankWhenNull="true">
+				<reportElement style="Detalhe" x="18" y="155" width="252" height="14" isPrintWhenDetailOverflows="true" uuid="e38e70dc-ec47-47f4-b0bf-244564af2290"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="10" isBold="false" pdfFontName="Times-Roman"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{NM_CURSO}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement style="Label" x="399" y="142" width="100" height="12" uuid="40ac20b2-fa79-4ec9-ad42-6831e65439d0"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Turno]]></text>
+			</staticText>
+			<textField pattern="" isBlankWhenNull="true">
+				<reportElement style="Detalhe" x="286" y="101" width="98" height="14" isPrintWhenDetailOverflows="true" uuid="11c83a32-fb19-4451-8a5f-2e72aec7116b"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="10" isBold="false" pdfFontName="Times-Roman"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{NR_ENDERECO}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="396" y="168" width="158" height="1" uuid="c62d98b4-6dda-4259-8a8e-f47bccbbf51d"/>
+			</line>
+			<textField pattern="###.###.###-##" isBlankWhenNull="true">
+				<reportElement style="Detalhe" x="455" y="67" width="98" height="14" isPrintWhenDetailOverflows="true" uuid="e5fc9e00-d8c0-4fad-a394-9eab06c66ec7"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="10" isBold="false" pdfFontName="Times-Roman"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{NR_CPF}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement style="Detalhe" x="128" y="67" width="311" height="14" isPrintWhenDetailOverflows="true" uuid="e486ae55-dd53-446a-b3de-5a61b6d5a7b9"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="10" isBold="false" pdfFontName="Times-Roman"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{NM_NATURALIDADE}!=null && $F{SG_ESTADO_NATURALIDADE}!=null ? $F{NM_NATURALIDADE} + " - " + $F{SG_ESTADO_NATURALIDADE} : null]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="396" y="143" width="1" height="26" uuid="7e0d098e-e87c-4edb-8879-942c5cd152de"/>
+			</line>
+			<line>
+				<reportElement x="15" y="46" width="102" height="1" uuid="c497eef6-3027-426b-8e26-a055f7e22fe2"/>
+			</line>
+			<line>
+				<reportElement x="452" y="22" width="1" height="25" uuid="2d6ff77d-2682-4920-9fc8-a2069874cf7b"/>
+			</line>
+			<line>
+				<reportElement x="396" y="89" width="1" height="26" uuid="4cb088d2-2be8-468b-8a26-cb77fb0fe3bb"/>
+			</line>
+			<line>
+				<reportElement x="15" y="55" width="1" height="25" uuid="e93f2305-195d-495c-a3e2-027ef46d7268"/>
+			</line>
+			<textField pattern="dd/MM/yyyy" isBlankWhenNull="true">
+				<reportElement style="Detalhe" x="455" y="33" width="98" height="14" isPrintWhenDetailOverflows="true" uuid="56b7b200-6c97-4a51-999f-18b0e887b1ee"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="10" isBold="false" pdfFontName="Times-Roman"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{DT_NASCIMENTO}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="15" y="114" width="256" height="1" uuid="db75e332-768d-45e1-a48f-204fcaa1c130"/>
+			</line>
+			<staticText>
+				<reportElement style="Label" x="286" y="88" width="100" height="12" uuid="c7cf4691-cebc-4621-aacb-23926d70f60a"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Número]]></text>
+			</staticText>
+			<line>
+				<reportElement x="127" y="80" width="315" height="1" uuid="a9e4acbe-3dd3-42ba-aca2-114b3df732b8"/>
+			</line>
+			<line>
+				<reportElement x="127" y="21" width="1" height="25" uuid="9b302160-36c2-4fa5-8192-7d0b0aafd36c"/>
+			</line>
+			<line>
+				<reportElement x="283" y="89" width="1" height="25" uuid="76213f78-d532-4eda-9c70-9bfc13459f4c"/>
+			</line>
+			<textField pattern="" isBlankWhenNull="true">
+				<reportElement style="Detalhe" x="286" y="155" width="100" height="14" isPrintWhenDetailOverflows="true" uuid="d33bd864-d044-41a8-8eb6-f2d22b57134a"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="10" isBold="false" pdfFontName="Times-Roman"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{NM_TURMA}]]></textFieldExpression>
+			</textField>
+			<textField pattern="" isBlankWhenNull="true">
+				<reportElement style="Detalhe" x="19" y="67" width="98" height="14" isPrintWhenDetailOverflows="true" uuid="0d963521-68b4-43b6-bb9a-0aea6f29caf6"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="10" isBold="false" pdfFontName="Times-Roman"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{NR_RG}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="94" y="198" width="1" height="20" uuid="8a55941e-e210-4c88-b91a-a8a0b42641a9"/>
+			</line>
+			<line>
+				<reportElement x="171" y="198" width="1" height="20" uuid="8a55941e-e210-4c88-b91a-a8a0b42641a9"/>
+			</line>
+			<line>
+				<reportElement x="248" y="198" width="1" height="20" uuid="8a55941e-e210-4c88-b91a-a8a0b42641a9"/>
+			</line>
+			<line>
+				<reportElement x="325" y="198" width="1" height="20" uuid="8a55941e-e210-4c88-b91a-a8a0b42641a9"/>
+			</line>
+			<line>
+				<reportElement x="402" y="198" width="1" height="20" uuid="8a55941e-e210-4c88-b91a-a8a0b42641a9"/>
+			</line>
+			<line>
+				<reportElement x="479" y="198" width="1" height="20" uuid="8a55941e-e210-4c88-b91a-a8a0b42641a9"/>
+			</line>
+			<staticText>
+				<reportElement x="17" y="198" width="75" height="20" uuid="9c467970-8953-445c-b6ec-c2efc6bee668"/>
+				<textElement textAlignment="Right" verticalAlignment="Top">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Dias]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="16" y="198" width="77" height="20" uuid="62680d3b-4a0d-4b5a-949a-e484a5e613f2"/>
+				<textElement verticalAlignment="Bottom">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Horários]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="100" y="198" width="65" height="20" uuid="b0dd995a-c2e3-4bbf-b9f0-d85c52714f3a"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Segunda]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="172" y="198" width="76" height="20" uuid="321fa2cd-f201-4712-84a1-ae6c0f8ed948"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Terça]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="249" y="198" width="76" height="20" uuid="383e5a45-4247-4216-af6e-41974fae1cf6"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Quarta]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="326" y="198" width="76" height="20" uuid="6e24c9d4-a9a4-4324-b7d3-a365d9e44827"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Quinta]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="403" y="198" width="76" height="20" uuid="25e44944-d494-4d21-8926-bc273543df66"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Sexta]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="480" y="198" width="74" height="20" uuid="e65e9667-01b3-4297-a0ed-67b558d9722e"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Sábado]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement style="Detalhe" x="399" y="101" width="154" height="14" isPrintWhenDetailOverflows="true" uuid="389aacab-a4a2-402b-8cd1-b44645abd290"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="10" isBold="false" pdfFontName="Times-Roman"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{NM_BAIRRO}]]></textFieldExpression>
+			</textField>
+			<subreport>
+				<reportElement x="15" y="219" width="540" height="20" isPrintWhenDetailOverflows="true" uuid="856a3abe-0866-4789-8c72-5f085fdd658b"/>
+				<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource($F{RSM_HORARIOS})]]></dataSourceExpression>
+				<subreportExpression><![CDATA[$P{SUBREPORT_DIR}+"\\acd\\comprovante_matricula_subreport.jasper"]]></subreportExpression>
+			</subreport>
+			<textField isBlankWhenNull="true">
+				<reportElement positionType="Float" stretchType="RelativeToBandHeight" x="19" y="365" width="536" height="20" isPrintInFirstWholeBand="true" isPrintWhenDetailOverflows="true" uuid="9349fca2-0607-44f5-811c-5c9a50da77eb"/>
+				<textFieldExpression><![CDATA[$F{TXT_OBSERVACAO}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement style="Cabeçalho" x="0" y="344" width="457" height="18" uuid="ab0c0257-0bbf-4f22-97a7-0d5ea13d9e8a"/>
+				<textElement textAlignment="Left">
+					<font fontName="SansSerif" size="14"/>
+				</textElement>
+				<text><![CDATA[Informações Gerais]]></text>
+			</staticText>
+			<line>
+				<reportElement x="16" y="198" width="540" height="1" uuid="c1c78b1f-2e56-4e4b-83ce-25cc9687e3e9">
+					<property name="local_mesure_unitwidth" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+			</line>
+			<line>
+				<reportElement x="556" y="199" width="1" height="20" uuid="53cd7a63-3226-4215-bc4f-7bd21c18a18e"/>
+			</line>
+			<line>
+				<reportElement x="15" y="198" width="1" height="20" uuid="8f625d82-e86f-4451-bc2a-d7f2b4823452"/>
+			</line>
+			<line>
+				<reportElement x="15" y="218" width="540" height="1" uuid="b3149083-2ced-41ca-9807-f43d84742eb7">
+					<property name="local_mesure_unitwidth" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+			</line>
+			<line>
+				<reportElement x="15" y="199" width="79" height="19" uuid="8722f161-bca5-4b2b-9446-66ee7564d60b"/>
+			</line>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="23" splitType="Stretch">
+			<line>
+				<reportElement positionType="FixRelativeToBottom" x="0" y="3" width="555" height="1" uuid="fda0d44a-7133-4139-be43-bcac3ef8687d"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#999999"/>
+				</graphicElement>
+			</line>
+			<frame>
+				<reportElement mode="Opaque" x="0" y="2" width="555" height="20" forecolor="#D0B48E" backcolor="#F2EBDF" uuid="aad53cf5-781e-4795-8f52-7f8bd12993f2"/>
+				<textField pattern="EEE, d MMM yyyy HH:mm">
+					<reportElement style="Cabeçalho" x="1" y="0" width="197" height="20" forecolor="#736343" uuid="eb60c0dd-047c-4874-a31e-63e07208cb61"/>
+					<textElement textAlignment="Left" verticalAlignment="Middle">
+						<font fontName="SansSerif" size="10" isBold="false"/>
+					</textElement>
+					<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+				</textField>
+				<textField evaluationTime="Report">
+					<reportElement x="257" y="0" width="298" height="20" uuid="a71c5e8f-cbcf-4a32-8920-47eca3c6ad99"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle"/>
+					<textFieldExpression><![CDATA["Página "+$V{PAGE_NUMBER}+" de " + $V{PAGE_NUMBER}]]></textFieldExpression>
+				</textField>
+			</frame>
+		</band>
+	</pageFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>

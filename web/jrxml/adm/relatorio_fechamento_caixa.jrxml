@@ -1,0 +1,449 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.1.1.final using JasperReports Library version 6.1.1  -->
+<!-- 2016-09-15T14:45:57 -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="relatorio_fechamento_caixa" pageWidth="595" pageHeight="842" whenNoDataType="AllSectionsNoDetail" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="3e76cb13-a818-44f7-a94f-1577a17c75b6">
+	<property name="ireport.zoom" value="1.4641000000000037"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="nmEmpresa" class="java.lang.String"/>
+	<parameter name="nmConta" class="java.lang.String"/>
+	<parameter name="dtFechamento" class="java.util.Date"/>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA["C:\\Users\\Ricardo\\TiVic\\workspace\\manager\\web\\adm\\"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="rsmRecebimentos" class="java.util.List"/>
+	<parameter name="rsmPagamentos" class="java.util.List"/>
+	<parameter name="rsmResumo" class="java.util.List"/>
+	<parameter name="rsmTransferencias" class="java.util.List"/>
+	<parameter name="rsmEncerrantes" class="java.util.List"/>
+	<parameter name="rsmMedicao" class="java.util.List"/>
+	<parameter name="LG_SHOW_ESTOQUE" class="java.lang.Boolean">
+		<defaultValueExpression><![CDATA[true]]></defaultValueExpression>
+	</parameter>
+	<parameter name="LG_SHOW_VENDA_DIA" class="java.lang.Boolean">
+		<defaultValueExpression><![CDATA[true]]></defaultValueExpression>
+	</parameter>
+	<parameter name="vlSaldoInicial" class="java.lang.String"/>
+	<parameter name="vlTransferencia" class="java.lang.String"/>
+	<parameter name="vlTotalEntradas" class="java.lang.String"/>
+	<parameter name="vlRecebimento" class="java.lang.String"/>
+	<parameter name="vlDespesas" class="java.lang.String"/>
+	<parameter name="LOGO" class="java.lang.Object"/>
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<field name="NR_DOCUMENTO_SAIDA" class="java.lang.String"/>
+	<field name="NM_CLIENTE" class="java.lang.String"/>
+	<field name="NM_VENDEDOR" class="java.lang.String"/>
+	<field name="VL_TOTAL_DESCONTOS" class="java.lang.Double"/>
+	<field name="VL_TOTAL_LIQUIDO" class="java.lang.Double"/>
+	<field name="VL_TOTAL_SAIDA" class="java.lang.Double"/>
+	<field name="ID_PRODUTO_SERVICO" class="java.lang.String"/>
+	<field name="NM_PRODUTO_SERVICO" class="java.lang.String"/>
+	<field name="QT_SAIDA" class="java.lang.Double"/>
+	<field name="VL_UNITARIO" class="java.lang.Double"/>
+	<field name="VL_DESCONTO" class="java.lang.Double"/>
+	<field name="VL_PAGAMENTO" class="java.lang.Double"/>
+	<field name="NM_FORMA_PAGAMENTO" class="java.lang.String"/>
+	<field name="NM_PLANO_PAGAMENTO" class="java.lang.String"/>
+	<variable name="totalProduto" class="java.lang.Double">
+		<variableExpression><![CDATA[($F{QT_SAIDA}*$F{VL_UNITARIO})-$F{VL_DESCONTO}]]></variableExpression>
+		<initialValueExpression><![CDATA[new Double(0)]]></initialValueExpression>
+	</variable>
+	<variable name="planoFormaPagamento" class="java.lang.String">
+		<variableExpression><![CDATA[$F{NM_FORMA_PAGAMENTO}==null?$F{NM_PLANO_PAGAMENTO}:$F{NM_PLANO_PAGAMENTO}+"/"+$F{NM_FORMA_PAGAMENTO}]]></variableExpression>
+	</variable>
+	<variable name="totalRecebido" class="java.lang.Double"/>
+	<group name="saida_group">
+		<groupExpression><![CDATA[$F{NR_DOCUMENTO_SAIDA}]]></groupExpression>
+		<groupHeader>
+			<band height="9">
+				<printWhenExpression><![CDATA[$P{LG_SHOW_VENDA_DIA}]]></printWhenExpression>
+				<line>
+					<reportElement x="3" y="8" width="551" height="1" uuid="67597ce0-a195-49e2-a5ea-7b4170cf353a"/>
+					<graphicElement>
+						<pen lineStyle="Dashed"/>
+					</graphicElement>
+				</line>
+				<textField isBlankWhenNull="true">
+					<reportElement x="3" y="0" width="53" height="8" uuid="ccb20022-0c8c-47a4-b78c-1ffa5b99beda"/>
+					<textElement>
+						<font size="6" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{NR_DOCUMENTO_SAIDA}]]></textFieldExpression>
+				</textField>
+				<textField isBlankWhenNull="true">
+					<reportElement x="113" y="0" width="114" height="8" uuid="57127122-4107-4867-9cb7-ea4f848aba8b"/>
+					<textElement>
+						<font size="6" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{NM_CLIENTE}]]></textFieldExpression>
+				</textField>
+				<textField isBlankWhenNull="true">
+					<reportElement x="231" y="0" width="134" height="8" uuid="7a9ce50d-43a8-4b99-bac6-eb25520fb656"/>
+					<textElement>
+						<font size="6" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{NM_VENDEDOR}]]></textFieldExpression>
+				</textField>
+				<textField pattern="#,##0.00" isBlankWhenNull="true">
+					<reportElement x="516" y="0" width="37" height="8" uuid="ec275004-0abc-483a-9f69-1a728a457cd6"/>
+					<textElement textAlignment="Right">
+						<font size="6" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{VL_TOTAL_LIQUIDO}]]></textFieldExpression>
+				</textField>
+				<textField pattern="#,##0.00" isBlankWhenNull="true">
+					<reportElement x="380" y="0" width="54" height="8" uuid="2b55d5c3-6dd2-4fcc-899a-2444176cda97"/>
+					<textElement textAlignment="Right">
+						<font size="6" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{VL_TOTAL_SAIDA}]]></textFieldExpression>
+				</textField>
+				<textField pattern="#,##0.00" isBlankWhenNull="true">
+					<reportElement x="449" y="0" width="63" height="8" uuid="bfea5f63-ec94-4679-83e7-d5dcc195754b"/>
+					<textElement textAlignment="Right">
+						<font size="6" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{VL_TOTAL_DESCONTOS}]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupHeader>
+		<groupFooter>
+			<band height="5">
+				<printWhenExpression><![CDATA[$P{LG_SHOW_VENDA_DIA}]]></printWhenExpression>
+				<line>
+					<reportElement x="2" y="1" width="552" height="1" uuid="06bac373-b037-47f5-9033-d88232d7166f"/>
+				</line>
+			</band>
+		</groupFooter>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="67" splitType="Stretch">
+			<textField pattern="" isBlankWhenNull="true">
+				<reportElement x="180" y="0" width="269" height="21" uuid="a026b702-972f-4e45-b57b-937598773730">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<textElement textAlignment="Center">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{nmEmpresa}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="180" y="21" width="269" height="18" uuid="7809eb63-d07c-4768-b35c-437c493b9981">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<textElement textAlignment="Center">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{nmConta}]]></textFieldExpression>
+			</textField>
+			<textField pattern="">
+				<reportElement x="170" y="39" width="289" height="16" uuid="376652df-afb1-4f1d-bb18-06db255b02a0">
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="10" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Fechamento do dia "+( 
+	new SimpleDateFormat("d 'de' MMMM, yyyy").format($P{dtFechamento})
+)]]></textFieldExpression>
+			</textField>
+			<image scaleImage="RetainShape" hAlign="Center">
+				<reportElement mode="Opaque" x="1" y="0" width="119" height="50" isRemoveLineWhenBlank="true" uuid="80d2b944-e14b-4eec-80da-377ee70b1dd1"/>
+				<imageExpression><![CDATA[net.sf.jasperreports.engine.util.JRImageLoader.loadImage((byte[]) $P{LOGO})]]></imageExpression>
+			</image>
+		</band>
+	</title>
+	<columnHeader>
+		<band height="37" splitType="Stretch">
+			<printWhenExpression><![CDATA[$P{LG_SHOW_VENDA_DIA}]]></printWhenExpression>
+			<frame>
+				<reportElement x="0" y="0" width="555" height="36" uuid="0cb01ee5-c8a7-4b52-8436-deed68e44356">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					<printWhenExpression><![CDATA[$P{LG_SHOW_VENDA_DIA}]]></printWhenExpression>
+				</reportElement>
+				<rectangle>
+					<reportElement x="0" y="0" width="554" height="16" forecolor="#CCCCCC" backcolor="#CCCCCC" uuid="0cc27694-037c-42d5-9e34-756402e8b196"/>
+				</rectangle>
+				<staticText>
+					<reportElement x="3" y="0" width="551" height="16" uuid="ef18eec2-d259-4c46-85db-cc4b19a2cd31"/>
+					<textElement verticalAlignment="Middle">
+						<font size="10" isBold="true"/>
+					</textElement>
+					<text><![CDATA[VENDAS DO DIA]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="3" y="17" width="53" height="8" uuid="3449c846-fc30-49c4-9822-1266068f252e"/>
+					<textElement>
+						<font size="6" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Nº Doc]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="58" y="17" width="53" height="8" uuid="5679c71b-8cba-449f-a677-0cc3c777f00b"/>
+					<textElement>
+						<font size="6" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Nº Ticket]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="112" y="17" width="114" height="8" uuid="5679c71b-8cba-449f-a677-0cc3c777f00b"/>
+					<textElement>
+						<font size="6" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Cliente]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="229" y="17" width="136" height="8" uuid="5679c71b-8cba-449f-a677-0cc3c777f00b"/>
+					<textElement>
+						<font size="6" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Vendedor]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="380" y="17" width="54" height="8" uuid="5679c71b-8cba-449f-a677-0cc3c777f00b"/>
+					<textElement textAlignment="Right">
+						<font size="6" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Total Produtos]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="449" y="17" width="63" height="8" uuid="5679c71b-8cba-449f-a677-0cc3c777f00b"/>
+					<textElement textAlignment="Right">
+						<font size="6" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Descontos]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="516" y="17" width="38" height="8" uuid="5679c71b-8cba-449f-a677-0cc3c777f00b"/>
+					<textElement textAlignment="Right">
+						<font size="6" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Liquido]]></text>
+				</staticText>
+				<line>
+					<reportElement x="3" y="25" width="551" height="1" uuid="67597ce0-a195-49e2-a5ea-7b4170cf353a"/>
+					<graphicElement>
+						<pen lineStyle="Dashed"/>
+					</graphicElement>
+				</line>
+				<staticText>
+					<reportElement x="11" y="26" width="90" height="8" uuid="e0688616-d1c8-46bc-9bbd-2b2137142272"/>
+					<textElement>
+						<font size="6"/>
+					</textElement>
+					<text><![CDATA[Cód./Refêrencia]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="112" y="26" width="117" height="8" uuid="6e9db4fa-6fc9-406b-b08a-92d5bbc3209d"/>
+					<textElement>
+						<font size="6"/>
+					</textElement>
+					<text><![CDATA[Nome do Produto]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="231" y="26" width="22" height="8" uuid="8abf3e61-182c-44ca-b70c-bd15ce3c7dfb"/>
+					<textElement textAlignment="Right">
+						<font size="6"/>
+					</textElement>
+					<text><![CDATA[Qtd.]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="256" y="26" width="37" height="8" uuid="b399c238-f735-437a-91a7-18d31e671028"/>
+					<textElement textAlignment="Right">
+						<font size="6"/>
+					</textElement>
+					<text><![CDATA[P. Unit]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="302" y="26" width="29" height="8" uuid="82c8fdd9-652f-499a-b39b-f0503e774325"/>
+					<textElement textAlignment="Right">
+						<font size="6"/>
+					</textElement>
+					<text><![CDATA[Descontos]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="345" y="26" width="27" height="8" uuid="3cbf12cb-de59-44f0-8393-0fd45ef4089b"/>
+					<textElement textAlignment="Right">
+						<font size="6"/>
+					</textElement>
+					<text><![CDATA[Total]]></text>
+				</staticText>
+				<line>
+					<reportElement x="374" y="27" width="1" height="7" uuid="4f9c7c59-bbfc-4e06-b31c-a4a177818ad0"/>
+					<graphicElement>
+						<pen lineStyle="Dashed"/>
+					</graphicElement>
+				</line>
+				<line>
+					<reportElement x="2" y="34" width="551" height="1" uuid="4518117c-2a28-4507-a932-7af3a1c04eb0"/>
+				</line>
+				<staticText>
+					<reportElement x="380" y="26" width="54" height="8" uuid="3cbf12cb-de59-44f0-8393-0fd45ef4089b"/>
+					<textElement>
+						<font size="6"/>
+					</textElement>
+					<text><![CDATA[Valor pago]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="441" y="26" width="112" height="8" uuid="3cbf12cb-de59-44f0-8393-0fd45ef4089b"/>
+					<textElement>
+						<font size="6"/>
+					</textElement>
+					<text><![CDATA[Plano/F. Pagamento]]></text>
+				</staticText>
+			</frame>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="8" splitType="Stretch">
+			<printWhenExpression><![CDATA[$P{LG_SHOW_VENDA_DIA}]]></printWhenExpression>
+			<textField>
+				<reportElement x="12" y="0" width="89" height="8" uuid="6c85353f-ae00-406f-9f91-d21d0abb835e"/>
+				<textElement>
+					<font size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{ID_PRODUTO_SERVICO}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="374" y="1" width="1" height="7" uuid="4f9c7c59-bbfc-4e06-b31c-a4a177818ad0"/>
+				<graphicElement>
+					<pen lineStyle="Dashed"/>
+				</graphicElement>
+			</line>
+			<textField>
+				<reportElement x="113" y="0" width="116" height="8" uuid="3ce80f4a-1449-4342-807b-d693977024fc"/>
+				<textElement>
+					<font size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{NM_PRODUTO_SERVICO}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00">
+				<reportElement x="256" y="0" width="37" height="8" uuid="d1b71ffe-a1f8-4cc0-a13e-085adaab1339"/>
+				<textElement textAlignment="Right">
+					<font size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{VL_UNITARIO}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00">
+				<reportElement x="302" y="0" width="29" height="8" uuid="e4b3f01d-abd5-4853-94a1-f4219a385123"/>
+				<textElement textAlignment="Right">
+					<font size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{VL_DESCONTO}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00">
+				<reportElement x="345" y="0" width="27" height="8" uuid="34ca86f5-eab3-45fa-b38b-c843c9b1b0ac"/>
+				<textElement textAlignment="Right">
+					<font size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{totalProduto}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="232" y="0" width="21" height="8" uuid="0530eb28-075f-4b6a-aea6-489db591b9d7"/>
+				<textElement textAlignment="Right">
+					<font size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{QT_SAIDA}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="380" y="0" width="54" height="8" uuid="d55d7b1c-9fc6-47e5-905c-d2cf0c69e343"/>
+				<textElement>
+					<font size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{VL_PAGAMENTO}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="442" y="0" width="111" height="8" uuid="387f1fe7-1891-4390-a766-23b4564c8f0a"/>
+				<textElement>
+					<font size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{planoFormaPagamento}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<summary>
+		<band height="295" splitType="Stretch">
+			<subreport>
+				<reportElement positionType="Float" x="0" y="53" width="553" height="48" isRemoveLineWhenBlank="true" uuid="4f200750-49be-437f-a0f0-9d86e6a7b8d1">
+					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+					<printWhenExpression><![CDATA[$P{rsmPagamentos}!=null]]></printWhenExpression>
+				</reportElement>
+				<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource($P{rsmPagamentos})]]></dataSourceExpression>
+				<subreportExpression><![CDATA[$P{SUBREPORT_DIR}+"relatorio_fechamento_caixa_subreportPagamentos.jasper"]]></subreportExpression>
+			</subreport>
+			<subreport>
+				<reportElement positionType="Float" x="0" y="2" width="554" height="48" isRemoveLineWhenBlank="true" uuid="1feb609b-ae8b-4317-8fe8-45c471f84abe">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+				</reportElement>
+				<subreportParameter name="vlRecebimento">
+					<subreportParameterExpression><![CDATA[$P{vlRecebimento}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="vlSaldoInicial">
+					<subreportParameterExpression><![CDATA[$P{vlSaldoInicial}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="vlTransferencia">
+					<subreportParameterExpression><![CDATA[$P{vlTransferencia}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="vlDespesas">
+					<subreportParameterExpression><![CDATA[$P{vlDespesas}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="vlTotalEntradas">
+					<subreportParameterExpression><![CDATA[$P{vlTotalEntradas}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA[$P{SUBREPORT_DIR}+"relatorio_fechamento_caixa_subreportResumoDinheiro.jasper"]]></subreportExpression>
+			</subreport>
+			<subreport>
+				<reportElement positionType="Float" x="0" y="155" width="286" height="48" isRemoveLineWhenBlank="true" uuid="e145cff7-9a92-4faa-be75-82669627bcdb">
+					<printWhenExpression><![CDATA[$P{rsmResumo}!=null]]></printWhenExpression>
+				</reportElement>
+				<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource($P{rsmResumo})]]></dataSourceExpression>
+				<subreportExpression><![CDATA[$P{SUBREPORT_DIR}+"relatorio_fechamento_caixa_subreport_resumoFormaPagamento.jasper"]]></subreportExpression>
+			</subreport>
+			<subreport>
+				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="0" y="198" width="555" height="48" isRemoveLineWhenBlank="true" uuid="7a13405d-34cb-4ea2-bfc8-09e0a6b6b70f">
+					<printWhenExpression><![CDATA[$P{rsmEncerrantes}!=null]]></printWhenExpression>
+				</reportElement>
+				<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource($P{rsmEncerrantes})]]></dataSourceExpression>
+				<subreportExpression><![CDATA[$P{SUBREPORT_DIR}+"relatorio_fechamento_caixa_subreportEncerrantes.jasper"]]></subreportExpression>
+			</subreport>
+			<subreport>
+				<reportElement positionType="Float" stretchType="RelativeToTallestObject" mode="Opaque" x="289" y="155" width="266" height="48" uuid="3bfbb55e-b743-4447-a511-8137f4611030"/>
+				<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource($P{rsmTransferencias})]]></dataSourceExpression>
+				<subreportExpression><![CDATA[$P{SUBREPORT_DIR}+"relatorio_fechamento_caixa_subreportTransferencias.jasper"]]></subreportExpression>
+			</subreport>
+			<subreport>
+				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="263" y="245" width="290" height="48" isRemoveLineWhenBlank="true" uuid="6d62eff2-928f-4cbe-9a93-a305cbe2a387">
+					<printWhenExpression><![CDATA[$P{LG_SHOW_ESTOQUE}]]></printWhenExpression>
+				</reportElement>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA[$P{SUBREPORT_DIR}+"relatorio_fechamento_caixa_subreportEstoque.jasper"]]></subreportExpression>
+			</subreport>
+			<subreport>
+				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="0" y="245" width="260" height="48" isRemoveLineWhenBlank="true" uuid="6f1fba6a-f50c-4e2e-bac0-f3b7eb7c45c6">
+					<printWhenExpression><![CDATA[$P{rsmMedicao}!=null]]></printWhenExpression>
+				</reportElement>
+				<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource($P{rsmMedicao})]]></dataSourceExpression>
+				<subreportExpression><![CDATA[$P{SUBREPORT_DIR}+"relatorio_fechamento_caixa_subreportMedicaoFisica.jasper"]]></subreportExpression>
+			</subreport>
+			<subreport>
+				<reportElement positionType="Float" isPrintRepeatedValues="false" mode="Opaque" x="0" y="105" width="554" height="48" forecolor="#030000" uuid="ed20938f-4cef-4a0e-8f29-750200098a8a">
+					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+					<printWhenExpression><![CDATA[$P{rsmRecebimentos}!=null]]></printWhenExpression>
+				</reportElement>
+				<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource($P{rsmRecebimentos})]]></dataSourceExpression>
+				<subreportExpression><![CDATA[$P{SUBREPORT_DIR}+"relatorio_fechamento_caixa_recebimentos.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+	</summary>
+</jasperReport>

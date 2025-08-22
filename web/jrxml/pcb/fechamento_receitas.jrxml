@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version last-->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="fechamento_receitas" language="groovy" pageWidth="555" pageHeight="802" columnWidth="555" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="5fb50f67-3257-48ea-8544-c1804d243a5b">
+	<property name="ireport.zoom" value="2.143588810000007"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<field name="NM_TIPO_DOCUMENTO" class="java.lang.String"/>
+	<field name="DS_HISTORICO" class="java.lang.String"/>
+	<field name="NM_PESSOA" class="java.lang.String"/>
+	<field name="VL_CONTA" class="java.lang.Double"/>
+	<variable name="totalVlConta" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[$F{VL_CONTA}]]></variableExpression>
+		<initialValueExpression><![CDATA[new Double(0)]]></initialValueExpression>
+	</variable>
+	<columnHeader>
+		<band height="40" splitType="Stretch">
+			<line>
+				<reportElement x="554" y="1" width="1" height="13" uuid="05293fef-59f2-4aa3-be53-22458fc820c0"/>
+			</line>
+			<staticText>
+				<reportElement x="101" y="28" width="219" height="11" uuid="89098afe-bfb0-4802-94b9-97a57a71cf1d"/>
+				<textElement>
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[ Descrição]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="1" y="1" width="553" height="13" uuid="30a7fd26-375b-4b42-886b-6af438191f55"/>
+				<textElement textAlignment="Center">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[RECEBIMENTOS OCORRIDOS]]></text>
+			</staticText>
+			<line>
+				<reportElement x="503" y="28" width="1" height="11" uuid="09038c9c-8b06-43d6-9996-3790ec5c52a8"/>
+			</line>
+			<staticText>
+				<reportElement x="321" y="28" width="182" height="11" uuid="084c1fbc-d392-4045-8a32-b4d515267020"/>
+				<textElement>
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Sacado]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="1" y="28" width="99" height="11" uuid="847d93c5-c4f5-4f4c-ba63-d3fe1535d55b"/>
+				<textElement>
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[ Tipo de receita]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="504" y="28" width="48" height="11" uuid="56af5dbc-3e49-4724-8623-e7bac7d265ac"/>
+				<textElement textAlignment="Right">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Valor(R$)]]></text>
+			</staticText>
+			<line>
+				<reportElement x="100" y="28" width="1" height="11" uuid="06390a74-7f0d-4e73-8894-7db3119beacf"/>
+			</line>
+			<line>
+				<reportElement x="0" y="1" width="1" height="13" uuid="8403c0fd-9ff7-4b00-b822-91efa6c4bc55"/>
+			</line>
+			<line>
+				<reportElement x="0" y="14" width="555" height="1" uuid="f1942481-874b-40ee-9c0b-2e0eedd11808"/>
+			</line>
+			<line>
+				<reportElement x="320" y="28" width="1" height="11" uuid="7cc7bbd3-cc23-450f-8256-7d0abffffd01"/>
+			</line>
+			<line>
+				<reportElement x="0" y="28" width="1" height="11" uuid="e6feff02-1c17-4446-aee0-17f9c19af89b"/>
+			</line>
+			<line>
+				<reportElement x="554" y="28" width="1" height="11" uuid="d69ddb13-4b16-4baf-976f-68ffd74106a5"/>
+			</line>
+			<line>
+				<reportElement x="0" y="0" width="555" height="1" uuid="9292abce-ecde-4675-8d0b-daaa8cc07cad"/>
+			</line>
+			<line>
+				<reportElement x="0" y="39" width="555" height="1" uuid="ffcee43d-3ccd-4409-977d-bbcadc9ca29a"/>
+			</line>
+			<line>
+				<reportElement x="0" y="14" width="1" height="13" uuid="8403c0fd-9ff7-4b00-b822-91efa6c4bc55"/>
+			</line>
+			<line>
+				<reportElement x="554" y="14" width="1" height="13" uuid="05293fef-59f2-4aa3-be53-22458fc820c0"/>
+			</line>
+			<line>
+				<reportElement x="0" y="27" width="555" height="1" uuid="f1942481-874b-40ee-9c0b-2e0eedd11808"/>
+			</line>
+			<staticText>
+				<reportElement x="1" y="14" width="553" height="13" uuid="30a7fd26-375b-4b42-886b-6af438191f55"/>
+				<textElement textAlignment="Center">
+					<font isBold="false"/>
+				</textElement>
+				<text><![CDATA[]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="11" splitType="Stretch">
+			<line>
+				<reportElement x="0" y="0" width="1" height="11" uuid="e6feff02-1c17-4446-aee0-17f9c19af89b"/>
+			</line>
+			<line>
+				<reportElement x="554" y="0" width="1" height="11" uuid="e6feff02-1c17-4446-aee0-17f9c19af89b"/>
+			</line>
+			<line>
+				<reportElement x="503" y="0" width="1" height="11" uuid="e6feff02-1c17-4446-aee0-17f9c19af89b"/>
+			</line>
+			<line>
+				<reportElement x="320" y="0" width="1" height="11" uuid="e6feff02-1c17-4446-aee0-17f9c19af89b"/>
+			</line>
+			<line>
+				<reportElement x="100" y="0" width="1" height="11" uuid="e6feff02-1c17-4446-aee0-17f9c19af89b"/>
+			</line>
+			<textField isBlankWhenNull="true">
+				<reportElement x="3" y="1" width="97" height="9" uuid="e22ad59b-ff7e-41e2-806d-df2142555de1"/>
+				<textElement>
+					<font size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{NM_TIPO_DOCUMENTO}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="104" y="1" width="216" height="9" uuid="6223c157-e10d-4e88-bb19-0fcbb1040ffe"/>
+				<textElement>
+					<font size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{DS_HISTORICO}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="324" y="1" width="179" height="9" uuid="aeb266d8-6938-4d58-ba42-60aa48cd14df"/>
+				<textElement>
+					<font size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{NM_PESSOA}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00">
+				<reportElement x="504" y="1" width="48" height="9" uuid="d9ff5cd7-2b54-4305-aca0-75f3161ed0a6"/>
+				<textElement textAlignment="Right">
+					<font size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{VL_CONTA}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="13" splitType="Stretch">
+			<line>
+				<reportElement x="0" y="0" width="555" height="1" uuid="5154da19-eea2-49fa-82bb-94ab7a886a9e"/>
+			</line>
+			<line>
+				<reportElement x="503" y="1" width="1" height="11" uuid="925aa322-38ec-4d3c-9a09-31ed54bfeaac"/>
+			</line>
+			<staticText>
+				<reportElement x="401" y="1" width="98" height="11" uuid="abeab7fc-4251-4cd4-97fe-6859cf346143"/>
+				<textElement textAlignment="Right">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[TOTAL]]></text>
+			</staticText>
+			<line>
+				<reportElement x="0" y="1" width="1" height="11" uuid="e3704694-177f-4eff-97ff-067f65bf27bf"/>
+			</line>
+			<line>
+				<reportElement x="554" y="1" width="1" height="11" uuid="01b4ce73-e894-4daa-b7fd-b3b823707aa4"/>
+			</line>
+			<line>
+				<reportElement x="0" y="12" width="555" height="1" uuid="143d5070-1b33-487c-aaea-9aab35a2dbd2"/>
+			</line>
+			<textField pattern="#,##0.00">
+				<reportElement x="504" y="2" width="48" height="9" uuid="ea0180ff-5c33-4ba2-9282-b7223a36313a"/>
+				<textElement textAlignment="Right">
+					<font size="6" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{totalVlConta}]]></textFieldExpression>
+			</textField>
+		</band>
+	</columnFooter>
+</jasperReport>

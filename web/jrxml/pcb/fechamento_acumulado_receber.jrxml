@@ -1,0 +1,299 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="fechamento_acumulado_receber" language="groovy" pageWidth="555" pageHeight="802" columnWidth="555" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="7ec1226c-e5b7-4201-b9e6-f292e7e89ef9">
+	<property name="ireport.zoom" value="1.2100000000000006"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="qtTurnos" class="java.lang.String"/>
+	<field name="TP_FORMA_PAGAMENTO" class="java.lang.String"/>
+	<field name="NM_FORMA_PAGAMENTO" class="java.lang.String"/>
+	<field name="VL_PAGAMENTO" class="java.lang.Double"/>
+	<field name="QT_ENTRADA" class="java.lang.Double"/>
+	<field name="QT_SAIDA" class="java.lang.Double"/>
+	<variable name="vlSaldoAtual" class="java.lang.Double" resetType="Column">
+		<variableExpression><![CDATA[($F{VL_PAGAMENTO}+$F{QT_ENTRADA})-$F{QT_SAIDA}]]></variableExpression>
+	</variable>
+	<variable name="VL_PAGAMENTO_1" class="java.lang.Double" resetType="Group" resetGroup="GRUPO1" calculation="Sum">
+		<variableExpression><![CDATA[$F{VL_PAGAMENTO}]]></variableExpression>
+	</variable>
+	<variable name="QT_ENTRADA_1" class="java.lang.Double" resetType="Group" resetGroup="GRUPO1" calculation="Sum">
+		<variableExpression><![CDATA[$F{QT_ENTRADA}]]></variableExpression>
+	</variable>
+	<variable name="QT_SAIDA_1" class="java.lang.Double" resetType="Group" resetGroup="GRUPO1" calculation="Sum">
+		<variableExpression><![CDATA[$F{QT_SAIDA}]]></variableExpression>
+	</variable>
+	<variable name="vlSubTotalSaldoAtual" class="java.lang.Double" resetType="Group" resetGroup="GRUPO1" calculation="Sum">
+		<variableExpression><![CDATA[$V{vlSaldoAtual}]]></variableExpression>
+		<initialValueExpression><![CDATA[new Double(0)]]></initialValueExpression>
+	</variable>
+	<variable name="vlTotalVlPagamento" class="java.lang.Double" incrementType="Group" incrementGroup="GRUPO1" calculation="Sum">
+		<variableExpression><![CDATA[$V{VL_PAGAMENTO_1}]]></variableExpression>
+		<initialValueExpression><![CDATA[new Double(0)]]></initialValueExpression>
+	</variable>
+	<variable name="vlTotalQtEntrada" class="java.lang.Double" incrementType="Group" incrementGroup="GRUPO1" calculation="Sum">
+		<variableExpression><![CDATA[$V{QT_ENTRADA_1}]]></variableExpression>
+		<initialValueExpression><![CDATA[new Double(0)]]></initialValueExpression>
+	</variable>
+	<variable name="vlTotalQtSaida" class="java.lang.Double" incrementType="Group" incrementGroup="GRUPO1" calculation="Sum">
+		<variableExpression><![CDATA[$V{QT_SAIDA_1}]]></variableExpression>
+		<initialValueExpression><![CDATA[new Double(0)]]></initialValueExpression>
+	</variable>
+	<variable name="vlTotalSaldoAtual" class="java.lang.Double" incrementType="Group" incrementGroup="GRUPO1" calculation="Sum">
+		<variableExpression><![CDATA[$V{vlSubTotalSaldoAtual}]]></variableExpression>
+		<initialValueExpression><![CDATA[new Double(0)]]></initialValueExpression>
+	</variable>
+	<group name="GRUPO1">
+		<groupExpression><![CDATA[$F{TP_FORMA_PAGAMENTO}]]></groupExpression>
+		<groupFooter>
+			<band height="15">
+				<line>
+					<reportElement uuid="384f14e9-1132-49e5-a0ca-34d4418440ad" x="0" y="1" width="1" height="13"/>
+				</line>
+				<line>
+					<reportElement uuid="f6679b58-344f-4c05-8d0f-6471e3dddd21" x="554" y="1" width="1" height="13"/>
+				</line>
+				<staticText>
+					<reportElement uuid="d9777d63-224b-453d-a132-15903d64f423" x="1" y="1" width="169" height="13"/>
+					<textElement textAlignment="Right">
+						<font isBold="true"/>
+					</textElement>
+					<text><![CDATA[SUB TOTAL]]></text>
+				</staticText>
+				<line>
+					<reportElement uuid="2de1ef19-2f23-496f-a1db-9094548d3b88" x="170" y="1" width="1" height="13"/>
+				</line>
+				<line>
+					<reportElement uuid="bb5db092-a906-4938-8e91-6da2c65b424e" x="0" y="0" width="555" height="1"/>
+				</line>
+				<line>
+					<reportElement uuid="ea415745-c825-4738-a0f7-246e7df59179" x="0" y="14" width="555" height="1"/>
+				</line>
+				<line>
+					<reportElement uuid="967e3c52-3c18-4c5c-b8e0-c607558687c7" x="271" y="1" width="1" height="13"/>
+				</line>
+				<line>
+					<reportElement uuid="f7bc0c29-f8b2-4eba-b1ff-39d16988fd47" x="352" y="1" width="1" height="13"/>
+				</line>
+				<line>
+					<reportElement uuid="45571b6e-8a18-4316-9c17-e8dc433dc14e" x="453" y="1" width="1" height="13"/>
+				</line>
+				<line>
+					<reportElement uuid="5c5d5f77-99bf-4411-bded-116a08efafc2" x="1" y="14" width="555" height="1"/>
+				</line>
+				<textField pattern="#,##0.000">
+					<reportElement uuid="bd67f1eb-80bc-4b06-8c96-295b63daf7f8" x="172" y="1" width="99" height="13"/>
+					<textElement textAlignment="Right">
+						<font size="10" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$V{VL_PAGAMENTO_1}]]></textFieldExpression>
+				</textField>
+				<textField pattern="#,##0.000" isBlankWhenNull="true">
+					<reportElement uuid="4924c75c-7fb2-48fa-a619-6093ea50f476" x="272" y="1" width="80" height="13"/>
+					<textElement textAlignment="Right">
+						<font isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$V{QT_ENTRADA_1}]]></textFieldExpression>
+				</textField>
+				<textField pattern="#,##0.000" isBlankWhenNull="true">
+					<reportElement uuid="0cc5fca1-741d-41a9-a02e-8c6d806f4077" x="354" y="1" width="99" height="13"/>
+					<textElement textAlignment="Right">
+						<font isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$V{QT_SAIDA_1}]]></textFieldExpression>
+				</textField>
+				<textField pattern="#,##0.000" isBlankWhenNull="true">
+					<reportElement uuid="c84393c9-5643-49a1-bb77-38b3765dccfa" x="455" y="1" width="99" height="13"/>
+					<textElement textAlignment="Right">
+						<font isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$V{vlSubTotalSaldoAtual}]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupFooter>
+	</group>
+	<columnHeader>
+		<band height="29" splitType="Stretch">
+			<line>
+				<reportElement uuid="180b437c-7dd7-406b-a36d-60fa970c01f5" x="0" y="0" width="555" height="1"/>
+			</line>
+			<line>
+				<reportElement uuid="4263a18c-a8a6-4fb0-a6db-c9aeec12c821" x="0" y="1" width="1" height="13"/>
+			</line>
+			<line>
+				<reportElement uuid="b0e288ab-2fb9-4b65-90f6-25a2965dc007" x="554" y="1" width="1" height="13"/>
+			</line>
+			<line>
+				<reportElement uuid="07195445-a856-40c0-9f14-1046368628ef" x="0" y="14" width="555" height="1"/>
+			</line>
+			<line>
+				<reportElement uuid="90eeb147-37ce-4ce1-8794-e385669d672e" x="0" y="15" width="1" height="13"/>
+			</line>
+			<staticText>
+				<reportElement uuid="0536cca6-0b29-42a7-b3b5-30a01e3867a4" x="1" y="15" width="169" height="13"/>
+				<textElement/>
+				<text><![CDATA[DESCRIÇÃO]]></text>
+			</staticText>
+			<line>
+				<reportElement uuid="000f06bb-9d12-43e6-adf3-af5037b8c8d0" x="170" y="15" width="1" height="13"/>
+			</line>
+			<line>
+				<reportElement uuid="11946a36-5b3b-4b82-a1bd-05d29d5238c6" x="0" y="28" width="555" height="1"/>
+			</line>
+			<staticText>
+				<reportElement uuid="807c1823-edcd-4b11-9501-7d0e3009f669" x="171" y="15" width="100" height="13"/>
+				<textElement textAlignment="Right"/>
+				<text><![CDATA[SALDO ANTES]]></text>
+			</staticText>
+			<line>
+				<reportElement uuid="d988ee58-ef31-40cb-bde5-7212b3dc8812" x="271" y="15" width="1" height="13"/>
+			</line>
+			<staticText>
+				<reportElement uuid="966d30fc-5800-4c97-81c9-9d9fa4f3c3a2" x="272" y="15" width="80" height="13"/>
+				<textElement textAlignment="Right"/>
+				<text><![CDATA[ENTRADA(R$)]]></text>
+			</staticText>
+			<line>
+				<reportElement uuid="72babc6e-3fb3-4977-8881-823f89c7488f" x="352" y="15" width="1" height="13"/>
+			</line>
+			<staticText>
+				<reportElement uuid="ab1bc8db-dde2-46a2-acd0-407dd6492b59" x="353" y="15" width="100" height="13"/>
+				<textElement textAlignment="Right"/>
+				<text><![CDATA[SAÍDA (R$)]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="91c1f5e4-6f49-4a29-bdef-f90cb48e8dcb" x="454" y="15" width="100" height="13"/>
+				<textElement textAlignment="Right"/>
+				<text><![CDATA[SALDO ATUAL]]></text>
+			</staticText>
+			<line>
+				<reportElement uuid="2a0d4f5e-0a83-45ab-87bf-e819942d4b14" x="554" y="15" width="1" height="13"/>
+			</line>
+			<line>
+				<reportElement uuid="bd407910-81b7-4c53-8af9-19abd9ba6adc" x="453" y="15" width="1" height="13"/>
+			</line>
+			<textField>
+				<reportElement uuid="5b96fd45-4a0c-45e7-929e-d3a33afd744d" x="1" y="1" width="553" height="13"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[( $P{qtTurnos} == null || $P{qtTurnos} == 0 )
+?"ACUMULADO A RACEBER (Todos os Turnos)"
+:"ACUMULADO A RACEBER"]]></textFieldExpression>
+			</textField>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="13" splitType="Stretch">
+			<line>
+				<reportElement uuid="72babc6e-3fb3-4977-8881-823f89c7488f" x="352" y="0" width="1" height="13"/>
+			</line>
+			<textField>
+				<reportElement uuid="189c5c0c-1f25-4240-82ee-dd4cb9bf584a" x="1" y="1" width="169" height="11"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{NM_FORMA_PAGAMENTO}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement uuid="000f06bb-9d12-43e6-adf3-af5037b8c8d0" x="170" y="0" width="1" height="13"/>
+			</line>
+			<line>
+				<reportElement uuid="90eeb147-37ce-4ce1-8794-e385669d672e" x="0" y="0" width="1" height="13"/>
+			</line>
+			<line>
+				<reportElement uuid="000f06bb-9d12-43e6-adf3-af5037b8c8d0" x="271" y="0" width="1" height="13"/>
+			</line>
+			<line>
+				<reportElement uuid="bd407910-81b7-4c53-8af9-19abd9ba6adc" x="453" y="0" width="1" height="13"/>
+			</line>
+			<line>
+				<reportElement uuid="bd407910-81b7-4c53-8af9-19abd9ba6adc" x="554" y="0" width="1" height="13"/>
+			</line>
+			<textField pattern="#,##0.000" isBlankWhenNull="true">
+				<reportElement uuid="3116a8aa-eb68-4b95-a065-257f2fa01510" x="172" y="1" width="99" height="11"/>
+				<textElement textAlignment="Right">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{VL_PAGAMENTO}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.000" isBlankWhenNull="true">
+				<reportElement uuid="656d1ea3-f314-4c78-9935-cf42fb0c5d9b" x="272" y="1" width="80" height="11"/>
+				<textElement textAlignment="Right">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{QT_ENTRADA}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.000" isBlankWhenNull="true">
+				<reportElement uuid="0799cdd9-f1a5-406f-9618-b6d67fc7fc2a" x="354" y="1" width="99" height="11"/>
+				<textElement textAlignment="Right">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{QT_SAIDA}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.000" isBlankWhenNull="true">
+				<reportElement uuid="ce346729-b402-4b79-bb2e-43c455c2467d" x="455" y="1" width="99" height="11"/>
+				<textElement textAlignment="Right">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{vlSaldoAtual}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="14" splitType="Stretch">
+			<textField pattern="#,##0.000" isBlankWhenNull="true">
+				<reportElement uuid="85a3f11a-981c-4016-8ac4-3eca98910585" x="172" y="0" width="99" height="13"/>
+				<textElement textAlignment="Right">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{vlTotalVlPagamento}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement uuid="218fe845-4312-49e9-a656-cc1d9efec1f8" x="0" y="0" width="1" height="13"/>
+			</line>
+			<line>
+				<reportElement uuid="1cc2d26f-42ec-4710-a493-900a69de40f8" x="271" y="0" width="1" height="13"/>
+			</line>
+			<line>
+				<reportElement uuid="ec335a3a-9b41-4e9d-9a63-56e80233c2c6" x="352" y="0" width="1" height="13"/>
+			</line>
+			<line>
+				<reportElement uuid="33d04202-12f0-4135-a649-fe40fe078b96" x="453" y="0" width="1" height="13"/>
+			</line>
+			<line>
+				<reportElement uuid="527e54b5-bcea-45db-aaac-3ff0154f4357" x="554" y="0" width="1" height="13"/>
+			</line>
+			<staticText>
+				<reportElement uuid="f465ce00-51b2-4d7f-b656-67e5b55edf61" x="1" y="0" width="169" height="13"/>
+				<textElement textAlignment="Right">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[TOTAL]]></text>
+			</staticText>
+			<line>
+				<reportElement uuid="fcc01f10-5383-43c9-87b0-10a34fba9517" x="170" y="0" width="1" height="13"/>
+			</line>
+			<line>
+				<reportElement uuid="7c7c446f-dc30-42b4-ae1f-5ad3fea5774f" x="0" y="13" width="555" height="1"/>
+			</line>
+			<textField pattern="#,##0.000" isBlankWhenNull="true">
+				<reportElement uuid="7017dca0-8fcd-4dc1-be7a-fd79430e22b9" x="272" y="0" width="80" height="13"/>
+				<textElement textAlignment="Right">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{vlTotalQtEntrada}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.000" isBlankWhenNull="true">
+				<reportElement uuid="952a3d1b-cfa5-4a9f-9d24-d0b6bcbf2318" x="354" y="0" width="99" height="13"/>
+				<textElement textAlignment="Right">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{vlTotalQtSaida}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.000" isBlankWhenNull="true">
+				<reportElement uuid="822991f4-09e4-4820-b034-7e60ef9f7719" x="455" y="0" width="99" height="13"/>
+				<textElement textAlignment="Right">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{vlTotalSaldoAtual}]]></textFieldExpression>
+			</textField>
+		</band>
+	</columnFooter>
+</jasperReport>

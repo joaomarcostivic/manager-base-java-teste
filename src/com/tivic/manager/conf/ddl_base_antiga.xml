@@ -1,0 +1,921 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<releases>
+	<release id="edgard20210715" date="15/07/2021" autor="Edgard" description="Inicialização de estrutura de país, região, estado, distrito e cidade.">
+		<!-- grl_regiao -->
+		<DDL>
+			CREATE TABLE IF NOT EXISTS grl_regiao (
+			    cd_regiao integer NOT NULL,
+			    nm_regiao varchar(50),
+			    tp_regiao smallint
+			);
+		</DDL>
+		<DDL>ALTER TABLE grl_regiao ADD CONSTRAINT grl_regiao_pkey PRIMARY KEY (cd_regiao);</DDL>
+		<!-- grl_pais -->
+		<DDL>
+			CREATE TABLE IF NOT EXISTS grl_pais (
+			    cd_pais integer NOT NULL,
+			    nm_pais varchar(50),
+			    sg_pais varchar(10),
+			    cd_regiao integer,
+			    id_pais varchar(20)
+			);
+		</DDL>
+		<DDL>ALTER TABLE grl_pais ADD CONSTRAINT grl_pais_pkey PRIMARY KEY (cd_pais);</DDL>
+		<DDL>ALTER TABLE grl_pais ADD CONSTRAINT grl_pais_cd_regiao_fkey FOREIGN KEY (cd_regiao) REFERENCES grl_regiao(cd_regiao);</DDL>
+		<!-- grl_estado -->
+		<DDL>
+			CREATE TABLE IF NOT EXISTS grl_estado (
+			    cd_estado integer NOT NULL,
+			    nm_estado varchar(50),
+			    sg_estado varchar(10),
+			    cd_pais integer,
+			    cd_regiao integer,
+			    id_estado varchar(10)
+			);
+		</DDL>
+		<DDL>ALTER TABLE grl_estado ADD CONSTRAINT grl_estado_pkey PRIMARY KEY (cd_estado);</DDL>
+		<DDL>ALTER TABLE grl_estado ADD CONSTRAINT grl_estado_cd_pais_fk FOREIGN KEY (cd_pais) REFERENCES grl_pais(cd_pais);</DDL>
+		<DDL>ALTER TABLE grl_estado ADD CONSTRAINT grl_pais_cd_regiao_fkey FOREIGN KEY (cd_regiao) REFERENCES grl_regiao(cd_regiao);</DDL>
+		<!-- grl_cidade -->
+		<DDL>
+			CREATE TABLE IF NOT EXISTS grl_cidade (
+			    cd_cidade integer NOT NULL,
+			    nm_cidade varchar(50),
+			    nr_cep varchar(8),
+			    vl_altitude double precision,
+			    vl_latitude double precision,
+			    vl_longitude double precision,
+			    cd_estado integer,
+			    id_cidade varchar(20),
+			    cd_regiao integer,
+			    id_ibge varchar(20),
+			    qt_distancia_capital integer,
+			    qt_distancia_base integer,
+			    sg_cidade varchar(20),
+			    dt_atualizacao timestamp without time zone
+			);
+		</DDL>
+		<DDL>ALTER TABLE grl_cidade ADD CONSTRAINT grl_cidade_pkey PRIMARY KEY (cd_cidade);</DDL>
+		<DDL>ALTER TABLE grl_cidade ADD CONSTRAINT grl_cidade_cd_estado_fkey FOREIGN KEY (cd_estado) REFERENCES grl_estado(cd_estado);</DDL>
+		<DDL>ALTER TABLE grl_cidade ADD CONSTRAINT grl_cidade_cd_regiao_fkey FOREIGN KEY (cd_regiao) REFERENCES grl_regiao(cd_regiao);</DDL>
+		<!-- grl_distrito -->
+		<DDL>
+			CREATE TABLE IF NOT EXISTS grl_distrito (
+			    cd_distrito integer NOT NULL,
+			    cd_cidade integer NOT NULL,
+			    nm_distrito varchar(50),
+			    nr_cep varchar(8),
+			    id_distrito varchar(100)
+			);
+		</DDL>
+		<DDL>ALTER TABLE grl_distrito ADD CONSTRAINT grl_distrito_pkey PRIMARY KEY (cd_distrito);</DDL>
+		<DDL>ALTER TABLE grl_distrito ADD CONSTRAINT grl_distrito_cd_cidade_fkey FOREIGN KEY (cd_cidade) REFERENCES grl_cidade(cd_cidade);</DDL>
+	</release>
+	
+	<release id="edgard20210715_1" date="15/07/2021" autor="Edgard" description="Inicialização de estrutura de cor, tipo, espécie, categoria, marca e modelo de veículos.">
+		<!-- fta_cor -->
+		<DDL>
+			CREATE TABLE IF NOT EXISTS fta_cor (
+			    cd_cor integer NOT NULL,
+			    nm_cor varchar(10)
+			);
+		</DDL>
+		<DDL>ALTER TABLE fta_cor ADD CONSTRAINT fta_cor_pkey PRIMARY KEY (cd_cor);</DDL>
+		
+		<!-- fta_categoria_veiculo -->
+		<DDL>
+			CREATE TABLE IF NOT EXISTS fta_categoria_veiculo (
+			    cd_categoria integer NOT NULL,
+			    nm_categoria varchar(50)
+			);
+		</DDL>
+		<DDL>ALTER TABLE fta_categoria_veiculo ADD CONSTRAINT fta_categoria_veiculo_pkey PRIMARY KEY (cd_categoria);</DDL>
+		
+		<!-- fta_tipo_veiculo -->
+		<DDL>
+			CREATE TABLE IF NOT EXISTS fta_tipo_veiculo (
+			    cd_tipo_veiculo integer NOT NULL,
+			    nm_tipo_veiculo varchar(50),
+			    txt_cnh_requerida text
+			)
+		</DDL>
+		<DDL>ALTER TABLE fta_tipo_veiculo ADD CONSTRAINT fta_tipo_veiculo_pkey PRIMARY KEY (cd_tipo_veiculo);</DDL>
+		
+		<!-- fta_especie_veiculo -->
+		<DDL>
+			CREATE TABLE IF NOT EXISTS fta_especie_veiculo (
+			    cd_especie integer NOT NULL,
+			    ds_especie varchar(50)
+			)
+		</DDL>
+		<DDL>ALTER TABLE fta_especie_veiculo ADD CONSTRAINT fta_especie_veiculo_pkey PRIMARY KEY (cd_especie);</DDL>
+		
+		<!-- fta_marca_modelo -->
+		<DDL>
+			CREATE TABLE IF NOT EXISTS fta_marca_modelo (
+			    cd_marca integer NOT NULL,
+			    nm_marca varchar(50),
+			    nm_modelo varchar(100),
+			    tp_marca integer,
+			    dt_atualizacao timestamp without time zone,
+			    nr_marca varchar(30)
+			)
+		</DDL>
+		<DDL>ALTER TABLE fta_marca_modelo ADD CONSTRAINT fta_marca_modelo_pkey PRIMARY KEY (cd_marca);</DDL>
+	</release>
+		
+	<release id="edgard20210715_2" date="15/07/2021" autor="Edgard" description="Inicialização de estrutura de boat, boat veículo, boat imagem, boat vítima, boat testemunha.">		
+		<!-- mob_boat -->
+		<DDL>
+			CREATE TABLE IF NOT EXISTS mob_condicao_clima (
+			    cd_condicao_clima integer NOT NULL,
+			    nm_condicao_clima character varying(100),
+			    id_condicao_clima character varying(10)
+			)
+		</DDL>
+		<DDL>ALTER TABLE mob_condicao_clima ADD CONSTRAINT mob_condicao_clima_pkey PRIMARY KEY (cd_condicao_clima);</DDL>
+		
+		<!-- mob_condicao_via -->
+		<DDL>
+			CREATE TABLE IF NOT EXISTS mob_condicao_via (
+			    cd_condicao_via integer NOT NULL,
+			    nm_condicao_via character varying(100),
+			    id_condicao_via character varying(10)
+			)
+		</DDL>
+		<DDL>ALTER TABLE mob_condicao_via ADD CONSTRAINT mob_condicao_via_pkey PRIMARY KEY (cd_condicao_via);</DDL>
+		
+		<!-- mob_tipo_acidente -->
+		<DDL>
+			CREATE TABLE IF NOT EXISTS mob_tipo_acidente (
+			    cd_tipo_acidente integer NOT NULL,
+			    nm_tipo_acidente character varying(100),
+			    id_tipo_acidente character varying(10),
+			    ds_tipo_acidente character varying(255)
+			)
+		</DDL>
+		<DDL>ALTER TABLE mob_tipo_acidente ADD CONSTRAINT mob_tipo_acidente_pkey PRIMARY KEY (cd_tipo_acidente);</DDL>
+		
+		<!-- mob_tipo_pavimento -->
+		<DDL>
+			CREATE TABLE IF NOT EXISTS mob_tipo_pavimento (
+			   cd_tipo_pavimento integer NOT NULL,
+			   nm_tipo_pavimento character varying(100),
+			   id_tipo_pavimento character varying(10)
+			)
+		</DDL>
+		<DDL>ALTER TABLE mob_tipo_pavimento ADD CONSTRAINT mob_tipo_pavimento_pkey PRIMARY KEY (cd_tipo_pavimento);</DDL>
+<!-- 		<?ignore -->
+		<!-- mob_boat -->
+		<DDL>
+			CREATE TABLE IF NOT EXISTS mob_boat
+			(
+				cd_boat                       integer not null,
+				nr_boat                       varchar(12),
+				dt_ocorrencia                 timestamp without time zone not null,
+				tp_acidente                   smallint,
+				nm_tipo_acidente_outro        varchar(50),
+				cd_usuario                    integer,
+				cd_agente                     smallint,
+				cd_cidade                     integer,
+				ds_observacao                 text,
+				ds_local_ocorrencia           text,
+				ds_ponto_referencia           text,
+				vl_latitude                   double precision,
+				vl_longitude                  double precision,
+				cd_tipo_acidente              integer,
+				cd_condicao_via               integer,
+				cd_tipo_pavimento             integer,
+				cd_condicao_clima             integer,
+				st_sinalizacao_horizontal     smallint,
+				st_sinalizacao_vertical       smallint,
+				st_semaforo                   smallint,
+				nm_delegacia_comunicada       varchar(50),
+				dt_comunicacao                timestamp without time zone,
+				nr_ocorrencia_policial        varchar(50),
+				nm_agente_policial            varchar(100),
+				nr_matricula_agente_policial  varchar(50),
+				txt_ocorrencia_policial       text,
+				lg_policia_tecnica              smallint,
+				nm_responsavel_policia_tecnica  varchar(50),
+				lg_iml                        smallint,
+				nm_responsavel_iml            varchar(50),
+				lg_pericia_realizada          smallint,
+				nm_responsavel_pericia        varchar(50),
+				lg_bombeiros                  varchar(50),
+				nm_responsavel_bombeiros      varchar(50),
+				lg_resgate                    smallint,
+				nm_responsavel_resgate        varchar(50),
+				nm_outro_orgao                varchar(50),
+				nm_responsavel_outro_orgao    varchar(50),
+				blb_diagrama                  bytea,
+				img_diagrama                  bytea,
+				img_diagrama                  bytea,
+				txt_descricao_sumaria         text,
+				tp_caracteristica_acidente    smallint,
+				tp_condicao_via               smallint,
+				tp_pavimento                  smallint,
+				tp_condicao_clima             smallint,
+				tp_tracado_via                smallint,
+				nr_protocolo                  varchar(32),
+				st_boat                       smallint,
+				nm_outra_condicao_via         varchar(50),
+				nm_outro_pavimento            varchar(50),
+				nm_outra_condicao_clima       varchar(50),
+				lg_dano_patrimonio_publico    smallint,
+				lg_dano_meio_ambiente         smallint,
+				txt_justificativa             text,
+			);
+		</DDL>
+		<DDL>ALTER TABLE mob_boat ADD CONSTRAINT mob_boat_pkey PRIMARY KEY (cd_boat);</DDL>
+		<DDL>ALTER TABLE mob_boat ADD CONSTRAINT mob_boat_cd_agente_fkey FOREIGN KEY (cd_agente) REFERENCES agente(cod_agente);</DDL>
+		<DDL>ALTER TABLE mob_boat ADD CONSTRAINT mob_boat_cd_usuario_fkey FOREIGN KEY (cd_usuario) REFERENCES usuario(cod_usuario);</DDL>
+		<DDL>ALTER TABLE mob_boat ADD CONSTRAINT mob_boat_cd_cidade_fkey FOREIGN KEY (cd_cidade) REFERENCES grl_cidade(cd_cidade);</DDL>
+		<DDL>ALTER TABLE mob_boat ADD CONSTRAINT mob_boat_cd_tipo_acidente_fkey FOREIGN KEY (cd_tipo_acidente) REFERENCES mob_tipo_acidente(cd_tipo_acidente);</DDL>
+		<DDL>ALTER TABLE mob_boat ADD CONSTRAINT mob_boat_cd_condicao_via_fkey FOREIGN KEY (cd_condicao_via) REFERENCES mob_condicao_via(cd_condicao_via);</DDL>
+		<DDL>ALTER TABLE mob_boat ADD CONSTRAINT mob_boat_cd_tipo_pavimento_fkey FOREIGN KEY (cd_tipo_pavimento) REFERENCES mob_tipo_pavimento(cd_tipo_pavimento);</DDL>
+		<DDL>ALTER TABLE mob_boat ADD CONSTRAINT mob_boat_cd_condicao_clima_fkey FOREIGN KEY (cd_condicao_clima) REFERENCES mob_condicao_clima(cd_condicao_clima);</DDL>
+		
+		<!-- mob_boat_veiculo -->
+		<DDL>
+			CREATE TABLE IF NOT EXISTS mob_boat_veiculo
+			(
+				cd_boat_veiculo       	  integer NOT NULL ,
+				cd_boat               	  integer  NOT NULL ,
+				cd_veiculo            	  integer,
+				cd_cidade            	  integer,
+				cd_especie            	  integer,
+				cd_marca              	  integer,
+				cd_cor                	  integer,
+				nm_proprietario       	  varchar(50),
+				ds_endereco           	  varchar(50),
+				tp_documento          	  smallint,
+				nr_documento          	  varchar(30),
+				nm_condutor          	  varchar(50),
+				nr_cnh_condutor      	  varchar(20),
+				uf_cnh_condutor       	  varchar(2),
+				nr_placa              	  varchar(30)  NOT NULL ,
+				nr_renavam                varchar(30),
+				txt_declaracao_condutor   text,
+				ds_endereco_condutor      text,
+				nr_telefone_condutor      varchar(20),
+				id_veiculo                varchar(10),
+				tp_categoria_cnh          varchar(3),
+				tp_sexo                   smallint,
+				nr_idade                  integer,
+				nr_documento_condutor     varchar(30),
+				dt_vencimento_cnh         timestamp without time zone,
+				dt_primeira_habilitacao   timestamp without time zone,
+				lg_condutor_evadiu        smallint,
+				nr_telefone_proprietario  varchar(30),
+				nr_chassi                 varchar(30) ,
+				lg_busca_detran           smallint ,
+				lg_dano_dianteira_direita  smallint ,
+				lg_dano_dianteira_esquerda smallint ,
+				lg_dano_lateral_direita    smallint ,
+				lg_dano_lateral_esquerda   smallint ,
+				lg_dano_traseira_direita   smallint ,
+				lg_dano_traseira_esquerda  smallint
+			);
+		</DDL>
+		
+		<DDL>ALTER TABLE mob_boat_veiculo ADD CONSTRAINT mob_boat_veiculo_pkey PRIMARY KEY (cd_boat_veiculo,cd_boat);</DDL>
+		<DDL>ALTER TABLE mob_boat_veiculo ADD CONSTRAINT mob_boat_veiculo_cd_boat_fkey FOREIGN KEY (cd_boat) REFERENCES mob_boat(cd_boat);</DDL>
+		<DDL>ALTER TABLE mob_boat_veiculo ADD CONSTRAINT mob_boat_veiculo_cd_veiculo_fkey FOREIGN KEY (cd_veiculo) REFERENCES fta_veiculo(cd_veiculo);</DDL>
+		<DDL>ALTER TABLE mob_boat_veiculo ADD CONSTRAINT mob_boat_veiculo_cd_tipo_fkey FOREIGN KEY (cd_tipo) REFERENCES tipo_veiculo(cod_tipo);</DDL>
+		<DDL>ALTER TABLE mob_boat_veiculo ADD CONSTRAINT mob_boat_veiculo_cd_cor_fkey FOREIGN KEY (cd_cor) REFERENCES cor(cod_cor);</DDL>
+		<DDL>ALTER TABLE mob_boat_veiculo ADD CONSTRAINT mob_boat_veiculo_cd_marca_fkey FOREIGN KEY (cd_marca) REFERENCES marca_modelo(cod_marca);</DDL>
+		<DDL>ALTER TABLE mob_boat_veiculo ADD CONSTRAINT mob_boat_veiculo_cd_categoria_fkey FOREIGN KEY (cd_categoria) REFERENCES categoria_veiculo(cod_categoria);</DDL>
+		
+		<!-- mob_boat_imagem -->
+		<DDL>
+			CREATE TABLE IF NOT EXISTS mob_boat_imagem
+			(
+				cd_imagem             integer  NOT NULL ,
+				cd_boat_veiculo       integer  NOT NULL ,
+				cd_boat               integer  NOT NULL ,
+				blb_imagem            bytea,
+				nm_url_imagem         text,
+				tp_posicao            smallint 
+			);
+		</DDL>
+		<DDL>ALTER TABLE mob_boat_imagem ADD CONSTRAINT mob_boat_imagem_pkey PRIMARY KEY (cd_imagem,cd_boat_veiculo,cd_boat);</DDL>
+		<DDL>ALTER TABLE mob_boat_imagem ADD CONSTRAINT mob_boat_imagem_cd_boat FOREIGN KEY (cd_boat) REFERENCES mob_boat(cd_boat);</DDL>
+		<DDL>ALTER TABLE mob_boat_imagem ADD CONSTRAINT mob_boat_imagem_cd_boat_veiculo FOREIGN KEY (cd_boat_veiculo) REFERENCES mob_boat_veiculo(cd_boat_veiculo);</DDL>
+		
+		<!-- mob_boat_ocorrencia -->
+		<DDL>
+			CREATE TABLE IF NOT EXISTS CREATE TABLE mob_boat_ocorrencia
+			(
+				cd_boat_ocorrencia    integer  NOT NULL,
+				cd_boat               integer,
+				cd_agente             integer,
+				cd_ocorrencia         integer,
+				dt_ocorrencia         timestamp without time zone,
+				ds_ocorrencia         text,
+				txt_observacao        text 
+			);
+		</DDL>
+		<DDL>ALTER TABLE mob_boat_ocorrencia ADD CONSTRAINT mob_boat_ocorrencia_pkey PRIMARY KEY (cd_boat_ocorrencia);</DDL>
+		<DDL>ALTER TABLE mob_boat_ocorrencia ADD CONSTRAINT mob_boat_ocorrencia_cd_boat FOREIGN KEY (cd_boat) REFERENCES mob_boat(cd_boat);</DDL>
+		<DDL>ALTER TABLE mob_boat_ocorrencia ADD CONSTRAINT mob_boat_ocorrencia_cd_agente FOREIGN KEY (cd_agente) REFERENCES agente(cod_agente);</DDL>
+		<DDL>ALTER TABLE mob_boat_ocorrencia ADD CONSTRAINT mob_boat_ocorrencia_cd_ocorrencia FOREIGN KEY (cd_ocorrencia) REFERENCES mob_ocorrencia(cd_ocorrencia);</DDL>
+
+		<!-- mob_inconsistencia -->
+		<DDL>
+			CREATE TABLE IF NOT EXISTS CREATE TABLE mob_inconsistencia
+			(
+				cd_inconsistencia     integer  NOT NULL,
+				nm_inconsistencia     text,
+				tp_inconsistencia     smallint
+			);
+		</DDL>
+		<DDL>ALTER TABLE mob_inconsistencia ADD CONSTRAINT mob_inconsistencia_pkey PRIMARY KEY (cd_inconsistencia);</DDL>
+		
+		<!-- mob_boat_inconsistencia -->
+		<DDL>
+			CREATE TABLE mob_boat_inconsistencia
+			(
+				cd_boat               integer  NOT NULL ,
+				cd_inconsistencia     integer  NOT NULL 
+			);
+		</DDL>
+		<DDL>ALTER TABLE mob_boat_inconsistencia ADD CONSTRAINT mob_boat_inconsistencia_pkey PRIMARY KEY (cd_boat,cd_inconsistencia);</DDL>
+		<DDL>ALTER TABLE mob_boat_inconsistencia ADD CONSTRAINT mob_boat_inconsistencia_cd_boat FOREIGN KEY (cd_boat) REFERENCES mob_boat(cd_boat);</DDL>
+		<DDL>ALTER TABLE mob_boat_inconsistencia ADD CONSTRAINT mob_boat_inconsistencia_cd_inconsistencia FOREIGN KEY (cd_inconsistencia) REFERENCES mob_inconsistencia(cd_inconsistencia);</DDL>
+	</release>
+	<release id="edgard20210720" date="20/07/2021" autor="Edgard" description="Criação de tabela para relacão de boats">	
+		<!-- mob_boat_relacao -->
+		<DDL>
+			CREATE TABLE mob_boat_relacao
+			(
+				cd_boat               integer  NOT NULL ,
+				cd_boat_relacao       integer  NOT NULL 
+			);
+		</DDL>
+		<DDL>ALTER TABLE mob_boat_relacao ADD CONSTRAINT mob_boat_relacao_pkey  PRIMARY KEY (cd_boat,cd_boat_relacao);</DDL>
+		<DDL>ALTER TABLE mob_boat_relacao ADD CONSTRAINT mob_boat_relacao_cd_boat FOREIGN KEY (cd_boat) REFERENCES mob_boat(cd_boat);</DDL>
+		<DDL>ALTER TABLE mob_boat_relacao ADD CONSTRAINT mob_boat_relacao_cd_boat_relacao FOREIGN KEY (cd_boat_relacao) REFERENCES mob_boat(cd_boat);</DDL>
+	</release>
+	<release id="edgard20210902" date="02/09/2021" autor="Edgard" description="Criação de colunas em mob_boat e mob_boat_veiculo">
+		<DDL>ALTER TABLE mob_boat ADD COLUMN lg_dano_patrimonio_publico SMALLINT;</DDL>
+		<DDL>ALTER TABLE mob_boat ADD COLUMN lg_dano_meio_ambiente SMALLINT;</DDL>
+		<DDL>ALTER TABLE mob_boat ADD COLUMN tp_tracado_via SMALLINT;</DDL>
+		<DDL>ALTER TABLE mob_boat_veiculo ADD CONSTRAINT mob_boat_veiculo_cd_boat_cd_boat_veiculo PRIMARY KEY (cd_boat, cd_boat_veiculo);</DDL>
+		<DDL>ALTER TABLE mob_boat_veiculo ADD COLUMN lg_busca_detran SMALLINT;</DDL>
+	</release>
+	<release id="edgard20210914" date="14/09/2021" autor="Edgard" description="Criação de colunas em mob_boat_veiculo referente aos danos do veículo">
+		<DDL>ALTER TABLE mob_boat_veiculo ADD COLUMN lg_dano_dianteira_direita SMALLINT;</DDL>
+		<DDL>ALTER TABLE mob_boat_veiculo ADD COLUMN lg_dano_dianteira_esquerda SMALLINT;</DDL>
+		<DDL>ALTER TABLE mob_boat_veiculo ADD COLUMN lg_dano_lateral_direita SMALLINT;</DDL>
+		<DDL>ALTER TABLE mob_boat_veiculo ADD COLUMN lg_dano_lateral_esquerda SMALLINT;</DDL>
+		<DDL>ALTER TABLE mob_boat_veiculo ADD COLUMN lg_dano_traseira_direita SMALLINT;</DDL>
+		<DDL>ALTER TABLE mob_boat_veiculo ADD COLUMN lg_dano_traseira_esquerda SMALLINT;</DDL>
+	</release>
+	<release id="edgard20210914_1" date="14/09/2021" autor="Edgard" description="Criação de colunas em mob_boat_veiculo referente a tipo e categoria de veículo e alguns índices">
+		<DDL>ALTER TABLE mob_boat_veiculo ADD COLUMN cd_tipo INTEGER;</DDL>
+		<DDL>ALTER TABLE mob_boat_veiculo ADD COLUMN cd_categoria INTEGER;</DDL>
+		<DDL>ALTER TABLE mob_boat_veiculo ADD COLUMN nr_ano_fabricacao VARCHAR(5);</DDL>
+		<DDL>ALTER TABLE mob_boat_veiculo ADD CONSTRAINT mob_boat_veiculo_cd_veiculo_fkey FOREIGN KEY (cd_veiculo) REFERENCES fta_veiculo(cd_veiculo);</DDL>
+		<DDL>ALTER TABLE mob_boat_veiculo ADD CONSTRAINT mob_boat_veiculo_cd_tipo_fkey FOREIGN KEY (cd_tipo) REFERENCES tipo_veiculo(cod_tipo);</DDL>
+		<DDL>ALTER TABLE mob_boat_veiculo ADD CONSTRAINT mob_boat_veiculo_cd_cor_fkey FOREIGN KEY (cd_cor) REFERENCES cor(cod_cor);</DDL>
+		<DDL>ALTER TABLE mob_boat_veiculo ADD CONSTRAINT mob_boat_veiculo_cd_marca_fkey FOREIGN KEY (cd_marca) REFERENCES marca_modelo(cod_marca);</DDL>
+		<DDL>ALTER TABLE mob_boat_veiculo ADD CONSTRAINT mob_boat_veiculo_cd_categoria_fkey FOREIGN KEY (cd_categoria) REFERENCES categoria_veiculo(cod_categoria);</DDL>
+	</release>
+	<release id="edgard20210914_2" date="14/09/2021" autor="Edgard" description="Criação de colunas em mob_boat_veiculo referente aos documentos do condutor">
+		<DDL>ALTER TABLE mob_boat_veiculo ADD COLUMN nr_rg_condutor VARCHAR(30);</DDL>
+		<DDL>ALTER TABLE mob_boat_veiculo ADD COLUMN nm_orgao_rg_condutor VARCHAR(10);</DDL>
+	</release>
+	<release id="edgard20210915_1" date="15/09/2021" autor="Edgard" description="Criação de colunas em mob_declarante referente a profissão">
+		<DDL>ALTER TABLE mob_declarante  ADD COLUMN nm_profissao VARCHAR(30);</DDL>
+	</release>
+	<release id="edgard20211006" date="06/10/2021" autor="Edgard" description="Criação de colunas em mob_declarante referente a profissão">
+		<DDL>
+		CREATE TABLE IF NOT EXISTS mob_declarante
+		(
+		    cd_declarante integer NOT NULL,
+		    nm_declarante character varying(50),
+		    nr_cpf character varying(11),
+		    dt_nascimento timestamp without time zone,
+		    tp_sexo smallint,
+		    nr_telefone character varying(16),
+		    nr_celular character varying(16),
+		    nm_email character varying(100),
+		    nr_cnh character varying(16),
+		    sg_uf_cnh character varying(2),
+		    nm_profissao character varying(30)
+		)
+		</DDL>
+		<DDL>ALTER TABLE mob_declarante ADD CONSTRAINT mob_declarante_pkey PRIMARY KEY (cd_declarante);</DDL>
+	</release>
+	<release id="edgard20211006_1" date="06/10/2021" autor="Edgard" description="Criação da tabela mob_boat_declarante">
+		<DDL>
+		CREATE TABLE IF NOT EXISTS mob_boat_declarante
+		(
+		    cd_boat integer NOT NULL,
+		    cd_declarante integer NOT NULL,
+		    tp_relacao smallint NOT NULL,
+		    ds_declaracao text
+		)
+		</DDL>
+		<DDL>ALTER TABLE mob_boat_declarante ADD CONSTRAINT mob_boat_declarante_pkey PRIMARY KEY (cd_boat, cd_declarante);</DDL>
+		<DDL>ALTER TABLE mob_boat_declarante ADD CONSTRAINT mob_boat_declarante_cd_boat_fkey FOREIGN KEY (cd_boat) REFERENCES mob_boat(cd_boat);</DDL>
+		<DDL>ALTER TABLE mob_boat_declarante ADD CONSTRAINT mob_boat_declarante_cd_declarante_fkey FOREIGN KEY (cd_declarante) REFERENCES mob_declarante(cd_declarante);</DDL>
+	</release>
+	
+	<release id="edgard20211006_2" date="06/10/2021" autor="Edgard" description="Mudança da coluna tp_relacao de mob_declarante para mob_boat_declarante">
+		<DDL>ALTER TABLE mob_declarante DROP COLUMN tp_relacao;</DDL>
+		<DDL>ALTER TABLE mob_boat_declarante ADD COLUMN tp_relacao smallint;</DDL>
+	</release>
+	<release id="edgard20212506" date="25/11/2021" autor="Edgard" description="Mudança das colunas de data de mob_boat e mob_boat_veiculo removendo o timezone">
+		<DDL>ALTER TABLE mob_boat ALTER COLUMN dt_ocorrencia TYPE timestamp without time zone USING dt_ocorrencia;</DDL>
+		<DDL>ALTER TABLE mob_boat ALTER COLUMN dt_comunicacao TYPE timestamp without time zone USING dt_comunicacao;</DDL>
+		<DDL>ALTER TABLE mob_boat_veiculo ALTER COLUMN dt_primeira_habilitacao TYPE timestamp without time zone USING dt_primeira_habilitacao;</DDL>
+		<DDL>ALTER TABLE mob_boat_veiculo ALTER COLUMN dt_vencimento_cnh TYPE timestamp without time zone USING dt_vencimento_cnh;</DDL>
+	</release>
+	
+	<release id="gabriel20221124" date="24/11/2022" autor="Gabriel" description="Adicionar campo de logradouro de infracao em ait">
+		<DDL>ALTER TABLE str_ait ADD COLUMN cd_logradouro_infracao INTEGER;</DDL>
+		<DDL>ALTER TABLE str_ait ADD CONSTRAINT str_ait_cd_logradouro_infracao_fkey FOREIGN KEY (cd_logradouro_infracao) REFERENCES grl_logradouro(cd_logradouro) ON DELETE NO ACTION ON UPDATE NO ACTION;</DDL>
+	</release>
+	
+	<release id="edgard20230427" date="27/04/2023" autor="Edgard" description="Criação de parâmetro para ativar/desativar emissão de NAI/NIP pelo portal.">
+		<DDL>ALTER TABLE parametro ADD COLUMN LG_PORTAL_IMPRESSAO_NAI_NIP smallint DEFAULT(0);</DDL>
+	</release>
+	
+	<release id="felipe20230427" date="27/04/2023" autor="Felipe D. Santos" description="Criação de parâmetro para ativar/desativar calculo de juros NIP na segunda via">
+		<DDL>ALTER TABLE parametro ADD COLUMN MOB_CALCULAR_JUROS_NIP smallint DEFAULT(0);</DDL>
+	</release>
+	
+	<release id="felipe20230502" date="02/05/2023" autor="Felipe D. Santos" description="Criação da coluna para banco conveniado">
+		<DDL>ALTER TABLE grl_banco ADD COLUMN banco_conveniado smallint DEFAULT(0)</DDL>
+	</release>
+	
+	<release id="alisson20230619" date="19/06/2023" autor="Alisson Rodrigues" description="Alteração da tabela parametro para a adição de coluna para impressão de andamento do AIT">
+		<DDL>ALTER TABLE parametro ADD COLUMN lg_portal_antigo_impressao_ait smallint DEFAULT(0);</DDL>
+	</release>
+	
+	<release id="danilo20230623" date="23/06/2023" autor="Danilo Alves" description="Alteração da tabela parametro para a adição ds coluna lg_google_map">
+		<DDL>ALTER TABLE parametro ADD COLUMN lg_google_map smallint DEFAULT(1);</DDL>
+	</release>
+	
+	<release id="yuriBrito20230811" date="11/08/2023"
+		autor="Yuri Brito"
+		description="Tabela que contém os termos e condições do eDat">
+		<DDL>
+			CREATE TABLE IF NOT EXISTS mob_edat_termos
+			(
+				cd_termo integer NOT NULL,
+				ds_termo text,
+				nr_posicao integer NOT NULL
+			);
+		</DDL>
+	</release>
+	
+	<release id="danilo20230906" date="06/09/2023" autor="Danilo Alves" description="Alteração da tabela parametro para a adição ds coluna mob_obrigatoriedade_publicaco">
+		<DDL>ALTER TABLE parametro ADD COLUMN mob_obrigatoriedade_publicacao smallint DEFAULT(0);</DDL>
+	</release>
+		
+	<release id="breno20230912" date="12/09/2023" autor="Breno Tainan" description="Criação de parâmetros para e-cartas">
+		<DDL>ALTER TABLE parametro ADD COLUMN mob_informacoes_adicionais_nai text;</DDL>
+		<DDL>ALTER TABLE parametro ADD COLUMN mob_informacoes_adicionais_nip text;</DDL>
+		<DDL>ALTER TABLE parametro ADD COLUMN mob_tipo_envio_correios_nai text;</DDL>
+		<DDL>ALTER TABLE parametro ADD COLUMN mob_tipo_envio_correios_nip text;</DDL>
+	</release>
+	
+	<release id="breno20230913" date="13/09/2023" autor="Breno Tainan" description="Criação de parâmetros para e-cartas">
+		<DDL>ALTER TABLE parametro ADD COLUMN mob_texto_imformativo_condutor text;</DDL>
+	</release>
+	
+	<release id="breno20230921" date="21/09/2023" autor="Breno Tainan" description="Criação coluna para e-cartas">
+		<DDL>ALTER TABLE stt_correios_etiqueta ADD COLUMN cd_lote_impressao integer;</DDL>
+	</release>
+	
+	<release id="breno20230922" date="22/09/2023" autor="Breno Tainan" description="Criação de parâmetros para e-cartas">
+		<DDL>ALTER TABLE parametro ADD COLUMN ect_lg_autorizacao_cep_invalido integer;</DDL>
+	</release>
+	
+	<release id="yuri20231026" date="26/10/2023" autor="Yuri Brito" description="Criação de parâmetros para videomonitoramento">
+		<DDL>ALTER TABLE parametro ADD COLUMN CD_EQUIPAMENTO_VIDEOMONITORAMENTO integer;</DDL>
+    </release>
+
+	<release id="danilo20231018" date="18/10/2023" autor="Danilo Alves" description="Criação do parâmetros LG_CLIENTE_ECARTAS para e-cartas">
+		<DDL>ALTER TABLE parametro ADD COLUMN LG_CLIENTE_ECARTAS smallint DEFAULT(0);</DDL>
+	</release>
+	
+	<release id="brenotainan20232510" date="25/10/2023" autor="Breno Tainan Aguiar" description="Criar tabela que liga arquivo a lote">
+		<DDL>
+			CREATE TABLE MOB_LOTE_IMPRESSAO_ARQUIVO
+			(
+				cd_lote_impressao INTEGER NOT NULL,
+				cd_arquivo INTEGER NOT NULL
+			);
+		</DDL>
+		<DDL>
+			ALTER TABLE MOB_LOTE_IMPRESSAO_ARQUIVO ADD PRIMARY KEY (cd_lote_impressao, cd_arquivo);
+		</DDL>
+	</release>
+	
+	<release id="brenotainan20232510" date="25/10/2023" autor="Breno Tainan Aguiar" description="Criação de parâmetros para e-cartas">
+		<DDL>ALTER TABLE parametro ADD COLUMN TP_ARQUIVO_ARQUIVO_DE_SERVICO smallint;</DDL>
+		<DDL>ALTER TABLE parametro ADD COLUMN TP_ARQUIVO_RECIBO smallint;</DDL>
+		<DDL>ALTER TABLE parametro ADD COLUMN TP_ARQUIVO_INCONSISTENCIA smallint;</DDL>
+		<DDL>ALTER TABLE parametro ADD COLUMN TP_ARQUIVO_RESPOSTA smallint;</DDL>
+		<DDL>ALTER TABLE parametro ADD COLUMN MOB_IMPRESSOS_TP_MODELO_NIP smallint;</DDL>
+		<DDL>ALTER TABLE parametro ADD COLUMN MOB_IMPRESSOS_TP_MODELO_NAI smallint;</DDL>
+	</release>
+	
+	<release id="yuri20231020" date="20/10/2023" autor="Yuri Brito" description="Criação de parâmetro para login">
+		<DDL>ALTER TABLE parametro ADD COLUMN MOB_USER_EDAT integer;</DDL>
+	</release>
+	
+	<release id="yuri20231020" date="20/10/2023" autor="Yuri Brito" description="Criação de parâmetro para login">
+		<DDL>ALTER TABLE parametro ADD COLUMN MOB_USER_PORTAL integer;</DDL>
+	</release>
+	
+	<release id="yuri20231124" date="24/11/2023" autor="Yuri Brito" description="Criação de parâmetro para identificação de sistema">
+		<DDL>ALTER TABLE parametro ADD COLUMN NM_SISTEMA_PORTAL varchar(50);</DDL>
+		<DDL>ALTER TABLE parametro ADD COLUMN NM_SISTEMA_ETRANSITO varchar(50);</DDL>
+	</release>
+	
+	<release id="felipe07122023" date="07/12/2023" autor="Felipe D. Santos" description="Criação de parâmetro para mensagem de JARI indeferida.">
+		<DDL>ALTER TABLE parametro ADD COLUMN MOB_BLB_JARI_SEM_PROVIMENTO varchar;</DDL>
+	</release>
+	
+	<release id="felipe07122023" date="07/12/2023" autor="Felipe D. Santos" description="Criação de parâmetro para mensagem de JARI deferida.">
+		<DDL>ALTER TABLE parametro ADD COLUMN MOB_BLB_JARI_COM_PROVIMENTO varchar;</DDL>
+	</release>
+
+	<release id="danilo22012024" date="22/01/2024" autor="Danilo Alves" description="Criação de parâmetro para nome do responsável por assinar credencial de estacionamento.">
+		<DDL>ALTER TABLE parametro ADD COLUMN PTC_NM_EMISSOR_RESPONSAVEL varchar;</DDL>
+	</release>
+	
+	<release id="felipe14012024" date="14/01/2024" autor="Felipe D. Santos" description="Criação da tabela de notificações para estacionamento digital">
+		<DDL>
+			CREATE TABLE mob_evento_estacionamento_digital (
+   	 			cd_evento INTEGER PRIMARY KEY,
+    			nr_notificacao VARCHAR(10),
+    			ds_notificacao VARCHAR(255),
+    			st_notificacao INTEGER,
+    			ds_motivo_cancelamento VARCHAR(255),
+    			dt_tempo_verificacao TIMESTAMP
+    			FOREIGN KEY (cd_evento) REFERENCES mob_evento_equipamento(cd_evento)
+			);		
+		</DDL>
+	</release>
+	
+	<release id="felipe140120241" date="14/01/2024" autor="Felipe D. Santos" description="Criação da tabela de detales das notificações para estacionamento digital">
+		<DDL>
+			CREATE TABLE mob_evento_estacionamento_digital_detalhes (
+    			cd_evento INTEGER PRIMARY KEY,
+    			id_dispositivo VARCHAR(50),
+    			nr_vaga VARCHAR(10),
+    			nm_rua_notificacao VARCHAR(255),
+    			nr_imovel_referencia VARCHAR(10),
+    			id_colaborador VARCHAR(50),
+    			FOREIGN KEY (cd_evento) REFERENCES mob_evento_equipamento(cd_evento)
+			);	
+		</DDL>
+	</release>
+	
+	<release id="felipe15012024" date="15/01/2024" autor="Felipe D. Santos" description="Criação da tabela de imagens das notificações para estacionamento digital">
+		<DDL>
+			CREATE TABLE mob_evento_estacionamento_digital_imagem (
+    			cd_evento INTEGER,
+    			url_imagem VARCHAR(500),
+    			vl_latitude DECIMAL,
+    			vl_longitude DECIMAL,
+    			PRIMARY KEY (cd_evento, ur_imagem),
+    			FOREIGN KEY (cd_evento) REFERENCES mob_evento_equipamento(cd_evento)
+			);
+		</DDL>
+	</release>
+	
+	<release id="brenotainan20240312" date="12/03/2024" autor="Breno Tainan Aguiar" description="Tabela para gerenciamnento de fix">
+		<DDL>
+			CREATE TABLE IF NOT EXISTS sis_fix
+			(
+				cd_fix        integer NOT NULL PRIMARY KEY,
+			    nm_class      varchar(100),
+			    nm_method     varchar(100),
+			    id_fix        varchar(50),
+			    dt_execucao   timestamp,
+			    lg_apenas_uma smallint
+			);
+		</DDL>
+	</release>
+	
+	<release id="brenotainan20240408" date="08/04/2024" autor="Breno Tainan Aguiar" description="Criação de parâmetro para eCarta base antiga, lote NA">
+		<DDL>ALTER TABLE parametro ADD COLUMN MOB_PERIODO_DIAS_EMISSAO_AIT integer;</DDL>
+	</release>
+	
+	<release id="daniloalves20240514" date="14/05/2024" autor="Danilo Alves" description="Criação da tabela grl_endereco">
+		<DDL>
+			CREATE TABLE IF NOT EXISTS grl_endereco
+			(
+    			cd_endereco SERIAL PRIMARY KEY,
+    			cd_cidade INTEGER,
+    			ds_logradouro VARCHAR(255),
+    			nr_cep VARCHAR(9),
+    			nr_endereco VARCHAR(50),
+    			ds_complemento VARCHAR(255),
+    			nm_bairro VARCHAR(100)
+			);
+
+		</DDL>
+		<DDL>ALTER TABLE grl_endereco ADD CONSTRAINT grl_endereco_cd_cidade_fkey FOREIGN KEY (cd_cidade) REFERENCES grl_cidade(cd_cidade);</DDL>
+	</release>
+	
+	<release id="daniloalves20240515" date="15/05/2024" autor="Danilo Alves" description="Criação da tabela grl_endereco_boat">
+		<DDL>
+			CREATE TABLE IF NOT EXISTS grl_endereco_boat
+			(
+				cd_boat INTEGER NOT NULL,
+				cd_endereco INTEGER NOT NULL
+			);
+		</DDL>
+		<DDL>ALTER TABLE grl_endereco_boat ADD PRIMARY KEY (cd_boat, cd_endereco);</DDL>
+		<DDL>ALTER TABLE grl_endereco_boat ADD CONSTRAINT grl_endereco_boat_cd_boat_fkey FOREIGN KEY (cd_boat) REFERENCES mob_boat(cd_boat);</DDL>
+		<DDL>ALTER TABLE grl_endereco_boat ADD CONSTRAINT grl_endereco_boat_cd_endereco_fkey FOREIGN KEY (cd_endereco) REFERENCES grl_endereco(cd_endereco);</DDL>
+	</release>
+	
+	<release id="breno11062024" date="11/06/2024" autor="Breno Tainan Aguiar" description="Criação de parâmetro para mensagem educativa NAI no portal cidadão.">
+		<DDL>ALTER TABLE parametro ADD COLUMN MOB_BLB_MENSAGEM_EDUCATIVA_NAI varchar;</DDL>
+	</release>
+	
+	<release id="edgard20240816" date="16/08/2024" autor="Edgard Lopes" description="Criação de tabelas e colunas de ocorrência">
+		 <DDL>
+	        CREATE TABLE IF NOT EXISTS public.mob_ocorrencia
+	        (
+	            cd_ocorrencia integer NOT NULL
+	        );
+	    </DDL>
+	    <DDL>ALTER TABLE mob_ocorrencia ADD CONSTRAINT mob_ocorrencia_pkey PRIMARY KEY (cd_ocorrencia);</DDL>
+		<DDL>ALTER TABLE mob_ocorrencia ADD COLUMN ds_ocorrencia TEXT;</DDL>
+	    <DDL>ALTER TABLE mob_ocorrencia ADD COLUMN id_movimentacao integer;</DDL>
+	    <DDL>ALTER TABLE mob_ocorrencia ADD COLUMN id_parecer integer;</DDL>
+	    <DDL>ALTER TABLE mob_ocorrencia ADD COLUMN tp_ocorrencia smallint;</DDL>
+	</release>
+	
+	<release id="Iago31012025" date="31/01/2025" autor="Iago Almeida" description="Adicionando coluna txt_cancelamento em ait">
+		<DDL>
+			ALTER TABLE ait ADD COLUMN txt_cancelamento TEXT;
+		</DDL>
+	</release>
+	
+	<release id="Ricardo25022025_1" date="25/02/2025" autor="Ricardo Almeida" description="Adicionando colunas em parâmetro para Zona Azul">
+		<DDL>ALTER TABLE parametro ADD COLUMN cd_equipamento_estacionamento_digital INT;</DDL>
+		<DDL>ALTER TABLE parametro ADD COLUMN mob_nr_infracao_estacionamento_digital VARCHAR(10);</DDL>
+		<DDL>ALTER TABLE parametro ADD COLUMN cd_tipo_agrupamento_triagem INT;</DDL>
+		<DDL>ALTER TABLE parametro ADD COLUMN mob_evento_estacionamento_digital INT;</DDL>
+	</release>
+	
+	<release id="Ricardo25022025_2" date="25/02/2025" autor="Ricardo Almeida" description="Criação de tabela mob_evento_estacionamento_digital para Zona Azul">
+		<DDL>
+	        CREATE TABLE mob_evento_estacionamento_digital (
+   	 			cd_evento INTEGER PRIMARY KEY,
+    			nr_notificacao VARCHAR(10),
+    			ds_notificacao VARCHAR(255),
+    			st_notificacao INTEGER,
+    			ds_motivo_cancelamento VARCHAR(255),
+    			dt_tempo_verificacao TIMESTAMP,
+    			FOREIGN KEY (cd_evento) REFERENCES mob_evento_equipamento(cd_evento)
+			);	
+	    </DDL>
+	</release>
+	
+	<release id="Ricardo25022025_3" date="25/02/2025" autor="Ricardo Almeida" description="Criação de tabela mob_evento_estacionamento_digital_imagem para Zona Azul">
+		<DDL>
+	        CREATE TABLE mob_evento_estacionamento_digital_imagem (
+    			cd_evento INTEGER,
+    			url_imagem VARCHAR(510),
+    			vl_latitude DECIMAL,
+    			vl_longitude DECIMAL,
+    			PRIMARY KEY (cd_evento, url_imagem),
+    			FOREIGN KEY (cd_evento) REFERENCES mob_evento_equipamento(cd_evento)
+			);
+	    </DDL>
+	</release>
+	
+	<release id="Ricardo25022025_4" date="25/02/2025" autor="Ricardo Almeida" description="Criação de tabela mob_evento_veiculo_whitelist para Zona Azul">
+		<DDL>
+	        CREATE TABLE mob_evento_veiculo_whitelist (
+			    cd_whitelist SERIAL PRIMARY KEY,
+			    nr_placa VARCHAR(255) NOT NULL,
+			    dt_inclusao TIMESTAMP NOT NULL,
+			    cd_usuario_inclusao INTEGER NOT NULL,
+			    cd_orgao INTEGER,
+			    FOREIGN KEY (cd_orgao) REFERENCES mob_orgao(cd_orgao)
+			);
+	    </DDL>
+	</release>
+	
+	<release id="Ricardo25022025_6" date="25/02/2025" autor="Ricardo Almeida" description="Adicionando coluna cd_pessoa na tabela usuario">
++		<DDL>ALTER TABLE usuario ADD COLUMN cd_pessoa INT;</DDL>
++	</release>
+
+	<release id="LeonaroVilasboas25022025" date="25/02/2025" autor="Leonardo Vilasboas" description="Criação da tabela mob_convenio">
+		<DDL>
+			CREATE TABLE IF NOT EXISTS mob_convenio (
+				cd_convenio INTEGER NOT NULL,
+				nm_convenio VARCHAR(100),
+				lg_default SMALLINT,
+	            tp_convenio SMALLINT			
+			);
+		</DDL>
+		<DDL>ALTER TABLE mob_convenio ADD PRIMARY KEY (cd_convenio);</DDL>
+		<DDL>ALTER TABLE ait ADD COLUMN cd_convenio INTEGER;</DDL>
+		<DDL>ALTER TABLE ait ADD FOREIGN KEY (cd_convenio) REFERENCES mob_convenio (cd_convenio);</DDL>
+	</release>
+	
+	<release id="LeonaroVilasboas05032025" date="05/03/2025" autor="Leonardo Vilasboas" description="criação da tabela mob_acao_usuario">
+		<DDL>
+			CREATE TABLE mob_acao_usuario (
+				cd_acao INTEGER NOT NULL,
+				cd_usuario INTEGER NOT NULL,
+				ds_acao VARCHAR,
+				dt_acao TIMESTAMP WITHOUT TIME ZONE
+			);
+		</DDL>
+		<DDL>
+			ALTER TABLE mob_acao_usuario
+			ADD PRIMARY KEY (cd_acao);
+		</DDL>
+		<DDL>
+			ALTER TABLE mob_acao_usuario
+			ADD FOREIGN KEY (cd_usuario) REFERENCES usuario (cod_usuario); 
+		</DDL>
+	</release>
+	
+	<release id="LeonaroVilasboas07032025" date="07/03/2025" autor="Leonardo Vilasboas" description="criação dos parametros para sincronizacao do APP">
+		<DDL>ALTER TABLE parametro ADD COLUMN MOB_IMPRESSOS_NM_MUNICIPIO_AUTUADOR VARCHAR(256);</DDL>
+		<DDL>ALTER TABLE parametro ADD COLUMN MOB_IMPRESSOS_NM_ORGAO_AUTUADOR VARCHAR(256);</DDL>
+		<DDL>ALTER TABLE parametro ADD COLUMN CD_ORGAO_AUTUADOR INTEGER;</DDL>
+		<DDL>ALTER TABLE parametro ADD COLUMN NM_TITULO_IMPRESSAO_1 VARCHAR(100);</DDL>
+		<DDL>ALTER TABLE parametro ADD COLUMN NM_TITULO_IMPRESSAO_2 VARCHAR(100);</DDL>
+		<DDL>ALTER TABLE parametro ADD COLUMN NM_TITULO_IMPRESSAO_3 VARCHAR(100);</DDL>
+		<DDL>ALTER TABLE parametro ADD COLUMN LG_CONVENIO SMALLINT;</DDL>
+		<DDL>ALTER TABLE parametro ADD COLUMN MOB_IMPRESSAO_RODAPE_APP_AIT VARCHAR(256);</DDL>
+		<DDL>ALTER TABLE parametro ADD COLUMN NM_SENHA_CONSULTA_DETRAN VARCHAR(100);</DDL>
+		<DDL>ALTER TABLE parametro ADD COLUMN NM_USUARIO_CONSULTA_DETRAN VARCHAR(100);</DDL>
+		<DDL>ALTER TABLE parametro ADD COLUMN LG_CADASTRO_HORA_INFRACAO_ALTERAVEL SMALLINT;</DDL>
+		<DDL>ALTER TABLE parametro ADD COLUMN NM_EQUIPAMENTO_PREFIXO VARCHAR(256);</DDL>
+		<DDL>ALTER TABLE parametro ADD COLUMN LG_API_SSL VARCHAR(256);</DDL>
+		<DDL>ALTER TABLE parametro ADD COLUMN NM_API_HOST VARCHAR(256);</DDL>
+		<DDL>ALTER TABLE parametro ADD COLUMN NM_API_PORT VARCHAR(256);</DDL>
+		<DDL>ALTER TABLE parametro ADD COLUMN NM_API_CONTEXT VARCHAR(256);</DDL>
+		<DDL>ALTER TABLE parametro ADD COLUMN NM_API_APIROOT VARCHAR(256);</DDL>
+		<DDL>ALTER TABLE parametro ADD COLUMN CD_USUARIO_MASTER INTEGER;</DDL>
+		<DDL>ALTER TABLE parametro ADD COLUMN LG_OBRIGATORIEDADE_CONSISTENCIA_AIT SMALLINT DEFAULT 0;</DDL>
+	</release>
+	
+	<release id="LeonaroVilasboas01042025" date="01/04/2025" autor="Leonardo Vilasboas" description="Adiciona possiveis dependencias para app novo">
+	    <DDL>
+	        CREATE IF NOT EXISTS TABLE public.srh_funcao (
+	            cd_funcao int4 NOT NULL,
+	            cd_empresa int4 NULL,
+	            nm_funcao varchar(50) NULL,
+	            id_funcao varchar(20) NULL,
+	            CONSTRAINT srh_funcao_pkey PRIMARY KEY (cd_funcao),
+	            CONSTRAINT srh_funcao_cd_empresa_fkey FOREIGN KEY (cd_empresa) REFERENCES public.grl_empresa(cd_empresa)
+	        );
+	    </DDL>
+	    <DDL>
+	        CREATE TABLE IF NOT EXISTS public.grl_pais (
+	            cd_pais integer NOT NULL,
+	            nm_pais character varying(50) NULL,
+	            sg_pais character varying(10) NULL,
+	            cd_regiao integer NULL,
+	            id_pais character varying(20) NULL
+	        );
+	    </DDL>
+	    <DDL>ALTER TABLE public.grl_pais ADD CONSTRAINT grl_pais_pkey PRIMARY KEY (cd_pais);</DDL>
+	    <DDL>
+	        CREATE TABLE IF NOT EXISTS public.mob_orgao (
+	            cd_orgao integer NOT NULL,
+	            nm_orgao character varying(100) NULL,
+	            id_orgao character varying(50) NULL,
+	            cd_responsavel integer NULL,
+	            cd_funcao_responsavel integer NULL,
+	            cd_pessoa_orgao integer NULL,
+	            cd_cidade integer NULL,
+	            cd_agente_responsavel integer NULL,
+	            lg_emitir_ait smallint NULL
+	        );
+	    </DDL>
+	    <DDL>ALTER TABLE public.mob_orgao ADD CONSTRAINT mob_orgao_pkey PRIMARY KEY (cd_orgao)</DDL>
+	    <DDL>
+	        CREATE TABLE IF NOT EXISTS public.grl_grupo_parametro (
+	            cd_grupo_parametro INTEGER NOT NULL,
+	            nm_grupo_parametro VARCHAR(30),
+	            CONSTRAINT grl_grupo_parametro_pkey PRIMARY KEY (cd_grupo_parametro)
+	        ) TABLESPACE pg_default;
+	    </DDL>
+	    <DDL>ALTER TABLE IF EXISTS public.grl_grupo_parametro OWNER TO postgres;</DDL>
+	    <DDL>
+	        CREATE UNIQUE INDEX IF NOT EXISTS xpkgrl_categoria_parametro
+	            ON public.grl_grupo_parametro (cd_grupo_parametro ASC NULLS LAST)
+	            TABLESPACE pg_default;
+	    </DDL>
+	</release>
+
+	<release id="LeonaroVilasboas01042025" date="04/04/2025" autor="Leonardo Vilasboas" description="adiciona parametro que permite alterar endereco de evento zona azul">
+		<DDL>ALTER TABLE parametro ADD COLUMN LG_ENDERECO_ZONA_AZUL_ALTERAVEL SMALLINT DEFAULT 0;</DDL>
+	</release>
+	
+	<release id="LeonaroVilasboas14042025" date="14/04/2025" autor="Leonardo Vilasboas" description="Adiciona coluna nr_ultimo_ait a tabela talonario">
+		<DDL>ALTER TABLE talonario ADD COLUMN nr_ultimo_ait VARCHAR(255);</DDL>
+	</release>
+	
+	<release id="LeonaroVilasboas22042025" date="22/04/2025" autor="Leonardo Vilasboas" description="Criação das tabelas de permissões">
+		<DDL>	
+			CREATE TABLE IF NOT EXISTS seg_sistema (
+				nm_sistema character varying(50) NULL,
+				cd_sistema integer NOT NULL
+			);
+		</DDL>
+		<DDL>ALTER TABLE seg_sistema ADD CONSTRAINT seg_sistema_pkey PRIMARY KEY (cd_sistema);</DDL>
+		<DDL>	
+			CREATE TABLE IF NOT EXISTS seg_modulo (
+			    cd_modulo integer NOT NULL,
+			    cd_sistema integer NOT NULL,
+			    nm_modulo character varying(50) NULL,
+			    id_modulo character varying(20) NULL,
+			    nr_versao character varying(10) NULL,
+			    nr_release character varying(10) NULL,
+			    lg_ativo smallint NULL
+			  );
+		</DDL>
+		<DDL>ALTER TABLE seg_modulo ADD CONSTRAINT seg_modulo_pkey PRIMARY KEY (cd_modulo, cd_sistema);</DDL>
+		<DDL>
+			CREATE TABLE IF NOT EXISTS seg_agrupamento_acao (
+				cd_agrupamento integer NOT NULL,
+				cd_modulo integer NOT NULL,
+				cd_sistema integer NOT NULL,
+				nm_agrupamento character varying(256) NULL,
+				id_agrupamento character varying(50) NULL,
+				ds_agrupamento text NULL,
+				cd_agrupamento_superior integer NULL,
+				lg_ativo smallint NULL,
+				nr_ordem integer NULL
+			);
+		</DDL>
+		<DDL>ALTER TABLE seg_agrupamento_acao ADD CONSTRAINT seg_agrupamento_acao_pkey PRIMARY KEY (cd_agrupamento, cd_modulo, cd_sistema)</DDL>
+		<DDL>
+			CREATE TABLE IF NOT EXISTS seg_acao (
+			    cd_acao integer NOT NULL,
+			    cd_modulo integer NOT NULL,
+			    cd_sistema integer NOT NULL,
+			    nm_acao character varying(100) NULL,
+			    ds_acao character varying(100) NULL,
+			    cd_agrupamento integer NULL,
+			    id_acao character varying(50) NULL,
+			    tp_organizacao smallint NULL,
+			    nr_ordem integer NULL,
+			    cd_acao_superior integer NULL
+			);
+		</DDL>
+		<DDL>ALTER TABLE seg_acao ADD CONSTRAINT seg_acao_pkey PRIMARY KEY (cd_acao, cd_modulo, cd_sistema)</DDL>
+		<DDL>
+			CREATE TABLE IF NOT EXISTS seg_usuario_permissao_acao (
+				cd_usuario integer NOT NULL,
+				cd_acao integer NOT NULL,
+				cd_modulo integer NOT NULL,
+				cd_sistema integer NOT NULL,
+				lg_natureza smallint NULL
+			);
+		</DDL>
+		<DDL>ALTER TABLE seg_usuario_permissao_acao ADD CONSTRAINT seg_usuario_permissao_acao_pkey PRIMARY KEY (cd_acao, cd_modulo, cd_sistema, cd_usuario)</DDL>
+	</release>
+	
+	<release id="Iago06052025" date="06/05/2025" autor="Iago Almeida" description="Adicionando coluna cd_pessoa na tabela mob_boat_testemunha">
++		<DDL>ALTER TABLE mob_boat_testemunha ADD COLUMN nr_rg VARCHAR(30);</DDL>
+		<DDL>ALTER TABLE mob_boat_testemunha ADD COLUMN sg_orgao_rg VARCHAR(10);</DDL>
+		<DDL>ALTER TABLE mob_boat_testemunha ADD COLUMN txt_endereco VARCHAR(255);</DDL>
++	</release>
+
+	<release id="LeonaroVilasboas21052025" date="21/05/2025" autor="Leonardo Vilasboas" description="adiciona parametros LG_WIFI_SYNC e MOB_OSM_VIEWBOX">
+		<DDL>ALTER TABLE parametro ADD COLUMN LG_WIFI_SYNC SMALLINT;</DDL>
+		<DDL>ALTER TABLE parametro ADD COLUMN MOB_OSM_VIEWBOX VARCHAR(256);</DDL>
+	</release>
+	
+	<release id="LisGumes290525" date="29/05/2025" autor="Lisandra Gumes" description="Correção e criação de parâmetros para sincronização de AITs">
+		<DDL>ALTER TABLE parametro RENAME COLUMN LG_OBRIGATORIEDADE_CONSISTENCIA_AIT TO LG_OBRIGAR_CONSISTENCIA_AIT;</DDL>
+		<DDL>ALTER TABLE parametro ADD COLUMN LG_OBRIGAR_CONSISTENCIA_RADAR SMALLINT DEFAULT 0;</DDL>
+		<DDL>ALTER TABLE parametro ADD COLUMN LG_OBRIGAR_CONSISTENCIA_VM SMALLINT DEFAULT 0;</DDL>
+	</release>
+	
+	<release id="LeonaroVilasboas30052025" date="30/05/2025" autor="Leonardo Vilasboas" description="adiciona parametros para OSM Nominatim">
+		<DDL>ALTER TABLE parametro ADD COLUMN API_URL_NOMINATIM VARCHAR(256);</DDL>
+		<DDL>ALTER TABLE parametro ADD COLUMN MOB_OSM_ESTADO VARCHAR(100);</DDL>
+		<DDL>ALTER TABLE parametro ADD COLUMN MOB_OSM_CIDADE VARCHAR(100);</DDL>
+	</release>
+	
+	<release id="IgorCesar030725" date="03/07/2025" autor="Igor Cesar" description="Renomeia parametro loteExigeRegistroDetran para lote_exige_registro_detran">
+		<DDL>ALTER TABLE parametro RENAME COLUMN loteExigeRegistroDetran TO lote_exige_registro_detran;</DDL>
+	</release>
+
+	<release id="Edgard120825" date="12/08/2025" autor="Edgard" description="Criação de coluna URL_DADOS_SYNC em parametro para sincronização de dados do app">
+		<DDL>ALTER TABLE parametro ADD COLUMN URL_DADOS_SYNC TEXT;</DDL>
+	</release>
+</releases>

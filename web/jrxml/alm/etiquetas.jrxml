@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Etiquetas" language="groovy" columnCount="4" printOrder="Horizontal" pageWidth="612" pageHeight="792" whenNoDataType="BlankPage" columnWidth="125" columnSpacing="9" leftMargin="42" rightMargin="42" topMargin="34" bottomMargin="0" whenResourceMissingType="Empty" uuid="da4bea31-9729-480f-b00d-7f06eabbaafe">
+	<property name="ireport.zoom" value="1.5"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<property name="net.sf.jasperreports.export.html.size.unit" value="cm"/>
+	<field name="NM_PRODUTO_SERVICO" class="java.lang.String"/>
+	<field name="ID_REDUZIDO" class="java.lang.String"/>
+	<field name="VL_PRECO" class="java.lang.String"/>
+	<field name="NM_EMPRESA" class="java.lang.String"/>
+	<field name="NR_REFERENCIA" class="java.lang.String"/>
+	<detail>
+		<band height="47">
+			<textField>
+				<reportElement uuid="78e56e12-14c1-4250-a5cc-ec89498fc2f7" x="7" y="3" width="94" height="8"/>
+				<textElement textAlignment="Center">
+					<font size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{NM_PRODUTO_SERVICO}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="58cfd1d4-dd4e-49a6-8e22-d199141825c9" x="7" y="23" width="95" height="9"/>
+				<textElement textAlignment="Center">
+					<font size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{ID_REDUZIDO}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement uuid="b1baa752-c397-4c38-9e8d-8a5cb3d01dd4" x="103" y="3" width="1" height="39"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineStyle="Dashed"/>
+				</graphicElement>
+			</line>
+			<textField>
+				<reportElement uuid="2698bb10-701a-4d07-8511-50ade620c58b" x="106" y="4" width="14" height="24"/>
+				<textElement textAlignment="Right" rotation="Left">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{VL_PRECO}]]></textFieldExpression>
+			</textField>
+			<componentElement>
+				<reportElement uuid="a48eaed5-a41b-4676-9f6d-297fd5e78bb1" x="7" y="11" width="94" height="14">
+					<printWhenExpression><![CDATA[$F{ID_REDUZIDO} != null]]></printWhenExpression>
+				</reportElement>
+				<jr:barbecue xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd" type="Code128C" drawText="false" checksumRequired="false">
+					<jr:codeExpression><![CDATA[$F{ID_REDUZIDO}]]></jr:codeExpression>
+				</jr:barbecue>
+			</componentElement>
+			<staticText>
+				<reportElement uuid="2fa709bf-3a60-4fee-a52d-b3652cf9a583" x="106" y="27" width="14" height="15"/>
+				<textElement rotation="Left">
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[R$]]></text>
+			</staticText>
+			<textField>
+				<reportElement uuid="58cfd1d4-dd4e-49a6-8e22-d199141825c9" x="7" y="30" width="94" height="9"/>
+				<textElement textAlignment="Center">
+					<font size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{NM_EMPRESA}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement uuid="58cfd1d4-dd4e-49a6-8e22-d199141825c9" x="7" y="36" width="94" height="9"/>
+				<textElement textAlignment="Center">
+					<font size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{NR_REFERENCIA}!=null && !$F{NR_REFERENCIA}.equals("") ? "Ref. "+$F{NR_REFERENCIA} : ""]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+</jasperReport>

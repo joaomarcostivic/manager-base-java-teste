@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version last-->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="processo_grafico_cliente_situacao_subreport" pageWidth="555" pageHeight="842" columnWidth="515" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="2c185406-f7fc-41a4-8be5-0626b149e0ec">
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
+	<property name="com.jaspersoft.studio.unit." value="pixel"/>
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<field name="QT_PROCESSOS" class="java.lang.Integer"/>
+	<field name="ST_PROCESSO" class="java.lang.Integer"/>
+	<field name="NM_ST_PROCESSO" class="java.lang.String"/>
+	<field name="TOTAL_PROCESSOS" class="java.lang.Integer"/>
+	<title>
+		<band height="200">
+			<pieChart>
+				<chart evaluationTime="Report" renderType="image" theme="default">
+					<reportElement isPrintRepeatedValues="false" x="0" y="0" width="515" height="200" uuid="b9721fea-1106-409f-90e4-24fc074c66bd">
+						<property name="local_mesure_unitwidth" value="pixel"/>
+						<property name="com.jaspersoft.studio.unit.width" value="px"/>
+						<property name="local_mesure_unitheight" value="pixel"/>
+						<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					</reportElement>
+					<chartTitle/>
+					<chartSubtitle/>
+					<chartLegend position="Right">
+						<font size="7"/>
+					</chartLegend>
+				</chart>
+				<pieDataset>
+					<keyExpression><![CDATA[($F{ST_PROCESSO} == 0 ? "Inativo".toUpperCase() : 
+	($F{ST_PROCESSO} == 1 ? "Ativo".toUpperCase() :
+		($F{ST_PROCESSO} == 2 ? "Suspenso".toUpperCase() :
+			($F{ST_PROCESSO} == 3 ? "Descontratado".toUpperCase() : "")
+		)))]]></keyExpression>
+					<valueExpression><![CDATA[$F{QT_PROCESSOS}]]></valueExpression>
+					<labelExpression><![CDATA[ "" + new DecimalFormat("0.0").format(((new Double($F{QT_PROCESSOS}) / new Double($F{TOTAL_PROCESSOS})) * 100)) + "%"]]></labelExpression>
+				</pieDataset>
+				<piePlot>
+					<plot/>
+					<itemLabel/>
+				</piePlot>
+			</pieChart>
+		</band>
+	</title>
+</jasperReport>

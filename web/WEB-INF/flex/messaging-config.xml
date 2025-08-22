@@ -1,0 +1,24 @@
+<service id="message-service" 
+    class="flex.messaging.services.MessageService"> 
+    <adapters> 
+        <adapter-definition  
+            id="actionscript" 
+            class="flex.messaging.services.messaging.adapters.ActionScriptAdapter"  
+            default="true"/> 
+        <adapter-definition id="jms" 
+            class="flex.messaging.services.messaging.adapters.JMSAdapter"/> 
+    </adapters>
+	<default-channels>
+		<channel ref="my-polling-amf"/>
+	</default-channels>
+	<destination id="solar-rpc"> 
+        <properties> 
+            <server> 
+                <message-time-to-live>0</message-time-to-live> 
+            </server> 
+        </properties> 
+        <channels> 
+            <channel ref="my-polling-amf"/> 
+        </channels> 
+    </destination> 
+</service>

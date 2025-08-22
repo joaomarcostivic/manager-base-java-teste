@@ -1,0 +1,235 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.1.1.final using JasperReports Library version 6.1.1  -->
+<!-- 2016-12-02T16:33:37 -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="relatorio_fechamento_caixa_recebimentos_pax" language="groovy" pageWidth="555" pageHeight="802" columnWidth="555" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="b575cc88-5a54-4863-ae9e-a5de5af26fc8">
+	<property name="ireport.zoom" value="2.5937424601000028"/>
+	<property name="ireport.x" value="599"/>
+	<property name="ireport.y" value="0"/>
+	<property name="com.jaspersoft.studio.unit." value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.pageHeight" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.pageWidth" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.topMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.bottomMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.leftMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.rightMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.columnWidth" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.columnSpacing" value="pixel"/>
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<field name="NM_FORMA_PAGAMENTO" class="java.lang.String"/>
+	<field name="NM_PESSOA" class="java.lang.String"/>
+	<field name="DT_VENCIMENTO" class="java.util.Date"/>
+	<field name="VL_CONTA" class="java.lang.Double"/>
+	<field name="VL_MULTA" class="java.lang.Double"/>
+	<field name="VL_JUROS" class="java.lang.Double"/>
+	<field name="VL_DESCONTO" class="java.lang.Double"/>
+	<field name="VL_RECEBIDO" class="java.lang.Double"/>
+	<field name="SG_TIPO_DOCUMENTO" class="java.lang.String"/>
+	<field name="DT_MOVIMENTO" class="java.sql.Date"/>
+	<variable name="totalRecebimento" class="java.lang.Double"/>
+	<variable name="dtAtraso" class="java.lang.Integer"/>
+	<variable name="totalValor" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[$F{VL_CONTA}]]></variableExpression>
+		<initialValueExpression><![CDATA[new Double(0)]]></initialValueExpression>
+	</variable>
+	<variable name="totalMulta" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[$F{VL_MULTA}]]></variableExpression>
+		<initialValueExpression><![CDATA[new Double(0)]]></initialValueExpression>
+	</variable>
+	<variable name="totalJuros" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[$F{VL_JUROS}]]></variableExpression>
+		<initialValueExpression><![CDATA[new Double(0)]]></initialValueExpression>
+	</variable>
+	<variable name="totalDescontos" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[$F{VL_DESCONTO}]]></variableExpression>
+		<initialValueExpression><![CDATA[new Double(0)]]></initialValueExpression>
+	</variable>
+	<variable name="totalRecebido" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[$F{VL_RECEBIDO}]]></variableExpression>
+		<initialValueExpression><![CDATA[new Double(0)]]></initialValueExpression>
+	</variable>
+	<group name="totalRecebimento">
+		<groupExpression><![CDATA[$V{totalRecebimento}]]></groupExpression>
+		<groupFooter>
+			<band height="13">
+				<line>
+					<reportElement x="0" y="0" width="555" height="1" uuid="54e39e1f-69a0-4f54-9a83-aa1320c05c76">
+						<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+					</reportElement>
+				</line>
+				<staticText>
+					<reportElement x="212" y="1" width="39" height="12" uuid="d4dbc5ed-3de9-44c5-ae3a-9a923d0fcb2d">
+						<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					</reportElement>
+					<textElement verticalAlignment="Middle">
+						<font size="8" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Totais:]]></text>
+				</staticText>
+				<textField pattern="#,##0.00" isBlankWhenNull="true">
+					<reportElement x="310" y="1" width="68" height="12" uuid="4db60599-de03-4a13-9af0-c99441ce401f">
+						<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+					</reportElement>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font size="8" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$V{totalValor}]]></textFieldExpression>
+				</textField>
+				<textField pattern="#,##0.00">
+					<reportElement x="380" y="1" width="28" height="12" uuid="71a725ca-cdf0-43a6-ba11-1d6ec4ed51b2"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font size="8" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$V{totalMulta}]]></textFieldExpression>
+				</textField>
+				<textField pattern="#,##0.00">
+					<reportElement x="412" y="1" width="39" height="12" uuid="c0e959bb-f40d-48af-8ac0-d73c74e978ba"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font size="8" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$V{totalJuros}]]></textFieldExpression>
+				</textField>
+				<textField pattern="#,##0.00">
+					<reportElement x="453" y="1" width="44" height="12" uuid="f1baa4a7-0691-4edc-b30f-658f2f6c6caa"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font size="8" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$V{totalDescontos}]]></textFieldExpression>
+				</textField>
+				<textField pattern="#,##0.00">
+					<reportElement x="500" y="1" width="50" height="12" uuid="ce4c5f02-7910-4d5a-86f8-92fd8c2776ba"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font size="8" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$V{totalRecebido}]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupFooter>
+	</group>
+	<columnHeader>
+		<band height="31" splitType="Stretch">
+			<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+			<rectangle>
+				<reportElement mode="Opaque" x="0" y="0" width="555" height="16" forecolor="#030000" backcolor="#CCCCCC" uuid="4121a6cd-d3ca-473d-9fca-07e906e0a3f7">
+					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+			</rectangle>
+			<staticText>
+				<reportElement mode="Transparent" x="5" y="0" width="308" height="16" forecolor="#030000" uuid="50ef43dc-15f6-4034-bb97-c129fe690735"/>
+				<textElement verticalAlignment="Middle">
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[RECEBIMENTOS DO DIA]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="5" y="19" width="108" height="12" forecolor="#030000" uuid="2f56e2db-5647-4b36-b6b3-c4bd7afa476a">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+				</reportElement>
+				<textElement verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Forma de pagamento]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="310" y="19" width="68" height="12" forecolor="#030000" uuid="7a23aebe-8003-4536-9c22-a9ec063e81ae"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Valor da conta]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="380" y="19" width="28" height="12" forecolor="#030000" uuid="96bd0201-88b7-4a9a-8f3b-21d3356b53aa"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Multa]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="412" y="19" width="39" height="12" forecolor="#030000" uuid="17013348-b3d8-4886-9b34-1d034ce55df5"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Juros]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="453" y="19" width="44" height="12" forecolor="#030000" uuid="67e7e6c8-eeea-4b29-9583-5e1a3179da33"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Descontos]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="500" y="19" width="50" height="12" forecolor="#030000" uuid="d134b03d-673c-45c6-9bb8-128c150d7432"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Recebido]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="12" splitType="Stretch">
+			<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+			<textField isBlankWhenNull="true">
+				<reportElement x="5" y="0" width="108" height="12" uuid="c26e2c08-31f1-4dc7-95f9-2e0e59b720a3">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<textElement verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{NM_FORMA_PAGAMENTO}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00" isBlankWhenNull="true">
+				<reportElement x="310" y="0" width="68" height="12" uuid="82916337-a577-4974-9b29-3b34030261e3">
+					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+				</reportElement>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{VL_CONTA}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00" isBlankWhenNull="true">
+				<reportElement x="380" y="0" width="28" height="12" uuid="88b112b6-7a02-4cea-b530-374dd382bcc6"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{VL_MULTA}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00" isBlankWhenNull="true">
+				<reportElement x="412" y="0" width="39" height="12" uuid="daa651dd-a8ee-4776-bbda-3c76b9c3922f"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{VL_JUROS}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00" isBlankWhenNull="true">
+				<reportElement x="453" y="0" width="44" height="12" uuid="a8de3142-8824-4fcc-a0f6-bd7859155e9d"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{VL_DESCONTO}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00" isBlankWhenNull="true">
+				<reportElement x="500" y="0" width="50" height="12" uuid="0f86900d-0c5e-4896-a999-739ece5f489e"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{VL_RECEBIDO}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement mode="Opaque" x="5" y="0" width="545" height="1" forecolor="#030000" uuid="6b4aa19c-876d-4895-bacc-e4964e291479">
+					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+				<graphicElement>
+					<pen lineWidth="0.5"/>
+				</graphicElement>
+			</line>
+		</band>
+	</detail>
+</jasperReport>

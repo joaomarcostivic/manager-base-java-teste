@@ -1,0 +1,565 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version last-->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="necessidade_compra" language="groovy" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="373958c3-b6da-40d9-9a37-03db86411872">
+	<property name="ireport.zoom" value="2.0"/>
+	<property name="ireport.x" value="146"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="LOGO" class="java.lang.Object"/>
+	<parameter name="nmRazaoSocial" class="java.lang.String"/>
+	<parameter name="nmFantasia" class="java.lang.String"/>
+	<parameter name="dtInicial" class="java.lang.String"/>
+	<parameter name="dtFinal" class="java.lang.String"/>
+	<parameter name="dtHoje" class="java.lang.String"/>
+	<parameter name="hrHoje" class="java.lang.String"/>
+	<parameter name="nmUsuario" class="java.lang.String"/>
+	<parameter name="nmDesenvolvedor" class="java.lang.String"/>
+	<parameter name="nmEmail" class="java.lang.String"/>
+	<parameter name="LOGO_DEV" class="java.lang.Object"/>
+	<field name="CD_PRODUTO_SERVICO" class="java.lang.String"/>
+	<field name="NM_GRUPO_SUPERIOR" class="java.lang.String"/>
+	<field name="NM_GRUPO" class="java.lang.String"/>
+	<field name="NM_PRODUTO_SERVICO" class="java.lang.String"/>
+	<field name="SG_UNIDADE_MEDIDA" class="java.lang.String"/>
+	<field name="QT_SAIDA" class="java.lang.Double"/>
+	<field name="QT_MEDIA_DIARIA" class="java.lang.Double"/>
+	<field name="QT_MINIMA" class="java.lang.Double"/>
+	<field name="QT_ESTOQUE" class="java.lang.Double"/>
+	<field name="QT_SUGESTAO_COMPRA" class="java.lang.Double"/>
+	<field name="QT_PROJECAO_VENDA" class="java.lang.Double"/>
+	<field name="QT_ESTOQUE_FUTURO" class="java.lang.Double"/>
+	<field name="QT_COMPRA_SEGURANCA" class="java.lang.Double"/>
+	<field name="VL_ULTIMO_CUSTO" class="java.lang.Double"/>
+	<field name="VL_COMPRA" class="java.lang.Double"/>
+	<field name="NM_LOCAL_ARMAZENAMENTO" class="java.lang.String"/>
+	<variable name="qtSaidaTotal" class="java.lang.Double" resetType="Group" resetGroup="grupoProdutos" calculation="Sum">
+		<variableExpression><![CDATA[$F{QT_SAIDA}]]></variableExpression>
+	</variable>
+	<variable name="qtMinimaTotal" class="java.lang.Double" resetType="Group" resetGroup="grupoProdutos" calculation="Sum">
+		<variableExpression><![CDATA[$F{QT_MINIMA}]]></variableExpression>
+	</variable>
+	<variable name="qtEstoqueTotal" class="java.lang.Double" resetType="Group" resetGroup="grupoProdutos" calculation="Sum">
+		<variableExpression><![CDATA[$F{QT_ESTOQUE}]]></variableExpression>
+	</variable>
+	<variable name="qtSugestaoCompraTotal" class="java.lang.Double" resetType="Group" resetGroup="grupoProdutos" calculation="Sum">
+		<variableExpression><![CDATA[$F{QT_SUGESTAO_COMPRA}]]></variableExpression>
+	</variable>
+	<variable name="qtProjecaoVendaTotal" class="java.lang.Double" resetType="Group" resetGroup="grupoProdutos" calculation="Sum">
+		<variableExpression><![CDATA[$F{QT_PROJECAO_VENDA}]]></variableExpression>
+	</variable>
+	<variable name="qtEstoqueFuturoTotal" class="java.lang.Double" resetType="Group" resetGroup="grupoProdutos" calculation="Sum">
+		<variableExpression><![CDATA[$F{QT_ESTOQUE_FUTURO}]]></variableExpression>
+	</variable>
+	<variable name="vlCompraTotal" class="java.lang.Double" resetType="Group" resetGroup="grupoProdutos" calculation="Sum">
+		<variableExpression><![CDATA[$F{VL_COMPRA}]]></variableExpression>
+	</variable>
+	<variable name="qtMediaDiariaTotal" class="java.lang.Double" resetType="Group" resetGroup="grupoProdutos" calculation="Sum">
+		<variableExpression><![CDATA[$F{QT_MEDIA_DIARIA}]]></variableExpression>
+	</variable>
+	<variable name="qtSaidaTotalGeral" class="java.lang.Double" resetType="Group" resetGroup="grupoSuperior" calculation="Sum">
+		<variableExpression><![CDATA[$F{QT_SAIDA}]]></variableExpression>
+	</variable>
+	<variable name="qtMediaDiariaTotalGeral" class="java.lang.Double" resetType="Group" resetGroup="grupoSuperior" calculation="Sum">
+		<variableExpression><![CDATA[$F{QT_MEDIA_DIARIA}]]></variableExpression>
+	</variable>
+	<variable name="qtMinimaTotalGeral" class="java.lang.Double" resetType="Group" resetGroup="grupoSuperior" calculation="Sum">
+		<variableExpression><![CDATA[$F{QT_MINIMA}]]></variableExpression>
+	</variable>
+	<variable name="qtEstoqueTotalGeral" class="java.lang.Double" resetType="Group" resetGroup="grupoSuperior" calculation="Sum">
+		<variableExpression><![CDATA[$F{QT_ESTOQUE}]]></variableExpression>
+	</variable>
+	<variable name="qtSugestaoCompraTotalGeral" class="java.lang.Double" resetType="Group" resetGroup="grupoSuperior" calculation="Sum">
+		<variableExpression><![CDATA[$F{QT_SUGESTAO_COMPRA}]]></variableExpression>
+	</variable>
+	<variable name="qtProjecaoVendaTotalGeral" class="java.lang.Double" resetType="Group" resetGroup="grupoSuperior" calculation="Sum">
+		<variableExpression><![CDATA[$F{QT_PROJECAO_VENDA}]]></variableExpression>
+	</variable>
+	<variable name="qtEstoqueFuturoTotalGeral" class="java.lang.Double" resetType="Group" resetGroup="grupoSuperior" calculation="Sum">
+		<variableExpression><![CDATA[$F{QT_ESTOQUE_FUTURO}]]></variableExpression>
+	</variable>
+	<variable name="vlCompraTotalGeral" class="java.lang.Double" resetType="Group" resetGroup="grupoSuperior" calculation="Sum">
+		<variableExpression><![CDATA[$F{VL_COMPRA}]]></variableExpression>
+	</variable>
+	<group name="grupoSuperior">
+		<groupExpression><![CDATA[$F{NM_GRUPO_SUPERIOR}]]></groupExpression>
+		<groupHeader>
+			<band height="17">
+				<property name="local_mesure_unitheight" value="pixel"/>
+				<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				<textField>
+					<reportElement x="1" y="1" width="801" height="16" uuid="604df7dc-9676-4cf4-a1e7-96b1f529c02e"/>
+					<textElement textAlignment="Center">
+						<font size="12"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{NM_GRUPO_SUPERIOR}]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupHeader>
+		<groupFooter>
+			<band height="8">
+				<property name="local_mesure_unitheight" value="pixel"/>
+				<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				<rectangle>
+					<reportElement x="0" y="0" width="801" height="8" forecolor="#999999" backcolor="#999999" uuid="0d1d5e68-21f7-427e-b86d-768e42d99901">
+						<property name="local_mesure_unitx" value="pixel"/>
+						<property name="com.jaspersoft.studio.unit.x" value="px"/>
+						<property name="local_mesure_unity" value="pixel"/>
+						<property name="com.jaspersoft.studio.unit.y" value="px"/>
+						<property name="local_mesure_unitheight" value="pixel"/>
+						<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					</reportElement>
+					<graphicElement>
+						<pen lineWidth="0.0"/>
+					</graphicElement>
+				</rectangle>
+				<textField>
+					<reportElement mode="Opaque" x="0" y="0" width="160" height="8" backcolor="#999999" uuid="e8e140a9-f8e6-4b53-ab2d-021ba35296b1">
+						<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					</reportElement>
+					<textElement>
+						<font size="6"/>
+					</textElement>
+					<textFieldExpression><![CDATA["TOTAL "+$F{NM_GRUPO_SUPERIOR}]]></textFieldExpression>
+				</textField>
+				<textField pattern="" isBlankWhenNull="true">
+					<reportElement x="186" y="0" width="42" height="8" uuid="782606a6-6617-44ab-a3d3-46492fc5e989"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="6"/>
+					</textElement>
+					<textFieldExpression><![CDATA[new DecimalFormat("#,##0.00;-#,##0.00", new java.text.DecimalFormatSymbols(new java.util.Locale("pt", "BR"))).format($V{qtSaidaTotalGeral})]]></textFieldExpression>
+				</textField>
+				<textField isBlankWhenNull="true">
+					<reportElement x="232" y="0" width="47" height="8" uuid="3e9f80bc-7ae2-4fa4-b6d7-9102c6307662"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="6"/>
+					</textElement>
+					<textFieldExpression><![CDATA[new DecimalFormat("#,##0.00;-#,##0.00", new java.text.DecimalFormatSymbols(new java.util.Locale("pt", "BR"))).format($V{qtMediaDiariaTotal})]]></textFieldExpression>
+				</textField>
+				<textField isBlankWhenNull="true">
+					<reportElement x="283" y="0" width="44" height="8" uuid="dc501f0e-5cae-4373-af77-44da9f5c8c4c"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="6"/>
+					</textElement>
+					<textFieldExpression><![CDATA[new DecimalFormat("#,##0.00;-#,##0.00", new java.text.DecimalFormatSymbols(new java.util.Locale("pt", "BR"))).format($V{qtMinimaTotalGeral})]]></textFieldExpression>
+				</textField>
+				<textField isBlankWhenNull="true">
+					<reportElement x="332" y="0" width="40" height="8" uuid="62217262-7290-4c5f-aea0-7d0c0b314391"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="6"/>
+					</textElement>
+					<textFieldExpression><![CDATA[new DecimalFormat("#,##0.00;-#,##0.00", new java.text.DecimalFormatSymbols(new java.util.Locale("pt", "BR"))).format($V{qtEstoqueTotalGeral})]]></textFieldExpression>
+				</textField>
+				<textField isBlankWhenNull="true">
+					<reportElement x="378" y="0" width="40" height="8" uuid="2313cbeb-187a-48b5-812b-7cb2dc70ae3d"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="6"/>
+					</textElement>
+					<textFieldExpression><![CDATA[new DecimalFormat("#,##0.00;-#,##0.00", new java.text.DecimalFormatSymbols(new java.util.Locale("pt", "BR"))).format($V{qtSugestaoCompraTotalGeral})]]></textFieldExpression>
+				</textField>
+				<textField pattern="" isBlankWhenNull="true">
+					<reportElement x="423" y="0" width="50" height="8" uuid="bafee338-e614-40f0-8320-296e5b312ee3"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="6"/>
+					</textElement>
+					<textFieldExpression><![CDATA[new DecimalFormat("#,##0.00;-#,##0.00", new java.text.DecimalFormatSymbols(new java.util.Locale("pt", "BR"))).format($V{qtProjecaoVendaTotalGeral})]]></textFieldExpression>
+				</textField>
+				<textField isBlankWhenNull="true">
+					<reportElement x="480" y="0" width="50" height="8" uuid="eeed3579-ca5f-41d2-a424-bf474f27e707"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="6"/>
+					</textElement>
+					<textFieldExpression><![CDATA[new DecimalFormat("#,##0.00;-#,##0.00", new java.text.DecimalFormatSymbols(new java.util.Locale("pt", "BR"))).format($V{qtEstoqueFuturoTotalGeral})]]></textFieldExpression>
+				</textField>
+				<textField pattern="¤ #,##0.00#;¤ -#,##0.00#" isBlankWhenNull="true">
+					<reportElement x="652" y="0" width="36" height="8" uuid="1a9c2dac-84b7-420e-ac40-719b78995c3d"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font size="6"/>
+					</textElement>
+					<textFieldExpression><![CDATA[new DecimalFormat("#,##0.00;-#,##0.00", new java.text.DecimalFormatSymbols(new java.util.Locale("pt", "BR"))).format($V{vlCompraTotalGeral})]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupFooter>
+	</group>
+	<group name="grupoProdutos">
+		<groupExpression><![CDATA[$F{NM_GRUPO}]]></groupExpression>
+		<groupHeader>
+			<band height="12">
+				<property name="local_mesure_unitheight" value="pixel"/>
+				<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				<textField>
+					<reportElement x="1" y="0" width="800" height="12" uuid="27321101-eef1-431e-b17c-936e6cf890d9">
+						<property name="local_mesure_unitheight" value="pixel"/>
+						<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					</reportElement>
+					<textElement verticalAlignment="Middle">
+						<font size="8" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{NM_GRUPO}]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupHeader>
+		<groupFooter>
+			<band height="8">
+				<property name="local_mesure_unitheight" value="pixel"/>
+				<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				<rectangle>
+					<reportElement x="0" y="0" width="801" height="8" forecolor="#C0C0C0" backcolor="#C0C0C0" uuid="afab7c78-ea27-4394-aad5-1cd665ff2dbb">
+						<property name="local_mesure_unitx" value="pixel"/>
+						<property name="com.jaspersoft.studio.unit.x" value="px"/>
+						<property name="local_mesure_unity" value="pixel"/>
+						<property name="com.jaspersoft.studio.unit.y" value="px"/>
+						<property name="local_mesure_unitheight" value="pixel"/>
+						<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					</reportElement>
+					<graphicElement>
+						<pen lineWidth="0.0"/>
+					</graphicElement>
+				</rectangle>
+				<textField>
+					<reportElement mode="Transparent" x="0" y="0" width="160" height="8" backcolor="#FFFFFF" uuid="fa647f01-8161-49f1-890a-954891486fb4">
+						<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					</reportElement>
+					<textElement>
+						<font size="6"/>
+					</textElement>
+					<textFieldExpression><![CDATA["TOTAL "+$F{NM_GRUPO}]]></textFieldExpression>
+				</textField>
+				<textField pattern="" isBlankWhenNull="true">
+					<reportElement x="186" y="0" width="42" height="8" uuid="3aaf7c0e-ddf4-401a-9dee-be26d69000a3"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="6"/>
+					</textElement>
+					<textFieldExpression><![CDATA[new DecimalFormat("#,##0.00;-#,##0.00", new java.text.DecimalFormatSymbols(new java.util.Locale("pt", "BR"))).format($V{qtSaidaTotal})]]></textFieldExpression>
+				</textField>
+				<textField isBlankWhenNull="true">
+					<reportElement x="232" y="0" width="47" height="8" uuid="7528362d-fcb6-4d52-88af-24ff78010de9"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="6"/>
+					</textElement>
+					<textFieldExpression><![CDATA[new DecimalFormat("#,##0.00;-#,##0.00", new java.text.DecimalFormatSymbols(new java.util.Locale("pt", "BR"))).format($V{qtMediaDiariaTotal})]]></textFieldExpression>
+				</textField>
+				<textField isBlankWhenNull="true">
+					<reportElement x="283" y="0" width="44" height="8" uuid="11a3dc4b-4721-4cd7-8487-707a8b7309b0"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="6"/>
+					</textElement>
+					<textFieldExpression><![CDATA[new DecimalFormat("#,##0.00;-#,##0.00", new java.text.DecimalFormatSymbols(new java.util.Locale("pt", "BR"))).format($V{qtMinimaTotal})]]></textFieldExpression>
+				</textField>
+				<textField isBlankWhenNull="true">
+					<reportElement x="332" y="0" width="40" height="8" uuid="263b0fd2-c293-45e6-af0a-bf5cd761f328"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="6"/>
+					</textElement>
+					<textFieldExpression><![CDATA[new DecimalFormat("#,##0.00;-#,##0.00", new java.text.DecimalFormatSymbols(new java.util.Locale("pt", "BR"))).format($V{qtEstoqueTotal})]]></textFieldExpression>
+				</textField>
+				<textField isBlankWhenNull="true">
+					<reportElement x="378" y="0" width="40" height="8" uuid="a8afc4be-228b-4f7a-8052-2230b7357a2a"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="6"/>
+					</textElement>
+					<textFieldExpression><![CDATA[new DecimalFormat("#,##0.00;-#,##0.00", new java.text.DecimalFormatSymbols(new java.util.Locale("pt", "BR"))).format($V{qtSugestaoCompraTotal})]]></textFieldExpression>
+				</textField>
+				<textField pattern="" isBlankWhenNull="true">
+					<reportElement x="423" y="0" width="50" height="8" uuid="de12af36-299d-440f-bb88-97ad7b28fe22"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="6"/>
+					</textElement>
+					<textFieldExpression><![CDATA[new DecimalFormat("#,##0.00;-#,##0.00", new java.text.DecimalFormatSymbols(new java.util.Locale("pt", "BR"))).format($V{qtProjecaoVendaTotal})]]></textFieldExpression>
+				</textField>
+				<textField isBlankWhenNull="true">
+					<reportElement x="480" y="0" width="50" height="8" uuid="3755efbf-4009-4475-8002-0886142e4eed"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="6"/>
+					</textElement>
+					<textFieldExpression><![CDATA[new DecimalFormat("#,##0.00;-#,##0.00", new java.text.DecimalFormatSymbols(new java.util.Locale("pt", "BR"))).format($V{qtEstoqueFuturoTotal})]]></textFieldExpression>
+				</textField>
+				<textField pattern="¤ #,##0.00#;¤ -#,##0.00#" isBlankWhenNull="true">
+					<reportElement x="652" y="0" width="36" height="8" uuid="8232a9fc-363d-4491-92aa-78c3c38c3ab9"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font size="6"/>
+					</textElement>
+					<textFieldExpression><![CDATA[new DecimalFormat("#,##0.00;-#,##0.00", new java.text.DecimalFormatSymbols(new java.util.Locale("pt", "BR"))).format($V{vlCompraTotal})]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupFooter>
+	</group>
+	<group name="grupoLocalArmazenamento">
+		<groupExpression><![CDATA[$F{NM_LOCAL_ARMAZENAMENTO}]]></groupExpression>
+		<groupHeader>
+			<band height="14">
+				<textField>
+					<reportElement x="27" y="2" width="772" height="12" uuid="67cd11b4-1065-42b1-ac13-42fc20c9a0e6">
+						<property name="local_mesure_unitheight" value="pixel"/>
+						<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					</reportElement>
+					<textElement textAlignment="Left" verticalAlignment="Middle">
+						<font size="8"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{NM_PRODUTO_SERVICO}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="1" y="2" width="26" height="12" uuid="e8e140a9-f8e6-4b53-ab2d-021ba35296b1">
+						<property name="local_mesure_unitheight" value="pixel"/>
+						<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					</reportElement>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="8"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{CD_PRODUTO_SERVICO}]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupHeader>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<pageHeader>
+		<band height="79">
+			<staticText>
+				<reportElement x="97" y="16" width="605" height="21" uuid="b0a975cb-8cac-4013-a9ac-c49406f0d5d5"/>
+				<textElement textAlignment="Center">
+					<font size="16" isBold="true"/>
+				</textElement>
+				<text><![CDATA[NECESSIDADE DE COMPRA DE PRODUTO]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="97" y="59" width="604" height="20" uuid="c6158799-fb61-41c2-8585-38acabdc702c"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA["Ordem de saída: "]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="97" y="0" width="604" height="16" uuid="d95120a9-93ca-4e71-9e3d-5c51e6d2eb66"/>
+				<textElement textAlignment="Center" verticalAlignment="Bottom" markup="none">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{nmRazaoSocial} + (($P{nmFantasia}.equals("") || $P{nmFantasia} == null) ? "" : " - " + $P{nmFantasia})]]></textFieldExpression>
+			</textField>
+			<image scaleImage="FillFrame" hAlign="Center" vAlign="Middle" onErrorType="Blank" evaluationTime="Report">
+				<reportElement x="0" y="0" width="97" height="79" uuid="8c074d58-4f9a-4d93-8a2a-75274a8279a4"/>
+				<imageExpression><![CDATA[net.sf.jasperreports.engine.util.JRImageLoader.loadImage((byte[]) $P{LOGO_DEV})]]></imageExpression>
+			</image>
+			<textField>
+				<reportElement x="97" y="37" width="604" height="20" uuid="56a449de-2f82-4c52-8016-06dcb96aab9f"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA["Período de " + $P{dtInicial} + " até " + $P{dtFinal}]]></textFieldExpression>
+			</textField>
+			<image scaleImage="FillFrame" hAlign="Center" vAlign="Middle" onErrorType="Blank" evaluationTime="Report">
+				<reportElement x="702" y="0" width="97" height="79" uuid="8c074d58-4f9a-4d93-8a2a-75274a8279a4"/>
+				<imageExpression><![CDATA[net.sf.jasperreports.engine.util.JRImageLoader.loadImage((byte[]) $P{LOGO})]]></imageExpression>
+			</image>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="23" splitType="Stretch">
+			<staticText>
+				<reportElement x="27" y="4" width="133" height="16" uuid="041ea3b4-5374-4975-96fe-06f9aee1837c"/>
+				<textElement textAlignment="Left">
+					<font size="6"/>
+				</textElement>
+				<text><![CDATA[PRODUTO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="186" y="4" width="42" height="16" uuid="0eb26ccb-5c8e-4eed-9b34-f97ad899d619"/>
+				<textElement textAlignment="Left">
+					<font size="6"/>
+				</textElement>
+				<text><![CDATA[VENDA  (no período)]]></text>
+			</staticText>
+			<line>
+				<reportElement x="1" y="2" width="798" height="2" uuid="6978ee43-d8c9-443b-9788-dffa5f623354"/>
+				<graphicElement>
+					<pen lineWidth="1.5"/>
+				</graphicElement>
+			</line>
+			<staticText>
+				<reportElement x="163" y="4" width="20" height="16" uuid="0eb26ccb-5c8e-4eed-9b34-f97ad899d619"/>
+				<textElement textAlignment="Left">
+					<font size="6"/>
+				</textElement>
+				<text><![CDATA[UND]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="232" y="4" width="48" height="16" uuid="16e51332-16ef-4fc3-a126-23e10ee70b65"/>
+				<textElement textAlignment="Left">
+					<font size="6"/>
+				</textElement>
+				<text><![CDATA[MÉDIA(diária)]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="1" y="4" width="26" height="16" uuid="041ea3b4-5374-4975-96fe-06f9aee1837c"/>
+				<textElement textAlignment="Left">
+					<font size="6"/>
+				</textElement>
+				<text><![CDATA[COD]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="332" y="4" width="40" height="16" uuid="16e51332-16ef-4fc3-a126-23e10ee70b65"/>
+				<textElement textAlignment="Left">
+					<font size="6"/>
+				</textElement>
+				<text><![CDATA[ESTOQUE ATUAL]]></text>
+			</staticText>
+			<line>
+				<reportElement x="0" y="21" width="798" height="2" uuid="aee11a31-3b64-4f9d-acbc-a13b496e51db"/>
+				<graphicElement>
+					<pen lineWidth="1.5"/>
+				</graphicElement>
+			</line>
+			<staticText>
+				<reportElement x="378" y="4" width="40" height="16" uuid="16e51332-16ef-4fc3-a126-23e10ee70b65"/>
+				<textElement textAlignment="Left">
+					<font size="6"/>
+				</textElement>
+				<text><![CDATA[SUGESTÃO DE COMPRA]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="423" y="4" width="50" height="16" uuid="16e51332-16ef-4fc3-a126-23e10ee70b65"/>
+				<textElement textAlignment="Left">
+					<font size="6"/>
+				</textElement>
+				<text><![CDATA[PROJ. VENDA(p/10 dias)]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="480" y="4" width="50" height="16" uuid="16e51332-16ef-4fc3-a126-23e10ee70b65"/>
+				<textElement textAlignment="Left">
+					<font size="6"/>
+				</textElement>
+				<text><![CDATA[ESTOQUE FUTURO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="534" y="4" width="50" height="16" uuid="16e51332-16ef-4fc3-a126-23e10ee70b65"/>
+				<textElement textAlignment="Left">
+					<font size="6"/>
+				</textElement>
+				<text><![CDATA[COMPRA SEGUR.(p/ 15 dias)]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="590" y="4" width="54" height="16" uuid="16e51332-16ef-4fc3-a126-23e10ee70b65"/>
+				<textElement textAlignment="Left">
+					<font size="6"/>
+				</textElement>
+				<text><![CDATA[PREÇO DE CUSTO (R$)]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="652" y="4" width="35" height="16" uuid="16e51332-16ef-4fc3-a126-23e10ee70b65"/>
+				<textElement textAlignment="Left">
+					<font size="6"/>
+				</textElement>
+				<text><![CDATA[VALOR DA COMPRA (R$)]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="284" y="4" width="43" height="16" uuid="1176c426-cceb-4149-ad59-144494453033"/>
+				<textElement textAlignment="Left">
+					<font size="6"/>
+				</textElement>
+				<text><![CDATA[ESTOQUE MÍNIMO]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="8" splitType="Stretch">
+			<textField isBlankWhenNull="true">
+				<reportElement x="480" y="0" width="50" height="8" uuid="e8e140a9-f8e6-4b53-ab2d-021ba35296b1"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new DecimalFormat("#,##0.00;-#,##0.00", new java.text.DecimalFormatSymbols(new java.util.Locale("pt", "BR"))).format($F{QT_ESTOQUE_FUTURO})]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="378" y="0" width="40" height="8" uuid="e8e140a9-f8e6-4b53-ab2d-021ba35296b1"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new DecimalFormat("#,##0.00;-#,##0.00", new java.text.DecimalFormatSymbols(new java.util.Locale("pt", "BR"))).format($F{QT_SUGESTAO_COMPRA})]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="423" y="0" width="50" height="8" uuid="e8e140a9-f8e6-4b53-ab2d-021ba35296b1"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new DecimalFormat("#,##0.00;-#,##0.00", new java.text.DecimalFormatSymbols(new java.util.Locale("pt", "BR"))).format($F{QT_PROJECAO_VENDA})]]></textFieldExpression>
+			</textField>
+			<textField pattern="¤ #,##0.00#;¤ -#,##0.00#" isBlankWhenNull="true">
+				<reportElement x="652" y="0" width="36" height="8" uuid="e8e140a9-f8e6-4b53-ab2d-021ba35296b1"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new DecimalFormat("#,##0.00;-#,##0.00", new java.text.DecimalFormatSymbols(new java.util.Locale("pt", "BR"))).format($F{VL_COMPRA})]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="332" y="0" width="40" height="8" uuid="e8e140a9-f8e6-4b53-ab2d-021ba35296b1"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new DecimalFormat("#,##0.00;-#,##0.00", new java.text.DecimalFormatSymbols(new java.util.Locale("pt", "BR"))).format($F{QT_ESTOQUE})]]></textFieldExpression>
+			</textField>
+			<textField pattern="¤ #,##0.00#;¤ -#,##0.00#" isBlankWhenNull="true">
+				<reportElement x="590" y="0" width="53" height="8" uuid="e8e140a9-f8e6-4b53-ab2d-021ba35296b1"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new DecimalFormat("#,##0.00;-#,##0.00", new java.text.DecimalFormatSymbols(new java.util.Locale("pt", "BR"))).format($F{VL_ULTIMO_CUSTO})]]></textFieldExpression>
+			</textField>
+			<textField pattern="">
+				<reportElement x="27" y="0" width="133" height="8" uuid="e8e140a9-f8e6-4b53-ab2d-021ba35296b1"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{NM_LOCAL_ARMAZENAMENTO}]]></textFieldExpression>
+			</textField>
+			<textField pattern="" isBlankWhenNull="true">
+				<reportElement x="186" y="0" width="42" height="8" uuid="e8e140a9-f8e6-4b53-ab2d-021ba35296b1"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new DecimalFormat("#,##0.00;-#,##0.00", new java.text.DecimalFormatSymbols(new java.util.Locale("pt", "BR"))).format($F{QT_SAIDA})]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="164" y="0" width="20" height="8" uuid="e8e140a9-f8e6-4b53-ab2d-021ba35296b1">
+					<property name="local_mesure_unitheight" value="pixel"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{SG_UNIDADE_MEDIDA}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="232" y="0" width="47" height="8" uuid="e8e140a9-f8e6-4b53-ab2d-021ba35296b1"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new DecimalFormat("#,##0.00;-#,##0.00", new java.text.DecimalFormatSymbols(new java.util.Locale("pt", "BR"))).format($F{QT_MEDIA_DIARIA})]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="283" y="0" width="44" height="8" uuid="558de082-acd4-4146-9856-8217c3e34ad3"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new DecimalFormat("#,##0.00;-#,##0.00", new java.text.DecimalFormatSymbols(new java.util.Locale("pt", "BR"))).format($F{QT_MINIMA})]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="13">
+			<line>
+				<reportElement x="1" y="1" width="799" height="1" uuid="b22cbe36-06b3-4501-a505-99c9c259cab5"/>
+				<graphicElement>
+					<pen lineStyle="Solid"/>
+				</graphicElement>
+			</line>
+			<textField>
+				<reportElement x="213" y="3" width="586" height="10" uuid="b4535353-a90a-4520-8dc4-8400a0e2fed5"/>
+				<textElement textAlignment="Right" verticalAlignment="Top">
+					<font fontName="SansSerif" size="6" isBold="true" isItalic="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Emitido em " + $P{dtHoje} + " às " + $P{hrHoje} + " por " + $P{nmUsuario} + "   Página: " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="3" width="213" height="10" uuid="b4535353-a90a-4520-8dc4-8400a0e2fed5"/>
+				<textElement textAlignment="Left" verticalAlignment="Top">
+					<font fontName="SansSerif" size="6" isBold="false" isItalic="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{nmDesenvolvedor} + "   " + $P{nmEmail}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+</jasperReport>

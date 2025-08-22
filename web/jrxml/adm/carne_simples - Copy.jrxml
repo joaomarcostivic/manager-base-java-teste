@@ -1,0 +1,257 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="protocoloDeCadastroDeInteressado" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="30" rightMargin="30" topMargin="20" bottomMargin="20">
+	<property name="ireport.scriptlethandling" value="0"/>
+	<property name="ireport.encoding" value="UTF-8"/>
+	<property name="ireport.zoom" value="0.9090909090909091"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<import value="net.sf.jasperreports.engine.*"/>
+	<import value="java.util.*"/>
+	<import value="net.sf.jasperreports.engine.data.*"/>
+	<parameter name="cdInteressado" class="java.lang.Integer"/>
+	<parameter name="logo" class="java.lang.String" isForPrompting="false"/>
+	<queryString>
+		<![CDATA[select cd_Interessado, nm_interessado, rg, cpf, titulo, zona, secao, endereco, bairro,
+referencia, renda_mensal, profissao, local_trabalho, fone1, fone2, nr_filhos_menores,
+nr_filhos_maiores, nr_outros_depend, tempo_resid_cidade, tempo_resid_atual, data_cadastro,
+nm_usuario, situacao_cadastro, estado_civil, nm_conjugue, rg_conjugue, cpf_conjugue, observacoes, naturalidade, data_nasc from interessado i,  usuario u where i.cd_interessado=($P{cdInteressado}) and u.cd_usuario=i.cd_usuario_cadastro;]]>
+	</queryString>
+	<field name="cd_interessado" class="java.lang.Integer"/>
+	<field name="nm_interessado" class="java.lang.String"/>
+	<field name="rg" class="java.lang.String"/>
+	<field name="cpf" class="java.lang.String"/>
+	<field name="titulo" class="java.lang.String"/>
+	<field name="zona" class="java.lang.String"/>
+	<field name="secao" class="java.lang.String"/>
+	<field name="endereco" class="java.lang.String"/>
+	<field name="bairro" class="java.lang.String"/>
+	<field name="referencia" class="java.lang.String"/>
+	<field name="renda_mensal" class="java.lang.String"/>
+	<field name="profissao" class="java.lang.String"/>
+	<field name="local_trabalho" class="java.lang.String"/>
+	<field name="fone1" class="java.lang.String"/>
+	<field name="fone2" class="java.lang.String"/>
+	<field name="nr_filhos_menores" class="java.lang.Integer"/>
+	<field name="nr_filhos_maiores" class="java.lang.Integer"/>
+	<field name="nr_outros_depend" class="java.lang.Integer"/>
+	<field name="tempo_resid_cidade" class="java.lang.Integer"/>
+	<field name="tempo_resid_atual" class="java.lang.Integer"/>
+	<field name="data_cadastro" class="java.sql.Date"/>
+	<field name="nm_usuario" class="java.lang.String"/>
+	<field name="situacao_cadastro" class="java.lang.Integer"/>
+	<field name="estado_civil" class="java.lang.Integer"/>
+	<field name="nm_conjugue" class="java.lang.String"/>
+	<field name="rg_conjugue" class="java.lang.String"/>
+	<field name="cpf_conjugue" class="java.lang.String"/>
+	<field name="observacoes" class="java.lang.String"/>
+	<field name="naturalidade" class="java.lang.String"/>
+	<field name="data_nasc" class="java.sql.Date"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="33" splitType="Stretch"/>
+	</title>
+	<pageHeader>
+		<band height="29" splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="36" splitType="Stretch"/>
+	</columnHeader>
+	<detail>
+		<band height="250" splitType="Stretch">
+			<rectangle>
+				<reportElement key="rectangle-10" x="0" y="48" width="213" height="40"/>
+			</rectangle>
+			<rectangle>
+				<reportElement key="rectangle-12" x="0" y="26" width="213" height="22"/>
+			</rectangle>
+			<rectangle>
+				<reportElement key="rectangle-14" x="0" y="3" width="213" height="22"/>
+			</rectangle>
+			<staticText>
+				<reportElement key="staticText-7" x="2" y="25" width="40" height="14"/>
+				<textElement/>
+				<text><![CDATA[Nome:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement key="staticText-46" x="2" y="48" width="71" height="14"/>
+				<textElement/>
+				<text><![CDATA[Endereço:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement key="staticText-7" x="6" y="9" width="154" height="14"/>
+				<textElement>
+					<font isUnderline="true"/>
+				</textElement>
+				<text><![CDATA[PAX NACIONAL LTDA]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement key="rectangle-10" x="0" y="88" width="213" height="32"/>
+			</rectangle>
+			<staticText>
+				<reportElement key="staticText-46" x="2" y="88" width="71" height="14"/>
+				<textElement/>
+				<text><![CDATA[Plano:]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement key="rectangle-10" x="0" y="120" width="54" height="32"/>
+			</rectangle>
+			<staticText>
+				<reportElement key="staticText-46" x="2" y="121" width="27" height="14"/>
+				<textElement/>
+				<text><![CDATA[Tipo:]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement key="rectangle-10" x="54" y="120" width="92" height="32"/>
+			</rectangle>
+			<staticText>
+				<reportElement key="staticText-46" x="56" y="121" width="75" height="14"/>
+				<textElement/>
+				<text><![CDATA[Nr. Documento:]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement key="rectangle-10" x="145" y="120" width="68" height="32"/>
+			</rectangle>
+			<staticText>
+				<reportElement key="staticText-46" x="148" y="121" width="65" height="14"/>
+				<textElement/>
+				<text><![CDATA[Vencimento:]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement key="rectangle-10" x="0" y="152" width="54" height="32"/>
+			</rectangle>
+			<staticText>
+				<reportElement key="staticText-46" x="2" y="152" width="27" height="14"/>
+				<textElement/>
+				<text><![CDATA[Valor:]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement key="rectangle-10" x="54" y="152" width="92" height="32"/>
+			</rectangle>
+			<staticText>
+				<reportElement key="staticText-46" x="56" y="152" width="49" height="14"/>
+				<textElement/>
+				<text><![CDATA[Outros(+):]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement key="rectangle-10" x="145" y="152" width="68" height="32"/>
+			</rectangle>
+			<staticText>
+				<reportElement key="staticText-46" x="148" y="152" width="30" height="14"/>
+				<textElement/>
+				<text><![CDATA[Total:]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement key="rectangle-10" x="0" y="184" width="213" height="32"/>
+			</rectangle>
+			<staticText>
+				<reportElement key="staticText-46" x="3" y="184" width="102" height="14"/>
+				<textElement/>
+				<text><![CDATA[Outras Informações:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement key="staticText-46" x="2" y="216" width="71" height="14"/>
+				<textElement/>
+				<text><![CDATA[Impresso por:]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement key="rectangle-14" x="218" y="4" width="317" height="22"/>
+			</rectangle>
+			<staticText>
+				<reportElement key="staticText-7" x="221" y="9" width="266" height="14"/>
+				<textElement>
+					<font isUnderline="true"/>
+				</textElement>
+				<text><![CDATA[PAX NACIONAL SERVIÇOS FUNERÁRIOS LTDA]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement key="rectangle-14" x="218" y="26" width="88" height="36"/>
+			</rectangle>
+			<staticText>
+				<reportElement key="staticText-7" x="219" y="27" width="27" height="14"/>
+				<textElement/>
+				<text><![CDATA[Tipo:]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement key="rectangle-14" x="306" y="26" width="87" height="36"/>
+			</rectangle>
+			<staticText>
+				<reportElement key="staticText-7" x="307" y="28" width="53" height="14"/>
+				<textElement/>
+				<text><![CDATA[Emissão:]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement key="rectangle-14" x="393" y="26" width="142" height="36"/>
+			</rectangle>
+			<staticText>
+				<reportElement key="staticText-7" x="395" y="29" width="35" height="14"/>
+				<textElement/>
+				<text><![CDATA[Plano:]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement key="rectangle-14" x="218" y="62" width="88" height="36"/>
+			</rectangle>
+			<staticText>
+				<reportElement key="staticText-7" x="220" y="63" width="77" height="14"/>
+				<textElement/>
+				<text><![CDATA[Nr. Documento:]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement key="rectangle-14" x="306" y="62" width="87" height="36"/>
+			</rectangle>
+			<staticText>
+				<reportElement key="staticText-7" x="308" y="63" width="65" height="14"/>
+				<textElement/>
+				<text><![CDATA[Vencimento:]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement key="rectangle-14" x="393" y="62" width="87" height="36"/>
+			</rectangle>
+			<staticText>
+				<reportElement key="staticText-7" x="393" y="63" width="87" height="14"/>
+				<textElement/>
+				<text><![CDATA[Data Pagamento:]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement key="rectangle-14" x="480" y="63" width="55" height="35"/>
+			</rectangle>
+			<staticText>
+				<reportElement key="staticText-7" x="481" y="63" width="54" height="14"/>
+				<textElement/>
+				<text><![CDATA[Valor Pago:]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement key="rectangle-14" x="218" y="98" width="317" height="54"/>
+			</rectangle>
+			<staticText>
+				<reportElement key="staticText-7" x="221" y="101" width="38" height="19"/>
+				<textElement/>
+				<text><![CDATA[Nome:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement key="staticText-7" x="219" y="155" width="40" height="19"/>
+				<textElement/>
+				<text><![CDATA[Chaves:]]></text>
+			</staticText>
+			<componentElement>
+				<reportElement x="280" y="174" width="200" height="50"/>
+				<jr:barbecue xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd" type="Int2of5" drawText="false" checksumRequired="false">
+					<jr:codeExpression><![CDATA["1234"]]></jr:codeExpression>
+				</jr:barbecue>
+			</componentElement>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="30" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="50" splitType="Stretch"/>
+	</pageFooter>
+	<lastPageFooter>
+		<band height="50" splitType="Stretch"/>
+	</lastPageFooter>
+	<summary>
+		<band height="50" splitType="Stretch"/>
+	</summary>
+</jasperReport>

@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.1.1.final using JasperReports Library version 6.1.1  -->
+<!-- 2017-02-02T17:04:28 -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="relatorio_planejamento_orcamentario" pageWidth="842" pageHeight="595" orientation="Landscape" whenNoDataType="AllSectionsNoDetail" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="3e76cb13-a818-44f7-a94f-1577a17c75b6">
+	<property name="ireport.zoom" value="1.4641000000000037"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<property name="com.jaspersoft.studio.unit." value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.pageHeight" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.pageWidth" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.topMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.bottomMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.leftMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.rightMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.columnWidth" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.columnSpacing" value="pixel"/>
+	<subDataset name="DatasetCompetencia" uuid="b145cb9d-36fe-46ee-935e-442c4cd3def2">
+		<property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
+		<queryString>
+			<![CDATA[]]>
+		</queryString>
+		<field name="NM_COMPETENCIA" class="java.lang.String"/>
+		<field name="VL_ORCADO" class="java.lang.String"/>
+	</subDataset>
+	<parameter name="nmEmpresa" class="java.lang.String"/>
+	<parameter name="dtFechamento" class="java.util.Date"/>
+	<parameter name="LOGO" class="java.lang.Object"/>
+	<parameter name="nmResponsavel" class="java.lang.String"/>
+	<parameter name="nmUsuario" class="java.lang.String"/>
+	<parameter name="nmPlanejamento" class="java.lang.String"/>
+	<parameter name="nmCentroCusto" class="java.lang.String"/>
+	<parameter name="COMPETENCIAS" class="java.util.List"/>
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<field name="NR_NIVEL" class="java.lang.String"/>
+	<field name="DS_CATEGORIA_ECONOMICA" class="java.lang.String"/>
+	<field name="ORCAMENTO_COMPETENCIA" class="java.util.List"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="65" splitType="Stretch">
+			<textField pattern="" isBlankWhenNull="true">
+				<reportElement x="122" y="0" width="598" height="21" uuid="a026b702-972f-4e45-b57b-937598773730">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+				</reportElement>
+				<textElement textAlignment="Center">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{nmEmpresa}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="122" y="21" width="598" height="18" uuid="7809eb63-d07c-4768-b35c-437c493b9981">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<textElement textAlignment="Center">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Planejamento Orçamentário"]]></textFieldExpression>
+			</textField>
+			<textField pattern="">
+				<reportElement x="122" y="39" width="598" height="13" uuid="376652df-afb1-4f1d-bb18-06db255b02a0">
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="10" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{nmPlanejamento}]]></textFieldExpression>
+			</textField>
+			<image scaleImage="RetainShape" hAlign="Center">
+				<reportElement mode="Opaque" x="1" y="0" width="74" height="50" isRemoveLineWhenBlank="true" uuid="80d2b944-e14b-4eec-80da-377ee70b1dd1">
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+				<imageExpression><![CDATA[net.sf.jasperreports.engine.util.JRImageLoader.loadImage((byte[]) $P{LOGO})]]></imageExpression>
+			</image>
+			<textField pattern="">
+				<reportElement x="122" y="52" width="598" height="13" uuid="c8befb3b-6dc9-4cb4-a16d-8e39ea6e272e">
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{nmCentroCusto}]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="12">
+			<textField>
+				<reportElement x="0" y="0" width="150" height="12" uuid="017b0b20-76f1-4c24-bdbd-1d652f3fc6a7"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Categoria Econômica"]]></textFieldExpression>
+			</textField>
+			<componentElement>
+				<reportElement stretchType="RelativeToTallestObject" x="150" y="0" width="652" height="12" uuid="38309357-f3ca-4be7-a6e9-204d0a15018b">
+					<property name="net.sf.jasperreports.export.headertoolbar.table.name" value=""/>
+					<property name="com.jaspersoft.studio.unit.CONTENTS.height" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					<property name="com.jaspersoft.studio.layout" value="com.jaspersoft.studio.editor.layout.HorizontalRowLayout"/>
+				</reportElement>
+				<jr:list xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd" printOrder="Horizontal">
+					<datasetRun subDataset="DatasetCompetencia" uuid="a0d58e3d-47ae-4c20-96cf-6daf47bdfd89">
+						<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource($P{COMPETENCIAS})]]></dataSourceExpression>
+					</datasetRun>
+					<jr:listContents height="12" width="45">
+						<textField isBlankWhenNull="true">
+							<reportElement x="0" y="0" width="45" height="12" uuid="0a096530-d15c-4d6a-9fce-93953f481572"/>
+							<box>
+								<topPen lineWidth="0.0"/>
+								<leftPen lineWidth="0.0"/>
+								<bottomPen lineWidth="0.0"/>
+								<rightPen lineWidth="0.0"/>
+							</box>
+							<textElement textAlignment="Right" verticalAlignment="Middle">
+								<font size="8" isBold="true"/>
+							</textElement>
+							<textFieldExpression><![CDATA[$F{NM_COMPETENCIA}]]></textFieldExpression>
+						</textField>
+					</jr:listContents>
+				</jr:list>
+			</componentElement>
+		</band>
+	</pageHeader>
+	<detail>
+		<band height="12">
+			<textField isBlankWhenNull="true">
+				<reportElement x="0" y="0" width="150" height="12" uuid="1a0558a0-8da6-486d-a4ce-62c18dc2ffcd"/>
+				<textElement verticalAlignment="Middle">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{DS_CATEGORIA_ECONOMICA}]]></textFieldExpression>
+			</textField>
+			<componentElement>
+				<reportElement x="150" y="0" width="652" height="12" uuid="9f46563b-b69f-40c8-a168-4a6b594e4962">
+					<property name="com.jaspersoft.studio.layout" value="com.jaspersoft.studio.editor.layout.HorizontalRowLayout"/>
+				</reportElement>
+				<jr:list xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd" printOrder="Horizontal">
+					<datasetRun subDataset="DatasetCompetencia" uuid="d2e239a2-d5ad-4b7f-9283-efe642f3e263">
+						<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource($F{ORCAMENTO_COMPETENCIA})]]></dataSourceExpression>
+					</datasetRun>
+					<jr:listContents height="12" width="45">
+						<textField isBlankWhenNull="true">
+							<reportElement x="0" y="0" width="45" height="12" uuid="eb2a0d2a-b53f-44d4-bbab-ce55dfea1477"/>
+							<textElement textAlignment="Right" verticalAlignment="Middle">
+								<font size="7"/>
+							</textElement>
+							<textFieldExpression><![CDATA[$F{VL_ORCADO}]]></textFieldExpression>
+						</textField>
+					</jr:listContents>
+				</jr:list>
+			</componentElement>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="11">
+			<line>
+				<reportElement x="0" y="0" width="802" height="1" uuid="362650d7-8cd6-4ca1-9a27-d995df1d00d2">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+			</line>
+			<textField>
+				<reportElement x="1" y="1" width="399" height="10" uuid="2071e188-e6d4-4692-bc59-40d167568efa">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Emitido em "+
+( new SimpleDateFormat("d 'de' MMMM, yyyy  'às' HH:mm ", new Locale("pt", "BR")).format( new java.util.Date() ))+", por "+$P{nmUsuario}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" evaluationTime="Report">
+				<reportElement x="596" y="1" width="124" height="10" uuid="74393a1c-7300-4e28-a07a-7c246ac3bc11"/>
+				<textElement textAlignment="Right">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Pág. " +($V{PAGE_COUNT}+1)+" de " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+</jasperReport>

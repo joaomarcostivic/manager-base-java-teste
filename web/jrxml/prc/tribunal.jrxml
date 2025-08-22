@@ -1,0 +1,225 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.1.1.final using JasperReports Library version 6.1.1  -->
+<!-- 2016-03-02T16:27:44 -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="tribunal" language="groovy" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="b585a798-47b7-4fa6-b465-64bfb12faed5">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<property name="com.jaspersoft.studio.unit." value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.pageHeight" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.pageWidth" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.topMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.bottomMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.leftMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.rightMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.columnWidth" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.columnSpacing" value="pixel"/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
+	<parameter name="NM_CLIENTE" class="java.lang.String"/>
+	<parameter name="IMG_LOGOMARCA" class="byte[]" isForPrompting="false"/>
+	<parameter name="NM_EMPRESA" class="java.lang.String"/>
+	<parameter name="NM_RELATORIO" class="java.lang.String"/>
+	<field name="TP_SEGMENTO" class="java.lang.Integer"/>
+	<field name="NM_TRIBUNAL" class="java.lang.String"/>
+	<field name="ID_TRIBUNAL" class="java.lang.String"/>
+	<field name="SG_TRIBUNAL" class="java.lang.String"/>
+	<title>
+		<band height="51" splitType="Stretch">
+			<textField>
+				<reportElement x="104" y="0" width="596" height="25" uuid="006706fc-1218-4e42-bf73-52696800b466"/>
+				<textElement textAlignment="Center">
+					<font size="15" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{NM_EMPRESA}]]></textFieldExpression>
+			</textField>
+			<image scaleImage="RetainShape" hAlign="Center">
+				<reportElement x="1" y="0" width="103" height="47" isRemoveLineWhenBlank="true" uuid="658c84dc-73b2-4899-bfde-b3a72fd192d9"/>
+				<imageExpression><![CDATA[net.sf.jasperreports.engine.util.JRImageLoader.loadImage((byte[]) $P{IMG_LOGOMARCA})]]></imageExpression>
+			</image>
+			<textField isBlankWhenNull="true">
+				<reportElement x="104" y="27" width="596" height="20" uuid="107a21d4-6ea1-4ca0-9381-187c3811ea75">
+					<property name="local_mesure_unitheight" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Center">
+					<font size="15" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{NM_RELATORIO}]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="3">
+			<line>
+				<reportElement x="0" y="2" width="800" height="1" uuid="f90d8974-9b05-4f50-9561-76efddd5e7e0">
+					<property name="local_mesure_unitwidth" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+			</line>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="17">
+			<line>
+				<reportElement x="0" y="16" width="800" height="1" uuid="14ffeb2f-4328-48fe-b044-74d1b325ca3a">
+					<property name="local_mesure_unitwidth" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+			</line>
+			<line>
+				<reportElement x="0" y="0" width="800" height="1" uuid="43483376-aed1-435a-a60e-8ef958570164">
+					<property name="local_mesure_unitwidth" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+			</line>
+			<staticText>
+				<reportElement x="0" y="1" width="280" height="14" uuid="c6380e93-8391-4bc7-86a1-e90789e2202b">
+					<property name="local_mesure_unitheight" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement>
+					<font fontName="SansSerif" size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Tribunal]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="363" y="1" width="116" height="14" uuid="884f9502-f9c1-4776-8bfd-005ae311a4bb">
+					<property name="local_mesure_unitwidth" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="local_mesure_unitheight" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement>
+					<font fontName="SansSerif" size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Abreviatura]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="488" y="1" width="312" height="14" uuid="034959a2-563c-4d73-a61c-dc53de4b5773"/>
+				<textElement>
+					<font fontName="SansSerif" size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Segmento]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="287" y="1" width="70" height="14" uuid="e917b22e-0488-4edf-9b80-89ee2deb009d">
+					<property name="local_mesure_unitwidth" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="local_mesure_unitheight" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement>
+					<font fontName="SansSerif" size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Id.]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="18">
+			<textField isBlankWhenNull="true">
+				<reportElement x="488" y="2" width="311" height="16" uuid="bb8a97f9-7c72-440a-9667-5e84c665643f">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<textElement>
+					<font fontName="SansSerif" size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{TP_SEGMENTO}==0 ? "Administrativo/Outros" :
+	($F{TP_SEGMENTO}==1 ? "STF" : 
+		($F{TP_SEGMENTO}==2 ? "CNJ" :
+			($F{TP_SEGMENTO}==3 ? "STJ" :
+				($F{TP_SEGMENTO}==4 ? "Justiça Federal" :
+					($F{TP_SEGMENTO}==5 ? "Justiça do Trabalho" :
+						($F{TP_SEGMENTO}==6 ? "Justiça Eleitoral" :
+							($F{TP_SEGMENTO}==7 ? "Justiça Militar da União" :
+								($F{TP_SEGMENTO}==8 ? "Justiça Estadual" :
+									"Justiça Militar Estadual"
+								)
+							)
+						)
+					)
+				)
+			)
+		)
+	)]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="0" y="3" width="280" height="15" uuid="06883b10-011e-4c5f-9dc6-1f0ad512d659"/>
+				<textFieldExpression><![CDATA[$F{NM_TRIBUNAL}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="287" y="2" width="70" height="16" uuid="6eb31c93-6f08-4d2a-a72a-28208f57b54d"/>
+				<textFieldExpression><![CDATA[$F{ID_TRIBUNAL}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="363" y="2" width="116" height="16" uuid="e9b7feaf-921a-4829-ac03-1a7d67e5559d"/>
+				<textFieldExpression><![CDATA[$F{SG_TRIBUNAL}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="12" splitType="Stretch">
+			<textField pattern="dd/MM/yyyy HH:mm:ss">
+				<reportElement x="735" y="3" width="65" height="9" uuid="0d44b0be-dc37-41a9-a4da-de58394f126c"/>
+				<textElement>
+					<font size="7" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new SimpleDateFormat("dd/MM/yyyy").format(new java.util.Date())]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="35" y="3" width="13" height="9" uuid="49719f95-d9cc-4295-bfe1-4b837e61b3ec"/>
+				<textElement>
+					<font size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[ de]]></text>
+			</staticText>
+			<line>
+				<reportElement x="0" y="1" width="800" height="1" uuid="51f2970d-4e60-499f-8735-2224e3e89645">
+					<property name="local_mesure_unitheight" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<graphicElement>
+					<pen lineWidth="1.0"/>
+				</graphicElement>
+			</line>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement x="310" y="3" width="186" height="9" uuid="094729d9-6eaf-47fe-89ad-5511d6a90696"/>
+				<textElement textAlignment="Center">
+					<font size="7" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["JurisManager - Gestor de Processos Jurídicos"]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="3" width="25" height="9" uuid="191ec61a-bf76-4c77-ac89-3daedd7cba61"/>
+				<textElement>
+					<font size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Página]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true" pattern="">
+				<reportElement stretchType="RelativeToTallestObject" x="25" y="3" width="10" height="9" uuid="34f603b7-f070-4caf-8159-d4ddd7706394"/>
+				<textElement textAlignment="Right">
+					<font size="7" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="690" y="3" width="43" height="9" uuid="dd1d733e-adf4-4c58-bd3c-35eb2d153da5"/>
+				<textElement>
+					<font size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Emitido em ]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true" evaluationTime="Report" pattern="">
+				<reportElement x="48" y="3" width="12" height="9" uuid="307ae0f9-fbea-45cb-afd3-87673abd07d0">
+					<property name="local_mesure_unitwidth" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Left">
+					<font size="7" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+</jasperReport>

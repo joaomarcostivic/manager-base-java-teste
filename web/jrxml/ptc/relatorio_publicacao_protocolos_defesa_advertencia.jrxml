@@ -1,0 +1,379 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.1.1.final using JasperReports Library version 6.1.1  -->
+<!-- 2025-02-20T09:30:40 -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="relatorio_publicacao_protocolos_defesa_advertencia" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="a1277020-2935-42c9-afae-2b42d785aea9">
+	<parameter name="Defesa Prévia" class="java.lang.Integer"/>
+	<parameter name="Recurso JARI" class="java.lang.Integer"/>
+	<parameter name="PTC_DEFERIDOS" class="java.lang.Integer"/>
+	<parameter name="PTC_INDEFERIDOS" class="java.lang.Integer"/>
+	<parameter name="LOGO_1" class="java.lang.String"/>
+	<parameter name="LOGO_2" class="java.lang.String"/>
+	<parameter name="DS_TITULO_1" class="java.lang.String"/>
+	<parameter name="DS_TITULO_2" class="java.lang.String"/>
+	<parameter name="DS_TITULO_3" class="java.lang.String"/>
+	<parameter name="NM_RECURSO" class="java.lang.String"/>
+	<parameter name="MOB_PUBLICAR_JULGAMENTO" class="java.lang.String"/>
+	<parameter name="EXIBIR_TEXTO_PRIMEIRA_PAGINA" class="java.lang.String">
+		<defaultValueExpression><![CDATA[true]]></defaultValueExpression>
+	</parameter>
+	<parameter name="NUMERO_EDITAL" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<field name="ID_AIT" class="java.lang.String"/>
+	<field name="NR_PLACA" class="java.lang.String"/>
+	<field name="NR_PROTOCOLO" class="java.lang.String"/>
+	<field name="DT_PROTOCOLO" class="java.util.Date"/>
+	<field name="NM_TIPO_DOCUMENTO" class="java.lang.String"/>
+	<field name="NM_JULGAMENTO" class="java.lang.String"/>
+	<field name="DT_INFRACAO" class="java.util.Date"/>
+	<field name="DT_OCORRENCIA" class="java.util.Date"/>
+	<variable name="LINHA_NUMERO" class="java.lang.String">
+		<variableExpression><![CDATA["_____"]]></variableExpression>
+		<initialValueExpression><![CDATA["_____"]]></initialValueExpression>
+	</variable>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="107" splitType="Stretch">
+			<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+			<staticText>
+				<reportElement x="0" y="0" width="554" height="36" uuid="268b7138-2af2-4af2-9f95-2bbcaf86241e"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<image>
+				<reportElement x="10" y="8" width="50" height="50" uuid="c844c85c-858b-4ea4-8543-713330840ad8"/>
+				<imageExpression><![CDATA[net.sf.jasperreports.engine.util.JRImageLoader.getInstance(new SimpleJasperReportsContext()).loadAwtImageFromBytes(javax.xml.bind.DatatypeConverter.parseBase64Binary($P{LOGO_1}))]]></imageExpression>
+			</image>
+			<textField isBlankWhenNull="true">
+				<reportElement x="80" y="1" width="400" height="16" uuid="9ef10e79-a95d-429b-baf4-f22e54ff39b5"/>
+				<textElement textAlignment="Center">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{DS_TITULO_1}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="80" y="20" width="400" height="16" uuid="51977aae-b9fa-4825-be3e-2d9f51c6d77a"/>
+				<textElement textAlignment="Center">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{DS_TITULO_2}]]></textFieldExpression>
+			</textField>
+			<image>
+				<reportElement x="491" y="6" width="50" height="50" uuid="09921fc9-9509-405a-a731-7cb018f950b1"/>
+				<imageExpression><![CDATA[net.sf.jasperreports.engine.util.JRImageLoader.getInstance(new SimpleJasperReportsContext()).loadAwtImageFromBytes(javax.xml.bind.DatatypeConverter.parseBase64Binary($P{LOGO_2}))]]></imageExpression>
+			</image>
+			<textField isBlankWhenNull="true">
+				<reportElement x="80" y="40" width="400" height="16" uuid="98f29959-38a9-41f0-99a6-0073515ef162">
+					<printWhenExpression><![CDATA[$P{DS_TITULO_3} != "0"]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Center">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{DS_TITULO_3}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="80" y="60" width="400" height="16" uuid="296ceaf1-7b7a-4912-ac6c-13e8b3bb2860">
+					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="10" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["EDITAL NÚMERO " + ($P{NUMERO_EDITAL} != null ? $P{NUMERO_EDITAL} : $V{LINHA_NUMERO} + "/" + new java.util.Date().toString().split(" ")[5])]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="85" width="555" height="16" uuid="16173a21-82c6-41ca-9da1-17963b717d76">
+					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<textElement textAlignment="Center">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["EDITAL DE " + $F{NM_TIPO_DOCUMENTO}.toUpperCase() + ($F{NM_JULGAMENTO} != null ? " - " + $F{NM_JULGAMENTO}.toUpperCase() : "")]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="125">
+			<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+			<printWhenExpression><![CDATA[$P{MOB_PUBLICAR_JULGAMENTO} != null]]></printWhenExpression>
+			<textField>
+				<reportElement x="0" y="0" width="554" height="120" uuid="9a8d5875-e469-47b1-b1c6-f2434d822caf">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+					<printWhenExpression><![CDATA[$P{EXIBIR_TEXTO_PRIMEIRA_PAGINA} && $V{PAGE_NUMBER} == 1]]></printWhenExpression>
+				</reportElement>
+				<box topPadding="5" leftPadding="5" bottomPadding="5" rightPadding="5"/>
+				<textElement markup="html"/>
+				<textFieldExpression><![CDATA[$P{MOB_PUBLICAR_JULGAMENTO}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="27" splitType="Stretch">
+			<staticText>
+				<reportElement x="20" y="-2" width="70" height="29" uuid="c0fb9057-7416-491c-bfc5-72f1105c6e00"/>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Nº AIT]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="90" y="-2" width="60" height="29" uuid="7dd6ef9a-e704-4e16-b555-79b7fc953246">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Nº Placa]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="150" y="-2" width="110" height="29" uuid="6dc2a943-52a0-4420-bd36-a99aae822428">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Nº Protocolo ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="330" y="-2" width="72" height="29" uuid="2e3cffb1-eea0-40c8-a678-1995f9efcb5c">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Data de Infração]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="402" y="-2" width="78" height="29" uuid="1e37bc82-0421-4cc4-b7da-ecb055a158b5">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Resultado do Processo]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="-2" width="20" height="29" uuid="cf3bd694-a032-410d-a6b7-47b9f65b4891">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[#]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="260" y="-2" width="70" height="29" uuid="368dddd3-6292-4938-bdd4-1e71ef3c4c8a">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Data de Protocolo]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="480" y="-2" width="75" height="29" uuid="ee8dcac7-2b5e-4205-b778-655b06cb7ae6">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Data de Julgamento]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="21" splitType="Stretch">
+			<textField>
+				<reportElement x="20" y="0" width="70" height="20" uuid="d2e18dfe-cf14-4af8-b317-f48e62123299">
+					<printWhenExpression><![CDATA[$F{ID_AIT} != null]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{ID_AIT}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="90" y="0" width="60" height="20" uuid="32fd2ab0-2584-4ece-937c-ed43972b3011">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<printWhenExpression><![CDATA[$F{NR_PLACA} != null]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{NR_PLACA}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="150" y="0" width="110" height="20" uuid="02f175d1-f1c3-4441-8f79-88bddefd9bc8">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<printWhenExpression><![CDATA[$F{NR_PROTOCOLO} != null]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{NR_PROTOCOLO}]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement x="330" y="0" width="72" height="20" uuid="149bc524-8ffb-4fbf-91b3-24fbf15cd62d">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<printWhenExpression><![CDATA[$F{DT_INFRACAO} != null]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{DT_INFRACAO}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement stretchType="RelativeToBandHeight" x="402" y="0" width="80" height="20" uuid="bfd050d3-baea-46e2-bf74-b6741a04417d">
+					<printWhenExpression><![CDATA[$F{NM_JULGAMENTO} != null]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{NM_JULGAMENTO}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="0" width="20" height="20" uuid="8a432172-3cf8-4923-86c5-839887b4f670"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="9" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{REPORT_COUNT}]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement x="260" y="0" width="70" height="20" uuid="daef8aa6-608d-4a51-ae42-e1296c5ef714">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<printWhenExpression><![CDATA[$F{DT_PROTOCOLO} != null]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{DT_PROTOCOLO}]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement x="482" y="0" width="73" height="20" uuid="9e0c4702-4dac-4987-a074-38de14d537ec">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<printWhenExpression><![CDATA[$F{DT_OCORRENCIA} != null]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{DT_OCORRENCIA}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="2" splitType="Stretch">
+			<rectangle>
+				<reportElement x="0" y="0" width="555" height="1" backcolor="#000000" uuid="b8989e92-ade2-41e2-be0a-3ec681491a68">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+			</rectangle>
+		</band>
+	</columnFooter>
+	<pageFooter>
+		<band height="20" splitType="Stretch">
+			<textField>
+				<reportElement x="460" y="0" width="50" height="20" uuid="88566fce-7f11-4aa3-b309-b576b0e929d2"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA["Página " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="510" y="0" width="45" height="20" uuid="b8feeffd-df71-45ac-86e4-5ac14ceb2580"/>
+				<textElement textAlignment="Left"/>
+				<textFieldExpression><![CDATA[" de " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="130" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="20" width="234" height="20" isRemoveLineWhenBlank="true" uuid="3fa07d24-032c-41e0-abf6-9e6b70f488d6"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Quantidade de processos: " + $V{REPORT_COUNT}]]></textFieldExpression>
+			</textField>
+			<rectangle>
+				<reportElement x="0" y="0" width="555" height="1" backcolor="#000000" uuid="737ad574-f0d6-4a76-af80-5e71d525095f">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+			</rectangle>
+			<staticText>
+				<reportElement x="175" y="50" width="54" height="20" uuid="d232a6d0-6720-4010-8e09-19b9e274a27f"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Deferidos: ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="279" y="50" width="60" height="20" uuid="33d45627-ee6b-4f96-9cf6-4d4d9ed72c2c"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Indeferidos: ]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="229" y="50" width="50" height="20" uuid="b888f69f-20de-4c4d-afe0-7a57b7a342a4"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$P{PTC_DEFERIDOS}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="339" y="50" width="50" height="20" uuid="f4625e2e-a9c1-4635-a4e5-7ed3cf505b1d"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$P{PTC_INDEFERIDOS}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="50" width="174" height="20" uuid="b51659fc-8a2d-4889-bdda-5e37ee407384"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{NM_RECURSO}]]></textFieldExpression>
+			</textField>
+		</band>
+	</summary>
+</jasperReport>

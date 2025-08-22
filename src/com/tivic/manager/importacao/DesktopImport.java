@@ -1,0 +1,9194 @@
+package com.tivic.manager.importacao;
+
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.PrintWriter;
+import java.io.RandomAccessFile;
+import java.sql.Connection;
+import java.sql.Date;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.sql.Timestamp;
+import java.sql.Types;
+import java.text.DateFormat;
+import java.text.Normalizer;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Collections;
+import java.util.GregorianCalendar;
+import java.util.HashMap;
+import java.util.StringTokenizer;
+import java.util.concurrent.TimeUnit;
+
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.NodeList;
+
+import com.tivic.manager.adm.CategoriaEconomica;
+import com.tivic.manager.adm.CategoriaEconomicaServices;
+import com.tivic.manager.adm.Cheque;
+import com.tivic.manager.adm.ChequeDAO;
+import com.tivic.manager.adm.Cliente;
+import com.tivic.manager.adm.ClienteDAO;
+import com.tivic.manager.adm.ContaFinanceira;
+import com.tivic.manager.adm.ContaFinanceiraDAO;
+import com.tivic.manager.adm.ContaPagar;
+import com.tivic.manager.adm.ContaPagarCategoria;
+import com.tivic.manager.adm.ContaPagarCategoriaDAO;
+import com.tivic.manager.adm.ContaPagarDAO;
+import com.tivic.manager.adm.ContaReceber;
+import com.tivic.manager.adm.ContaReceberCategoria;
+import com.tivic.manager.adm.ContaReceberCategoriaDAO;
+import com.tivic.manager.adm.ContaReceberCategoriaServices;
+import com.tivic.manager.adm.ContaReceberDAO;
+import com.tivic.manager.adm.ContaReceberServices;
+import com.tivic.manager.adm.Contrato;
+import com.tivic.manager.adm.ContratoDAO;
+import com.tivic.manager.adm.ContratoServices;
+import com.tivic.manager.adm.FormaPagamento;
+import com.tivic.manager.adm.FormaPagamentoDAO;
+import com.tivic.manager.adm.FormaPagamentoServices;
+import com.tivic.manager.adm.MovimentoConta;
+import com.tivic.manager.adm.MovimentoContaCategoria;
+import com.tivic.manager.adm.MovimentoContaCategoriaDAO;
+import com.tivic.manager.adm.MovimentoContaDAO;
+import com.tivic.manager.adm.MovimentoContaPagar;
+import com.tivic.manager.adm.MovimentoContaPagarDAO;
+import com.tivic.manager.adm.MovimentoContaReceber;
+import com.tivic.manager.adm.MovimentoContaReceberDAO;
+import com.tivic.manager.adm.MovimentoContaTituloCredito;
+import com.tivic.manager.adm.MovimentoContaTituloCreditoDAO;
+import com.tivic.manager.adm.TituloCredito;
+import com.tivic.manager.adm.TituloCreditoDAO;
+import com.tivic.manager.adm.TituloCreditoServices;
+import com.tivic.manager.alm.DocumentoEntradaItem;
+import com.tivic.manager.alm.DocumentoEntradaItemDAO;
+import com.tivic.manager.alm.EntradaLocalItem;
+import com.tivic.manager.alm.EntradaLocalItemDAO;
+import com.tivic.manager.alm.ProdutoReferencia;
+import com.tivic.manager.alm.ProdutoReferenciaDAO;
+import com.tivic.manager.evt.Evento;
+import com.tivic.manager.evt.EventoDAO;
+import com.tivic.manager.evt.EventoPessoaServices;
+import com.tivic.manager.evt.EventoServices;
+import com.tivic.manager.evt.Ocorrencia;
+import com.tivic.manager.evt.OcorrenciaServices;
+import com.tivic.manager.fta.Frota;
+import com.tivic.manager.fta.FrotaServices;
+import com.tivic.manager.fta.MarcaModelo;
+import com.tivic.manager.fta.MarcaModeloServices;
+import com.tivic.manager.fta.Veiculo;
+import com.tivic.manager.fta.VeiculoServices;
+import com.tivic.manager.grl.Agencia;
+import com.tivic.manager.grl.AgenciaDAO;
+import com.tivic.manager.grl.Bairro;
+import com.tivic.manager.grl.BairroDAO;
+import com.tivic.manager.grl.Banco;
+import com.tivic.manager.grl.BancoDAO;
+import com.tivic.manager.grl.Cidade;
+import com.tivic.manager.grl.CidadeDAO;
+import com.tivic.manager.grl.CidadeServices;
+import com.tivic.manager.grl.Distrito;
+import com.tivic.manager.grl.DistritoDAO;
+import com.tivic.manager.grl.Doenca;
+import com.tivic.manager.grl.DoencaDAO;
+import com.tivic.manager.grl.Empresa;
+import com.tivic.manager.grl.EmpresaDAO;
+import com.tivic.manager.grl.Estado;
+import com.tivic.manager.grl.EstadoDAO;
+import com.tivic.manager.grl.Logradouro;
+import com.tivic.manager.grl.LogradouroDAO;
+import com.tivic.manager.grl.ParametroServices;
+import com.tivic.manager.grl.Pessoa;
+import com.tivic.manager.grl.PessoaDAO;
+import com.tivic.manager.grl.PessoaEmpresa;
+import com.tivic.manager.grl.PessoaEmpresaDAO;
+import com.tivic.manager.grl.PessoaEndereco;
+import com.tivic.manager.grl.PessoaEnderecoDAO;
+import com.tivic.manager.grl.PessoaEnderecoServices;
+import com.tivic.manager.grl.PessoaFisica;
+import com.tivic.manager.grl.PessoaFisicaDAO;
+import com.tivic.manager.grl.PessoaFisicaServices;
+import com.tivic.manager.grl.PessoaJuridica;
+import com.tivic.manager.grl.PessoaServices;
+import com.tivic.manager.grl.ProdutoServico;
+import com.tivic.manager.grl.ProdutoServicoDAO;
+import com.tivic.manager.grl.ProdutoServicoEmpresa;
+import com.tivic.manager.grl.ProdutoServicoEmpresaDAO;
+import com.tivic.manager.grl.ProdutoServicoEmpresaServices;
+import com.tivic.manager.grl.Setor;
+import com.tivic.manager.grl.SetorDAO;
+import com.tivic.manager.grl.SetorServices;
+import com.tivic.manager.grl.Vinculo;
+import com.tivic.manager.grl.VinculoDAO;
+import com.tivic.manager.grl.equipamento.EquipamentoServices;
+import com.tivic.manager.mob.Agente;
+import com.tivic.manager.mob.AgenteServices;
+import com.tivic.manager.mob.AitTransporte;
+import com.tivic.manager.mob.AitTransporteServices;
+import com.tivic.manager.mob.Cartao;
+import com.tivic.manager.mob.CartaoDocumento;
+import com.tivic.manager.mob.CartaoDocumentoDAO;
+import com.tivic.manager.mob.CartaoDocumentoDoenca;
+import com.tivic.manager.mob.CartaoDocumentoDoencaDAO;
+import com.tivic.manager.mob.CartaoServices;
+import com.tivic.manager.mob.Concessao;
+import com.tivic.manager.mob.ConcessaoServices;
+import com.tivic.manager.mob.ConcessaoVeiculo;
+import com.tivic.manager.mob.ConcessaoVeiculoServices;
+import com.tivic.manager.mob.DefeitoVistoriaItemServices;
+import com.tivic.manager.mob.Equipamento;
+import com.tivic.manager.mob.GrupoParada;
+import com.tivic.manager.mob.GrupoParadaServices;
+import com.tivic.manager.mob.ImportacaoAit;
+import com.tivic.manager.mob.ImportacaoAitServices;
+import com.tivic.manager.mob.Infracao;
+import com.tivic.manager.mob.InfracaoMotivo;
+import com.tivic.manager.mob.InfracaoTransporte;
+import com.tivic.manager.mob.InfracaoVariacao;
+import com.tivic.manager.mob.Parada;
+import com.tivic.manager.mob.ParadaServices;
+import com.tivic.manager.mob.PlanoVistoriaItemDefeito;
+import com.tivic.manager.mob.PlanoVistoriaItemDefeitoServices;
+import com.tivic.manager.mob.PlanoVistoriaItemServices;
+import com.tivic.manager.mob.TalonarioAIT;
+import com.tivic.manager.mob.TalonarioAITServices;
+import com.tivic.manager.mob.VeiculoEquipamento;
+import com.tivic.manager.mob.VeiculoEquipamentoServices;
+import com.tivic.manager.prc.AreaDireito;
+import com.tivic.manager.prc.AreaDireitoDAO;
+import com.tivic.manager.prc.BemPenhora;
+import com.tivic.manager.prc.BemPenhoraDAO;
+import com.tivic.manager.prc.GrupoProcesso;
+import com.tivic.manager.prc.GrupoProcessoDAO;
+import com.tivic.manager.prc.Juizo;
+import com.tivic.manager.prc.JuizoDAO;
+import com.tivic.manager.prc.ObjetoAcao;
+import com.tivic.manager.prc.ObjetoAcaoDAO;
+import com.tivic.manager.prc.Orgao;
+import com.tivic.manager.prc.OrgaoDAO;
+import com.tivic.manager.prc.Processo;
+import com.tivic.manager.prc.ProcessoAndamento;
+import com.tivic.manager.prc.ProcessoAndamentoDAO;
+import com.tivic.manager.prc.ProcessoInstancia;
+import com.tivic.manager.prc.ProcessoInstanciaDAO;
+import com.tivic.manager.prc.ProcessoServices;
+import com.tivic.manager.prc.TipoAndamento;
+import com.tivic.manager.prc.TipoAndamentoDAO;
+import com.tivic.manager.prc.TipoPedido;
+import com.tivic.manager.prc.TipoPedidoDAO;
+import com.tivic.manager.prc.TipoProcesso;
+import com.tivic.manager.prc.TipoProcessoDAO;
+import com.tivic.manager.prc.TipoSituacao;
+import com.tivic.manager.prc.TipoSituacaoDAO;
+import com.tivic.manager.prc.Tribunal;
+import com.tivic.manager.prc.TribunalDAO;
+import com.tivic.manager.prc.TribunalServices;
+import com.tivic.manager.ptc.Documento;
+import com.tivic.manager.ptc.DocumentoDAO;
+import com.tivic.manager.ptc.DocumentoPessoa;
+import com.tivic.manager.ptc.DocumentoPessoaDAO;
+import com.tivic.manager.ptc.DocumentoServices;
+import com.tivic.manager.ptc.DocumentoTramitacao;
+import com.tivic.manager.ptc.DocumentoTramitacaoDAO;
+import com.tivic.manager.ptc.Fase;
+import com.tivic.manager.ptc.FaseDAO;
+import com.tivic.manager.seg.Grupo;
+import com.tivic.manager.seg.GrupoDAO;
+import com.tivic.manager.seg.Modulo;
+import com.tivic.manager.seg.ModuloDAO;
+import com.tivic.manager.seg.Sistema;
+import com.tivic.manager.seg.SistemaDAO;
+import com.tivic.manager.seg.Usuario;
+import com.tivic.manager.seg.UsuarioDAO;
+import com.tivic.manager.seg.UsuarioServices;
+import com.tivic.manager.srh.DadosFuncionais;
+import com.tivic.manager.srh.DadosFuncionaisDAO;
+import com.tivic.manager.srh.DadosFuncionaisServices;
+import com.tivic.manager.srh.Funcao;
+import com.tivic.manager.srh.FuncaoServices;
+import com.tivic.manager.srh.Lotacao;
+import com.tivic.manager.srh.LotacaoDAO;
+import com.tivic.manager.srh.LotacaoServices;
+import com.tivic.manager.srh.TipoAdmissao;
+import com.tivic.manager.srh.TipoAdmissaoServices;
+import com.tivic.manager.util.Util;
+import com.tivic.manager.util.XmlServices;
+import com.tivic.sol.connection.Conexao;
+
+import sol.dao.ItemComparator;
+import sol.dao.ResultSetMap;
+import sol.util.Result;
+
+public class DesktopImport {	
+
+	// Vínculos das empresas do eTransito com o Transito WEB
+	public static int CIDADE_VERDE_TRANSPORTE = ParametroServices.getValorOfParametroAsInteger("CIDADE_VERDE_TRANSPORTE", -1);
+	public static int SERRANA = ParametroServices.getValorOfParametroAsInteger("SERRANA", -1);
+	public static int VDC = ParametroServices.getValorOfParametroAsInteger("VDC", -1);
+	public static int VIACAO_VITORIA_LTDA = ParametroServices.getValorOfParametroAsInteger("VIACAO_VITORIA_LTDA", -1);
+	public static int VIACAO_VITORIA = ParametroServices.getValorOfParametroAsInteger("VIACAO_VITORIA", -1);
+	
+	
+	// Fases de Documento do Juris
+	public static int ST_JURIS_JULGAMENTO_1 = ParametroServices.getValorOfParametroAsInteger("ST_JURIS_JULGAMENTO_1", -1);
+	public static int ST_JURIS_DEFERIDO_1 = ParametroServices.getValorOfParametroAsInteger("ST_JURIS_DEFERIDO_1", -1);
+	public static int ST_JURIS_INDEFERIDO_1 = ParametroServices.getValorOfParametroAsInteger("ST_JURIS_INDEFERIDO_1", -1);
+	public static int ST_JURIS_DEFERIMENTO_NOTIFICADO_1 = ParametroServices.getValorOfParametroAsInteger("ST_JURIS_DEFERIMENTO_NOTIFICADO_1", -1);
+	public static int ST_JURIS_INDEFERIMENTO_NOTIFICADO_1 = ParametroServices.getValorOfParametroAsInteger("ST_JURIS_INDEFERIMENTO_NOTIFICADO_1", -1);
+	public static int ST_JURIS_JULGAMENTO_2 = ParametroServices.getValorOfParametroAsInteger("ST_JURIS_JULGAMENTO_2", -1);
+	public static int ST_JURIS_DEFERIDO_2 = ParametroServices.getValorOfParametroAsInteger("ST_JURIS_DEFERIDO_2", -1);
+	public static int ST_JURIS_INDEFERIDO_2 = ParametroServices.getValorOfParametroAsInteger("ST_JURIS_INDEFERIDO_2", -1);
+	public static int ST_JURIS_DEFERIMENTO_NOTIFICADO_2 = ParametroServices.getValorOfParametroAsInteger("ST_JURIS_DEFERIMENTO_NOTIFICADO_2", -1);
+	public static int ST_JURIS_INDEFERIMENTO_NOTIFICADO_2 = ParametroServices.getValorOfParametroAsInteger("ST_JURIS_INDEFERIMENTO_NOTIFICADO_2", -1);
+	public static int ST_JURIS_CANCELADO = ParametroServices.getValorOfParametroAsInteger("ST_JURIS_CANCELADO", -1);
+	
+	// Fase do AitTransporte do Web
+	public static int CANCELADA                     = 0;
+	public static int LAVRADA                       = 1;
+	public static int EMITIDA                       = 2;
+	public static int RECEBIDA                      = 3;
+	public static int NIP_EMITIDA                   = 4;
+	public static int EM_JULGAMENTO_1               = 5;
+	public static int DEFERIDO_1                    = 6;
+	public static int INDEFERIDO_1                  = 7;
+	public static int NOTIFICADO_DEFERIMENTO_1      = 8;
+	public static int NOTIFICADO_INDEFERIMENTO_1    = 9;
+	public static int EM_JULGAMENTO_2               = 10;
+	public static int DEFERIDO_2                    = 11;
+	public static int INDEFERIDO_2                  = 12;
+	public static int NOTIFICADO_DEFERIMENTO_2      = 13;
+	public static int NOTIFICADO_INDEFERIEMNTO_2    = 14;	
+	
+	public static int DT_LIMITE_1RECURSO = ParametroServices.getValorOfParametroAsInteger("QT_DIAS_PRAZO_INTERPOR_INSTANCIA1", -1);
+	public static int DT_LIMITE_2RECURSO = ParametroServices.getValorOfParametroAsInteger("QT_DIAS_PRAZO_INTERPOR_INSTANCIA2", -1);
+	
+	public static int totalContas = 0;
+	
+	// Grava a saida da importação da AIT em um arquivo
+	public static FileWriter saidaImportacao;
+	public static PrintWriter gravarArq;
+	
+	
+	public static sol.util.Result importGrlBancos()	{
+		Connection connect   = Conexao.conectar();
+		Connection conOrigem = conectar();
+		try {
+			/***********************
+			 * Importando bancos
+			 ***********************/
+			PreparedStatement pesqBancoByID = connect.prepareStatement("SELECT * FROM grl_banco WHERE id_banco = ?");
+			PreparedStatement pesqBancoByNr = connect.prepareStatement("SELECT * FROM grl_banco WHERE nr_banco = ?");
+			System.out.println("Importando bancos...");
+			//
+			ResultSet rs = conOrigem.prepareStatement("SELECT * FROM grl_banco").executeQuery();
+			while(rs.next())	{
+				pesqBancoByID.setString(1, rs.getString("cd_banco"));
+				ResultSet rsBanco = pesqBancoByID.executeQuery();
+				if(!rsBanco.next())	{
+					// Verifica se já não existe o banco pelo número
+					pesqBancoByNr.setString(1, rs.getString("nr_banco"));
+					rsBanco = pesqBancoByNr.executeQuery();
+					if(rsBanco.next())	{
+						Banco banco = BancoDAO.get(rsBanco.getInt("cd_banco"), connect);
+						banco.setIdBanco(rs.getString("cd_banco"));
+						BancoDAO.update(banco, connect);
+					}
+					else	{
+						Banco banco = new Banco(0, rs.getString("nr_banco"), rs.getString("nm_banco"), rs.getString("cd_banco"), null);
+						BancoDAO.insert(banco, connect);
+					}
+				}
+			}
+			System.out.println("Importação de bancos concluída!");
+			return new sol.util.Result(1);
+		}
+		catch(Exception e){
+			e.printStackTrace(System.out);
+			return new sol.util.Result(-1, "Erro ao tentar importar bancos!", e);
+		}
+		finally{
+			Conexao.desconectar(connect);
+			Conexao.desconectar(conOrigem);
+		}
+	}
+
+	public static sol.util.Result importGrlEmpresas()	{
+		Connection connect   = Conexao.conectar();
+		Connection conOrigem = conectar();
+		try {
+			/***********************
+			 * Importando Empresas
+			 ***********************/
+			PreparedStatement pesqEmpresaByID = connect.prepareStatement("SELECT * FROM grl_empresa WHERE cd_empresa = ?");
+			System.out.println("Importando empresas...");
+			//
+			ResultSet rs = conOrigem.prepareStatement("SELECT * FROM grl_empresa ").executeQuery();
+			while(rs.next())	{
+				pesqEmpresaByID.setString(1, rs.getString("cd_empresa"));
+				ResultSet rsEmpresa = pesqEmpresaByID.executeQuery();
+				if(!rsEmpresa.next())	{
+					Empresa empresa = new Empresa(rs.getInt("cd_empresa"), 0, 0, rs.getString("nm_fantasia"), rs.getString("NR_TELEFONE"),
+							                      rs.getString("NR_TELEFONE2"), null, null, rs.getString("nm_email"), new GregorianCalendar(),
+							                      PessoaServices.TP_JURIDICA, null, 1,rs.getString("NM_HOMEPAGE"), null, null, 0,
+							                      rs.getString("cd_empresa"),0,0,null,rs.getString("NR_CNPJ"),
+							                      rs.getString("nm_empresa"), null, null, 0, null, 0, 0, null, 1,null,
+							                      rs.getString("cd_empresa"), 0);
+					EmpresaDAO.insert(empresa, connect);
+				}
+			}
+			System.out.println("Importação de empresas concluída!");
+			return new sol.util.Result(1);
+		}
+		catch(Exception e){
+			e.printStackTrace(System.out);
+			return new sol.util.Result(-1, "Erro ao tentar importar empresas!", e);
+		}
+		finally{
+			Conexao.desconectar(connect);
+			Conexao.desconectar(conOrigem);
+		}
+	}
+
+	public static sol.util.Result importAdmCategoriaEconomica()	{
+		Connection connect   = Conexao.conectar();
+		Connection conOrigem = conectar();
+		try {
+			/***********************
+			 * Importando categoria econômica
+			 ***********************/
+			PreparedStatement pesqCategoria = connect.prepareStatement("SELECT * FROM adm_categoria_economica WHERE nm_categoria_economica = ?");
+			System.out.println("Importando categorias...");
+			//
+			ResultSet rsCat = conOrigem.prepareStatement("SELECT A.*, B.nm_categoria AS nm_categoria_superior FROM adm_categoria_economica A " +
+					                                     "LEFT OUTER JOIN adm_categoria_economica B ON (A.cd_categoria_superior = B.cd_categoria) " +
+					                                     "ORDER BY cd_categoria_superior").executeQuery();
+			while(rsCat.next())	{
+				pesqCategoria.setString(1, rsCat.getString("nm_categoria"));
+				ResultSet rsTemp = pesqCategoria.executeQuery();
+				if(!rsTemp.next())	{
+					int cdCategoriaSuperior = 0;
+					if(rsCat.getInt("cd_categoria_superior")>0)	{
+						pesqCategoria.setString(1, rsCat.getString("nm_categoria_superior"));
+						rsTemp = pesqCategoria.executeQuery();
+						if(rsTemp.next())
+							cdCategoriaSuperior = rsTemp.getInt("cd_categoria_economica");
+					}
+					// Categoria
+					CategoriaEconomica categoria = new CategoriaEconomica(0,cdCategoriaSuperior,rsCat.getString("nm_categoria"),
+																		  rsCat.getInt("tp_categoria"),rsCat.getString("nr_categoria"),
+																		  rsCat.getString("nr_categoria"),rsCat.getInt("nr_nivel"),0/*cdTabelaCatEconomica*/, 1/*lgAtivo*/, 
+																		  rsCat.getDouble("vl_aliquota"), rsCat.getInt("lg_lancar_faturamento"));
+					CategoriaEconomicaServices.insert(categoria);
+				}
+			}
+			System.out.println("Importação de categorias concluída!");
+			return new sol.util.Result(1);
+		}
+		catch(Exception e){
+			e.printStackTrace(System.out);
+			return new sol.util.Result(-1, "Erro ao tentar importar bancos!", e);
+		}
+		finally{
+			Conexao.desconectar(connect);
+			Conexao.desconectar(conOrigem);
+		}
+	}
+
+	public static sol.util.Result importGrlPessoa()	{
+		Connection connect   = Conexao.conectar();
+		Connection conOrigem = conectar();
+		try {
+			String[] tipoVinculo = new String[] {"ALUNO", "PROFESSOR", "FUNCIONÁRIO", "FUNC. E PROFESSOR", "FUNC. E ALUNO",
+                    							 "TERCEIROS (FORN., PRES. DE SERVIÇO)", "CLIENTE", "ADV. EMPRESA", "ADV. CONTRÁRIO",
+                    							 "PARTE CONTRÁRIA", "TESTEMUNHA", "OFICIAL DE JUSTIÇA"};
+			/***********************
+			 * Importando pessoas
+			 ***********************/
+			PreparedStatement pesqPessoa  = connect.prepareStatement("SELECT * FROM grl_pessoa WHERE cd_pessoa = ?");
+			PreparedStatement pesqEstado  = connect.prepareStatement("SELECT * FROM grl_estado WHERE sg_estado = ?");
+			PreparedStatement pesqCidade  = connect.prepareStatement("SELECT * FROM grl_cidade WHERE id_cidade = ?");
+			PreparedStatement pesqVinculo = connect.prepareStatement("SELECT * FROM grl_vinculo WHERE nm_vinculo = ?");
+			System.out.println("Importando pessoas...");
+			ResultSet rs = connect.prepareStatement("SELECT count(*) FROM grl_pessoa").executeQuery();
+			boolean existePessoa = rs.next() && (rs.getInt(1) > 0);
+			
+			//
+			ResultSet rsPessoa = conOrigem.prepareStatement("SELECT * FROM grl_pessoa").executeQuery();
+			int i = 0;
+			while(rsPessoa.next())	{
+				i++;
+				if(i%100==0)
+					System.out.println("Pessoas gravadas: "+i);
+				
+				pesqPessoa.setInt(1, rsPessoa.getInt("cd_pessoa"));
+				ResultSet rsTemp = existePessoa ? pesqPessoa.executeQuery() : null;
+				if(rsTemp==null || !rsTemp.next())	{
+					if(rsTemp!=null)
+						rsTemp.close();
+					int cdEmpresa = getCdEmpresa(1);
+					int cdVinculo = 0;
+					pesqVinculo.setString(1, tipoVinculo[rsPessoa.getInt("tp_cadastro")]);
+					rsTemp = pesqVinculo.executeQuery();
+					if(!rsTemp.next())	{
+						Vinculo vinculo = new Vinculo(0,tipoVinculo[rsPessoa.getInt("tp_cadastro")],1 /*lgEstatico*/,
+													  0 /*lgFuncao*/, 0 /*cdFormulario*/, 1 /*lgCadastro*/);
+						cdVinculo = VinculoDAO.insert(vinculo, connect);
+					}
+					else
+						cdVinculo = rsTemp.getInt("cd_vinculo");
+					//
+					String nrTelefone1 = rsPessoa.getString("nr_telefone");
+					nrTelefone1 = nrTelefone1!=null ? nrTelefone1.replaceAll("[-]", "").replaceAll("[(]", "").replaceAll("[)]", "") : null;
+					String nrTelefone2 = rsPessoa.getString("nr_telefone2");
+					nrTelefone2 = nrTelefone2!=null ? nrTelefone2.replaceAll("[-]", "").replaceAll("[(]", "").replaceAll("[)]", "") : null;
+					String nrCelular   = rsPessoa.getString("nr_celular");
+					nrCelular = nrCelular!=null ? nrCelular.replaceAll("[-]", "").replaceAll("[(]", "").replaceAll("[)]", "") : null;
+					String nrCpfCnpj   = rsPessoa.getString("nr_cpf_cnpj");
+					nrCpfCnpj = nrCpfCnpj!=null ? nrCpfCnpj.replaceAll("[ ]", "").replaceAll("[-]", "").replaceAll("[/]", "").replaceAll("[.]", "") : null;
+					String nrRg   = rsPessoa.getString("nr_rg");
+					if(nrRg!=null && nrRg.length()>15)
+						nrRg = nrRg.trim().substring(0,14);
+					Pessoa pessoa;
+					int cdPessoa = rsPessoa.getInt("cd_pessoa");
+					// PESSOA FÍSICA
+					if(rsPessoa.getInt("gn_pessoa")==0)	{
+						// Cidade - Naturalidade
+						int cdNaturalidade = 0;
+						if(rsTemp!=null)
+							rsTemp.close();
+						pesqCidade.setString(1, rsPessoa.getString("cd_cidade_naturalidade"));
+						rsTemp = pesqCidade.executeQuery();
+						if(rsTemp.next())
+							cdNaturalidade = rsTemp.getInt("cd_cidade");
+						// Estado - RG
+						if(rsTemp!=null)
+							rsTemp.close();
+						int cdEstadoRg     = 0;
+						pesqEstado.setString(1, rsPessoa.getString("sg_uf_rg"));
+						rsTemp = pesqEstado.executeQuery();
+						if(rsTemp.next())
+							cdEstadoRg = rsTemp.getInt("cd_estado");
+						rsTemp.close();
+						pessoa = new PessoaFisica(cdPessoa,0/*cdPessoaSuperior*/,0/*cdPais*/,rsPessoa.getString("nm_pessoa"),
+								   							   nrTelefone1,nrTelefone2,nrCelular,null /*nrFax*/,rsPessoa.getString("nm_email"),
+								   							   Util.convTimestampToCalendar(rsPessoa.getTimestamp("dt_cadastro")),
+								   							   PessoaServices.TP_FISICA,null /*imgFoto*/,1 /*stCadastro*/,
+								   							   null/*nmUrl*/,null/*nmApelido*/,rsPessoa.getString("txt_observacao"),
+								   							   0/*lgNotificacao*/,rsPessoa.getString("cd_pessoa")/*idPessoa*/,
+								   							   0/*cdClassificacao*/,0/*cdFormaDivulgacao*/,null /*dtChegadaPais*/,
+								   							   cdNaturalidade, 0 /*cdEscolaridade*/, 
+								   							   Util.convTimestampToCalendar(rsPessoa.getTimestamp("dt_nascimento")),
+								   							   nrCpfCnpj,rsPessoa.getString("sg_orgao_rg"),rsPessoa.getString("nm_mae"),
+								   							   rsPessoa.getString("nm_pai"),rsPessoa.getInt("tp_sexo"),rsPessoa.getInt("st_estado_civil"),
+								   							   nrRg,null/*nrCnh*/,null/*dtValidadeCnh*/,
+								   							   null/*dtPrimeiraHabilitacao*/,0/*tpCategoriaHabilitacao*/,0/*tpRaca*/,
+								   							   0/*lgDeficienteFisico*/,null/*nmFormaTratamento*/,cdEstadoRg,null/*dtEmissaoRg*/,
+								   							   null /*blbFingerprint*/);
+					}
+					else	{
+						pessoa = new PessoaJuridica(cdPessoa,0/*cdPessoaSuperior*/,0/*cdPais*/,rsPessoa.getString("nm_pessoa"),
+	   							   nrTelefone1,nrTelefone2,nrCelular,null /*nrFax*/,rsPessoa.getString("nm_email"),
+	   							   Util.convTimestampToCalendar(rsPessoa.getTimestamp("dt_cadastro")),
+	   							   PessoaServices.TP_JURIDICA,null /*imgFoto*/,1 /*stCadastro*/,
+	   							   null/*nmUrl*/,null/*nmApelido*/,rsPessoa.getString("txt_observacao"),
+	   							   0/*lgNotificacao*/,rsPessoa.getString("cd_pessoa")/*idPessoa*/,
+	   							   0/*cdClassificacao*/,0/*cdFormaDivulgacao*/,null /*dtChegadaPais*/,
+	   							   nrCpfCnpj,rsPessoa.getString("nm_razao_social"), rsPessoa.getString("nr_inscricao"), rsPessoa.getString("nr_inscricao"),
+	   							   0/*nrFuncionarios*/,null/*dtInicioAtividade*/,0/*cdNaturezaJuridica*/,
+	   							   0/*tpEmpresa*/,null/*dtTerminoAtividade*/);
+					}
+					// ENDEREÇO
+					if(rsTemp!=null)
+						rsTemp.close();
+					int cdCidade = 0;
+					pesqCidade.setString(1, rsPessoa.getString("cd_cidade_endereco"));
+					rsTemp = pesqCidade.executeQuery();
+					if(rsTemp.next())
+						cdCidade = rsTemp.getInt("cd_cidade");
+					rsTemp.close();
+					PessoaEndereco endereco = new PessoaEndereco(0,cdPessoa,rsPessoa.getString("nm_rua"),0/*cdTipoLogradouro*/,0/*cdTipoEndereco*/,
+															     0/*cdLogradouro*/,0/*cdBairro*/,cdCidade, rsPessoa.getString("nm_rua"),
+															     rsPessoa.getString("nm_bairro"),rsPessoa.getString("nr_cep"),
+															     rsPessoa.getString("nr_endereco"),rsPessoa.getString("nm_complemento_endereco"),
+															     nrTelefone1,null/*nmPontoReferencia*/,0/*lgCobranca*/,1/*lgPrincipal*/);
+					Result result = PessoaServices.insert(pessoa, endereco, cdEmpresa, cdVinculo);
+					if(result.getCode() <= 0)
+						System.out.println("Não foi possivel incluir["+result.getCode()+"]: "+pessoa+" -> "+result.getMessage());
+				}
+				if(rsTemp!=null)
+					rsTemp.close();
+			}
+			System.out.println("Importação de pessoas concluída!");
+			return new sol.util.Result(1);
+		}
+		catch(Exception e){
+			e.printStackTrace(System.out);
+			return new sol.util.Result(-1, "Erro ao tentar importar pessoas!", e);
+		}
+		finally{
+			Conexao.desconectar(connect);
+			Conexao.desconectar(conOrigem);
+		}
+	}
+
+	public static sol.util.Result importGrlCidades()	{
+		Connection connect   = Conexao.conectar();
+		Connection conOrigem = conectar();
+		try {
+			/***********************
+			 * Importando CIDADE
+			 ***********************/
+			connect.prepareStatement("UPDATE grl_cidade SET id_ibge = id_cidade WHERE id_ibge IS NULL AND id_cidade IS NOT NULL").executeUpdate();
+			//
+			PreparedStatement pesqEstado     = connect.prepareStatement("SELECT * FROM grl_estado WHERE sg_estado = ?");
+			PreparedStatement pesqCidadeByNm = connect.prepareStatement("SELECT * FROM grl_cidade WHERE nm_cidade = ?");
+			PreparedStatement pesqCidadeByID = connect.prepareStatement("SELECT * FROM grl_cidade WHERE id_cidade = ?");
+			PreparedStatement pesqDistri     = connect.prepareStatement("SELECT * FROM grl_distrito WHERE cd_cidade = ? AND nm_distrito = \'DISTRITO SEDE\'");
+			PreparedStatement updCidade      = connect.prepareStatement("UPDATE grl_cidade SET id_cidade = ?, cd_estado = ? WHERE cd_cidade = ?");
+			System.out.println("Importando cidades ...");
+			//
+			ResultSet rsCidade = conOrigem.prepareStatement("SELECT * FROM grl_cidade").executeQuery();
+			while(rsCidade.next())	{
+				int cdCidade = 0;
+				pesqCidadeByID.setString(1, rsCidade.getString("cd_cidade"));
+				ResultSet rsTemp = pesqCidadeByID.executeQuery();
+				if(!rsTemp.next())	{
+					int cdEstado = 0;
+					pesqEstado.setString(1, rsCidade.getString("sg_estado"));
+					ResultSet rsEstado = pesqEstado.executeQuery();
+					if(rsEstado.next())
+						cdEstado = rsEstado.getInt("cd_estado");
+					else	{
+						Estado estado = new Estado(0,0,rsCidade.getString("nm_estado"),rsCidade.getString("sg_estado"),0);
+						cdEstado = EstadoDAO.insert(estado, connect);
+					}
+					// Verifica existência de cidade pelo nome
+					pesqCidadeByNm.setString(1, rsCidade.getString("nm_cidade").trim());
+					rsTemp = pesqCidadeByNm.executeQuery();
+					if(rsTemp.next())	{
+						updCidade.setString(1, rsCidade.getString("cd_cidade"));
+						updCidade.setInt(2, cdEstado);
+						updCidade.setInt(3, rsTemp.getInt("cd_cidade"));
+						updCidade.executeUpdate();
+					}
+					else	{
+						// Cadastra CIDADE
+						Cidade cidade = new Cidade(rsCidade.getInt("cd_cidade"),rsCidade.getString("nm_cidade"),null /*nrCep*/,0 /*vlAltitude*/,0 /*vlLatitude*/,
+								                   0 /*vlLongitude*/,cdEstado,rsCidade.getString("cd_cidade"), 0 /*cdRegiao*/,null /*idIbge*/, null, 0, 0);
+						cdCidade = CidadeDAO.insert(cidade, connect);
+					}
+				}
+				else
+					cdCidade = rsTemp.getInt("cd_cidade");
+				// Distrito
+				if(cdCidade > 0)	{
+					pesqDistri.setInt(1, cdCidade);
+					if(!pesqDistri.executeQuery().next())	{
+						Distrito distrito = new Distrito(cdCidade/*cdDistrito*/,cdCidade,"DISTRITO SEDE",null /*nrCep*/);
+						DistritoDAO.insert(distrito, connect);
+					}
+				}
+			}
+			System.out.println("Importação de cidades e estados concluída!");
+			return new sol.util.Result(1);
+		}
+		catch(Exception e){
+			e.printStackTrace(System.out);
+			return new sol.util.Result(-1, "Erro ao tentar importar cidades!", e);
+		}
+		finally{
+			Conexao.desconectar(connect);
+			Conexao.desconectar(conOrigem);
+		}
+	}
+
+	public static sol.util.Result importAdmContaECarteiras()	{
+		Connection connect   = Conexao.conectar();
+		Connection conOrigem = conectar();
+		try {
+			/***********************
+			 * Importando Contas e Carteiras
+			 ***********************/
+			PreparedStatement pesqConta   = connect.prepareStatement("SELECT * FROM adm_conta_financeira WHERE id_conta = ?");
+			PreparedStatement pesqAgencia = connect.prepareStatement("SELECT * FROM grl_agencia WHERE nr_agencia = ?");
+			PreparedStatement pesqBanco   = connect.prepareStatement("SELECT * FROM grl_banco WHERE id_banco = ?");
+			System.out.println("Importando contas...");
+			//
+			ResultSet rs = conOrigem.prepareStatement("SELECT * FROM adm_conta_financeira").executeQuery();
+			while(rs.next())	{
+				//
+				pesqConta.setString(1, rs.getString("cd_conta"));
+				ResultSet rsTemp = pesqConta.executeQuery();
+				if(rsTemp.next())
+					continue;
+				int cdEmpresa  = getCdEmpresa(rs.getInt("cd_empresa"));
+				// Agencia
+				int cdAgencia  = 0;
+				String nrAgencia = rs.getString("nr_agencia");
+				nrAgencia = nrAgencia!=null ? nrAgencia.replaceAll("[-]", "") : null;
+				if(nrAgencia != null)	{
+					pesqAgencia.setString(1, rs.getString("nr_agencia"));
+					ResultSet rsAg = pesqAgencia.executeQuery();
+					if(!rsAg.next())	{
+						// Banco
+						pesqBanco.setString(1, rs.getString("cd_banco"));
+						ResultSet rsBanco = pesqBanco.executeQuery();
+						int cdBanco = 0;
+						String nmBanco = "";
+						if(rsBanco.next())	{
+							cdBanco = rsBanco.getInt("cd_banco");
+							nmBanco = rsBanco.getString("nm_banco");
+						}
+						Agencia agencia = new Agencia(0,0,0,nmBanco+" "+rs.getString("nr_agencia"),rs.getString("nr_telefone"),
+													  null,null,null,null,new GregorianCalendar(),PessoaServices.TP_JURIDICA,null,
+													  1,null,null,null,0,rs.getString("nr_agencia"),0,0,null,null,null,null,null,
+													  0,null,0,0,null,cdBanco,rs.getString("nm_gerente"),rs.getString("nr_agencia"));
+						cdAgencia = AgenciaDAO.insert(agencia, connect);
+					}
+					else
+						cdAgencia = rsAg.getInt("cd_agencia");
+				}
+				// Conta
+				int cdResponsavel = 0;
+				String nrConta = rs.getString("nr_conta");
+				String nrDv    = rs.getString("nr_dv");
+				ContaFinanceira contaFinanceira = new ContaFinanceira(0,cdResponsavel,cdEmpresa,cdAgencia,rs.getString("nm_conta"),
+																  rs.getInt("tp_conta"),nrConta,nrDv, rs.getInt("tp_operacao"),
+																  rs.getFloat("vl_limite"), null /*dtFechamento*/, rs.getString("cd_conta"),
+																  null /*dtVencimentoLimite*/, 0 /*vlSaldoInicial*/, null /*dtSaldoInicial*/,
+																  0 /*cdTurno*/);
+				ContaFinanceiraDAO.insert(contaFinanceira, connect);
+			}
+			System.out.println("Importacao de contas!");
+			return new sol.util.Result(1);
+		}
+		catch(Exception e){
+			e.printStackTrace(System.out);
+			return new sol.util.Result(-1, "Erro ao tentar importar tabelas de endereçamento!", e);
+		}
+		finally{
+			Conexao.desconectar(connect);
+			Conexao.desconectar(conOrigem);
+		}
+	}
+
+	public static sol.util.Result importAdmCheques()	{
+		Connection connect   = Conexao.conectar();
+		Connection conOrigem = conectar();
+		try {
+			/***********************
+			 * Importando Cheques
+			 ***********************/
+			PreparedStatement pesqConta  = connect.prepareStatement("SELECT * FROM adm_conta_financeira WHERE id_conta = ?");
+			PreparedStatement pesqCheque = connect.prepareStatement("SELECT * FROM adm_cheque WHERE cd_conta = ? AND nr_cheque = ?");
+			System.out.println("Importando cheques...");
+			//
+			ResultSet rs = conOrigem.prepareStatement("SELECT * FROM adm_cheque").executeQuery();
+			while(rs.next())	{
+				pesqConta.setString(1, rs.getString("cd_conta"));
+				ResultSet rsTemp = pesqConta.executeQuery();
+				if(!rsTemp.next())	{
+					System.out.println("Conta não encontrada... cdConta = "+rs.getString("cd_conta"));
+					continue;
+				}
+				int cdConta   = rsTemp.getInt("cd_conta");
+				// Cheque
+				pesqCheque.setInt(1, cdConta);
+				pesqCheque.setString(2, rs.getString("nr_cheque"));
+				if(!pesqCheque.executeQuery().next())	{
+					Cheque cheque = new Cheque(0,cdConta,rs.getString("nr_cheque"),
+											   Util.convTimestampToCalendar(rs.getTimestamp("dt_emissao")),
+											   Util.convTimestampToCalendar(rs.getTimestamp("dt_liberacao")),
+											   Util.convTimestampToCalendar(rs.getTimestamp("dt_impressao")),
+											   rs.getString("nr_talao"), rs.getInt("st_cheque"), "");
+					ChequeDAO.insert(cheque, connect);
+				}
+			}
+			System.out.println("Importacao de cheques concluída!");
+			return new sol.util.Result(1);
+		}
+		catch(Exception e){
+			e.printStackTrace(System.out);
+			return new sol.util.Result(-1, "Erro ao tentar importar cheques!", e);
+		}
+		finally{
+			Conexao.desconectar(connect);
+			Conexao.desconectar(conOrigem);
+		}
+	}
+
+	public static sol.util.Result importAdmChequesRecebidos()	{
+		Connection connect   = Conexao.conectar();
+		Connection conOrigem = conectar();
+		try {
+			/***********************
+			 * Importando Cheques
+			 ***********************/
+			PreparedStatement pesqChequeRecebido = connect.prepareStatement("SELECT * FROM adm_titulo_credito WHERE cd_tipo_documento = ? AND nr_documento = ?");
+			PreparedStatement pesqBancoByNr 	 = connect.prepareStatement("SELECT * FROM grl_banco WHERE nr_banco = ?");
+			System.out.println("Importando cheques recebidos...");
+			int cdTipoDocumento = 0;
+			ResultSet rsTemp = connect.prepareStatement("SELECT * FROM adm_tipo_documento WHERE sg_tipo_documento = \'CH\'").executeQuery();
+			if(rsTemp.next())
+				cdTipoDocumento = rsTemp.getInt("cd_tipo_documento");
+			//
+			ResultSet rs = conOrigem.prepareStatement("SELECT A.*, B.nr_banco FROM adm_cheque_recebido A, grl_banco B WHERE A.cd_banco = B.cd_banco").executeQuery();
+			while(rs.next())	{
+				// Cheque Recebido
+				pesqChequeRecebido.setInt(1, cdTipoDocumento);
+				pesqChequeRecebido.setString(2, rs.getString("nr_cheque"));
+				if(!pesqChequeRecebido.executeQuery().next())	{
+					// Banco
+					int cdBanco = 0;
+					pesqBancoByNr.setString(1, rs.getString("nr_banco"));
+					rsTemp = pesqBancoByNr.executeQuery();
+					if(rsTemp.next())
+						cdBanco = rsTemp.getInt("cd_banco");
+					//
+					String nrDocEmitente = rs.getString("nr_cpf_cnpj");
+					TituloCredito titulo = new TituloCredito(0,cdBanco,0/*cdAlinea*/,rs.getString("nr_cheque")/*nrDocumento*/,
+															 rs.getString("nr_cpf_cnpj")/*nrDocumentoEmissor*/,
+															 nrDocEmitente!=null && nrDocEmitente.length()>11 ?  TituloCreditoServices.tdocCNPJ : TituloCreditoServices.tdocCPF,
+														     rs.getString("nm_titular"),rs.getDouble("vl_cheque"),rs.getInt("tp_emissao"),
+														     rs.getString("nr_agencia"),Util.convTimestampToCalendar(rs.getTimestamp("dt_compensacao")),
+														     null,rs.getInt("st_cheque"),rs.getString("ds_observacao"),
+														     cdTipoDocumento,TituloCreditoServices.tcAORDEM,
+														     0/*cdConta*/,0/*cdContaReceber*/, 0, 0, "");
+					int cdTituloCredito = TituloCreditoDAO.insert(titulo, connect);
+					if(cdTituloCredito <= 0)
+						System.out.println(titulo);
+				}
+			}
+			System.out.println("Importacao de cheques recebidos concluída!");
+			return new sol.util.Result(1);
+		}
+		catch(Exception e){
+			e.printStackTrace(System.out);
+			return new sol.util.Result(-1, "Erro ao tentar importar cheques recebidos!", e);
+		}
+		finally{
+			Conexao.desconectar(connect);
+			Conexao.desconectar(conOrigem);
+		}
+	}
+
+	public static sol.util.Result importAdmContrato()	{
+		Connection connect   = Conexao.conectar();
+		Connection conOrigem = conectar();
+		try {
+			/***********************
+			 * Importando Contratos
+			 ***********************/
+			PreparedStatement pesqPessoaByID  = connect.prepareStatement("SELECT * FROM grl_pessoa WHERE id_pessoa = ?");
+			PreparedStatement pesqPessoaByCpf = connect.prepareStatement("SELECT * FROM grl_pessoa_fisica WHERE nr_cpf = ?");
+			PreparedStatement pesqContrato    = connect.prepareStatement("SELECT * FROM adm_contrato WHERE id_contrato = ?");
+			PreparedStatement pesqCategoria   = connect.prepareStatement("SELECT * FROM adm_categoria_economica WHERE nm_categoria_economica = ?");
+			System.out.println("Importando contratos...");
+			//
+			ResultSet rs = conOrigem.prepareStatement("SELECT A.*, B.nm_categoria FROM adm_contrato A " +
+					                                  "LEFT OUTER JOIN adm_categoria_economica B ON (A.cd_categoria = B.cd_categoria) ").executeQuery();
+			while(rs.next())	{
+				int cdContrato = 0;
+				// Pesquisa contrato
+				pesqContrato.setString(1, rs.getString("cd_contrato"));
+				ResultSet rsTemp = pesqContrato.executeQuery();
+				if(!rsTemp.next())	{
+					int cdEmpresa = getCdEmpresa(rs.getInt("cd_empresa"));
+					// Pesquisando pessoa
+					int cdPessoa  = 0;
+					pesqPessoaByID.setString(1, rs.getString("cd_pessoa"));
+					rsTemp = pesqPessoaByID.executeQuery();
+					if(rsTemp.next())
+						cdPessoa = rsTemp.getInt("cd_pessoa");
+					else	{ // Pesquisa por cpf
+						ResultSet rsPessoa = conOrigem.prepareStatement("SELECT nr_cpf_cnpj FROM grl_pessoa WHERE cd_pessoa = "+rs.getInt("cd_pessoa")).executeQuery();
+						if(rsPessoa.next())	{
+							String nrCpf = rsPessoa.getString("nr_cpf_cnpj");
+							nrCpf = nrCpf!=null ? nrCpf.replaceAll("[-]", "").replaceAll("[.]", "") : null;
+							pesqPessoaByCpf.setString(1, nrCpf);
+							rsTemp = pesqPessoaByCpf.executeQuery();
+							if(rsTemp.next())
+								cdPessoa = rsTemp.getInt("cd_pessoa");
+						}	
+					}
+					if(cdPessoa <=0 )	{
+						System.out.println("Pessoa não localizada "+rs.getInt("cd_pessoa"));
+						continue;
+					}
+					int cdCategoriaParcelas = 0;
+					pesqCategoria.setString(1, rs.getString("nm_categoria"));
+					rsTemp = pesqCategoria.executeQuery();
+					if(rsTemp.next())
+						cdCategoriaParcelas = rsTemp.getInt("cd_categoria_economica");
+					// Conta e Carteira
+					int cdConta = 0, cdContaCarteira = 0;
+					// Contrato
+					Contrato contrato = new Contrato(0,0/*cdConvenio*/,cdCategoriaParcelas,cdEmpresa,cdPessoa,0/*cdModeloContrato*/,0/*cdIndicador*/,
+													 Util.convTimestampToCalendar(rs.getTimestamp("dt_contrato"))/*dtAssinatura*/,
+													 Util.convTimestampToCalendar(rs.getTimestamp("dt_primeira_parcela")),
+													 rs.getInt("nr_dia_vencimento"),rs.getInt("nr_parcelas"),
+													 rs.getFloat("pr_juros_mora"),rs.getFloat("pr_multa_mora"),
+													 rs.getFloat("pr_desconto_adimplencia"),rs.getFloat("pr_desconto"),
+													 rs.getInt("tp_contratacao"),rs.getFloat("vl_parcelas"),
+													 rs.getFloat("vl_adesao"),rs.getFloat("vl_contrato"),
+													 rs.getString("nr_matricula"),null/*txtContrato*/,
+													 rs.getInt("st_contrato"),rs.getString("cd_contrato"),
+													 Util.convTimestampToCalendar(rs.getTimestamp("dt_contrato"))/*dtInicio*/,
+													 Util.convTimestampToCalendar(rs.getTimestamp("dt_final"))/*dtInicio*/,
+													 0/*cdAgente*/,cdContaCarteira,cdConta,ContratoServices.AMORT_NENHUM,
+													 0 /*gnContrato*/,
+													 0/*prJuros*/,0/*cdTipoOperacao*/,0/*cdDocumento*/,ContratoServices.DESC_PERCENTUAL,
+													 rs.getFloat("pr_desconto")*rs.getFloat("vl_contrato")/100,0/*cdContratoOrigem*/,
+													 null /*txtObservacao*/,0/*cdCategoriaAdesao*/);
+					cdContrato = ContratoDAO.insert(contrato, connect);
+				}
+				else	{
+					cdContrato = rsTemp.getInt("cd_contrato");
+					System.out.println("cdContrato = "+cdContrato);
+				}
+				// 
+			}
+			System.out.println("Importacao de contratos!");
+			return new sol.util.Result(1);
+		}
+		catch(Exception e){
+			e.printStackTrace(System.out);
+			return new sol.util.Result(-1, "Erro ao tentar importar contratos!", e);
+		}
+		finally{
+			Conexao.desconectar(connect);
+			Conexao.desconectar(conOrigem);
+		}
+	}
+
+	public static sol.util.Result importAdmContaPagar()	{
+		Connection connect   = Conexao.conectar();
+		Connection conOrigem = conectar();
+		try {
+			/***********************
+			 * Importando Contas a PAGAR
+			 ***********************/
+			PreparedStatement pesqCat         = connect.prepareStatement("SELECT * FROM adm_categoria_economica WHERE nm_categoria_economica = ?");
+			PreparedStatement pesqCPagar      = connect.prepareStatement("SELECT * FROM adm_conta_pagar WHERE txt_observacao = ?");
+			PreparedStatement pesqTipoDoc     = connect.prepareStatement("SELECT * FROM adm_tipo_documento WHERE sg_tipo_documento = ?");
+			PreparedStatement pesqPessoaByID  = connect.prepareStatement("SELECT * FROM grl_pessoa WHERE id_pessoa = ?");
+			PreparedStatement pesqPessoaByCpf = connect.prepareStatement("SELECT * FROM grl_pessoa_fisica WHERE nr_cpf = ?");
+			// Origem
+			PreparedStatement pesqCPagarCat   = conOrigem.prepareStatement("SELECT A.*, B.nm_categoria FROM adm_conta_categoria A, adm_categoria_economica B " +
+					                                                       "WHERE A.cd_categoria = B.cd_categoria AND cd_conta_pagar = ?");
+			System.out.println("Importando contas a PAGAR...");
+			//
+			ResultSet rs = conOrigem.prepareStatement("SELECT * FROM adm_conta_pagar ORDER BY cd_conta_origem").executeQuery();
+			while(rs.next())	{
+				int cdContaPagar = 0;
+				//
+				pesqCPagar.setString(1, rs.getString("cd_conta_pagar"));
+				ResultSet rsTemp = pesqCPagar.executeQuery();
+				if(!rsTemp.next())	{
+					int cdEmpresa  = getCdEmpresa(rs.getInt("cd_empresa"));
+					// Pesquisando pessoa
+					int cdPessoa  = 0;
+					pesqPessoaByID.setString(1, rs.getString("cd_pessoa"));
+					rsTemp = pesqPessoaByID.executeQuery();
+					if(rsTemp.next())
+						cdPessoa = rsTemp.getInt("cd_pessoa");
+					else	{ // Pesquisa por cpf
+						ResultSet rsPessoa = conOrigem.prepareStatement("SELECT nr_cpf_cnpj FROM grl_pessoa WHERE cd_pessoa = "+rs.getInt("cd_pessoa")).executeQuery();
+						if(rsPessoa.next())	{
+							String nrCpf = rsPessoa.getString("nr_cpf_cnpj");
+							nrCpf = nrCpf!=null ? nrCpf.replaceAll("[-]", "").replaceAll("[.]", "") : null;
+							pesqPessoaByCpf.setString(1, nrCpf);
+							rsTemp = pesqPessoaByCpf.executeQuery();
+							if(rsTemp.next())
+								cdPessoa = rsTemp.getInt("cd_pessoa");
+						}	
+					}
+					if(cdPessoa <=0 )	{
+						System.out.println("Pessoa não localizada "+rs.getInt("cd_pessoa"));
+						continue;
+					}
+					// Campos não usados no banco de dados de origem
+					int cdContrato    = 0;
+					int cdConta = 0, cdContaBancaria = 0;
+					// Conta de Origem
+					int cdContaOrigem = 0;
+					if(rs.getInt("cd_conta_origem")>0)	{
+						pesqCPagar.setInt(1, rs.getInt("cd_conta_origem"));
+						rsTemp = pesqCPagar.executeQuery();
+						if(rsTemp.next())
+							cdContaOrigem = rsTemp.getInt("cd_conta_pagar");
+					}
+					// Tipo de Documento
+					String[] tipoDocumento = new String[] {"DM", "NP", "FAT", "BOL", "O"};
+					int cdTipoDocumento = 0;
+					pesqTipoDoc.setString(1, tipoDocumento[rs.getInt("tp_documento")]);
+					rsTemp = pesqTipoDoc.executeQuery();
+					if(rsTemp.next())
+						cdTipoDocumento = rsTemp.getInt("cd_tipo_documento");
+					String nrReferencia = rs.getString("nr_referencia");
+					if(nrReferencia!=null && nrReferencia.length()>15)
+						nrReferencia = nrReferencia.substring(0, 14);
+					String nrDocumento = rs.getString("nr_documento");
+					if(nrDocumento!=null && nrDocumento.length()>15)
+						nrDocumento = nrDocumento.substring(0, 14);
+					// Conta a PAGAR
+					ContaPagar cpagar = new ContaPagar(0,cdContrato,cdPessoa,cdEmpresa,cdContaOrigem,0/*cdDocumentoEntrada*/,
+													   cdConta,cdContaBancaria,Util.convTimestampToCalendar(rs.getTimestamp("dt_vencimento")),
+													   Util.convTimestampToCalendar(rs.getTimestamp("dt_emissao")),
+													   Util.convTimestampToCalendar(rs.getTimestamp("dt_pagamento")),
+													   Util.convTimestampToCalendar(rs.getTimestamp("dt_autorizacao")),
+													   nrDocumento,nrReferencia,
+													   rs.getInt("nr_parcela"),cdTipoDocumento,rs.getFloat("vl_conta"),
+													   rs.getFloat("vl_abatimento"),rs.getFloat("vl_acrescimo"),
+													   rs.getFloat("vl_pago"),rs.getString("ds_historico"),
+													   rs.getInt("st_conta"),rs.getInt("lg_autorizado"),
+													   rs.getInt("tp_frequencia"),rs.getInt("qt_parcelas"),
+													   rs.getFloat("vl_base_autorizacao"),0/*cdViagem*/,0/*cdManutencao*/,
+													   rs.getString("cd_conta_pagar")/*Informação de origem - txtObservacao*/,
+													   Util.convTimestampToCalendar(rs.getTimestamp("dt_emissao")),
+													   Util.convTimestampToCalendar(rs.getTimestamp("dt_vencimento")),  rs.getInt("cd_turno"));
+					cdContaPagar = ContaPagarDAO.insert(cpagar, connect);
+					if(cdContaPagar <= 0){
+						System.out.println("Erro ao tentar incluir conta a pagar["+cdContaPagar+"] "+cpagar);
+					}
+				}
+				else	{
+					cdContaPagar = rsTemp.getInt("cd_conta_pagar");
+					continue;
+				}
+				if(cdContaPagar <= 0)
+					continue;
+				// Categorias
+				boolean noCat = true;
+				for(int i=0; i<1 && noCat; i++)	{
+					pesqCPagarCat.setInt(1, i==0 ? rs.getInt("cd_conta_pagar") : rs.getInt("cd_conta_origem"));
+					ResultSet rsCat = pesqCPagarCat.executeQuery();
+					while(rsCat.next())	{
+						noCat = false;
+						int cdCategoria = 0;
+						pesqCat.setString(1, rsCat.getString("nm_categoria"));
+						rsTemp = pesqCat.executeQuery();
+						if(rsTemp.next())	{
+							cdCategoria = rsTemp.getInt("cd_categoria_economica");
+							if(!connect.prepareStatement("SELECT * FROM adm_conta_pagar_categoria " +
+									                     "WHERE cd_conta_pagar = "+cdContaPagar+
+									                     "  AND cd_categoria_economica = "+cdCategoria).executeQuery().next())	{ 
+								ContaPagarCategoria cat = new ContaPagarCategoria(cdContaPagar, cdCategoria, rsCat.getFloat("vl_montante"), 0);
+								ContaPagarCategoriaDAO.insert(cat, connect);
+							}
+						}
+						else
+							System.out.println("Categoria não localizada..."+rsCat.getString("nm_categoria"));
+					}
+				}
+			}
+			System.out.println("Importacao de contas a pagar concluida!");
+			return new sol.util.Result(1);
+		}
+		catch(Exception e){
+			e.printStackTrace(System.out);
+			return new sol.util.Result(-1, "Erro ao tentar importar contas a pagar!", e);
+		}
+		finally{
+			Conexao.desconectar(connect);
+			Conexao.desconectar(conOrigem);
+		}
+	}
+	/**
+	 * Método que importa as contas a receber a partir de um CSV
+	 * @return
+	 */
+	public static sol.util.Result importAdmContaReceberFromCSVIntima(){
+		String nmArquivo = "C:\\TIVIC\\CONRC63.csv";
+		int cdEmpresa = 2;
+		return importAdmContaReceberFromCSV(nmArquivo, cdEmpresa);
+	}
+	
+	/**
+	 * Método que importa as contas a receber a partir de um CSV
+	 * @return
+	 */
+	public static sol.util.Result importAdmContaReceberFromCSVIntimaKids(){
+		String nmArquivo = "C:\\TIVIC\\CONRC64.csv";
+		int cdEmpresa = 2651;
+		return importAdmContaReceberFromCSV(nmArquivo, cdEmpresa);
+	}
+	
+	/**
+	 * Método que importa as contas a receber a partir de um CSV
+	 * @return
+	 */
+	public static sol.util.Result importAdmContaReceberFromCSVVulcao(){
+		String nmArquivo = "C:\\TIVIC\\CONRC61.csv";
+		int cdEmpresa = 3041;
+		return importAdmContaReceberFromCSV(nmArquivo, cdEmpresa);
+	}
+	
+	/**
+	 * Método que importa as contas a receber a partir de um CSV
+	 * @return
+	 */
+	public static sol.util.Result importAdmContaReceberFromCSVNacionalModas(){
+		String nmArquivo = "C:\\TIVIC\\CONRC62.csv";
+		int cdEmpresa = 3730;
+		return importAdmContaReceberFromCSV(nmArquivo, cdEmpresa);
+	}
+	
+	/**
+	 * Método que importa as contas a receber a partir de um CSV
+	 * @return
+	 */
+	public static sol.util.Result importAdmContaReceberFromCSVNacional(){
+		String nmArquivo = "C:\\TIVIC\\CONRC60.csv";
+		int cdEmpresa = 1890;
+		return importAdmContaReceberFromCSV(nmArquivo, cdEmpresa);
+	}
+	
+	/**
+	 * 
+	 * @param nmArquivo
+	 * @param cdEmpresa
+	 * @return
+	 */
+	public static sol.util.Result importAdmContaReceberFromCSV(String nmArquivo, int cdEmpresa) {
+		Connection connect = Conexao.conectar();
+		int count = 0;
+		try {
+			connect.setAutoCommit(false);
+			PreparedStatement pesqPessoa = connect.prepareStatement("SELECT * FROM grl_pessoa " 
+																	+ " WHERE nm_pessoa = ?");
+			PreparedStatement pesqTipoDocumento = connect.prepareStatement("SELECT * FROM adm_tipo_documento WHERE cd_tipo_documento = ?");
+			File fileDir = new File(nmArquivo);
+			BufferedReader raf = new BufferedReader(new InputStreamReader(new FileInputStream(fileDir), "UTF8"));
+			System.out.println(nmArquivo + " carregado...");
+			String line = "";
+			String idContaReceber, tpDocumento, nmCliente, dtVencimento, dtPagamento, vlConta, vlAbatimento,dtEmissao, prJuros;
+			int cdPessoa = 0;
+			int cdTipoDocumento = 0;
+			int lin = 1;
+			String contasCriadas = "";
+			
+			/*RETIRANDO ACENTUAÇÃO*/
+			ResultSetMap rsmClientes = new ResultSetMap(connect.prepareStatement(
+					"SELECT A.CD_PESSOA, A.NM_PESSOA"+
+					" FROM GRL_PESSOA A "+
+					" join grl_pessoa_fisica b on ( a.cd_pessoa = b.cd_pessoa ) "
+						).executeQuery());
+			rsmClientes.beforeFirst();
+			int i = 1;
+			while (rsmClientes.next()) {
+				String input = rsmClientes.getString("NM_PESSOA");  
+				if( input != null && input.length() > 0 ){
+					input = Normalizer.normalize(input, Normalizer.Form.NFD);  
+					input = input.replaceAll("[^\\p{ASCII}]", "").replace("'", "").toUpperCase();  
+					System.out.println(input);
+					connect.prepareStatement(" UPDATE GRL_PESSOA SET NM_PESSOA = '"+input+"' where cd_pessoa = "+rsmClientes.getInt("CD_PESSOA")).executeUpdate();
+				}
+				System.out.println("Retirando acento :"+i++);
+			}
+			/**********************************************/
+			while ((line = raf.readLine()) != null) {
+				StringTokenizer tokens = new StringTokenizer(line, ";", false);
+				idContaReceber = tokens.nextToken();
+				tpDocumento = tokens.nextToken();
+				nmCliente = tokens.nextToken();
+				dtEmissao = tokens.nextToken();
+				dtVencimento = tokens.nextToken();
+				dtPagamento = tokens.nextToken();
+				vlConta = tokens.nextToken();
+				vlAbatimento = tokens.nextToken();
+				prJuros = tokens.nextToken();
+				if(prJuros.contains("-"))
+					prJuros = "0,00";
+				if(vlAbatimento.contains("-"))
+					vlAbatimento = "0,00";
+				lin++;
+				if( (lin%100)==0 )
+					System.out.println("Linha :"+lin);
+				
+				
+				/** VERIFICA EXISTÊNCIA DO CLIENTE E O ADICIONA **/
+				/************************************************/
+				if(!pesquisaContaIgual(idContaReceber, tpDocumento, nmCliente, dtVencimento, dtPagamento, vlConta, vlAbatimento,dtEmissao, prJuros, cdEmpresa ,connect)){
+					
+					float vlTotalConta = converteStringToFloat(vlConta)+converteStringToFloat(prJuros)-converteStringToFloat(vlAbatimento);
+					float vlTotalDespesa = converteStringToFloat(vlAbatimento);
+					/*
+					 * Pesquisa se já existe uma pessoa com esse nome, se caso existir usa, se não existir insere uma nova
+					 */
+					pesqPessoa.setString(1, nmCliente);
+					ResultSet rsPessoa = pesqPessoa.executeQuery();
+					if(rsPessoa.next()){
+						cdPessoa = rsPessoa.getInt("CD_PESSOA");
+					} else{
+						System.out.println("Cadastrando novo cliente: "+nmCliente);
+						//return new Result(-1, "Pessoa Inexistente: "+nmCliente);
+						PessoaFisica pessoa = new PessoaFisica();
+						pessoa.setNmPessoa(nmCliente);
+						Result result = PessoaServices.insert(pessoa, null, cdEmpresa, ParametroServices.getValorOfParametroAsInteger("CD_VINCULO_CLIENTE", 0));
+						
+						if( result.getCode() <= 0 )
+							return new sol.util.Result( result.getCode(), result.getMessage());
+						cdPessoa = ((Pessoa) result.getObjects().get("pessoa")).getCdPessoa();
+					}
+					/*
+					 * Pesquisa se já existe um tipo de documento cadastrado, se não existir insere um novo
+					 */
+					pesqTipoDocumento.setInt(1, (isNotNullOrBlank(tpDocumento) ? Integer.parseInt(tpDocumento) : 0));
+					ResultSet rsTipoDocumento = pesqTipoDocumento.executeQuery();
+					if(rsTipoDocumento.next()){
+						cdTipoDocumento = rsTipoDocumento.getInt("CD_TIPO_DOCUMENTO");
+					} else {
+						cdTipoDocumento = 9;
+					}
+					
+					ContaReceber contaReceber = new ContaReceber(0, cdPessoa, cdEmpresa,0/*cdContrato*/, 0/*cdContaOrigem*/, 0/*cdDocumentoSaida*/, 1/*cdContaCarteira*/, 
+							5/*cdConta*/, 0/*cdFrete*/, ""/*nrDocumento*/, idContaReceber, 0/*nrParcela*/, ""/*nrReferencia*/, cdTipoDocumento, "" /*dsHistorico*/, 
+							converteStringToCalendar(dtVencimento), converteStringToCalendar(dtEmissao), converteStringToCalendar(dtPagamento), null/*dtProrrogacao*/, 
+							converteStringToDouble(vlConta), converteStringToDouble(vlAbatimento), 0.0d/*vlAcrescimo*/, 0.0d/*vlRecebido*/, 
+							ContaReceberServices.ST_EM_ABERTO  /*isNotNullOrBlank(dtPagamento) ? ContaReceberServices.ST_RECEBIDA : ContaReceberServices.ST_EM_ABERTOstConta*/, 0/*tpFrequencia*/, 0/*qtParcelas*/, 
+							ContaReceberServices.TP_PARCELA/*tpContaReceber*/, 0/*cdNegociacao*/, ""/*txtObservacao*/, 0/*cdPlanoPagamento*/, 0/*cdFormaPagamento*/, 
+							converteStringToCalendar(dtEmissao)/*dtDigitacao*/, 
+							converteStringToCalendar(dtVencimento), 1/*cdTurno*/, 0.0d/*prJuros*/, 0.0d/*prMulta*/, 0/*lgProtesto*/);
+					int code = ContaReceberDAO.insert(contaReceber, connect);
+					
+					//Categoria de Receita
+					ContaReceberCategoriaServices.save( 
+							new ContaReceberCategoria(code, 1/* receita geral cdCategoriaEconomica*/,
+													converteStringToFloat(vlConta), 0), null,
+							connect);
+					//Categoria de Despesa se houver
+					if( vlTotalDespesa > 0 ){
+						ContaReceberCategoriaServices.save( 
+								new ContaReceberCategoria(code, 16/* despesa geral cdCategoriaEconomica*/,
+										vlTotalDespesa, 0), null,
+										connect);
+					}
+					
+//					//Adiciona movimentação caso haja data de pagamento
+					if( code > 0 && isNotNullOrBlank(dtPagamento) ){
+						
+						int cdCategoriaJuros = ( converteStringToFloat(prJuros) > 0 )?28/*JUROS & MORA RECEBIDOS*/:0;
+						
+						Result resultRecebimento = ContaReceberServices.lancarRecebimento(code/*cdContaReceber*/, 1/*cdConta*/, 0.0/*vlMulta*/, 0/*cdCategoriaMulta*/,
+								 		new Double(converteStringToFloat(prJuros))/*vlJuros*/, cdCategoriaJuros/*cdCategoriaJuros*/,
+										0.0/*vlDesconto*/, 0/*cdCategoriaDesconto*/, new Double(vlTotalConta)/*vlRecebido*/, 3/*cdFormaPagamento - 3:Dinheiro*/,
+										null/*tituloCredito*/, 2/*cdUsuario*/, converteStringToCalendar(dtPagamento)/*dtDeposito*/, converteStringToCalendar(dtPagamento)/*dtMovimento*/,
+										""/*dsHistorico*/, connect);
+						if( resultRecebimento.getCode() < 0 ){
+							connect.rollback();
+							System.out.println("LINHA: "+lin);
+							return new sol.util.Result( resultRecebimento.getCode(), "Erro ao Lançar recebimento! ID conta: "+idContaReceber+" message: "+resultRecebimento.getMessage());
+						}
+					}
+					
+					//System.out.println("Code: " + code);
+					if(code > 0 ) {
+						count++;
+						contasCriadas += code+",";
+					}
+					else{
+						connect.rollback();
+						System.out.println("LINHA: "+lin);
+						return new sol.util.Result(-1, "Erro ao tentar importar contas a RECEBER!");
+					}
+				}
+			}
+			connect.commit();
+			System.out.println("Contas importadas :"+contasCriadas);
+			File fileContas = new File("C:\\contas_importadas.txt");
+			FileOutputStream out = new FileOutputStream(fileContas);
+			out.write( contasCriadas.getBytes() );
+			out.close();
+			
+			System.out.printf("%d contas importadas com sucesso.", count);
+			return new sol.util.Result(1, "Importação realizada com sucesso!Contas importadas :"+contasCriadas);
+		} catch (Exception e) {
+			e.printStackTrace(System.out);
+			Conexao.rollback(connect);
+			return new sol.util.Result(-1, "Erro ao tentar importar contas a RECEBER!", e);
+		} finally {
+			try {
+				
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			Conexao.desconectar(connect);
+		}
+	}
+	
+	public static sol.util.Result removerContasReceberNacional(){
+		Connection connect = Conexao.conectar();
+		String nmArquivo = "C:\\TIVIC\\contas_nacional.csv";
+		//int cdEmpresa = 1890;
+		try {
+			connect.setAutoCommit(false);
+			File fileDir = new File(nmArquivo);
+			BufferedReader raf = new BufferedReader(new InputStreamReader(new FileInputStream(fileDir), "UTF8"));
+			System.out.println(nmArquivo + " carregado...");
+			String line = "";
+			int lin = 1;
+			totalContas = 0;
+			Statement stmt = connect.createStatement();
+			while ((line = raf.readLine()) != null) {
+				System.out.println("linha : "+lin++);
+				ContaReceber conta = ContaReceberDAO.get(Integer.parseInt(line));
+				if( conta != null ){
+					ResultSetMap rsmCategorias = new ResultSetMap( connect.prepareStatement("SELECT * FROM ADM_CONTA_RECEBER_CATEGORIA WHERE CD_CONTA_RECEBER = "+conta.getCdContaReceber()).executeQuery());
+					ResultSetMap rsmMovimento = new ResultSetMap( connect.prepareStatement("SELECT * FROM ADM_MOVIMENTO_CONTA_RECEBER WHERE CD_CONTA_RECEBER = "+conta.getCdContaReceber()).executeQuery());
+					
+					if( !rsmCategorias.next() && !rsmMovimento.next() && conta.getCdConta() == 0 ){
+						stmt.addBatch("DELETE FROM ADM_CONTA_RECEBER WHERE CD_CONTA_RECEBER = "+conta.getCdContaReceber());
+						totalContas++;
+					}
+				}
+			}
+			System.out.println("Executando exclusões");
+			int[] result = stmt.executeBatch();
+			connect.prepareStatement("delete from adm_conta_receber where id_conta_receber = 'NULL'").executeUpdate();
+			connect.commit();
+			raf.close();
+			System.out.printf("%d contas removidas.", totalContas);
+			System.out.printf("%d contas removidas(Array result).", result.length);
+			return new sol.util.Result(1, "Contas Excluídas com sucesso!");
+		} catch (Exception e) {
+			e.printStackTrace(System.out);
+			Conexao.rollback(connect);
+			return new sol.util.Result(-1, "Erro ao tentar importar contas a RECEBER!", e);
+		} finally {
+			try {
+				//raf.close();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			Conexao.desconectar(connect);
+		}
+	}
+	
+	public static sol.util.Result popularDefeitosFromCsv(){
+		Connection connect = Conexao.conectar();
+		String nmArquivo = "/tivic/veiculos.csv";
+		//int cdEmpresa = 1890;
+		try {
+			connect.setAutoCommit(false);
+			ResultSetMap rsmDefeitos =  DefeitoVistoriaItemServices.getAll();
+			ResultSetMap rsmPlanoVistoriaItem =  PlanoVistoriaItemServices.getAll();
+			rsmDefeitos.beforeFirst();
+			rsmPlanoVistoriaItem.beforeFirst();
+			while ( rsmPlanoVistoriaItem.next() ) {
+				while( rsmDefeitos.next() ){
+					PlanoVistoriaItemDefeito itemDefeito = new PlanoVistoriaItemDefeito();
+					itemDefeito.setCdDefeitoVistoriaItem( rsmDefeitos.getInt("CD_DEFEITO_VISTORIA_ITEM"));
+					itemDefeito.setCdPlanoVistoria(rsmPlanoVistoriaItem.getInt("CD_PLANO_VISTORIA"));
+					itemDefeito.setCdVistoriaItem(rsmPlanoVistoriaItem.getInt("CD_VISTORIA_ITEM"));
+					PlanoVistoriaItemDefeitoServices.save(itemDefeito);
+				}
+				rsmDefeitos.beforeFirst();
+			}
+			connect.commit();
+			return new sol.util.Result(1, "Veículos importados com sucesso!");
+		} catch (Exception e) {
+			e.printStackTrace(System.out);
+			Conexao.rollback(connect);
+			return new sol.util.Result(-1, "Erro ao importat Veículos!", e);
+		} finally {
+			try {
+				//raf.close();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			Conexao.desconectar(connect);
+		}
+	}
+//	public static sol.util.Result importVeiculosFromCsv(){
+//		Connection connect = Conexao.conectar();
+//		String nmArquivo = "/tivic/veiculos.csv";
+//		//int cdEmpresa = 1890;
+//		try {
+//			connect.setAutoCommit(false);
+//			File fileDir = new File(nmArquivo);
+//			BufferedReader raf = new BufferedReader(new InputStreamReader(new FileInputStream(fileDir), "UTF8"));
+//			System.out.println(nmArquivo + " carregado...");
+//			String line = "";
+//			String nrPlaca, nrChassi, cdMarcaModelo, anoChassi, potMotor, cdTipoVeiculo, cdMarcaCarroceria, anoCarroceria, capPassageiro, qtPortas, lgAdaptado, cdProprietario, anoExercicio;
+//			while ((line = raf.readLine()) != null) {
+//				StringTokenizer tokens = new StringTokenizer(line, ";", false);
+//				nrPlaca = tokens.nextToken();
+//				nrChassi = tokens.nextToken();
+//				cdMarcaModelo = tokens.nextToken();
+//				anoChassi = tokens.nextToken();
+//				potMotor = tokens.nextToken();
+//				cdTipoVeiculo = tokens.nextToken();
+//				cdMarcaCarroceria = tokens.nextToken();
+//				anoCarroceria = tokens.nextToken();
+//				capPassageiro = tokens.nextToken();
+//				qtPortas = tokens.nextToken();
+//				lgAdaptado = tokens.nextToken();
+//				cdProprietario = tokens.nextToken();
+//				
+//				Veiculo v = new Veiculo();
+//				v.setNrPlaca(nrPlaca);
+//				v.setNrChassi(nrChassi);
+//				v.setCdMarca( Integer.parseInt( cdMarcaModelo));
+//				v.setNrAnoFabricacao(anoChassi);
+//				v.setNrPotencia(Integer.parseInt(potMotor));
+//				v.setCdTipoVeiculo(Integer.parseInt(cdTipoVeiculo));
+//				v.setCdMarcaCarroceria(Integer.parseInt(cdMarcaCarroceria));
+//				v.setNrAnoCarroceria(anoCarroceria);
+//				v.setNrCapacidade(capPassageiro);
+//				v.setNrPortas(Integer.parseInt(qtPortas));
+//				v.setTpAdaptacao(Integer.parseInt(lgAdaptado));
+//				v.setCdProprietario(Integer.parseInt(cdProprietario));
+//				v.setCdVeiculo(0);
+//				System.out.println("MARCA MODELO");
+//				System.out.println(cdMarcaModelo);
+//				MarcaModelo marca = MarcaModeloDAO.get( v.getCdMarca() );
+//				v.setNmModelo(marca.getNmMarca()+" / "+marca.getNmModelo());
+//				VeiculoServices.save(v, null, connect);
+//			}
+//			connect.commit();
+//			return new sol.util.Result(1, "Veículos importados com sucesso!");
+//		} catch (Exception e) {
+//			e.printStackTrace(System.out);
+//			Conexao.rollback(connect);
+//			return new sol.util.Result(-1, "Erro ao importat Veículos!", e);
+//		} finally {
+//			try {
+//				//raf.close();
+//			} catch (Exception e) {
+//				e.printStackTrace();
+//			}
+//			Conexao.desconectar(connect);
+//		}
+//	}
+//	public static sol.util.Result importConcessaoFromCsv(){
+//		Connection connect = Conexao.conectar();
+//		String nmArquivo = "/tivic/concessao.csv";
+//		//int cdEmpresa = 1890;
+//		try {
+//			connect.setAutoCommit(false);
+//			/**
+//			 * Cidade Verde - 12377
+//			 * Serrana - 12368
+//			 * 
+//			 */
+//			int cdConcessionario = 12377;
+//			File fileDir = new File(nmArquivo);
+//			BufferedReader raf = new BufferedReader(new InputStreamReader(new FileInputStream(fileDir), "UTF8"));
+//			System.out.println(nmArquivo + " carregado...");
+//			String line = "";
+//			String nrPrefixo, nrPlaca, nrAnoFabricacao, nrAnoLicenciamento, dtVinculacao, dtDesvinculacao;
+//			
+//			Concessao concessao = new Concessao();
+//			
+//			concessao.setNrConcessao("0"+cdConcessionario);
+//			concessao.setCdConcessionario(cdConcessionario);
+//			concessao.setTpConcessao(0);
+//			concessao.setStConcessao(1);
+//			
+//			Result result = ConcessaoServices.save(concessao, connect);
+//			if( result.getCode() <= 0 ){
+//				Conexao.rollback(connect);
+//				return new sol.util.Result(-1, "Erro ao criar concessao!");
+//			}else{
+//				concessao = (Concessao) result.getObjects().get("CONCESSAO");
+//			}
+//			
+//			while ((line = raf.readLine()) != null) {
+//				StringTokenizer tokens = new StringTokenizer(line, ";", false);
+//				nrPrefixo = tokens.nextToken();
+//				nrPlaca = tokens.nextToken();
+//				nrAnoFabricacao = tokens.nextToken();
+//				nrAnoLicenciamento = tokens.nextToken();
+//				dtVinculacao = tokens.nextToken();
+//				
+//				ResultSetMap rsm = new ResultSetMap( connect.prepareStatement("SELECT * FROM FTA_VEICULO WHERE nr_placa = '"+nrPlaca+"' ").executeQuery());
+//				rsm.beforeFirst();
+//				if( rsm.next() ){
+//					int cdVeiculo = rsm.getInt("CD_VEICULO");
+//					Veiculo veiculo = VeiculoDAO.get(cdVeiculo);
+//					veiculo.setCdVeiculo(cdVeiculo);
+//					veiculo.setNrAnoFabricacao(nrAnoFabricacao);
+//					veiculo.setNrAnoLicenciamento(nrAnoLicenciamento);
+//					
+//					ConcessaoVeiculo concessaoVeiculo = new ConcessaoVeiculo();
+//					concessaoVeiculo.setCdConcessao( concessao.getCdConcessao() );
+//					concessaoVeiculo.setCdVeiculo(cdVeiculo);
+//					concessaoVeiculo.setNrPrefixo( Integer.parseInt(nrPrefixo));
+//					concessaoVeiculo.setDtAssinatura(Util.convStringToCalendar(dtVinculacao));
+//					concessaoVeiculo.setDtInicioOperacao( Util.convStringToCalendar(dtVinculacao));
+//					result = ConcessaoVeiculoServices.save(concessaoVeiculo, connect);
+//					if( result.getCode() <= 0 ){
+//						Conexao.rollback(connect);
+//						return new sol.util.Result(-1, "Erro ao adicionar veículo!");
+//					}
+//					
+//				}
+//			}
+//			connect.commit();
+//			raf.close();
+//			return new sol.util.Result(1, "Concessao importada importados com sucesso!");
+//		} catch (Exception e) {
+//			e.printStackTrace(System.out);
+//			Conexao.rollback(connect);
+//			return new sol.util.Result(-1, "Erro ao importat Veículos!", e);
+//		} finally {
+//			try {
+//			} catch (Exception e) {
+//				e.printStackTrace();
+//			}
+//			Conexao.desconectar(connect);
+//		}
+//	}
+	public static sol.util.Result importAfericoesFromCsv(int cdConcessionario){
+		Connection connect = Conexao.conectar();
+		String nmArquivo = "/tivic/afericoes.csv";
+		try {
+			connect.setAutoCommit(false);
+			/**
+			 * Cidade Verde - 12377
+			 * Serrana      - 12368
+			 * 
+			 */
+			File fileDir = new File(nmArquivo);
+			BufferedReader raf = new BufferedReader(new InputStreamReader(new FileInputStream(fileDir), "UTF8"));
+			System.out.println(nmArquivo + " carregado...");
+			String line = "";
+			String nrPrefixo, qtInicial, qtFinal, dtInicial, dtFinal;
+			
+			while ((line = raf.readLine()) != null) {
+				StringTokenizer tokens = new StringTokenizer(line, ";", false);
+				nrPrefixo = tokens.nextToken();
+				qtInicial = tokens.nextToken();
+				qtFinal = tokens.nextToken();
+				dtInicial = tokens.nextToken();
+				dtFinal = tokens.nextToken();
+				
+				ResultSetMap rsm = new ResultSetMap( connect.prepareStatement("SELECT * FROM MOB_CONCESSAO_VEICULO WHERE id_prefixo = '"+nrPrefixo+"' ").executeQuery());
+				rsm.beforeFirst();
+				if( rsm.next() ){
+
+//					result = ConcessaoVeiculoServices.save(concessaoVeiculo, connect);
+//					if( result.getCode() <= 0 ){
+//						Conexao.rollback(connect);
+//						return new sol.util.Result(-1, "Erro ao adicionar veículo!");
+//					}
+					
+				}
+			}
+			connect.commit();
+			raf.close();
+			return new sol.util.Result(1, "Aferições importadas com sucesso!");
+		} catch (Exception e) {
+			e.printStackTrace(System.out);
+			Conexao.rollback(connect);
+			return new sol.util.Result(-1, "Erro ao importar Aferições!", e);
+		} finally {
+			try {
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			Conexao.desconectar(connect);
+		}
+	}
+	
+	/**
+	 * Valida se já existe uma conta a receber idêntica no banco de dados
+	 * 
+	 * @param tokens
+	 * @param cdEmpresa
+	 * @param connect
+	 * @return
+	 */
+	private static boolean pesquisaContaIgual(String idContaReceber, String tpDocumento, String nmCliente, String dtVencimento, String dtPagamento, String vlConta, String vlAbatimento,
+			String dtEmissao, String prJuros, int cdEmpresa, Connection connect) {
+		int cdPessoa = 0;
+		int cdTipoDocumento = 0;
+		
+		try {
+			String sql = "SELECT * FROM adm_conta_receber WHERE cd_empresa = ? AND cd_pessoa = ? AND id_conta_receber = ? "
+					+ " AND dt_vencimento = ?  AND vl_conta = ? AND vl_abatimento  = ? AND dt_emissao = ?";
+			String sqlPessoa = "SELECT * FROM grl_pessoa WHERE nm_pessoa ILIKE ? ";
+			String sqlTipoDocumento = "SELECT * FROM adm_tipo_documento WHERE cd_tipo_documento = ? ";
+			PreparedStatement pstmConta = connect.prepareStatement(sql);
+			PreparedStatement pstmPessoa = connect.prepareStatement(sqlPessoa);
+			PreparedStatement pstmTipoDocumento = connect.prepareStatement(sqlTipoDocumento);
+
+			pstmPessoa.setString(1, nmCliente);
+			ResultSet rsPessoa = pstmPessoa.executeQuery();
+			if(rsPessoa.next()){
+				cdPessoa = rsPessoa.getInt("CD_PESSOA");
+			}else{
+				System.out.println("Pessoa não encontrada :"+nmCliente);
+			}
+			
+			pstmTipoDocumento.setInt(1, Integer.parseInt(tpDocumento.equalsIgnoreCase("NULL") ? "0" : tpDocumento));
+			ResultSet rsTipoDocumento = pstmTipoDocumento.executeQuery();
+			if(rsTipoDocumento.next()){
+				cdTipoDocumento = rsTipoDocumento.getInt("CD_TIPO_DOCUMENTO");
+			}
+			
+			int index = 1;
+			pstmConta.setInt(index++, cdEmpresa);
+			pstmConta.setInt(index++, cdPessoa);
+			pstmConta.setString(index++, idContaReceber);
+			//pstmConta.setInt(index++, cdTipoDocumento);
+			pstmConta.setDate(index++, converteStringToDate(dtVencimento));
+//			if(dtPagamento.length() > 3 )
+//				pstmConta.setDate(index++,  converteStringToDate(dtPagamento));
+//			else
+//				pstmConta.setNull(index++, Types.DATE);
+			pstmConta.setFloat(index++, converteStringToFloat(vlConta));
+			pstmConta.setFloat(index++, converteStringToFloat(vlAbatimento));
+			pstmConta.setDate(index++, converteStringToDate(dtEmissao));
+			//pstmConta.setFloat(index++, converteStringToFloat(prJuros));
+			
+			ResultSetMap rs = new ResultSetMap(pstmConta.executeQuery());
+			totalContas += rs.getLines().size();
+//			if( rs.getLines().size() > 0 )
+//				System.out.println("Conta existente: "+rs);
+			return rs.next();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return false;
+	}
+
+	/**
+	 * Converte String em Date
+	 * @param dtVencimento
+	 * @return
+	 */
+	private static Date converteStringToDate(String dtVencimento) {
+		return new Date(converteStringToCalendar(dtVencimento)!=null? converteStringToCalendar(dtVencimento).getTimeInMillis(): Calendar.getInstance().getTimeInMillis());
+	}
+
+	/**
+	 * @param vl
+	 * @return
+	 * Converte uma string em float e verifica os valores se são válidos
+	 */
+	private static float converteStringToFloat(String vl) {
+		vl = isNotNullOrBlank(vl) ? vl.replace(',', '.' ) : "0";
+		return Float.parseFloat(vl);
+	}
+	
+	/**
+	 * @param vl
+	 * @return
+	 * Converte uma string em double e verifica os valores se são válidos
+	 */
+	private static double converteStringToDouble(String vl) {
+		vl = isNotNullOrBlank(vl) ? vl.replace(',', '.' ) : "0";
+		return Double.parseDouble(vl);
+	}
+
+	/**
+	 * @param vl
+	 * @return
+	 * Valida se é um valor válido no csv
+	 */
+	private static boolean isNotNullOrBlank(String vl) {
+		return !"NULL".equalsIgnoreCase(vl) && vl != null && !"".equalsIgnoreCase(vl.trim());
+	}
+
+	/**
+	 * @param dt
+	 * @return
+	 * Converte uma string em um calendar se tiver null retorna null
+	 */
+	private static GregorianCalendar converteStringToCalendar(String dt) {
+		return isNotNullOrBlank(dt) ? Util.convStringToCalendar(dt) : null;
+	}
+
+	public static sol.util.Result importAdmContaReceber()	{
+		Connection connect   = Conexao.conectar();
+		Connection conOrigem = conectar();
+		try {
+			/***********************
+			 * Importando Contas a RECEBER
+			 ***********************/
+			PreparedStatement pesqCat         = connect.prepareStatement("SELECT * FROM adm_categoria_economica WHERE nm_categoria_economica = ?");
+			PreparedStatement pesqCReceber    = connect.prepareStatement("SELECT * FROM adm_conta_receber WHERE id_conta_receber = ?");
+			PreparedStatement pesqTipoDoc     = connect.prepareStatement("SELECT * FROM adm_tipo_documento WHERE sg_tipo_documento = ?");
+			PreparedStatement pesqPessoaByID  = connect.prepareStatement("SELECT * FROM grl_pessoa WHERE id_pessoa = ?");
+			PreparedStatement pesqPessoaByCpf = connect.prepareStatement("SELECT * FROM grl_pessoa_fisica WHERE nr_cpf = ?");
+			PreparedStatement pesqContrato    = connect.prepareStatement("SELECT * FROM adm_contrato WHERE id_contrato = ?");
+			// Origem
+			PreparedStatement pesqCReceberCat   = conOrigem.prepareStatement("SELECT A.*, B.nm_categoria FROM adm_conta_categoria A, adm_categoria_economica B " +
+					                                                         "WHERE A.cd_categoria = B.cd_categoria AND cd_conta_receber = ?");
+			System.out.println("Importando contas a RECEBER...");
+			connect.setAutoCommit(false);
+			int l = 0;
+			//
+			ResultSet rs = conOrigem.prepareStatement("SELECT * FROM adm_conta_receber ORDER BY cd_conta_origem").executeQuery();
+			while(rs.next())	{
+				if((l%200==0) && l>0)	{
+					System.out.println(l+" registros gravados.");
+					connect.commit();
+					connect.close();
+					System.gc();
+					connect = Conexao.conectar();
+				}
+				l++;
+				int cdContaReceber = 0;
+				//
+				pesqCReceber.setString(1, rs.getString("cd_conta_receber"));
+				ResultSet rsTemp = pesqCReceber.executeQuery();
+				if(!rsTemp.next())	{
+					int cdEmpresa  = getCdEmpresa(rs.getInt("cd_empresa"));
+					// Pesquisando pessoa
+					int cdPessoa  = 0;
+					pesqPessoaByID.setString(1, rs.getString("cd_pessoa"));
+					rsTemp = pesqPessoaByID.executeQuery();
+					if(rsTemp.next())
+						cdPessoa = rsTemp.getInt("cd_pessoa");
+					else	{ // Pesquisa por cpf
+						ResultSet rsPessoa = conOrigem.prepareStatement("SELECT nr_cpf_cnpj FROM grl_pessoa WHERE cd_pessoa = "+rs.getInt("cd_pessoa")).executeQuery();
+						if(rsPessoa.next())	{
+							String nrCpf = rsPessoa.getString("nr_cpf_cnpj");
+							nrCpf = nrCpf!=null ? nrCpf.replaceAll("[-]", "").replaceAll("[.]", "") : null;
+							pesqPessoaByCpf.setString(1, nrCpf);
+							rsTemp = pesqPessoaByCpf.executeQuery();
+							if(rsTemp.next())
+								cdPessoa = rsTemp.getInt("cd_pessoa");
+						}	
+					}
+					if(cdPessoa <=0 )	{
+						System.out.println("Pessoa não localizada "+rs.getInt("cd_pessoa"));
+						continue;
+					}
+					// Campos não usados no banco de dados de origem
+					int cdConta = 0, cdCarteira = 0;
+					// Contrato
+					int cdContrato    = 0;
+					pesqContrato.setString(1, rs.getString("cd_contrato"));
+					rsTemp = pesqContrato.executeQuery();
+					if(rsTemp.next())
+						cdContrato = rsTemp.getInt("cd_contrato");
+					// Conta de Origem
+					int cdContaOrigem = 0;
+					if(rs.getInt("cd_conta_origem")>0)	{
+						pesqCReceber.setInt(1, rs.getInt("cd_conta_origem"));
+						rsTemp = pesqCReceber.executeQuery();
+						if(rsTemp.next())
+							cdContaOrigem = rsTemp.getInt("cd_conta_receber");
+					}
+					// Tipo de Documento
+					String[] tipoDocumento = new String[] {"DM","NP","ME","BOL","O","O"};
+					int cdTipoDocumento = 0;
+					pesqTipoDoc.setString(1, tipoDocumento[rs.getInt("tp_documento")]);
+					rsTemp = pesqTipoDoc.executeQuery();
+					if(rsTemp.next())
+						cdTipoDocumento = rsTemp.getInt("cd_tipo_documento");
+					//
+					String nrReferencia = rs.getString("nr_referencia");
+					if(nrReferencia!=null && nrReferencia.length()>15)
+						nrReferencia = nrReferencia.substring(0, 14);
+					String nrDocumento = rs.getString("nr_documento");
+					if(nrDocumento!=null && nrDocumento.length()>15)
+						nrDocumento = nrDocumento.substring(0, 14);
+					// Conta a RECEBER
+					ContaReceber creceber = new ContaReceber(0,cdPessoa,cdEmpresa,cdContrato,cdContaOrigem,0/*cdDocumentoSaida*/,
+															 cdCarteira,cdConta,0/*cdFrete*/,nrDocumento,rs.getString("cd_conta_receber"),
+															 rs.getInt("nr_parcela"),nrReferencia,cdTipoDocumento,
+															 rs.getString("ds_historico"),
+															 Util.convTimestampToCalendar(rs.getTimestamp("dt_vencimento")),
+															 Util.convTimestampToCalendar(rs.getTimestamp("dt_emissao")),
+															 Util.convTimestampToCalendar(rs.getTimestamp("dt_recebimento")),
+															 null/*dtProrrogacao*/,rs.getDouble("vl_conta"),
+															 rs.getDouble("vl_abatimento"),rs.getDouble("vl_acrescimo"),
+															 rs.getDouble("vl_recebido"),rs.getInt("st_conta"),
+															 rs.getInt("tp_frequencia"),rs.getInt("qt_parcelas"),
+															 cdContrato>0 ? ContaReceberServices.TP_PARCELA : ContaReceberServices.TP_OUTRO,
+															 0/*cdNegociacao*/,null/*txtObservacao*/,0/*cdPlanoPagamento*/,0/*cdFormaPagamento*/,
+															 Util.convTimestampToCalendar(rs.getTimestamp("dt_emissao")),
+															 Util.convTimestampToCalendar(rs.getTimestamp("dt_vencimento")), rs.getInt("cd_turno"), 0.0d, 0.0d, 0/*lgProtesto*/);
+					cdContaReceber = ContaReceberDAO.insert(creceber, connect);
+					if(cdContaReceber <= 0){
+						System.out.println("Erro ao tentar incluir conta a receber["+cdContaReceber+"] "+creceber);
+					}
+				}
+				else	{
+					cdContaReceber = rsTemp.getInt("cd_conta_receber");
+					continue;
+				}
+				if(cdContaReceber <= 0)
+					continue;
+				// Categorias
+				boolean noCat = true;
+				for(int i=0; i<1 && noCat; i++)	{
+					pesqCReceberCat.setInt(1, i==0 ? rs.getInt("cd_conta_receber") : rs.getInt("cd_conta_origem"));
+					ResultSet rsCat = pesqCReceberCat.executeQuery();
+					while(rsCat.next())	{
+						noCat = false;
+						int cdCategoria = 0;
+						pesqCat.setString(1, rsCat.getString("nm_categoria"));
+						rsTemp = pesqCat.executeQuery();
+						if(rsTemp.next())	{
+							cdCategoria = rsTemp.getInt("cd_categoria_economica");
+							if(!connect.prepareStatement("SELECT * FROM adm_conta_receber_categoria " +
+									                     "WHERE cd_conta_receber = "+cdContaReceber+
+									                     "  AND cd_categoria_economica = "+cdCategoria).executeQuery().next())	{ 
+								ContaReceberCategoria cat = new ContaReceberCategoria(cdContaReceber, cdCategoria, rsCat.getFloat("vl_montante"), 0);
+								ContaReceberCategoriaDAO.insert(cat, connect);
+							}
+						}
+						else
+							System.out.println("Categoria não localizada..."+rsCat.getString("nm_categoria"));
+					}
+				}
+			}
+			connect.commit();
+			System.out.println("Importacao de contas a receber concluida!");
+			return new sol.util.Result(1);
+		}
+		catch(Exception e){
+			e.printStackTrace(System.out);
+			return new sol.util.Result(-1, "Erro ao tentar importar contas a receber!", e);
+		}
+		finally{
+			Conexao.desconectar(connect);
+			Conexao.desconectar(conOrigem);
+		}
+	}
+
+	public static sol.util.Result importAdmMovimentoConta()	{
+		Connection connect   = Conexao.conectar();
+		Connection conOrigem = conectar();
+		try {
+			/***********************
+			 * Importando Movimento de Conta
+			 ***********************/
+			PreparedStatement pesqCat         = connect.prepareStatement("SELECT * FROM adm_categoria_economica WHERE nm_categoria_economica = ?");
+			PreparedStatement pesqCReceber    = connect.prepareStatement("SELECT * FROM adm_conta_receber WHERE id_conta_receber = ?");
+			PreparedStatement pesqCPagar      = connect.prepareStatement("SELECT * FROM adm_conta_pagar WHERE txt_observacao = ?");
+			PreparedStatement pesqFormaPag    = connect.prepareStatement("SELECT * FROM adm_forma_pagamento WHERE id_forma_pagamento = ?");
+			PreparedStatement pesqConta       = connect.prepareStatement("SELECT * FROM adm_conta_financeira WHERE id_conta = ?");
+			PreparedStatement pesqCheque	  = connect.prepareStatement("SELECT * FROM adm_cheque WHERE cd_conta = ? AND nr_cheque = ?");
+			PreparedStatement pesqMovimento   = connect.prepareStatement("SELECT * FROM adm_movimento_conta WHERE cd_conta = ? AND id_extrato = ?");
+			PreparedStatement pesqUsuario     = connect.prepareStatement("SELECT * FROM seg_usuario WHERE nm_login_im = ?");
+			PreparedStatement pesqTituloCred  = connect.prepareStatement("SELECT * FROM adm_titulo_credito WHERE cd_tipo_documento = ? AND nr_documento = ?");
+			// Origem
+			PreparedStatement pesqMovCategoria = conOrigem.prepareStatement("SELECT A.*, B.nm_categoria FROM adm_movimento_conta_categoria A, adm_categoria_economica B " +
+					                                                        "WHERE A.cd_categoria = B.cd_categoria " +
+					                                                        "  AND cd_conta       = ?" +
+					                                                        "  AND nr_movimento   = ?");
+			PreparedStatement pesqMovPagamento = conOrigem.prepareStatement("SELECT * FROM adm_movimento_conta_pagamento " +
+                    														"WHERE cd_conta       = ?" +
+                    														"  AND nr_movimento   = ?");
+			PreparedStatement pesqMovChequeRec = conOrigem.prepareStatement("SELECT A.*, B.nr_cheque FROM adm_movimento_conta_cheque A, adm_cheque_recebido B " +
+																			"WHERE A.cd_cheque_recebido = B.cd_cheque_recebido " +
+																			"  AND A.cd_conta       = ?" +
+																			"  AND A.nr_movimento   = ?");
+			System.out.println("Importando movimento de conta...");
+			connect.setAutoCommit(false);
+			int l = 0;
+			int cdTipoDocCheque = 0;
+			ResultSet rsTemp = connect.prepareStatement("SELECT * FROM adm_tipo_documento WHERE sg_tipo_documento = \'CH\'").executeQuery();
+			if(rsTemp.next())
+				cdTipoDocCheque = rsTemp.getInt("cd_tipo_documento");
+			//
+			ResultSet rs = conOrigem.prepareStatement("SELECT A.*, B.nr_cheque FROM adm_movimento_conta A " +
+													  "LEFT OUTER JOIN adm_cheque B ON (A.cd_cheque = B.cd_cheque) " +
+					                                  " ORDER BY cd_conta_2").executeQuery();
+			while(rs.next())	{
+				if((l%200==0) && l>0)	{
+					System.out.println(l+" registros gravados.");
+					connect.commit();
+					connect.close();
+					System.gc();
+					connect = Conexao.conectar();
+					pesqCat         = connect.prepareStatement("SELECT * FROM adm_categoria_economica WHERE nm_categoria_economica = ?");
+					pesqCReceber    = connect.prepareStatement("SELECT * FROM adm_conta_receber WHERE id_conta_receber = ?");
+					pesqCPagar      = connect.prepareStatement("SELECT * FROM adm_conta_pagar WHERE txt_observacao = ?");
+					pesqFormaPag    = connect.prepareStatement("SELECT * FROM adm_forma_pagamento WHERE id_forma_pagamento = ?");
+					pesqConta       = connect.prepareStatement("SELECT * FROM adm_conta_financeira WHERE id_conta = ?");
+					pesqCheque	  = connect.prepareStatement("SELECT * FROM adm_cheque WHERE cd_conta = ? AND nr_cheque = ?");
+					pesqMovimento   = connect.prepareStatement("SELECT * FROM adm_movimento_conta WHERE cd_conta = ? AND id_extrato = ?");
+					pesqUsuario     = connect.prepareStatement("SELECT * FROM seg_usuario WHERE nm_login_im = ?");
+					pesqTituloCred  = connect.prepareStatement("SELECT * FROM adm_titulo_credito WHERE cd_tipo_documento = ? AND nr_documento = ?");
+				}
+				l++;
+				// Pesquisando CONTA
+				pesqConta.setString(1, rs.getString("cd_conta"));
+				rsTemp = pesqConta.executeQuery();
+				if(!rsTemp.next())	{
+					System.out.println("Conta não encontrada... cdConta = "+rs.getString("cd_conta"));
+					continue;
+				}
+				int cdConta   = rsTemp.getInt("cd_conta");
+				// Pesquisando MOVIMENTO
+				int cdMovimentoConta = 0;
+				pesqMovimento.setInt(1, cdConta);
+				pesqMovimento.setString(2, rs.getString("nr_movimento"));
+				rsTemp = pesqMovimento.executeQuery();
+				if(!rsTemp.next())	{
+					// Movimento de Origem
+					int cdMovimentoOrigem = 0;
+					int cdContaOrigem     = 0;
+					if(rs.getInt("cd_conta_2")>0)	{
+						// Pesquisando CONTA
+						pesqConta.setString(1, rs.getString("cd_conta_2"));
+						rsTemp = pesqConta.executeQuery();
+						if(!rsTemp.next())	{
+							System.out.println("Conta de origem não encontrada... cdConta = "+rs.getString("cd_conta_2"));
+						}
+						cdContaOrigem = rsTemp.getInt("cd_conta");
+						// pesquisando movimento de origem
+						pesqMovimento.setInt(1, cdContaOrigem);
+						pesqMovimento.setString(2, rs.getString("nr_movimento_2"));
+						if(rsTemp.next())
+							cdMovimentoOrigem = rsTemp.getInt("cd_movimento_conta");
+						else
+							System.out.println("Movimento de origem não encontrado...");
+					}
+					// Usuário
+					int cdUsuario = 0;
+					pesqUsuario.setString(1, rs.getString("cd_usuario"));
+					rsTemp = pesqUsuario.executeQuery();
+					if(!rsTemp.next())	{
+						rsTemp = conOrigem.prepareStatement("SELECT * FROM seg_usuario WHERE cd_usuario = "+rs.getInt("cd_usuario")).executeQuery();
+						rsTemp.next();
+						Usuario usuario = new Usuario(0,0/*cdPessoa*/,0/*cdPerguntaSecreta*/,rsTemp.getString("nm_login"),
+													  rsTemp.getString("nm_senha"),rsTemp.getInt("tp_usuario"),null/*nmRespostaSecreta*/,
+													  1/*stUsuario*/);
+						cdUsuario = UsuarioDAO.insert(usuario, connect);
+					}
+					else
+						cdUsuario = rsTemp.getInt("cd_usuario");
+					// Cheque
+					int cdCheque  = 0;
+					pesqCheque.setInt(1, cdConta);
+					pesqCheque.setString(2, rs.getString("nr_cheque"));
+					rsTemp = pesqCheque.executeQuery();
+					if(rsTemp.next())
+						cdCheque = rsTemp.getInt("cd_cheque");
+					// Forma de Pagamento
+					String[] formaPagamento = new String[] {"Dinheiro","Cheque","Cartão de Crédito"};
+					int cdFormaPagamento = 0;
+					pesqFormaPag.setString(1, formaPagamento[rs.getInt("tp_pagamento")]);
+					rsTemp = pesqFormaPag.executeQuery();
+					if(rsTemp.next())
+						cdFormaPagamento = rsTemp.getInt("cd_forma_pagamento");
+					else	{
+						FormaPagamento formaPag = new FormaPagamento(0,formaPagamento[rs.getInt("tp_pagamento")],null/*sgFormaPagamento*/,
+																	 null/*idFormaPagamento*/,FormaPagamentoServices.MOEDA_CORRENTE,
+																	 1/*lgTransferencia*/);
+						cdFormaPagamento = FormaPagamentoDAO.insert(formaPag, connect);
+					}
+					// Movimento
+					MovimentoConta movConta = new MovimentoConta(0,cdConta,cdContaOrigem,cdMovimentoOrigem,cdUsuario,cdCheque,0/*cdViagem*/,
+																 Util.convTimestampToCalendar(rs.getTimestamp("dt_movimento")),
+																 rs.getFloat("vl_movimento"),rs.getString("nr_documento"),
+																 rs.getInt("tp_movimento"),rs.getInt("tp_origem"),
+																 rs.getInt("st_movimento"),rs.getString("ds_historico"),
+																 Util.convTimestampToCalendar(rs.getTimestamp("dt_compensacao")),
+																 rs.getString("nr_movimento")/*idExtrato*/,cdFormaPagamento,0/*cdFechamento*/,0/*cdTurno*/);
+					cdMovimentoConta = MovimentoContaDAO.insert(movConta, connect);
+					if(cdMovimentoConta <= 0)
+						System.out.println("Erro ao tentar incluir conta a receber["+cdMovimentoConta+"] "+movConta);
+				}
+				else	{
+					cdMovimentoConta = rsTemp.getInt("cd_movimento_conta");
+					continue;
+				}
+				if(cdMovimentoConta <= 0)
+					continue;
+				/*
+				 * PAGAMENTOS E RECEBIMENTOS
+				 */ 
+				int cdContaReceber = 0;
+				int cdContaPagar   = 0;
+				pesqMovPagamento.setInt(1, rs.getInt("cd_conta"));
+				pesqMovPagamento.setInt(2, rs.getInt("nr_movimento"));
+				ResultSet rsPagamento = pesqMovPagamento.executeQuery();
+				while(rsPagamento.next())	{
+					cdContaReceber = 0;
+					cdContaPagar   = 0;
+					// Conta Pagar
+					if(rsPagamento.getInt("cd_conta_pagar")>0){
+						pesqCPagar.setString(1, rsPagamento.getString("cd_conta_pagar"));
+						rsTemp = pesqCPagar.executeQuery();
+						if(rsTemp.next())	{
+							cdContaPagar = rsTemp.getInt("cd_conta_pagar");
+							MovimentoContaPagar pag = new MovimentoContaPagar(cdConta,cdMovimentoConta,cdContaPagar,
+																			  rsPagamento.getFloat("vl_pago"),
+																			  rsPagamento.getFloat("vl_juros_mora"),
+																			  rsPagamento.getFloat("vl_multa_mora"),
+																			  rsPagamento.getFloat("vl_desconto"));
+							MovimentoContaPagarDAO.insert(pag, connect);
+						}
+						else
+							System.out.println("Conta a pagar não localizada..."+rsPagamento.getString("cd_conta_pagar"));
+					}
+					// Conta Receber
+					if(rsPagamento.getInt("cd_conta_receber")>0){
+						pesqCReceber.setString(1, rsPagamento.getString("cd_conta_receber"));
+						rsTemp = pesqCReceber.executeQuery();
+						if(rsTemp.next())	{
+							cdContaReceber = rsTemp.getInt("cd_conta_receber");
+							MovimentoContaReceber rec = new MovimentoContaReceber(cdConta,cdMovimentoConta,cdContaReceber,
+																				  rsPagamento.getFloat("vl_pago"),
+																				  rsPagamento.getFloat("vl_juros_mora"),
+																				  rsPagamento.getFloat("vl_multa_mora"),
+																				  rsPagamento.getFloat("vl_desconto"),
+																				  0/*vlTarifa*/,0,0);
+							MovimentoContaReceberDAO.insert(rec, connect);
+						}
+						else
+							System.out.println("Conta a receber não localizada..."+rsPagamento.getString("cd_conta_receber"));
+					}
+				}
+				/*
+				 * CATEGORIAS
+				 */ 
+				pesqMovCategoria.setInt(1, rs.getInt("cd_conta"));
+				pesqMovCategoria.setInt(2, rs.getInt("nr_movimento"));
+				ResultSet rsCat = pesqMovCategoria.executeQuery();
+				while(rsCat.next())	{
+					int cdCategoria = 0;
+					pesqCat.setString(1, rsCat.getString("nm_categoria"));
+					rsTemp = pesqCat.executeQuery();
+					if(rsTemp.next())	{
+						cdCategoria = rsTemp.getInt("cd_categoria_economica");
+						MovimentoContaCategoria cat = new MovimentoContaCategoria(cdConta,cdMovimentoConta,cdCategoria,
+																				  rsCat.getFloat("vl_montante"),1 /*cdMovimentoContaCategoria*/,
+																				  cdContaPagar,cdContaReceber,rs.getInt("tp_movimento"), 0/*cdCentroCusto*/);
+						MovimentoContaCategoriaDAO.insert(cat, connect);
+					}
+					else
+						System.out.println("Categoria não localizada..."+rsCat.getString("nm_categoria"));
+				}
+				/*
+				 * CHEQUES RECEBIDOS -> TÍTULOS DE CRÉDITO
+				 */ 
+				pesqMovChequeRec.setInt(1, rs.getInt("cd_conta"));
+				pesqMovChequeRec.setInt(2, rs.getInt("nr_movimento"));
+				ResultSet rsMovChequeRec = pesqMovChequeRec.executeQuery();
+				while(rsMovChequeRec.next())	{
+					pesqTituloCred.setInt(1, cdTipoDocCheque);
+					pesqTituloCred.setString(2, rsMovChequeRec.getString("nr_cheque"));
+					rsTemp = pesqTituloCred.executeQuery();
+					if(rsTemp.next())	{
+						int cdTituloCredito = rsTemp.getInt("cd_titulo_credito");
+						MovimentoContaTituloCredito movTitCred = new MovimentoContaTituloCredito(cdTituloCredito,cdMovimentoConta,cdConta);
+						MovimentoContaTituloCreditoDAO.insert(movTitCred, connect);
+					}
+					else
+						System.out.println("Cheque recebido não localizado..."+rsMovChequeRec.getString("nr_documento"));
+				}
+			}
+			connect.commit();
+			System.out.println("Importacao dos movimentos de conta concluida!");
+			return new sol.util.Result(1);
+		}
+		catch(Exception e){
+			e.printStackTrace(System.out);
+			return new sol.util.Result(-1, "Erro ao tentar importar movimentos de conta!", e);
+		}
+		finally{
+			Conexao.desconectar(connect);
+			Conexao.desconectar(conOrigem);
+		}
+	}
+
+	public static int getCdEmpresa(int cdOldEmpresa)	{
+		Connection connect   = Conexao.conectar();
+		Connection conOrigem = conectar();
+		try {
+			PreparedStatement pesqEmpresa = connect.prepareStatement("SELECT * FROM grl_empresa");
+			ResultSet rs = pesqEmpresa.executeQuery();
+			if(rs.next())
+				return rs.getInt("cd_empresa");
+			return -1;
+		}
+		catch(Exception e){
+			e.printStackTrace(System.out);
+			return -1;
+		}
+		finally{
+			Conexao.desconectar(connect);
+			Conexao.desconectar(conOrigem);
+		}
+	}
+
+	public static sol.util.Result initAdm()	{
+		// Geral
+		importGrlBancos(); // Incluir a atualiza
+		importGrlCidades();
+		importGrlPessoa();
+		// Administrativos
+		importAdmContaECarteiras();
+		importAdmCheques();
+		importAdmChequesRecebidos();
+		importAdmCategoriaEconomica();
+		importAdmContrato();
+		importAdmContaPagar();
+		importAdmContaReceber();
+		importAdmMovimentoConta();
+		return new sol.util.Result(1);
+	}
+
+	public static sol.util.Result importTabelasDoJuridico(int inicio, int fim)	{
+		Connection connect   = Conexao.conectar();
+		Connection conOrigem = conectar();
+		try {
+			fim = fim<=0 ? 15 : fim;
+			/***********************
+			 * Importando Área do Direito
+			 ***********************/
+			String[] nmTabela  = new String[] {"prc_area_direito","prc_tribunal","prc_juizo","prc_grupo_processo","prc_orgao","prc_tipo_processo","prc_tipo_andamento",
+					                           "prc_tipo_situacao","prc_tipo_pedido","prc_tipo_objeto","prc_comarca","prc_orgao_judicial","prc_tipo_prazo",
+					                           "prc_andamento_prazo","prc_cidade_orgao","prc_prazo_secundario","prc_tribunal_cidade"};
+			String[] nmIdBusca = new String[] {"cd_area_direito","cd_tribunal","cd_juizo","cd_grupo_processo","cd_orgao","cd_tipo_processo","cd_tipo_andamento",
+					                           "cd_tipo_situacao","cd_tipo_pedido","cd_tipo_objeto","cd_comarca","cd_orgao_judicial","cd_tipo_prazo",
+					                           "cd_andamento_prazo","cd_cidade","cd_prazo_secundario","cd_cidade"};
+			
+			for(int i = inicio; i<=fim; i++)	{
+				PreparedStatement pesqRegistroBy = connect.prepareStatement("SELECT * FROM "+nmTabela[i]+" WHERE "+nmIdBusca[i]+" = ?");
+				System.out.println("Importando "+nmTabela[i]+"...");
+				//
+				String tableName = nmTabela[i];
+				if (i==9)
+					tableName = "prc_tipo_objeto";
+				ResultSet rsTabela = conOrigem.prepareStatement("SELECT * FROM "+tableName).executeQuery();
+				while(rsTabela.next())	{
+					String nmField = nmIdBusca[i];
+					if (i==9)
+						nmField = "cd_tipo_objeto";
+					ResultSet rsTemp = null;
+					if(i==11)	{
+						rsTemp = connect.prepareStatement("SELECT * FROM prc_orgao_judicial "+
+								                          "WHERE cd_comarca = "+rsTabela.getInt("cd_comarca")+
+								                          " AND cd_orgao_judicial = "+rsTabela.getInt("cd_orgao_judicial")).executeQuery();
+					}
+					else if(i==14)	{
+						rsTemp = connect.prepareStatement("SELECT * FROM prc_cidade_orgao " +
+														  "WHERE cd_orgao  = "+rsTabela.getInt("cd_orgao")+
+														  "  AND cd_cidade = "+rsTabela.getInt("cd_cidade")).executeQuery();
+					}
+					else if(i==16)	{
+						rsTemp = connect.prepareStatement("SELECT * FROM prc_tribunal_cidade " +
+														  "WHERE cd_tribunal = "+rsTabela.getInt("cd_tribunal")+
+														  "  AND cd_cidade   = "+rsTabela.getInt("cd_cidade")).executeQuery();
+					}
+					else	{
+						pesqRegistroBy.setInt(1, rsTabela.getInt(nmField));
+						rsTemp = pesqRegistroBy.executeQuery();
+					}
+					if(!rsTemp.next())	{
+						switch(i)	{
+							case 0: // Área do Direito
+								AreaDireito areaDireito = new AreaDireito(rsTabela.getInt("cd_area_direito"), rsTabela.getString("nm_area_direito"),rsTabela.getString("id_area_direito"));
+								AreaDireitoDAO.insert(areaDireito, connect);
+								break;
+							case 1: // Tribunal
+								Tribunal tribunal = new Tribunal(rsTabela.getInt("cd_tribunal"), rsTabela.getString("nm_tribunal"), rsTabela.getInt("tp_segmento"), rsTabela.getString("id_tribunal"), rsTabela.getString("sg_tribunal"));
+								TribunalDAO.insert(tribunal, connect);
+								break;
+							case 2: // Juízo
+								Juizo juizo = new Juizo(rsTabela.getInt("cd_juizo"), rsTabela.getString("nm_juizo"), rsTabela.getInt("tp_juizo"), rsTabela.getString("id_juizo"), null, rsTabela.getString("sg_juizo"), 0);
+								JuizoDAO.insert(juizo, connect);
+								break;
+							case 3: // Grupo
+								GrupoProcesso grupo = new GrupoProcesso(rsTabela.getInt("cd_grupo_processo"), rsTabela.getString("nm_grupo_processo"), rsTabela.getString("id_grupo_processo"), null, 0, 1);
+								int cdGrupoProcesso = GrupoProcessoDAO.insert(grupo, connect);
+								connect.prepareStatement("UPDATE prc_grupo_processo SET nm_email = \'"+rsTabela.getString("nm_email")+"\' WHERE cd_grupo_processo = "+cdGrupoProcesso).executeUpdate();
+								break;
+							case 4: // Órgão
+								Orgao orgao = new Orgao(rsTabela.getInt("cd_orgao"), 0, rsTabela.getString("nm_orgao"), rsTabela.getString("id_orgao"), 0, 0, 0);
+								OrgaoDAO.insert(orgao, connect);
+								break;
+							case 5: // Tipo de Processo
+								com.tivic.manager.prc.TipoProcesso tipoProcesso = new com.tivic.manager.prc.TipoProcesso(rsTabela.getInt("cd_tipo_processo"),rsTabela.getInt("cd_area_direito"),
+										                                                                   rsTabela.getString("nm_tipo_processo"), rsTabela.getString("nm_parte"),
+										                                                                   rsTabela.getInt("lg_possui_contraparte"), rsTabela.getString("nm_contra_parte"),
+										                                                                   rsTabela.getString("nm_outro_interessado"), rsTabela.getInt("lg_segredo_justica"),
+										                                                                   rsTabela.getInt("tp_site_busca"));
+								com.tivic.manager.prc.TipoProcessoDAO.insert(tipoProcesso, connect);
+								break;
+							case 6: // Tipo de Andamento
+								TipoAndamento tipoAndamento = new TipoAndamento(rsTabela.getInt("cd_tipo_andamento"), rsTabela.getString("nm_tipo_andamento"), rsTabela.getString("id_tipo_andamento"), 0, 0.0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+								TipoAndamentoDAO.insert(tipoAndamento, connect);
+								break;
+							case 7: // Tipo de Situação
+								TipoSituacao tipoSituacao = new TipoSituacao(rsTabela.getInt("cd_tipo_situacao"),rsTabela.getString("nm_tipo_situacao"), rsTabela.getString("id_tipo_situacao"), rsTabela.getInt("nr_ordem"), rsTabela.getInt("lg_retrocede"));
+								TipoSituacaoDAO.insert(tipoSituacao, connect);
+								break;
+							case 8: // Tipo de Pedido
+								TipoPedido tipoPedido = new TipoPedido(rsTabela.getInt("cd_tipo_pedido"), rsTabela.getString("nm_tipo_pedido"), rsTabela.getString("id_tipo_pedido"));
+								TipoPedidoDAO.insert(tipoPedido, connect);
+								break;
+							case 9: // Objeto
+								ObjetoAcao objetoAcao = new ObjetoAcao(rsTabela.getInt("cd_tipo_objeto"), rsTabela.getString("nm_tipo_objeto"), rsTabela.getString("cd_tipo_objeto"));
+								ObjetoAcaoDAO.insert(objetoAcao, connect);
+								break;
+							case 12: // Tipo de Prazo
+								PreparedStatement pstmt = connect.prepareStatement("INSERT INTO PRC_TIPO_PRAZO (CD_TIPO_PRAZO,NM_TIPO_PRAZO) VALUES (?, ?)");
+								pstmt.setInt(1, rsTabela.getInt("cd_tipo_prazo"));
+								pstmt.setString(2, rsTabela.getString("nm_tipo_prazo"));
+								pstmt.executeUpdate();
+								break;
+							case 13: // Andamento - Prazo
+								pstmt = connect.prepareStatement("INSERT INTO PRC_ANDAMENTO_PRAZO (CD_ANDAMENTO_PRAZO,CD_TIPO_ANDAMENTO,"+
+		                                                         "CD_TIPO_PROCESSO,CD_TIPO_PRAZO,QT_DIAS,ST_LIMINAR) VALUES (?, ?, ?, ?, ?, ?)");
+								pstmt.setInt(1, rsTabela.getInt("cd_andamento_prazo"));
+								pstmt.setInt(2, rsTabela.getInt("cd_tipo_andamento"));
+								if(rsTabela.getInt("cd_tipo_processo")==0)
+									pstmt.setNull(3, Types.INTEGER);
+								else
+									pstmt.setInt(3,rsTabela.getInt("cd_tipo_processo"));
+								pstmt.setInt(4,rsTabela.getInt("cd_tipo_prazo"));
+								pstmt.setInt(5,rsTabela.getInt("qt_dias"));
+								pstmt.setInt(6,rsTabela.getInt("st_liminar"));
+								pstmt.executeUpdate();
+								break;
+							case 14: // Cidade - Órgão
+								pstmt = connect.prepareStatement("INSERT INTO PRC_CIDADE_ORGAO (CD_ORGAO,CD_CIDADE,QT_DISTANCIA) VALUES (?, ?, ?)");
+								pstmt.setInt(1,rsTabela.getInt("cd_orgao"));
+								pstmt.setInt(2,rsTabela.getInt("cd_cidade"));
+								pstmt.setFloat(3,rsTabela.getFloat("qt_distancia"));
+								pstmt.executeUpdate();
+								break;
+							case 15: // Prazo Secundário
+								pstmt = connect.prepareStatement("INSERT INTO PRC_PRAZO_SECUNDARIO (CD_PRAZO_SECUNDARIO,CD_TIPO_PRAZO,CD_TIPO_PROCESSO,"+
+		                                  						 "QT_DIAS,ST_LIMINAR) VALUES (?, ?, ?, ?, ?)");
+								pstmt.setInt(1, rsTabela.getInt("cd_prazo_secundario"));
+								pstmt.setInt(2, rsTabela.getInt("cd_tipo_prazo"));
+								if(rsTabela.getInt("cd_tipo_processo")==0)
+									pstmt.setNull(3, Types.INTEGER);
+								else
+									pstmt.setInt(3,rsTabela.getInt("cd_tipo_processo"));
+								pstmt.setInt(4,rsTabela.getInt("qt_dias"));
+								pstmt.setInt(5,rsTabela.getInt("st_liminar"));
+								pstmt.executeUpdate();
+								break;
+							case 16: // Tribunal - Cidade
+								pstmt = connect.prepareStatement("INSERT INTO PRC_TRIBUNAL_CIDADE (CD_TRIBUNAL,CD_CIDADE,ID_UNIDADE) VALUES (?, ?, ?)");
+								pstmt.setInt(1,rsTabela.getInt("cd_tribunal"));
+								pstmt.setInt(2,rsTabela.getInt("cd_cidade"));
+								pstmt.setString(3,rsTabela.getString("id_unidade"));
+								pstmt.executeUpdate();
+								break;
+						}
+					}
+				}
+			}
+			System.out.println("Importação de prcTabelas concluída!");
+			return new sol.util.Result(1);
+		}
+		catch(Exception e){
+			e.printStackTrace(System.out);
+			return new sol.util.Result(-1, "Erro ao tentar importar prcTabelas!", e);
+		}
+		finally{
+			Conexao.desconectar(connect);
+			Conexao.desconectar(conOrigem);
+		}
+	}
+
+	public static sol.util.Result importPrcProcessos()	{
+		Connection connect   = Conexao.conectar();
+		Connection conOrigem = conectar();
+		try {
+			/***********************
+			 * Importando Processos
+			 ***********************/
+			PreparedStatement pesqProcesso = connect.prepareStatement("SELECT * FROM prc_processo WHERE cd_processo = ?");
+			System.out.println("Importando processos...");
+			ResultSet rsCount = connect.prepareStatement("SELECT count(*) FROM prc_processo").executeQuery();
+			boolean findProcesso = rsCount.next() && rsCount.getInt(1) > 0; 
+			//
+			ResultSet rs = conOrigem.prepareStatement("SELECT * FROM prc_processo").executeQuery();
+			int i = 0;
+			while(rs.next())	{
+				pesqProcesso.setInt(1, rs.getInt("cd_processo"));
+				ResultSet rsTemp = findProcesso ? pesqProcesso.executeQuery() : null;
+				if(rsTemp==null || !rsTemp.next())	{
+					com.tivic.manager.prc.Processo processo = new com.tivic.manager.prc.Processo(rs.getInt("CD_PROCESSO"),rs.getInt("CD_TIPO_PROCESSO"),
+							rs.getInt("CD_ORGAO_JUDICIAL"),rs.getInt("CD_COMARCA"),rs.getInt("CD_TIPO_SITUACAO"),
+							rs.getInt("CD_ADVOGADO"),rs.getInt("CD_ADVOGADO_CONTRARIO"),rs.getInt("CD_ORGAO"),
+							rs.getInt("CD_GRUPO_PROCESSO"),rs.getInt("LG_CLIENTE_AUTOR"),
+							rs.getString("DS_OBJETO"),rs.getString("DS_OBSERVACAO"),
+							(rs.getTimestamp("DT_DISTRIBUICAO")==null)?null:Util.longToCalendar(rs.getTimestamp("DT_DISTRIBUICAO").getTime()),
+							(rs.getTimestamp("DT_AUTUACAO")==null)?null:Util.longToCalendar(rs.getTimestamp("DT_AUTUACAO").getTime()),
+							rs.getString("DS_SENTENCA"),
+							(rs.getTimestamp("DT_SENTENCA")==null)?null:Util.longToCalendar(rs.getTimestamp("DT_SENTENCA").getTime()),
+							rs.getInt("ST_PROCESSO"),
+							(rs.getTimestamp("DT_SITUACAO")==null)?null:Util.longToCalendar(rs.getTimestamp("DT_SITUACAO").getTime()),
+							rs.getDouble("VL_PROCESSO"),rs.getDouble("VL_ACORDO"),rs.getInt("LG_TAXA_PAPEL"),
+							rs.getInt("LG_TAXA_PAGA"),rs.getString("NR_ANTIGO"),
+							(rs.getTimestamp("DT_ULTIMO_ANDAMENTO")==null)?null:Util.longToCalendar(rs.getTimestamp("DT_ULTIMO_ANDAMENTO").getTime()),
+							rs.getInt("QT_MAX_DIAS"),rs.getDouble("VL_SENTENCA"),rs.getInt("TP_INSTANCIA"),
+							(rs.getTimestamp("DT_ATUALIZACAO")==null)?null:Util.longToCalendar(rs.getTimestamp("DT_ATUALIZACAO").getTime()),
+							rs.getInt("TP_PERDA"),rs.getInt("CD_ADVOGADO_TITULAR"),rs.getInt("CD_OFICIAL_JUSTICA"),
+							rs.getInt("CD_TIPO_PEDIDO"),rs.getInt("CD_TIPO_OBJETO"),rs.getInt("CD_RESPONSAVEL_ARQUIVO"),
+							(rs.getTimestamp("DT_CADASTRO")==null)?null:Util.longToCalendar(rs.getTimestamp("DT_CADASTRO").getTime()),
+							rs.getInt("TP_SENTENCA"),rs.getString("NR_JUIZO"),
+							rs.getInt("CD_CIDADE"),rs.getInt("QT_MEDIA_DIAS"),
+							(rs.getTimestamp("DT_PRAZO")==null)?null:Util.longToCalendar(rs.getTimestamp("DT_PRAZO").getTime()),
+							rs.getInt("LG_PRAZO"),rs.getString("NM_CONTEINER1"),rs.getString("NM_CONTEINER2"),rs.getString("NM_CONTEINER3"),
+							rs.getInt("ST_LIMINAR"),rs.getInt("ST_ARQUIVO"),
+							(rs.getTimestamp("DT_REPASSE")==null)?null:Util.longToCalendar(rs.getTimestamp("DT_REPASSE").getTime()),
+							rs.getInt("CD_CENTRO_CUSTO"),
+							null,
+							(rs.getTimestamp("DT_ATUALIZACAO_EDI")==null)?null:Util.longToCalendar(rs.getTimestamp("DT_ATUALIZACAO_EDI").getTime()),
+							rs.getInt("ST_ATUALIZACAO_EDI"),
+							rs.getInt("CD_JUIZO"),
+							rs.getInt("CD_TRIBUNAL"),
+							rs.getString("NR_PROCESSO"),
+							rs.getInt("CD_USUARIO_CADASTRO"),
+							rs.getInt("TP_AUTOS"), 
+							null, 0, rs.getInt("CD_PROCESSO_PRINCIPAL"),
+							rs.getString("ID_PROCESSO"),
+							rs.getInt("CD_JUIZ"),
+							rs.getInt("CD_SISTEMA_PROCESSO"),
+							rs.getInt("TP_RITO"),
+							rs.getInt("TP_REPASSE"),
+							(rs.getTimestamp("DT_INATIVACAO")==null)?null:Util.longToCalendar(rs.getTimestamp("DT_INATIVACAO").getTime()), 
+							rs.getInt("LG_IMPORTANTE"));
+					com.tivic.manager.prc.ProcessoDAO.insert(processo, connect);
+				}
+				if(rsTemp!=null)
+					rsTemp.close();
+				i++;
+				if (i%100==0 && i>1) {
+					System.out.println(i+" registros importados");
+				}
+			}
+			System.out.println("Importação de processos concluída!");
+			return new sol.util.Result(1);
+		}
+		catch(Exception e){
+			e.printStackTrace(System.out);
+			return new sol.util.Result(-1, "Erro ao tentar importar processos!", e);
+		}
+		finally{
+			Conexao.desconectar(connect);
+			Conexao.desconectar(conOrigem);
+		}
+	}
+	
+	/**
+	 * Método que faz importação de clientes a partir de um csv
+	 * Suporte #1290
+	 */
+	public static sol.util.Result importClienteFromCsvIntima(){
+		int cdEmpresa = 2;
+		String nmArquivo = "C:\\TIVIC\\CADCL63.csv";
+		return importClienteFromCsvEspecifico(nmArquivo, cdEmpresa);
+	}
+	
+	/**
+	 * Método que faz importação de clientes a partir de um csv
+	 * Suporte #1290
+	 */
+	public static sol.util.Result importClienteFromCsvVulcao(){
+		int cdEmpresa = 3041;
+		String nmArquivo = "C:\\TIVIC\\CADCL61.csv";
+		return importClienteFromCsvEspecifico(nmArquivo, cdEmpresa);
+	}
+	
+	/**
+	 * Método que faz importação de clientes a partir de um csv
+	 * Suporte #1290
+	 */
+	public static sol.util.Result importClienteFromCsvNacionalModas(){
+		int cdEmpresa = 3730;
+		String nmArquivo = "C:\\TIVIC\\CADCL62.csv";
+		return importClienteFromCsvEspecifico(nmArquivo, cdEmpresa);
+	}
+	
+	/**
+	 * Método que faz importação de clientes a partir de um csv
+	 * Suporte #1290
+	 */
+	public static sol.util.Result importClienteFromCsvIntimaKids(){
+		int cdEmpresa = 2651;
+		String nmArquivo = "C:\\TIVIC\\CADCL64.csv";
+		return importClienteFromCsvEspecifico(nmArquivo, cdEmpresa);
+	}
+	
+	/**
+	 * Método que faz importação de clientes a partir de um csv
+	 * Suporte #1290
+	 */
+	public static sol.util.Result importClienteFromCsvNacional(){
+		int cdEmpresa = 1890;
+		String nmArquivo = "C:\\TIVIC\\CADCL60.csv";
+		return importClienteFromCsvEspecifico(nmArquivo, cdEmpresa);
+	}
+	
+	/**
+	 * Importa os clientes a partir de um csv, específico para intima, nacional, vulcão e planeta kids, 
+	 * usa a mesma lógica que o método {@link #importClienteFromCsv(String, int)}, mas é transacional e um pouco mais enxuto
+	 * @param nmArquivo
+	 * @param cdEmpresa
+	 * @return
+	 */
+	public static sol.util.Result importClienteFromCsvEspecifico(String nmArquivo, int cdEmpresa) {
+		Connection connect = Conexao.conectar();
+		RandomAccessFile raf = null;
+		String tpPessoa, idCliente, nrRg, nmCliente, nmLogradouro, nmBairro, nmCidade, sgUf, nmSexo, nrCep, nrCpf, nrTelefone, dtNasc, nmPai, nmMae, nmNatural, vlLimite, nmRefCom;
+		int cdVinculo = ParametroServices.getValorOfParametroAsInteger("CD_VINCULO_CLIENTE", 0); 
+		int count = 0;
+		
+		try {
+			connect.setAutoCommit(false);
+			
+			
+			File fileDir = new File(nmArquivo);
+			 
+			BufferedReader in = new BufferedReader(new InputStreamReader(new FileInputStream(fileDir), "UTF8"));
+			//raf = new RandomAccessFile(nmArquivo, "rw");
+			System.out.println(nmArquivo+" carregado...");
+			String line = "";
+			ResultSetMap rsTemp = null;
+			
+			ResultSetMap rsmClientes = new ResultSetMap(connect.prepareStatement(
+														"SELECT A.CD_PESSOA, A.NM_PESSOA"+
+														" FROM GRL_PESSOA A "+
+														" join grl_pessoa_fisica b on ( a.cd_pessoa = b.cd_pessoa ) "
+															).executeQuery());
+			rsmClientes.beforeFirst();
+			int i = 1;
+			while (rsmClientes.next()) {
+				String input = rsmClientes.getString("NM_PESSOA");  
+				if( input != null && input.length() > 0 ){
+						input = Normalizer.normalize(input, Normalizer.Form.NFD);  
+						input = input.replaceAll("[^\\p{ASCII}]", "").replace("'", "").toUpperCase();  
+						System.out.println(input);
+						connect.prepareStatement(" UPDATE GRL_PESSOA SET NM_PESSOA = '"+input+"' where cd_pessoa = "+rsmClientes.getInt("CD_PESSOA")).executeUpdate();
+				}
+				System.out.println("Retirando acento :"+i++);
+			}
+			
+			String sqlCpf = "SELECT * FROM GRL_PESSOA A JOIN GRL_PESSOA_FISICA B ON ( A.CD_PESSOA = B.CD_PESSOA )"+
+							" WHERE B.NR_CPF = ?";
+			String sql = "SELECT * FROM grl_pessoa WHERE nm_pessoa = ?";
+			PreparedStatement pesqPessoaCpf;
+			PreparedStatement pesqPessoa;
+			PreparedStatement pesqCliente		= connect.prepareStatement("SELECT * FROM adm_cliente WHERE cd_pessoa = ?");
+			
+			
+			PessoaEndereco endereco = new PessoaEndereco();
+			int cdPessoa = 0;
+			int code = 0;
+			int lineNum = 1;
+			int atualizados = 0;
+			while((line = in.readLine()) != null) {
+				StringTokenizer tokens = new StringTokenizer(line, ";", false);
+				
+				tpPessoa		= tokens.nextToken().trim();//F - Física J - jurídica
+				idCliente		= tokens.nextToken().trim();
+				nrRg      		= tokens.nextToken().trim();
+				nmCliente		= tokens.nextToken();
+				nmLogradouro	= tokens.nextToken().trim();
+				nmBairro		= tokens.nextToken().toUpperCase().trim();
+				nmCidade		= tokens.nextToken().toUpperCase().trim();
+				sgUf			= tokens.nextToken().toUpperCase().trim();
+				nrCep			= tokens.nextToken().trim(); 
+				nrCpf			= tokens.nextToken().trim();
+				//nmSexo			= tokens.nextToken().toUpperCase();
+				nrTelefone		= tokens.nextToken().trim();
+				dtNasc			= tokens.nextToken().trim();
+				nmPai			= tokens.nextToken().trim();
+				nmMae			= tokens.nextToken().trim();
+				nmNatural		= tokens.nextToken().trim();
+				vlLimite		= tokens.nextToken().trim();
+				//nmRefCom		= tokens.nextToken();
+				
+				System.out.println(lineNum);
+				if( (lineNum%100)==0 )
+					System.out.println(lineNum);
+				lineNum++;
+				if( nrCpf.length() < 5 )
+					System.out.println("cpf inexistente "+nmCliente);
+				
+				//Preenche o endereço
+				if( false )
+					endereco = preencheEndereco(nmCidade, nmBairro, nmLogradouro, nrTelefone, nrCep, sgUf,connect);					
+				
+				// Verifica se o cliente já está cadastrado
+				pesqPessoaCpf = connect.prepareStatement( sqlCpf );
+				pesqPessoaCpf.setString(1, nrCpf);
+				ResultSetMap rsCpf = new ResultSetMap(pesqPessoaCpf.executeQuery());
+				rsCpf.beforeFirst();
+				
+				pesqPessoa = connect.prepareStatement( sql );
+				pesqPessoa.setString(1, nmCliente);
+				rsTemp = null;
+				rsTemp = new ResultSetMap(pesqPessoa.executeQuery());
+				Pessoa pessoa = new Pessoa();
+				PessoaFisica pessoaFisica = new PessoaFisica();
+				
+				if( rsTemp.getLines().size() > 1 ){
+					System.out.println("Cliente com provavel duplicação : "+nmCliente);
+				}
+				rsTemp.beforeFirst();
+				if(rsTemp.next() || ( nrCpf.length() > 5 && rsCpf.next() )  ) {					
+					
+					if( rsTemp.getLines().size() > 0 )
+						cdPessoa = rsTemp.getInt("cd_pessoa");
+					else if( rsCpf.getLines().size() > 0 ){
+						cdPessoa = rsCpf.getInt("cd_pessoa");
+						System.out.println("Atualiza nome do cliente");
+						System.out.println(nmCliente+" para "+rsCpf.getString("NM_PESSOA"));
+					}
+					
+					pessoa = PessoaDAO.get(cdPessoa);
+					
+					if( pessoa != null && tpPessoa.equals("F") ){
+						pessoaFisica = PessoaFisicaDAO.get(cdPessoa);	
+						if( pessoaFisica == null ){
+							pessoaFisica = new PessoaFisica();
+							pessoaFisica.setCdPessoa(cdPessoa);
+						}
+							pessoaFisica.setNrCpf( (nrCpf.length() > 5)?nrCpf:String.valueOf("000100"+lineNum));
+							pessoaFisica.setNrRg(nrRg);
+							pessoaFisica.setNmMae(nmMae);
+							pessoaFisica.setNmPai(nmPai);
+							
+							PessoaEndereco endPessoa = PessoaEnderecoServices.getEnderecoPrincipal(cdPessoa);
+							
+							PreparedStatement pesqBairro = connect.prepareStatement("SELECT * FROM grl_bairro WHERE nm_bairro = ?");
+							pesqBairro.setString(1, nmBairro);
+							ResultSet rsTempBairro = pesqBairro.executeQuery();
+							int cdBairro = 0;
+							if(rsTempBairro.next())
+								cdBairro = rsTempBairro.getInt("cd_bairro");
+							
+							if( endPessoa == null ){
+								
+								Logradouro logradouro = new Logradouro(0, 0, 1/*cdCidade VCA*/, 1, nmLogradouro, "");
+								int cdLogradouro = LogradouroDAO.insert(logradouro, connect);
+								
+								endPessoa = new PessoaEndereco( 0/*cdEndereco*/, cdPessoa/*cdPessoa*/, ""/*dsEndereco*/, 1/*cdTipoLogradouro*/,
+													1/*cdTipoEndereco*/, cdLogradouro/*cdLogradouro*/, cdBairro/*cdBairro*/, 1/*cdCidade*/, nmLogradouro/*nmLogradouro*/,
+													nmBairro/*nmBairro*/, nrCep/*nrCep*/, ""/*nrEndereco*/, ""/*nmComplemento*/,
+													nrTelefone/*nrTelefone*/, ""/*nmPontoReferencia*/,
+													0/*lgCobranca*/, 1/*lgPrincipal*/);
+								endPessoa.setCdPessoa(cdPessoa);
+								
+							}else{
+								endPessoa.setLgPrincipal(1);
+								endPessoa.setCdTipoLogradouro(1);
+								endPessoa.setCdTipoEndereco(1);
+								endPessoa.setCdBairro(cdBairro);
+								endPessoa.setCdCidade(1);
+								endPessoa.setNmLogradouro(nmLogradouro);
+								endPessoa.setNmBairro(nmBairro);
+								endPessoa.setNrCep(nrCep);
+								endPessoa.setNrTelefone(nrTelefone);
+							}
+							Result end = PessoaEnderecoServices.save(endPessoa, connect);
+							
+							//System.out.println("atualizar :"+nmCliente);
+							int update = 0;
+							if( PessoaFisicaDAO.get(cdPessoa) == null ){
+								update = connect.prepareStatement("INSERT INTO GRL_PESSOA_FISICA (CD_PESSOA, NR_CPF, NR_RG, NM_MAE, NM_PAI) "+
+										"  VALUES ( "+pessoaFisica.getCdPessoa()+","+
+										"  '"+pessoaFisica.getNrCpf()+"',"+
+										"  '"+pessoaFisica.getNrRg()+"',"+
+										"  '"+pessoaFisica.getNmMae()+"',"+
+										"  '"+pessoaFisica.getNmPai()+"' )").executeUpdate();
+								
+							}else{
+								update = PessoaFisicaDAO.update(pessoaFisica, connect);
+							}
+							if(update<=0 || end.getCode()<=0 ){
+								connect.rollback();
+								System.out.println("Erro ao incluir pessoa física");
+								return new sol.util.Result(cdPessoa, "Erro atualizar cpf");
+							}
+							atualizados++;
+							/*iNCLUI CLIENTE NA NOVA EMPRESA*/
+							if(  ClienteDAO.get(cdEmpresa, cdPessoa) == null ){
+								
+								Cliente cliente = new Cliente(cdEmpresa/*cdEmpresa*/, cdPessoa/*cdPessoa*/, 0/*lgConvenio*/, 1/*lgEcommerce*/, 0/*lgLimiteCredito*/,
+										0/*lgAgenda*/, 0/*nrDiasCarenciaFatura*/, (vlLimite == null || vlLimite.equalsIgnoreCase("null") || vlLimite.equals("")  ? 0 : Float.parseFloat(vlLimite.replace(",", ".")))/*vlLimiteCredito*/, 0/*vlLimiteMensal*/,
+										0/*vlLimiteFactoring*/, 0/*vlLimiteFactoringEmissor*/, 0/*vlLimiteFactoringUnitario*/, 0/*lgPista*/, 0/*lgLoja*/,
+										0/*lgVeiculosCadastrados*/, 0/*nrLimiteAbastecimentos*/, 0/*vlLimiteVale*/, 0/*cdConvenio*/, 0/*cdTabelaPreco*/,
+										endereco.getCdCidade()/*cdCidade*/, 0/*cdTipoLogradouro*/, null/*nmCargo*/, nmLogradouro, null/*nrEndereco*/, null/*nmComplemento*/,
+										nmBairro, null/*nmPontoReferencia*/, nrCep, null/*nmContato*/, null/*nmEmail*/, 0/*nrDependentes*/, 0/*vlSalario*/,
+										0/*stAluguel*/, 0/*vlAluguel*/, new GregorianCalendar()/*dtAdmissao*/, null/*nmOutraRenda*/, 0/*vlOutraRenda*/,
+										0/*cdFaixaRenda*/, 0/*lgControleVeiculo*/, "nmRefCom"/*nmEmpresaTrabalho*/, null/*nrTelefoneTrabalho*/, 
+										0/*qtPrazoMinimoFactoring*/, 0/*qtPrazoMaximoFactoring*/, 0/*qtIdadeMinimaFactoring*/, 0/*vlGanhoMinimoFactoring*/,
+										0/*prTaxaMinimaFactoring*/, 0/*vlTaxaDevolucaoFactoring*/, 0/*prTaxaPadraoFactoring*/, 0/*prTaxaJurosFactoring*/,
+										0/*prTaxaProrrogacaoFactoring*/, 0/*qtMaximoDocumento*/, 0/*cdClassificacaoCliente*/);
+								int cdCliente = ClienteDAO.insert(cliente, connect);
+								if(cdCliente<=0){
+									connect.rollback();
+									System.out.println("Erro ao atualizar cliente");
+									return new sol.util.Result(cdCliente, "Erro ao cadastrar cliente");
+								}
+							}
+					}else{
+						System.out.println(pessoa);
+					}
+				} else{
+					count++;
+					// para evitar erros, preencher os campos vazios com "null" e testar se estão preenchidos com null para validar se estão corretos.
+					//System.out.println(nmCliente);
+					pessoa = new PessoaFisica(0/*cdPessoa*/,0/*cdPessoaSuperior*/,0/*cdPais*/,nmCliente,
+							   nrTelefone,null,null,null /*nrFax*/,null,new GregorianCalendar(),PessoaServices.TP_FISICA,null /*imgFoto*/,1 /*stCadastro*/,
+							   null,null/*nmApelido*/,null/*observacao*/,0/*lgNotificacao*/,idCliente/*idPessoa*/,
+							   0/*cdClassificacao*/,0/*cdFormaDivulgacao*/,null /*dtChegadaPais*/,
+							   0, 0 /*cdEscolaridade*/,(!"NULL".equalsIgnoreCase(dtNasc) ? converteStringToCalendar(dtNasc) : null) /*dtNascimento*/, nrCpf.equals("NULL") ? null : nrCpf,"SSP"/*orgao rg*/,nmMae /*nmMae*/,
+							   nmPai/*nmPai*/,0/*tpSexo*/,0/*stEstadoCivil*/,null,null/*nrCnh*/,null/*dtValidadeCnh*/,
+							   null/*dtPrimeiraHabilitacao*/,0/*tpCategoriaHabilitacao*/,0/*tpRaca*/,
+							   0/*lgDeficienteFisico*/,null/*nmFormaTratamento*/,0,null/*dtEmissaoRg*/, null /*blbFingerprint*/);
+					
+					
+					Result insert = PessoaServices.insert(pessoa, endereco, cdEmpresa, cdVinculo, connect);
+					code = insert.getCode();
+					cdPessoa = code;
+					pessoa.setCdPessoa(cdPessoa);
+					if(code<=0){
+						connect.rollback();
+						System.out.println(insert.getMessage());
+						System.out.println("Erro ao cadastrar pessoa");
+						return new sol.util.Result(cdPessoa, "Erro ao cadastrar pessoa");
+					}
+					/*
+					 * CLIENTE
+					 */
+					int cdCliente = 0;
+					pesqCliente.setInt(1, cdPessoa);
+					rsTemp = null;
+					rsTemp = new ResultSetMap(pesqCliente.executeQuery());
+					rsTemp.beforeFirst();
+					if(rsTemp.next())
+						cdCliente = rsTemp.getInt("cd_pessoa");
+					else {
+						// para evitar erros preencher os campos vazios com "null" e testar se estão preenchidos com null para validar se estão corretos.
+						Cliente cliente = new Cliente(cdEmpresa/*cdEmpresa*/, cdPessoa/*cdPessoa*/, 0/*lgConvenio*/, 1/*lgEcommerce*/, 0/*lgLimiteCredito*/,
+														0/*lgAgenda*/, 0/*nrDiasCarenciaFatura*/, (vlLimite == null || vlLimite.equalsIgnoreCase("null") || vlLimite.equals("")  ? 0 : Float.parseFloat(vlLimite.replace(",", ".")))/*vlLimiteCredito*/, 0/*vlLimiteMensal*/,
+														0/*vlLimiteFactoring*/, 0/*vlLimiteFactoringEmissor*/, 0/*vlLimiteFactoringUnitario*/, 0/*lgPista*/, 0/*lgLoja*/,
+														0/*lgVeiculosCadastrados*/, 0/*nrLimiteAbastecimentos*/, 0/*vlLimiteVale*/, 0/*cdConvenio*/, 0/*cdTabelaPreco*/,
+														endereco.getCdCidade()/*cdCidade*/, 0/*cdTipoLogradouro*/, null/*nmCargo*/, nmLogradouro, null/*nrEndereco*/, null/*nmComplemento*/,
+														nmBairro, null/*nmPontoReferencia*/, nrCep, null/*nmContato*/, null/*nmEmail*/, 0/*nrDependentes*/, 0/*vlSalario*/,
+														0/*stAluguel*/, 0/*vlAluguel*/, new GregorianCalendar()/*dtAdmissao*/, null/*nmOutraRenda*/, 0/*vlOutraRenda*/,
+														0/*cdFaixaRenda*/, 0/*lgControleVeiculo*/, "nmRefCom"/*nmEmpresaTrabalho*/, null/*nrTelefoneTrabalho*/, 
+														0/*qtPrazoMinimoFactoring*/, 0/*qtPrazoMaximoFactoring*/, 0/*qtIdadeMinimaFactoring*/, 0/*vlGanhoMinimoFactoring*/,
+														0/*prTaxaMinimaFactoring*/, 0/*vlTaxaDevolucaoFactoring*/, 0/*prTaxaPadraoFactoring*/, 0/*prTaxaJurosFactoring*/,
+														0/*prTaxaProrrogacaoFactoring*/, 0/*qtMaximoDocumento*/, 0/*cdClassificacaoCliente*/);
+						cdCliente = ClienteDAO.insert(cliente, connect);
+						
+						
+						if(cdCliente<=0){
+							connect.rollback();
+							System.out.println("Erro ao cadastrar cliente");
+							return new sol.util.Result(cdCliente, "Erro ao cadastrar cliente");
+						}
+						
+					}
+				}
+			}
+			connect.commit();
+			System.out.println(atualizados+" clientes atualizados");
+			System.out.println(count+" clientes importados");
+			System.out.println("Importação realizada com sucesso");
+			in.close();
+			return new sol.util.Result(1, "Importação realizada com sucesso");
+		} 
+		catch(Exception e) {
+			e.printStackTrace(System.out);
+			return new sol.util.Result(-1, "Erro ao tentar importar clientes!", e);
+		}
+		finally {
+			try{raf.close();}catch(Exception e){
+				
+			}
+			Conexao.desconectar(connect);
+			
+		}
+	}
+	
+	/**
+	 * Cria as validações de endereço, cria o endereço caso não exista e retorna o endereço preenchido
+	 * 
+	 * @param nmCidade
+	 * @param nmBairro
+	 * @param nmLogradouro
+	 * @param nrTelefone
+	 * @param nrCep
+	 * @param sgUf
+	 * @param connect
+	 * @return
+	 */
+	private static PessoaEndereco preencheEndereco(String nmCidade, String nmBairro, String nmLogradouro, String nrTelefone, String nrCep, String sgUf, Connection connect) {
+		try {
+		
+			PreparedStatement pesqCidade 		= connect.prepareStatement("SELECT * FROM grl_cidade WHERE nm_cidade = ?");
+			PreparedStatement pesqBairro		= connect.prepareStatement("SELECT * FROM grl_bairro WHERE nm_bairro = ?");
+			PreparedStatement pesqUf			= connect.prepareStatement("SELECT * FROM grl_estado WHERE sg_estado = ?");
+			ResultSet rsTemp = null;
+			
+			/*
+			 * ESTADO
+			 */
+			pesqUf.setString(1, sgUf);
+			rsTemp = pesqUf.executeQuery();
+			int cdEstado = 0;
+			// para evitar erros preencher os campos vazios com "null" e testar se estão preenchidos com null para validar se estão corretos.
+			if(!"NULL".equalsIgnoreCase(sgUf)){
+				if(rsTemp.next())
+					cdEstado = rsTemp.getInt("cd_estado");
+				else {
+					Estado estado = new Estado(0/*cdEstado*/, 0/*cdPais*/, null/*nmEstado*/, sgUf/*sgEstado*/, 0/*cdRegiao*/);
+					cdEstado = EstadoDAO.insert(estado);
+				}
+			}
+			
+			/*
+			 * CIDADE
+			 */
+			pesqCidade.setString(1, nmCidade);
+			rsTemp = pesqCidade.executeQuery();
+			int cdCidade = 0;
+			if(rsTemp.next())
+				cdCidade = rsTemp.getInt("cd_cidade");
+			else {
+				Cidade cidade = new Cidade(0/*cdCidade*/, nmCidade/*nmCidade*/, nrCep/*nrCep*/, 0/*vlAltitude*/, 0/*vlLatitude*/, 0/*vlLongitude*/, cdEstado/*cdEstado*/, 
+											null/*idCidade*/, 0/*cdRegiao*/, null/*idIbge*/, null/*sgCidade*/, 0/*qtDistanciaCapital*/, 0/*qtDistanciaBase*/);
+				cdCidade = CidadeDAO.insert(cidade);
+			}
+			
+			/*
+			 * BAIRRO
+			 */
+			pesqBairro.setString(1, nmBairro);
+			rsTemp = pesqBairro.executeQuery();
+			int cdBairro = 0;
+			if(rsTemp.next())
+				cdBairro = rsTemp.getInt("cd_bairro");
+			else {
+				Bairro bairro = new Bairro(0/*cdBairro*/, 0/*cdDistrito*/, cdCidade/*cdCidade*/, nmBairro/*nmBairro*/, null/*idBairro*/, 0/*cdRegiao*/);
+				cdBairro = BairroDAO.insert(bairro);
+			}
+			
+			/*
+			 * LOGRADOURO
+			 */
+			Logradouro logradouro = new Logradouro(0, 0, cdCidade, 1, nmLogradouro, null);
+			int cdLogradouro = LogradouroDAO.insert(logradouro);
+			
+			/*
+			 * PESSOA ENDEREÇO
+			 */
+			PessoaEndereco pessoaEndereco = new PessoaEndereco(1, 0/*cdPessoa*/, null, 1, 1, cdLogradouro, 0, cdCidade, nmLogradouro, nmBairro,
+																nrCep, null, null, nrTelefone, null, 0, 1);
+			return pessoaEndereco;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+
+	public static sol.util.Result importClienteFromCsv(String nmArquivo, int cdEmpresa) {
+		Connection connect = Conexao.conectar();
+		RandomAccessFile raf = null;
+		String idCliente, nmCliente, nmLogradouro, nmBairro, nmCidade, sgUf, nmSexo, nrCep, nrCpf, nrTelefone, dtNasc, nmPai, nmMae, nmNatural, vlLimite, nmRefCom;
+		int cdVinculo = ParametroServices.getValorOfParametroAsInteger("CD_VINCULO_CLIENTE", 0); 
+		int count = 0;
+		
+		try {
+			PreparedStatement pesqPessoaEmp		= connect.prepareStatement("SELECT * FROM grl_pessoa_empresa " +
+																			"WHERE 	 cd_pessoa = ? " +
+																			"AND 	cd_empresa = ? " +
+																			"AND 	cd_vinculo = ?");
+			PreparedStatement pesqCliente		= connect.prepareStatement("SELECT * FROM adm_cliente WHERE cd_pessoa = ?");
+			PreparedStatement pesqPessoa		= connect.prepareStatement("SELECT * FROM grl_pessoa WHERE nm_pessoa = ?");
+			PreparedStatement pesqPessoaFisica	= connect.prepareStatement("SELECT * FROM grl_pessoa_fisica WHERE cd_pessoa = ? AND nr_cpf = ?");
+			PreparedStatement pesqCidade		= connect.prepareStatement("SELECT * FROM grl_cidade WHERE nm_cidade = ?");
+			PreparedStatement pesqBairro		= connect.prepareStatement("SELECT * FROM grl_bairro WHERE nm_bairro = ?");
+			PreparedStatement pesqUf			= connect.prepareStatement("SELECT * FROM grl_estado WHERE sg_estado = ?");
+			
+			raf = new RandomAccessFile(nmArquivo, "rw");
+			System.out.println(nmArquivo+" carregado...");
+			String line = "";
+			ResultSet rsTemp = null;
+			
+			while((line = raf.readLine()) != null) {
+				StringTokenizer tokens = new StringTokenizer(line, ";", false);
+				
+				idCliente		= tokens.nextToken().trim();
+				nmCliente		= tokens.nextToken();
+				nmLogradouro	= tokens.nextToken();
+				nmBairro		= tokens.nextToken().toUpperCase();
+				nmCidade		= tokens.nextToken().toUpperCase();
+				sgUf			= tokens.nextToken().toUpperCase().trim();
+				nrCep			= tokens.nextToken().trim(); 
+				nmSexo			= tokens.nextToken().toUpperCase();
+				nrCpf			= tokens.nextToken().trim();
+				nrTelefone		= tokens.nextToken().trim();
+				dtNasc			= tokens.nextToken().trim();
+				nmPai			= tokens.nextToken();
+				nmMae			= tokens.nextToken();
+				nmNatural		= tokens.nextToken();
+				vlLimite		= tokens.nextToken();
+				nmRefCom		= tokens.nextToken();
+				
+				/*
+				 * PESSOA
+				 */
+				pesqPessoa.setString(1, nmCliente);
+				rsTemp = pesqPessoa.executeQuery();
+				int cdPessoa = 0;
+				if(rsTemp.next())
+					cdPessoa =  rsTemp.getInt("cd_pessoa");
+				pesqPessoaFisica.setInt(1,cdPessoa);
+				pesqPessoaFisica.setString(2, nrCpf);
+				rsTemp = pesqPessoaFisica.executeQuery();
+				int cdPessoaFisica = 0;
+				// se existe pega o cd_pessoa e garante que exista pessoa_endereco
+				if(rsTemp.next()) { 
+					cdPessoaFisica = rsTemp.getInt("cd_pessoa");
+					System.out.println("Pessoa já cadastrada");
+					PessoaEndereco pessoaEndereco = new PessoaEndereco(1, cdPessoaFisica, null, 2, 1, 0, 0, 27, nmLogradouro, nmBairro,
+																		nrCep, null, null, nrTelefone, null, 0, 0);
+					PessoaEnderecoDAO.insert(pessoaEndereco);
+				}
+				//senão, cria a pessoa
+				else {
+					// para evitar erros preencher os campos vazios com "null" e testar se estão preenchidos com null para validar se estão corretos.
+					PessoaFisica pessoaFisica = new PessoaFisica(0/*cdPessoa*/,0/*cdPessoaSuperior*/,0/*cdPais*/,nmCliente,
+							   nrTelefone,null,null,null /*nrFax*/,null,new GregorianCalendar(),PessoaServices.TP_FISICA,null /*imgFoto*/,1 /*stCadastro*/,
+							   null,null/*nmApelido*/,null/*observacao*/,0/*lgNotificacao*/,idCliente/*idPessoa*/,
+							   0/*cdClassificacao*/,0/*cdFormaDivulgacao*/,null /*dtChegadaPais*/,
+							   0, 0 /*cdEscolaridade*/,(!"NULL".equalsIgnoreCase(dtNasc) ? converteStringToCalendar(dtNasc) : null) /*dtNascimento*/, nrCpf,"SSP"/*orgao rg*/,null /*nmMae*/,
+							   null/*nmPai*/,0/*tpSexo*/,0/*stEstadoCivil*/,null,null/*nrCnh*/,null/*dtValidadeCnh*/,
+							   null/*dtPrimeiraHabilitacao*/,0/*tpCategoriaHabilitacao*/,0/*tpRaca*/,
+							   0/*lgDeficienteFisico*/,null/*nmFormaTratamento*/,0,null/*dtEmissaoRg*/, null /*blbFingerprint*/);
+					cdPessoaFisica = PessoaFisicaDAO.insert(pessoaFisica, connect);
+					
+					/*
+					 * ESTADO
+					 */
+					pesqUf.setString(1, sgUf);
+					rsTemp = pesqUf.executeQuery();
+					int cdEstado = 0;
+					// para evitar erros preencher os campos vazios com "null" e testar se estão preenchidos com null para validar se estão corretos.
+					if(!"NULL".equalsIgnoreCase(sgUf)){
+						if(rsTemp.next())
+							cdEstado = rsTemp.getInt("cd_estado");
+						else {
+							Estado estado = new Estado(0/*cdEstado*/, 0/*cdPais*/, null/*nmEstado*/, sgUf/*sgEstado*/, 0/*cdRegiao*/);
+							cdEstado = EstadoDAO.insert(estado, connect);
+						}
+					}
+					
+					/*
+					 * CIDADE
+					 */
+					pesqCidade.setString(1, nmCidade);
+					rsTemp = pesqCidade.executeQuery();
+					int cdCidade = 0;
+					if(rsTemp.next())
+						cdCidade = rsTemp.getInt("cd_cidade");
+					else {
+						Cidade cidade = new Cidade(0/*cdCidade*/, nmCidade/*nmCidade*/, nrCep/*nrCep*/, 0/*vlAltitude*/, 0/*vlLatitude*/, 0/*vlLongitude*/, cdEstado/*cdEstado*/, 
+													null/*idCidade*/, 0/*cdRegiao*/, null/*idIbge*/, null/*sgCidade*/, 0/*qtDistanciaCapital*/, 0/*qtDistanciaBase*/);
+						cdCidade = CidadeDAO.insert(cidade, connect);
+					}
+					
+					/*
+					 * BAIRRO
+					 */
+					pesqBairro.setString(1, nmBairro);
+					rsTemp = pesqBairro.executeQuery();
+					int cdBairro = 0;
+					if(rsTemp.next())
+						cdBairro = rsTemp.getInt("cd_bairro");
+					else {
+						Bairro bairro = new Bairro(0/*cdBairro*/, 0/*cdDistrito*/, cdCidade/*cdCidade*/, nmBairro/*nmBairro*/, null/*idBairro*/, 0/*cdRegiao*/);
+						cdBairro = BairroDAO.insert(bairro, connect);
+					}
+					
+					/*
+					 * LOGRADOURO
+					 */
+					Logradouro logradouro = new Logradouro(0, 0, cdCidade, 1, nmLogradouro, null);
+					int cdLogradouro = LogradouroDAO.insert(logradouro, connect);
+					
+					/*
+					 * PESSOA ENDEREÇO
+					 */
+					PessoaEndereco pessoaEndereco = new PessoaEndereco(1, cdPessoaFisica, null, 1, 1, cdLogradouro, 0, cdCidade, nmLogradouro, nmBairro,
+																		nrCep, null, null, nrTelefone, null, 0, 1);
+					int cdPessoaEndereco = PessoaEnderecoDAO.insert(pessoaEndereco, connect);
+					
+					
+					/*
+					 * PESSOA EMPRESA
+					 */
+//					pesqPessoaEmp.setInt(1, cdPessoaFisica);
+//					pesqPessoaEmp.setInt(2, cdEmpresa);
+//					pesqPessoaEmp.setInt(3, cdVinculo);
+//					rsTemp = pesqPessoaEmp.executeQuery();
+					PessoaEmpresa pessoaEmpresa = new PessoaEmpresa(cdEmpresa, cdPessoaFisica, cdVinculo, new GregorianCalendar()/*dtVinculo*/, 1/*stVinculo*/);
+					PessoaEmpresaDAO.insert(pessoaEmpresa, connect);
+										
+					/*
+					 * CLIENTE
+					 */
+					int cdCliente = 0;
+					pesqCliente.setInt(1, cdPessoaFisica);
+					rsTemp = pesqCliente.executeQuery();
+					if(rsTemp.next())
+						cdCliente = rsTemp.getInt("cd_cliente");
+					else {
+						// para evitar erros preencher os campos vazios com "null" e testar se estão preenchidos com null para validar se estão corretos.
+						Cliente cliente = new Cliente(cdEmpresa/*cdEmpresa*/, cdPessoaFisica/*cdPessoa*/, 0/*lgConvenio*/, 1/*lgEcommerce*/, 0/*lgLimiteCredito*/,
+														0/*lgAgenda*/, 0/*nrDiasCarenciaFatura*/, (vlLimite == null || vlLimite.equalsIgnoreCase("null") || vlLimite.equals("")  ? 0 : Float.parseFloat(vlLimite.replace(",",".")))/*vlLimiteCredito*/, 0/*vlLimiteMensal*/,
+														0/*vlLimiteFactoring*/, 0/*vlLimiteFactoringEmissor*/, 0/*vlLimiteFactoringUnitario*/, 0/*lgPista*/, 0/*lgLoja*/,
+														0/*lgVeiculosCadastrados*/, 0/*nrLimiteAbastecimentos*/, 0/*vlLimiteVale*/, 0/*cdConvenio*/, 0/*cdTabelaPreco*/,
+														cdCidade/*cdCidade*/, 0/*cdTipoLogradouro*/, null/*nmCargo*/, nmLogradouro, null/*nrEndereco*/, null/*nmComplemento*/,
+														nmBairro, null/*nmPontoReferencia*/, nrCep, null/*nmContato*/, null/*nmEmail*/, 0/*nrDependentes*/, 0/*vlSalario*/,
+														0/*stAluguel*/, 0/*vlAluguel*/, new GregorianCalendar()/*dtAdmissao*/, null/*nmOutraRenda*/, 0/*vlOutraRenda*/,
+														0/*cdFaixaRenda*/, 0/*lgControleVeiculo*/, nmRefCom/*nmEmpresaTrabalho*/, null/*nrTelefoneTrabalho*/, 
+														0/*qtPrazoMinimoFactoring*/, 0/*qtPrazoMaximoFactoring*/, 0/*qtIdadeMinimaFactoring*/, 0/*vlGanhoMinimoFactoring*/,
+														0/*prTaxaMinimaFactoring*/, 0/*vlTaxaDevolucaoFactoring*/, 0/*prTaxaPadraoFactoring*/, 0/*prTaxaJurosFactoring*/,
+														0/*prTaxaProrrogacaoFactoring*/, 0/*qtMaximoDocumento*/, 0/*cdClassificacaoCliente*/);
+						cdCliente = ClienteDAO.insert(cliente, connect);
+						
+					if(cdCliente<=0)
+						return new sol.util.Result(cdCliente, "Erro ao cadastrar cliente");
+					else
+						count++;
+					}
+				}
+			}
+			System.out.println(count+" clientes importados");
+			System.out.println("Importação realizada com sucesso");
+			return new sol.util.Result(1, "Importação realizada com ");
+		} 
+		catch(Exception e) {
+			e.printStackTrace(System.out);
+			return new sol.util.Result(-1, "Erro ao tentar importar clientes!", e);
+		}
+		finally {
+			try{raf.close();}catch(Exception e){}
+			Conexao.desconectar(connect);
+		}
+	}
+	
+	public static sol.util.Result importPtcDocumentoFromCsv(String nmArquivo) {
+		Connection connect 	= Conexao.conectar();
+		String dtProtocolo, nmLocalOrigem, nrDocumento, nmTipoDocumento, nmSolicitante, nrCpfSolicitante, nmAssunto, nmSetorAtual, nmFase, nmObservacao;
+		RandomAccessFile raf = null;
+		int cdVinculo = ParametroServices.getValorOfParametroAsInteger("CD_VINCULO_CLIENTE", 0);
+//		int cdVinculoAutor = ParametroServices.getValorOfParametroAsInteger("CD_VINCULO_AUTOR", 0);
+		try {
+			/************************
+			 * Importando Documentos
+			 ************************/
+			PreparedStatement pesqDocumento  	= connect.prepareStatement("SELECT * FROM ptc_documento WHERE cd_tipo_documento = ? AND nr_documento = ?");
+			PreparedStatement pesqTipoDocumento	= connect.prepareStatement("SELECT * FROM PTC_TIPO_DOCUMENTO WHERE nm_tipo_documento = ?");
+			PreparedStatement pesqSetor			= connect.prepareStatement("SELECT * FROM GRL_SETOR WHERE nm_setor = ?");
+			PreparedStatement pesqFase			= connect.prepareStatement("SELECT * FROM PTC_FASE WHERE nm_fase = ?");
+			PreparedStatement pesqPessoa        = connect.prepareStatement("SELECT * FROM grl_pessoa WHERE nm_pessoa = ?");
+//			PreparedStatement pesqPessoaCpf     = connect.prepareStatement("SELECT * FROM grl_pessoa_fisica WHERE nr_cpf = ?");
+
+			raf = new RandomAccessFile(nmArquivo, "rw");
+			System.out.println(nmArquivo+" carregado...");
+	  		String line = "";
+	  		int contDocs = 0;
+	  		ResultSet rsTemp = null;
+			//Empresa
+//			String nmEmpresa 	= "Pref. Mun. Vitória da Conquisa";
+			int cdEmpresa 		= 3;
+			while((line = raf.readLine()) != null){
+				StringTokenizer tokens = new StringTokenizer(line, ";", false);
+				
+				dtProtocolo 	= tokens.nextToken().trim();
+				if(dtProtocolo.equals("")) //se o campo DATA não estiver preenchido pega a data da importação
+					dtProtocolo	= Util.convCalendarString(new GregorianCalendar());
+				nmLocalOrigem	= tokens.nextToken().toUpperCase().trim();
+				nmTipoDocumento	= tokens.nextToken().toUpperCase().trim();
+				nrDocumento		= tokens.nextToken().trim();
+				System.out.println("No.: "+nrDocumento);
+				nmSolicitante	= tokens.nextToken().toUpperCase().trim();
+				System.out.println("Nome: "+nmSolicitante);
+				nrCpfSolicitante= tokens.nextToken();
+				nmAssunto		= tokens.nextToken().toUpperCase();
+				nmSetorAtual	= tokens.nextToken().toUpperCase().trim();
+				nmObservacao	= tokens.nextToken().toUpperCase();
+				nmFase			= tokens.nextToken().toUpperCase();
+				
+				
+				// Verifica se o Documento já não existe
+				//Tipo de Documento
+	  			pesqTipoDocumento.setString(1, nmTipoDocumento);
+	  			rsTemp = pesqTipoDocumento.executeQuery();
+	  			int cdTipoDocumento = 0;
+	  			if(rsTemp.next())
+	  				cdTipoDocumento = rsTemp.getInt("cd_tipo_documento");
+	  			else {
+	  				// TODO Codato Corrigir a chamada do construtor 
+//	  				com.tivic.manager.ptc.TipoDocumento tipoDoc = new com.tivic.manager.ptc.TipoDocumento(0,nmTipoDocumento,com.tivic.manager.ptc.TipoDocumentoServices.TP_INC_COM_ANO,null,null,1,0,1, 0,0,0,0,null);
+//	  				cdTipoDocumento = com.tivic.manager.ptc.TipoDocumentoDAO.insert(tipoDoc, connect);
+	  				com.tivic.manager.ptc.TipoDocumento tipoDoc = new com.tivic.manager.ptc.TipoDocumento(0, nmTipoDocumento, null, com.tivic.manager.ptc.TipoDocumentoServices.TP_INC_COM_ANO,
+	  						0, 0, 0, 0, null, null, 0, 0, 0, null);
+	  				cdTipoDocumento = com.tivic.manager.ptc.TipoDocumentoDAO.insert(tipoDoc, connect);
+	  			}
+	  			if(cdTipoDocumento<=0) {
+	  				System.out.println("Erro ao tentar incluir Tipo de Documento! cdTipoDocumento = "+cdTipoDocumento);
+	  				raf.close();
+	  				return new sol.util.Result(cdTipoDocumento);
+	  			}	  			
+	  			pesqDocumento.setInt(1, cdTipoDocumento);
+				pesqDocumento.setString(2, nrDocumento);
+				//
+				rsTemp = pesqDocumento.executeQuery();
+				if(rsTemp.next())
+					System.out.println("DOCUMENTO No. "+nrDocumento+" JÁ FOI CADASTRADO");
+				else {
+					//Solicitante/Pessoa
+		  			pesqPessoa.setString(1, nmSolicitante);
+		  			int cdPessoa = 0;
+		  			rsTemp = pesqPessoa.executeQuery();
+		  			if(rsTemp.next())
+		  				cdPessoa = rsTemp.getInt("cd_pessoa");
+		  			else	{
+			  			PessoaFisica pessoa = new PessoaFisica(0/*cdPessoa*/,0/*cdPessoaSuperior*/,0/*cdPais*/,nmSolicitante,
+								   null,null,null,null /*nrFax*/,null,new GregorianCalendar(),PessoaServices.TP_FISICA,null /*imgFoto*/,1 /*stCadastro*/,
+								   null,null/*nmApelido*/,null/*observacao*/,0/*lgNotificacao*/,null/*idPessoa*/,
+								   0/*cdClassificacao*/,0/*cdFormaDivulgacao*/,null /*dtChegadaPais*/,
+								   0, 0 /*cdEscolaridade*/,null /*dtNascimento*/,null,"SSP"/*orgao rg*/,null /*nmMae*/,
+								   null/*nmPai*/,0/*tpSexo*/,0/*stEstadoCivil*/,null,null/*nrCnh*/,null/*dtValidadeCnh*/,
+								   null/*dtPrimeiraHabilitacao*/,0/*tpCategoriaHabilitacao*/,0/*tpRaca*/,
+								   0/*lgDeficienteFisico*/,null/*nmFormaTratamento*/,0,null/*dtEmissaoRg*/, null /*blbFingerprint*/);
+			  			cdPessoa = PessoaServices.insert(pessoa, null/*endereço*/, cdEmpresa, cdVinculo).getCode();
+		  			}
+		  			if(cdPessoa<=0)	{
+		  				System.out.println("Erro ao tentar incluir solicitante! cdPessoa = "+cdPessoa);
+		  				raf.close();
+		  				return new sol.util.Result(cdPessoa);
+		  			}
+		  			
+					//Fase
+		  			pesqFase.setString(1, nmFase);
+		  			rsTemp = pesqFase.executeQuery();
+		  			int cdFase = 0;
+		  			if(rsTemp.next())
+		  				cdFase = rsTemp.getInt("cd_fase");
+		  			else	{
+		  				Fase fase = new Fase(0,nmFase,null,0, cdEmpresa,null, 0);
+		  				cdFase = FaseDAO.insert(fase, connect);
+		  			}
+		  			if(cdFase<=0)	{
+		  				System.out.println("Erro ao tentar incluir Fase! cdFase = "+cdFase);
+		  				raf.close();
+		  				return new sol.util.Result(cdFase);
+		  			}
+					
+					//Origem
+		  			pesqSetor.setString(1, nmLocalOrigem);
+		  			rsTemp = pesqSetor.executeQuery();
+		  			int cdSetorOrigem = 0;
+		  			if(rsTemp.next())
+		  				cdSetorOrigem = rsTemp.getInt("cd_setor");
+		  			else	{
+		  				Setor setor = new Setor(0,0,cdEmpresa,0,nmLocalOrigem,1,null,null,null,null,null,null,null,0,null,null,null,0,0,null);
+		  				cdSetorOrigem = SetorDAO.insert(setor, connect);
+		  			}
+		  			if(cdSetorOrigem<=0)	{
+		  				System.out.println("Erro ao tentar incluir Setor de Origem! cdSetor = "+cdSetorOrigem);
+		  				raf.close();
+		  				return new sol.util.Result(cdSetorOrigem);
+		  			}
+					
+					//Setor Atual (Destino/Encaminhado à)
+		  			pesqSetor.setString(1, nmSetorAtual);
+		  			rsTemp = pesqSetor.executeQuery();
+		  			int cdSetor = 0;
+		  			if(rsTemp.next())
+		  				cdSetor = rsTemp.getInt("cd_setor");
+		  			else	{
+		  				Setor setor = new Setor(0,0,cdEmpresa,0,nmSetorAtual,1,null,null,null,null,null,null,null,0,null,null,null,0,0,null);
+		  				cdSetor = SetorDAO.insert(setor, connect);
+		  			}
+		  			if(cdSetor<=0)	{
+		  				System.out.println("Erro ao tentar incluir Setor Atual! cdSetor = "+cdSetor);
+		  				raf.close();
+		  				return new sol.util.Result(cdSetor);
+		  			}
+		  			
+		  			Documento documento = new com.tivic.manager.ptc.Documento(0/*cdDocumento*/, 0/*cdArquivo*/, cdSetor, 0/*cdUsuario*/, nmLocalOrigem,
+		  																	 Util.convStringToCalendar(dtProtocolo), 0/*tpDocumento*/, nmObservacao, 
+		  																	 null/*idDocumento*/, nrDocumento, cdTipoDocumento, 0/*cdServico*/, 
+		  																	 0/*cdAtendimento*/, nmAssunto, cdSetor, 0/*cdSituacaoDocumento*/, cdFase, 
+		  																	 cdEmpresa, 0/*cdProcesso*/, 0 /*tpPrioridade*/, 0/*cdDocumentoSuperior*/, 
+		  																	 null /*dsAssunto*/, null /*nrAtendimento*/, 0/*lgNotificacao*/, 
+		  																	 0 /*cdTipoDocumentoAnterior*/, null/*nrDocumentoExterno*/,null/*nrAssunto*/,null, null, 0, 1);
+		  			int cdDocumento = com.tivic.manager.ptc.DocumentoDAO.insert(documento, connect);	
+		  			if(cdDocumento <= 0) {
+		  				System.out.println("Erro ao tentar inserir documento No. "+nrDocumento);
+		  				raf.close();
+		  				return new sol.util.Result(cdDocumento);
+		  			}
+		  			contDocs++;
+				}				
+			}
+			System.out.println(contDocs+" documentos importados.");
+			System.out.println("Importação de documentos concluída!");
+			raf.close();
+			return new sol.util.Result(1);			
+		}
+		catch(Exception e) {
+			try {raf.close(); }catch(Exception n){};
+			e.printStackTrace(System.out);
+			return new sol.util.Result(-1, "Erro ao tentar importar documentos!", e);
+		}
+		finally {
+			Conexao.desconectar(connect);
+		}		
+	}
+	
+	public static sol.util.Result importSrhPessoa() {
+		return importSrhPessoa("C://TIVIC//cadastro_educação_fev2016.csv");
+	}
+	
+	public static sol.util.Result importSrhPessoa(String nmArquivo) {
+		Connection connect 	= Conexao.conectar();
+		
+		RandomAccessFile raf = null;
+		Result result = null;
+		ResultSetMap rsmAux = null;
+		
+		String nmRegime = null;
+		String nrMatricula = null;
+		String nmPessoa = null;
+		String nmCargo = null;
+		int vlCargaHoraria = 0;
+		String nmLotacao = null;
+		GregorianCalendar dtAdmissao = null;
+		String nrCpf = null;
+		String nrPis = null;
+		int tpSexo = 0;
+		GregorianCalendar dtNasc = null;
+		String nmMae = null;
+		String nmPai = null;
+		String nrRg = null;
+		String sgUfRg = null;
+		String sgOrgaoRg = null;
+		GregorianCalendar dtEmissaoRg = null;
+		String nrCtps = null;
+		String nrSerieCtps = null;
+		GregorianCalendar dtExpiracaoCtps = null;
+		String sgUfCtps = null;
+		String nrTituloEleitoral = null;
+		String nrZonaEleitoral = null;
+		String nrSessaoEleitoral = null;
+		String nrMunicipioEleitoral = null;
+		String nmEmail = null;
+		String nrTelefone1 = null;
+		String nrCelular = null;
+		String nmTipoLogradouro = null;
+		String nmLogradouro = null;
+		String nrLogradouro = null;
+		String nmComplemento = null;
+		String nmBairro = null;
+		String nmCidade = null;
+		String sgEstado = null;
+		String nrCep = null;
+		
+		try {
+			connect.setAutoCommit(false);
+			
+			raf = new RandomAccessFile(nmArquivo , "rw");
+			System.out.println(nmArquivo+" carregado...");
+
+			int count = 0;
+			
+			String line = "";
+			while((line = raf.readLine()) != null){
+				StringTokenizer tokens = new StringTokenizer(line, ";", false);
+				
+				//String nrNumero = tokens.nextToken().toUpperCase().trim();
+				nmRegime = tokens.nextToken().toUpperCase().trim();
+				nrMatricula = tokens.nextToken().toUpperCase().trim();
+				nmPessoa = tokens.nextToken().toUpperCase().trim();
+				nmCargo = tokens.nextToken().toUpperCase().trim();
+				vlCargaHoraria = Integer.parseInt(tokens.nextToken().toUpperCase().trim());
+				nmLotacao = tokens.nextToken().toUpperCase().trim();
+				dtAdmissao = Util.convStringToCalendar(tokens.nextToken().toUpperCase().trim());
+				nrCpf = tokens.nextToken().toUpperCase().trim();
+				nrPis = tokens.nextToken().toUpperCase().trim();
+				tpSexo = tokens.nextToken().toUpperCase().trim().equals("Masculino")?0:1;
+				String dt = tokens.nextToken().toUpperCase().trim();
+				if(!dt.equalsIgnoreCase(""))
+						dtNasc = Util.convStringToCalendar(dt);
+				nmMae = tokens.nextToken().toUpperCase().trim();
+				nmPai = tokens.nextToken().toUpperCase().trim();
+				nrRg = tokens.nextToken().toUpperCase().trim();
+				sgUfRg = tokens.nextToken().toUpperCase().trim();
+				sgOrgaoRg = tokens.nextToken().toUpperCase().trim();
+				dtEmissaoRg = Util.convStringToCalendar(tokens.nextToken().toUpperCase().trim());
+				nrCtps = tokens.nextToken().toUpperCase().trim();
+				nrSerieCtps = tokens.nextToken().toUpperCase().trim();
+				dtExpiracaoCtps = Util.convStringToCalendar(tokens.nextToken().toUpperCase().trim());
+				sgUfCtps = tokens.nextToken().toUpperCase().trim();
+				nrTituloEleitoral = tokens.nextToken().toUpperCase().trim();
+				nrZonaEleitoral = tokens.nextToken().toUpperCase().trim();
+				nrSessaoEleitoral = tokens.nextToken().toUpperCase().trim();
+				nrMunicipioEleitoral = tokens.nextToken().toUpperCase().trim();
+				nmEmail = tokens.nextToken().toUpperCase().trim();
+				nrTelefone1 = tokens.nextToken().toUpperCase().trim();
+				nrCelular = tokens.nextToken().toUpperCase().trim();
+				nmTipoLogradouro = tokens.nextToken().toUpperCase().trim();
+				nmLogradouro = tokens.nextToken().toUpperCase().trim();
+				nrLogradouro = tokens.nextToken().toUpperCase().trim();
+				nmComplemento = tokens.nextToken().toUpperCase().trim();
+				nmBairro = tokens.nextToken().toUpperCase().trim();
+				nmCidade = tokens.nextToken().toUpperCase().trim();
+				sgEstado = tokens.nextToken().toUpperCase().trim();
+				nrCep = tokens.nextToken().toUpperCase().trim();
+				
+				int cdEmpresa = ParametroServices.getValorOfParametroAsInteger("CD_INSTITUICAO_SECRETARIA_MUNICIPAL", 0);
+				int cdMatricula = 0;
+				/*
+				 * PESSOA
+				 */
+				PessoaFisica pessoa = null;
+				PessoaEndereco endereco = null;
+				
+				int cdPessoa = 0;
+				PreparedStatement pstmt = connect.prepareStatement("SELECT A.cd_pessoa "
+																+ " FROM grl_pessoa A"
+																+ " JOIN grl_pessoa_fisica B ON (A.cd_pessoa=B.cd_pessoa)"
+																+ " WHERE B.nr_cpf LIKE '"+nrCpf+"'");
+				
+				ArrayList<ItemComparator> criterios = new ArrayList<ItemComparator>();
+//				criterios.add(new ItemComparator("A.nm_pessoa", nmPessoa, ItemComparator.LIKE_ANY, Types.VARCHAR));
+//				criterios.add(new ItemComparator("E.nr_cpf", nrCpf, ItemComparator.LIKE_ANY, Types.VARCHAR));
+				//criterios.add(new ItemComparator("F.nr_matricula", nrMatricula, ItemComparator.LIKE_ANY, Types.VARCHAR));
+				ResultSetMap rsmPessoa = new ResultSetMap(pstmt.executeQuery());//PessoaServices.find(criterios, connect);
+				if(rsmPessoa.next()) {
+					cdPessoa = rsmPessoa.getInt("cd_pessoa");
+					//cdMatricula = rsmPessoa.getInt("cd_matricula");
+					
+				}
+				else {
+//					int cdEstadoRg = EstadoServices.getBySg(sgEstado, connect).getCdEstado();
+					
+					pessoa = new PessoaFisica();
+					pessoa.setCdPessoa(cdPessoa);
+					pessoa.setCdPais(1); //BRASIL
+					pessoa.setNmPessoa(nmPessoa);
+					pessoa.setNrTelefone1(nrTelefone1);
+					pessoa.setNrCelular(nrCelular);
+					pessoa.setNmEmail(nmEmail);
+					pessoa.setDtCadastro(new GregorianCalendar());
+					pessoa.setGnPessoa(PessoaServices.TP_FISICA);
+					pessoa.setStCadastro(1); //ATIVO
+					pessoa.setDtNascimento(dtNasc);
+					pessoa.setNrCpf(nrCpf);
+					pessoa.setSgOrgaoRg(sgOrgaoRg);
+					pessoa.setNmMae(nmMae);
+					pessoa.setNmPai(nmPai);
+					pessoa.setTpSexo(tpSexo);
+					pessoa.setNrRg(nrRg);
+//					pessoa.setCdEstadoRg(cdEstadoRg);
+					pessoa.setDtEmissaoRg(dtEmissaoRg);
+					
+//					ResultSetMap rsmEndereco = (ResultSetMap)LogradouroServices.getEnderecoByCep(nrCep, connect).getObject("ENDERECO");
+//					if(rsmEndereco.next()) {
+//						endereco = new PessoaEndereco(0, 0, 
+//								nmLogradouro+", "+nrLogradouro+" - "+nmBairro,//dsEndereco, 
+//								0, //cdTipoLogradouro, 
+//								0, //cdTipoEndereco, 
+//								rsmEndereco.getInt("CD_LOGRADOURO"), 
+//								rsmEndereco.getInt("CD_BAIRRO"), 
+//								rsmEndereco.getInt("CD_CIDADE"), 
+//								nmLogradouro, 
+//								nmBairro, 
+//								nrCep, 
+//								nrLogradouro, 
+//								nmComplemento, 
+//								null, //nrTelefone, 
+//								null, //nmPontoReferencia, 
+//								0, //lgCobranca, 
+//								1, //lgPrincipal, 
+//								0 /*tpZona*/);
+//					}
+//					else {
+						endereco = new PessoaEndereco(0, 0, 
+								nmLogradouro+", "+nrLogradouro+" - "+nmBairro,//dsEndereco, 
+								0, //cdTipoLogradouro, 
+								0, //cdTipoEndereco, 
+								0, //CD_LOGRADOURO, 
+								0, //CD_BAIRRO, 
+								0, //CD_CIDADE, 
+								nmLogradouro, 
+								nmBairro, 
+								nrCep, 
+								nrLogradouro, 
+								nmComplemento, 
+								null, //nrTelefone, 
+								null, //nmPontoReferencia, 
+								0, //lgCobranca, 
+								1, //lgPrincipal, 
+								0 /*tpZona*/);
+//					}
+					
+					int cdVinculo = 0;
+					if(nmCargo.equalsIgnoreCase("PROFESSOR") || nmCargo.equalsIgnoreCase("PROFESSOR SUBSTITUTO")) {
+						cdVinculo = ParametroServices.getValorOfParametroAsInteger("CD_VINCULO_PROFESSOR", 0);
+					}
+					
+					
+					result = PessoaServices.save(pessoa, endereco, cdEmpresa, cdVinculo, connect);
+					if(result.getCode()<0)
+						return new Result(result.getCode(), result.getMessage());
+					cdPessoa = result.getCode();
+				}
+				
+				/*
+				 * SETOR
+				 */
+				int cdSetor = 0;
+				criterios = new ArrayList<ItemComparator>();
+				criterios.add(new ItemComparator("A.nm_setor", nmLotacao, ItemComparator.LIKE_ANY, Types.VARCHAR));
+				rsmAux = SetorServices.find(criterios, connect);
+				if(rsmAux.next()) {
+					cdSetor = rsmAux.getInt("cd_setor");
+				}
+				else {
+					Setor setor = new Setor();
+					setor.setCdSetor(0);
+					setor.setNmSetor(nmLotacao);
+					setor.setCdEmpresa(cdEmpresa);
+					setor.setTpSetor(SetorServices.TP_SETOR_INTERNO);
+					
+					result = SetorServices.save(setor, connect);
+					if(result.getCode()<0)
+						return new Result(result.getCode(), result.getMessage());
+					cdSetor = result.getCode();
+				}
+				
+				/*
+				 * REGIME DE TRABALHO
+				 */
+				int cdTipoAdmissao = 0;
+				criterios = new ArrayList<ItemComparator>();
+				criterios.add(new ItemComparator("nm_tipo_admissao", nmRegime, ItemComparator.LIKE_ANY, Types.VARCHAR));
+				rsmAux = TipoAdmissaoServices.find(criterios, connect);
+				if(rsmAux.next()) {
+					cdTipoAdmissao = rsmAux.getInt("cd_tipo_admissao");
+				}
+				else {
+					TipoAdmissao tipoAdmissao = new TipoAdmissao();
+					tipoAdmissao.setCdTipoAdmissao(cdTipoAdmissao);
+					tipoAdmissao.setNmTipoAdmissao(nmRegime);
+					
+					result = TipoAdmissaoServices.save(tipoAdmissao, connect);
+					if(result.getCode()<0)
+						return new Result(result.getCode(), result.getMessage());
+					cdTipoAdmissao = result.getCode();
+				}
+
+				/*
+				 * FUNCAO
+				 */
+				int cdFuncao = 0;
+				criterios = new ArrayList<ItemComparator>();
+				criterios.add(new ItemComparator("nm_funcao", nmCargo, ItemComparator.LIKE_ANY, Types.VARCHAR));
+				rsmAux = FuncaoServices.find(criterios, connect);
+				if(rsmAux.next()) {
+					cdFuncao = rsmAux.getInt("cd_funcao");
+				}
+				else {
+					Funcao funcao = new Funcao();
+					funcao.setCdFuncao(cdFuncao);
+					funcao.setCdEmpresa(cdEmpresa);
+					funcao.setNmFuncao(nmCargo);
+					
+					result = FuncaoServices.save(funcao, connect);
+					if(result.getCode()<0)
+						return new Result(result.getCode(), result.getMessage());
+					cdFuncao = result.getCode();
+				}
+				
+				/*
+				 * VÍNCULO EMPREGATÍCIO (???)
+				 */
+				int cdVinculoEmpregaticio = 0;
+				
+				/*
+				 * DADOS FUNCIONAIS
+				 */
+				cdMatricula = 0;
+				DadosFuncionais dadosFuncionais = new DadosFuncionais();
+				criterios = new ArrayList<ItemComparator>();
+				criterios.add(new ItemComparator("A.cd_pessoa", cdPessoa+"", ItemComparator.EQUAL, Types.INTEGER));
+//				criterios.add(new ItemComparator("F.nr_matricula", nrMatricula, ItemComparator.LIKE_ANY, Types.VARCHAR));
+				rsmAux = DadosFuncionaisServices.find(criterios, null, connect);
+				if(rsmAux.next()) {
+					cdMatricula = rsmAux.getInt("cd_matricula");
+				}
+				if(cdMatricula>0) {
+					
+					dadosFuncionais = DadosFuncionaisDAO.get(cdMatricula, connect);
+					
+					dadosFuncionais.setCdSetor(cdSetor);
+					dadosFuncionais.setCdFuncao(cdFuncao);
+					dadosFuncionais.setCdTipoAdmissao(cdTipoAdmissao);
+					dadosFuncionais.setCdVinculoEmpregaticio(cdVinculoEmpregaticio);
+					dadosFuncionais.setCdPessoa(cdPessoa);
+					dadosFuncionais.setNrMatricula(nrMatricula);
+					dadosFuncionais.setDtMatricula(dtAdmissao);
+					dadosFuncionais.setStFuncional(DadosFuncionaisServices.sfATIVO);
+					dadosFuncionais.setCdEmpresa(cdEmpresa);
+				}
+				else {
+					dadosFuncionais = new DadosFuncionais();
+					dadosFuncionais.setCdMatricula(cdMatricula);
+					dadosFuncionais.setCdSetor(cdSetor);
+					dadosFuncionais.setCdFuncao(cdFuncao);
+					dadosFuncionais.setCdTipoAdmissao(cdTipoAdmissao);
+					dadosFuncionais.setCdVinculoEmpregaticio(cdVinculoEmpregaticio);
+					dadosFuncionais.setCdPessoa(cdPessoa);
+					dadosFuncionais.setNrMatricula(nrMatricula);
+					dadosFuncionais.setDtMatricula(dtAdmissao);
+					dadosFuncionais.setStFuncional(DadosFuncionaisServices.sfATIVO);
+					dadosFuncionais.setCdEmpresa(cdEmpresa);
+					
+				}
+				result = DadosFuncionaisServices.save(dadosFuncionais, connect);
+				if(result.getCode()<0)
+					return new Result(result.getCode(), result.getMessage());
+				cdMatricula = ((DadosFuncionais)result.getObjects().get("DADOSFUNCIONAIS")).getCdMatricula();
+				
+
+				/*
+				 * LOTACAO
+				 */
+				int cdLotacao = 0;
+				Lotacao lotacao = null;
+				criterios = new ArrayList<ItemComparator>();
+				criterios.add(new ItemComparator("cd_matricula", Integer.toString(cdMatricula), ItemComparator.EQUAL, Types.INTEGER));
+				criterios.add(new ItemComparator("cd_setor", Integer.toString(cdSetor), ItemComparator.EQUAL, Types.INTEGER));
+				criterios.add(new ItemComparator("cd_funcao", Integer.toString(cdFuncao), ItemComparator.EQUAL, Types.INTEGER));
+				rsmAux = LotacaoServices.find(criterios, connect);
+				if(rsmAux.next()) {
+					cdLotacao = rsmAux.getInt("cd_lotacao");
+					
+					lotacao = LotacaoDAO.get(cdLotacao, cdMatricula, connect);
+					lotacao.setVlCargaHoraria(vlCargaHoraria);
+				}
+				else {
+					lotacao = new Lotacao();					
+					lotacao.setCdLotacao(cdLotacao);
+					lotacao.setCdMatricula(cdMatricula);
+					lotacao.setCdSetor(cdSetor);
+					lotacao.setCdFuncao(cdFuncao);
+					lotacao.setVlCargaHoraria(vlCargaHoraria);
+				}
+				
+				result = LotacaoServices.save(lotacao, connect);
+				if(result.getCode()<0)
+					return new Result(result.getCode(), result.getMessage());
+				cdLotacao = result.getCode();
+				
+				count++;
+				System.out.print(".");
+			}
+			System.out.println();
+			
+			if(result.getCode()<0) {
+				connect.rollback();
+				return new Result(result.getCode(), result.getMessage());
+			}
+			
+			raf.close();
+			connect.commit();
+			
+			System.out.println(count+" registros importados.");
+			
+			return new Result(1, "RH importado com sucesso");
+		}
+		catch(Exception e) {
+			try {raf.close(); }catch(Exception n){};
+			e.printStackTrace(System.out);
+			return new sol.util.Result(-1, "Erro ao tentar importar!", e);
+		}
+		finally {
+			Conexao.desconectar(connect);
+		}
+	}
+	
+	public static sol.util.Result importAlmProdutoFromCsv(String nmArquivo) {
+		Connection connect 	= Conexao.conectar();
+		String nmReferencia;//, nmArquivo = "C:/TIVIC/TABELAPRODUTOBOI.csv";
+		float qtEntrada, qtEntradaConsignada = 0;
+		RandomAccessFile raf = null;
+		try {
+			
+			raf = new RandomAccessFile(nmArquivo , "rw");
+			System.out.println(nmArquivo+" carregado...");
+			String line = "";
+			int contBois = 0;
+			int cdEmpresa 		= 147,
+			cdProdutoServico 	= 2,
+			cdDocumentoEntrada 	= 1,
+			cdLocalArmazenamento = 5, 
+			cdEntradaLocalItem	= 0, 
+			cdReferencia		= 0, 
+			cdItem 				= 0;
+			DocumentoEntradaItem item = new DocumentoEntradaItem(cdDocumentoEntrada, cdProdutoServico, cdEmpresa, cdItem, qtEntradaConsignada, 0, 0, 0, 0, null);
+			if (ProdutoServicoEmpresaDAO.get(item.getCdEmpresa(), item.getCdProdutoServico(), connect) == null) {
+				if (ProdutoServicoEmpresaDAO.insert(new ProdutoServicoEmpresa(item.getCdEmpresa(), item.getCdProdutoServico(),item.getCdUnidadeMedida(),
+						"" /*idReduzido*/,0 /*vlPrecoMedio*/,0 /*vlCustoMedio*/,0 /*vlUltimoCusto*/,
+						0 /*qtIdeal*/,0 /*qtMinima*/,0 /*qtMaxima*/,0 /*qtDiasEstoque*/,
+						0 /*qtPrecisaoCusto*/,0 /*qtPrecisaoUnidade*/,0 /*qtDiasGarantia*/,
+						0 /*tpReabastecimento*/,0 /*tpControleEstoque*/,0 /*tpTransporte*/,
+						ProdutoServicoEmpresaServices.ST_ATIVO /*stProdutoEmpresa*/,
+						null /*dtDesativacao*/,"" /*nrOrdem*/,0 /*lgEstoqueNegativo*/), connect) <= 0) {
+					Conexao.rollback(connect);
+					raf.close();
+					return new Result(-1, "Erro ao salvar dados do produto na empresa!");
+				}
+			}
+			
+			item.setCdItem(DocumentoEntradaItemDAO.insert(item, connect));
+			if (item.getCdItem() <= 0) {
+				Conexao.rollback(connect);
+				raf.close();
+				return new Result(-1, "Erro ao salvar dados do item na entrada!");
+			}
+// no banco de corretagem na maquina de esdras, Fazenda Primavera e produto BOI correspondem a: cdEmpresa = 6428, cdProdutoServico = 1391, cdDocuementoEntrada = 34 e cdLocalAramzenamento = 543			
+//			int cdEmpresa 		= 6428,
+//					cdProdutoServico 	= 1391,
+//					cdDocumentoEntrada 	= 34,
+//					cdLocalArmazenamento = 543, 
+//					cdEntradaLocalItem, cdReferencia, cdItem;
+//			cdEntradaLocalItem = cdReferencia = cdItem = 0;
+			while((line = raf.readLine()) != null){
+				StringTokenizer tokens = new StringTokenizer(line, ";", false);
+				
+				nmReferencia 	= tokens.nextToken().toUpperCase().trim();
+				qtEntrada		= Float.valueOf(tokens.nextToken());
+
+				ProdutoReferencia produtoReferencia = new ProdutoReferencia(0, cdProdutoServico, cdEmpresa, nmReferencia, "", null, null, 0, 1, 0, 0, "", cdLocalArmazenamento);
+				EntradaLocalItem entradaLocalItem = new EntradaLocalItem(cdProdutoServico, cdDocumentoEntrada, cdEmpresa, cdLocalArmazenamento, qtEntrada, qtEntradaConsignada, cdEntradaLocalItem, cdReferencia, cdItem);
+				
+				
+				int cod = getProdutoReferencia(produtoReferencia, connect) != null ? getProdutoReferencia(produtoReferencia, connect).getCdReferencia() : 0;
+				produtoReferencia.setCdReferencia(cod > 0 ? cod : ProdutoReferenciaDAO.insert(produtoReferencia, connect));
+				if (produtoReferencia.getCdReferencia() > 0) {
+					entradaLocalItem.setCdItem(item.getCdItem());
+					entradaLocalItem.setCdReferencia(produtoReferencia.getCdReferencia());
+					int ret = EntradaLocalItemDAO.insert(entradaLocalItem, connect);
+					if (ret <= 0) {
+						Conexao.rollback(connect);
+						raf.close();
+						return new Result(-1, "Erro ao tentar salvar entrada local item!");
+					}
+				} 
+				else{
+					raf.close();
+					return new Result(-1, "Erro ao tentar salvar produto referencia!");
+				}
+				contBois++;
+			}
+			System.out.println(contBois+" bois importados.");
+			System.out.println("Importação de bois concluída!");
+			raf.close();
+			return new sol.util.Result(1);			
+		}
+		catch(Exception e) {
+			try {raf.close(); }catch(Exception n){};
+			e.printStackTrace(System.out);
+			return new sol.util.Result(-1, "Erro ao tentar importar bois!", e);
+		}
+		finally {
+			Conexao.desconectar(connect);
+		}		
+	}
+	
+	public static ProdutoReferencia getProdutoReferencia(ProdutoReferencia produtoReferencia, Connection connection){
+		return ProdutoReferenciaDAO.get(produtoReferencia.getCdReferencia(), produtoReferencia.getCdProdutoServico(), 
+				produtoReferencia.getCdEmpresa(), produtoReferencia.getNmReferencia(), connection);
+	}
+	
+	@Deprecated
+	public static sol.util.Result importPrcProcessosCsv()	{
+		
+		String nmArquivo = "C:/Users/darll/Desktop/importacao2.csv";
+		
+		Connection connect   = Conexao.conectar();
+		
+		RandomAccessFile raf = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		Result result = null;
+		
+		GregorianCalendar dtRepasse = null;
+		String nrPasta = null;
+		String nmAdverso = null;
+		String nrCpfAdverso = null;
+		String nrProcesso = null;
+		String sarmento = null;
+		String nrJuizo = null;
+		String nmJuizo = null;
+		String nmTribunal = null;
+		String nmComarca = null;
+		String sgEstado = null;
+		String nmInstancia = null;
+		int cdCliente = 0;
+		String nmTipoObjeto = null;
+		String nmPerda = null;
+		String nmSituacao = null;
+		int cdGrupoProcesso = 0;
+		int tpAcao = 0;
+		int cdGrupoTrabalho = 0;
+		int cdAdv = 0;
+		int tpRepasse = 0;
+		
+		try {
+			connect.setAutoCommit(false);
+			
+			System.out.println(nmArquivo);
+			
+			raf = new RandomAccessFile(nmArquivo, "rw");
+	  		System.out.println(nmArquivo+" carregado...");
+	  		String line = "";
+	  		int i = 0;
+	  		int found = 0;
+			
+	  		while((line = raf.readLine()) != null)	{
+	  			
+		  		System.out.print("ln"+(i+1));
+		  		
+	  			StringTokenizer tokens = new StringTokenizer(line, ";", false);
+	  			
+	  			dtRepasse = Util.convStringToCalendar(tokens.nextToken().trim());
+	  			nrPasta = tokens.nextToken().trim();
+	  			nmAdverso = tokens.nextToken().trim();
+	  			nrCpfAdverso = tokens.nextToken().trim();
+	  			nrProcesso = tokens.nextToken().trim();
+	  			sarmento = tokens.nextToken().trim();
+	  			nrJuizo = tokens.nextToken().trim();
+	  			nmJuizo = tokens.nextToken().trim();
+	  			nmTribunal = tokens.nextToken().trim();
+	  			nmComarca = tokens.nextToken().trim();
+	  			sgEstado = tokens.nextToken().trim();
+	  			nmInstancia = tokens.nextToken().trim();
+	  			cdCliente = Integer.parseInt(tokens.nextToken());
+	  			nmTipoObjeto = tokens.nextToken().trim();
+	  			nmPerda = tokens.nextToken().trim();
+	  			nmSituacao = tokens.nextToken().trim();
+	  			cdGrupoProcesso = Integer.parseInt(tokens.nextToken());
+	  			tpAcao = Integer.parseInt(tokens.nextToken());
+	  			cdGrupoTrabalho = Integer.parseInt(tokens.nextToken());
+	  			cdAdv = Integer.parseInt(tokens.nextToken());
+	  			tpRepasse = Integer.parseInt(tokens.nextToken());
+	  			
+	  			//ADVERSO
+	  			int cdAdverso = 0;
+	  			if(nrCpfAdverso.length()>11) {
+	  				nrCpfAdverso = null;
+	  			}
+	  			pstmt = connect.prepareStatement("SELECT A.cd_pessoa FROM grl_pessoa A"
+	  											+ " LEFT OUTER JOIN grl_pessoa_fisica B ON (A.cd_pessoa = B.cd_pessoa)"
+	  											+ " WHERE (A.nm_pessoa LIKE ? OR B.nr_cpf LIKE ?)");
+	  			pstmt.setString(1, nmAdverso);
+	  			pstmt.setString(2, nrCpfAdverso);
+	  			rs = pstmt.executeQuery();
+	  			if(rs.next()) {
+	  				cdAdverso = rs.getInt("cd_pessoa");
+	  			}
+	  			else {
+	  				int cdVinculo = ParametroServices.getValorOfParametroAsInteger("CD_VINCULO_ADVERSO", 0);
+	  				PessoaFisica adverso = new PessoaFisica(0, nmAdverso, null, new GregorianCalendar(), PessoaServices.TP_FISICA, null, null, 
+	  						nrCpfAdverso, null, null, null, 0, null);
+	  				
+	  				result = PessoaServices.save(adverso, null, 3, cdVinculo);
+	  				if(result.getCode()<=0) {
+	  					connect.rollback();
+	  					return new Result(-2, "Erro ao cadastrar adverso.");
+	  				}
+	  				
+	  				cdAdverso = result.getCode();
+	  			}
+	  			
+	  			//JUIZO
+	  			int cdJuizo = 0;
+	  			pstmt = connect.prepareStatement("SELECT cd_juizo FROM prc_juizo WHERE nm_juizo LIKE ?");
+	  			pstmt.setString(1, nmJuizo);
+	  			rs = pstmt.executeQuery();
+	  			if(rs.next()) {
+	  				cdJuizo = rs.getInt("cd_juizo");
+	  			}
+//	  			else {
+//	  				Juizo juizo = new Juizo(0, nmJuizo, tpJuizo, idJuizo, nrJuizo, sgJuizo, tpInstancia);
+//	  			}
+	  			
+	  			//TRIBUNAL  
+	  			int cdTribunal = 0;
+	  			pstmt = connect.prepareStatement("SELECT cd_tribunal FROM prc_tribunal WHERE nm_tribunal LIKE ?");
+	  			pstmt.setString(1, nmTribunal);
+	  			rs = pstmt.executeQuery();
+	  			if(rs.next()) {
+	  				cdTribunal = rs.getInt("cd_tribunal");
+	  			}
+	  			else {
+	  				Tribunal tribunal = new Tribunal(0, nmTribunal, 0, null, null);
+	  				result = TribunalServices.save(tribunal, connect);
+	  				if(result.getCode()<=0) {
+	  					connect.rollback();
+	  					return new Result(-3, "Erro ao cadastrar tribunal.");
+	  				}
+	  				cdTribunal = result.getCode();
+	  			}
+	  			
+	  			//COMARCA
+	  			int cdComarca = 0;
+	  			pstmt = connect.prepareStatement("SELECT cd_cidade FROM grl_cidade WHERE nm_cidade LIKE ?");
+	  			pstmt.setString(1, nmComarca);
+	  			rs = pstmt.executeQuery();
+	  			if(rs.next()) {
+	  				cdComarca = rs.getInt("cd_cidade");
+	  			}
+	  			else {
+	  				int cdEstado = 0;
+	  				pstmt = connect.prepareStatement("SELECT cd_estado FROM grl_estado WHERE sg_estado LIKE ?");
+	  				pstmt.setString(1, sgEstado);
+		  			rs = pstmt.executeQuery();
+		  			if(rs.next()) {
+		  				cdEstado = rs.getInt("cd_estado");
+		  			}
+		  			
+		  			Cidade comarca = new Cidade(0, nmComarca, null, 0, 0, 0, cdEstado, null, 0, null, null, 0, 0);
+		  			result = CidadeServices.save(comarca, connect);
+		  			if(result.getCode()<=0) {
+	  					connect.rollback();
+	  					return new Result(-4, "Erro ao cadastrar comarca.");
+	  				}
+		  			cdComarca = result.getCode();
+	  			}
+	  			
+	  			
+	  			//INSTANCIA
+	  			int tpInstancia = -1;
+	  			for (int j=0; j<ProcessoServices.tipoInstancia.length; j++) {
+					if(nmInstancia.equalsIgnoreCase(ProcessoServices.tipoInstancia[j])) {
+						tpInstancia = j;
+						break;
+					}
+				}
+	  			
+	  			//CLIENTE
+////	  			int cdCliente = 0;
+////	  			
+////	  			pstmt = connect.prepareStatement("SELECT cd_pessoa FROM grl_pessoa WHERE nm_pessoa LIKE ?");
+////	  			pstmt.setString(1, nmCliente);
+////	  			rs = pstmt.executeQuery();
+//	  			
+//	  			if(rs.next()) {
+//	  				cdCliente = rs.getInt("cd_pessoa");
+//	  			}
+//	  			else {
+//	  				int cdVinculo = ParametroServices.getValorOfParametroAsInteger("CD_VINCULO_CLIENTE", 0);
+//	  				PessoaFisica cliente = new PessoaFisica(0, nmCliente, null, new GregorianCalendar(), PessoaServices.TP_JURIDICA, null, null, 
+//	  						null, null, null, null, 0, null);
+//	  				
+//	  				result = PessoaServices.save(cliente, null, 3, cdVinculo);
+//	  				if(result.getCode()<=0) {
+//	  					connect.rollback();
+//	  					return new Result(-2, "Erro ao cadastrar cliente.");
+//	  				}
+//	  				
+//	  				cdCliente = result.getCode();
+//	  			}
+	  			
+	  			//OBJETO
+	  			int cdTipoObjeto = 0;
+	  			pstmt = connect.prepareStatement("SELECT cd_tipo_objeto FROM prc_tipo_objeto WHERE nm_tipo_objeto LIKE ?");
+	  			pstmt.setString(1, nmTipoObjeto);
+	  			rs = pstmt.executeQuery();
+	  			if(rs.next()) {
+	  				cdTipoObjeto = rs.getInt("cd_tipo_objeto");
+	  			}
+	  			
+	  			//PERDA
+	  			int tpPerda = -1;
+	  			for (int j=0; j<ProcessoServices.tipoPerda.length; j++) {
+					if(nmPerda.equalsIgnoreCase(ProcessoServices.tipoPerda[j])) {
+						tpPerda = j;
+						break;
+					}
+				}
+	  			
+	  			//SITUACAO
+	  			int tpSituacao = 1; //ativo
+	  			for (int j=0; j<ProcessoServices.situacaoProcesso.length; j++) {
+					if(nmSituacao.equalsIgnoreCase(ProcessoServices.situacaoProcesso[j])) {
+						tpSituacao = j;
+						break;
+					}
+				}
+	  			
+	  			//GRUPO DE PROCESSO
+//	  			int cdGrupoProcesso = 0;
+//	  			pstmt = connect.prepareStatement("SELECT cd_grupo_processo FROM prc_grupo_processo WHERE nm_grupo_processo LIKE ?");
+//	  			pstmt.setString(1, nmGrupoProcesso);
+//	  			rs = pstmt.executeQuery();
+//	  			if(rs.next()) {
+//	  				cdGrupoProcesso = rs.getInt("cd_grupo_processo");
+//	  			}
+	  			
+	  			//TIPO DE PROCESSO
+	  			//int cdTipoProcesso = 2; //AÇÃO INDENIZATÓRIA
+	  			
+	  			//PROCESSO  0805491%23%2014%8%20%0004
+	  			String nrProcessoPartes = null;
+	  			if(nrProcesso.length()>=20) {					
+					nrProcessoPartes = nrProcesso.substring(0, 7) +"%"+
+									   nrProcesso.substring(7, 9) +"%"+
+									   nrProcesso.substring(9, 13) +"%"+
+									   nrProcesso.substring(13, 14) +"%"+
+									   nrProcesso.substring(14, 16) +"%"+
+									   nrProcesso.substring(16, 20);
+	  			}
+	  			
+	  			int cdProcesso = 0;
+	  			Processo processo = null;	
+	  			System.out.println("nrProcessoPartes: "+nrProcessoPartes);
+	  			pstmt = connect.prepareStatement("SELECT cd_processo FROM prc_processo "
+	  											+ " WHERE nr_processo LIKE ? "
+	  											+ (nrProcessoPartes!=null ? " OR nr_processo LIKE '"+nrProcessoPartes+"'" : ""));
+	  			pstmt.setString(1, nrProcesso);
+	  			
+	  			System.out.println("SELECT cd_processo FROM prc_processo "
+							+ " WHERE nr_processo LIKE "+ nrProcesso
+							+ (nrProcessoPartes!=null ? " OR nr_processo LIKE '"+nrProcessoPartes+"'" : ""));
+	  			
+	  			
+				rs = pstmt.executeQuery();
+				if(rs.next()) {
+					found++;
+					continue;
+					
+//					cdProcesso = rs.getInt("cd_processo");
+//					processo = ProcessoDAO.get(cdProcesso, connect);
+//					
+//					processo.setCdTipoProcesso(cdTipoProcesso);
+//					processo.setCdGrupoProcesso(cdGrupoProcesso);
+//					processo.setDtRepasse(dtRepasse);
+//					processo.setNmConteiner3(nrPasta);
+				}
+				else {					
+					processo = new Processo(cdProcesso, tpAcao, 0, cdComarca, 1, cdAdv, 
+							0, 0, cdGrupoProcesso, 0, null, null, 
+							null, null, null, null, tpSituacao, null, 0, 
+							0, 0, 0, null, null, 0, 0, 
+							tpInstancia, null, tpPerda, 0, 0, 0, 
+							cdTipoObjeto, 0, new GregorianCalendar(), 0, nrJuizo, cdComarca, 0, 
+							null, 0, null, null, nrPasta, 0, 0, dtRepasse, 
+							0, null, null, 0, cdTribunal, cdJuizo, nrProcesso, 
+							10414/*TIVIC*/, 0, null, cdGrupoTrabalho, 0, null, 0, 0, -1, 1, null, 0);
+					
+					//CLIENTE
+		  			ResultSetMap rsmCliente = new ResultSetMap();
+		  			HashMap<String, Object> cliente = new HashMap<>();
+		  			cliente.put("CD_PESSOA", cdCliente);
+		  			rsmCliente.addRegister(cliente);
+		  			
+		  			//ADVERSO
+		  			ResultSetMap rsmAdverso = new ResultSetMap();
+		  			HashMap<String, Object> adverso = new HashMap<>();
+		  			adverso.put("CD_PESSOA", cdAdverso);
+		  			rsmAdverso.addRegister(adverso);
+		  			
+		  			result = ProcessoServices.save(processo, rsmCliente, rsmAdverso, null, 0, null, connect);
+		  			if(result.getCode()<=0) {
+		  				connect.rollback();
+	  					return new Result(-5, "Erro ao cadastrar processo.");
+	  				}
+				}
+	  			
+	  			i++;
+	  			
+	  			pstmt = null;
+	  			result = null;
+	  			rs = null;
+	  		}
+	  		
+	  		connect.commit();
+	  		System.out.println("\n"+found+" processos encontrados");
+	  		System.out.println("\n"+i+" processos importados");
+	  		
+			return new Result(1, "Processos importados com sucesso.");
+		}
+		catch(Exception e)	{
+			e.printStackTrace(System.out);
+			return new sol.util.Result(-1, "Erro ao tentar importar processos!", e);
+		}
+		finally{
+			try {raf.close(); }catch(Exception n){};
+			Conexao.desconectar(connect);
+		}
+	}
+	
+	public static sol.util.Result importPrcProcessosFromXls(String nmArquivo) {
+		
+		Connection connect   = Conexao.conectar();
+		
+		String nrPasta = "";
+		String nmAdverso = "";
+		String nrCpfAdverso = "";
+		String nrProcesso = "";
+		String nrContrato = "";
+		String nrJuizo = "";
+		String nmJuizo = "";
+		String nmTipoProcesso = "";
+		String nmComarca = "";
+		String sgUf = "";
+		String nmAdvogadoResponsavel = "";
+		String nmGrupoProcesso = "";
+		GregorianCalendar dtDistribuicao = null;
+		String txtObservacao = "";
+		
+		RandomAccessFile raf = null;
+		
+		try {
+		
+			/***********************
+			 * Importando Processos
+			 ***********************/
+			PreparedStatement pesqProcesso      = connect.prepareStatement("SELECT * FROM prc_processo A " +
+					                                                       "WHERE (nr_processo = ? OR nr_processo = ?) " +
+					                                                       "  AND EXISTS (SELECT * FROM prc_parte_cliente B " +
+					                                                       "              WHERE A.cd_processo = B.cd_processo" +
+					                                                       "                AND B.cd_pessoa   = ?)");
+			PreparedStatement pesqCidade        = connect.prepareStatement("SELECT * FROM grl_cidade WHERE nm_cidade = ? AND cd_estado = ?");
+			PreparedStatement pesqEstado        = connect.prepareStatement("SELECT * FROM grl_estado WHERE sg_estado = ?");
+			// PreparedStatement pesqObjetoAcao    = connect.prepareStatement("SELECT * FROM prc_tipo_objeto WHERE nm_tipo_objeto = ?");
+			PreparedStatement pesqTipoProcesso  = connect.prepareStatement("SELECT * FROM prc_tipo_processo WHERE nm_tipo_processo = ?");
+			PreparedStatement pesqGrupoProcesso = connect.prepareStatement("SELECT * FROM prc_grupo_processo WHERE nm_grupo_processo = ?");
+			PreparedStatement pesqPessoa        = connect.prepareStatement("SELECT * FROM grl_pessoa WHERE nm_pessoa = ?");
+			PreparedStatement pesqPessoaCpf     = connect.prepareStatement("SELECT * FROM grl_pessoa_fisica WHERE nr_cpf = ?");
+			PreparedStatement pesqJuizo         = connect.prepareStatement("SELECT * FROM prc_juizo WHERE nm_juizo = ?");
+			PreparedStatement pesqTribunal      = connect.prepareStatement("SELECT * FROM prc_tribunal WHERE sg_tribunal = ?");
+			
+			raf = new RandomAccessFile(nmArquivo, "rw");
+	  		System.out.println("Arquivo carregado...");
+	  		String line = "";
+	  		int i = 0;
+	  		
+			// Parte Cliente
+//			String nmCliente      = tokens.nextToken();	
+//			int cdCliente  = 0;
+//			pesqPessoa.setString(1, nmCliente);
+//			ResultSet rsTemp = pesqPessoa.executeQuery();
+//			if(rsTemp.next())
+//				cdCliente = rsTemp.getInt("cd_pessoa");
+	  		
+	  		int cdCliente  = 0;
+	  		
+	  		while((line = raf.readLine()) != null)	{
+	  			
+	  			StringTokenizer tokens = new StringTokenizer(line, ";", false);
+	  			
+				nrPasta        = tokens.nextToken().trim();
+				nmTipoProcesso = tokens.nextToken().toUpperCase().trim();	
+				dtDistribuicao = Util.convStringToCalendar(tokens.nextToken());
+				nrProcesso     = tokens.nextToken().trim();
+				nrJuizo		   = tokens.nextToken().replaceAll("ª", "").replaceAll("º", "").trim();
+				nmJuizo        = tokens.nextToken().toUpperCase().trim();
+				nmComarca      = tokens.nextToken().toUpperCase(); nmComarca = nmComarca.replaceAll("\'", "").trim();
+				sgUf	       = tokens.nextToken().toUpperCase().trim();
+				nrContrato	   = tokens.nextToken().trim();
+				float vlCausa  = 0;
+				
+				//para uso posterior na geracao de contratos, temporariamente gravado no campo de observacao
+				txtObservacao = nrContrato;
+				
+				try	{
+					String vlProcesso = tokens.nextToken();
+					System.out.println("vlProcesso: "+vlProcesso);
+					
+					vlProcesso = vlProcesso.trim().substring(2);
+					vlProcesso = vlProcesso.trim().replaceAll("\\.", "");
+					vlProcesso = vlProcesso.replaceAll(",", ".");
+					vlCausa = Float.parseFloat(vlProcesso.trim());
+				}
+				catch(Exception e){};
+				
+				nmAdverso = tokens.nextToken().toUpperCase();
+				nrCpfAdverso    = tokens.nextToken(); nrCpfAdverso = nrCpfAdverso.replaceAll("-", ""); nrCpfAdverso = nrCpfAdverso.replaceAll("\\.", "").trim();
+				nmGrupoProcesso = tokens.nextToken().toUpperCase();
+				nmAdvogadoResponsavel   = tokens.nextToken().toUpperCase().trim();
+				
+				System.out.println("nmAdverso: "+nmAdverso);
+				System.out.println("nrProcesso: "+nrProcesso);
+				System.out.println("vlCausa: "+vlCausa);
+				
+				String nrProcessoOriginal = nrProcesso;
+				if(nrProcesso.length()==20)
+					nrProcesso = Util.format(nrProcesso, "#######-##.####.#.##.####", false);
+				try {
+					if(nrProcesso.length()==12 && Integer.parseInt(nrProcesso.substring(8, 12)) > 2000)
+						nrProcesso = Util.format(nrProcesso, "#######-#/####", false);
+				} catch(Exception f){};
+				
+				
+				//String nmTipoObjeto   = ""; //tokens.nextToken();	
+				String sgTribunal     = "TJ-"+sgUf;
+				//
+				if(nmTipoProcesso.trim().equals(""))
+					nmTipoProcesso = "AÇÃO INDENIZATÓRIA";
+				
+				// Verifica se o processo já não existe
+				pesqProcesso.setString(1, nrProcesso);
+				pesqProcesso.setString(2, nrProcessoOriginal);
+				pesqProcesso.setInt(3, cdCliente);
+				
+				int cdAdvogadoResponsavel  = 0;
+				pesqPessoa.setString(1, nmAdvogadoResponsavel);				
+				ResultSet rsTemp = pesqPessoa.executeQuery();
+				if(rsTemp.next())
+					cdAdvogadoResponsavel = rsTemp.getInt("cd_pessoa");
+				
+				System.out.println("nmAdvogadoResponsavel: "+nmAdvogadoResponsavel);
+				System.out.println("cdAdvogadoResponsavel: "+cdAdvogadoResponsavel);
+				
+				rsTemp = pesqProcesso.executeQuery();
+				if(rsTemp.next())
+					System.out.println("JÁ CADASTRADO: nrProcesso: "+nrProcesso);
+				else {
+					
+					//PARTE ADVERSA
+					int cdAdverso  = 0;
+					if(!nrCpfAdverso.trim().equals("") && Util.isCpfValido(nrCpfAdverso)) {
+						pesqPessoaCpf.setString(1, nrCpfAdverso);
+						rsTemp = pesqPessoaCpf.executeQuery();
+						if(rsTemp.next())
+							cdAdverso = rsTemp.getInt("cd_pessoa");
+					}
+					//
+					if(cdAdverso <= 0) {
+						pesqPessoa.setString(1, nmAdverso);
+						rsTemp = pesqPessoa.executeQuery();
+						if(rsTemp.next())
+							cdAdverso = rsTemp.getInt("cd_pessoa");
+					}
+					if (cdAdverso <= 0)	{
+						cdAdverso = Conexao.getSequenceCode("grl_pessoa");
+						// Insere dados pessoais
+						connect.prepareStatement("INSERT INTO grl_pessoa (cd_pessoa,nm_pessoa,gn_pessoa) VALUES("+cdAdverso+",\'"+nmAdverso+"\',"+PessoaServices.TP_FISICA+")").executeUpdate();
+						// Dados de pessoa física
+						nrCpfAdverso = nrCpfAdverso.length()>11 ? nrCpfAdverso.substring(0,11) : nrCpfAdverso;
+						connect.prepareStatement("INSERT INTO grl_pessoa_fisica (cd_pessoa,nr_cpf) VALUES("+cdAdverso+",\'"+nrCpfAdverso+"\')").executeUpdate();
+						connect.prepareStatement("INSERT INTO grl_pessoa_empresa (cd_pessoa,cd_empresa,cd_vinculo) " +
+								                 "VALUES("+cdAdverso+",3,2)").executeUpdate();
+					}
+					
+					//SITUAÇÃO
+					int cdTipoSituacao  = 1;
+					
+					//TRIBUNAL
+					int cdTribunal      = 0;
+					pesqTribunal.setString(1, sgTribunal);
+					rsTemp = pesqTribunal.executeQuery();
+					if(rsTemp.next())
+						cdTribunal = rsTemp.getInt("cd_Tribunal");
+					else {
+						com.tivic.manager.prc.Tribunal tribunal = new com.tivic.manager.prc.Tribunal(0,sgTribunal,8,null,sgTribunal);
+						cdTribunal = com.tivic.manager.prc.TribunalDAO.insert(tribunal, connect);
+					}
+					
+					int tpInstancia = 3;
+					if(!nmJuizo.equals("JEC"))
+						tpInstancia = 1;
+						
+					// JUIZO
+					int cdJuizo         = 0;
+					pesqJuizo.setString(1, nmJuizo);
+					rsTemp = pesqJuizo.executeQuery();
+					if(rsTemp.next())
+						cdJuizo = rsTemp.getInt("cd_juizo");
+					else	{
+						System.out.println("NOVO JUIZO: "+nmJuizo);
+						com.tivic.manager.prc.Juizo juizo = new com.tivic.manager.prc.Juizo(0, nmJuizo, 0, null, null, null, 0);
+						cdJuizo = com.tivic.manager.prc.JuizoDAO.insert(juizo, connect);
+					}
+					
+					// TIPO DE PROCESSO
+					int cdTipoProcesso  = 0;
+					pesqTipoProcesso.setString(1, nmTipoProcesso);
+					rsTemp = pesqTipoProcesso.executeQuery();
+					if(rsTemp.next())
+						cdTipoProcesso = rsTemp.getInt("cd_tipo_processo");
+					else	{
+						System.out.println("NOVO TIPO DE AÇÃO: "+nmTipoProcesso);
+						com.tivic.manager.prc.TipoProcesso tipoProcesso = new com.tivic.manager.prc.TipoProcesso(0,0 /*cdAreaDireito*/,nmTipoProcesso,"AUTOR",1,"RÉU","",0,0);
+						cdTipoProcesso = com.tivic.manager.prc.TipoProcessoDAO.insert(tipoProcesso, connect);
+					}
+					
+					//OBJETO DA AÇÃO
+					int cdObjetoAcao    = 0;
+					/*
+					pesqObjetoAcao.setString(1, nmTipoObjeto);
+					rsTemp = pesqObjetoAcao.executeQuery();
+					if(rsTemp.next())
+						cdObjetoAcao = rsTemp.getInt("cd_tipo_objeto");
+					else	{
+						com.tivic.manager.prc.ObjetoAcao objetoAcao = new com.tivic.manager.prc.ObjetoAcao(0,nmTipoObjeto,null);
+						cdObjetoAcao = com.tivic.manager.prc.ObjetoAcaoDAO.insert(objetoAcao, connect);
+					}
+					*/
+					
+					//GRUPO DE PROCESSO
+					int cdGrupoProcesso = 0;
+					pesqGrupoProcesso.setString(1, nmGrupoProcesso);
+					rsTemp = pesqGrupoProcesso.executeQuery();
+					if(rsTemp.next())
+						cdGrupoProcesso = rsTemp.getInt("cd_grupo_processo");
+					else	{
+						com.tivic.manager.prc.GrupoProcesso grupoProcesso = new com.tivic.manager.prc.GrupoProcesso(0, nmGrupoProcesso, null, null, 0, 1);
+						cdGrupoProcesso = com.tivic.manager.prc.GrupoProcessoDAO.insert(grupoProcesso, connect);
+					}
+					
+					//CIDADE
+					int cdEstado = 0;
+					pesqEstado.setString(1, sgUf);
+					rsTemp = pesqEstado.executeQuery();
+					if(rsTemp.next())
+						cdEstado = rsTemp.getInt("cd_estado");
+					//
+					int cdCidade = 4;
+										
+					pesqCidade.setString(1, nmComarca);
+					pesqCidade.setInt(2, cdEstado);
+					rsTemp = pesqCidade.executeQuery();
+					if(rsTemp.next())
+						cdCidade = rsTemp.getInt("cd_cidade");
+					else	{
+						System.out.println("Nova cidade: "+nmComarca);
+						com.tivic.manager.grl.Cidade cidade = new com.tivic.manager.grl.Cidade(0,nmComarca,null/*cep*/, 0/* vlAltitude*/, 0, 0, cdEstado, null, 0, null, null, 0, 0);
+						cdCidade = com.tivic.manager.grl.CidadeDAO.insert(cidade, connect);
+					}
+					
+					
+					GregorianCalendar dtRepasse = new GregorianCalendar();
+					com.tivic.manager.prc.Processo processo = ProcessoServices.getProcessoByNrProcesso(nrProcesso);
+					
+					if(processo==null) {
+						System.out.println("Processo não encontrado: "+nrProcesso);
+//						 processo = new com.tivic.manager.prc.Processo(0, 
+//													cdTipoProcesso,
+//													0/*cdOrgaoJudicial*/,
+//													0/*cdComarca*/,
+//													cdTipoSituacao,
+//													cdAdvogadoResponsavel /*cdAdvogado*/,
+//													0/*cdAdvogadoContrario*/,
+//													0/*cdOrgao*/,
+//													cdGrupoProcesso,
+//													0 /*lgClienteAutor*/,
+//													"" /*txtObjeto*/,
+//													txtObservacao /*txtObservacao*/, 
+//													dtDistribuicao /*dtDistribuicao*/,
+//													null /*dtAutuacao*/,
+//													null /*txtSentenca*/,
+//													null /*dtSentenca*/,
+//													1 /*stProcesso*/,
+//													new GregorianCalendar()/*dtSituacao*/,
+//													vlCausa /*vlProcesso*/,
+//													0 /*vlAcordo*/,
+//													0 /*lgTaxaPapel*/,
+//													0 /*lgTaxaPaga*/,
+//													null/*nrAntigo*/,
+//													null/*dtUltimoAndamento*/,
+//													0/*qtMaxDias*/,
+//													0/*vlSentenca*/,
+//													tpInstancia,
+//													new GregorianCalendar()/*dtAtualizacao*/,
+//													1/*tpPerda:Provável*/,
+//													0/*cdAdvogadoTitular*/,
+//													0/*cdOficialJustica*/,
+//													0/*cdTipoPedido*/,
+//													cdObjetoAcao /*cdTipoObjeto*/,
+//													0/*cdResponsavelArquivo*/,
+//													new GregorianCalendar()/*dtCadastro*/,
+//													0/**/,
+//													nrJuizo /*nrJuizo*/,
+//													cdCidade,
+//													0/*qtMediaDias*/,
+//													null /*dtPrazo*/,
+//													0 /*lgPrazo*/,
+//													null /**/,
+//													null,
+//													nrPasta,
+//													0/*stLiminar*/,
+//													0/*stArquivo*/,
+//													dtRepasse,
+//													0/*cdCentroCusto*/, 
+//													null /*dtAtualizacaoEdit*/, 
+//													null/*dtAtualizacaoEDI*/, 
+//													0 /*stAtualizacaoEdi*/, 
+//													cdTribunal, 
+//													cdJuizo, 
+//													nrProcesso, 
+//													0 /*cdUsuarioCadastro*/, 
+//													0 /*tpAutos*/);
+//					
+//						 int cdProcesso = com.tivic.manager.prc.ProcessoDAO.insert(processo, connect);
+//
+//						//ADVERSO
+//						com.tivic.manager.prc.ProcessoServices.insertAdverso(cdProcesso, cdAdverso);
+//						
+//						//CLIENTE
+//						if(cdCliente > 0)	
+//							com.tivic.manager.prc.ProcessoServices.insertParteCliente(cdProcesso, cdCliente);
+					}
+					else {
+						if(processo.getVlAcordo()!=vlCausa)
+							processo.setVlProcesso(vlCausa);
+						
+						if(processo.getCdGrupoProcesso()!=cdGrupoProcesso)
+							processo.setCdGrupoProcesso(cdGrupoProcesso);
+						
+						if(processo.getCdAdvogado()!=cdAdvogadoResponsavel)
+							processo.setCdAdvogado(cdAdvogadoResponsavel);
+						
+						if(processo.getVlAcordo()>0 ||  processo.getCdGrupoProcesso()>0 || processo.getCdAdvogado()>0) {
+							System.out.println("UPDATE Processo.");
+							com.tivic.manager.prc.ProcessoDAO.update(processo, connect);
+						}
+					}
+				}
+				
+				i++;
+				if (i%100==0 && i>1) {
+					System.out.println(i+" registros importados");
+				}
+			}
+	  		
+	  		System.out.println(i+" registros importados");
+			System.out.println("Importação de processos concluída!");
+			raf.close();
+			return new sol.util.Result(1);
+		}
+		catch(Exception e)	{
+			try {raf.close(); }catch(Exception n){};
+			System.out.println(nrPasta);
+			e.printStackTrace(System.out);
+			return new sol.util.Result(-1, "Erro ao tentar importar processos!", e);
+		}
+		finally{
+			Conexao.desconectar(connect);
+		}
+	}
+
+	public static sol.util.Result updatePrcProcessosFromXlsBenner(String nmArquivo)	{
+		nmArquivo = "c:/bi.csv"; 
+		Connection connect   = Conexao.conectar();
+		String nrPasta="", nmAdverso, nrCpfAdverso, nrProcesso, nrContrato, dtDistribuicao, idProcesso, nmGrupo;
+		RandomAccessFile raf = null;
+		try {
+			/***********************
+			 * Importando Processos
+			 ***********************/
+			PreparedStatement pesqProcesso      = connect.prepareStatement("SELECT * FROM prc_processo A, prc_parte_cliente B " +
+					                                                       "WHERE nr_processo  = ? " +
+					                                                       "  AND A.cd_processo = B.cd_processo" +
+					                                                       "  AND B.cd_pessoa   = ?");
+			PreparedStatement pesqProcesso2     = connect.prepareStatement("SELECT * FROM prc_processo A, prc_parte_cliente B " +
+														                   "WHERE nr_processo LIKE ? " +
+														                   "  AND A.cd_processo = B.cd_processo" +
+														                   "  AND B.cd_pessoa   = ?");
+			PreparedStatement pesqGrupoProcesso = connect.prepareStatement("SELECT * FROM prc_grupo_processo WHERE nm_grupo_processo LIKE ?");
+			PreparedStatement pesqPessoa        = connect.prepareStatement("SELECT * FROM grl_pessoa WHERE nm_pessoa = ?");
+			PreparedStatement pesqPessoaCpf     = connect.prepareStatement("SELECT * FROM grl_pessoa_fisica WHERE nr_cpf = ?");
+			PreparedStatement updPessoaCpf     = connect.prepareStatement("UPDATE grl_pessoa_fisica SET nr_cpf = ? WHERE cd_pessoa = ?");
+			PreparedStatement pesqContrato      = connect.prepareStatement("SELECT * FROM prc_contrato WHERE cd_processo = ?");
+			PreparedStatement insContrato       = connect.prepareStatement("INSERT INTO prc_contrato (cd_contrato, cd_devedor, cd_processo, nr_contrato) VALUES (?, ?, ?, ?) ");
+			PreparedStatement updProcesso = connect.prepareStatement("UPDATE prc_processo SET dt_distribuicao=?,vl_processo=?,nm_conteiner3=?,id_processo=?,cd_grupo_processo=? WHERE cd_processo = ?");
+			
+			raf = new RandomAccessFile(nmArquivo, "rw");
+	  		System.out.println("Arquivo carregado...");
+	  		String line = "";
+	  		int i = 0;
+			// Parte Cliente
+			int cdCliente  = 0;
+			ResultSet rsTemp = connect.prepareStatement("SELECT * FROM grl_pessoa WHERE nm_pessoa LIKE \'BANCO INDUSTRIAL DO BRASIL S/A%\'").executeQuery();
+			if(rsTemp.next())
+				cdCliente = rsTemp.getInt("cd_pessoa");
+			//
+	  		rsTemp = connect.prepareStatement("SELECT MAX(cd_contrato) FROM prc_contrato").executeQuery();
+	  		int cdContrato = rsTemp.next() ? rsTemp.getInt(1) + 1 : 1;
+	  		while((line = raf.readLine()) != null)	{
+				if(i < 400) {
+					i++;
+					continue;
+				}
+	  			StringTokenizer tokens = new StringTokenizer(line, ";", false);
+	  			
+				nrProcesso     = tokens.nextToken().trim();	
+				nrContrato     = tokens.nextToken().trim();	
+				nrCpfAdverso   = tokens.nextToken(); nrCpfAdverso = nrCpfAdverso.replaceAll("-", ""); nrCpfAdverso = nrCpfAdverso.replaceAll("\\.", ""); nrCpfAdverso   = Util.fill(nrCpfAdverso, 11, '0', 'E');	
+				dtDistribuicao = tokens.nextToken(); 	
+				float vlProcesso = 0; 
+				try	{
+					String dsValorProcesso = tokens.nextToken();
+					dsValorProcesso = dsValorProcesso.replaceAll("\\.", "");
+					dsValorProcesso = dsValorProcesso.replaceAll(",", ".");
+					vlProcesso      = Float.parseFloat(dsValorProcesso);
+				}
+				catch(Exception e){ };
+				
+				nrPasta        = tokens.nextToken(); // Pasta Tedesco	
+				idProcesso     = tokens.nextToken(); // Pasta Benner - provavelmente	
+				nmAdverso      = tokens.nextToken().toUpperCase();
+				nmGrupo        = tokens.nextToken().toUpperCase();
+				if(nrProcesso.equals("")) {
+					System.out.println("Nº do processo não informado! nrPasta: "+nrPasta);
+					continue;
+				}
+				/*
+				nmJuizo        = tokens.nextToken().toUpperCase();	
+				nmTipoProcesso = tokens.nextToken().toUpperCase();	
+				nmComarca      = tokens.nextToken().toUpperCase(); nmComarca = nmComarca.replaceAll("\'", "");	
+				sgUf	       = tokens.nextToken().toUpperCase(); 
+				nmEscritorio   = tokens.nextToken().toUpperCase();
+				
+				String nrProcessoOriginal = nrProcesso;
+				if(nrProcesso.length()==20)
+					nrProcesso = Util.format(nrProcesso, "#######-##.####.#.##.####", false);
+				//
+				try {
+					if(nrProcesso.length()==12 && Integer.parseInt(nrProcesso.substring(8, 12)) > 2000)
+						nrProcesso = Util.format(nrProcesso, "#######-#/####", false);
+				} catch(Exception f){};
+				//String nmTipoObjeto   = ""; //tokens.nextToken();	
+				String sgTribunal     = "TJ-"+sgUf;
+				//
+				if(nmTipoProcesso.trim().equals(""))
+					nmTipoProcesso = "AÇÃO INDENIZATÓRIA";
+				*/
+				// Verifica se o processo já não existe
+				pesqProcesso.setString(1, nrProcesso);
+				pesqProcesso.setInt(2, cdCliente);
+				ResultSetMap rsmTemp = new ResultSetMap(pesqProcesso.executeQuery());
+				// Busca de novo usando o LIKE
+				if(rsmTemp.size()==0) {
+					pesqProcesso2.setString(1, "%"+nrProcesso);
+					pesqProcesso2.setInt(2, cdCliente);
+					rsmTemp = new ResultSetMap(pesqProcesso2.executeQuery());
+					if(rsmTemp.size() > 1)
+						rsmTemp = new ResultSetMap();
+				}
+				if(rsmTemp.next()) {
+					int cdProcesso           = rsmTemp.getInt("cd_processo");
+					Timestamp dtDistGravada  = rsmTemp.getTimestamp("dt_distribuicao");
+					String nrPastaGravada    = rsmTemp.getString("nm_conteiner3");
+					String idProcessoGravado = rsmTemp.getString("id_processo");
+					float vlProcessoGravado  = rsmTemp.getFloat("vl_processo");
+					int cdGrupoGravado       = rsmTemp.getInt("cd_grupo_processo");
+					/*
+					 * VERIFICA GRUPO DE PROCESSO
+					 */
+					int cdGrupo = 0;
+					pesqGrupoProcesso.setString(1, "%"+nmGrupo+"%");
+					ResultSet rsGrupo = pesqGrupoProcesso.executeQuery();
+					if(rsGrupo.next())
+						cdGrupo = rsGrupo.getInt("cd_grupo_processo");
+					/*
+					 * ATUALIZA DADOS DO PROCESSO
+					 */
+					// dtDistribuicao
+					if(dtDistGravada != null)
+						updProcesso.setTimestamp(1, dtDistGravada);
+					else {
+						try {
+							GregorianCalendar dtDist = com.tivic.manager.util.Util.convStringToCalendar(dtDistribuicao);
+							updProcesso.setTimestamp(1, new Timestamp(dtDist.getTimeInMillis()));
+						}
+						catch(Exception e) {
+							updProcesso.setNull(1, Types.TIMESTAMP);
+						}
+					}
+					// Valor da causa
+					if(vlProcessoGravado > 0)
+						updProcesso.setFloat(2, vlProcessoGravado);
+					else
+						updProcesso.setFloat(2, vlProcesso);
+					// Nº da Pasta
+					if(nrPastaGravada!=null && !nrPastaGravada.trim().equals(""))
+						updProcesso.setString(3, nrPastaGravada);
+					else
+						updProcesso.setString(3, nrPasta);
+					// Nº da Pasta
+					if(idProcessoGravado!=null && !idProcessoGravado.trim().equals(""))
+						updProcesso.setString(4, idProcessoGravado);
+					else
+						updProcesso.setString(4, idProcesso);
+					// Nº da Pasta
+					if (cdGrupo > 0) 
+						updProcesso.setInt(5, cdGrupo);
+					else if(cdGrupoGravado>0 )
+						updProcesso.setInt(5, cdGrupoGravado);
+					else
+						updProcesso.setNull(5, Types.INTEGER);
+					updProcesso.setInt(6, cdProcesso);
+					updProcesso.executeUpdate();
+					/*
+					 * ATUALIZA DADOS DO ADVERSO
+					 */
+					// Parte Adversa - Busca por CPF
+					int cdAdverso  = 0;
+					if(!nrCpfAdverso.trim().equals("") && Util.isCpfValido(nrCpfAdverso)) {
+						// Se encontrar pelo cpf não precisa atualizar
+						pesqPessoaCpf.setString(1, nrCpfAdverso);
+						rsTemp = pesqPessoaCpf.executeQuery();
+						if(rsTemp.next())
+							cdAdverso = rsTemp.getInt("cd_pessoa");
+					}
+ 					if(cdAdverso <= 0) {
+						// Busca por Nome
+						if(cdAdverso <= 0) {
+							if(nmAdverso.length()>50)
+								nmAdverso = nmAdverso.substring(0, 49);
+							pesqPessoa.setString(1, nmAdverso);
+							rsTemp = pesqPessoa.executeQuery();
+							if(rsTemp.next())
+								cdAdverso = rsTemp.getInt("cd_pessoa");
+							if(rsTemp.next())
+								cdAdverso = 0;
+						}
+						if(cdAdverso > 0) {
+							updPessoaCpf.setString(1, nrCpfAdverso);
+							updPessoaCpf.setInt(2, cdAdverso);
+							updPessoaCpf.executeUpdate();
+						}
+					}
+					/*
+					 * ATUALIZA DADOS DO CONTRATO
+					 */
+					pesqContrato.setInt(1, cdProcesso);
+					ResultSet rs = pesqContrato.executeQuery();
+					if(!rs.next()) {
+						if(cdAdverso <= 0) {
+							rs = connect.prepareStatement("SELECT cd_pessoa FROM prc_outra_parte WHERE cd_processo = "+cdProcesso).executeQuery();
+							cdAdverso = rs.next() ? rs.getInt(1) : 0;
+						}
+						insContrato.setInt(1, cdContrato);
+						if(cdAdverso > 0)
+							insContrato.setInt(2, cdAdverso);
+						else
+							insContrato.setInt(2, cdCliente);
+						insContrato.setInt(3, cdProcesso);
+						insContrato.setString(4, nrContrato);
+						insContrato.executeUpdate();
+						cdContrato++;
+					}
+				}
+				else
+					System.out.println("\tNao Localizado: nrProcesso: "+nrProcesso);
+				i++;
+				if (i%100==0 && i>1) {
+					System.out.println("\t\t"+i+" registros importados");
+				}
+			}
+			System.out.println("Importação de processos concluída! ["+i+" registros]");
+			raf.close();
+			return new sol.util.Result(1);
+		}
+		catch(Exception e)	{
+			try {raf.close(); }catch(Exception n){};
+			System.out.println("nrPasta: "+nrPasta);
+			e.printStackTrace(System.out);
+			return new sol.util.Result(-1, "Erro ao tentar importar processos!", e);
+		}
+		finally{
+			Conexao.desconectar(connect);
+		}
+	}
+
+	public static sol.util.Result importVinculosProcesso(int inicio, int fim)	{
+		Connection connect   = Conexao.conectar();
+		Connection conOrigem = conectar();
+		try {
+			fim = fim<=0 || fim>9 ? 9 : fim;
+			/***********************
+			 * Importando Vinculos dos Processos
+			 ***********************/
+			String[] nmTabela  = new String[] {"prc_bem_penhora","prc_outra_parte","prc_outro_interessado","prc_parte_cliente","prc_processo_advogado",
+					                           "prc_processo_andamento","prc_processo_arquivo","prc_processo_instancia","prc_processo_tipo_pedido",
+					                           "prc_testemunha"};
+			String[] nmIdBusca = new String[] {"cd_bem","cd_pessoa","cd_outro_interessado","cd_pessoa","cd_pessoa","cd_andamento","cd_arquivo","tp_instancia",
+											   "cd_tipo_pedido","cd_pessoa"};
+			
+			for(int i = inicio; i<=fim; i++)	{
+				ResultSet rs = connect.prepareStatement("SELECT COUNT(*) FROM "+nmTabela[i]).executeQuery();
+				rs.next();
+				boolean verificaExistencia = rs.getInt(1)>0;
+				PreparedStatement pesqRegistroBy = connect.prepareStatement("SELECT * FROM "+nmTabela[i]+" WHERE cd_processo = ? AND "+nmIdBusca[i]+" = ?");
+				System.out.println("Importando "+nmTabela[i]+"...");
+				//
+				String tableName = nmTabela[i];
+				rs = conOrigem.prepareStatement("SELECT * FROM "+tableName).executeQuery();
+				while(rs.next())	{
+					ResultSet rsTemp = null;
+					String nmField = nmIdBusca[i];
+					if(verificaExistencia)	{
+						pesqRegistroBy.setInt(1, rs.getInt("cd_processo"));
+						pesqRegistroBy.setInt(2, rs.getInt(nmField));
+						rsTemp = pesqRegistroBy.executeQuery();
+					}
+					if(!verificaExistencia || !rsTemp.next())	{
+						switch(i)	{
+							case 0: // Bem Penhora
+								BemPenhora bemPenhora = new BemPenhora(rs.getInt("CD_BEM"),rs.getInt("CD_PROCESSO"),rs.getInt("CD_CIDADE"),rs.getString("NM_BEM"),
+										                               rs.getInt("ST_BEM"),rs.getDouble("VL_BEM"),rs.getString("NM_LOGRADOURO"),rs.getString("NM_BAIRRO"),
+										                               rs.getString("NM_DISTRITO"),rs.getString("NR_ENDERECO"),rs.getString("NM_COMPLEMENTO"),rs.getString("NM_ENDERECO"),
+										                               (rs.getTimestamp("DT_ATUALIZACAO_EDI")==null)?null:Util.longToCalendar(rs.getTimestamp("DT_ATUALIZACAO_EDI").getTime()),
+										                               rs.getInt("ST_ATUALIZACAO_EDI"),rs.getInt("TP_BEM"),rs.getInt("TP_GARANTIA"),rs.getInt("TP_GRAU"),
+										                               rs.getDouble("VL_JUDICIAL"),rs.getDouble("VL_CREDOR"),
+										                               (rs.getTimestamp("DT_ESTIMATIVA")==null)?null:Util.longToCalendar(rs.getTimestamp("DT_ESTIMATIVA").getTime()),
+										                               (rs.getTimestamp("DT_AVALIACAO_JUDICIAL")==null)?null:Util.longToCalendar(rs.getTimestamp("DT_AVALIACAO_JUDICIAL").getTime()),
+										                               (rs.getTimestamp("DT_AVALIACAO_CREDOR")==null)?null:Util.longToCalendar(rs.getTimestamp("DT_AVALIACAO_CREDOR").getTime()));
+								BemPenhoraDAO.insert(bemPenhora, connect);
+								break;
+							case 1: // Adverso
+								PreparedStatement pstmt = connect.prepareStatement("INSERT INTO PRC_OUTRA_PARTE (CD_PESSOA,CD_PROCESSO) VALUES (?, ?)");
+								pstmt.setInt(1,rs.getInt("cd_pessoa"));
+								pstmt.setInt(2,rs.getInt("cd_processo"));
+								try {pstmt.executeUpdate();}catch(Exception e){e.printStackTrace(System.out);};
+								break;
+							case 2: // Outros Interessados
+								pstmt = connect.prepareStatement("INSERT INTO PRC_OUTRO_INTERESSADO (CD_OUTRO_INTERESSADO,CD_PROCESSO,NM_OUTRO_INTERESSADO,NM_QUALIFICACAO) VALUES (?, ?, ?, ?)");
+								pstmt.setInt(1, rs.getInt("cd_outro_interessado"));
+								pstmt.setInt(2,rs.getInt("cd_processo"));
+								pstmt.setString(3,rs.getString("nm_outro_interessado"));
+								pstmt.setString(4,rs.getString("nm_qualificacao"));
+								try {pstmt.executeUpdate();}catch(Exception e){e.printStackTrace(System.out);};
+								break;
+							case 3: // Parte Cliente
+								pstmt = connect.prepareStatement("INSERT INTO PRC_PARTE_CLIENTE (CD_PESSOA,CD_PROCESSO,LG_CLIENTE) VALUES (?, ?, 1)");
+								pstmt.setInt(1,rs.getInt("cd_pessoa"));
+								pstmt.setInt(2,rs.getInt("cd_processo"));
+								try {pstmt.executeUpdate();}catch(Exception e){e.printStackTrace(System.out);};
+								break;
+							case 4: // Outros Advogados
+								pstmt = connect.prepareStatement("INSERT INTO PRC_PROCESSO_ADVOGADO (CD_PESSOA,CD_PROCESSO) VALUES (?, ?)");
+								pstmt.setInt(1,rs.getInt("cd_pessoa"));
+								pstmt.setInt(2,rs.getInt("cd_processo"));
+								try {pstmt.executeUpdate();}catch(Exception e){e.printStackTrace(System.out);};
+								break;
+							case 5: // Andamentos
+								ProcessoAndamento andamento = new ProcessoAndamento(rs.getInt("CD_ANDAMENTO"),rs.getInt("CD_PROCESSO"),rs.getInt("CD_TIPO_ANDAMENTO"),
+										(rs.getTimestamp("DT_ANDAMENTO")==null)?null:Util.longToCalendar(rs.getTimestamp("DT_ANDAMENTO").getTime()),
+										(rs.getTimestamp("DT_LANCAMENTO")==null)?null:Util.longToCalendar(rs.getTimestamp("DT_LANCAMENTO").getTime()),
+										rs.getString("TXT_ANDAMENTO"),rs.getInt("ST_ANDAMENTO"),rs.getInt("TP_INSTANCIA"),
+										null /*txtAta*/,rs.getInt("CD_USUARIO"),
+										(rs.getTimestamp("DT_ALTERACAO")==null)?null:Util.longToCalendar(rs.getTimestamp("DT_ALTERACAO").getTime()),
+										rs.getInt("TP_ORIGEM"),rs.getBytes("BLB_ATA"),
+										rs.getInt("TP_VISIBILIDADE"),rs.getInt("TP_EVENTO_FINANCEIRO"),
+										rs.getDouble("VL_EVENTO_FINANCEIRO"),rs.getInt("CD_CONTA_PAGAR"),rs.getInt("CD_CONTA_RECEBER"),
+										(rs.getTimestamp("DT_ATUALIZACAO_EDI")==null)?null:Util.longToCalendar(rs.getTimestamp("DT_ATUALIZACAO_EDI").getTime()),
+										rs.getInt("ST_ATUALIZACAO_EDI"), null /*txtPublicacao*/, 0 /*cdDocumento*/, 0 /*cdOrigemAndamento*/,
+										0 /*cdRecorte*/);
+								ProcessoAndamentoDAO.insert(andamento, connect);
+								break;
+							case 6:
+								/*
+								ProcessoArquivo arquivo = new ProcessoArquivo(rs.getInt("cd_arquivo"),rs.getInt("cd_processo"),rs.getInt("cd_andamento"),
+																			  rs.getString("nm_arquivo"), rs.getString("nm_documento"),
+																			  (rs.getTimestamp("dt_arquivamento")==null)?null:Util.longToCalendar(rs.getTimestamp("dt_arquivamento").getTime()),
+																			  rs.getString("blb_arquivo"));
+								ProcessoArquivoDAO.insert(arquivo, connect);
+								*/
+								break;
+							case 7:
+								ProcessoInstancia instancia = new ProcessoInstancia(rs.getInt("cd_processo"),rs.getInt("cd_tipo_processo"),
+																					rs.getInt("cd_orgao_judicial"),rs.getInt("cd_comarca"),
+																					rs.getInt("tp_instancia"),
+																					(rs.getTimestamp("dt_sentenca")==null)?null:Util.longToCalendar(rs.getTimestamp("dt_sentenca").getTime()),
+																					rs.getInt("st_processo"),rs.getString("ds_sentenca"),
+																					rs.getString("nr_processo"));
+								ProcessoInstanciaDAO.insert(instancia, connect);
+								break;
+							case 8: // Tipo de Pedido
+								pstmt = connect.prepareStatement("INSERT INTO PRC_PROCESSO_TIPO_PEDIDO (CD_TIPO_PEDIDO,CD_PROCESSO) VALUES (?, ?)");
+								pstmt.setInt(1,rs.getInt("cd_tipo_pedido"));
+								pstmt.setInt(2,rs.getInt("cd_processo"));
+								try {pstmt.executeUpdate();}catch(Exception e){e.printStackTrace(System.out);};
+								break;
+							case 9: // Testemunha
+								pstmt = connect.prepareStatement("INSERT INTO PRC_TESTEMUNHA (CD_PESSOA,CD_PROCESSO) VALUES (?, ?)");
+								pstmt.setInt(1,rs.getInt("cd_pessoa"));
+								pstmt.setInt(2,rs.getInt("cd_processo"));
+								try {pstmt.executeUpdate();}catch(Exception e){e.printStackTrace(System.out);};
+								break;
+						}
+					}
+				}
+			}
+			System.out.println("Importação dos Vinculos dos Processos concluída!");
+			return new sol.util.Result(1);
+		}
+		catch(Exception e){
+			e.printStackTrace(System.out);
+			return new sol.util.Result(-1, "Erro ao tentar importar Vinculos dos Processos!", e);
+		}
+		finally{
+			Conexao.desconectar(connect);
+			Conexao.desconectar(conOrigem);
+		}
+	}
+
+	public static sol.util.Result importSeguranca(int nrTabelaInicial, int nrTabelaFinal)	{
+		Connection connect   = Conexao.conectar();
+		Connection conOrigem = conectar();
+		try {
+			if (nrTabelaFinal <= 0)
+				nrTabelaFinal = 13; 
+			
+			/***********************
+			 * Importando Dados de Segurança
+			 ***********************/
+			String[] nmTabela  = new String[] {"seg_usuario","seg_grupo","seg_sistema","seg_modulo","seg_formulario","seg_agrupamento_acao","seg_acao",
+					                           "seg_sistema_acao","seg_objeto","seg_usuario_grupo","seg_grupo_permissao","seg_usuario_permissao",
+					                           "seg_log_execucao_acao","seg_conta_usuario"};
+			String[] nmIdBusca = new String[] {"cd_usuario","cd_grupo","cd_sistema","cd_modulo","cd_formulario","cd_agrupamento","cd_acao",
+					                           "cd_acao","cd_objeto","cd_usuario","cd_grupo","cd_usuario",
+					                           "cd_execucao","cd_conta"};
+			
+			for(int i = nrTabelaInicial; i<=nrTabelaFinal; i++)	{
+				String tabela = nmTabela[i]; 
+				if(nmTabela[i].equals("seg_conta_usuario"))
+					tabela = "seg_usuario_conta_financeira";
+				ResultSet rs = connect.prepareStatement("SELECT COUNT(*) FROM "+tabela).executeQuery();
+				rs.next();
+				boolean verificaExistencia = rs.getInt(1)>0;
+				PreparedStatement pesqRegistroBy = connect.prepareStatement("SELECT * FROM "+tabela+" WHERE "+nmIdBusca[i]+" = ?");
+				System.out.println("Importando "+nmTabela[i]+"...");
+				int l = 0;
+				//
+				String tableName = nmTabela[i];
+				rs = conOrigem.prepareStatement("SELECT * FROM "+tableName).executeQuery();
+				while(rs.next())	{
+					l++;
+					if(l%100==0)
+						System.out.println(l+" registros gravados!");
+					if(i==12 && l>100)	{
+						System.out.println(l+" saindo antes do final!");
+						break;
+					}
+					ResultSet rsTemp = null;
+					String nmField = nmIdBusca[i];
+					if(i==8 && verificaExistencia)	{
+						rsTemp = connect.prepareStatement("SELECT * FROM seg_objeto WHERE cd_formulario = "+rs.getInt("cd_formulario")+
+								                          " AND nm_objeto = \'"+rs.getString("nm_objeto")+"\'").executeQuery();
+					}
+					else if(i==9 && verificaExistencia)	{
+						rsTemp = connect.prepareStatement("SELECT * FROM seg_usuario_grupo WHERE cd_usuario = "+rs.getInt("cd_usuario")+
+								                          " AND cd_grupo = "+rs.getInt("cd_grupo")).executeQuery();
+					}
+					else if(i==10 && verificaExistencia)	{
+						rsTemp = connect.prepareStatement("SELECT * FROM seg_grupo_permissao WHERE cd_acao = "+rs.getInt("cd_acao")+
+								                          " AND cd_grupo = "+rs.getInt("cd_grupo")).executeQuery();
+					}
+					else if(i==11 && verificaExistencia)	{
+						rsTemp = connect.prepareStatement("SELECT * FROM seg_usuario_permissao WHERE cd_usuario = "+rs.getInt("cd_usuario")+
+								                          " AND cd_acao = "+rs.getInt("cd_acao")).executeQuery();
+					}
+					else if(i==13 && verificaExistencia)	{
+						rsTemp = connect.prepareStatement("SELECT * FROM seg_usuario_conta_financeira WHERE cd_usuario = "+rs.getInt("cd_usuario")+
+								                          " AND cd_conta = "+rs.getInt("cd_conta")).executeQuery();
+					}
+					else if(verificaExistencia)	{
+						pesqRegistroBy.setInt(1, rs.getInt(nmField));
+						rsTemp = pesqRegistroBy.executeQuery();
+					}
+					if(!verificaExistencia || !rsTemp.next())	{
+						switch(i)	{
+							case 0: // Usuário
+								Usuario usuario = new Usuario(rs.getInt("cd_usuario"),rs.getInt("cd_usuario"),rs.getInt("cd_pergunta_secreta"),rs.getString("nm_login"),
+										  rs.getString("nm_senha"),rs.getInt("tp_usuario"),rs.getString("nm_resposta_secreta"),1);
+								UsuarioDAO.insert(usuario, connect);
+								break;
+							case 1: // Grupo de Usuário
+								Grupo grupo = new Grupo(rs.getInt("cd_grupo"),rs.getString("nm_grupo"));
+								GrupoDAO.insert(grupo, connect);
+								break;
+							case 2: // Sistema
+								Sistema sistema = new Sistema(rs.getInt("cd_sistema"),rs.getString("nm_sistema"),rs.getString("id_sistema"),1); 
+								SistemaDAO.insert(sistema, connect);
+								break;
+							case 3: // Módulos
+								Modulo modulo = new Modulo(rs.getInt("cd_modulo"),rs.getInt("cd_sistema"),rs.getString("nm_modulo"),rs.getString("id_modulo"),
+														   "1.0","1.0",1);  
+								ModuloDAO.insert(modulo, connect);
+								break;
+							case 4: // Formulários
+								connect.prepareStatement("INSERT INTO seg_formulario (cd_formulario,cd_sistema,nm_formulario,nm_titulo) " +
+										                 "VALUES ("+rs.getInt("cd_formulario")+","+rs.getInt("cd_sistema")+
+										                 ",\'"+rs.getString("nm_formulario")+"\',\'"+rs.getString("nm_titulo")+"\')").executeUpdate();
+								break;
+							case 5: // Agrupamento de Ação
+								PreparedStatement pstmt = connect.prepareStatement("INSERT INTO SEG_AGRUPAMENTO_ACAO (CD_AGRUPAMENTO,CD_MODULO,CD_SISTEMA,"+
+		                                  										   "NM_AGRUPAMENTO,ID_AGRUPAMENTO,DS_AGRUPAMENTO) VALUES (?, ?, ?, ?, ?, ?)");
+								pstmt.setInt(1, rs.getInt("cd_agrupamento"));
+								pstmt.setInt(2,rs.getInt("cd_modulo"));
+								pstmt.setInt(3,rs.getInt("cd_sistema"));
+								pstmt.setString(4,rs.getString("nm_agrupamento"));
+								pstmt.setString(5,rs.getString("id_agrupamento"));
+								pstmt.setString(6,rs.getString("ds_agrupamento"));
+								try {pstmt.executeUpdate();}catch(Exception e){e.printStackTrace(System.out);};
+								break;
+							case 6: // Ação
+								pstmt = connect.prepareStatement("INSERT INTO SEG_ACAO (CD_ACAO,CD_MODULO,CD_SISTEMA,NM_ACAO,DS_ACAO,CD_AGRUPAMENTO) VALUES (?, ?, ?, ?, ?, ?)");
+								pstmt.setInt(1, rs.getInt("cd_acao"));
+								pstmt.setInt(2, rs.getInt("cd_modulo"));
+								pstmt.setInt(3, rs.getInt("cd_sistema"));
+								pstmt.setString(4, rs.getString("nm_acao"));
+								pstmt.setString(5, rs.getString("ds_acao"));
+								if(rs.getInt("cd_agrupamento")==0)
+									pstmt.setNull(6, Types.INTEGER);
+								else
+									pstmt.setInt(6,rs.getInt("cd_agrupamento"));
+								try {pstmt.executeUpdate();}catch(Exception e){e.printStackTrace(System.out);};
+								break;
+							case 7: // Sistema Ação
+								pstmt = connect.prepareStatement("INSERT INTO SEG_SISTEMA_ACAO (CD_ACAO,CD_SISTEMA,NM_ACAO) VALUES (?, ?, ?)");
+								pstmt.setInt(1, rs.getInt("cd_acao"));
+								pstmt.setInt(2, rs.getInt("cd_sistema"));
+								pstmt.setString(3, rs.getString("nm_acao"));
+								try {pstmt.executeUpdate();}catch(Exception e){e.printStackTrace(System.out);};
+								break;
+							case 8:
+								pstmt = connect.prepareStatement("INSERT INTO SEG_OBJETO (CD_FORMULARIO,CD_OBJETO,CD_SISTEMA,CD_ACAO,CD_MODULO,"+
+		                                  						 "TP_OBJETO,NM_HINT,NM_OBJETO) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
+								pstmt.setInt(1, rs.getInt("cd_formulario"));
+								pstmt.setInt(2, rs.getInt("cd_objeto"));
+								pstmt.setInt(3, rs.getInt("cd_sistema"));
+								if(rs.getInt("cd_acao")==0)
+									pstmt.setNull(4, Types.INTEGER);
+								else
+									pstmt.setInt(4, rs.getInt("cd_acao"));
+								if(rs.getInt("cd_modulo")==0)
+									pstmt.setNull(5, Types.INTEGER);
+								else
+									pstmt.setInt(5, rs.getInt("cd_modulo"));
+								pstmt.setInt(6, rs.getInt("tp_objeto"));
+								pstmt.setString(7, rs.getString("nm_hint"));
+								pstmt.setString(8, rs.getString("nm_objeto"));
+								try {pstmt.executeUpdate();}catch(Exception e){e.printStackTrace(System.out);};
+								break;
+							case 9: // Usuário - Grupo
+								pstmt = connect.prepareStatement("INSERT INTO SEG_USUARIO_GRUPO (CD_USUARIO,CD_GRUPO) VALUES (?, ?)");
+								pstmt.setInt(1, rs.getInt("cd_usuario"));
+								pstmt.setInt(2, rs.getInt("cd_grupo"));
+								try {pstmt.executeUpdate();}catch(Exception e){e.printStackTrace(System.out);};
+								break;
+							case 10: // Grupo - Permissão
+								pstmt = connect.prepareStatement("INSERT INTO SEG_GRUPO_PERMISSAO (CD_SISTEMA,CD_ACAO,CD_GRUPO) VALUES (?, ?, ?)");
+								pstmt.setInt(1, rs.getInt("cd_sistema"));
+								pstmt.setInt(2, rs.getInt("cd_acao"));
+								pstmt.setInt(3, rs.getInt("cd_grupo"));
+								try {pstmt.executeUpdate();}catch(Exception e){e.printStackTrace(System.out);};
+								break;
+							case 11: // Usuário - Permissão
+								pstmt = connect.prepareStatement("INSERT INTO SEG_USUARIO_PERMISSAO (CD_SISTEMA,CD_ACAO,CD_USUARIO,LG_NATUREZA) VALUES (?, ?, ?, ?)");
+								pstmt.setInt(1, rs.getInt("cd_sistema"));
+								pstmt.setInt(2, rs.getInt("cd_acao"));
+								pstmt.setInt(3, rs.getInt("cd_usuario"));
+								pstmt.setInt(4, rs.getInt("lg_natureza"));
+								try {pstmt.executeUpdate();}catch(Exception e){e.printStackTrace(System.out);};
+								break;
+							case 12:
+								pstmt = connect.prepareStatement("INSERT INTO SEG_LOG_EXECUCAO_ACAO (CD_EXECUCAO,CD_ACAO,CD_MODULO,CD_SISTEMA,"+
+		                                                         "CD_USUARIO,DT_EXECUCAO,TXT_EXECUCAO) VALUES (?, ?, ?, ?, ?, ?, ?)");
+								pstmt.setInt(1, rs.getInt("cd_execucao"));
+								pstmt.setInt(2, rs.getInt("cd_acao"));
+								pstmt.setInt(3, rs.getInt("cd_modulo"));
+								pstmt.setInt(4, rs.getInt("cd_sistema"));
+								pstmt.setInt(5, rs.getInt("cd_usuario"));
+								if(rs.getTimestamp("dt_execucao")==null)
+									pstmt.setNull(6, Types.TIMESTAMP);
+								else
+									pstmt.setTimestamp(6, rs.getTimestamp("dt_execucao"));
+								pstmt.setObject(7, rs.getObject("txt_execucao"));
+								try {pstmt.executeUpdate();}catch(Exception e){e.printStackTrace(System.out);};								
+								break;
+							case 13: // Usuário - Conta
+								pstmt = connect.prepareStatement("INSERT INTO seg_usuario_conta_financeira (CD_USUARIO,CD_CONTA) VALUES (?, ?)");
+								pstmt.setInt(1, rs.getInt("cd_usuario"));
+								pstmt.setInt(2, rs.getInt("cd_conta"));
+								try {pstmt.executeUpdate();}catch(Exception e){e.printStackTrace(System.out);};
+								break;
+						}
+					}
+				}
+			}
+			System.out.println("Importação de dados da segurança concluída!");
+			return new sol.util.Result(1);
+		}
+		catch(Exception e){
+			e.printStackTrace(System.out);
+			return new sol.util.Result(-1, "Erro ao tentar importar dados de segurança!", e);
+		}
+		finally{
+			Conexao.desconectar(connect);
+			Conexao.desconectar(conOrigem);
+		}
+	}
+
+	public static sol.util.Result importAgdAgendaItem()	{
+		Connection connect   = Conexao.conectar();
+		Connection conOrigem = conectar();
+		try {
+			/***********************
+			 * Importando agenda
+			 ***********************/
+			PreparedStatement pesqAgenda = connect.prepareStatement("SELECT * FROM agd_agenda_item WHERE cd_agenda_item = ?");
+			System.out.println("Importando agendas...");
+			ResultSet rs = connect.prepareStatement("SELECT count(*) FROM agd_agenda_item").executeQuery();
+			rs.next();
+			boolean verificaExistencia = rs.getInt(1)>0;
+			//
+			int i = 0;
+			rs = conOrigem.prepareStatement("SELECT * FROM agd_agenda_item").executeQuery();
+			while(rs.next())	{
+				i++;
+				if(i%100==0)
+					System.out.println(i+" registros gravados");
+				ResultSet rsTemp = null; 
+				if(verificaExistencia){
+					pesqAgenda.setInt(1, rs.getInt("cd_agenda_item"));
+					rsTemp = pesqAgenda.executeQuery();
+				}
+				if(!verificaExistencia || !rsTemp.next())	{
+					PreparedStatement pstmt = connect.prepareStatement("INSERT INTO AGD_AGENDA_ITEM (CD_AGENDA_ITEM,DT_INICIAL,DT_FINAL,DT_LANCAMENTO,"+
+					                            					   "DS_DETALHE,ST_AGENDA_ITEM,CD_TIPO_PRAZO,CD_PESSOA,CD_PROCESSO,CD_TIPO_AGENDAMENTO,"+
+					                            					   "DT_REALIZACAO,DS_OBSERVACAO,DT_ALARME,CD_USUARIO,DT_ALTERACAO,DS_ASSUNTO) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+					pstmt.setInt(1, rs.getInt("cd_agenda_item"));
+					if(rs.getTimestamp("Dt_Inicial")==null)
+						pstmt.setNull(2, Types.TIMESTAMP);
+					else
+						pstmt.setTimestamp(2,rs.getTimestamp("Dt_Inicial"));
+					if(rs.getTimestamp("Dt_Final")==null)
+						pstmt.setNull(3, Types.TIMESTAMP);
+					else
+						pstmt.setTimestamp(3,rs.getTimestamp("Dt_Final"));
+					if(rs.getTimestamp("Dt_Lancamento")==null)
+						pstmt.setNull(4, Types.TIMESTAMP);
+					else
+						pstmt.setTimestamp(4,rs.getTimestamp("Dt_Lancamento"));
+					pstmt.setString(5,rs.getString("ds_detalhe"));
+					pstmt.setInt(6,rs.getInt("St_Agenda_Item"));
+					if(rs.getInt("Cd_Tipo_Prazo")==0)
+						pstmt.setNull(7, Types.INTEGER);
+					else
+						pstmt.setInt(7,rs.getInt("Cd_Tipo_Prazo"));
+					if(rs.getInt("Cd_Pessoa")==0)
+						pstmt.setNull(8, Types.INTEGER);
+					else
+						pstmt.setInt(8,rs.getInt("Cd_Pessoa"));
+					if(rs.getInt("Cd_Processo")==0)
+						pstmt.setNull(9, Types.INTEGER);
+					else
+						pstmt.setInt(9,rs.getInt("Cd_Processo"));
+					pstmt.setInt(10,rs.getInt("Cd_Tipo_Agendamento"));
+					if(rs.getTimestamp("Dt_Realizacao")==null)
+						pstmt.setNull(11, Types.TIMESTAMP);
+					else
+						pstmt.setTimestamp(11,rs.getTimestamp("Dt_Realizacao"));
+					pstmt.setString(12,rs.getString("Ds_Observacao"));
+					if(rs.getTimestamp("Dt_Alarme")==null)
+						pstmt.setNull(13, Types.TIMESTAMP);
+					else
+						pstmt.setTimestamp(13,rs.getTimestamp("Dt_Alarme"));
+					if(rs.getInt("Cd_Usuario")==0)
+						pstmt.setNull(14, Types.INTEGER);
+					else
+						pstmt.setInt(14,rs.getInt("Cd_Usuario"));
+					if(rs.getTimestamp("Dt_Alteracao")==null)
+						pstmt.setNull(15, Types.TIMESTAMP);
+					else
+						pstmt.setTimestamp(15,rs.getTimestamp("Dt_Alteracao"));
+					pstmt.setString(16,rs.getString("Ds_Assunto"));
+					try { pstmt.executeUpdate(); } catch(Exception e){ e.printStackTrace(System.out); };
+				}
+			}
+			System.out.println("Importação da agenda concluída!");
+			return new sol.util.Result(1);
+		}
+		catch(Exception e){
+			e.printStackTrace(System.out);
+			return new sol.util.Result(-1, "Erro ao tentar importar agenda!", e);
+		}
+		finally{
+			Conexao.desconectar(connect);
+			Conexao.desconectar(conOrigem);
+		}
+	}
+
+	public static sol.util.Result initJur(int tpEtapa)	{
+		// Geral
+		if(tpEtapa==0 || tpEtapa>=10)	{
+			importGrlCidades();
+			importGrlEmpresas();
+			importGrlBancos(); // Inclui e atualiza
+			importGrlPessoa();
+		}
+		// Segurança
+		if(tpEtapa==1 || tpEtapa>=11)
+			importSeguranca(0,0);
+		// Administrativos
+		if(tpEtapa==2 || tpEtapa>=12)	{
+			importAdmContaECarteiras();
+			importAdmCheques();
+			importAdmChequesRecebidos();
+			importAdmCategoriaEconomica();
+			importAdmContrato();
+			importAdmContaPagar();
+			importAdmContaReceber();
+			importAdmMovimentoConta();
+		}
+		// Jurídico
+		if(tpEtapa==3 || tpEtapa>=13)
+			importTabelasDoJuridico(0,0); // Áreas do Direito, Tipo de Processo, Tipo de Pedido, Objeto de Ação, Tipo de Andamenot, Tipo de Situação, Tribunal, Juizo
+		// Processos
+		if(tpEtapa==4 || tpEtapa>=14)
+			importPrcProcessos();
+		if(tpEtapa==5 || tpEtapa>=15)
+			importVinculosProcesso(0,0);
+		// Agenda
+		if(tpEtapa==6 || tpEtapa>=16)
+			importAgdAgendaItem();
+		
+		return new sol.util.Result(1);
+	}
+	
+public static sol.util.Result importPrcProcessosPgmPmvc(String nmArquivo)	{
+		
+		Connection connect   = Conexao.conectar();
+		
+		RandomAccessFile raf = null;
+		
+		String nrProcesso = null;
+		String nmAdverto = null;
+		String nmTipoProcesso = null;
+		String nmProcurador = null;
+		String dsDtDistribuicao = null;
+		GregorianCalendar dtDistribuicao = null;
+		int cdCliente = 0;
+		
+		try {
+			connect.setAutoCommit(false);
+			File log = new File(nmArquivo+".txt");
+	  		FileWriter fw = new FileWriter(log);
+	  		BufferedWriter bw = new BufferedWriter(fw);
+			
+		
+			PreparedStatement pstmt = connect.prepareStatement("SELECT cd_pessoa FROM grl_pessoa WHERE nm_pessoa LIKE '%PREFEITURA MUNICIPAL DE VITORIA DA CONQUISTA%'");
+			ResultSet rs = pstmt.executeQuery();
+			if(rs.next()) {
+				cdCliente = rs.getInt("cd_pessoa");
+			}
+		
+			int i = 0;
+			raf = new RandomAccessFile(nmArquivo, "rw");
+			String line = "";
+			
+			int count = 0;
+		
+			while((line = raf.readLine()) != null)	{
+				int result=0;
+				
+				StringTokenizer tokens = new StringTokenizer(line, ";", false);
+	  			
+				System.out.println("line "+(++count));
+				
+				nrProcesso = tokens.nextToken().trim();
+				nmAdverto = tokens.nextToken().trim();
+				nmTipoProcesso = tokens.nextToken().trim();
+				nmProcurador = tokens.nextToken().trim();
+				dsDtDistribuicao = tokens.nextToken().trim();
+				if(!dsDtDistribuicao.equals(""))
+					dtDistribuicao = Util.convStringToCalendar(dsDtDistribuicao);
+				
+				//PESQUISAR PROCESSO
+				Processo processo = ProcessoServices.getProcessoByNrProcesso(nrProcesso, connect);
+				
+				//SALVAR PROCESSO NÃO ENCONTRADO
+				if(processo==null) {
+					//Tipo processo
+					int cdTipoProcesso = 0;
+					pstmt = connect.prepareStatement("SELECT cd_tipo_processo FROM prc_tipo_processo WHERE nm_tipo_processo LIKE '%"+nmTipoProcesso+"%'");
+					rs = pstmt.executeQuery();
+					if(rs.next())
+						cdTipoProcesso = rs.getInt("cd_tipo_processo");
+					else if(!nmTipoProcesso.equals("")){
+						TipoProcesso tipoProcesso = new TipoProcesso(0, 0, nmTipoProcesso, null, 0, null, null, 0, 0);
+						cdTipoProcesso = TipoProcessoDAO.insert(tipoProcesso, connect);
+					}
+					else {
+						cdTipoProcesso = 247; //NÂO INFORMADO
+					}
+					
+					//Procurador
+					int cdAdvogado = 0;
+					pstmt = connect.prepareStatement("SELECT cd_pessoa FROM grl_pessoa WHERE nm_pessoa LIKE '%"+nmProcurador+"%'");
+					rs = pstmt.executeQuery();
+					if(rs.next())
+						cdAdvogado = rs.getInt("cd_pessoa");
+					
+					
+					//Processo
+					processo = new Processo(0/*cdProcesso*/, cdTipoProcesso, 0/*cdOrgaoJudicial*/, 0/*cdComarca*/, 
+											5/*cdTipoSituacao-NÃO INFORMADO*/, cdAdvogado, 0/*cdAdvogadoContrario*/, 0/*cdOrgao*/, 
+											0/*cdGrupoProcesso*/, 0/*lgClienteAutor*/, null/*txtObjeto*/, null/*txtObservacao*/, 
+											dtDistribuicao, null/*dtAutuacao*/, null/*txtSentenca*/, null/*dtSentenca*/, 
+											0/*stProcesso*/, null/*dtSituacao*/, 0/*vlProcesso*/, 0/*vlAcordo*/, 
+											0/*lgTaxaPapel*/, 0/*lgTaxaPaga*/, null/*nrAntigo*/, null/*dtUltimoAndamento*/, 
+											0/*qtMaxDias*/, 0/*vlSentenca*/, 0/*tpInstancia*/, null/*dtAtualizacao*/, 
+											0/*tpPerda*/, 0/*cdAdvogadoTitular*/, 0/*cdOficialJustica*/, 0/*cdTipoPedido*/, 
+											0/*cdTipoObjeto*/, 0/*cdResponsavelArquivo*/, null/*dtCadastro*/,
+											0/*tpSentenca*/, null/*nrJuizo*/, 875/*cdCidade-NÃO INFORMADO*/, 0/*qtMediaDias*/, 
+											null/*dtPrazo*/, 0/*lgPrazo*/, null/*nmConteiner1*/, null/*nmConteiner2*/, 
+											null/*nmConteiner3*/, 0/*stLiminar*/, 0/*stArquivo*/, null/*dtRepasse*/, 
+											0/*cdCentroCusto*/, null/*dtAtualizacaoEdit*/, null/*dtAtualizacaoEdi*/, 
+											0/*stAtualizacaoEdi*/, 0/*cdTribunal*/, 0/*cdJuizo*/, 
+											nrProcesso, 0/*cdUsuarioCadastro*/, 0/*tpAutos*/, null/*nrInterno*/, 
+											0/*cdGrupoTrabalho*/,  0/*cdProcessoPrincipal*/, null/*idProcesso*/, 0/*cdJuiz*/, 
+											0/*cdSistemaProcesso*/, -1/*tpRito*/, -1/*TP_REPASSE*/, null/*dtInativacao*/, 0/*lgImportante*/);
+					
+					result = com.tivic.manager.prc.ProcessoDAO.insert(processo, connect);
+					
+					if(result<=0) {
+						bw.write("Processo "+nrProcesso+" não importado.");
+						bw.newLine();
+						
+						continue;
+					}
+					int cdProcesso = result;
+					
+					//Partes
+					int cdAdverso = 0;
+					pstmt = connect.prepareStatement("SELECT cd_pessoa FROM grl_pessoa WHERE nm_pessoa LIKE '%"+nmAdverto+"%'");
+					rs = pstmt.executeQuery();
+					if(rs.next()) {
+						cdAdverso = rs.getInt("cd_pessoa");
+					}
+					else if(!nmAdverto.equals("")) {
+						int cdVinculoAdverso = ParametroServices.getValorOfParametroAsInteger("CD_VINCULO_ADVERSO", 0, 0, connect);
+						
+						Pessoa adverso = new Pessoa(0, nmAdverto, null, null, null, null, null, new GregorianCalendar(), 0, 1, 0);
+						Result r = PessoaServices.save(adverso, null, 3, cdVinculoAdverso, connect);
+						
+						if(r.getCode()>0)
+							cdAdverso = r.getCode();
+					}
+					if(cdAdverso>0 && cdProcesso>0)
+						ProcessoServices.insertAdverso(cdProcesso, cdAdverso, connect);
+					if(cdCliente>0 && cdProcesso>0)
+						ProcessoServices.insertParteCliente(cdProcesso, cdCliente, connect);						
+					
+				}
+				else {
+					
+					if(!ProcessoServices.getOutraParte(processo.getCdProcesso(), connect).next()) {
+						
+						//Partes
+						int cdAdverso = 0;
+						pstmt = connect.prepareStatement("SELECT cd_pessoa FROM grl_pessoa WHERE nm_pessoa LIKE '%"+nmAdverto+"%'");
+						rs = pstmt.executeQuery();
+						if(rs.next()) {
+							cdAdverso = rs.getInt("cd_pessoa");
+						}
+						else if(!nmAdverto.equals("")) {
+							int cdVinculoAdverso = ParametroServices.getValorOfParametroAsInteger("CD_VINCULO_ADVERSO", 0, 0, connect);
+							
+							Pessoa adverso = new Pessoa(0, nmAdverto, null, null, null, null, null, new GregorianCalendar(), 0, 1, 0);
+							Result r = PessoaServices.save(adverso, null, 3, cdVinculoAdverso, connect);
+							
+							if(r.getCode()>0)
+								cdAdverso = r.getCode();
+						}
+						if(cdAdverso>0 && processo.getCdProcesso()>0)
+							ProcessoServices.insertAdverso(processo.getCdProcesso(), cdAdverso, connect);
+						
+						
+					}
+				}
+				
+				if(result>0)
+					i++;
+			}
+	  		
+	  		System.out.println(i+" registros importados");
+			System.out.println("Importação de processos concluída!");
+			raf.close();
+			
+			connect.commit();
+			
+			return new sol.util.Result(1, "Importação de processos concluída!");
+		}
+		catch(Exception e)	{
+			try {raf.close(); }catch(Exception n){};
+			e.printStackTrace(System.out);
+			return new sol.util.Result(-1, "Erro ao tentar importar processos!", e);
+		}
+		finally{
+			Conexao.desconectar(connect);
+		}
+	}
+
+ 	/**
+ 	 * Importar de arquivo csv os dados de deficientes vindos da ATUV.
+ 	 * 
+ 	 * @author Edgard Hufelande
+ 	 * @param nmArquivo
+ 	 * @return Result()
+ 	 */
+
+	public static Result importPNEatuv(String nmArquivo) {		
+  		BufferedReader fileReader = null;
+		Connection connect = Conexao.conectar();
+		
+		try {	 
+			connect.setAutoCommit(false); 	
+			
+	  		int cdVinculo = ParametroServices.getValorOfParametroAsInteger("CD_VINCULO_PNE_SOLICITANTE", 0);
+	  		int i = 0;
+            String line = "";
+            File fileDir = new File(nmArquivo);
+			BufferedReader raf = new BufferedReader(new InputStreamReader(new FileInputStream(fileDir), "UTF8"));
+			
+			System.out.println(nmArquivo + " carregado...");
+			
+			/* Dados referentes ao registro de pessoa */
+			String nrDocumento, nmPessoa, nrDocumentoPessoa, dtNascimento, nmEndereco,
+				   nmBairro;
+			
+			/* Dados referentes ao documento que será criado */
+			String cdComunicacaoInterna, dtEntradaDocumento, nrViaDocumento, dtEntregaDocumento,
+				   dtValidadeDocumento, dtRetornoComunicacaoInterna, nmObservacao, nmDeficiencia,
+				   sgDeficiencia, anoEmissaoCI, nmOutrasDeficiencias,cdVia, cdPleito, lgAcompanhante,
+				   tpPeriodo, lgAtivo;
+
+			while ((line = raf.readLine()) != null) {
+				System.out.println("===========================================================================================================");
+				StringTokenizer tokens = new StringTokenizer(line, ";", false);
+				nrDocumento            		= tokens.nextToken();
+				nmPessoa            		= tokens.nextToken().trim();
+				nrDocumentoPessoa   		= tokens.nextToken().trim();
+				dtNascimento	    		= tokens.nextToken();
+				nmEndereco          		= tokens.nextToken();
+				nmBairro            		= tokens.nextToken();
+				dtEntradaDocumento  		= tokens.nextToken();
+				dtEntregaDocumento   		= tokens.nextToken();
+				dtValidadeDocumento  		= tokens.nextToken();
+				lgAcompanhante      		= tokens.nextToken();
+				tpPeriodo            		= tokens.nextToken();
+				nmObservacao        		= tokens.nextToken();
+				nmDeficiencia        		= tokens.nextToken();
+				sgDeficiencia        		= tokens.nextToken();
+				nmOutrasDeficiencias 		= tokens.nextToken(); 
+				cdComunicacaoInterna 		= tokens.nextToken();
+				dtRetornoComunicacaoInterna = tokens.nextToken();
+				anoEmissaoCI                = tokens.nextToken();
+				cdVia                       = tokens.nextToken();
+				cdPleito                    = tokens.nextToken();
+				lgAtivo                     = tokens.nextToken();
+				
+				
+				
+				/* Validando informações da pessoa */
+				
+				// Validação de data de nascimento
+				DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+				java.util.Date date = df.parse(dtNascimento.split(" ")[0]);
+				Calendar cal = Calendar.getInstance();
+				cal.setTime(date);				
+				GregorianCalendar dtNascimentoFormat = new GregorianCalendar();
+				dtNascimentoFormat.setTime(cal.getTime());
+				
+
+				GregorianCalendar dtValidadeFormat = new GregorianCalendar();
+				if(!dtValidadeDocumento.equals("NULL")) {
+					java.util.Date date1 = df.parse(dtValidadeDocumento.split(" ")[0]);
+					Calendar cal1 = Calendar.getInstance();
+					cal1.setTime(date1);				
+					dtValidadeFormat.setTime(cal1.getTime());
+				} else {
+					dtValidadeFormat = null;
+				}
+				
+				GregorianCalendar dtEntradaCIFormat = new GregorianCalendar();
+				if(!dtRetornoComunicacaoInterna.equals("NULL")) {		
+					java.util.Date date3 = df.parse(dtEntradaDocumento.split(" ")[0]);
+					Calendar cal3 = Calendar.getInstance();
+					cal3.setTime(date3);				
+					dtEntradaCIFormat.setTime(cal3.getTime());
+				} else {
+					dtEntradaCIFormat = null;
+				}
+
+				GregorianCalendar dtRetornoCIFormat = new GregorianCalendar();
+				if(!dtRetornoComunicacaoInterna.equals("NULL")) {		
+					java.util.Date date2 = df.parse(dtRetornoComunicacaoInterna.split(" ")[0]);
+					Calendar cal2 = Calendar.getInstance();
+					cal2.setTime(date2);				
+					dtRetornoCIFormat.setTime(cal2.getTime());
+				} else {
+					dtRetornoCIFormat = null;
+				}
+				
+				// Validação de ano de cadastro da CI
+				if(!anoEmissaoCI.equals("NULL")) {
+					Calendar calCI = Calendar.getInstance();
+					calCI.set(Integer.valueOf(anoEmissaoCI), 0, 1, 0, 0, 0);
+					GregorianCalendar DataAnoCI = new GregorianCalendar();
+					DataAnoCI.setTime(calCI.getTime());
+				}			
+				
+				//Validação de CPF ou RG
+				String nrCpf = nrDocumentoPessoa != null && nrDocumentoPessoa.replaceAll("[^0-9]", "").length() == 11 && Util.isCpfValido(nrDocumentoPessoa.replaceAll("[^0-9]", "")) ? nrDocumentoPessoa.replaceAll("[^0-9]", "") : "";
+				String nrRg  = nrDocumentoPessoa != null && nrDocumentoPessoa.replaceAll("[^0-9]", "").length() > 11 ? nrDocumentoPessoa : "";
+								
+				/* Instâncio os dados da pessoa para ser inseridos no banco */
+				PessoaFisica pessoa = new PessoaFisica();
+				pessoa.setNmPessoa(nmPessoa);
+				pessoa.setNrRg(nrRg);
+				pessoa.setNrCpf(nrCpf);
+				pessoa.setDtNascimento(dtNascimentoFormat);
+				pessoa.setLgDeficienteFisico(1);
+				pessoa.setGnPessoa(PessoaServices.TP_FISICA);
+				
+				/* Instâncio os dados de endereço da pessoa para serem incluídos ao cadastro dela no banco */
+				PessoaEndereco pessoaEndereco = new PessoaEndereco();
+				pessoaEndereco.setNmLogradouro(nmEndereco);
+				pessoaEndereco.setNmBairro(nmBairro);
+				
+				/* Verifico se a pessoa há existe no banco, uma vez que ela tenha nome e data de nascimento iguais será considerada como a mesma pessoa. */
+				String dtPessoaNascimento = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(dtNascimentoFormat.getTime());
+				PreparedStatement pstmt = connect.prepareStatement( "SELECT * FROM grl_pessoa A " +
+																	"LEFT OUTER JOIN grl_pessoa_fisica B ON (A.cd_pessoa = B.cd_pessoa) " +
+																	" WHERE A.nm_pessoa     = ?"+ 
+																	"   AND B.dt_nascimento = ? ");
+				pstmt.setString(1, pessoa.getNmPessoa());
+				pstmt.setDate(2, new Date(dtNascimentoFormat.getTimeInMillis()));
+				ResultSetMap rsmPessoa = new ResultSetMap(pstmt.executeQuery());
+				
+				/* Caso eu encontre uma pessoa, eu pego suas informações e continuo com o fluxo sem precisar adiciona-la novamente. */				
+				if(rsmPessoa.size() >= 1){
+					rsmPessoa.beforeFirst();
+					System.out.println(nmPessoa + " já foi importado na base de dados, verificando informações restantes...");
+					/* Intero no resultado da pessoa para concilia-la com o objeto pessoa e ter as informações corretas.*/
+					while(rsmPessoa.next()){
+						pessoa = PessoaFisicaDAO.get(rsmPessoa.getInt("CD_PESSOA"), connect);
+					}
+				} else {
+					System.out.println("Importando " + pessoa.getNmPessoa() + " ...");
+					Result retorno = PessoaServices.save(pessoa, pessoaEndereco, 3200, cdVinculo, connect);
+					
+					/* Caso haja um problema de inserir a pessoa, retorna uma mensagem abaixo */
+					if(retorno.getCode() <= 0){
+						System.out.println(retorno.getMessage());
+						new Result(-1);
+					}	
+					pessoa = (PessoaFisica)retorno.getObjects().get("PESSOA");					
+				}
+				
+				/* Se existir uma pessoa no objeto eu instancio o documento para ser inserido no banco */
+				if(pessoa.getCdPessoa() > 0){					
+					ResultSetMap rsmDocumentos = DocumentoServices.getAllDocumentosBySolicitante(pessoa.getCdPessoa(), connect);
+					
+					PreparedStatement pstmtDoenca = connect.prepareStatement( "SELECT * FROM grl_doenca A WHERE A.id_doenca = ? OR A.nm_doenca = ?" );
+					pstmtDoenca.setString(1, sgDeficiencia);
+					pstmtDoenca.setString(2, nmDeficiencia);
+					ResultSetMap rsmDoenca = new ResultSetMap(pstmtDoenca.executeQuery());
+					
+					PreparedStatement pstmtDocumento = connect.prepareStatement( "SELECT * FROM ptc_documento A WHERE A.nr_documento = ?" );
+					pstmtDocumento.setString(1, nrDocumento);
+					ResultSetMap rsmDocumento = new ResultSetMap(pstmtDocumento.executeQuery());
+					
+					int cdSetorAtuv  = ParametroServices.getValorOfParametroAsInteger("CD_SETOR_ATUV_SIT", 0);
+					int cdSetorCemae = ParametroServices.getValorOfParametroAsInteger("CD_SETOR_CEMAE", 0);
+					int cdSetorSemob = ParametroServices.getValorOfParametroAsInteger("CD_SETOR_SEMOB_ATUV", 0);
+
+					int tpDocumentoDeferido     = ParametroServices.getValorOfParametroAsInteger("PNE_DOCUMENTO_DEFERIDO", 0);
+					int tpDocumentoIndeferido   = ParametroServices.getValorOfParametroAsInteger("PNE_DOCUMENTO_INDEFERIDO", 0);
+					int tpDocumentoEmAndamento  = ParametroServices.getValorOfParametroAsInteger("PNE_DOCUMENTO_EM_ANDAMENTO", 0);
+					
+					/* Verificando se a doença/deficiência já está cadastrada no banco */
+					Doenca doenca = new Doenca();
+					if(rsmDoenca.size() <= 0) {
+						sgDeficiencia = sgDeficiencia.equals("") || sgDeficiencia.equals("NULL") ? "" : sgDeficiencia;
+						nmDeficiencia = nmDeficiencia.equals("") || nmDeficiencia.equals("NULL") ? "" : nmDeficiencia;
+						
+						if(!sgDeficiencia.equals("") && !nmDeficiencia.equals("")){
+							doenca.setIdDoenca(sgDeficiencia.substring(0, 3));
+							doenca.setNmDoenca(nmDeficiencia);
+							
+							int cdDoenca = DoencaDAO.insert(doenca, connect);
+							doenca = DoencaDAO.get(cdDoenca, connect);
+						} else {
+							doenca = DoencaDAO.get(17750, connect);
+						}
+					} else {
+						while(rsmDoenca.next()){
+							doenca = DoencaDAO.get(rsmDoenca.getInt("CD_DOENCA"), connect);
+						}
+					}
+					
+					/* Tratamento do fluxo de documento e cartão */
+					if(rsmDocumento.size() <= 0){										
+						Documento documento = new Documento();						
+						documento.setNrAtendimento(cdComunicacaoInterna);
+						documento.setNrDocumento(nrDocumento);
+						documento.setTpDocumento(12);
+						documento.setCdSituacaoDocumento(5);
+						documento.setCdEmpresa(3200);
+						documento.setCdSetor(cdSetorSemob);
+						documento.setDtProtocolo(dtEntradaCIFormat);
+						
+						int cdDocumento = DocumentoDAO.insert(documento, connect);
+						
+						if(!dtEntradaDocumento.equals("NULL") && dtRetornoComunicacaoInterna.equals("NULL")) {
+							DocumentoTramitacao tramitacao = new DocumentoTramitacao();
+							tramitacao.setCdDocumento(cdDocumento);
+							tramitacao.setDtTramitacao(dtEntradaCIFormat);
+							tramitacao.setCdSetorOrigem(cdSetorAtuv);
+							tramitacao.setCdSetorDestino(26);
+							tramitacao.setTxtTramitacao("Documento enviado para análise no CEMAE, aguardando retorno.");
+							tramitacao.setNmLocalOrigem("ATUV/SIT");
+							tramitacao.setNmLocalDestino("CEMAE");
+							DocumentoTramitacaoDAO.insert(tramitacao, connect);
+						}
+
+						if(!dtEntradaDocumento.equals("NULL") && !dtRetornoComunicacaoInterna.equals("NULL")) {
+							DocumentoTramitacao tramitacao = new DocumentoTramitacao();
+							tramitacao.setCdDocumento(cdDocumento);
+							tramitacao.setDtTramitacao(dtRetornoCIFormat);
+							tramitacao.setCdSetorOrigem(cdSetorCemae);
+							tramitacao.setCdSetorDestino(cdSetorSemob);
+							tramitacao.setTxtTramitacao("Documento recebido pela SEMOB/ATUV, solicitação de cartão enviado para a ATUV.");
+							tramitacao.setNmLocalOrigem("CEMAE");
+							tramitacao.setNmLocalDestino("SEMOB/ATUV");
+							DocumentoTramitacaoDAO.insert(tramitacao, connect);
+						}
+						
+						if (cdDocumento > 0) {							
+							DocumentoPessoa docPessoa = new DocumentoPessoa();
+							docPessoa.setCdDocumento(cdDocumento);
+							docPessoa.setCdPessoa(pessoa.getCdPessoa());
+							docPessoa.setNmQualificacao("Solicitante");
+							
+							if(DocumentoPessoaDAO.insert(docPessoa, connect) >= 0){								
+								ResultSetMap rsmCartao = CartaoServices.getCartoesByPessoa(pessoa.getCdPessoa());
+								int cdCartao = 0;
+								
+								while (rsmCartao.next()){
+									cdCartao = rsmCartao.getInt("CD_CARTAO");
+								}
+								
+								Cartao cartao = new Cartao();			
+								if(cdCartao > 0){
+									cartao.setCdCartao(cdCartao);
+								}
+								cartao.setCdPessoa(pessoa.getCdPessoa());
+								cartao.setNrVia(cdCartao > 0 ? 2 : 1);
+								cartao.setDtValidade(dtValidadeFormat);
+								cartao.setStCartao(Integer.valueOf(lgAtivo));
+								cartao.setTpCartao(2);
+								cartao.setDtEmissao(dtRetornoCIFormat);
+								cartao.setTpVigencia(!tpPeriodo.equals("NULL") ? Integer.valueOf(tpPeriodo) : 0);
+								cartao.setLgAcompanhante(!lgAcompanhante.equals("NULL") ? Integer.valueOf(lgAcompanhante) : 0);
+								
+								Result cartaoSave = CartaoServices.save(cartao, connect);								
+								if(cartaoSave.getCode() >= 0){
+									CartaoDocumento cartaoDocumento = new CartaoDocumento();
+									cartaoDocumento.setCdCartao(cdCartao);
+									cartaoDocumento.setCdDocumento(cdDocumento);
+									int cdCartaoDocumento = CartaoDocumentoDAO.insert(cartaoDocumento, connect);
+									if(cdCartaoDocumento > 0){
+										CartaoDocumentoDoenca cartaoDocumentoDoenca = new CartaoDocumentoDoenca();
+										cartaoDocumentoDoenca.setCdCartaoDocumento(cdCartaoDocumento);
+										cartaoDocumentoDoenca.setCdDoenca(doenca.getCdDoenca());
+										CartaoDocumentoDoencaDAO.insert(cartaoDocumentoDoenca, connect);
+									}
+								}
+							}
+							
+						}
+					}					
+				}
+				
+				System.out.println("Importação concluída.");
+				System.out.println("===========================================================================================================");
+				System.out.println("|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||");
+            }
+			
+			connect.commit();
+			raf.close();
+			
+			i++;
+			return new Result(1, "Importação de pessoas concluída!");
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+			Conexao.rollback(connect);
+			return new Result(-1, "Erro ao tentar importar processos!", e);
+			
+		} finally {
+		}
+	}	
+	
+	/**
+ 	 * Importar cadastro internacional de doenças.
+ 	 * 
+ 	 * @author Edgard Hufelande
+ 	 * @param nmArquivo
+ 	 * @return Result()
+ 	 */
+
+	@SuppressWarnings("null")
+	public static Result importCID10(String nmArquivo) {		
+  		BufferedReader fileReader = null;
+		Connection connect = Conexao.conectar();
+		
+		try {	 
+			connect.setAutoCommit(false);
+			
+			//Este documento agora possui toda a estrutura do arquivo.
+			Document d;
+			int iCounter = 0;
+			int iSubCatCount = 0;
+			int iContadorExistentes = 0;
+			Result   ret = XmlServices.loadXML(nmArquivo);
+			Document doc = (Document)ret.getObjects().get("doc");
+			
+			Doenca doenca = new Doenca();
+			
+			/* ****************************************************** 
+		     * Capítulos - Interando entre o elemento de capitulos. *
+		     *******************************************************/
+
+			iSubCatCount = 1;
+			iContadorExistentes = 1;
+			NodeList  capituloNodeList = doc.getElementsByTagName("capitulo");
+			for (int i = 0; i < capituloNodeList.getLength(); i++) {				
+				System.out.println("-------------------------------------------------------------------------------------------------------");				
+				Element  capituloNode	= (Element) capituloNodeList.item(i);
+				NodeList capituloNodes 	= capituloNode.getChildNodes();				
+				System.out.println("Verificando Capítulo " + capituloNode.getAttributes().getNamedItem("numcap").getTextContent() + ": " + capituloNodes.item(1).getTextContent());
+				
+				NodeList grupoNodeList = capituloNode.getElementsByTagName("grupo");				
+				System.out.println("Total de " + grupoNodeList.getLength() + " grupos encontrados neste capítulo.");
+				
+				System.out.println("-------------------------------------------------------------------------------------------------------");
+				
+				iCounter = 1;
+				for (int iGrupo = 0; iGrupo < grupoNodeList.getLength(); iGrupo++) {
+					Element  grupoNode 	= (Element) grupoNodeList.item(iGrupo);
+					NodeList grupoNodes = grupoNode.getChildNodes();				
+					System.out.println("-> ["+ iCounter +"] Verificando Grupo " + grupoNode.getAttributes().getNamedItem("codgrupo").getTextContent() + ": " + grupoNodes.item(1).getTextContent());
+					iCounter++;
+
+					NodeList categoriaNodeList = grupoNode.getElementsByTagName("categoria");	
+					System.out.println("   Total de " + categoriaNodeList.getLength() + " categorias encontrados neste grupo.");
+					System.out.println("   ----------------------------------------------------------------------------------------------------");
+
+
+					for (int iCateg = 0; iCateg < categoriaNodeList.getLength(); iCateg++) {
+						Element  categNode 	= (Element) categoriaNodeList.item(iCateg);
+						NodeList categNodes = categNode.getChildNodes();	
+						
+						System.out.println("   -> Verificando Categoria " + categNode.getAttributes().getNamedItem("codcat").getTextContent() + ": " + categNodes.item(1).getTextContent());
+
+						NodeList subcategoriaNodeList = categNode.getElementsByTagName("subcategoria");	
+						System.out.println("      -------------------------------------------------------------------------------------------------");
+						System.out.println("      Total de " + subcategoriaNodeList.getLength() + " subcategorias encontrados nesta categoria.");
+						System.out.println("      -------------------------------------------------------------------------------------------------");
+						
+						doenca = new Doenca();
+						doenca.setIdDoenca(categNode.getAttributes().getNamedItem("codcat").getTextContent());
+						doenca.setNmDoenca(categNodes.item(1).getTextContent());
+						doenca.setTpDoenca(1);
+						
+						if(DoencaDAO.getById(doenca.getIdDoenca(), connect) == null){
+							DoencaDAO.insert(doenca, connect);
+						} else {
+							System.out.println("      A doença "+ categNodes.item(1).getTextContent() + " já existe na base de dados...");
+							iContadorExistentes++;
+						}
+						
+						for (int iSubCat = 0; iSubCat < subcategoriaNodeList.getLength(); iSubCat++) {
+							Element  subCatNode 	= (Element) subcategoriaNodeList.item(iSubCat);
+							NodeList subCatNodes 	= subCatNode.getChildNodes();			
+
+							System.out.println("      -> Verificando Subcategoria " + subCatNode.getAttributes().getNamedItem("codsubcat").getTextContent() + ": " + subCatNodes.item(1).getTextContent());
+							
+							doenca = new Doenca();
+							doenca.setIdDoenca(subCatNode.getAttributes().getNamedItem("codsubcat").getTextContent());
+							doenca.setNmDoenca(subCatNodes.item(1).getTextContent());
+							doenca.setTpDoenca(1);
+							
+							if(DoencaDAO.getById(doenca.getIdDoenca(), connect) == null){
+								DoencaDAO.insert(doenca, connect);
+							} else {
+								System.out.println("      A doença "+ subCatNodes.item(1).getTextContent() + " já existe na base de dados...");
+								iContadorExistentes++;
+							}
+							
+							iSubCatCount++;
+						}
+					}
+				}
+				 
+			}			
+
+			System.out.println("-------------------------------------------------------------------------------------------------------");
+			System.out.println(iSubCatCount + " doenças encontradas.");
+			System.out.println("Das " + iSubCatCount + " doenças encontradas, " + iContadorExistentes + " já estão na base de dados.");
+			System.out.println("-------------------------------------------------------------------------------------------------------");
+			connect.commit();
+			
+			return new Result(1, "Importação de doenças/deficiências concluída!");
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+			Conexao.rollback(connect);
+			return new Result(-1, "Erro ao tentar importar processos!", e);
+			
+		} finally {
+		}
+	}
+	
+	/**
+ 	 * Importar de arquivo csv os dados de deficientes vindos da ATUV.
+ 	 * 
+ 	 * @author Edgard Hufelande
+ 	 * @param nmArquivo
+ 	 * @return Result()
+ 	 */
+
+	public static Result importFrequenciaJornada(String nmArquivo) {		
+  		BufferedReader fileReader = null;
+		Connection connect = Conexao.conectar();
+		
+		try {	 
+			connect.setAutoCommit(false); 	
+			
+			int i = 0;
+            String line = "";
+            File fileDir = new File(nmArquivo);
+			BufferedReader raf = new BufferedReader(new InputStreamReader(new FileInputStream(fileDir), "UTF8"));
+			
+			System.out.println(nmArquivo + " carregado...");
+			
+			/* Dados referentes ao registro de pessoa */
+			int tpOcorrencia = 0;
+			String nrInscricao = null;
+			String nmLocal = null;
+			GregorianCalendar dtOcorrencia = null;
+			Ocorrencia ocorrencia = new Ocorrencia();
+
+			while ((line = raf.readLine()) != null) {
+				
+				if(i==0){
+					i++;
+					continue;
+				}
+				
+				System.out.println("===========================================================================================================");
+				StringTokenizer tokens = new StringTokenizer(line, ";", false);
+				
+				nrInscricao            		= tokens.nextToken();
+				dtOcorrencia          		= Util.convStringToCalendar(tokens.nextToken());
+				nmLocal              		= tokens.nextToken();
+				
+				if(nrInscricao.contains("/2016")){	
+
+					System.out.println(nrInscricao);
+					System.out.println(dtOcorrencia);
+					
+					String[] splitInscricao = nrInscricao.split("\\/");
+					int cdPessoa = Integer.valueOf(splitInscricao[0]);
+					PessoaFisica pessoa = PessoaFisicaDAO.get(cdPessoa, connect);
+					
+					if(pessoa != null && pessoa.getCdPessoa() > 0) {
+						
+						ArrayList<ItemComparator> criterios = new ArrayList<ItemComparator>();
+						criterios.add(new ItemComparator("CD_PESSOA", String.valueOf(pessoa.getCdPessoa()), ItemComparator.EQUAL, Types.VARCHAR));
+						criterios.add(new ItemComparator("DT_OCORRENCIA", Util.formatDateTime(dtOcorrencia, "dd/MM/yyyy HH:mm:ss"), ItemComparator.EQUAL, Types.TIMESTAMP));
+						ResultSetMap findEntradasByPessoa = OcorrenciaServices.find(criterios, connect);
+						
+						if(findEntradasByPessoa.size() < 1){						
+							ocorrencia.setCdOcorrencia(0);
+							ocorrencia.setCdEvento(1);
+							ocorrencia.setCdPessoa(pessoa.getCdPessoa());
+							ocorrencia.setTpOcorrencia(0);
+							ocorrencia.setTxtOcorrencia("REGISTRO DE ENTRADA DA JORNADA PEDAGÓGICA PARA " + nrInscricao + " - " + nmLocal);
+							ocorrencia.setDtOcorrencia(dtOcorrencia);
+							
+							Result saveOcorrencia = OcorrenciaServices.save(ocorrencia, connect);		
+						}
+													
+					} else {
+						System.out.println("Não existe uma pessoa referenciada a esta ocorrencia. [" + pessoa + "]");
+					}
+					
+					System.out.println(ocorrencia);
+				} else {
+					System.out.println("O número de inscrição de [" + nrInscricao + "] não segue o padrão correto de numeração ######/####.");					
+				} 
+				
+			}
+			
+			connect.commit();
+			return new Result(1, "Importação de frequências executada com sucesso!");
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+			Conexao.rollback(connect);
+			return new Result(-1, "Erro ao tentar importar processos!", e);		
+		} finally {
+		}
+	}
+	
+	public static sol.util.Result importEtransporteToPostgresql()	{
+		Connection connect   = Conexao.conectar();
+		Connection conFirebird = getConnectFirebirdMobilidade();
+		ResultSetMap rsmFirebird;
+		ResultSetMap rsmPostgres;
+		Result result;
+		try {
+			connect.setAutoCommit(false);
+			conFirebird.setAutoCommit(false);
+			//IMPORTANDO TABELAS ISOLADAS
+			System.out.println("Importando Infrações");
+			rsmFirebird = new ResultSetMap(conFirebird.prepareStatement("SELECT * FROM INFRACAO").executeQuery());
+			rsmFirebird.beforeFirst();
+			while( rsmFirebird.next() ){
+				Infracao infracao = new Infracao(
+						rsmFirebird.getInt("COD_INFRACAO")/*cdInfracao*/,
+						rsmFirebird.getString("DS_INFRACAO2")/* dsInfracao*/, 
+						rsmFirebird.getInt("NR_PONTUACAO")/* nrPontuacao*/,
+						rsmFirebird.getInt("NR_COD_DETRAN")/* nrCodDetran*/, 
+						rsmFirebird.getDouble("NR_VALOR_UFIR")/* vlUfir*/,
+						rsmFirebird.getString("NM_NATUREZA")/*nmNatureza*/, 
+						rsmFirebird.getString("NR_ARTIGO")/* nrArtigo*/,
+						rsmFirebird.getString("NR_PARAGRAFO")/* nrParagrafo*/, 
+						rsmFirebird.getString("NR_INCISO")/*nrInciso*/, 
+						rsmFirebird.getString("NR_ALINEA")/* nrAlinea*/,
+						rsmFirebird.getInt("TP_COMPETENCIA")/* tpCompetencia*/,
+						rsmFirebird.getInt("LG_PRIORITARIA")/* lgPrioritaria*/,
+						rsmFirebird.getGregorianCalendar("DT_FIM_VIGENCIA"), null, 0, 0);/* tpResponsabilidade*/ 
+				
+				PreparedStatement pstmt = connect.prepareStatement("INSERT INTO mob_infracao (cd_infracao,"+
+                        "ds_infracao,"+
+                        "nr_pontuacao,"+
+                        "nr_cod_detran,"+
+                        "vl_ufir,"+
+                        "nm_natureza,"+
+                        "nr_artigo,"+
+                        "nr_paragrafo,"+
+                        "nr_inciso,"+
+                        "nr_alinea,"+
+                        "tp_competencia,"+
+                        "lg_prioritaria,"+
+                        "dt_fim_vigencia,"+
+			            "vl_infracao,"+
+			            "tp_responsabilidade) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+				pstmt.setInt(1, infracao.getCdInfracao());
+				pstmt.setString(2,infracao.getDsInfracao());
+				pstmt.setInt(3,infracao.getNrPontuacao());
+				pstmt.setInt(4,infracao.getNrCodDetran());
+				pstmt.setDouble(5,infracao.getVlInfracao());
+				pstmt.setString(6,infracao.getNmNatureza());
+				pstmt.setString(7,infracao.getNrArtigo());
+				pstmt.setString(8,infracao.getNrParagrafo());
+				pstmt.setString(9,infracao.getNrInciso());
+				pstmt.setString(10,infracao.getNrAlinea());
+				pstmt.setInt(11,infracao.getTpCompetencia());
+				pstmt.setInt(12,infracao.getLgPrioritaria());
+				if(infracao.getDtFimVigencia()==null)
+					pstmt.setNull(13, Types.TIMESTAMP);
+				else
+					pstmt.setTimestamp(13,new Timestamp(infracao.getDtFimVigencia().getTimeInMillis()));
+				pstmt.setDouble(14,infracao.getVlInfracao());
+				pstmt.setInt(15,infracao.getTpCompetencia());
+				int code = pstmt.executeUpdate();
+				if( code <= 0 ){
+					Conexao.rollback(connect);
+					Conexao.rollback(conFirebird);
+					return new sol.util.Result(-1, "Erro ao importar Infrações de transporte");
+				}
+			}
+			
+			System.out.println("Importando Infrações de transporte");
+			
+			rsmFirebird = new ResultSetMap(conFirebird.prepareStatement("SELECT * FROM INFRACAO_TRANSPORTE").executeQuery());
+			rsmFirebird.beforeFirst();
+			while( rsmFirebird.next() ){
+				InfracaoTransporte infracao = new InfracaoTransporte( rsmFirebird.getInt("COD_INFRACAO")/*cdInfracao*/, 
+														rsmFirebird.getString("DS_INFRACAO")/* dsInfracao*/,
+														rsmFirebird.getInt("NR_PONTUACAO")/* nrPontuacao*/,
+														rsmFirebird.getFloat("NR_VALOR_UFIR")/* nrValorUfir*/,
+														rsmFirebird.getString("NM_NATUREZA")/*nmNatureza*/,
+														rsmFirebird.getString("NR_ARTIGO")/* nrArtigo*/,
+														rsmFirebird.getString("NR_PARAGRAFO")/* nrParagrafo*/,
+														rsmFirebird.getString("NR_INCISO")/*nrInciso*/,
+														rsmFirebird.getString("NR_ALINEA")/* nrAlinea*/,
+														rsmFirebird.getInt("TP_CONCESSAO")/* tpConcessao*/,
+														rsmFirebird.getString("NR_INFRACAO")/* nrInfracao*/,
+														rsmFirebird.getInt("LG_PRIORITARIO")/*lgPrioritario*/,
+														0/* tpGrupo*/);
+				PreparedStatement pstmt = connect.prepareStatement("INSERT INTO mob_infracao_transporte (cd_infracao,"+
+                        "ds_infracao,"+
+                        "nr_pontuacao,"+
+                        "nr_valor_ufir,"+
+                        "nm_natureza,"+
+                        "nr_artigo,"+
+                        "nr_paragrafo,"+
+                        "nr_inciso,"+
+                        "nr_alinea,"+
+                        "tp_concessao,"+
+                        "nr_infracao,"+
+                        "lg_prioritario,"+
+                        "tp_grupo) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+				pstmt.setInt(1, infracao.getCdInfracao());
+				pstmt.setString(2,infracao.getDsInfracao());
+				pstmt.setInt(3,infracao.getNrPontuacao());
+				pstmt.setFloat(4,infracao.getNrValorUfir());
+				pstmt.setString(5,infracao.getNmNatureza());
+				pstmt.setString(6,infracao.getNrArtigo());
+				pstmt.setString(7,infracao.getNrParagrafo());
+				pstmt.setString(8,infracao.getNrInciso());
+				pstmt.setString(9,infracao.getNrAlinea());
+				pstmt.setInt(10,infracao.getTpConcessao());
+				pstmt.setString(11,infracao.getNrInfracao());
+				pstmt.setInt(12,infracao.getLgPrioritario());
+				pstmt.setInt(13,infracao.getTpGrupo());
+				
+				int code = pstmt.executeUpdate();
+				if( code <= 0 ){
+					Conexao.rollback(connect);
+					Conexao.rollback(conFirebird);
+					return new sol.util.Result(-1, "Erro ao importar Infrações de transporte");
+				}
+			}
+			
+			System.out.println("Importando Variações de Infração");
+			rsmFirebird = new ResultSetMap(conFirebird.prepareStatement("SELECT * FROM STR_INFRACAO_VARIACAO").executeQuery());
+			rsmFirebird.beforeFirst();
+			while( rsmFirebird.next() ){
+				InfracaoVariacao variacao = new InfracaoVariacao(rsmFirebird.getInt("CD_VARIACAO")/*cdVariacao*/,
+						rsmFirebird.getInt("CD_INFRACAO")/* cdInfracao*/,
+						rsmFirebird.getInt("CD_VARIACAO_TRANSPORTE")/*cdInfracaoTransporte*/,
+						rsmFirebird.getInt("TP_VARIACAO")/* tpVariacao*/,
+						rsmFirebird.getFloat("VL_VARIACAO")/* vlVariacao*/,
+						rsmFirebird.getString("TXT_PROCEDIMENTO")/* txtProcedimentos*/,
+						rsmFirebird.getInt("NR_ORDEM")/*nrOrdem*/,rsmFirebird.getInt("TP_MULTIPLICADOR")/* tpMultiplicador*/);
+						
+				PreparedStatement pstmt = connect.prepareStatement("INSERT INTO mob_infracao_variacao (cd_variacao,"+
+                        "cd_infracao,"+
+                        "cd_infracao_transporte,"+
+                        "tp_variacao,"+
+                        "vl_variacao,"+
+                        "txt_procedimentos,"+
+                        "nr_ordem,"+
+                        "tp_multiplicador) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
+				pstmt.setInt(1, variacao.getCdVariacao());
+				if(variacao.getCdInfracao()==0)
+					pstmt.setNull(2, Types.INTEGER);
+				else
+					pstmt.setInt(2,variacao.getCdInfracao());
+				if(variacao.getCdInfracaoTransporte()==0)
+					pstmt.setNull(3, Types.INTEGER);
+				else
+					pstmt.setInt(3,variacao.getCdInfracaoTransporte());
+				pstmt.setInt(4,variacao.getTpVariacao());
+				pstmt.setFloat(5,variacao.getVlVariacao());
+				pstmt.setString(6,variacao.getTxtProcedimentos());
+				pstmt.setInt(7,variacao.getNrOrdem());
+				pstmt.setInt(8,variacao.getTpMultiplicador());
+				int code = pstmt.executeUpdate();
+				if( code <= 0 ){
+					Conexao.rollback(connect);
+					Conexao.rollback(conFirebird);
+					return new sol.util.Result(-1, "Erro ao importar Variação de Infração");
+				}
+			}
+			
+			System.out.println("Importando Motivo de Infração");
+			rsmFirebird = new ResultSetMap(conFirebird.prepareStatement("SELECT * FROM STP_INFRACAO_MOTIVO").executeQuery());
+			rsmFirebird.beforeFirst();
+			while( rsmFirebird.next() ){
+				InfracaoMotivo motivo = new InfracaoMotivo(rsmFirebird.getInt("COD_INFRACAO")/*cdInfracao*/, 
+						rsmFirebird.getInt("CD_MOTIVO")/*cdMotivo*/, 
+						rsmFirebird.getString("NR_MOTIVO")/*nrMotivo*/, 
+						rsmFirebird.getString("NM_MOTIVO")/*nmMotivo*/, 
+						rsmFirebird.getInt("ST_MOTIVO")/*stMotivo*/);
+				
+				PreparedStatement pstmt = connect.prepareStatement("INSERT INTO mob_infracao_motivo (cd_infracao,"+
+                        "cd_motivo,"+
+                        "nr_motivo,"+
+                        "nm_motivo,"+
+                        "st_motivo) VALUES (?, ?, ?, ?, ?)");
+				if(motivo.getCdInfracao()==0)
+					pstmt.setNull(1, Types.INTEGER);
+				else
+					pstmt.setInt(1,motivo.getCdInfracao());
+				pstmt.setInt(2, motivo.getCdMotivo());
+				pstmt.setString(3,motivo.getNrMotivo());
+				pstmt.setString(4,motivo.getNmMotivo());
+				pstmt.setInt(5,motivo.getStMotivo());
+				int code = pstmt.executeUpdate();
+				if( code <= 0 ){
+					Conexao.rollback(connect);
+					Conexao.rollback(conFirebird);
+					return new sol.util.Result(-1, "Erro ao importar motivo de Infração");
+				}
+			} 
+			
+			System.out.println("Importando Agentes");
+			rsmFirebird = new ResultSetMap(conFirebird.prepareStatement("SELECT * FROM AGENTE").executeQuery());
+			rsmFirebird.beforeFirst();
+			int codUsuario = 0;
+			while( rsmFirebird.next() ){
+				
+				codUsuario = rsmFirebird.getInt("COD_USUARIO");
+				if( codUsuario > 0 ){
+					ResultSetMap rsmUsuario = new ResultSetMap(conFirebird.prepareStatement("SELECT * FROM USUARIO WHERE COD_USUARIO = "+rsmFirebird.getInt("COD_USUARIO")).executeQuery());
+					
+					Result r = importUsuarioEtransito(rsmUsuario, 1, connect);
+					if( r.getCode() < 0 ){
+						Conexao.rollback(connect);
+						Conexao.rollback(conFirebird);
+						return r;
+					}
+					codUsuario = r.getCode();
+				}
+				
+				Agente agente = new Agente( rsmFirebird.getInt("COD_AGENTE")/*cdAgente*/,
+											codUsuario/* cdUsuario*/,
+											rsmFirebird.getString("NM_AGENTE")/* nmAgente*/,
+											rsmFirebird.getString("DS_ENDERECO")/* dsEndereco*/,
+											rsmFirebird.getString("NM_ABAIRRO")/* nmBairro*/,
+											rsmFirebird.getString("NR_CEP")/* nrCep*/,
+											rsmFirebird.getInt("COD_MUNICIPIO")/* cdMunicipio*/,
+											rsmFirebird.getString("NR_MATRICULA")/* nrMatricula*/,
+											rsmFirebird.getInt("TP_AGENTE")/* tpAgente*/);
+				
+				PreparedStatement pstmt = connect.prepareStatement("INSERT INTO mob_agente (cd_agente,"+
+                        "cd_usuario,"+
+                        "nm_agente,"+
+                        "ds_endereco,"+
+                        "nm_bairro,"+
+                        "nr_cep,"+
+                        "cd_municipio,"+
+                        "nr_matricula,"+
+                        "tp_agente) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)");
+				pstmt.setInt(1, agente.getCdAgente());
+				if(agente.getCdUsuario()==0)
+					pstmt.setNull(2, Types.INTEGER);
+				else
+					pstmt.setInt(2,agente.getCdUsuario());
+				pstmt.setString(3,agente.getNmAgente());
+				pstmt.setString(4,agente.getDsEndereco());
+				pstmt.setString(5,agente.getNmBairro());
+				pstmt.setString(6,agente.getNrCep());
+				pstmt.setInt(7,agente.getCdCidade());
+				pstmt.setString(8,agente.getNrMatricula());
+				pstmt.setInt(9,agente.getTpAgente());
+				int code = pstmt.executeUpdate();
+				if( code <= 0 ){
+					Conexao.rollback(connect);
+					Conexao.rollback(conFirebird);
+					return new sol.util.Result(-1, "Erro ao importar agentes");
+				}
+			} 
+//			rsmFirebird.beforeFirst();
+//			Pessoa pessoa;
+//			int cdPessoaNew = 0;
+//			while(rsmFirebird.next()){
+//				
+//				pessoa = new Pessoa(rsmFirebird.getInt("CD_PESSOA")/*cdPessoa*/, rsmFirebird.getInt("CD_PESSOA_SUPERIOR")/* cdPessoaSuperior*/,
+//									rsmFirebird.getInt("CD_PAIS")/* cdPais*/,rsmFirebird.getString("NM_PESSOA")/* nmPessoa*/,
+//									rsmFirebird.getString("NR_TELEFONE1")/* nrTelefone1*/,rsmFirebird.getString("NR_TELEFONE2")/*nrTelefone2*/,
+//									rsmFirebird.getString("NR_CELULAR")/* nrCelular*/,rsmFirebird.getString("NR_FAX")/* nrFax*/,
+//									rsmFirebird.getString("NM_EMAIL")/* nmEmail*/, rsmFirebird.getGregorianCalendar("DT_CADASTRO")/* dtCadastro*/,
+//									rsmFirebird.getInt("GN_PESSOA")/* gnPessoa*/, (byte[]) rsmFirebird.getObject("IMG_FOTO")/* imgFoto*/,
+//									rsmFirebird.getInt("ST_CADASTRO")/*stCadastro*/,rsmFirebird.getString("NM_URL")/* nmUrl*/,
+//									rsmFirebird.getString("NM_APELIDO")/* nmApelido*/,rsmFirebird.getString("TXT_OBSERVACAO")/* txtObservacao*/,
+//									rsmFirebird.getInt("LG_NOTIFICACAO")/* lgNotificacao*/,rsmFirebird.getString("ID_PESSOA")/* idPessoa*/,
+//									rsmFirebird.getInt("CD_CLASSIFICACAO")/*cdClassificacao*/,
+//									rsmFirebird.getInt("CD_FORMA_DIVULGACAO")/* cdFormaDivulgacao*/,
+//									rsmFirebird.getGregorianCalendar("DT_CHEGADA_PAIS")/* dtChegadaPais*/);
+//				
+//				result = PessoaServices.save(pessoa, null, 0, 0, connect);
+//				if( result.getCode()<=0 ){
+//					Conexao.rollback(connect);
+//					Conexao.rollback(conFirebird);
+//					return new sol.util.Result(-1, "Erro ao importar pessoas");
+//				}
+//				
+//				cdPessoaNew = result.getCode();
+//				/*Salva pessoa Física ou Jurídica*/
+//				PessoaFisica pf = new PessoaFisica();
+//				
+//			}
+			
+			/**
+			 * Banco bradesco já existento no banco de destino
+			 */
+//			int cdBanco = 4;
+//			rsFirebird = conFirebird.prepareStatement("SELECT * FROM GRL_AGENCIA").executeQuery();
+//			rsFirebird.beforeFirst();
+//			Agencia ag;
+//			while(rsFirebird.next()){
+//				ag = new Agencia();
+//				ag.setCdBanco(cdBanco);
+//				ag.setNrAgencia(rsFirebird.getString("NR_AGENCIA"));
+//				result = AgenciaServices.save(ag, null,connect);
+//				if( result.getCode()<=0 ){
+//					Conexao.rollback(connect);
+//					Conexao.rollback(conFirebird);
+//					return new sol.util.Result(-1, "Erro ao importar agência");
+//				}
+//			}
+//			
+//			
+//			
+//			rsFirebird = conFirebird.prepareStatement("SELECT * FROM ADM_CONTA_FINANCEIRA").executeQuery();
+//			while (rsFirebird.next()) {
+//			}
+			connect.commit();
+			Conexao.desconectar(conFirebird);
+			Conexao.desconectar(connect);
+			
+			return new sol.util.Result(1, "ok");
+		}
+		catch(Exception e){
+			e.printStackTrace(System.out);
+			return new sol.util.Result(-1, "Erro ao tentar importar banco eTransito.fdb!", e);
+		}
+		finally{
+			Conexao.desconectar(connect);
+			Conexao.desconectar(conFirebird);
+		}
+	}
+	
+	
+	public static sol.util.Result importInfracaoToPostgres()	{
+		Connection connect   = Conexao.conectar();
+		Connection conFirebird = getConnectFirebirdMobilidade();
+		ResultSetMap rsmFirebird;
+		ResultSetMap rsmPostgres;
+		Result result;
+		try {
+			connect.setAutoCommit(false);
+			conFirebird.setAutoCommit(false);
+			//IMPORTANDO TABELAS ISOLADAS
+			int infracaoImportada = 0;
+			int infracaoJaExiste = 0;
+			
+			
+			System.out.println("\n\n\n***********************************************************  ");
+			System.out.println("Importando Infrações ");
+			System.out.println("***********************************************************  ");
+			
+			rsmFirebird = new ResultSetMap(conFirebird.prepareStatement("SELECT * FROM INFRACAO").executeQuery());
+			rsmFirebird.beforeFirst();
+			
+			// Configura a progressbar
+			long startTime = System.currentTimeMillis();
+			long total = rsmFirebird.getLines().size();
+			long contLoop = 0;
+			
+			
+			while( rsmFirebird.next() ){
+				printProgress(startTime, total, contLoop++);				
+				Infracao infracao = new Infracao(rsmFirebird.getInt("COD_INFRACAO")/*cdInfracao*/,
+						rsmFirebird.getString("DS_INFRACAO2")/* dsInfracao*/, rsmFirebird.getInt("NR_PONTUACAO")/* nrPontuacao*/,
+						rsmFirebird.getInt("NR_COD_DETRAN")/* nrCodDetran*/, rsmFirebird.getDouble("NR_VALOR_UFIR")/* vlUfir*/,
+						rsmFirebird.getString("NM_NATUREZA")/*nmNatureza*/, rsmFirebird.getString("NR_ARTIGO")/* nrArtigo*/,
+						rsmFirebird.getString("NR_PARAGRAFO")/* nrParagrafo*/, rsmFirebird.getString("NR_INCISO")/*nrInciso*/, rsmFirebird.getString("NR_ALINEA")/* nrAlinea*/,
+						rsmFirebird.getInt("TP_COMPETENCIA")/* tpCompetencia*/,
+						rsmFirebird.getInt("LG_PRIORITARIA")/* lgPrioritaria*/,
+						rsmFirebird.getGregorianCalendar("DT_FIM_VIGENCIA")/* dtFimVigencia*/, null, 0, 0); 
+						
+				PreparedStatement pstmt = connect.prepareStatement("INSERT INTO mob_infracao (cd_infracao,"+
+                        "ds_infracao,"+
+                        "nr_pontuacao,"+
+                        "nr_cod_detran,"+
+                        "vl_ufir,"+
+                        "nm_natureza,"+
+                        "nr_artigo,"+
+                        "nr_paragrafo,"+
+                        "nr_inciso,"+
+                        "nr_alinea,"+
+                        "tp_competencia,"+
+                        "lg_prioritaria,"+
+                        "dt_fim_vigencia,"+
+			            "vl_infracao,"+
+			            "tp_responsabilidade) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+				pstmt.setInt(1, infracao.getCdInfracao());
+				pstmt.setString(2,infracao.getDsInfracao());
+				pstmt.setInt(3,infracao.getNrPontuacao());
+				pstmt.setInt(4,infracao.getNrCodDetran());
+				pstmt.setDouble(5,infracao.getVlInfracao());
+				pstmt.setString(6,infracao.getNmNatureza());
+				pstmt.setString(7,infracao.getNrArtigo());
+				pstmt.setString(8,infracao.getNrParagrafo());
+				pstmt.setString(9,infracao.getNrInciso());
+				pstmt.setString(10,infracao.getNrAlinea());
+				pstmt.setInt(11,infracao.getTpCompetencia());
+				pstmt.setInt(12,infracao.getLgPrioritaria());
+				if(infracao.getDtFimVigencia()==null)
+					pstmt.setNull(13, Types.TIMESTAMP);
+				else
+					pstmt.setTimestamp(13,new Timestamp(infracao.getDtFimVigencia().getTimeInMillis()));
+					pstmt.setDouble(14,infracao.getVlInfracao());
+					pstmt.setInt(15,infracao.getTpCompetencia());
+				
+				
+				String cdInfracao = String.valueOf(rsmFirebird.getInt("COD_INFRACAO"));
+				int code = 0;
+				if(jaExisteInfracao(cdInfracao, connect) == 0){				
+				   code = pstmt.executeUpdate();
+					gravarArq.println("Infração importada:"+ rsmFirebird.getInt("COD_INFRACAO"));
+					infracaoImportada++;
+				}
+				else{
+					gravarArq.println("Já existe a infração :"+ rsmFirebird.getInt("COD_INFRACAO"));
+					infracaoJaExiste++;				
+				}
+				
+				if( code < 0 ){						
+					gravarArq.println("ERROR: Erro ao salvar infração");
+					//return new sol.util.Result(-1, "Já existe o infração");
+				}
+				
+			}
+			
+			System.out.println("\n\n======================================================== ");
+			System.out.println("RESULTADO DA IMPORTAÇÃO DE INFRAÇÃO");
+			System.out.println("======================================================== ");
+			System.out.println("Importados: " + infracaoImportada);
+			System.out.println("Já existentes: " + infracaoJaExiste);
+			
+			
+			gravarArq.println("\n\n======================================================== ");
+			gravarArq.println("RESULTADO DA IMPORTAÇÃO DE INFRAÇÃO");
+			gravarArq.println("======================================================== ");
+			gravarArq.println("Importados: " + infracaoImportada);
+			gravarArq.println("Já existentes: " + infracaoJaExiste);
+			
+			
+			
+			
+			
+			System.out.println("\n\n\n*********************************************************** ");
+			System.out.println("Importando Infrações de transporte");
+			System.out.println("***********************************************************  ");
+			
+			
+			int infracaoTransporteImportada = 0;
+			int infracaoTransporteJaExiste = 0;
+			
+			rsmFirebird = new ResultSetMap(conFirebird.prepareStatement("SELECT * FROM INFRACAO_TRANSPORTE").executeQuery());
+			rsmFirebird.beforeFirst();
+			while( rsmFirebird.next() ){
+				InfracaoTransporte infracao = new InfracaoTransporte( rsmFirebird.getInt("COD_INFRACAO")/*cdInfracao*/, 
+														rsmFirebird.getString("DS_INFRACAO")/* dsInfracao*/,
+														rsmFirebird.getInt("NR_PONTUACAO")/* nrPontuacao*/,
+														rsmFirebird.getFloat("NR_VALOR_UFIR")/* nrValorUfir*/,
+														rsmFirebird.getString("NM_NATUREZA")/*nmNatureza*/,
+														rsmFirebird.getString("NR_ARTIGO")/* nrArtigo*/,
+														rsmFirebird.getString("NR_PARAGRAFO")/* nrParagrafo*/,
+														rsmFirebird.getString("NR_INCISO")/*nrInciso*/,
+														rsmFirebird.getString("NR_ALINEA")/* nrAlinea*/,
+														rsmFirebird.getInt("TP_CONCESSAO")/* tpConcessao*/,
+														rsmFirebird.getString("NR_INFRACAO")/* nrInfracao*/,
+														rsmFirebird.getInt("LG_PRIORITARIO")/*lgPrioritario*/,
+														0/* tpGrupo*/);
+				PreparedStatement pstmt = connect.prepareStatement("INSERT INTO mob_infracao_transporte (cd_infracao,"+
+                        "ds_infracao,"+
+                        "nr_pontuacao,"+
+                        "nr_valor_ufir,"+
+                        "nm_natureza,"+
+                        "nr_artigo,"+
+                        "nr_paragrafo,"+
+                        "nr_inciso,"+
+                        "nr_alinea,"+
+                        "tp_concessao,"+
+                        "nr_infracao,"+
+                        "lg_prioritario,"+
+                        "tp_grupo) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+				pstmt.setInt(1, infracao.getCdInfracao());
+				pstmt.setString(2,infracao.getDsInfracao());
+				pstmt.setInt(3,infracao.getNrPontuacao());
+				pstmt.setFloat(4,infracao.getNrValorUfir());
+				pstmt.setString(5,infracao.getNmNatureza());
+				pstmt.setString(6,infracao.getNrArtigo());
+				pstmt.setString(7,infracao.getNrParagrafo());
+				pstmt.setString(8,infracao.getNrInciso());
+				pstmt.setString(9,infracao.getNrAlinea());
+				pstmt.setInt(10,infracao.getTpConcessao());
+				pstmt.setString(11,infracao.getNrInfracao());
+				pstmt.setInt(12,infracao.getLgPrioritario());
+				pstmt.setInt(13,infracao.getTpGrupo());
+
+				int code = 0;
+				
+				String cdInfracaoTransporte = String.valueOf(rsmFirebird.getInt("COD_INFRACAO"));
+				
+				if(jaExisteInfracaoDeTransporte(cdInfracaoTransporte, connect) == 0){				
+				   code = pstmt.executeUpdate();
+				   
+				   // Grava o histórico da transferência da infracao para Firebird ao Postgres.
+					ImportacaoAit importacaoAit = new ImportacaoAit();
+					importacaoAit.setCdAntigo(rsmFirebird.getInt("COD_INFRACAO"));
+					importacaoAit.setCdNovo(rsmFirebird.getInt("COD_INFRACAO"));
+					importacaoAit.setTabelaFirebird(ImportacaoAitServices.INFRACAO_TRANSPORTE);
+					importacaoAit.setTabelaPostgre(ImportacaoAitServices.nomeTabelaPostegres(ImportacaoAitServices.MOB_INFRACAO_TRANSPORTE));
+					
+					ImportacaoAitServices.save(importacaoAit);
+				   
+					gravarArq.println("Infração de transrpote importada:"+ rsmFirebird.getInt("COD_INFRACAO"));
+					infracaoTransporteImportada++;
+				}
+				else{
+					gravarArq.println("Já existe a infração de transporte :"+ rsmFirebird.getInt("COD_INFRACAO"));
+					infracaoTransporteJaExiste++;				
+				}
+				
+				if( code < 0 ){	
+					gravarArq.println("ERRO: Erro ao salvar infração de transporte" + rsmFirebird.getInt("COD_INFRACAO"));					
+					//return new sol.util.Result(-1, "Já existe o infração");
+				}
+				
+			}
+			
+			System.out.println("\n\n======================================================================== ");
+			System.out.println("============= RESULTADO DA IMPORTAÇÃO DE INFRAÇÃO DE TRANPORTE =============");
+			System.out.println("======================================================================== ");
+			System.out.println("Importados: " +  infracaoTransporteImportada);
+			System.out.println("Já existentes: " + infracaoTransporteJaExiste);
+			System.out.println("\n\n\n");
+			
+			gravarArq.println("\n\n======================================================================== ");
+			gravarArq.println("============= RESULTADO DA IMPORTAÇÃO DE INFRAÇÃO DE TRANPORTE =============");
+			gravarArq.println("======================================================================== ");
+			gravarArq.println("Importados: " +  infracaoTransporteImportada);
+			gravarArq.println("Já existentes: " + infracaoTransporteJaExiste);
+			gravarArq.println("\n\n\n");
+			
+			
+			
+			
+			int variacaoDeInfracaoImportada = 0;
+			int variacaoDeInfracaoJaExiste = 0;
+			
+			
+			System.out.println("\n\n\n************************************************************************************* ");
+			System.out.println("************* Importando Variações de Infração *************");
+			System.out.println("***************************************************************************************** ");
+						
+			rsmFirebird = new ResultSetMap(conFirebird.prepareStatement("SELECT * FROM STR_INFRACAO_VARIACAO").executeQuery());
+			rsmFirebird.beforeFirst();
+			while( rsmFirebird.next() ){
+				InfracaoVariacao variacao = new InfracaoVariacao(rsmFirebird.getInt("CD_VARIACAO")/*cdVariacao*/,
+						rsmFirebird.getInt("CD_INFRACAO")/* cdInfracao*/,
+						rsmFirebird.getInt("CD_VARIACAO_TRANSPORTE")/*cdInfracaoTransporte*/,
+						rsmFirebird.getInt("TP_VARIACAO")/* tpVariacao*/,
+						rsmFirebird.getFloat("VL_VARIACAO")/* vlVariacao*/,
+						rsmFirebird.getString("TXT_PROCEDIMENTO")/* txtProcedimentos*/,
+						rsmFirebird.getInt("NR_ORDEM")/*nrOrdem*/,rsmFirebird.getInt("TP_MULTIPLICADOR")/* tpMultiplicador*/);
+						
+				PreparedStatement pstmt = connect.prepareStatement("INSERT INTO mob_infracao_variacao (cd_variacao,"+
+                        "cd_infracao,"+
+                        "cd_infracao_transporte,"+
+                        "tp_variacao,"+
+                        "vl_variacao,"+
+                        "txt_procedimentos,"+
+                        "nr_ordem,"+
+                        "tp_multiplicador) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
+				pstmt.setInt(1, variacao.getCdVariacao());
+				if(variacao.getCdInfracao()==0)
+					pstmt.setNull(2, Types.INTEGER);
+				else
+					pstmt.setInt(2,variacao.getCdInfracao());
+				if(variacao.getCdInfracaoTransporte()==0)
+					pstmt.setNull(3, Types.INTEGER);
+				else
+					pstmt.setInt(3,variacao.getCdInfracaoTransporte());
+				pstmt.setInt(4,variacao.getTpVariacao());
+				pstmt.setFloat(5,variacao.getVlVariacao());
+				pstmt.setString(6,variacao.getTxtProcedimentos());
+				pstmt.setInt(7,variacao.getNrOrdem());
+				pstmt.setInt(8,variacao.getTpMultiplicador());
+				
+				int code = 0;
+				
+                String cdInfracaoVariacao = String.valueOf(rsmFirebird.getInt("CD_VARIACAO"));
+				
+				if(jaExisteInfracaoVariacao(cdInfracaoVariacao, connect) == 0){				
+				   code = pstmt.executeUpdate();				  
+				    gravarArq.println("Variação de Infração de transrpote importada:"+ rsmFirebird.getInt("CD_VARIACAO"));
+					variacaoDeInfracaoImportada++;
+					
+					// Grava o histórico da transferência da pessoa fisica Firebird ao Postgres.
+					ImportacaoAit importacaoAit = new ImportacaoAit();
+					importacaoAit.setCdAntigo(rsmFirebird.getInt("CD_VARIACAO"));
+					importacaoAit.setCdNovo(rsmFirebird.getInt("CD_VARIACAO"));
+					importacaoAit.setTabelaFirebird(ImportacaoAitServices.STR_INFRACAO_VARIACAO);
+					importacaoAit.setTabelaPostgre(ImportacaoAitServices.nomeTabelaPostegres(ImportacaoAitServices.MOB_INFRACAO_VARIACAO));
+					
+					ImportacaoAitServices.save(importacaoAit);
+					
+				}
+				else{
+					gravarArq.println("Já existe a Variação de infração de transporte :"+ rsmFirebird.getInt("CD_VARIACAO"));
+					variacaoDeInfracaoJaExiste++;				
+				}
+				
+				if( code < 0 ){	
+					gravarArq.println("ERRO: Erro ao salvar variação de infração :"+ rsmFirebird.getInt("CD_VARIACAO"));					
+					//return new sol.util.Result(-1, "Já existe o infração");
+				}
+			}
+				
+			
+			System.out.println("\n\n======================================================================== ");
+			System.out.println("============= RESULTADO DA IMPORTAÇÃO DA VARIAÇÃO DA INFRAÇÃO DE TRANPORTE =============");
+			System.out.println("======================================================================== ");
+			System.out.println("Importados: " +  variacaoDeInfracaoImportada);
+			System.out.println("Já existentes: " + variacaoDeInfracaoJaExiste);
+			System.out.println("\n\n\n");
+			
+			
+			gravarArq.println("\n\n======================================================================== ");
+			gravarArq.println("============= RESULTADO DA IMPORTAÇÃO DA VARIAÇÃO DA INFRAÇÃO DE TRANPORTE =============");
+			gravarArq.println("======================================================================== ");
+			gravarArq.println("Importados: " +  variacaoDeInfracaoImportada);
+			gravarArq.println("Já existentes: " + variacaoDeInfracaoJaExiste);
+			gravarArq.println("\n\n\n");
+			
+			
+			
+			
+
+			int motivoDeInfracaoImportada = 0;
+			int motivoDeInfracaoJaExiste = 0;
+			
+			System.out.println("\n\n\n************************************************************************************* ");
+			System.out.println("************* Importando Motivo de Infração *************");
+			System.out.println("***************************************************************************************** ");
+			
+			rsmFirebird = new ResultSetMap(conFirebird.prepareStatement("SELECT * FROM STP_INFRACAO_MOTIVO").executeQuery());
+			rsmFirebird.beforeFirst();
+			while( rsmFirebird.next() ){
+				InfracaoMotivo motivo = new InfracaoMotivo(rsmFirebird.getInt("COD_INFRACAO")/*cdInfracao*/, 
+						rsmFirebird.getInt("CD_MOTIVO")/*cdMotivo*/, 
+						rsmFirebird.getString("NR_MOTIVO")/*nrMotivo*/, 
+						rsmFirebird.getString("NM_MOTIVO")/*nmMotivo*/, 
+						rsmFirebird.getInt("ST_MOTIVO")/*stMotivo*/);
+				
+				PreparedStatement pstmt = connect.prepareStatement("INSERT INTO mob_infracao_motivo (cd_infracao,"+
+                        "cd_motivo,"+
+                        "nr_motivo,"+
+                        "nm_motivo,"+
+                        "st_motivo) VALUES (?, ?, ?, ?, ?)");
+				if(motivo.getCdInfracao()==0)
+					pstmt.setNull(1, Types.INTEGER);
+				else
+					pstmt.setInt(1,motivo.getCdInfracao());
+				pstmt.setInt(2, motivo.getCdMotivo());
+				pstmt.setString(3,motivo.getNrMotivo());
+				pstmt.setString(4,motivo.getNmMotivo());
+				pstmt.setInt(5,motivo.getStMotivo());
+				int code = 0;
+		        
+				String cdInfracaoTransporte = String.valueOf(rsmFirebird.getInt("COD_INFRACAO"));
+				String cdMotivo = String.valueOf(rsmFirebird.getInt("CD_MOTIVO"));
+				
+				
+				if(jaExisteInfracaoMotivo(cdInfracaoTransporte, cdMotivo, connect) == 0){				
+				    code = pstmt.executeUpdate();
+				 
+				    gravarArq.println("Motivo da infração importada:"+ rsmFirebird.getInt("COD_INFRACAO") + "cdMotivo: " + rsmFirebird.getInt("CD_MOTIVO"));
+					motivoDeInfracaoImportada++;
+					
+					// Grava o histórico da transferência da pessoa fisica Firebird ao Postgres.
+					ImportacaoAit importacaoAit = new ImportacaoAit();
+					importacaoAit.setCdAntigo(rsmFirebird.getInt("CD_VARIACAO"));
+					importacaoAit.setCdNovo(rsmFirebird.getInt("COD_INFRACAO"));
+					importacaoAit.setTabelaFirebird(ImportacaoAitServices.STR_INFRACAO_VARIACAO);
+					importacaoAit.setTabelaPostgre(ImportacaoAitServices.nomeTabelaPostegres(ImportacaoAitServices.MOB_INFRACAO_VARIACAO));
+					
+					ImportacaoAitServices.save(importacaoAit);
+					
+				}
+				else{
+					gravarArq.println("Já existe o Motivo da infração :"+ rsmFirebird.getInt("COD_INFRACAO")  + "cdMotivo: " + rsmFirebird.getInt("CD_MOTIVO"));
+					motivoDeInfracaoJaExiste++;				
+				}
+				
+				if( code < 0 ){	
+					gravarArq.println("ERRO: Erro ao salvar Motivo da infração de transporte" + rsmFirebird.getInt("COD_INFRACAO")  + "cdMotivo: " + rsmFirebird.getInt("CD_MOTIVO"));					
+					//return new sol.util.Result(-1, "Já existe o infração");
+				}
+			}		
+			
+			System.out.println("\n\n======================================================================== ");
+			System.out.println("============= RESULTADO DA IMPORTAÇÃO DA VARIAÇÃO DA INFRAÇÃO DE TRANPORTE =============");
+			System.out.println("======================================================================== ");
+			System.out.println("Importados: " +  motivoDeInfracaoImportada);
+			System.out.println("Já existentes: " + motivoDeInfracaoJaExiste);
+			System.out.println("\n\n\n");
+			
+			System.out.println("\n\n======================================================================== ");
+			System.out.println("============= RESULTADO DA IMPORTAÇÃO DA VARIAÇÃO DA INFRAÇÃO DE TRANPORTE =============");
+			System.out.println("======================================================================== ");
+			System.out.println("Importados: " +  motivoDeInfracaoImportada);
+			System.out.println("Já existentes: " + motivoDeInfracaoJaExiste);
+			System.out.println("\n\n\n"); 
+
+			
+			
+						 		
+			connect.commit();
+			Conexao.desconectar(conFirebird);
+			Conexao.desconectar(connect);
+			
+			return new sol.util.Result(1, "ok");
+		}
+		catch(Exception e){
+			e.printStackTrace(System.out);
+			return new sol.util.Result(-1, "Erro ao tentar importar banco eTransito.fdb!", e);
+		}
+		finally{
+			Conexao.desconectar(connect);
+			Conexao.desconectar(conFirebird);
+		}
+	}
+	
+	
+	public static sol.util.Result importAitToPostgresql()	{
+		Connection connect   = Conexao.conectar();
+		Connection conFirebird = getConnectFirebirdMobilidade();
+		ResultSetMap rsmFirebird;
+		ResultSetMap rsmPostgres;
+		ResultSetMap rsmUltimoRegistro;
+		Result result;
+		try {
+			connect.setAutoCommit(false);
+			conFirebird.setAutoCommit(false);
+						
+			//IMPORTANDO TABELAS ISOLADAS			
+			System.out.println("\n\n\n************************************************************************************* ");
+			System.out.println("*************** Importando AIT Transporte ********************");
+			System.out.println("***************************************************************************************** ");
+			
+			rsmUltimoRegistro = new ResultSetMap(connect.prepareStatement(" SELECT * FROM mob_importacao " +
+																		  " WHERE tabela_postgre = \'mob_ait_transporte\'" +
+																		  " ORDER BY cd_antigo DESC LIMIT 1").executeQuery());
+			
+			int cdUltimoCdAitFirebird = 0;
+			
+			if(rsmUltimoRegistro.next())
+				cdUltimoCdAitFirebird = rsmUltimoRegistro.getInt("cd_antigo");
+			
+			System.out.println(cdUltimoCdAitFirebird);
+			
+			rsmFirebird = new ResultSetMap(conFirebird.prepareStatement(" SELECT A.*, B.nm_pessoa AS NM_CONCESSIONARIO, C.nm_usuario AS NM_USUARIO_CANCELAMENTO " +
+					                                                    " FROM AIT_TRANSPORTE A " +
+					                                                    " LEFT OUTER JOIN grl_pessoa B ON (A.cd_permissionario = B.cd_pessoa) " +
+					                                                    " LEFT OUTER JOIN usuario C ON (A.cd_usuario_cancelamento = C.cod_usuario) " + 
+					                                                    (cdUltimoCdAitFirebird > 0? " WHERE A.COD_AIT > " + cdUltimoCdAitFirebird : "") ).executeQuery());
+			rsmFirebird.beforeFirst();
+			int codUsuario = 0;
+			AitTransporte  aitTransporte = new AitTransporte();
+			
+			
+			// Variáveis que contabilizam o processo de importação da AIT
+			int aitImportada = 0;
+			int erroImportacaoAit = 0;
+		
+			
+			// Complemento do campos observação da ait
+			String observacaoComplemento = "";
+			
+			
+			// Configura a progressbar
+			long startTime = System.currentTimeMillis();
+			long total = rsmFirebird.getLines().size();
+			long contLoop = 0;
+		
+			// Código de Recursos
+			int cdRecurso1;
+			int cdRecurso2;
+			
+			
+			int retornoUsuarioCancelamento = 0;
+			int retornoConcessionario = 0;
+						
+			int retornoVeiculo = 0;
+			int retornoPrefixoLinha = 0;
+			
+						
+			while( rsmFirebird.next() ){
+				// Imprime a progressBarr no terminal
+				printProgress(startTime, total, contLoop++);
+				observacaoComplemento += "[IMPORTACAO] AIT importada do eTransito.    ";
+				
+				cdRecurso1 = 0;
+				cdRecurso2 = 0;
+				
+				observacaoComplemento = " ";
+				retornoVeiculo = 0;
+				retornoPrefixoLinha = 0;
+				aitTransporte = new AitTransporte();
+				
+				aitTransporte.setCdAit(rsmFirebird.getInt("COD_AIT"));
+				aitTransporte.setCdInfracao(rsmFirebird.getInt("COD_INFRACAO"));
+				aitTransporte.setDsProvidencia(rsmFirebird.getString("DS_PROVIDENCIA"));
+				aitTransporte.setDtPrazo(rsmFirebird.getGregorianCalendar("DT_PRAZO"));
+				aitTransporte.setCdAgente(rsmFirebird.getInt("COD_AGENTE"));
+				aitTransporte.setNmPreposto(rsmFirebird.getString("NM_PREPOSTO"));
+				aitTransporte.setNrAit(rsmFirebird.getString("NR_AIT"));
+				aitTransporte.setDtInfracao(rsmFirebird.getGregorianCalendar("DT_INFRACAO"));
+				aitTransporte.setDtEmissaoNip(rsmFirebird.getGregorianCalendar("DT_EMISSAO_NIP"));
+				aitTransporte.setNrViaNip(rsmFirebird.getInt("NR_VIA_NIP")); 
+				
+				// Seleciona o status correspondente do ait no transporte web 
+				aitTransporte.setStAit(getCorrespontendeStAit(rsmFirebird.getInt("ST_AIT")));
+				aitTransporte.setCdMotivo(rsmFirebird.getInt("CD_MOTIVO"));				
+				
+				retornoUsuarioCancelamento = jaExisteUsuario(rsmFirebird.getString("NM_USUARIO_CANCELAMENTO"), connect);
+			
+				if(retornoUsuarioCancelamento > 0){
+				aitTransporte.setCdUsuarioCancelamento(retornoUsuarioCancelamento);
+				}
+				else{
+					observacaoComplemento += "  Cancelado por: " + rsmFirebird.getString("NM_USUARIO_CANCELAMENTO"); 										
+				}
+				
+				aitTransporte.setCdOcorrencia(rsmFirebird.getInt("CD_OCORRENCIA"));
+				aitTransporte.setDsLocalInfracao(rsmFirebird.getString("NM_ENDERECO_TESTEMUNHA2"));
+				aitTransporte.setNmTestemunha1(rsmFirebird.getString("NM_TESTEMUNHA1"));
+				aitTransporte.setNrRgTestemunha1(rsmFirebird.getString("NR_RG_TESTEMUNHA1"));
+				aitTransporte.setNmEnderecoTestemunha1(rsmFirebird.getString("NM_ENDERECO_TESTEMUNHA1"));
+				aitTransporte.setTpAit((rsmFirebird.getInt("TP_AIT")));
+				aitTransporte.setCdTalao((rsmFirebird.getInt("COD_TALAO")));
+								
+				
+				// Verifica se já existe o concessionário				
+				retornoConcessionario = importConcessionario(rsmFirebird.getString("NM_CONCESSIONARIO"),rsmFirebird.getInt("TP_AIT"));
+			
+				if(retornoConcessionario != 0 && retornoConcessionario > 0){
+					switch (retornoConcessionario) {
+					case 398: // "CIDADE VERDE TRANSPORTE RODOVIÁRIO LTDA" cd_pessoa = 22122 
+						aitTransporte.setCdConcessao(13);//"CIDADE VERDE" cd_pessoa = 12377 
+						break;
+
+					case 403://"VIAÇÃO VITÓRIA" cd_pessoa = 22117 
+						aitTransporte.setCdConcessao(14); //"VIAÇÃO VITÓRIA LTDA" cd_pessoa = 12376 
+						break;
+						
+					default:
+						aitTransporte.setCdConcessao(retornoConcessionario);
+						break;
+					}
+				}
+								
+				
+				//Verifica se já existe o prefixo do veículo
+				retornoVeiculo = jaExisteNrPrefixo(rsmFirebird.getString("NR_RG_TESTEMUNHA2"), null);
+				
+				if(retornoVeiculo > 0){
+					aitTransporte.setCdConcessaoVeiculo(retornoVeiculo);
+				}
+				else{
+					if(rsmFirebird.getString("NR_RG_TESTEMUNHA2") == null){
+						observacaoComplemento += " .Não foi informado um prefixo de veículo no cadastro desta AIT no eTransito (1° Sistema)  ";
+					}
+					else{					
+					  observacaoComplemento += ". O prefixo " + rsmFirebird.getString("NR_RG_TESTEMUNHA2") + ", não é vinculado a nenhum veículo do Trânsito WEB  ";
+					}
+				}
+				retornoVeiculo = 0;
+				
+				//Verific ase já existe o prefixo da linha				
+                retornoPrefixoLinha = jaExistePrefixodaLinha(rsmFirebird.getString("NM_TESTEMUNHA2"), connect);
+				
+				if(retornoPrefixoLinha > 0){
+					aitTransporte.setCdLinha(retornoPrefixoLinha);
+				}
+				else{
+					if(rsmFirebird.getString("NM_TESTEMUNHA2") == null){
+						observacaoComplemento += ". Não foi informado um prefixo de linha no cadastro desta AIT no eTransito (1° Sistema) ";
+					}
+					else{					
+					  observacaoComplemento += ".  O prefixo de linha " + rsmFirebird.getString("NM_TESTEMUNHA2") + ", não é vinculado a nenhuma linha do Trânsito WEB";
+					}
+				}
+				
+				
+				//Importa os recursos caso exitam
+				
+				cdRecurso1 = importProcesso(rsmFirebird.getString("NR_PROCESSO1"),rsmFirebird.getGregorianCalendar("DT_PROCESSO1"),rsmFirebird.getInt("ST_PROCESSO1"),1);
+				cdRecurso2 = importProcesso(rsmFirebird.getString("NR_PROCESSO2"),rsmFirebird.getGregorianCalendar("DT_PROCESSO2"),rsmFirebird.getInt("ST_PROCESSO2"),2);
+				
+				if(cdRecurso1 > 0){
+				aitTransporte.setCdRecurso1(cdRecurso1);
+				}
+				else{
+					observacaoComplemento += " N° Processo 1: " + rsmFirebird.getString("NR_PROCESSO1"); 				
+				}
+				
+				if(cdRecurso2 > 0){
+					aitTransporte.setCdRecurso2(cdRecurso2);
+				}			
+				else{
+					observacaoComplemento += " N° Processo 2: " + rsmFirebird.getString("NR_PROCESSO2"); 				
+				}
+				
+				
+				if(DT_LIMITE_1RECURSO * DT_LIMITE_2RECURSO < 0){
+					System.out.println("ERRRO: Parâmetro com os prazos da AIT não inicializados");
+					return null;
+				}
+				
+				switch (rsmFirebird.getInt("ST_AIT")) {				
+				
+				case 0: // Data limite para entrada na 1° instância
+					GregorianCalendar dataLimite1Instancia = rsmFirebird.getGregorianCalendar("DT_LIMITE");					
+					
+					if(dataLimite1Instancia != null)
+					dataLimite1Instancia.add(Calendar.DAY_OF_MONTH,-1 * DT_LIMITE_1RECURSO);
+					
+					aitTransporte.setDtLimiteRecurso1(dataLimite1Instancia);
+					
+					break;
+                case 1: // Data limite para entrada na 2° instância
+                	GregorianCalendar dataLimite2Instancia = rsmFirebird.getGregorianCalendar("DT_LIMITE");
+					
+                	if(dataLimite2Instancia != null)
+					dataLimite2Instancia.add(Calendar.DAY_OF_MONTH,-1 * DT_LIMITE_2RECURSO);
+					
+                	aitTransporte.setDtLimiteRecurso2(dataLimite2Instancia);
+					break;
+
+				default:
+					 SimpleDateFormat fmt = new SimpleDateFormat("dd/MMM/yyyy");
+					 GregorianCalendar gregorianCalendar = rsmFirebird.getGregorianCalendar("DT_LIMITE");
+					 String dataFormat = "";
+					 
+					 if(gregorianCalendar != null){					 
+						 dataFormat = fmt.format(gregorianCalendar.getTime());
+					 }
+					
+					observacaoComplemento += "  [ IMPORTACAO ] DT_LIMITE=" + dataFormat + "; ST_AIT " ; 					
+					break;
+				}
+				
+			    aitTransporte.setDsObservacao("[ AIT IMPORTADA ] " + rsmFirebird.getString("DS_OBSERVACAO") + " ." +  observacaoComplemento);		
+				aitTransporte.setVlLongitude(0d);
+				aitTransporte.setVlLatitude(0d);
+				
+				
+				result = AitTransporteServices.saveValidado(aitTransporte,true /*marca a importação*/);
+				
+				if(result.getCode() > 0){// Salvo com sucesso
+					aitImportada++;
+					
+					gravarArq.println("SUCESSO: AIT_TRANSPORTE salva: COD_AIT = " + rsmFirebird.getInt("COD_AIT"));
+					
+					// Grava o histórico da transferência da pessoa fisica Firebird ao Postgres.
+					ImportacaoAit importacaoAit = new ImportacaoAit();
+					importacaoAit.setCdAntigo(rsmFirebird.getInt("COD_AIT"));
+					importacaoAit.setCdNovo(result.getCode());
+					importacaoAit.setTabelaFirebird(ImportacaoAitServices.AIT_TRANSPORTE);
+					importacaoAit.setTabelaPostgre(ImportacaoAitServices.nomeTabelaPostegres(ImportacaoAitServices.MOB_AIT_TRANSPORTE));
+					
+					ImportacaoAitServices.save(importacaoAit);					
+				}
+				else{					
+					gravarArq.println("ERRRO: Erro ao importa AIT_TRANSPORTE: COD_AIT=" + rsmFirebird.getInt("COD_AIT") );
+					gravarArq.println("ERRO_MSG:" + result.getMessage());
+					erroImportacaoAit++;
+				}				
+								
+			}
+			
+			connect.commit();
+			Conexao.desconectar(conFirebird);
+			Conexao.desconectar(connect);
+			
+			System.out.println("\n\n============================================================================ ");
+			System.out.println("============= RESULTADO DA IMPORTAÇÃO DAS AITS =============");
+			System.out.println("=============================================================================== ");
+			System.out.println("Importados: " +  aitImportada);
+			System.out.println("Erros: " + erroImportacaoAit);
+			
+			return new sol.util.Result(1, "ok");
+		}
+		catch(Exception e){
+			e.printStackTrace(System.out);
+			return new sol.util.Result(-1, "Erro ao tentar importar banco eTransito.fdb!", e);
+		}
+		finally{
+			Conexao.desconectar(connect);
+			Conexao.desconectar(conFirebird);
+		}
+	}
+	
+	
+	public static sol.util.Result importAgenteToPostgres()	{
+		Connection connect   = Conexao.conectar();
+		Connection conFirebird = getConnectFirebirdMobilidade();
+		ResultSetMap rsmFirebird;
+		ResultSetMap rsmPostgres;
+		Result result;
+		try {
+			connect.setAutoCommit(false);
+			conFirebird.setAutoCommit(false);
+			
+			System.out.println("\n\n\n***********************************************************  ");
+			System.out.println("Importando Agentes ");
+			System.out.println("***********************************************************  ");
+		
+			rsmFirebird = new ResultSetMap(conFirebird.prepareStatement("SELECT * FROM AGENTE").executeQuery());
+			rsmFirebird.beforeFirst();
+			int codUsuario = 0;
+			
+			// Configura a progressbar
+			long startTime = System.currentTimeMillis();
+			long total = rsmFirebird.getLines().size();
+			long contLoop = 0;
+			
+			while( rsmFirebird.next() ){				
+				printProgress(startTime, total, contLoop++);
+				
+				codUsuario = rsmFirebird.getInt("COD_USUARIO");
+				if( codUsuario > 0 ){
+					ResultSetMap rsmUsuario = new ResultSetMap(conFirebird.prepareStatement("SELECT * FROM USUARIO WHERE COD_USUARIO = "+rsmFirebird.getInt("COD_USUARIO")).executeQuery());
+
+					//Verifica se já existe o Usuário no postegress
+					if(rsmUsuario != null){
+						ResultSetMetaData rsmd = conFirebird.prepareStatement("SELECT * FROM USUARIO WHERE COD_USUARIO = "+rsmFirebird.getInt("COD_USUARIO")).executeQuery().getMetaData(); 
+						int numeroColuna = rsmd.getColumnCount();
+									
+						
+						HashMap hashUsuario = rsmUsuario.getLines().get(0);
+						
+						if(!jaExisteUsuarioDoAgente(hashUsuario.get("NM_USUARIO").toString())){						
+							Result r = importUsuarioEtransito(rsmUsuario, 0, connect);
+							if( r.getCode() < 0 ){
+								Conexao.rollback(connect);
+								Conexao.rollback(conFirebird);
+								return r;
+							}
+							codUsuario = r.getCode();
+						}// fim do jaExisteUsuario
+					}
+
+				}
+				
+				//Verifica se já existe o agente
+				if(jaExisteAgente(rsmFirebird.getString("NM_AGENTE"), null) == 0){				
+				Agente agente = new Agente( rsmFirebird.getInt("COD_AGENTE")/*cdAgente*/,
+											codUsuario/* cdUsuario*/,
+											rsmFirebird.getString("NM_AGENTE")/* nmAgente*/,
+											rsmFirebird.getString("DS_ENDERECO")/* dsEndereco*/,
+											rsmFirebird.getString("NM_ABAIRRO")/* nmBairro*/,
+											rsmFirebird.getString("NR_CEP")/* nrCep*/,
+											rsmFirebird.getInt("COD_MUNICIPIO")/* cdMunicipio*/,
+											rsmFirebird.getString("NR_MATRICULA")/* nrMatricula*/,
+											rsmFirebird.getInt("TP_AGENTE")/* tpAgente*/);
+				
+				PreparedStatement pstmt = connect.prepareStatement("INSERT INTO mob_agente (cd_agente,"+
+                        "cd_usuario,"+
+                        "nm_agente,"+
+                        "ds_endereco,"+
+                        "nm_bairro,"+
+                        "nr_cep,"+
+                        "cd_municipio,"+
+                        "nr_matricula,"+
+                        "tp_agente) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)");
+				pstmt.setInt(1, agente.getCdAgente());
+				if(agente.getCdUsuario()==0)
+					pstmt.setNull(2, Types.INTEGER);
+				else
+					pstmt.setInt(2,agente.getCdUsuario());
+				pstmt.setString(3,agente.getNmAgente());
+				pstmt.setString(4,agente.getDsEndereco());
+				pstmt.setString(5,agente.getNmBairro());
+				pstmt.setString(6,agente.getNrCep());
+				pstmt.setInt(7,agente.getCdCidade());
+				pstmt.setString(8,agente.getNrMatricula());
+				pstmt.setInt(9,agente.getTpAgente());
+				int code = pstmt.executeUpdate();
+			
+				System.out.println("AGENTE IMPORTADO: " + agente.getNmAgente() );
+				
+				if( code <= 0 ){
+					Conexao.rollback(connect);
+					Conexao.rollback(conFirebird);
+					return new sol.util.Result(-1, "Erro ao importar agentes");
+				}
+				
+				}// fim do jaExisteAgente
+				
+			}		
+
+			connect.commit();
+			Conexao.desconectar(conFirebird);
+			Conexao.desconectar(connect);
+			System.out.print(". Fim da Importação de Agente.");	
+			return new sol.util.Result(1, "ok");
+		}
+		catch(Exception e){
+			e.printStackTrace(System.out);
+			return new sol.util.Result(-1, "Erro ao tentar importar banco eTransito.fdb!", e);
+		}
+		finally{
+			Conexao.desconectar(connect);
+			Conexao.desconectar(conFirebird);
+		}
+	}
+	
+	private static Result importUsuarioEtransito(ResultSetMap rsm,int lgCriarPessoaFisica, Connection connect){
+		boolean isConnectionNull = connect==null;
+		try {
+			if (isConnectionNull)
+				connect = Conexao.conectar();
+			if(rsm==null)
+				return new Result(-1, "ResultSetMap é nulo");
+			Result r = new Result(0);
+			rsm.beforeFirst();
+			int nmLoginCounter = 0;
+			String nmLogin = "";
+			int cdPessoa = 0;
+			while(rsm.next()){				
+				nmLogin = rsm.getString("NM_NICK");
+				cdPessoa = 0;
+				if( lgCriarPessoaFisica > 0 ){
+					PessoaFisica pf = new PessoaFisica();
+					pf.setNmPessoa( rsm.getString("NM_USUARIO") );
+					pf.setDtCadastro( new GregorianCalendar() );
+					r = PessoaFisicaServices.save(pf, connect);
+					if( r.getCode() < 0 ){
+						return new sol.util.Result(-1, "Erro ao cadastras pessoa física na importação de usuários");
+					}
+					cdPessoa = pf.getCdPessoa();
+				}
+				
+				Usuario usuario = new Usuario( 0/*cdUsuario*/,cdPessoa/* cdPessoa*/,0/* cdPerguntaSecreta*/,
+											rsm.getString("NM_NICK")/* nmLogin*/,
+											"123456"/* nmSenha*/,
+											0/* tpUsuario*/,""/* nmRespostaSecreta*/,
+											rsm.getInt("ST_USUARIO")/* stUsuario*/);
+				
+				r = UsuarioServices.save(usuario, connect);
+				System.out.println("USUARIO SALVO: " + usuario.getNmLogin());
+				if( r.getCode() == -2 ){
+					nmLoginCounter++;
+					usuario.setNmLogin( nmLogin+String.valueOf( nmLoginCounter ));
+					r = UsuarioServices.save(usuario, connect);
+				}
+				if( r.getCode() < 0 ){
+					return new sol.util.Result(-1, "Erro ao importar usuários");
+				}
+				
+			}
+			return new Result(r.getCode(), "Usuário importado com sucesso" );
+			
+		}
+		catch(Exception e){
+			e.printStackTrace(System.out);
+			System.err.println("Erro! importUsuarioEtransito: " +  e);
+			return new Result(-2, "Erro ao importar usuário do etransito");
+		}
+		finally{
+			if (isConnectionNull)
+				Conexao.desconectar(connect);
+		}
+	}
+	public static Connection getConnectFirebirdMobilidade()	{
+		try{
+			Class.forName("org.firebirdsql.jdbc.FBDriver").newInstance();
+			DriverManager.setLoginTimeout(80);			
+			return DriverManager.getConnection("jdbc:firebirdsql:192.168.10.13/3050://tivic/database/etransito.fdb?lc_ctype=ISO8859_1", "sysdba","s1mtr4ns");
+		}
+		catch(Exception e) {
+			e.printStackTrace(System.out);
+			return null;
+		}
+	}
+	public static Connection conectar()	{
+		try{
+			Class.forName("org.firebirdsql.jdbc.FBDriver").newInstance();
+	  		DriverManager.setLoginTimeout(80);
+			return DriverManager.getConnection("jdbc:firebirdsql://127.0.0.1:3050//tivic/databases/juris/juris.fdb", "sysdba","masterkey");
+		}
+		catch(Exception e) {
+			e.printStackTrace(System.out);
+			return null;
+		}
+	}
+	
+	
+	public static sol.util.Result importTalonarioToPostgres()	{
+		Connection connect   = Conexao.conectar();
+		Connection conFirebird = getConnectFirebirdMobilidade();
+		ResultSetMap rsmFirebird;
+		ResultSetMap rsmPostgres;
+		ResultSetMap rsmUltimoRegistro;
+		Result result;
+		try {
+			connect.setAutoCommit(false);
+			conFirebird.setAutoCommit(false);
+						
+			//IMPORTANDO TABELAS ISOLADAS			
+			System.out.println("\n\n\n*********************************************************** ");
+			System.out.println(" Importando Talões ");
+			System.out.println("*********************************************************** ");
+			
+			
+			int taloesImportados = 0;
+			int taloesComErroImportacao = 0;
+			
+			
+			rsmUltimoRegistro = new ResultSetMap(connect.prepareStatement(" SELECT * FROM mob_importacao " +
+																		  " WHERE tabela_postgre = \'mob_talonario\'" +
+																		  " ORDER BY cd_antigo DESC LIMIT 1").executeQuery());
+
+			int cdUltimoCdTalaoFirebird = 0;
+			
+			if(rsmUltimoRegistro.next())
+				cdUltimoCdTalaoFirebird = rsmUltimoRegistro.getInt("cd_antigo");
+			
+			rsmFirebird = new ResultSetMap(conFirebird.prepareStatement("SELECT * FROM TALONARIO " + 
+										  (cdUltimoCdTalaoFirebird > 0 ? "WHERE COD_TALAO > " +cdUltimoCdTalaoFirebird : "")).executeQuery());
+			rsmFirebird.beforeFirst();
+			int codUsuario = 0;
+			
+			// Configura a progressbar
+			long startTime = System.currentTimeMillis();
+			long total = rsmFirebird.getLines().size();
+			long contLoop = 0;
+			
+			while( rsmFirebird.next() ){
+				printProgress(startTime, total, contLoop++);
+				
+				TalonarioAIT talonarioAIT = new TalonarioAIT();
+				talonarioAIT.setCdTalao(rsmFirebird.getInt("COD_TALAO"));
+				talonarioAIT.setNrInicial(rsmFirebird.getInt("NR_INICIAL"));
+				talonarioAIT.setCdAgente(rsmFirebird.getInt("COD_AGENTE"));
+				talonarioAIT.setNrFinal(rsmFirebird.getInt("NR_FINAL"));
+				talonarioAIT.setDtEntrega(rsmFirebird.getGregorianCalendar("DT_ENTREGA"));
+				talonarioAIT.setDtDevolucao(rsmFirebird.getGregorianCalendar("DT_DEVOLUCAO"));
+				talonarioAIT.setStTalao(rsmFirebird.getInt("ST_TALAO"));
+				talonarioAIT.setNrTalao(rsmFirebird.getInt("NR_TALAO"));
+				talonarioAIT.setTpTalao(rsmFirebird.getInt("TP_TALAO"));
+				talonarioAIT.setSgTalao(rsmFirebird.getString("SG_TALAO"));
+				
+				result = TalonarioAITServices.save(talonarioAIT,true);
+				
+				if( result.getCode() > 0 ){
+					//System.out.println("IMPORTADO: Talão salvo com sucesso:" + rsmFirebird.getInt("COD_TALAO"));
+					
+					// Grava o histórico da transferência da pessoa fisica Firebird ao Postgres.
+					ImportacaoAit importacaoAit = new ImportacaoAit();
+					importacaoAit.setCdAntigo(rsmFirebird.getInt("COD_TALAO"));
+					importacaoAit.setCdNovo(rsmFirebird.getInt("COD_TALAO"));
+					importacaoAit.setTabelaFirebird(ImportacaoAitServices.TALONARIO);
+					importacaoAit.setTabelaPostgre(ImportacaoAitServices.nomeTabelaPostegres(ImportacaoAitServices.MOB_TALONARIO));
+					
+					ImportacaoAitServices.save(importacaoAit);
+					
+					taloesImportados++;
+				}
+				else{
+					System.out.println("\n\nERROR: Erro ao salvar o Talão:" + rsmFirebird.getInt("COD_TALAO"));
+					System.out.println("\n\nERROR: "+ result.getMessage() );
+					System.out.println("\n\n: "+ result.getMessage() );
+					
+					taloesComErroImportacao++;
+				}
+			}
+			
+			System.out.println("\n\n============================================================================ ");
+			System.out.println("============= RESULTADO DA IMPORTAÇÃO DOS TALÕES =============");
+			System.out.println("=============================================================================== ");
+			System.out.println("Importados: " +  taloesImportados);
+			System.out.println("Erros: " + taloesComErroImportacao);
+					
+			connect.commit();
+			Conexao.desconectar(conFirebird);
+			Conexao.desconectar(connect);
+			
+			return new sol.util.Result(1, "ok");
+		}
+		catch(Exception e){
+			e.printStackTrace(System.out);
+			return new sol.util.Result(-1, "Erro ao importar TALONARIO do eTransito.fdb!", e);
+		}
+		finally{
+			Conexao.desconectar(connect);
+			Conexao.desconectar(conFirebird);
+		}
+	}
+
+
+	public static void criarArrayMobile() {	
+		Connection connect   = Conexao.conectar();
+		boolean isConnectionNull = connect==null;		
+		PreparedStatement pstmt;
+		try {				
+			
+			String saida = "";
+			
+			// Cidade verde 14			
+			pstmt = connect.prepareStatement(" SELECT * FROM mob_linha  " +
+					" WHERE  cd_concessao = 14 ORDER BY nr_linha ASC ");
+			ResultSetMap rsmRetorno =  new ResultSetMap(pstmt.executeQuery());
+			
+			gravarArq.println("Array mob_linha Cidade Verde");
+			while(rsmRetorno.next()){
+				saida = "{CD_LINHA: " + rsmRetorno.getInt("CD_LINHA") + ", NR_LINHA:'"+ rsmRetorno.getString("NR_LINHA") +"'},";
+				
+				gravarArq.println(saida);
+				saida = "";
+			}
+			
+			// VIAÇÃO VITÓRIA LTDA 13			
+			pstmt = connect.prepareStatement(" SELECT * FROM mob_linha  " +
+					                         " WHERE  cd_concessao = 13  ORDER BY nr_linha ASC ");
+			ResultSetMap rsmRetornoVitoria =  new ResultSetMap(pstmt.executeQuery());
+
+			gravarArq.println("Array mob_linha VIAÇÃO VITÓRIA");
+			saida = "";
+			while(rsmRetornoVitoria.next()){
+				saida = "{CD_LINHA: " + rsmRetornoVitoria.getInt("CD_LINHA") + ", NR_LINHA:'"+ rsmRetornoVitoria.getString("NR_LINHA") +"'},";
+
+				gravarArq.println(saida);
+				saida = "";
+			}
+			
+			//VEICULO VIACAO VIDTORIAO 13			
+			pstmt = connect.prepareStatement(" SELECT cd_concessao_veiculo, nr_prefixo FROM mob_concessao_veiculo  " +
+					                         " WHERE cd_concessao = 13 ORDER BY nr_prefixo ASC ");
+			ResultSetMap rsmVeiculoVitoria =  new ResultSetMap(pstmt.executeQuery());
+
+			gravarArq.println("Array mob_concessao_veiculo Viação Vitória");
+			saida = "";
+			while(rsmVeiculoVitoria.next()){
+				saida = "{CD_CONCESSAO_VEICULO: " + rsmVeiculoVitoria.getInt("CD_CONCESSAO_VEICULO") + ", NR_PREFIXO:"+ rsmVeiculoVitoria.getInt("NR_PREFIXO") +"},";
+
+				gravarArq.println(saida);
+				saida = "";
+			}
+			
+			//VEICULO CIDADE VERDE 14			
+			pstmt = connect.prepareStatement(" SELECT cd_concessao_veiculo, nr_prefixo FROM mob_concessao_veiculo  " +
+					                         " WHERE cd_concessao = 14 ORDER BY nr_prefixo ASC ");
+			ResultSetMap rsmVeiculoCidade =  new ResultSetMap(pstmt.executeQuery());
+
+			gravarArq.println("Array mob_concessao_veiculo Cidade Verde");
+			saida = "";
+			while(rsmVeiculoCidade.next()){
+				saida = "{CD_CONCESSAO_VEICULO: " + rsmVeiculoCidade.getInt("CD_CONCESSAO_VEICULO") + ", NR_PREFIXO:"+ rsmVeiculoCidade.getInt("NR_PREFIXO") +"},";
+
+				gravarArq.println(saida);
+				saida = "";
+			}
+		
+		}
+		catch(SQLException sqlExpt) {
+			gravarArq.println(sqlExpt.getMessage());
+			gravarArq.println("Erro ao pesquisar pessoa física: " + sqlExpt);
+		}
+		catch(Exception e) {
+			gravarArq.println(e.getMessage());
+			gravarArq.println("Erro! DesktopImportacao.jaExistePessoaFisica: " + e);
+		}
+		finally {
+			if (isConnectionNull)
+				Conexao.desconectar(connect);
+		}
+	}		
+	
+	
+	public static void criarQueryAtualizacao() {	
+		Connection connect   = Conexao.conectar();
+		boolean isConnectionNull = connect==null;		
+		PreparedStatement pstmt;
+		try {				
+			
+			String saida = "";
+			
+			// Cidade verde 14			
+			pstmt = connect.prepareStatement(" SELECT * FROM mob_ait_transporte  " +
+					" WHERE ST_AIT = 2 " +
+					" AND DT_NOTIFICACAO_INICIAL >= '2017-01-01 00:00:00-02' " +
+					" AND DT_NOTIFICACAO_INICIAL <= '2017-01-31 23:59:59-02' ");
+			ResultSetMap rsmRetorno =  new ResultSetMap(pstmt.executeQuery());
+			
+			gravarArq.println("Array mob_linha Cidade Verde");
+			SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+			
+			while(rsmRetorno.next()){
+				saida += " UPDATE mob_ait_transporte ";
+				saida += " SET dt_infracao= '" + simpleDateFormat.format(rsmRetorno.getGregorianCalendar("dt_infracao").getTime()) +"-02' , ";
+				saida += "     dt_notificacao_inicial= '" + simpleDateFormat.format(rsmRetorno.getGregorianCalendar("dt_infracao").getTime()) +"-02'";
+				saida += " WHERE cd_ait = " + rsmRetorno.getInt("cd_ait") + "; " ;
+				
+				gravarArq.println(saida);
+				saida = "";
+			}			
+					
+		}
+		catch(SQLException sqlExpt) {
+			gravarArq.println(sqlExpt.getMessage());
+			gravarArq.println("Erro ao pesquisar pessoa física: " + sqlExpt);
+		}
+		catch(Exception e) {
+			gravarArq.println(e.getMessage());
+			gravarArq.println("Erro! DesktopImportacao.jaExistePessoaFisica: " + e);
+		}
+		finally {
+			if (isConnectionNull)
+				Conexao.desconectar(connect);
+		}
+	}
+
+	// Bruno Codato	
+	public static void importUsuariosToPostgres()	{
+		Connection connect   = Conexao.conectar();
+		Connection conFirebird = getConnectFirebirdMobilidade();
+		ResultSetMap rsmFirebird;
+		ResultSetMap rsmPostgres;
+		Result result;
+		try {
+			connect.setAutoCommit(false);
+			conFirebird.setAutoCommit(false);
+						
+			//IMPORTANDO TABELAS ISOLADAS			
+			System.out.println("\n\n\n*********************************************************** ");
+			System.out.println(" Importando Usuários ");
+			System.out.println("*********************************************************** ");
+			
+			
+			int usuarioImportados = 0;
+			int usuarioComErrosDeImportacao = 0;
+			int usuarioLonginJaExiste = 0;
+			
+			rsmFirebird = new ResultSetMap(conFirebird.prepareStatement("SELECT * FROM USUARIO").executeQuery());
+			rsmFirebird.beforeFirst();
+			int codUsuario = 0;
+			
+			// Configura a progressbar
+			long startTime = System.currentTimeMillis();
+			long total = rsmFirebird.getLines().size();
+			long contLoop = 0;
+			
+			// Variáveis para salvar usuário
+			String nmUsuario;
+			int cdPessoa = 0;			
+			Result r = new Result(0);
+			
+			while( rsmFirebird.next() ){
+				printProgress(startTime, total, contLoop++);
+				
+				nmUsuario = rsmFirebird.getString("NM_USUARIO");
+				cdPessoa = jaExistePessoaFisicaGetCd(nmUsuario, null);
+				
+				//Erro ao pesquisar pessoa
+				if(cdPessoa < 0){
+					usuarioComErrosDeImportacao++;
+					continue;				
+				}
+				
+				if(cdPessoa == 0){
+					PessoaFisica pf = new PessoaFisica();
+					pf.setNmPessoa( rsmFirebird.getString("NM_USUARIO") );
+					pf.setDtCadastro( new GregorianCalendar() );
+					r = PessoaFisicaServices.save(pf, connect);
+					if( r.getCode() < 0 ){
+						gravarArq.println("Erro ao cadastras pessoa física na importação de usuários");
+					}
+					cdPessoa = pf.getCdPessoa();
+				}
+				
+				Usuario usuario = new Usuario( 0/*cdUsuario*/,cdPessoa/* cdPessoa*/,0/* cdPerguntaSecreta*/,
+						rsmFirebird.getString("NM_NICK")/* nmLogin*/,
+											"123456"/* nmSenha*/,
+											0/* tpUsuario*/,""/* nmRespostaSecreta*/,
+											rsmFirebird.getInt("ST_USUARIO")/* stUsuario*/);
+				
+				r = UsuarioServices.save(usuario, connect);
+				
+				if(r.getCode() > 0 ){
+					gravarArq.println("USUARIO SALVO: " + usuario.getNmLogin());
+					usuarioImportados++;
+					
+					// Grava o histórico da transferência da pessoa fisica Firebird ao Postgres.
+					ImportacaoAit importacaoAit = new ImportacaoAit();
+					importacaoAit.setCdAntigo(rsmFirebird.getInt("COD_USUARIO"));
+					importacaoAit.setCdNovo(r.getCode());
+					importacaoAit.setTabelaFirebird(ImportacaoAitServices.USUARIO);
+					importacaoAit.setTabelaPostgre(ImportacaoAitServices.nomeTabelaPostegres(ImportacaoAitServices.SEG_USUARIO));
+					
+					ImportacaoAitServices.save(importacaoAit);
+					
+					
+				}
+					
+				if( r.getCode() == -2 ){					
+					gravarArq.println(r.getMessage() + "USUARIO:" + rsmFirebird.getString("NM_NICK"));
+					usuarioLonginJaExiste++;
+				}
+				if( r.getCode() < 0 && r.getCode() != -2){
+					gravarArq.println("\n\nErro ao importar usuários: " + r.getMessage() +"\n\n");
+					usuarioComErrosDeImportacao++;
+				}
+				
+				
+			}// fim do WHILE
+			
+			System.out.println("\n\n============================================================================ ");
+			System.out.println("============= RESULTADO DA IMPORTAÇÃO DOS USUÁRIOS =============");
+			System.out.println("=============================================================================== ");
+			System.out.println("Importados: " +  usuarioImportados);
+			System.out.println("Erros: " + usuarioComErrosDeImportacao);
+			System.out.println("Login Ja Existe: " + usuarioLonginJaExiste);
+					
+			connect.commit();
+			Conexao.desconectar(conFirebird);
+			Conexao.desconectar(connect);
+			
+			gravarArq.println("IMPORTAÇÃO DO USUÁRIO CONCLUIDA \n\n");
+		}
+		catch(Exception e){
+			e.printStackTrace(System.out);
+			gravarArq.println("Erro ao importar TALONARIO do eTransito.fdb!");
+		}
+		finally{
+			Conexao.desconectar(connect);
+			Conexao.desconectar(conFirebird);
+		}
+	}
+	
+	
+	
+	public static void importOcorrenciaToPostgres(){
+		Connection connect   = Conexao.conectar();
+		Connection conFirebird = getConnectFirebirdMobilidade();
+		ResultSetMap rsmFirebird;
+		ResultSetMap rsmPostgres;
+		Result result;
+		try {
+			connect.setAutoCommit(false);
+			conFirebird.setAutoCommit(false);
+						
+			//IMPORTANDO TABELAS ISOLADAS			
+			System.out.println("\n\n\n*********************************************************** ");
+			System.out.println("Importando Ocorrência ");
+			System.out.println("*********************************************************** ");
+			
+			
+			int ocorrenciaImportadas = 0;
+			int ocorrenciaComErroImportacao = 0;
+			
+			rsmFirebird = new ResultSetMap(conFirebird.prepareStatement("SELECT * FROM OCORRENCIA").executeQuery());
+			rsmFirebird.beforeFirst();
+			int codUsuario = 0;
+			
+			
+			// Configura a progressbar
+			long startTime = System.currentTimeMillis();
+			long total = rsmFirebird.getLines().size();
+			long contLoop = 0;
+			
+			while( rsmFirebird.next() ){
+				printProgress(startTime, total, contLoop++);
+				while( rsmFirebird.next() ){		
+					
+					PreparedStatement pstmt = connect.prepareStatement("INSERT INTO mob_ocorrencia(cd_ocorrencia, ds_ocorrencia) " +
+							 " VALUES (?, ?) ");
+					
+					pstmt.setInt(1,rsmFirebird.getInt("COD_OCORRENCIA"));
+					pstmt.setString(2, rsmFirebird.getString("DS_OCORRENCIA"));					
+					int code = pstmt.executeUpdate();
+			        
+					if(code > 0){
+						//System.out.println("OK: Ocorrência salva com sucesso");
+						ocorrenciaImportadas++;
+					}
+				
+					
+					if( code < 0 ){	
+						System.out.println("\n\nERRO: Erro ao salvar a OCORRÊNCIA de transporte" + rsmFirebird.getInt("COD_OCORRENCIA"));					
+						ocorrenciaComErroImportacao++;
+					}
+			}
+			
+			System.out.println("\n\n============================================================================ ");
+			System.out.println("============= RESULTADO DA IMPORTAÇÃO DAS OCORRÊNCIAS =============");
+			System.out.println("=============================================================================== ");
+			System.out.println("Importados: " +  ocorrenciaImportadas);
+			System.out.println("Erros: " + ocorrenciaComErroImportacao);
+					
+			connect.commit();
+			Conexao.desconectar(conFirebird);
+			Conexao.desconectar(connect);						
+		  }
+		}
+		catch(Exception e){
+			e.printStackTrace(System.out);
+		}
+		finally{
+			Conexao.desconectar(connect);
+			Conexao.desconectar(conFirebird);
+		}
+	}
+	
+	
+	
+	
+	/**
+	 * Pesquisa se existe a infração similares no banco do Postgres
+	 * 
+	 * @author Bruno Codato
+	 * @param cdInfracao código de infração a ser pesquisado
+	 * @return Retorna 1 caso o nome já exista, 0 quando não existe e -1 quando há erro
+	 */
+	public static int jaExisteInfracao(String cdInfracao, Connection connect) {		
+		boolean isConnectionNull = connect==null;		
+		PreparedStatement pstmt;
+		try {			
+		
+			pstmt = connect.prepareStatement(" SELECT * FROM mob_infracao " +
+		                                     " WHERE cd_infracao = " + cdInfracao);
+			ResultSetMap rsmRetorno =  new ResultSetMap(pstmt.executeQuery());
+			
+			// Já existe a infração no banco
+			if(rsmRetorno.size() != 0){
+				return 1;				
+			}
+			// Não existe a infração pessoa no banco
+			else{
+				return 0;				
+			}
+		}
+		catch(SQLException sqlExpt) {
+			sqlExpt.printStackTrace(System.out);
+			System.err.println("Erro ao pesquisar infração: " + sqlExpt);
+			return -1;
+			
+		}
+		catch(Exception e) {
+			e.printStackTrace(System.out);
+			System.err.println("Erro! DesktopImportacao.jaExisteInfracao: " + e);
+			return -1;
+		}
+		finally {
+			if (isConnectionNull)
+				Conexao.desconectar(connect);
+		}
+	}	
+	
+	/**
+	 * Pesquisa se existe a infração de transporte  no banco do Postgres
+	 * 
+	 * @author Bruno Codato
+	 * @param cdInfracao código de infração de transporte a ser pesquisado
+	 * @return Retorna 1 caso o nome já exista, 0 quando não existe e -1 quando há erro
+	 */
+	public static int jaExisteInfracaoDeTransporte(String cdInfracao, Connection connect) {		
+		boolean isConnectionNull = connect==null;		
+		PreparedStatement pstmt;
+		try {			
+		
+			pstmt = connect.prepareStatement(" SELECT * FROM mob_infracao_transporte " +
+		                                     " WHERE cd_infracao = " + cdInfracao);
+			ResultSetMap rsmRetorno =  new ResultSetMap(pstmt.executeQuery());
+			
+			// Já existe a infração de transporte no banco
+			if(rsmRetorno.size() != 0){
+				return 1;				
+			}
+			// Não existe a infração de transporte  no banco
+			else{
+				return 0;				
+			}
+		}
+		catch(SQLException sqlExpt) {
+			sqlExpt.printStackTrace(System.out);
+			System.err.println("Erro ao pesquisar infracao de transporte: " + sqlExpt);
+			return -1;
+			
+		}
+		catch(Exception e) {
+			e.printStackTrace(System.out);
+			System.err.println("Erro! DesktopImportacao.jaExisteInfracaoDeTransporte: " + e);
+			return -1;
+		}
+		finally {
+			if (isConnectionNull)
+				Conexao.desconectar(connect);
+		}
+	}	
+	
+	
+	/**
+	 * Pesquisa se existe a variação no banco do Postgres
+	 * 
+	 * @author Bruno Codato
+	 * @param cdInfracao código de variação a ser pesquisado
+	 * @return Retorna 1 caso o nome já exista, 0 quando não existe e -1 quando há erro
+	 */
+	public static int jaExisteInfracaoVariacao(String cdVariacao, Connection connect) {		
+		boolean isConnectionNull = connect==null;		
+		PreparedStatement pstmt;
+		try {			
+		
+			pstmt = connect.prepareStatement(" SELECT * FROM mob_infracao_variacao " +
+		                                     " WHERE cd_variacao = " + cdVariacao);
+			ResultSetMap rsmRetorno =  new ResultSetMap(pstmt.executeQuery());
+			
+			// Já existe a infração de transporte no banco
+			if(rsmRetorno.size() != 0){
+				return 1;				
+			}
+			// Não existe a infração de transporte  no banco
+			else{
+				return 0;				
+			}
+		}
+		catch(SQLException sqlExpt) {
+			sqlExpt.printStackTrace(System.out);
+			System.err.println("Erro ao pesquisar infracao de transporte: " + sqlExpt);
+			return -1;
+			
+		}
+		catch(Exception e) {
+			e.printStackTrace(System.out);
+			System.err.println("Erro! DesktopImportacao.jaExisteInfracaoDeTransporte: " + e);
+			return -1;
+		}
+		finally {
+			if (isConnectionNull)
+				Conexao.desconectar(connect);
+		}
+	}	
+	
+	/**
+	 * Pesquisa se existe a variação no banco do Postgres
+	 * 
+	 * @author Bruno Codato
+	 * @param cdInfracao código de variação a ser pesquisado
+	 * @return Retorna 1 caso o nome já exista, 0 quando não existe e -1 quando há erro
+	 */
+	public static int jaExisteInfracaoMotivo(String cdInfracao, String cdMotivo, Connection connect) {		
+		boolean isConnectionNull = connect==null;		
+		PreparedStatement pstmt;
+		try {			
+		
+			pstmt = connect.prepareStatement(" SELECT * FROM mob_infracao_motivo " +
+		                                     " WHERE cd_infracao = "+ cdInfracao +" AND cd_motivo =" + cdMotivo);
+			ResultSetMap rsmRetorno =  new ResultSetMap(pstmt.executeQuery());
+			
+			// Já existe a infração de transporte no banco
+			if(rsmRetorno.size() != 0){
+				return 1;				
+			}
+			// Não existe a infração de transporte  no banco
+			else{
+				return 0;				
+			}
+		}
+		catch(SQLException sqlExpt) {
+			sqlExpt.printStackTrace(System.out);
+			System.err.println("Erro ao pesquisar infracao de transporte: " + sqlExpt);
+			return -1;
+			
+		}
+		catch(Exception e) {
+			e.printStackTrace(System.out);
+			System.err.println("Erro! DesktopImportacao.jaExisteInfracaoDeTransporte: " + e);
+			return -1;
+		}
+		finally {
+			if (isConnectionNull)
+				Conexao.desconectar(connect);
+		}
+	}
+	
+	/**
+	 * Verifica se já existe o agente no postgres, mob_agente
+	 * 
+	 * @author Bruno Codato
+	 * @param nmPessoa verifica se o nome da pessoa já está cadatro no postgres, grl_pessoa_fisica
+	 * @return retorna true caso exista, se não, false;
+	 */		
+	public static boolean jaExisteUsuarioDoAgente(String nmPessoa) {
+		ArrayList<ItemComparator> criterios = new ArrayList<ItemComparator>();
+		criterios.add(new ItemComparator("A.NM_PESSOA", nmPessoa, ItemComparator.LIKE, Types.VARCHAR));
+		
+		ResultSetMap rsmPessoaFisica = PessoaFisicaServices.find(criterios);
+		
+		if( rsmPessoaFisica != null && rsmPessoaFisica.getLines().size() != 0){
+			return true;		
+		}
+		else{
+			return false;		
+		}
+		
+	}
+		
+	/**
+	 * Pesquisa se existe nomes de pessoas físicas similares no banco do Postgres
+	 * 
+	 * @author Bruno Codato
+	 * @param nmPessoa nome a ser pesquisado
+	 * @return Retorna 1 caso o nome já exista, 0 quando não existe e -1 quando há erro
+	 */
+	public static int jaExistePessoaFisica(String nmPessoa, Connection connect) {		
+		boolean isConnectionNull = connect==null;		
+		PreparedStatement pstmt;
+		try {			
+			if(nmPessoa != null)
+			nmPessoa = nmPessoa.replace("'", "´");
+			pstmt = connect.prepareStatement(" SELECT *  FROM grl_pessoa  " +
+		                                     " WHERE  similarity(nm_pessoa, '" + nmPessoa + "') >= .8  ");
+			ResultSetMap rsmRetorno =  new ResultSetMap(pstmt.executeQuery());
+			
+			// Já existe a pessoa no banco
+			if(rsmRetorno.size() != 0){
+				return 1;				
+			}
+			// Não existe a pessoa no banco
+			else{
+				return 0;				
+			}
+		}
+		catch(SQLException sqlExpt) {
+			sqlExpt.printStackTrace(System.out);
+			System.err.println("Erro ao pesquisar pessoa física: " + sqlExpt);
+			return -1;
+			
+		}
+		catch(Exception e) {
+			e.printStackTrace(System.out);
+			System.err.println("Erro! DesktopImportacao.jaExistePessoaFisica: " + e);
+			return -1;
+		}
+		finally {
+			if (isConnectionNull)
+				Conexao.desconectar(connect);
+		}
+	}	
+	
+	
+	public static int jaExistePessoaFisicaGetCd(String nmPessoa, Connection connect) {		
+		boolean isConnectionNull = connect==null;
+				
+		if (isConnectionNull)
+			connect = Conexao.conectar();
+		
+		PreparedStatement pstmt;
+		try {			
+			if(nmPessoa != null)
+			nmPessoa = nmPessoa.replace("'", "´");
+			pstmt = connect.prepareStatement(" SELECT *  FROM grl_pessoa  " +
+		                                     " WHERE  similarity(nm_pessoa, '" + nmPessoa + "') >= .8  ");
+			ResultSetMap rsmRetorno =  new ResultSetMap(pstmt.executeQuery());
+			
+			// Já existe a pessoa no banco
+			if(rsmRetorno.size() != 0){
+				HashMap hasPessoa = rsmRetorno.getLines().get(0);				
+				return (Integer)hasPessoa.get("CD_PESSOA");			
+			}
+			// Não existe a pessoa no banco
+			else{
+				return 0;				
+			}
+		}
+		catch(SQLException sqlExpt) {
+			sqlExpt.printStackTrace(System.out);
+			System.err.println("Erro ao pesquisar pessoa física: " + sqlExpt);
+			return -1;
+			
+		}
+		catch(Exception e) {
+			e.printStackTrace(System.out);
+			System.err.println("Erro! DesktopImportacao.jaExistePessoaFisica: " + e);
+			return -1;
+		}
+		finally {
+			if (isConnectionNull)
+				Conexao.desconectar(connect);
+		}
+	}	
+	
+	/**
+	 * Pesquisa se existe nome da pessoa a uma concessão
+	 * 
+	 * @author Bruno Codato
+	 * @param nmPessoa nome a ser pesquisado
+	 * @return Retorna o código da concessao caso o nome já exista, retorna -1 caso não exista
+	 */
+	public static int jaExistePessoaConcessao(String nmPessoa, Connection connect) {		
+		boolean isConnectionNull = connect==null;		
+		PreparedStatement pstmt;
+		try {			
+			if(nmPessoa != null)
+			nmPessoa = nmPessoa.replace("'", "´");
+			pstmt = connect.prepareStatement(" SELECT * " +
+			                                 " FROM mob_concessao A, grl_pessoa B " +			
+		                                     " WHERE A.cd_concessionario = B.cd_pessoa AND similarity(B.nm_pessoa, '" + nmPessoa + "') >= .8  ");
+			ResultSetMap rsmRetorno =  new ResultSetMap(pstmt.executeQuery());
+			
+			// Já existe a pessoa no banco
+			if(rsmRetorno.size() != 0){
+				gravarArq.println("JaExistePessoaConcessa: Pessoa encontrada:" + nmPessoa);
+				HashMap hashUsuario = rsmRetorno.getLines().get(0);				
+				return (Integer)hashUsuario.get("CD_CONCESSAO");
+				
+			}
+			// Não existe a pessoa vinculada a uma concessão
+			else{
+				gravarArq.println("JaExistePessoaConcessa: Não existe pessoa" +  nmPessoa);
+				return -1;				
+			}
+		}
+		catch(SQLException sqlExpt) {
+			sqlExpt.printStackTrace(System.out);
+			System.err.println("Erro ao pesquisar pessoa vinculada a uma concessão: " + sqlExpt);
+			return -1;
+			
+		}
+		catch(Exception e) {
+			e.printStackTrace(System.out);
+			System.err.println("Erro! DesktopImportacao.jaExistePessoaConcessao: " + e);
+			return -1;
+		}
+		finally {
+			if (isConnectionNull)
+				Conexao.desconectar(connect);
+		}
+	}
+	
+	
+	/**
+	 * Recupera o cd_pessoa vinculado ao nome passado por parâmtro
+	 * 
+	 * @author Bruno Codato
+	 * @param nmPessoa nome a ser pesquisado
+	 * @return Retorna o código da pessoa vinculado ao nome passado por parâmtro
+	 */
+	public static int getCdPessoaByName(String nmPessoa, Connection connect) {		
+		boolean isConnectionNull = connect==null;		
+		PreparedStatement pstmt;
+		try {			
+			if(nmPessoa != null)
+			nmPessoa = nmPessoa.replace("'", "´");
+			pstmt = connect.prepareStatement(" SELECT * " +
+			                                 " FROM  grl_pessoa " +			
+		                                     " WHERE similarity(nm_pessoa, '" + nmPessoa + "') >= .8  ");
+			ResultSetMap rsmRetorno =  new ResultSetMap(pstmt.executeQuery());
+			
+			// Retorna o cd_pessoa da query
+			if(rsmRetorno.size() != 0){
+				System.out.println("getCdPessoaByName: Pessoa encontrada no banco "+ nmPessoa);
+				HashMap hashUsuario = rsmRetorno.getLines().get(0);				
+				return (Integer)hashUsuario.get("CD_PESSOA");
+				
+			}
+			// Não existe a pessoa vinculada ao nome do parâmtro
+			else{
+				System.out.println("getCdPessoaByName: Não existe a pessoa no banco "+ nmPessoa);
+				return -1;				
+			}
+		}
+		catch(SQLException sqlExpt) {
+			sqlExpt.printStackTrace(System.out);
+			System.err.println("Erro ao pesquisar pessoa vinculada a ao nome do parâmtro: " + sqlExpt);
+			return -1;
+			
+		}
+		catch(Exception e) {
+			e.printStackTrace(System.out);
+			System.err.println("Erro! DesktopImportacao.getCdPessoaByName: " + e);
+			return -1;
+		}
+		finally {
+			if (isConnectionNull)
+				Conexao.desconectar(connect);
+		}
+	}
+	
+	
+	/**
+	 * Pesquisa se existe nomes de agentes similares no banco do Postgres
+	 * 
+	 * @author Bruno Codato
+	 * @param nmPessoa nome a ser pesquisado
+	 * @return Retorna 1 caso o nome já exista, 0 quando não existe e -1 quando há erro
+	 */
+	public static int jaExisteAgente(String nmPessoa, Connection connect) {		
+		boolean isConnectionNull = connect==null;		
+		PreparedStatement pstmt;
+		
+		if (isConnectionNull)
+			connect = Conexao.conectar();
+		
+		try {
+			if(nmPessoa != null)
+			nmPessoa = nmPessoa.replace("'", "´");
+			pstmt = connect.prepareStatement(" SELECT *  FROM mob_agente  " +
+		                                     " WHERE  similarity(nm_agente, '" + nmPessoa + "') >= .8  ");
+			ResultSetMap rsmRetorno =  new ResultSetMap(pstmt.executeQuery());
+			
+			// Já existe a pessoa no banco
+			if(rsmRetorno.size() != 0){
+				return 1;				
+			}
+			// Não existe a pessoa no banco
+			else{
+				return 0;				
+			}
+		}
+		catch(SQLException sqlExpt) {
+			sqlExpt.printStackTrace(System.out);
+			System.err.println("Erro ao pesquisar pessoa física: " + sqlExpt);
+			return -1;
+			
+		}
+		catch(Exception e) {
+			e.printStackTrace(System.out);
+			System.err.println("Erro! DesktopImportacao.jaExistePessoaFisica: " + e);
+			return -1;
+		}
+		finally {
+			if (isConnectionNull)
+				Conexao.desconectar(connect);
+		}
+	}	
+	
+	/**
+	 * Verifica se já existe o agente no postgres, mob_agente
+	 * 
+	 * @author Bruno Codato
+	 * @param cdAgente código do agente a ser verificado
+	 * @return retorna true caso exista, se não, false;
+	 */	
+	public static boolean jaExisteAgente(Integer cdAgente) {
+		ArrayList<ItemComparator> criterios = new ArrayList<ItemComparator>();
+		criterios.add(new ItemComparator("CD_AGENTE", cdAgente.toString(), ItemComparator.LIKE, Types.VARCHAR));
+		
+		ResultSetMap rsmAgente = AgenteServices.find(criterios);
+		
+		if( rsmAgente != null && rsmAgente.getLines().size() != 0){
+			return true;		
+		}
+		else{
+			return false;		
+		}
+		
+	}
+	
+	
+	/**
+	 * Método que importa planilha com dados dos taxistas a partir de um CSV
+	 * @return
+	 */
+	public static sol.util.Result importDadosTaxiFromCSVSEMOBVDC(){
+		System.out.println("começou");
+		String nmArquivo = "C:\\TIVIC\\Projetos\\manager\\resources\\importacao\\SEMOB\\PontosPermissoes.csv";
+		int cdEmpresa = 3200;
+		return importDadosTaxiFromCSV(nmArquivo, cdEmpresa);
+	}
+	
+	/**
+	 * 
+	 * @param nmArquivo
+	 * @param cdEmpresa
+	 * @return
+	 */
+	@Deprecated
+	public static sol.util.Result importDadosTaxiFromCSV(String nmArquivo, int cdEmpresa) {
+		Connection connect = Conexao.conectar();
+		int count = 0;
+		try {
+			connect.setAutoCommit(false);
+			File fileDir = new File(nmArquivo);
+			BufferedReader raf = new BufferedReader(new InputStreamReader(new FileInputStream(fileDir), "UTF8"));
+			System.out.println(nmArquivo + " carregado...");
+			String line = "";
+			String nrPonto = "", nrOrdem = "", nmPermissionario = "", nrPlaca = "", nmModelo = "", nmMarca  = "", nrAno = "", nrTaximetro = "", nmMarcaTaximetro = "", txtObservacao = "", nrAlvara = "";
+			int cdPessoa = 0;
+			int lin = 1;
+
+			while ((line = raf.readLine()) != null) {
+				StringTokenizer tokens = new StringTokenizer(line, ";", false);
+				nrPonto          = tokens.nextToken().trim();
+				nrOrdem 		 = tokens.nextToken().trim();
+				nmPermissionario = Util.limparAcentos(tokens.nextToken().trim().toUpperCase());
+				nrPlaca 		 = Util.limparTexto(tokens.nextToken().trim());
+				nrPlaca          = Util.retirarEspacos(nrPlaca);
+				nmModelo         = tokens.nextToken().trim();
+				nmMarca          = tokens.nextToken().trim();
+				nrAno 		     = tokens.nextToken().trim();
+				nrTaximetro 	 = tokens.nextToken().trim();
+				nmMarcaTaximetro = (nrTaximetro.contains("FIP") ? "FIP":"");
+				nrTaximetro      = (nrTaximetro.contains("FIP") ? nrTaximetro.replace("FIP", ""):nrTaximetro);
+				nrTaximetro      = nrTaximetro.trim();
+				txtObservacao    = tokens.nextToken().trim();				
+				nrAlvara         = Util.limparTexto(tokens.nextToken());
+				
+				lin++;
+				if( (lin%100)==0 )
+					System.out.println("Linha :"+lin);
+				
+				GregorianCalendar dtCadastro = Util.getDataAtual();
+				
+				System.out.print(" PONTO: " + nrPonto);
+				//PONTO grupo de parada
+				PreparedStatement pstmtPonto = connect.prepareStatement( "SELECT * FROM mob_grupo_parada " +
+																		 " WHERE nm_grupo_parada     =  \'" + nrPonto+"\' " );	
+				ResultSetMap rsmPonto = new ResultSetMap(pstmtPonto.executeQuery());
+				
+				GrupoParada ponto = new GrupoParada();
+				
+				if(!rsmPonto.next()){
+					System.out.println("cadastraPonto: ");
+					ponto.setCdGrupoParada(0);
+					ponto.setNmGrupoParada(nrPonto);
+					ponto.setTpGrupoParada(GrupoParadaServices.TP_GRUPO_PRACA_TAXI);
+					
+					Result rsGrupoParadaServices = GrupoParadaServices.save(ponto);
+					
+					if(rsGrupoParadaServices.getCode()<=0){
+						System.out.println("Erro: " + rsGrupoParadaServices.getMessage());
+						break;
+					}
+				}
+				
+				PreparedStatement pstmtMarca = connect.prepareStatement(  "SELECT * FROM fta_marca_modelo " +
+																		  " WHERE nm_marca  =  \'" + nmMarca+"\' "+ 
+																		  "   AND nm_modelo = \'%" + nmModelo + "%\' LIMIT 1" );
+				 
+				
+				ResultSetMap rsmMarcaModelo = new ResultSetMap(pstmtMarca.executeQuery());
+				
+				MarcaModelo marcaModelo = new MarcaModelo();
+				
+				if(rsmMarcaModelo.size()==0){
+					marcaModelo.setCdMarca(0);
+					marcaModelo.setNmMarca(nmMarca);
+					marcaModelo.setNmModelo(nmMarca+"/"+nmModelo);
+					marcaModelo.setTpMarca(0);
+					
+//					MarcaModeloServices.save(marcaModelo);
+					
+					Result rsMarcaModeloServices = MarcaModeloServices.save(marcaModelo);
+					
+					if(rsMarcaModeloServices.getCode()<=0){
+						System.out.println("Erro: " + rsMarcaModeloServices.getMessage());
+						break;
+					}
+				}
+					
+				
+				PreparedStatement pstmtProduto = connect.prepareStatement(  "SELECT * FROM grl_produto_servico " +
+																			" WHERE nm_produto_servico  =  \'" + nmModelo+"\'  LIMIT 1" );
+
+
+				ResultSetMap rsmProduto = new ResultSetMap(pstmtProduto.executeQuery());
+				//TODO controlar os carros cadastrados no produto
+				ProdutoServico produtoServico = new ProdutoServico();
+				produtoServico.setCdProdutoServico(0);
+				produtoServico.setCdMarca(marcaModelo.getCdMarca());
+				produtoServico.setNmModelo(marcaModelo.getNmModelo());
+				produtoServico.setNmProdutoServico(nmModelo);	
+				
+				
+				System.out.print(" PERMISSIONÁRIO: " + nmPermissionario);
+				//PERMISSIONÁRIO
+				Pessoa pessoa = new Pessoa();
+				pessoa.setCdPessoa(0);
+				pessoa.setCdPais(1);//Brasil
+				pessoa.setStCadastro(PessoaServices.ST_ATIVO);
+				pessoa.setDtCadastro(dtCadastro);
+				pessoa.setNmPessoa(nmPermissionario);				
+				pessoa.setTxtObservacao(txtObservacao + "\nPermissionário importado pela TIVIC");
+											
+				PessoaServices.save(pessoa, null /*endereco*/, cdEmpresa, 13 /*cdVinculo*/);
+				//PESSOA FISICA
+				PessoaFisica pessoaFisica = new PessoaFisica();
+				pessoaFisica.setCdPessoa(pessoa.getCdPessoa());
+				pessoaFisica.setNmPessoa(nmPermissionario);
+				
+				PessoaFisicaServices.save(pessoaFisica);
+				//
+				System.out.print(" EQUIPAMENTO: " + nrTaximetro);
+				//EQUIPAMENTO
+				Equipamento equipamento = new Equipamento();
+				equipamento.setCdEquipamento(0);
+				equipamento.setIdEquipamento(nrTaximetro);
+				equipamento.setNmMarca(nmMarcaTaximetro);
+				equipamento.setNmModelo(nmMarcaTaximetro);
+				equipamento.setStEquipamento(EquipamentoServices.ATIVO);
+				equipamento.setTpEquipamento(EquipamentoServices.TAXIMETRO);
+				equipamento.setCdOrgao(4);//PRAÇA TAXI
+				equipamento.setNmEquipamento("Taxímetro");
+				equipamento.setTxtObservacao("Equipamento importado pela TIVIC");
+				
+//				com.tivic.manager.mob.EquipamentoServices.save(equipamento);
+				
+				Result rsEquipamentoServices = com.tivic.manager.mob.EquipamentoServices.save(equipamento);
+				
+				if(rsEquipamentoServices.getCode()<=0){
+					System.out.println("Erro: " + rsEquipamentoServices.getMessage());
+					break;
+				}
+				//				
+				System.out.print(" FROTA: " + nmPermissionario);
+				//FROTA
+				Frota frota = new Frota();
+				frota.setCdFrota(0);
+				frota.setCdProprietario(pessoa.getCdPessoa());
+				frota.setCdResponsavel(pessoa.getCdPessoa());
+				frota.setNmFrota("Táxi " + nrOrdem);
+				frota.setStFrota(FrotaServices.ST_ATIVO);//Ativo
+				frota.setTpFrota(FrotaServices.TP_PARTICULAR);
+				frota.setTxtObservacao("Frota importada pela TIVIC");
+				
+				Result rsFrotaServices = FrotaServices.save(frota);
+				
+				if(rsFrotaServices.getCode()<=0){
+					System.out.println("Erro: " + rsFrotaServices.getMessage());
+					break;
+				}
+				//
+//				System.out.println("BEM: ");
+				//BEM
+				int rsProdutoServicoDAO = ProdutoServicoDAO.insert(produtoServico);
+				
+				if(rsProdutoServicoDAO<=0){
+					System.out.println("Erro: rsProdutoServicoDAO");
+					break;
+				}
+				//
+				System.out.print(" VEÍCULO: " + nrPlaca);
+				//VEÍCULO
+				Veiculo veiculo = new Veiculo();
+				veiculo.setCdVeiculo(0);
+//				veiculo.setNmModelo(produtoServico.getNmModelo());
+				veiculo.setCdMarca(produtoServico.getCdMarca());
+				veiculo.setCdTipoVeiculo(9); //cd_tipo_veiculo = Taxi
+				veiculo.setStVeiculo(VeiculoServices.ST_ATIVO);
+				veiculo.setCdProprietario(pessoa.getCdPessoa());
+				veiculo.setNrPlaca(nrPlaca);
+				veiculo.setCdCidade(5658);// Vitória da Conqusita
+				veiculo.setNrAnoChassi(nrAno);
+				veiculo.setNrAnoModelo(nrAno);
+				veiculo.setNrAnoFabricacao(nrAno);
+				veiculo.setNrAnoCarroceria(nrAno);
+				veiculo.setTxtObservacao("Alvará importado pela TIVIC");
+				veiculo.setCdFrota(frota.getCdFrota());
+//				veiculo.setCdBem(0);
+//				veiculo.setCdReferencia(0);
+								
+				
+				Result rs = VeiculoServices.save(veiculo);
+				
+				if(rs.getCode()<0){
+					System.out.println("Erro!");
+					System.out.println(rs.getMessage());
+					break;
+				}
+				System.out.print(" getCdVeiculo: " + veiculo.getCdVeiculo());
+				//
+				System.out.print(" EQUIPAMENTO -> VEICULO: " + nrTaximetro + " -> " +nrPlaca);
+				//EQUIPAMENTO -> VEICULO
+				VeiculoEquipamento veiculoEquipamento = new VeiculoEquipamento();
+				veiculoEquipamento.setCdEquipamento(equipamento.getCdEquipamento());
+				veiculoEquipamento.setCdVeiculo(veiculo.getCdVeiculo());
+				veiculoEquipamento.setDtInstalacao(dtCadastro);
+				veiculoEquipamento.setStInstalacao(VeiculoEquipamentoServices.VINCULADO);
+				veiculoEquipamento.setTxtObservacao("Equipamento vinculado na importação da TIVIC");
+				veiculoEquipamento.setCdInstalacao(0);
+				
+				Result rsVeiculoEquipamentoServices = VeiculoEquipamentoServices.save(veiculoEquipamento);
+				
+				if(rsVeiculoEquipamentoServices.getCode()<=0){
+					System.out.println("Erro: " + rsVeiculoEquipamentoServices.getMessage());
+					break;
+				}
+				//
+				System.out.print(" ALVARÁ: " + nrAlvara);
+				//ALVARÁ
+				Concessao concessao = new Concessao();
+				concessao.setCdConcessao(0);
+				concessao.setCdConcessionario(pessoa.getCdPessoa());
+				concessao.setCdFrota(frota.getCdFrota());
+//				concessao.setCdVeiculo(veiculo.getCdVeiculo());
+				concessao.setNrConcessao(nrAlvara);
+				concessao.setStConcessao(ConcessaoServices.ST_ATIVO);
+				concessao.setTpConcessao(ConcessaoServices.TP_TAXI);				
+				concessao.setTxtObservacao("Alvará importado pela TIVIC");
+				
+				
+				Result rsConcessaoServices = ConcessaoServices.save(concessao);
+				
+				if(rsConcessaoServices.getCode()<=0){
+					System.out.println("Erro: " + rsConcessaoServices.getMessage());
+					break;
+				}
+				
+				//
+				System.out.print(" CONCESSAO/VEICULO: " + nrOrdem + " -> " + nrPlaca);
+				//CONCESSAO/VEICULO
+				ConcessaoVeiculo concessaoVeiculo = new ConcessaoVeiculo();
+				concessaoVeiculo.setCdConcessaoVeiculo(0);
+				concessaoVeiculo.setCdConcessao(concessao.getCdConcessao());				
+				concessaoVeiculo.setCdVeiculo(veiculo.getCdVeiculo());
+				concessaoVeiculo.setStConcessaoVeiculo(ConcessaoVeiculoServices.ST_VINCULADO);
+				concessaoVeiculo.setTpFrota(FrotaServices.TP_PARTICULAR);
+
+				
+				Result rsConcessaoVeiculo = ConcessaoVeiculoServices.save(concessaoVeiculo);
+	
+				if(rsConcessaoVeiculo.getCode()<=0){
+					System.out.println("Erro: " + rsConcessaoVeiculo.getMessage());
+					break;
+				}
+				
+				//
+				System.out.print(" NÚMERO DE ORDEM: " + nmPermissionario);
+				// NÚMERO DE ORDEM
+				Parada parada = new Parada();
+				parada.setCdConcessao(concessao.getCdConcessao());
+				parada.setCdGrupoParada(ponto.getCdGrupoParada());
+				parada.setCdParada(0);
+				parada.setDsReferencia(nrOrdem);
+				
+				Result rsParadaServices = ParadaServices.save(parada);
+				
+				if(rsParadaServices.getCode()<=0){
+					System.out.println("Erro: " + rsParadaServices.getMessage());
+					break;
+				}
+				System.out.println("Linha: " + lin);
+			}
+			
+			connect.commit();
+//
+//			File fileContas = new File("C:\\contas_importadas.txt");
+//			FileOutputStream out = new FileOutputStream(fileContas);
+////			out.write( contasCriadas.getBytes() );
+//			out.close();
+			
+//			System.out.printf("%d contas importadas com sucesso.", count);
+			return null;
+		} catch (Exception e) {
+			e.printStackTrace(System.out);
+			Conexao.rollback(connect);
+			return new sol.util.Result(-1, "Erro ao tentar importar contas a RECEBER!", e);
+		} finally {
+			try {
+				
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			Conexao.desconectar(connect);
+		}
+	}
+	/**
+	 * Método que importa planilha com dados dos taxistas a partir de um CSV
+	 * @return
+	 */
+	public static sol.util.Result importParadaByPontoTaxiCSV(){
+		System.out.println("começou");
+		String nmArquivo = "C:\\TIVIC\\Projetos\\manager\\resources\\importacao\\SEMOB\\PontosParadaPermissoes2.csv";
+		int cdEmpresa = 3200;
+		return importParadaByPontoTaxiCSV(nmArquivo, cdEmpresa);
+	}
+	
+	/**
+	 * 
+	 * @param nmArquivo
+	 * @param cdEmpresa
+	 * @return
+	 */
+	public static sol.util.Result importParadaByPontoTaxiCSV(String nmArquivo, int cdEmpresa) {
+		Connection connect = Conexao.conectar();
+		int count = 0;
+		try {
+			connect.setAutoCommit(false);
+			File fileDir = new File(nmArquivo);
+			BufferedReader raf = new BufferedReader(new InputStreamReader(new FileInputStream(fileDir), "UTF8"));
+			System.out.println(nmArquivo + " carregado...");
+			String line = "";
+			String nrPonto = "", nrOrdem = "";
+			int cdPessoa = 0;
+			int lin = 1;
+
+			while ((line = raf.readLine()) != null) {
+				StringTokenizer tokens = new StringTokenizer(line, ";", false);
+				nrPonto          = tokens.nextToken().trim();
+				nrOrdem 		 = tokens.nextToken().trim();				
+				
+				lin++;
+				if( (lin%100)==0 )
+					System.out.println("Linha :"+lin);
+				
+				//System.out.print(" PONTO: " + nrPonto);
+				
+				//PONTO grupo de parada
+				PreparedStatement pstmtPonto = connect.prepareStatement( "SELECT * FROM  mob_grupo_parada" +
+						 												 " WHERE nm_grupo_parada     =  \'" + nrPonto+"\' " );
+				
+				ResultSetMap rsmPonto = new ResultSetMap(pstmtPonto.executeQuery());
+				
+				int pstmtParada;
+				if(rsmPonto.next()){
+					System.out.println("Ponto: " + rsmPonto.getString("nm_grupo_parada") + " Parada: " + nrOrdem);
+					pstmtParada = connect.prepareStatement( "UPDATE mob_parada SET cd_grupo_parada = " + rsmPonto.getInt("cd_grupo_parada") + 
+																 " WHERE ds_referencia =  \'" + nrOrdem+"\' " ).executeUpdate();
+					if (pstmtParada <= 0)
+						System.out.println("Erro!");
+				}
+				System.out.println("Linha: " + lin);
+			}
+			
+			connect.commit();
+
+			return null;
+		} catch (Exception e) {
+			e.printStackTrace(System.out);
+			Conexao.rollback(connect);
+			return new sol.util.Result(-1, "Erro ao tentar importar contas a RECEBER!", e);
+		} finally {
+			try {
+				
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			Conexao.desconectar(connect);
+		}
+	}
+	
+	public static void main (String [] args) {
+		importEnderecoPontoTaxCSV();
+	}
+	
+	public static sol.util.Result importEnderecoPontoTaxCSV(){
+		System.out.println("começou");
+		String nmArquivo = "C:\\TIVIC\\Manager\\resources\\importacao\\SEMOB\\EnderecoPontoTaxi.csv";
+		int cdEmpresa = 3200;
+		return importEnderecoPontoTaxCSV(nmArquivo, cdEmpresa);
+	}	
+	
+	public static sol.util.Result importEnderecoPontoTaxCSV(String nmArquivo, int cdEmpresa) {
+		Connection connect = Conexao.conectar();
+		int count = 0;
+		try {
+			connect.setAutoCommit(false);
+			File fileDir = new File(nmArquivo);
+			BufferedReader raf = new BufferedReader(new InputStreamReader(new FileInputStream(fileDir), "UTF8"));
+			System.out.println(nmArquivo + " carregado...");
+			String line = "";
+			String nrPonto = "";
+			int cdLogradouro = 0;
+			
+			int cdPessoa = 0;
+			int lin = 1;
+
+			while ((line = raf.readLine()) != null) {
+				StringTokenizer tokens = new StringTokenizer(line, ";", false);
+				cdLogradouro = Integer.valueOf(tokens.nextToken().trim());
+				nrPonto 	 = Util.fill(tokens.nextToken().trim(), 3, '0', 'E');
+				
+				System.out.println(cdLogradouro);
+				System.out.println(nrPonto);
+				
+				lin++;
+				if( (lin%100)==0 )
+					System.out.println("Linha :"+lin);
+				
+				//System.out.print(" PONTO: " + nrPonto);
+				
+				//PONTO grupo de parada
+				String sql = "SELECT * FROM MOB_PARADA A " + 
+							" LEFT OUTER JOIN MOB_GRUPO_PARADA B ON (A.CD_GRUPO_PARADA = B.CD_GRUPO_PARADA) " +
+							" WHERE B.TP_GRUPO_PARADA = " + GrupoParadaServices.TP_GRUPO_PRACA_TAXI +
+							" AND B.NM_GRUPO_PARADA LIKE \'" + nrPonto + "\'";
+				
+				PreparedStatement pstmtPonto = connect.prepareStatement( sql );
+				
+				ResultSetMap rsmPonto = new ResultSetMap(pstmtPonto.executeQuery());
+				
+				int pstmtParada;
+				while(rsmPonto.next()){
+					System.out.println("Ponto: " + rsmPonto.getString("nm_grupo_parada") + " parada " + rsmPonto.getString("ds_referencia"));
+					
+					pstmtParada = connect.prepareStatement( "UPDATE mob_parada SET cd_logradouro = " + cdLogradouro + 
+																 " WHERE cd_parada = " + rsmPonto.getInt("cd_parada") ).executeUpdate();
+					if (pstmtParada <= 0)
+						System.out.println("Erro!");
+				}
+				System.out.println("Linha2: " + lin);
+			}
+			
+			connect.commit();
+
+			return null;
+		} catch (Exception e) {
+			e.printStackTrace(System.out);
+			Conexao.rollback(connect);
+			return new sol.util.Result(-1, "Erro ao tentar importar contas a RECEBER!", e);
+		} finally {
+			try {
+				
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			Conexao.desconectar(connect);
+		}
+	}
+	
+	/**
+	 * Importa as pessoas físicas do Firebird para o postgres
+	 * 
+	 * @author Bruno Codato
+	 *
+	 **/
+	public static sol.util.Result importPessoaFisica()	{
+		Connection connect   = Conexao.conectar();
+		Connection conFirebird = getConnectFirebirdMobilidade();
+		ResultSetMap rsmFirebird;
+		ResultSetMap rsmPostgres;
+		Result result;
+		try {
+			connect.setAutoCommit(false);
+			conFirebird.setAutoCommit(false);
+			
+			/*			
+			IMPORTAÇÃO DE GRL_PESSOA E GRL
+			*/
+			
+			System.out.println("Importando Pessoa");
+			
+			ResultSet rs = conFirebird.prepareStatement(" SELECT A.*, B.* " +
+					" FROM grl_pessoa A " +
+					" LEFT JOIN  grl_pessoa_fisica B ON(A.cd_pessoa = B.cd_pessoa) " +
+					" WHERE A.cd_pessoa in(1,3,35,339,470,4407,4622,6470,9322,69614);").executeQuery();
+			rsmFirebird = new ResultSetMap(rs);
+			
+			// Variáveis que contabilizam os processos da importação
+			int qtdSalvo = 0;
+			int qtdJaExiste = 0;
+			int qtdErro = 0;
+			
+			ResultSetMetaData rsmd = rs.getMetaData();
+			int numeroColuna = rsmd.getColumnCount();
+			
+			
+			// Variáveis de retorno das funções insert
+			int cdPessoaFisica = -1;
+			
+			// Interação sobre os registro do banco do Firebird
+			rsmFirebird.beforeFirst();	
+			
+						
+			// Configura a progressbar
+			long startTime = System.currentTimeMillis();
+			long total = rsmFirebird.getLines().size();
+			long contLoop = 0;
+			
+			while( rsmFirebird.next() ){
+				printProgress(startTime, total, contLoop++);
+				String nmPessoa = rsmFirebird.getString("NM_PESSOA");
+				int retorno =  jaExistePessoaFisica(nmPessoa, connect);
+				
+				// Não existe a pessoa física no banco postgres
+				if( retorno == 0){
+					PessoaFisica pessoaFisica = new PessoaFisica();				
+					pessoaFisica.setCdPessoaSuperior(rsmFirebird.getInt("CD_PESSOA_SUPERIOR"));					
+					pessoaFisica.setNmPessoa(rsmFirebird.getString("NM_PESSOA"));
+					pessoaFisica.setNrTelefone1(rsmFirebird.getString("NR_TELEFONE1"));
+					pessoaFisica.setNrTelefone2(rsmFirebird.getString("NR_TELEFONE2"));
+					pessoaFisica.setNrCelular(rsmFirebird.getString("NR_CELULAR"));
+					pessoaFisica.setNrFax(rsmFirebird.getString("NR_FAX"));
+					pessoaFisica.setNmEmail(rsmFirebird.getString("NM_EMAIL"));
+					pessoaFisica.setDtCadastro(rsmFirebird.getGregorianCalendar("DT_CADASTRO"));
+					pessoaFisica.setGnPessoa(rsmFirebird.getInt("GN_PESSOA"));
+					
+//                  TODO Codato: Retornava null na importação da imagem.					
+//					Blob imgFoto = rs.getBlob(9);					
+//					int n = 10;
+//					int tamanhoFoto = (int)imgFoto.length();
+//					pessoa.setImgFoto(imgFoto.getBytes(1, tamanhoFoto));				
+					
+					pessoaFisica.setStCadastro(rsmFirebird.getInt("ST_CADASTRO"));
+					pessoaFisica.setNmUrl(rsmFirebird.getString("NM_URL"));
+					pessoaFisica.setNmApelido(rsmFirebird.getString("NM_APELIDO"));
+					
+					String observacao = null;
+					
+					if(rsmFirebird.getString("TXT_OBSERVACAO") != null && rsmFirebird.getString("TXT_OBSERVACAO").length() > 0 ){
+						observacao = rsmFirebird.getString("TXT_OBSERVACAO");						
+						for (int index = 0; index < observacao.length(); index++) {
+							if(observacao.codePointAt(index) == 0){
+								observacao = observacao.substring(1,index);
+								
+							}		
+						}					
+					}// fim do if
+					
+					pessoaFisica.setTxtObservacao("[ IMPORTADA ]"+ observacao);					
+					pessoaFisica.setLgNotificacao(0);
+					pessoaFisica.setIdPessoa(null);				
+										
+					pessoaFisica.setIdPessoa(rsmFirebird.getString("ID_PESSOA"));
+					pessoaFisica.setDtChegadaPais(rsmFirebird.getGregorianCalendar("DT_CHEGADA_PAIS"));					
+															
+					pessoaFisica.setDtNascimento(rsmFirebird.getGregorianCalendar("DT_NASCIMENTO"));
+					pessoaFisica.setNrCpf(rsmFirebird.getString("NR_CPF"));																			
+					pessoaFisica.setSgOrgaoRg(rsmFirebird.getString("SG_ORGAO_RG"));
+					pessoaFisica.setNmMae(rsmFirebird.getString("NM_MAE"));
+					pessoaFisica.setNmPai(rsmFirebird.getString("NM_PAI"));
+					pessoaFisica.setTpSexo(rsmFirebird.getInt("TP_SEXO"));	
+				
+					String nrRg = null;
+					if(rsmFirebird.getString("NR_RG") != null){
+						nrRg =rsmFirebird.getString("NR_RG").replace("-", "");
+					}	
+					pessoaFisica.setNrRg(nrRg);
+					
+					String nrCNH = null;
+					if(rsmFirebird.getString("NR_CNH") != null){
+						nrCNH =rsmFirebird.getString("NR_CNH").replace(".", "").replace("-", "");					
+					} 					
+					pessoaFisica.setNrCnh(nrCNH);
+
+					pessoaFisica.setDtValidadeCnh(rsmFirebird.getGregorianCalendar("DT_VALIDADE_CNH"));
+					pessoaFisica.setDtPrimeiraHabilitacao(rsmFirebird.getGregorianCalendar("DT_PRIMEIRA_HABILITACAO"));
+					pessoaFisica.setTpCategoriaHabilitacao(getCorrespontendeTipoHabilitacao(rsmFirebird.getInt("TP_CATEGORIA_HABILITACAO")));
+
+					if( getCorrespontendeTipoHabilitacao(rsmFirebird.getInt("TP_CATEGORIA_HABILITACAO")) != -1){
+                    	pessoaFisica.setTpCategoriaHabilitacao(getCorrespontendeTipoHabilitacao(rsmFirebird.getInt("TP_CATEGORIA_HABILITACAO")));
+					}
+					
+					//pessoaFisica.setTpRaca(rsmFirebird.getInt("CD_PESSOA")); null
+					//pessoaFisica.setLgDeficienteFisico(rsmFirebird.getInt("CD_PESSOA")); null
+					//pessoaFisica.setNmFormaTratamento(rsmFirebird.getString("TXT_OBSERVACAO")); null					
+					
+                    if( getCorrespontendeEstado(rsmFirebird.getInt("CD_ESTADO_RG")) != -1){
+                    	pessoaFisica.setCdEstadoRg(getCorrespontendeEstado(rsmFirebird.getInt("CD_ESTADO_RG")));
+					}
+					
+					
+					pessoaFisica.setDtEmissaoRg(rsmFirebird.getGregorianCalendar("DT_EMISSAO_RG"));					
+					//pessoaFisica.setCdConjuge(rsmFirebird.getInt("CD_PESSOA"));					
+					
+					//Salva pessoa física
+					cdPessoaFisica  = PessoaFisicaDAO.insert(pessoaFisica);					
+				
+					if(cdPessoaFisica > 0){
+						// Grava o histórico da transferência da pessoa fisica Firebird ao Postgres.
+						ImportacaoAit importacaoAit = new ImportacaoAit();
+						importacaoAit.setCdAntigo(rsmFirebird.getInt("CD_PESSOA"));
+						importacaoAit.setCdNovo(cdPessoaFisica);
+						importacaoAit.setTabelaFirebird(ImportacaoAitServices.GRL_PESSOA_FISICA);
+						importacaoAit.setTabelaPostgre(ImportacaoAitServices.nomeTabelaPostegres(ImportacaoAitServices.MOB_GRL_PESSOA_FISCA));
+						
+						ImportacaoAitServices.save(importacaoAit);						
+						
+						++qtdSalvo;												
+					}
+					else{						
+						gravarArq.println(qtdErro  + "- ERRO DE IMPORTAÇÃO: AO SALVAR GRL_PESSOA_FISICA, CD_PESSOA: " + rsmFirebird.getInt("CD_PESSOA") + " NM_PESSOA: "+ rsmFirebird.getString("NM_PESSOA") );
+						++qtdErro;
+					}
+					
+										
+				}						
+				// Já existe a pessoa física no banco postgres
+				else if( retorno == 1){
+					gravarArq.println( qtdJaExiste + "- JA EXISTE O REGISTRO : GRL_PESSOA_FISICA, CD_PESSOA: " + rsmFirebird.getInt("CD_PESSOA") + " NM_PESSOA: "+ rsmFirebird.getString("NM_PESSOA") );
+					++qtdJaExiste;
+				}
+				// -1: Erro ao pesquisar a pessoa
+				else{ 
+					gravarArq.println(qtdErro  + "- ERRO DE IMPORTAÇÃO: GRL_PESSOA_FISICA, CD_PESSOA: " + rsmFirebird.getInt("CD_PESSOA") + " NM_PESSOA: "+ rsmFirebird.getString("NM_PESSOA") );
+					++qtdErro;
+				}
+				
+				
+				
+			} // fim do while do rsmFirebird			
+			System.out.println("\n\n====================================================== ");
+			System.out.println("RESULTADO DA IMPORTAÇÃO DE GRL_PESSOA_FISICA =============");
+			System.out.println("========================================================== ");
+			System.out.println("Importados: " + qtdSalvo);
+			System.out.println("Já existentes: " + qtdJaExiste);
+			System.out.println("Erros: " + qtdErro);
+						
+			
+			connect.commit();
+			Conexao.desconectar(conFirebird);
+			Conexao.desconectar(connect);
+			
+		    long stopTime = System.currentTimeMillis();
+		    long elapsedTime = stopTime - startTime;		    
+			
+			System.out.print(". Fim da importação de Pessoa Física");		
+			System.out.println(" Tempo de Execução: " + elapsedTime/1000/60);
+			
+			return new sol.util.Result(1, "ok");
+		}
+		catch(Exception e){
+			e.printStackTrace(System.out);
+			return new sol.util.Result(-1, "Erro ao tentar importar banco eTransito.fdb!", e);
+		}
+		finally{
+			Conexao.desconectar(connect);
+			Conexao.desconectar(conFirebird);
+		}
+	}// fim da função importTeste
+	
+	public static int importProcesso(String nrProcesso, GregorianCalendar dtProcesso, int stProcesso, int instancia)	{		
+		Connection connect   = Conexao.conectar();
+		ResultSetMap rsmPostgres;
+		Result result;		
+		String observacao = "";
+		
+		try {
+			connect.setAutoCommit(false);
+			gravarArq.println("Importando processos");
+
+			int cdProcesso1 = 0;
+				if(nrProcesso != null){
+					if(nrProcesso.equals( "7623/20008")){
+						int n = 0;					
+					}
+					
+					nrProcesso = nrProcesso.replace("-", "/");
+					nrProcesso = nrProcesso.replace("*", "");
+					nrProcesso = nrProcesso.replace(".", "");
+					nrProcesso = nrProcesso.trim();			
+					
+					if(nrProcesso == "7623/20008"){
+						observacao += "Número do processo alterado de 7623/20008 para 7623/2008 na importação";												
+					}					
+					nrProcesso = nrProcesso.replace("7623/20008", "7623/2008");
+					
+					
+					if(nrProcesso == "B4810"){
+						observacao += "Número do processo alterado de B4810 para 4810 na importação";												
+					}
+					nrProcesso = nrProcesso.replace("B4810", "4810");
+					
+					if(nrProcesso == "B381"){
+						observacao += "Número do processo alterado de B381 para 381 na importação";												
+					}
+					nrProcesso = nrProcesso.replace("B381", "381");
+					
+				}		
+
+				if(nrProcesso != null && dtProcesso != null)
+				cdProcesso1 = salvarProcesso(nrProcesso, dtProcesso, stProcesso, instancia, connect);
+				
+				ImportacaoAit importacaoAit = new ImportacaoAit();				
+				importacaoAit.setCdNovo(cdProcesso1);
+				importacaoAit.setTabelaFirebird(ImportacaoAitServices.AIT_TRANSPORTE);
+				importacaoAit.setTabelaPostgre(ImportacaoAitServices.nomeTabelaPostegres(ImportacaoAitServices.PTC_DOCUMENTO));
+				
+				ImportacaoAitServices.save(importacaoAit);
+
+				if(cdProcesso1 > 0){
+					gravarArq.println( " REGISTRO SALVO NO POSTEGRES : NR_PROCESSO " + nrProcesso);
+					connect.commit();
+					return cdProcesso1;				  
+				}
+				else if(cdProcesso1 != -6){
+					gravarArq.println(" ERRO : NR_PROCESSO " + nrProcesso);
+				}
+			
+			Conexao.desconectar(connect);
+			return cdProcesso1;
+			
+		}
+		catch(Exception e){
+			gravarArq.println(e.getMessage());			
+			return 0;
+		}
+		finally{
+			Conexao.desconectar(connect);
+		}
+	}// fim da função importProcessos
+	
+	public static sol.util.Result importTeste()	{		
+		try {
+			 System.out.println("Working Directory = " +
+		              System.getProperty("user.dir"));
+			 
+			File file = new File("importInfracaoToPostgres.txt"); 
+			saidaImportacao = new FileWriter(file);			
+			gravarArq = new PrintWriter(saidaImportacao);
+					//importInfracaoToPostgres(); 			
+					//importAgenteToPostgres(); 
+			        //importUsuariosToPostgres(); 
+					//importPessoaFisica(); 
+					//importTalonarioToPostgres(); // Pega do Zero
+					//importOcorrenciaToPostgres(); 
+			        importAitToPostgresql();
+			        //criarArrayMobile();
+			saidaImportacao.close();	
+
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		finally {
+					
+		}
+		return null;
+
+	}// fim da função importTeste
+	
+	public static int importNrPrefixoVeiculo(String nrPrefixo)	{		
+		Connection connect   = Conexao.conectar();
+		ResultSetMap rsmPostgres;
+		Result result;
+		
+		String observacao = "";
+		
+		try {
+			connect.setAutoCommit(false);
+			
+			int cdConcessaoVeiculo = -1;
+				if(nrPrefixo != null){
+					cdConcessaoVeiculo = jaExisteNrPrefixo(nrPrefixo, null); 					
+					if(cdConcessaoVeiculo > 0){	
+						return cdConcessaoVeiculo;					
+					}
+					else{
+						return 0;				
+					}
+			    }// if nmPermissionario		
+
+			connect.commit();			
+			Conexao.desconectar(connect);
+			return 0;
+		}
+		catch(Exception e){
+			gravarArq.println(e.getMessage());
+			return 0;
+		}
+		finally{
+			Conexao.desconectar(connect);			
+		}
+	}// fim da função importTeste
+	
+	
+	/**
+	 * Retorna a concessão baseado no nmPermisionario e no tpAit
+	 * 
+	 * @author Bruno Codato
+	 * @param nmPermissionario Nome do Permisionario, tpAit tipo da AIT
+	 * @return Caso exista o permisionário do Postgres retorna o código existente, caso contrário retorna o código da concessão recém criada. 
+	 *         ou retorna 0 (zero) 
+	 */
+	public static int importConcessionario(String nmPermissionario, int tpAit)	{		
+		Connection connect   = Conexao.conectar();
+		ResultSetMap rsmPostgres;
+		Result result;
+		
+		String observacao = "";
+		
+		try {
+			connect.setAutoCommit(false);
+				int cdPermissionario;
+											
+				if(nmPermissionario != null){
+					cdPermissionario = jaExistePessoaConcessao(nmPermissionario, connect); 
+					
+					if(cdPermissionario > 0){						
+						return cdPermissionario;						
+					}
+					else{// Salva a nova concessão			
+						int cdPessoaConcessao = getCdPessoaByName(nmPermissionario, connect);
+						int cdTipoConcessão = getTipoConcessaoByTpAit(tpAit);
+						
+						Concessao concessao = new Concessao();
+						concessao.setTxtObservacao("[ IMPORTACAO ] Concessão importada do eTransito ");
+						concessao.setTpConcessao(0); // Coletivo Urbano
+						
+						
+						if(cdPessoaConcessao > 0 ){
+							concessao.setCdConcessionario(cdPessoaConcessao);
+						}
+						if(cdTipoConcessão > 0){
+							concessao.setTpConcessao(cdTipoConcessão);														
+						}
+						Result resultConcessao = null;
+						if(cdPessoaConcessao > 0 )
+						resultConcessao = ConcessaoServices.save(concessao);
+						
+						if( resultConcessao != null && resultConcessao.getCode() > 0){
+							gravarArq.println(" Concessão salva. cd_concessao: " + resultConcessao.getCode());
+							
+							//Registra a criação de uma nova concessão no momento da importação
+							ImportacaoAit importacaoAit = new ImportacaoAit();
+							importacaoAit.setCdNovo(resultConcessao.getCode());
+							importacaoAit.setTabelaPostgre(ImportacaoAitServices.nomeTabelaPostegres(ImportacaoAitServices.MOB_CONCESSAO));
+							
+							ImportacaoAitServices.save(importacaoAit);
+							
+							return resultConcessao.getCode();																					
+						}
+						else{
+							gravarArq.println(" Erro ao salvar concessão da AIT: " + cdPessoaConcessao );							
+						}
+					}					
+			    }// if nmPermissionario
+				else{
+					gravarArq.println(" ERRO CONCESSAO: Não foi possivel criar o Concessionario com nome : " + nmPermissionario);										
+				}
+				
+			connect.commit();			
+			Conexao.desconectar(connect);
+			return 0;
+		}
+		catch(Exception e){
+			gravarArq.println(e.getMessage());
+			return 0;
+		}
+		finally{
+			Conexao.desconectar(connect);
+		}
+	}// fim da função importTeste	
+	
+	
+	
+	/**
+	 * Retorna o estado do postgres correspondente ao cd_estado do firebird
+	 * 
+	 * @author Bruno Codato
+	 * @param estadoFirebird código do estado do firebird
+	 * @return Retorna um número positivo correspondente a um estado no Postgres, caso tenha algum erro retorna -1.
+	 */
+	public static int getCorrespontendeEstado(int estadoFirebird){
+		
+		switch (estadoFirebird) {
+		case 1: // BA			
+			return 1;
+		case 2: // SP			
+			return 4;
+		case 3: // MG			
+			return 5;
+		case 4: // AL			
+			return 3;
+		case 5: // RN			
+			return 10;
+		case 6: // RJ			
+			return 24;
+		case 7: // A
+			return 1;
+		case 8: // SE			
+			return 2;
+		case 9: // ES			
+			return 23;
+		case 10: // B			
+			return 1;
+		case 11: // GO			
+			return 30;
+		case 12: // PE			
+			return 22;
+		case 13: // DF			
+			return 31;
+		case 14: // PB			
+			return 21;
+		case 15: // MS			
+			return 28;
+		case 16: // MM			
+			return -1;
+		case 17: // RB			
+			return 1;
+		case 18: // VAZIO			
+			return -1;
+		case 19: // PR			
+			return 25;
+		case 20: // RS			
+			return 27;
+		case 21: // SC			
+			return 26;
+		case 22: // AC			
+			return 12;
+		case 23: // RO			
+			return 11;
+		case 24: // CE			
+			return 20;
+		case 25: // MT			
+			return 29;
+		case 26: // PA			
+			return 15;
+		case 27: // TO			
+			return 17;
+		case 28: // AM			
+			return 13;	
+		default:
+			return -1;			
+		}// fim do switch		
+	}
+	
+
+	/**
+	 * Retorna o tipo de carteira do postgres correspondente ao TP_CATEGORIA_HABILITACAO do firebird
+	 * 
+	 * @author Bruno Codato
+	 * @param estadoFirebird código do estado do firebird
+	 * @return Retorna um número positivo correspondente a um estado no Postgres, caso tenha algum erro retorna -1.
+	 */
+	public static int getCorrespontendeTipoHabilitacao(int tpHabilitacaoFirebird){
+		
+		switch (tpHabilitacaoFirebird) {
+		case 10: // A			
+			return 0;
+		case 1: // B			
+			return 1;
+		case 2: // C			
+			return 2;
+		case 3: // D			
+			return 3;
+		case 4: // E			
+			return 4;
+		case 11:// AB			
+			return 5;
+		case 12:// AC
+			return 6;
+		case 13:// AD			
+			return 7;
+		case 14:// AE			
+			return 8;		
+		default:
+			return -1;			
+		}// fim do switch		
+	}
+	
+	/**
+	 * Verifica se os parãmetros de dos concessionários da empresas do eTranstio foi inicializado corretametne
+	 * 
+	 * @author Bruno Codato	 * 
+	 * @return Retorna true caso tenha sido inicilizado corretamente, caso contrário retorna false.
+	 */
+	public static boolean verificarInicializacaoDeParametros(){	
+		int parametroCalculo = CIDADE_VERDE_TRANSPORTE * SERRANA * VDC * VIACAO_VITORIA_LTDA * VIACAO_VITORIA;		
+		if(parametroCalculo < 0){
+			return false;			
+		}		
+		return true;	
+	}
+	
+	/**
+	 * Retorna o tipo de carteira do postgres correspondente ao TP_CATEGORIA_HABILITACAO do firebird
+	 * 
+	 * @author Bruno Codato
+	 * @param estadoFirebird código do estado do firebird
+	 * @return Retorna um número positivo correspondente a um estado no Postgres, caso tenha algum erro retorna -1.
+	 */
+	public static int getCorrespontendeConcessao(String nmEmpresa){
+		
+		switch (nmEmpresa) {
+		case "CIDADE VERDE TRANSPORTE RODOVIARIO LTDA": // A			
+			return CIDADE_VERDE_TRANSPORTE;
+		case "SERRANA": // B			
+			return SERRANA;
+		case "VDC": // C			
+			return VDC;
+		case "VIACAO VITORIA LTDA": // D			
+			return 3;
+		case "VIAÇÃO VITÓRIA": // E			
+			return VIACAO_VITORIA;		
+		default:
+			return -1;			
+		}// fim do switch		
+	}
+	
+	/**
+	 * Pesquisa se existe o prefixo da linha no postgres
+	 * 
+	 * @author Bruno Codato
+	 * @param prefixoLinha nome a ser pesquisado
+	 * @return Retorna 1 caso o prefixo já exista, 0 quando não existe e -1 quando há erro
+	 */
+	public static boolean hePrefixoValido(String prefixoLinha) {
+		return prefixoLinha.matches("[A-Z]+[0-9]+[A-Z]*");
+		
+	}	
+	
+	
+	/**
+	 * Pesquisa se existe o prefixo da linha no postgres
+	 * 
+	 * @author Bruno Codato
+	 * @param prefixoLinha nome a ser pesquisado
+	 * @return Retorna o código da linha caso o prefixo já exista, 0 quando não existe e -1 quando há erro
+	 */
+	public static int jaExistePrefixodaLinha(String prefixoLinha, Connection connect) {		
+		boolean isConnectionNull = connect==null;		
+		PreparedStatement pstmt;
+		try {			
+			if(prefixoLinha != null){
+				prefixoLinha = prefixoLinha.replace("-", "");
+				prefixoLinha = prefixoLinha.toUpperCase();
+
+			}
+			else{
+				return 0;			
+			}
+			pstmt = connect.prepareStatement(" SELECT * FROM mob_linha  " +
+		                                     " WHERE  nr_linha LIKE '" + prefixoLinha + "' ");
+			ResultSetMap rsmRetorno =  new ResultSetMap(pstmt.executeQuery());
+			
+			// Já existe o prefixo no banco
+			if(rsmRetorno.size() != 0){				
+				HashMap hashUsuario = rsmRetorno.getLines().get(0);				
+				return (Integer)hashUsuario.get("CD_LINHA");
+						
+			}
+			// Não existe o prefixo no banco
+			else{
+				return 0;				
+			}
+		}
+		catch(SQLException sqlExpt) {
+			gravarArq.println(sqlExpt.getMessage());
+			gravarArq.println("Erro ao pesquisar pessoa física: " + sqlExpt);
+			return -1;
+			
+		}
+		catch(Exception e) {
+			gravarArq.println(e.getMessage());
+			gravarArq.println("Erro! DesktopImportacao.jaExistePessoaFisica: " + e);
+			return -1;
+		}
+		finally {
+			if (isConnectionNull)
+				Conexao.desconectar(connect);
+		}
+	}
+	
+	public static int jaExisteUsuario(String nmLogin, Connection connect) {		
+		boolean isConnectionNull = connect==null;		
+		PreparedStatement pstmt;
+		try {			
+			
+			pstmt = connect.prepareStatement(" SELECT *  " +
+		                                     " FROM seg_usuario A " +
+					                         " LEFT JOIN grl_pessoa B ON(A.cd_pessoa = B.cd_pessoa) " +
+					                         " WHERE similarity(A.nm_login,'" + nmLogin + "') > .8 ");
+					                         
+			ResultSetMap rsmRetorno =  new ResultSetMap(pstmt.executeQuery());
+			
+			// Já existe 
+			if(rsmRetorno.size() != 0){				
+				HashMap hashUsuario = rsmRetorno.getLines().get(0);				
+				return (Integer)hashUsuario.get("CD_USUARIO");
+			}
+			// Não existe 
+			else{
+				return 0;				
+			}
+		}
+		catch(SQLException sqlExpt) {
+			gravarArq.println(sqlExpt.getMessage());
+			gravarArq.println("Erro ao pesquisar usuario: " + sqlExpt);
+			return -1;
+			
+		}
+		catch(Exception e) {
+			gravarArq.println(e.getMessage());
+			gravarArq.println("Erro! DesktopImportacao.jaExisteUsuario: " + e);
+			return -1;
+		}
+		finally {
+			if (isConnectionNull)
+				Conexao.desconectar(connect);
+		}
+	}
+	
+	public static int deferidosSelecao() {		
+  		BufferedReader fileReader = null;
+  		Connection connection = null;
+  		boolean isConnectionNull = false;
+		try {
+
+			connection = Conexao.conectar();
+			connection.setAutoCommit(false);
+			
+	  		int i = 0;
+	  		int deferidos = 1;
+            String line = "";
+            File fileDir = new File("E:/deferidos.csv");
+			BufferedReader raf = new BufferedReader(new InputStreamReader(new FileInputStream(fileDir), "UTF8"));
+			
+			GregorianCalendar dtProrrogacao = new GregorianCalendar();
+	  		dtProrrogacao.add(Calendar.DAY_OF_MONTH, 8);
+			
+			ArrayList<Integer> cds = new ArrayList<Integer>(); 
+			
+			System.out.println("E:\\deferidos.csv carregado...");
+			
+			while ((line = raf.readLine()) != null) {
+//				System.out.println("===========================================================================================================");
+				System.out.println(deferidos + ": ");
+				StringTokenizer tokens = new StringTokenizer(line, ";", false);
+
+				String nrInscricao = tokens.nextToken();
+				String nome = tokens.nextToken();
+				String dtNascimento = tokens.nextToken();
+				String nrRg = tokens.nextToken();
+				String nrCpf = tokens.nextToken();
+				String nrNIS = tokens.nextToken();
+//				String dtInscricao = tokens.nextToken();
+				String nmVaga = tokens.nextToken();
+//				String VlInscricao = tokens.nextToken();
+				String stInscricao = tokens.nextToken();
+				
+//				System.out.println("nrInscricao: " + nrInscricao);
+//				System.out.println("nome: " + nome);
+//				System.out.println("dtNascimento: " + dtNascimento);
+//				System.out.println("nrRg: " + nrRg);
+//				System.out.println("nrCpf: " + nrCpf);
+//				System.out.println("nrNIS: " + nrNIS);
+//				System.out.println("dtInscricao: " + dtInscricao);
+//				System.out.println("nmVaga: " + nmVaga);
+//				System.out.println("VlInscricao: " + VlInscricao);
+//				System.out.println("stInscricao: " + stInscricao);
+				
+				ArrayList<ItemComparator> crt = new ArrayList<ItemComparator>();
+				crt.add(new ItemComparator("A.ID_CADASTRO", nrInscricao, ItemComparator.EQUAL, Types.VARCHAR));
+				ResultSetMap rsmInscritos = EventoPessoaServices.getAllInscritos(crt);
+	
+				int cdContaReceber = (int)rsmInscritos.getLines().get(0).get("CD_CONTA_RECEBER");
+						
+				if(stInscricao.equals("DEFERIDO")) {
+				
+					//ContaReceber contaReceber = ContaReceberDAO.get(cdContaReceber);
+					
+					//System.out.println(contaReceber);
+					
+//					if(contaReceber.getStConta() == 0){ 
+//						cds.add(contaReceber.getCdContaReceber());
+//						deferidos++;		
+//						contaReceber.setStConta(3);
+//						contaReceber.setTxtObservacao("Inscrição com isenção deferida " + new SimpleDateFormat("dd/MM/yyyy").format(new GregorianCalendar().getTime()) + " - " + rsmInscritos.getLines().get(0).get("NM_EVENTO"));
+//						ContaReceberServices.save(contaReceber, null, null, connection);
+//					}
+				} else {
+					cds.add(cdContaReceber);
+				}
+				
+			}
+			
+			System.out.println(cds.toString());
+//			System.out.println(deferidos);
+//			
+//			connection.commit();
+			
+			return 1;
+		}
+		catch(Exception e) {
+			e.printStackTrace(System.out);
+			if (isConnectionNull)
+				Conexao.rollback(connection);
+			return -1;
+		}
+		finally {
+			if (isConnectionNull)
+				Conexao.desconectar(connection);
+		}
+	}
+	
+	public static int vagasSelecao(String fileDir) {		
+  		BufferedReader fileReader = null;
+  		Connection connection = null;
+  		boolean isConnectionNull = false;
+		try {
+
+			connection = Conexao.conectar();
+			connection.setAutoCommit(false);
+			
+	  		int i = 0;
+	  		int deferidos = 1;
+            String line = "";
+			BufferedReader raf = new BufferedReader(new InputStreamReader(new FileInputStream(fileDir), "UTF8"));
+			
+			System.out.println(fileDir + " carregado...");
+			
+
+			System.out.println("===========================================================================================================");
+			System.out.println("===================================== IMPORTAÇÃO INICIADA =================================================");
+			//System.out.println("===========================================================================================================");
+			
+			while ((line = raf.readLine()) != null) {
+				
+				System.out.println("===========================================================================================================");
+				StringTokenizer tokens = new StringTokenizer(line, ";", false);
+
+				String idVaga = tokens.nextToken().trim();
+				String nmFuncao = tokens.nextToken().trim();
+				String dsFuncao = tokens.nextToken().trim();
+				String qtVagas = tokens.nextToken().trim();
+				String tpEvento = tokens.nextToken().trim();
+				String cdEventoPrincipal = tokens.nextToken().trim();
+				String vlInscricao = tokens.nextToken().trim();
+				
+				GregorianCalendar dtInicial = new GregorianCalendar();
+				dtInicial.set(2017, Calendar.NOVEMBER, 26, 23, 59, 59);
+				
+				GregorianCalendar dtFinal = new GregorianCalendar();
+				dtFinal.set(2017, Calendar.DECEMBER, 01, 23, 59, 59);
+				
+				GregorianCalendar dtVencimentoBoleto = new GregorianCalendar();
+				dtVencimentoBoleto.set(2017, Calendar.DECEMBER, 03, 23, 59, 59);
+				
+//				System.out.println("idVaga: " + idVaga);
+//				System.out.println("nmFuncao: " + nmFuncao);
+//				System.out.println("dsFuncao: " + dsFuncao);
+//				System.out.println("qtVagas: " + qtVagas);
+//				System.out.println("tpEvento: " + tpEvento);
+//				System.out.println("cdEventoPrincipal: " + cdEventoPrincipal);
+//				System.out.println("vlInscricao: " + vlInscricao);		
+				
+				Evento eventoPrincipal = EventoDAO.get(Integer.valueOf(cdEventoPrincipal), connection);
+				
+				Evento evento = new Evento();
+				evento.setNmEvento(nmFuncao);
+				evento.setIdEvento(eventoPrincipal.getIdEvento() + "-" + idVaga);
+				evento.setQtVagas(Integer.valueOf(qtVagas));
+				evento.setTpEvento(Integer.valueOf(tpEvento));
+				evento.setVlInscricao(Float.valueOf(vlInscricao));
+				evento.setDtVencimentoBoleto(dtVencimentoBoleto);
+				evento.setDtInicial(dtInicial);
+				evento.setDtFinal(dtFinal);
+				evento.setDtEvento(new GregorianCalendar());
+				evento.setDsEvento(dsFuncao.equals("NULL") ? null : dsFuncao);
+				evento.setCdEventoPrincipal(Integer.valueOf(cdEventoPrincipal));
+				
+				ArrayList<ItemComparator> criterios = new ArrayList<ItemComparator>();
+				criterios.add(new ItemComparator("A.ID_EVENTO", evento.getIdEvento(), ItemComparator.EQUAL, Types.VARCHAR));
+				
+				ResultSetMap rsmEventos = EventoServices.find(criterios);
+//				
+				if(rsmEventos.size() == 0)
+					EventoServices.save(evento, connection);
+				
+				System.out.println(evento);
+				
+				
+			}
+			
+			System.out.println("===========================================================================================================");
+			System.out.println("==================================== IMPORTAÇÃO FINALIZADA ================================================");
+			System.out.println("===========================================================================================================");
+			
+			connection.commit();
+			
+			return 1;
+		}
+		catch(Exception e) {
+			e.printStackTrace(System.out);
+			if (isConnectionNull)
+				Conexao.rollback(connection);
+			return -1;
+		}
+		finally {
+			if (isConnectionNull)
+				Conexao.desconectar(connection);
+		}
+	}
+	
+	/**
+	 * Pesquisa se existe o prefixo do veículo linha no postgres
+	 * 
+	 * @author Bruno Codato
+	 * @param nrPrefixo n° do prefixo  a ser pesquisado
+	 * @return Retorna o codigo da concessão-veículo caso o prefixo já exista, 0 quando não existe e -1 quando há erro
+	 */
+	public static int jaExisteNrPrefixo(String nrPrefixo, Connection connect) {		
+		boolean isConnectionNull = connect==null;		
+		PreparedStatement pstmt;
+		
+		if(connect == null){
+			connect = Conexao.conectar();			
+		}
+		
+		try {				
+			
+			if( nrPrefixo != null && nrPrefixo.trim() != "" && nrPrefixo.matches("[0-9]+")){
+				String saida = " SELECT * FROM mob_concessao_veiculo  " +
+						" WHERE nr_prefixo = " + nrPrefixo; 
+
+				gravarArq.println("\n\n" + saida + "\n\n");
+
+				pstmt = connect.prepareStatement(" SELECT * FROM mob_concessao_veiculo  " +
+						" WHERE nr_prefixo = " + nrPrefixo );
+
+				ResultSetMap rsmRetorno =  new ResultSetMap(pstmt.executeQuery());
+
+				// Já existe o prefixo no banco
+				if(rsmRetorno.size() != 0){				
+					HashMap hashUsuario = rsmRetorno.getLines().get(0);				
+					return (Integer)hashUsuario.get("CD_CONCESSAO_VEICULO");						
+				}
+				// Não existe o prefixo no banco
+				else{
+					gravarArq.println("WARNING: Nao existe o prefixo no banco = " + nrPrefixo );
+					return 0;				
+				}
+			}
+			return 0;
+		}
+		catch(SQLException sqlExpt) {
+			gravarArq.println(sqlExpt.getMessage());
+			gravarArq.println("jaExisteNrPrefixo(): Erro ao pesquisar o n° do prefixo física: " + sqlExpt);
+			return -1;
+			
+		}
+		catch(Exception e) {
+			gravarArq.println(e.getMessage());
+			gravarArq.println("jaExisteNrPrefixo(): Erro! DesktopImportacao.jaExistePessoaFisica: " + e);
+			return -1;
+		}
+		finally {
+			if (isConnectionNull)
+				Conexao.desconectar(connect);
+		}
+	}
+	
+	
+	
+	// TODO: Retornar o código do processo salvo no postegres.	
+	public static int salvarProcesso(String nrProcesso, GregorianCalendar dataProcesso, int statusProcesso, int processoInstancia, Connection connect) {
+		boolean isConnectionNull = connect==null;		
+		PreparedStatement pstmt;
+
+		Setor setorImportacao = SetorServices.getByName("SEMOB");
+
+		if(setorImportacao == null){
+			gravarArq.println("O setor de SEMOB não foi encontrado no banco");
+			return -1;
+		}
+
+		int cdFase = 0;
+
+		switch (statusProcesso) {
+		case 0:
+			if(processoInstancia == 1){
+				cdFase = ST_JURIS_JULGAMENTO_1;
+			}
+			else{
+				cdFase = ST_JURIS_JULGAMENTO_2;									
+			}				
+			break;	
+		case 1:
+			if(processoInstancia == 1){
+				cdFase = ST_JURIS_JULGAMENTO_1;
+			}
+			else{
+				cdFase = ST_JURIS_JULGAMENTO_2;									
+			}				
+			break;	
+		case 2:
+			if(processoInstancia == 1){
+				cdFase = ST_JURIS_DEFERIDO_1;
+			}
+			else{
+				cdFase = ST_JURIS_DEFERIDO_2;									
+			}				
+			break;	
+		case 3:
+			if(processoInstancia == 1){
+				cdFase = ST_JURIS_INDEFERIDO_1;
+			}
+			else{
+				cdFase = ST_JURIS_INDEFERIDO_2;									
+			}				
+			break;	
+
+		default:
+			break;
+		}
+
+		Documento doc = new Documento(0,  /*cdDocumento*/
+				0, /*cdArquivo*/
+				setorImportacao.getCdSetor(), /* cdSetor = IMPORTAÇÃO*/
+				39, /* cdUsuario = TIVIC*/
+				null, /* nmLocalOrigem*/
+				dataProcesso, /* dtProtocolo*/
+				0, /* tpDocumento */
+				"[ IMPORTADO ] Documento importado do eTrânsito", /* txtObservacao*/
+				null, /* idDocumento*/
+				nrProcesso, /* nrDocumento*/
+				14, /* cdTipoDocumento = Recurso*/
+				0, /* cdServico*/
+				0, /* cdAtendimento*/
+				"[ IMPORTADO ] Documento importado do sistema do eTrânsito", /* txtDocumento*/
+				setorImportacao.getCdSetor(), /* cdSetorAtual*/
+				5, /* cdSituacaoDocumento: Importação*/
+				cdFase, /* cdFase*/
+				3200, /* cdEmpresa*/
+				0, /* cdProcesso*/
+				DocumentoServices.TP_PRIORIDADE_NORMAL, /*tpPrioridade*/  
+				0, /* cdDocumentoSuperior*/ 
+				"[ IMPORTADO ] Documento importado do eTrânsito", /* dsAssunto*/
+				null, /* nrAtendimento*/
+				0, /* lgNotificacao*/
+				0, /* cdTipoDocumentoAnterior*/
+				null, /* nrDocumentoExterno*/
+				null, /* nrAssunto*/
+				null, /*  nrProtocoloExterno*/
+				null, /* nrAnoExterno*/
+				0,/* tpDocumentoExterno*/
+				0/*tpInternoExterno*/
+				);
+
+		Result result = DocumentoServices.save(doc,connect);
+
+		
+		if(result.getCode()<=0) {	
+			
+			if(result.getCode() == -6){
+				gravarArq.println(result.getMessage());
+				
+			}
+			else{				
+				gravarArq.println("-------- ERRO: Erro ao salvar o Processo: " + nrProcesso);
+				gravarArq.println( "-------- " + result.getMessage());
+				
+			}
+			
+			return result.getCode();					
+		}
+		else{
+			return result.getCode();
+		}
+	}
+	
+	
+	/**
+	 * Retorna o status da ait do Trasporte web do postgres correspondente ao TP_CATEGORIA_HABILITACAO do firebird
+	 * 
+	 * @author Bruno Codato
+	 * @param estadoFirebird código do estado do firebird
+	 * @return Retorna um status positivo correspondente a um status da Ait do Transporte WEB no Postgres, caso tenha algum erro retorna -1.
+	 */
+	public static int getCorrespontendeStAit(int stEtransitoTransporte){		
+		switch (stEtransitoTransporte) {
+		case -1: // Cancelado			
+			return 0;
+		case 0: // Cadastrado/Notificado			
+			return 1;
+		case 1: // NAI Emitida
+			return 3;
+		case 2: // 1ª Inst. - Em Julgamento			
+			return 5;
+		case 3: // 1ª Inst. - Deferido			
+			return 8;
+		case 4:// 1ª Inst. - Indeferido			
+			return 9;
+		case 5:// 2ª Inst. - Em Julgamento
+			return 10;
+		case 6:// 2ª Inst. - Deferido			
+			return 11;
+		case 7:// 2ª Inst. - Indeferido			
+			return 14;
+		case 8:// 2ª NIP Emitida			
+			return 4;
+		default:
+			return -1;			
+		}// fim do switch		
+	}
+	
+	/**
+	 * Retorna o tipo de conessao baseado no tipo de ait do eTransito
+	 * 
+	 * @author Bruno Codato
+	 * @param tpAitEtransito tipo de ait do eTransito
+	 * @return Retorna um status positivo correspondente a um status da Ait do Transporte WEB no Postgres, caso tenha algum erro retorna -1.
+	 */
+	public static int getTipoConcessaoByTpAit(int tpAitEtransito){			
+		switch (tpAitEtransito) {
+		
+		case 0: // 0 Individual (Táxi)			
+			return 5;
+		case 1: // 1 Coletivo Urbano			
+			return 0;
+		case 2: // 2 Coletivo Rural
+			return 1;
+		case 3: // 3 Escolar		
+			return 2;
+		case 4: // 4 Suplementar (Vans)			
+			return 4;		
+		default:
+			return -1;			
+		}// fim do switch		
+	}
+	
+	
+	private static void printProgress(long startTime, long total, long current) {
+	    long eta = current == 0 ? 0 : 
+	        (total - current) * (System.currentTimeMillis() - startTime) / current;
+
+	    String etaHms = current == 0 ? "N/A" : 
+	            String.format("%02d:%02d:%02d", TimeUnit.MILLISECONDS.toHours(eta),
+	                    TimeUnit.MILLISECONDS.toMinutes(eta) % TimeUnit.HOURS.toMinutes(1),
+	                    TimeUnit.MILLISECONDS.toSeconds(eta) % TimeUnit.MINUTES.toSeconds(1));
+
+	    StringBuilder string = new StringBuilder(140);   
+	    int percent = (int) (current * 100 / total);
+	    string
+	        .append('\r')
+	        .append(String.join("", Collections.nCopies(percent == 0 ? 2 : 2 - (int) (Math.log10(percent)), " ")))
+	        .append(String.format(" %d%% [", percent))
+	        .append(String.join("", Collections.nCopies(percent, "=")))
+	        .append('>')
+	        .append(String.join("", Collections.nCopies(100 - percent, " ")))
+	        .append(']')
+	        //.append(String.join("", Collections.nCopies((int) (Math.log10(total)) - (int) (Math.log10(current)), " ")))
+	        .append(String.format(" %d/%d, ETA: %s", current, total, etaHms));
+
+	  
+	    System.out.print(string);
+	}
+	
+}

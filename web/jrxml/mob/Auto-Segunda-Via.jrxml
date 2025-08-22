@@ -1,0 +1,374 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.1.1.final using JasperReports Library version 6.1.1  -->
+<!-- 2024-10-09T11:49:15 -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report1" language="groovy" pageWidth="595" pageHeight="842" columnWidth="515" leftMargin="40" rightMargin="40" topMargin="20" bottomMargin="20" uuid="99d93beb-bdfc-407b-88a5-f9145b636a99">
+	<property name="ireport.zoom" value="0.75"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="CD_ORGAO_AUTUANTE" class="java.lang.String"/>
+	<parameter name="NM_MUNICIPIO" class="java.lang.String"/>
+	<parameter name="CD_MUNICIPIO_AUTUADOR" class="java.lang.String"/>
+	<parameter name="NM_ORGAO_AUTUADOR" class="java.lang.String"/>
+	<parameter name="NM_SUBORGAO" class="java.lang.String"/>
+	<parameter name="NM_DEPARTAMENTO" class="java.lang.String"/>
+	<parameter name="LOGO_2" class="java.lang.Object"/>
+	<parameter name="MOB_CD_ORGAO_AUTUADOR" class="java.lang.String"/>
+	<parameter name="DS_TITULO_1" class="java.lang.String"/>
+	<parameter name="SG_ORGAO" class="java.lang.String"/>
+	<parameter name="DS_ENDERECO" class="java.lang.String"/>
+	<parameter name="DS_TITULO_2" class="java.lang.String"/>
+	<parameter name="DS_TITULO_3" class="java.lang.String"/>
+	<parameter name="LOGO_1" class="java.lang.Object"/>
+	<parameter name="NM_CIDADE" class="java.lang.String"/>
+	<parameter name="MOB_IMPRESSOS_DS_TEXTO_NAI" class="java.lang.String"/>
+	<parameter name="MOB_BLB_MENSAGEM_EDUCATIVA_NAI" class="java.lang.String"/>
+	<parameter name="NM_LOGRADOURO" class="java.lang.String"/>
+	<parameter name="NR_ENDERECO" class="java.lang.String"/>
+	<parameter name="NM_BAIRRO" class="java.lang.String"/>
+	<parameter name="NR_CEP" class="java.lang.String">
+		<defaultValueExpression><![CDATA[$F{NR_CEP}.length() == 8 ? ($F{NR_CEP}.substring(0, 2) + "." + $F{NR_CEP}.substring(2, 5) + "-" + $F{NR_CEP}.substring(5, 8)) : "CEP INCORRETO"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="NR_TELEFONE" class="java.lang.String"/>
+	<parameter name="MOB_CORREIOS_NR_CONTRATO" class="java.lang.String"/>
+	<parameter name="SG_DEPARTAMENTO" class="java.lang.String">
+		<defaultValueExpression><![CDATA[$P{SG_DEPARTAMENTO} != null]]></defaultValueExpression>
+	</parameter>
+	<parameter name="Parameter1" class="java.lang.String"/>
+	<parameter name="MOB_PRAZOS_NR_DEFESA_PREVIA" class="java.lang.String"/>
+	<parameter name="MOB_IMAGEM_VEICULO" class="java.lang.Object"/>
+	<parameter name="MOB_IMPRESSOS_BLB_CHANCELA_CORREIOS" class="java.lang.Object"/>
+	<parameter name="MOB_APRESENTACAO_CONDUTOR" class="java.lang.String"/>
+	<parameter name="NM_COMPLEMENTO" class="java.lang.String"/>
+	<parameter name="IS_BASE_OLD" class="java.lang.Boolean">
+		<defaultValueExpression><![CDATA[false]]></defaultValueExpression>
+	</parameter>
+	<parameter name="mob_apresentar_observacao" class="java.lang.String"/>
+	<parameter name="MOB_IMPRESSOS_NM_MUNICIPIO_AUTUADOR" class="java.lang.String"/>
+	<parameter name="MOB_TP_CONVENIO" class="java.lang.String"/>
+	<parameter name="DATA_IMPRESSAO" class="java.util.Date"/>
+	<field name="NR_AIT" class="java.lang.String"/>
+	<field name="NR_CONTROLE" class="java.lang.String"/>
+	<field name="NR_PLACA" class="java.lang.String"/>
+	<field name="NM_UF" class="java.lang.String"/>
+	<field name="NM_MARCA" class="java.lang.String"/>
+	<field name="DS_ESPECIE" class="java.lang.String"/>
+	<field name="NM_CATEGORIA" class="java.lang.String"/>
+	<field name="NM_PROPRIETARIO" class="java.lang.String"/>
+	<field name="NR_CPF_CNPJ_PROPRIETARIO" class="java.lang.String"/>
+	<field name="NM_CONDUTOR" class="java.lang.String"/>
+	<field name="NR_CPF_CONDUTOR" class="java.lang.String"/>
+	<field name="NR_CNH_CONDUTOR" class="java.lang.String"/>
+	<field name="UF_CNH_CONDUTOR" class="java.lang.String"/>
+	<field name="DS_LOCAL_INFRACAO" class="java.lang.String"/>
+	<field name="DS_PONTO_REFERENCIA" class="java.lang.String"/>
+	<field name="DT_INFRACAO" class="java.sql.Timestamp"/>
+	<field name="NR_COD_DETRAN" class="java.lang.Integer"/>
+	<field name="DS_INFRACAO" class="java.lang.String"/>
+	<field name="NR_ARTIGO" class="java.lang.String"/>
+	<field name="NR_INCISO" class="java.lang.String"/>
+	<field name="NR_PARAGRAFO" class="java.lang.String"/>
+	<field name="NR_ALINEA" class="java.lang.String"/>
+	<field name="NM_NATUREZA" class="java.lang.String"/>
+	<field name="NR_PONTUACAO" class="java.lang.Integer"/>
+	<field name="VL_MULTA" class="java.lang.Float"/>
+	<field name="VL_VELOCIDADE_PERMITIDA" class="java.lang.Float"/>
+	<field name="VL_VELOCIDADE_AFERIDA" class="java.lang.Float"/>
+	<field name="VL_VELOCIDADE_PENALIDADE" class="java.lang.Float"/>
+	<field name="NM_MUNICIPIO" class="java.lang.String"/>
+	<field name="CD_MUNICIPIO_AUTUADOR" class="java.lang.String"/>
+	<field name="NR_RENAVAN" class="java.lang.String"/>
+	<field name="NM_EQUIPAMENTO" class="java.lang.String"/>
+	<field name="NR_MATRICULA" class="java.lang.String"/>
+	<field name="DT_VENCIMENTO" class="java.lang.String"/>
+	<field name="DT_AFERICAO" class="java.sql.Timestamp"/>
+	<field name="ID_IDENTIFICACAO_INMETRO" class="java.lang.String"/>
+	<field name="SG_UF_VEICULO" class="java.lang.String"/>
+	<field name="DS_ENDERECO_CONDUTOR" class="java.lang.String"/>
+	<field name="NR_CEP" class="java.lang.String"/>
+	<field name="NR_CORREIOS" class="java.lang.String"/>
+	<field name="DS_BAIRRO_PROPRIETARIO" class="java.lang.String"/>
+	<field name="IMG_VEICULO" class="java.lang.Object"/>
+	<field name="ID_EQUIPAMENTO" class="java.lang.String"/>
+	<field name="MARCA_EQUIPAMENTO" class="java.lang.String"/>
+	<field name="MODELO_EQUIPAMENTO" class="java.lang.String"/>
+	<field name="DS_BAIRRO_CONDUTOR" class="java.lang.String"/>
+	<field name="NR_CEP_CONDUTOR" class="java.lang.String"/>
+	<field name="TP_PESSOA_PROPRIETARIO" class="java.lang.Integer"/>
+	<field name="TP_EQUIPAMENTO" class="java.lang.Integer"/>
+	<field name="NOME_EQUIPAMENTO" class="java.lang.String"/>
+	<field name="DT_MOVIMENTO" class="java.sql.Timestamp"/>
+	<field name="ID_AIT" class="java.lang.String"/>
+	<field name="NM_MODELO" class="java.lang.String"/>
+	<field name="DS_LOGRADOURO" class="java.lang.String"/>
+	<field name="NM_BAIRRO" class="java.lang.String"/>
+	<field name="DS_NR_IMOVEL" class="java.lang.String"/>
+	<field name="DT_APRESENTACAO" class="java.lang.String"/>
+	<field name="Field_1" class="java.lang.String"/>
+	<field name="LABELVIA" class="java.lang.String"/>
+	<field name="DT_EMISSAO" class="java.lang.String"/>
+	<field name="TXT_CONDUTOR" class="java.lang.String"/>
+	<field name="LG_SUSPENSAO_CNH" class="java.lang.Integer"/>
+	<field name="DS_OBSERVACAO" class="java.lang.String"/>
+	<field name="NR_LACRE" class="java.lang.String"/>
+	<field name="CONVENIO" class="java.lang.String"/>
+	<variable name="identifica-pfisica-pjuridica" class="java.lang.String">
+		<variableExpression><![CDATA[$F{TP_PESSOA_PROPRIETARIO} == 1 ? "Preencher de forma legível o formulário abaixo que deverá conter assinaturas da pessoa responsável em contrato social pela empresa e do condutor ou procurador devidamente identificado. Anexar cópia da carteira de habilitação ou Permissão para dirigir do condutor, cópia do contrato social atualizado, cópia do RG do responsável pela empresa, comprovante de residência do condutor e enviar ao órgão autuador. Na impossibilidade da coleta da assinatura do condutor infrator, V. Sª poderá anexar cópia de documento onde conste cláusula de responsabilidade por quaisquer infrações cometidas na condução do veículo, bem como pela pontuação delas decorrentes. A identificação do condutor infrator só surtirá efeito se estiver corretamente preenchida, dentro do prazo, assinada e acompanhada de cópia legível dos documentos relacionados." : " Preencher de forma legível o formulário abaixo que deverá conter assinaturas  e cópias de documentos (Cópias do RG, CNH ou Permissão para dirigir e comprovante de endereço) do proprietário e do condutor ou procurador devidamente identificado e enviar ao órgão autuador. Na impossibilidade da coleta da assinatura do condutor infrator, V. Sª poderá anexar cópia de documento onde conste cláusula de responsabilidade por quaisquer infrações cometidas na condução do veículo, bem como pela pontuação delas decorrentes. A identificação do condutor infrator só surtirá efeito se estiver corretamente preenchida, dentro do prazo, assinada e acompanhada de cópia legível dos documentos relacionados. É imprescindível a assinatura do condutor e proprietário e apresentação de documentos que comprovem a assinatura de ambos"]]></variableExpression>
+	</variable>
+	<variable name="DS_BAIRRO_CONDUTOR" class="java.lang.String"/>
+	<variable name="TP_EQUIPAMENTO" class="java.lang.String"/>
+	<variable name="dt_limite" class="java.lang.String">
+		<variableExpression><![CDATA[$F{DT_MOVIMENTO} + 30]]></variableExpression>
+	</variable>
+	<variable name="identificar_txt_condutor" class="java.lang.String">
+		<variableExpression><![CDATA[$F{TXT_CONDUTOR} != null ? $F{TXT_CONDUTOR} : "DATA LIMITE P/ AP DEFESA PRÉVIA: " + $F{DT_APRESENTACAO}]]></variableExpression>
+	</variable>
+	<variable name="obs" class="java.lang.String">
+		<variableExpression><![CDATA[$F{DS_OBSERVACAO} != null ?  $F{DS_OBSERVACAO} : "Não informado."]]></variableExpression>
+	</variable>
+	<variable name="infracao" class="java.lang.String">
+		<variableExpression><![CDATA[$F{DS_INFRACAO} != null ? $F{DS_INFRACAO} : "Não informado."]]></variableExpression>
+	</variable>
+	<variable name="convenio" class="java.lang.String">
+		<variableExpression><![CDATA[$P{MOB_TP_CONVENIO} != null ? $P{MOB_TP_CONVENIO} : "Não informado."]]></variableExpression>
+	</variable>
+	<variable name="local" class="java.lang.String">
+		<variableExpression><![CDATA[$F{DS_LOCAL_INFRACAO} != null ? $F{DS_LOCAL_INFRACAO} : "Não informado."]]></variableExpression>
+	</variable>
+	<variable name="ponto_referencia" class="java.lang.String">
+		<variableExpression><![CDATA[$F{DS_PONTO_REFERENCIA} != null && $F{DS_PONTO_REFERENCIA}.trim() != ""  ?  $F{DS_PONTO_REFERENCIA} : "Não informado."]]></variableExpression>
+	</variable>
+	<variable name="condutor" class="java.lang.String">
+		<variableExpression><![CDATA[$F{NM_CONDUTOR} != null  ?  $F{NM_CONDUTOR}: "Não informado."]]></variableExpression>
+	</variable>
+	<variable name="proprietario" class="java.lang.String">
+		<variableExpression><![CDATA[$F{NM_PROPRIETARIO} != null ?  $F{NM_PROPRIETARIO}: "Não informado."]]></variableExpression>
+	</variable>
+	<variable name="cnh" class="java.lang.String">
+		<variableExpression><![CDATA[$F{NR_CNH_CONDUTOR} != null && $F{NR_CNH_CONDUTOR}.trim() != "" ? $F{NR_CNH_CONDUTOR} : "Não informado."]]></variableExpression>
+	</variable>
+	<variable name="uf_cnh" class="java.lang.String">
+		<variableExpression><![CDATA[$F{UF_CNH_CONDUTOR} != null && $F{UF_CNH_CONDUTOR}.trim() != "" ? $F{UF_CNH_CONDUTOR} : "Não informado."]]></variableExpression>
+	</variable>
+	<variable name="doc_cpf_cnpj" class="java.lang.String">
+		<variableExpression><![CDATA[$F{NR_CPF_CONDUTOR} != null && $F{NR_CPF_CONDUTOR}.trim() != "" ? $F{NR_CPF_CONDUTOR} : "Não informado."]]></variableExpression>
+	</variable>
+	<detail>
+		<band height="801" splitType="Stretch">
+			<textField>
+				<reportElement x="4" y="0" width="344" height="16" uuid="62eb7973-5112-441b-ac66-b821ff9f2015">
+					<printWhenExpression><![CDATA[$P{DS_TITULO_1} != null]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Left">
+					<font size="10" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{DS_TITULO_1}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="4" y="17" width="344" height="16" uuid="2db45ee8-670e-42e5-8191-53f313b2ea0f">
+					<printWhenExpression><![CDATA[$P{DS_TITULO_2} != null]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Left">
+					<font size="10" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{DS_TITULO_2}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="4" y="34" width="344" height="16" uuid="7f8958b7-e199-454a-b41b-276914a5e879">
+					<printWhenExpression><![CDATA[$P{DS_TITULO_3} != null]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Left">
+					<font size="10" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{DS_TITULO_3}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="54" width="280" height="14" uuid="ee16f410-1b0f-4f32-bc67-edcca4bbcbca">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA["AUTO DE INFRAÇÃO DE TRÂNSITO"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="68" width="280" height="14" uuid="8f6d126f-78f9-4527-b130-2843e51f2bea">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA["2º via"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="5" y="105" width="264" height="14" uuid="75dc8736-6387-49e5-8e36-cb60e570c10a">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Left" verticalAlignment="Bottom"/>
+				<textFieldExpression><![CDATA["AIT: " + ($F{ID_AIT} != null ? $F{ID_AIT} : "Não informado.")]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="5" y="119" width="264" height="14" uuid="a82e22c9-ea70-4692-a4a7-aad442a22859">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Left" verticalAlignment="Bottom"/>
+				<textFieldExpression><![CDATA["Data: " + ($F{DT_INFRACAO} != null ? new SimpleDateFormat("dd/MM/yyyy HH:mm").format($F{DT_INFRACAO}) : "Não informado.")]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="5" y="133" width="115" height="14" uuid="10a2de32-cca7-4102-81c3-436f504c9308">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Left" verticalAlignment="Bottom"/>
+				<textFieldExpression><![CDATA["Órgão autuador: "]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="5" y="147" width="264" height="14" uuid="23bb4036-d5ce-4640-aa2f-2a9df0aed523">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Left" verticalAlignment="Bottom"/>
+				<textFieldExpression><![CDATA[$P{DS_TITULO_1} != null ? $P{DS_TITULO_1} : "Não informado."]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="5" y="161" width="264" height="14" uuid="55d9e3c1-e80a-4d70-b4ca-0ee619a10c12">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Left" verticalAlignment="Bottom"/>
+				<textFieldExpression><![CDATA["Código da cidade: " + ($P{MOB_IMPRESSOS_NM_MUNICIPIO_AUTUADOR} != null ? $P{MOB_IMPRESSOS_NM_MUNICIPIO_AUTUADOR} : "Não informado.")]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="5" y="175" width="264" height="14" uuid="70995fb3-d7d0-4768-8d68-f7d44d70e5ab">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Left" verticalAlignment="Bottom"/>
+				<textFieldExpression><![CDATA["Agente: " + ($F{NR_MATRICULA} != null ? $F{NR_MATRICULA} : "Não informado.")]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="5" y="189" width="264" height="14" uuid="b80f94dd-b6c0-47bd-9f4b-014eae95ae21">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Left" verticalAlignment="Bottom"/>
+				<textFieldExpression><![CDATA["Placa: " + ($F{NR_PLACA} != null ? $F{NR_PLACA} : "Não informado.")]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="5" y="203" width="264" height="14" uuid="95464764-ed0a-4dd5-951e-a9a78d1528b6">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Left" verticalAlignment="Bottom"/>
+				<textFieldExpression><![CDATA["Município do veículo: " + ($F{NM_MUNICIPIO} != null ? $F{NM_MUNICIPIO} : "Não informado.")]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="5" y="217" width="264" height="14" uuid="544715c7-7910-4946-a8a8-8656c5b37d14">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Left" verticalAlignment="Bottom"/>
+				<textFieldExpression><![CDATA["UF do veículo: " + ($F{SG_UF_VEICULO} != null ? $F{SG_UF_VEICULO} : "Não informado.")]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="5" y="231" width="264" height="14" uuid="dd1419ee-9510-4b2b-863c-a83f39000e47">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Left" verticalAlignment="Bottom"/>
+				<textFieldExpression><![CDATA["Marca: " + ($F{NM_MODELO} != null ? $F{NM_MODELO} : "Não informado.")]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="5" y="245" width="264" height="14" uuid="8c0ddf8a-1962-4a87-9296-5d32f7f2b006">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Left" verticalAlignment="Bottom"/>
+				<textFieldExpression><![CDATA["Espécie: " + ($F{DS_ESPECIE} != null ? $F{DS_ESPECIE} : "Não informado.")]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="5" y="259" width="264" height="14" uuid="90747f63-1fb7-4a19-8adb-939dd0f4f224">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Left" verticalAlignment="Bottom"/>
+				<textFieldExpression><![CDATA["Infração: " + ($F{NR_COD_DETRAN} != null ? $F{NR_COD_DETRAN} : "Não informado.")]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="5" y="597" width="264" height="10" uuid="90b1dbfc-fb88-429d-8d4a-1b4a4700002e">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<textElement>
+					<font size="6"/>
+				</textElement>
+				<text><![CDATA[---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="5" y="607" width="116" height="14" uuid="b467ae35-3319-47f6-886b-f80b0d15c913">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Left" verticalAlignment="Bottom"/>
+				<textFieldExpression><![CDATA["Assinatura Condutor"]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="5" y="649" width="264" height="10" uuid="3bf34e7e-31af-4cd6-b07f-4ab296fbccf7">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<textElement>
+					<font size="6"/>
+				</textElement>
+				<text><![CDATA[---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="5" y="659" width="116" height="14" uuid="affb3de6-c240-4644-b7b8-0d5e3627acfc">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Left" verticalAlignment="Bottom"/>
+				<textFieldExpression><![CDATA["Assinatura Agente"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="5" y="683" width="264" height="38" uuid="f9c06a74-80ee-48e2-8f6f-4a0ee6a93b4c">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Left" verticalAlignment="Bottom"/>
+				<textFieldExpression><![CDATA["Obrigatório a apresentação do código INFRAESTE ou RENAINF nas notificações sob pena de invalidade da multa."]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="5" y="727" width="20" height="14" uuid="b4abacab-03cc-4bbd-b211-a0c358228f1f">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Left" verticalAlignment="Bottom"/>
+				<textFieldExpression><![CDATA["ID: "]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="25" y="727" width="244" height="14" uuid="cb42b9a8-eee9-411c-a4bf-663700eb338c">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Left" verticalAlignment="Bottom"/>
+				<textFieldExpression><![CDATA[$F{ID_EQUIPAMENTO} != null ? $F{ID_EQUIPAMENTO} : "Não informado."]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="5" y="750" width="264" height="51" uuid="6608a21b-9133-469b-aca7-46b12a2fc6ca">
+					<printWhenExpression><![CDATA[$P{NM_LOGRADOURO} != null + ",  " + $P{NR_ENDERECO} != null + ",  " + $P{NM_BAIRRO} != null + ",  " + $P{NR_TELEFONE} != null]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="10" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{SG_DEPARTAMENTO} + ":  " + $P{NM_LOGRADOURO} + ",  Nº: " + $P{NR_ENDERECO} + ", COMPLEMENTO: " + ( $P{NM_COMPLEMENTO} != null ? $P{NM_COMPLEMENTO} : ""  )   +",  BAIRRO: " + $P{NM_BAIRRO} + ", " + $P{NM_CIDADE}  + ", CONTATO:  " + $P{NR_TELEFONE}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="5" y="273" width="264" height="293" uuid="8ce9b3d5-156c-4225-acf8-0cd8401772bf"/>
+				<textElement>
+					<font size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{infracao} + "\n" + 
+"Convênio: " + $V{convenio} + "\n" +
+"Local: " + $V{local}  + "\n" +
+"Ponto de referência: " + $V{ponto_referencia} + "\n" +
+"Observações: " + $V{obs} + "\n" +
+"Condutor: " + $V{condutor} + "\n" +
+"Proprietário: " + $V{proprietario} + "\n" +
+"CNH: " + $V{cnh} + "\n" +
+"UF da CNH: " + $V{uf_cnh} + "\n" +
+"Documento (CPF/CNPJ): " + $V{doc_cpf_cnpj} + "\n"]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd/MM/yyyy HH:mm" isBlankWhenNull="true">
+				<reportElement x="0" y="82" width="280" height="14" uuid="407e0494-2547-479d-a715-92bf3598dc8c">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$P{DATA_IMPRESSAO}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+</jasperReport>

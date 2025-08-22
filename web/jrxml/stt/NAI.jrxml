@@ -1,0 +1,1061 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report1" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="99d93beb-bdfc-407b-88a5-f9145b636a99">
+	<property name="ireport.zoom" value="0.75"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="CD_ORGAO_AUTUANTE" class="java.lang.String"/>
+	<parameter name="NM_MUNICIPIO" class="java.lang.String"/>
+	<parameter name="CD_MUNICIPIO_AUTUADOR" class="java.lang.String"/>
+	<parameter name="NM_ORGAO_AUTUADOR" class="java.lang.String"/>
+	<parameter name="NM_SUBORGAO" class="java.lang.String"/>
+	<parameter name="NM_DEPARTAMENTO" class="java.lang.String"/>
+	<field name="NR_AIT" class="java.lang.Integer"/>
+	<field name="NR_CONTROLE" class="java.lang.Integer"/>
+	<field name="NR_PLACA" class="java.lang.String"/>
+	<field name="NM_UF" class="java.lang.String"/>
+	<field name="NM_MARCA" class="java.lang.String"/>
+	<field name="DS_ESPECIE" class="java.lang.String"/>
+	<field name="NM_CATEGORIA" class="java.lang.String"/>
+	<field name="NM_PROPRIETARIO" class="java.lang.String"/>
+	<field name="NR_CPF_CNPJ_PROPRIETARIO" class="java.lang.String"/>
+	<field name="NM_CONDUTOR" class="java.lang.String"/>
+	<field name="NR_CPF_CONDUTOR" class="java.lang.String"/>
+	<field name="NR_CNH_CONDUTOR" class="java.lang.String"/>
+	<field name="UF_CNH_CONDUTOR" class="java.lang.String"/>
+	<field name="DS_LOCAL_INFRACAO" class="java.lang.String"/>
+	<field name="DS_PONTO_REFERENCIA" class="java.lang.String"/>
+	<field name="DT_INFRACAO" class="java.sql.Timestamp"/>
+	<field name="NR_COD_DETRAN" class="java.lang.Integer"/>
+	<field name="DS_INFRACAO2" class="java.lang.String"/>
+	<field name="NR_ARTIGO" class="java.lang.String"/>
+	<field name="NR_INCISO" class="java.lang.String"/>
+	<field name="NR_PARAGRAFO" class="java.lang.String"/>
+	<field name="NR_ALINEA" class="java.lang.String"/>
+	<field name="NM_NATUREZA" class="java.lang.String"/>
+	<field name="NR_PONTUACAO" class="java.lang.Integer"/>
+	<field name="VL_MULTA" class="java.lang.Float"/>
+	<field name="VL_VELOCIDADE_PERMITIDA" class="java.lang.String"/>
+	<field name="VL_VELOCIDADE_AFERIDA" class="java.lang.String"/>
+	<field name="VL_VELOCIDADE_PENALIDADE" class="java.lang.String"/>
+	<field name="NM_MUNICIPIO" class="java.lang.String"/>
+	<field name="CD_MUNICIPIO_AUTUADOR" class="java.lang.String"/>
+	<detail>
+		<band height="802" splitType="Stretch">
+			<staticText>
+				<reportElement uuid="b62e2153-6cfa-4a2e-9251-7916c8a2ffae" x="0" y="251" width="555" height="16"/>
+				<textElement>
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[NOTIFICAÇÃO DE AUTUAÇÃO DE INFRAÇÃO - NAI]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="94ba0f20-9a00-42e3-8ad7-97b526367f5d" x="0" y="296" width="162" height="10"/>
+				<textElement>
+					<font size="6" isBold="true"/>
+				</textElement>
+				<text><![CDATA[1.IDENTIFICAÇÃO DE AUTUAÇÃO]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement uuid="4a79d592-e5a2-4351-8d6d-3b8ca3a280ed" x="0" y="306" width="100" height="20"/>
+			</rectangle>
+			<rectangle>
+				<reportElement uuid="790132e9-50c2-43f0-b1e2-da12fbe204fe" x="278" y="306" width="73" height="20"/>
+			</rectangle>
+			<rectangle>
+				<reportElement uuid="4d2d99c4-f245-41f5-bbbb-f476b4e9a8ab" x="100" y="306" width="178" height="20"/>
+			</rectangle>
+			<rectangle>
+				<reportElement uuid="615c0754-40ce-415d-9890-f1c3b40ee6d2" x="351" y="306" width="41" height="20"/>
+			</rectangle>
+			<staticText>
+				<reportElement uuid="d350e1ad-ac0f-45e9-b2c7-4ac1bf57f6dd" x="351" y="306" width="41" height="10"/>
+				<textElement>
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[ UF]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="d816a61f-c8e0-4285-8ff6-63ea244f241a" x="100" y="306" width="178" height="10"/>
+				<textElement>
+					<font size="6"/>
+				</textElement>
+				<text><![CDATA[ MUNICÍPIO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="f06d6858-1008-4632-bd90-75feaba708f9" x="278" y="306" width="73" height="10"/>
+				<textElement>
+					<font size="6"/>
+				</textElement>
+				<text><![CDATA[ CÓD. MUNICÍPIO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="5dff4b40-f89c-4b6b-a507-8007c904b3ea" x="0" y="306" width="100" height="10"/>
+				<textElement>
+					<font size="6"/>
+				</textElement>
+				<text><![CDATA[ ENTIDADE AUTUADORA]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement uuid="a82c0c41-c775-4b0b-b3d4-e8d8eb856743" x="0" y="326" width="191" height="20"/>
+			</rectangle>
+			<staticText>
+				<reportElement uuid="88122154-c9a1-497d-a517-f628b4cfcf47" x="0" y="326" width="191" height="20"/>
+				<textElement>
+					<font size="6"/>
+				</textElement>
+				<text><![CDATA[PROCESSO ADMINISTRATIVO/AUTUAÇÃO DE INFRAÇÃO DE TRANSITO - AIT N°]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="d5cefb56-c926-4d91-a40c-6d0373261158" x="0" y="346" width="162" height="10"/>
+				<textElement>
+					<font size="6" isBold="true"/>
+				</textElement>
+				<text><![CDATA[2.IDENTIFICAÇÃO DO VEÍCULO]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement uuid="b132b9b0-0653-4a55-a07d-8682e01e6cb8" x="0" y="356" width="59" height="20"/>
+			</rectangle>
+			<staticText>
+				<reportElement uuid="bb68105a-f022-4ce2-9410-c97227bce4b1" x="0" y="356" width="59" height="10"/>
+				<textElement>
+					<font size="6"/>
+				</textElement>
+				<text><![CDATA[ PLACA]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement uuid="f3ef67ab-1f61-40ae-825b-7b33f66241e4" x="59" y="356" width="17" height="20"/>
+			</rectangle>
+			<rectangle>
+				<reportElement uuid="33e17236-4008-438b-9d8a-74f323762800" x="340" y="356" width="52" height="20"/>
+			</rectangle>
+			<rectangle>
+				<reportElement uuid="654f68c2-3791-44d5-968a-0bda00c2b658" x="191" y="356" width="106" height="20"/>
+			</rectangle>
+			<rectangle>
+				<reportElement uuid="93a757d3-a030-43c5-9c55-e67372cb6a8a" x="76" y="356" width="115" height="20"/>
+			</rectangle>
+			<rectangle>
+				<reportElement uuid="d89e6541-2553-4a19-a261-e198798dac02" x="278" y="356" width="62" height="20"/>
+			</rectangle>
+			<staticText>
+				<reportElement uuid="78e843b7-0557-4fab-832f-c68a06c7d60e" x="59" y="356" width="17" height="10"/>
+				<textElement>
+					<font size="6"/>
+				</textElement>
+				<text><![CDATA[ UF]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="18a99c5d-1b33-48e5-ab18-9c2805b17cee" x="76" y="356" width="115" height="10"/>
+				<textElement>
+					<font size="6"/>
+				</textElement>
+				<text><![CDATA[ MUNICÍPIO DA PLACA]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="e39cf444-4602-4728-b711-3235c6eec8de" x="341" y="356" width="51" height="10"/>
+				<textElement>
+					<font size="6"/>
+				</textElement>
+				<text><![CDATA[ CATEGORIA]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="7c3d102f-bed8-43e6-8e5b-081a65a911ee" x="278" y="356" width="63" height="10"/>
+				<textElement>
+					<font size="6"/>
+				</textElement>
+				<text><![CDATA[ ESPÉCIE]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="4905b012-0af4-4ece-8375-b4145f800aaa" x="191" y="356" width="87" height="10"/>
+				<textElement>
+					<font size="6"/>
+				</textElement>
+				<text><![CDATA[ MARCA/MODELO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="d4765ed6-7fcd-4066-98fb-a98219cdbff0" x="0" y="376" width="177" height="10"/>
+				<textElement>
+					<font size="6" isBold="true"/>
+				</textElement>
+				<text><![CDATA[3.IDENTIFICAÇÃO DO PROPRIETÁRIO/CONDUTOR]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement uuid="ebadcefa-cd34-4c3a-881d-497771274520" x="0" y="386" width="266" height="20"/>
+			</rectangle>
+			<staticText>
+				<reportElement uuid="9bcb15f1-a878-4c72-8563-8f275edd63dd" x="0" y="386" width="266" height="10"/>
+				<textElement>
+					<font size="6"/>
+				</textElement>
+				<text><![CDATA[ NOME DO PROPRIETÁRIO]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement uuid="4826c1c9-23b0-45af-b3dd-be503b35790d" x="266" y="386" width="126" height="20"/>
+			</rectangle>
+			<staticText>
+				<reportElement uuid="c88a562f-bba7-4c52-93d0-b285ecaf08f4" x="266" y="386" width="126" height="10"/>
+				<textElement>
+					<font size="6"/>
+				</textElement>
+				<text><![CDATA[ CPF/CNPJ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="4cea7dcd-ad9f-4ce3-888a-70fd07af2edd" x="0" y="426" width="177" height="10"/>
+				<textElement>
+					<font size="6" isBold="true"/>
+				</textElement>
+				<text><![CDATA[4.IDENTIFICAÇÃO DO LOCAL DA INFRAÇÃO]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement uuid="996d1272-56df-4445-ae6b-236df44fc7af" x="0" y="436" width="241" height="20"/>
+			</rectangle>
+			<staticText>
+				<reportElement uuid="951fcd5b-d42a-414c-b778-7d9c17bf3d3e" x="0" y="436" width="241" height="10"/>
+				<textElement>
+					<font size="6"/>
+				</textElement>
+				<text><![CDATA[ LOCAL DA iNFRAÇÃO: Rua, Av., N°, Bairro, Sentido da Via/Referência]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement uuid="302cd697-fd11-4d74-974e-6f4872eba9ec" x="241" y="436" width="182" height="20"/>
+			</rectangle>
+			<rectangle>
+				<reportElement uuid="e8b63271-784a-418c-91d5-bb603f0c7c43" x="423" y="436" width="42" height="20"/>
+			</rectangle>
+			<rectangle>
+				<reportElement uuid="62374379-4d46-48ed-97ec-3cd0372465b1" x="465" y="436" width="51" height="20"/>
+			</rectangle>
+			<rectangle>
+				<reportElement uuid="2bdb3632-60e8-4db1-ab5d-bbcd6e317302" x="516" y="436" width="39" height="20"/>
+			</rectangle>
+			<staticText>
+				<reportElement uuid="8b738df2-7150-4645-9b44-423ff18cb6cd" x="241" y="436" width="182" height="10"/>
+				<textElement>
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[ PONTO DE REFERÊNCIA]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="e770312b-7d25-4f54-afc4-d1556ec22928" x="423" y="436" width="42" height="10"/>
+				<textElement>
+					<font size="6"/>
+				</textElement>
+				<text><![CDATA[ MUNICÍPIO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="9d1fc8ac-c5a6-4ded-94f2-cfecfb30d972" x="465" y="436" width="51" height="10"/>
+				<textElement>
+					<font size="6"/>
+				</textElement>
+				<text><![CDATA[ DATA]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="a09efe5e-1225-4f8c-8f15-14b9aee571de" x="516" y="436" width="39" height="10"/>
+				<textElement>
+					<font size="6"/>
+				</textElement>
+				<text><![CDATA[ HORA]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement uuid="0e016713-7bc5-4302-a0f3-217398486075" x="0" y="406" width="191" height="20"/>
+			</rectangle>
+			<rectangle>
+				<reportElement uuid="6d133e3b-a5f9-49c4-92c1-9a8eab2c3769" x="191" y="406" width="75" height="20"/>
+			</rectangle>
+			<rectangle>
+				<reportElement uuid="a071cc29-06ae-489a-93b7-35d5847a6a26" x="266" y="406" width="85" height="20"/>
+			</rectangle>
+			<rectangle>
+				<reportElement uuid="6f9d9f7d-dd66-49a7-a622-8284dfca9df3" x="351" y="406" width="41" height="20"/>
+			</rectangle>
+			<staticText>
+				<reportElement uuid="acdf4d4c-4b23-4e4f-bc10-76d3d1f6f231" x="0" y="406" width="191" height="10"/>
+				<textElement>
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[ NOME DO CONDUTOR/INFRATOR]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="a2b15526-67bd-4cf3-b0bc-2cabf920ab81" x="191" y="406" width="76" height="10"/>
+				<textElement>
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[ CPF COND./INFRAT]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="3cea5b22-e210-4d9a-a5bd-97d019203d06" x="266" y="406" width="85" height="10"/>
+				<textElement>
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[ N° REGISTRO DA CNH]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="86e4fa4c-706f-4abe-9990-88ab0c8372f7" x="351" y="406" width="41" height="10"/>
+				<textElement>
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[ UF CNH]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="36ff037f-11eb-4e1b-abaf-c66353d6decc" x="351" y="416" width="41" height="10"/>
+				<textElement>
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="cd5d0f36-ea57-43db-ad1c-b9dabd4ecc8b" x="0" y="456" width="225" height="10"/>
+				<textElement>
+					<font size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[5.IDENTIFICAÇÃO DO LOCAL DA INFRAÇÃO/LEI N° 9.503/97 - CTB]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement uuid="64f05641-fd8a-468a-b352-f6df6b51fd44" x="0" y="466" width="90" height="20"/>
+			</rectangle>
+			<rectangle>
+				<reportElement uuid="77a36167-a409-4330-87b5-7806b7bdc264" x="90" y="466" width="465" height="20"/>
+			</rectangle>
+			<staticText>
+				<reportElement uuid="7f153391-b44c-4bd7-be67-a64baed64a5b" x="0" y="466" width="90" height="10"/>
+				<textElement>
+					<font size="6"/>
+				</textElement>
+				<text><![CDATA[CÓDIGO DA INFRAÇÃO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="c7e3a17b-ce34-4700-8b0f-a9c6bc1af146" x="90" y="466" width="465" height="10"/>
+				<textElement>
+					<font size="6"/>
+				</textElement>
+				<text><![CDATA[DESCRIÇÃO DA INFRAÇÃO]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement uuid="d59df744-8389-41c2-bbf4-767d9447acf4" x="0" y="486" width="33" height="20"/>
+			</rectangle>
+			<rectangle>
+				<reportElement uuid="d93f5847-0db5-4f68-9efd-bfd5d1f761c4" x="33" y="486" width="30" height="20"/>
+			</rectangle>
+			<rectangle>
+				<reportElement uuid="6d6a95ed-66e3-4497-9af3-b4b20988eff7" x="63" y="486" width="54" height="20"/>
+			</rectangle>
+			<rectangle>
+				<reportElement uuid="7104d37a-e3c2-4586-9dd7-d4ccd2a5bb35" x="117" y="486" width="45" height="20"/>
+			</rectangle>
+			<rectangle>
+				<reportElement uuid="a0f4e82a-6462-45a6-b5f8-58f4631c47bd" x="162" y="486" width="50" height="20"/>
+			</rectangle>
+			<rectangle>
+				<reportElement uuid="04bed2cf-2cb4-4395-af9a-5ebe3929bfb2" x="211" y="486" width="36" height="20"/>
+			</rectangle>
+			<rectangle>
+				<reportElement uuid="fc742597-3bb6-44d1-8a75-2e77cc27d5db" x="247" y="486" width="85" height="20"/>
+			</rectangle>
+			<rectangle>
+				<reportElement uuid="8c249bcb-6f35-41b3-bb27-3d3c96ce77b6" x="406" y="486" width="63" height="20"/>
+			</rectangle>
+			<rectangle>
+				<reportElement uuid="0e0a6a75-52e9-4228-802f-506c2f3570e2" x="469" y="486" width="86" height="20"/>
+			</rectangle>
+			<staticText>
+				<reportElement uuid="7a19a203-45ce-4f0a-8a0b-512b964f47a4" x="0" y="486" width="33" height="10"/>
+				<textElement>
+					<font size="6"/>
+				</textElement>
+				<text><![CDATA[ ARTIGO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="844c0646-72bc-4174-a9da-1a12b549e733" x="33" y="486" width="30" height="10"/>
+				<textElement>
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[ INCISO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="bea5d55d-a4d2-44ed-b05d-218c61d3e591" x="64" y="486" width="54" height="10"/>
+				<textElement>
+					<font size="6"/>
+				</textElement>
+				<text><![CDATA[ PARÁGRAFO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="d5ea2b68-2d9e-4353-98ea-99e717c2b03f" x="117" y="486" width="45" height="10"/>
+				<textElement>
+					<font size="6"/>
+				</textElement>
+				<text><![CDATA[ ALÍNEA]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="2ba50514-6f43-4b61-926e-02b7dce64585" x="162" y="486" width="49" height="10"/>
+				<textElement>
+					<font size="6"/>
+				</textElement>
+				<text><![CDATA[ NATUREZA]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="ff0623fa-950b-41fe-a301-70e5382b5d83" x="211" y="486" width="36" height="10"/>
+				<textElement>
+					<font size="6"/>
+				</textElement>
+				<text><![CDATA[ PONTOS]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="4e26d4eb-9f38-47dc-bade-9d4f7f552de6" x="247" y="486" width="85" height="10"/>
+				<textElement>
+					<font size="6"/>
+				</textElement>
+				<text><![CDATA[ VALOR DA MULTA (REAIS)]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="a8e065e5-6bf1-4943-85fe-b8cbf199e44a" x="406" y="486" width="63" height="10"/>
+				<textElement>
+					<font size="6"/>
+				</textElement>
+				<text><![CDATA[ VEL. AFERIDA (Km/h)]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="71d3bfda-10b5-4d0d-9246-be486d853b92" x="469" y="486" width="86" height="10"/>
+				<textElement>
+					<font size="6"/>
+				</textElement>
+				<text><![CDATA[ VEL. DE PENALIDADE (Km/h)]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="9b0dba38-92de-4ba4-9f6b-cc85f8341548" x="0" y="506" width="177" height="10"/>
+				<textElement>
+					<font size="6" isBold="true"/>
+				</textElement>
+				<text><![CDATA[6.COMPROVAÇÃO DA INFRAÇÃO POR]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement uuid="e1c7cd2e-7848-4364-a1b5-17fdeb2af612" x="0" y="516" width="423" height="16"/>
+			</rectangle>
+			<rectangle>
+				<reportElement uuid="b261e81c-2f9d-46cc-9714-c311e52b12c0" x="423" y="516" width="132" height="16"/>
+			</rectangle>
+			<rectangle>
+				<reportElement uuid="5f02bf0e-36e9-4fe3-aa66-eb0e80c99b07" x="7" y="519" width="11" height="11"/>
+			</rectangle>
+			<rectangle>
+				<reportElement uuid="e74e7ef7-8f10-44ed-8309-48778aba3945" x="162" y="519" width="11" height="11"/>
+			</rectangle>
+			<rectangle>
+				<reportElement uuid="6ce95110-6899-483c-aa03-e3827bc7a581" x="289" y="519" width="11" height="11"/>
+			</rectangle>
+			<rectangle>
+				<reportElement uuid="fb337fa5-adf9-4130-bc28-9fd9ae799e9c" x="369" y="519" width="11" height="11"/>
+			</rectangle>
+			<staticText>
+				<reportElement uuid="90b2c654-7538-4f9e-8269-55b40ff07609" x="18" y="520" width="72" height="10"/>
+				<textElement>
+					<font size="6"/>
+				</textElement>
+				<text><![CDATA[  Agente Autuador Mat. N°]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="c9c0e3d0-6024-4e2d-a170-73827d23af40" x="177" y="520" width="81" height="10"/>
+				<textElement>
+					<font size="6"/>
+				</textElement>
+				<text><![CDATA[ Equipamento Eletrônico N°]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="b2ff8bae-06d5-4322-85c3-50b659323247" x="304" y="520" width="47" height="10"/>
+				<textElement>
+					<font size="6"/>
+				</textElement>
+				<text><![CDATA[FOTOSSENSOR]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="e61787df-239f-4f2a-8f3e-427a5407410d" x="380" y="520" width="31" height="10"/>
+				<textElement>
+					<font size="6"/>
+				</textElement>
+				<text><![CDATA[  RADAR]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="912df4e0-4f5f-43e1-a0ca-e1a6a092fe9c" x="423" y="516" width="132" height="10"/>
+				<textElement>
+					<font size="6"/>
+				</textElement>
+				<text><![CDATA[   MARCA/MODELO EQUIPAMENTO]]></text>
+			</staticText>
+			<textField>
+				<reportElement uuid="93c5df5b-3783-42df-b066-93212cd5a60f" x="0" y="316" width="100" height="10"/>
+				<textElement>
+					<font size="6" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{CD_ORGAO_AUTUANTE}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="5c020d0d-3778-4578-a748-318e25e34bf9" x="100" y="316" width="178" height="10"/>
+				<textElement>
+					<font size="6" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{NM_MUNICIPIO}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="7e5281a8-2219-4249-a2eb-ec3491e84ec2" x="278" y="316" width="73" height="10"/>
+				<textElement>
+					<font size="6" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{CD_MUNICIPIO_AUTUADOR}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="a3926226-cd9e-42ba-b47a-204f788a9433" x="1" y="366" width="59" height="10"/>
+				<textElement>
+					<font size="6" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{NR_PLACA}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="c46252c4-bdac-4d00-b136-f96b82ba9d28" x="59" y="366" width="17" height="10"/>
+				<textElement>
+					<font size="6" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{NM_UF}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="3a821ccb-08a6-4d48-84d8-083d98e74bea" x="76" y="366" width="115" height="10"/>
+				<textElement>
+					<font size="6" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{NM_MUNICIPIO}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="e6bd21b3-8a70-4f26-903c-63500608b1cf" x="191" y="366" width="87" height="10"/>
+				<textElement>
+					<font size="6" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{NM_MARCA}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="7d4e629c-8767-4ba2-a3c2-969b1f574016" x="278" y="366" width="62" height="10"/>
+				<textElement>
+					<font size="6" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{DS_ESPECIE}]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement uuid="9dc56e07-dbd9-48aa-8c0f-d049fb6c9b67" x="341" y="366" width="51" height="10"/>
+				<textElement textAlignment="Center">
+					<font size="6" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{NM_CATEGORIA}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="2e020477-8b69-4a4b-93aa-85f660b82554" x="1" y="396" width="265" height="10"/>
+				<textElement>
+					<font size="6" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{NM_PROPRIETARIO}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="0b5e238f-375d-4815-aacf-b519cdcd995d" x="266" y="396" width="126" height="10"/>
+				<textElement>
+					<font size="6" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{NR_CPF_CNPJ_PROPRIETARIO}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="e7a0136a-4ddb-42a0-bfe3-cee5aa95399a" x="0" y="609" width="162" height="11"/>
+				<textElement>
+					<font size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[IDENTIFICAÇÃO DO CONDUTOR INFRATOR]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement uuid="c89c0c5c-0992-4e9b-a1ed-e98c1da7f2c6" x="0" y="620" width="555" height="182"/>
+			</rectangle>
+			<staticText>
+				<reportElement uuid="5e66fad8-1e35-4345-8887-002596ba1a20" x="0" y="620" width="555" height="58"/>
+				<textElement>
+					<font size="6"/>
+				</textElement>
+				<text><![CDATA[      Caso V.Sª não seja o condutor infrator, preencha devidamente o formulário abaixo, que deverá conter as assinaturas do proprietário E do condutor infrator ou procurador devidamente identificado, anexe uma cópia da CNHou ermisão para dirigr do condutor OU documento que comprove a assinatura do condutor quando esta não costar no documento de habilitação (modelo antigo) e envie pelos correios ou dê entrada no "SUTRANS".]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="8224281c-1c09-442c-bf13-4d04403b5ddc" x="0" y="641" width="555" height="17"/>
+				<textElement>
+					<font size="6"/>
+				</textElement>
+				<text><![CDATA[      Na impossibilidade da coleta da assinatura do condutor infrator, V.Sª poderá anexar uma cópia de documento onde conste cláusula de responsabilidade por quaisquer infrações cometidas na condução do veículo, em como pela pontuação delas decorrentes.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="57280592-7d59-4e3d-a375-7908a913d573" x="0" y="658" width="555" height="10"/>
+				<textElement>
+					<font size="6"/>
+				</textElement>
+				<text><![CDATA[A identificação do condutor infrator só surtirá efeito se estiver corretamente reenchida, dentro do prazo, assinada e acompanhada de cópia legível dos documentos relacionados.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="b4293eaf-3644-4db7-87e8-1a4f94a85985" x="0" y="668" width="555" height="10"/>
+				<textElement>
+					<font size="6" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Caso não seja apresentado o condutor infrator no prazo indicado o proprietário do veículo será considerado reponsável pela infração cometida.]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement uuid="5a5ac569-e808-467b-aa44-350d7c40907c" x="0" y="688" width="309" height="20"/>
+			</rectangle>
+			<rectangle>
+				<reportElement uuid="dd4f3b3a-1a31-474a-b3ee-6b3ce3aaba40" x="309" y="688" width="145" height="20"/>
+			</rectangle>
+			<rectangle>
+				<reportElement uuid="07b087f0-51cb-49ab-9d2c-fde8c6be6d8b" x="454" y="688" width="52" height="20"/>
+			</rectangle>
+			<rectangle>
+				<reportElement uuid="74e9c816-6477-4a99-a44f-454ec54d9739" x="506" y="688" width="49" height="20"/>
+			</rectangle>
+			<staticText>
+				<reportElement uuid="6e0da330-5311-449e-9ee4-fda91b241f7d" x="0" y="688" width="309" height="10"/>
+				<textElement>
+					<font size="6"/>
+				</textElement>
+				<text><![CDATA[ APRESENTAÇÃO DO CONDUTOR EM ATÉ 15 DIAS A CONTAR DO RECEBIMENTO DESTA NOTIFICAÇÃO.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="8d58c897-1723-4671-8e87-1a659c586bcc" x="309" y="688" width="145" height="20"/>
+				<textElement>
+					<font size="6"/>
+				</textElement>
+				<text><![CDATA[ PROCESSO ADMINISTRATIVO/ AUTUAÇÃO DE INFRAÇÃO DE TRANSITO - AIT N°]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="52c95a35-a05f-4858-8f4f-22090bfb34ec" x="506" y="688" width="49" height="10"/>
+				<textElement>
+					<font size="6"/>
+				</textElement>
+				<text><![CDATA[ PLACA]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="11a55606-5462-40d2-8ea3-67d857d78a97" x="454" y="688" width="52" height="10"/>
+				<textElement>
+					<font size="6"/>
+				</textElement>
+				<text><![CDATA[ COD. INFRAÇÃO]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement uuid="261628e5-f2b1-4b74-8d41-65ea867b641a" x="423" y="708" width="132" height="20"/>
+			</rectangle>
+			<rectangle>
+				<reportElement uuid="e68602d2-f5af-4e69-b48e-3f4d69ea2db2" x="0" y="708" width="423" height="20"/>
+			</rectangle>
+			<staticText>
+				<reportElement uuid="0251bb14-8ed7-4f3e-a181-eb885eb4f7e1" x="0" y="708" width="423" height="10"/>
+				<textElement>
+					<font size="6"/>
+				</textElement>
+				<text><![CDATA[ NOME DO PROPRIETÁRIO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="dbeefd19-7f58-436d-a9e2-c4b50a45f9a2" x="423" y="708" width="132" height="10"/>
+				<textElement>
+					<font size="6"/>
+				</textElement>
+				<text><![CDATA[ CPF/CNPJ]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement uuid="e5d7a1bb-4821-4480-8235-f75eaafe5068" x="0" y="728" width="236" height="20"/>
+			</rectangle>
+			<rectangle>
+				<reportElement uuid="0422543e-a5d0-42dd-8a76-5ad97c3aa6f8" x="236" y="728" width="96" height="20"/>
+			</rectangle>
+			<rectangle>
+				<reportElement uuid="f468291e-981d-4e6c-8183-610c357e12b3" x="332" y="728" width="91" height="20"/>
+			</rectangle>
+			<rectangle>
+				<reportElement uuid="b8bc2b4c-61ef-4148-8e61-e756b104b2d0" x="423" y="728" width="110" height="20"/>
+			</rectangle>
+			<staticText>
+				<reportElement uuid="f8986c95-8d8e-46ce-93c4-c9001c502819" x="0" y="728" width="236" height="10"/>
+				<textElement>
+					<font size="6"/>
+				</textElement>
+				<text><![CDATA[ NOME DO CONDUTOR/INFRATOR]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="7afbd2e3-7def-402c-828f-9854f332c2ee" x="236" y="728" width="96" height="10"/>
+				<textElement>
+					<font size="6"/>
+				</textElement>
+				<text><![CDATA[ M° CPF CONDUTOR/INFRATOR]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="77bf1f4f-de88-45a7-9741-2d0d2afd56ed" x="332" y="728" width="91" height="10"/>
+				<textElement>
+					<font size="6"/>
+				</textElement>
+				<text><![CDATA[ N° RG]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="74ac8c4d-7ba8-430a-a5a5-74b8de361894" x="423" y="728" width="110" height="10"/>
+				<textElement>
+					<font size="6"/>
+				</textElement>
+				<text><![CDATA[ N° REGISTRO DA CNH]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement uuid="ec0a3eaf-36c7-4395-86d9-7559a7e84afb" x="533" y="728" width="22" height="20"/>
+			</rectangle>
+			<staticText>
+				<reportElement uuid="f9596288-5052-47ab-b5b2-08ceff5e7925" x="533" y="728" width="22" height="10"/>
+				<textElement>
+					<font size="6"/>
+				</textElement>
+				<text><![CDATA[ UF]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement uuid="b6a12859-f596-4b3d-b302-cf29a0ccc5b1" x="0" y="748" width="454" height="20"/>
+			</rectangle>
+			<rectangle>
+				<reportElement uuid="f07073c8-15f1-4aec-8cd5-eab356bc63e4" x="454" y="748" width="101" height="20"/>
+			</rectangle>
+			<staticText>
+				<reportElement uuid="b0d33c0a-45b4-476c-a092-c4f3ecbe6314" x="0" y="748" width="454" height="10"/>
+				<textElement>
+					<font size="6"/>
+				</textElement>
+				<text><![CDATA[ ENDEREÇO DO CONDUTOR, ATUALIZADO (Rua, N°, Bairro, Cidade, UF, CEP]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="98b9c7ef-17fe-4114-9717-9ed2e360fcc4" x="454" y="748" width="101" height="10"/>
+				<textElement>
+					<font size="6"/>
+				</textElement>
+				<text><![CDATA[DATA]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="ed7415f8-2194-4340-9b54-fcc4619e5a29" x="492" y="758" width="5" height="10"/>
+				<textElement>
+					<font size="6"/>
+				</textElement>
+				<text><![CDATA[ /]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="0fc1e180-261d-4964-8cd1-22e1c0b71b28" x="516" y="758" width="5" height="10"/>
+				<textElement>
+					<font size="6"/>
+				</textElement>
+				<text><![CDATA[ /]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="a8fd9186-4e46-4147-8d13-1df08cd254ff" x="90" y="792" width="101" height="10"/>
+				<textElement>
+					<font size="6"/>
+				</textElement>
+				<text><![CDATA[ ASSINATURA DO PROPRIETÁRIO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="f36f0bf6-3636-4260-8ca5-4c15c2e51dc4" x="368" y="792" width="101" height="10"/>
+				<textElement>
+					<font size="6"/>
+				</textElement>
+				<text><![CDATA[ ASSINATURA DO CONDUTOR]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="00e14ee6-4793-423d-ac33-4b09d4dd944b" x="28" y="782" width="225" height="10"/>
+				<textElement>
+					<font size="6"/>
+				</textElement>
+				<text><![CDATA[-------------------------------------------------------------------------------------------------------------------]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="6e95acab-b02d-4306-8a22-8fcda6af58cb" x="300" y="782" width="225" height="10"/>
+				<textElement>
+					<font size="6"/>
+				</textElement>
+				<text><![CDATA[-------------------------------------------------------------------------------------------------------------------]]></text>
+			</staticText>
+			<textField>
+				<reportElement uuid="20f697c8-5a06-4910-83b2-9b5db8a81b70" x="1" y="416" width="190" height="10"/>
+				<textElement>
+					<font size="6" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{NM_CONDUTOR}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="da866f74-f324-496d-b3e0-ff0ac2ee39ab" x="191" y="416" width="76" height="10"/>
+				<textElement>
+					<font size="6" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{NR_CPF_CONDUTOR}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="e0521eb8-d7a4-4a7a-b914-cd55db2f45d0" x="266" y="416" width="85" height="10"/>
+				<textElement>
+					<font size="6" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{NR_CNH_CONDUTOR}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="43acfeb5-addc-4923-b17a-02b874bc7db5" x="351" y="416" width="41" height="10"/>
+				<textElement>
+					<font size="6" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{UF_CNH_CONDUTOR}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="6354636d-9f60-46bc-99bd-3d62096b8546" x="0" y="446" width="241" height="10"/>
+				<textElement>
+					<font size="6" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{DS_LOCAL_INFRACAO}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="74ff3b70-b4fd-45aa-979f-480ff051b4b0" x="241" y="446" width="182" height="10"/>
+				<textElement>
+					<font size="6" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{DS_PONTO_REFERENCIA}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="7d524423-e3fa-4aee-a30e-f3b865950424" x="423" y="446" width="42" height="10"/>
+				<textElement>
+					<font size="6" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{CD_MUNICIPIO_AUTUADOR}]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement uuid="be3ef391-b5ca-4511-86f6-0fe79d380190" x="465" y="446" width="51" height="10"/>
+				<textElement>
+					<font size="6" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{DT_INFRACAO}]]></textFieldExpression>
+			</textField>
+			<textField pattern="hh:mm">
+				<reportElement uuid="32984921-bf4b-414c-bd5f-f9bc66b8c519" x="516" y="446" width="39" height="10"/>
+				<textElement>
+					<font size="6" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{DT_INFRACAO}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="ed5e356f-a1a4-4d44-8d37-cebccc775c94" x="0" y="476" width="90" height="10"/>
+				<textElement>
+					<font size="6" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{NR_COD_DETRAN}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="a7bb3510-6a1b-4c35-a480-fab56af218cf" x="90" y="476" width="465" height="10"/>
+				<textElement>
+					<font size="6" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{DS_INFRACAO2}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="b69fed45-a12a-46b1-9b16-1fd96aee949c" x="0" y="496" width="33" height="10"/>
+				<textElement>
+					<font size="6" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{NR_ARTIGO}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="4fef8d45-3f00-4144-a55f-28949123e5f4" x="33" y="496" width="31" height="10"/>
+				<textElement>
+					<font size="6" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{NR_INCISO}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="cd6715e6-6570-4414-9284-3b8194a0481c" x="64" y="496" width="53" height="10"/>
+				<textElement>
+					<font size="6" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{NR_PARAGRAFO}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="23a0fdb8-8c64-4d84-8372-a3b54187ff7d" x="117" y="496" width="45" height="10"/>
+				<textElement>
+					<font size="6" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{NR_ALINEA}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="ab2a1128-5755-4c9e-b719-00fe5f5865fa" x="162" y="496" width="49" height="10"/>
+				<textElement>
+					<font size="6" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{NM_NATUREZA}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="70755edd-d3cd-4156-b697-7fb21495b264" x="212" y="496" width="35" height="10"/>
+				<textElement>
+					<font size="6" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{NR_PONTUACAO}]]></textFieldExpression>
+			</textField>
+			<textField pattern="¤ #,##0.00">
+				<reportElement uuid="66dcd529-e9c0-4cf8-84d6-2ada0e9cf7a0" x="247" y="496" width="85" height="10"/>
+				<textElement textAlignment="Right">
+					<font size="6" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{VL_MULTA}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="d578f954-91de-4273-a44d-a347911e45c3" x="406" y="496" width="63" height="10"/>
+				<textElement>
+					<font size="6" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{VL_VELOCIDADE_AFERIDA}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="fa9685ae-a776-4129-b0dd-162051c94c2e" x="469" y="496" width="86" height="10"/>
+				<textElement>
+					<font size="6" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{VL_VELOCIDADE_PENALIDADE}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="4d2a2747-b198-4ed6-bfcd-15adda95038e" x="118" y="336" width="59" height="10"/>
+				<textElement>
+					<font size="6" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{NR_AIT}]]></textFieldExpression>
+			</textField>
+			<rectangle>
+				<reportElement uuid="e6638fd4-a59c-4c44-b390-96774185c666" x="191" y="326" width="76" height="20"/>
+			</rectangle>
+			<rectangle>
+				<reportElement uuid="5624c0cb-4a6d-4437-bb2d-0e99382dd129" x="267" y="326" width="125" height="20"/>
+			</rectangle>
+			<staticText>
+				<reportElement uuid="c156f605-95b0-4a0d-9ebb-e0f110a9967c" x="191" y="326" width="76" height="10"/>
+				<textElement>
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[COD. RANAINF]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="00a2c414-2060-494d-9286-95009d3e1a51" x="267" y="326" width="126" height="10"/>
+				<textElement>
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[ LIM. P/ APRESENTAÇÃO DE]]></text>
+			</staticText>
+			<textField>
+				<reportElement uuid="947c373d-38b2-4836-89a4-228184095bea" x="191" y="336" width="76" height="10"/>
+				<textElement>
+					<font size="6" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{NR_CONTROLE}]]></textFieldExpression>
+			</textField>
+			<rectangle>
+				<reportElement uuid="96f3f213-fa6e-412c-8357-0d0efbf59986" x="332" y="486" width="74" height="20"/>
+			</rectangle>
+			<staticText>
+				<reportElement uuid="dc7062f7-b1fa-499e-928f-2071698155ae" x="332" y="486" width="74" height="10"/>
+				<textElement>
+					<font size="6"/>
+				</textElement>
+				<text><![CDATA[ VEL PERMITIDA (Km/h)]]></text>
+			</staticText>
+			<textField>
+				<reportElement uuid="7c1de078-7667-4d17-8061-c98551a6bb54" x="332" y="496" width="74" height="10"/>
+				<textElement>
+					<font size="6" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{VL_VELOCIDADE_PERMITIDA}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="a2545de9-6935-40dd-96f1-675451489a78" x="423" y="698" width="31" height="10"/>
+				<textElement>
+					<font size="6" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{NR_AIT}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="1ea132b1-6930-4f07-ad53-da9a52f93272" x="454" y="698" width="52" height="10"/>
+				<textElement>
+					<font size="6" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{NR_COD_DETRAN}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="76442d1a-2ff3-43a0-90d6-cd1ddcccd07e" x="506" y="698" width="49" height="10"/>
+				<textElement>
+					<font size="6" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{NR_PLACA}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="e4889ac1-f745-44b4-84dc-d994e9eeb57b" x="0" y="718" width="423" height="10"/>
+				<textElement>
+					<font size="6" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{NM_PROPRIETARIO}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="439a1c1f-7860-4ad0-987c-704e08332d8e" x="423" y="718" width="132" height="10"/>
+				<textElement>
+					<font size="6" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{NR_CPF_CNPJ_PROPRIETARIO}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="6b931ee0-57e9-428d-b50b-d84cedf67060" x="267" y="336" width="125" height="10"/>
+				<textElement>
+					<font size="6"/>
+				</textElement>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<textField>
+				<reportElement uuid="f0891d6e-04a8-4fdd-959d-46d80305ecfc" x="0" y="229" width="555" height="11"/>
+				<textElement textAlignment="Center">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{NM_SUBORGAO}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="61497b4f-0655-4201-ac48-a2a16b1e3b99" x="0" y="240" width="555" height="11"/>
+				<textElement textAlignment="Center">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{NM_DEPARTAMENTO}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="27c549c9-a9bf-4c9a-ac7b-0bdeb1cc079d" x="1" y="213" width="554" height="16"/>
+				<textElement textAlignment="Center">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{NM_ORGAO_AUTUADOR}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="68e11613-8d0b-48d8-bd3e-e82388e10217" x="0" y="581" width="555" height="11"/>
+				<textElement textAlignment="Center">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{NM_DEPARTAMENTO}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="f7934629-7644-494f-b500-a4892710e39c" x="0" y="570" width="555" height="11"/>
+				<textElement textAlignment="Center">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{NM_SUBORGAO}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="96c71159-be8d-4f08-94df-bbef8b25a309" x="1" y="554" width="554" height="16"/>
+				<textElement textAlignment="Center">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{NM_ORGAO_AUTUADOR}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="23890cf0-a89f-44e6-9957-61b791738989" x="352" y="316" width="40" height="10"/>
+				<textElement>
+					<font size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[ BA]]></text>
+			</staticText>
+			<textField>
+				<reportElement uuid="105c14b5-9254-4258-99b0-9939f8b274e5" x="1" y="267" width="391" height="20"/>
+				<textElement>
+					<font size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA["A " + $P{NM_SUBORGAO} + " notifica a V.Sª. da lavratura do Auto de Infração de Trânsito, conforme discriminação abaixo, podendo apresentar RECURSO perante a Entidade Autuadora."]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+</jasperReport>

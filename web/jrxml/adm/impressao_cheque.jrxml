@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.1.1.final using JasperReports Library version 6.1.1  -->
+<!-- 2017-05-11T15:21:02 -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="impressao_cheque" pageWidth="789" pageHeight="291" columnWidth="789" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="df2e56af-4e9e-4f75-9e6f-02c59042cd58">
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
+	<property name="com.jaspersoft.studio.unit." value="cm"/>
+	<property name="com.jaspersoft.studio.unit.pageHeight" value="cm"/>
+	<property name="com.jaspersoft.studio.unit.pageWidth" value="cm"/>
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<field name="NR_CONTA" class="java.lang.String"/>
+	<field name="DS_HISTORICO" class="java.lang.String"/>
+	<field name="DS_EXTENSO_1" class="java.lang.String"/>
+	<field name="DS_EXTENSO_2" class="java.lang.String"/>
+	<field name="VL_RECEBIDO" class="java.lang.String"/>
+	<field name="NM_PESSOA" class="java.lang.String"/>
+	<field name="VL_MOVIMENTO" class="java.lang.String"/>
+	<field name="LG_NOMINAL" class="java.lang.Boolean"/>
+	<field name="LG_CRUZADO" class="java.lang.Boolean"/>
+	<field name="DS_NOMINAL" class="java.lang.String"/>
+	<field name="DT_MOVIMENTO" class="java.util.Date"/>
+	<detail>
+		<band height="269" splitType="Stretch">
+			<property name="com.jaspersoft.studio.unit.height" value="cm"/>
+			<frame>
+				<reportElement x="0" y="52" width="789" height="215" uuid="4cfefdfe-4478-4b4d-969a-68fcf107a6e5">
+					<property name="com.jaspersoft.studio.unit.height" value="cm"/>
+					<property name="com.jaspersoft.studio.unit.y" value="cm"/>
+				</reportElement>
+				<frame>
+					<reportElement positionType="FixRelativeToBottom" x="223" y="0" width="109" height="215" uuid="9015f089-243f-41b3-8407-b21f56a9955a"/>
+					<textField isBlankWhenNull="true">
+						<reportElement x="10" y="25" width="90" height="12" uuid="bd00580c-7a98-44c0-9ca2-8f3eef192dc3">
+							<property name="com.jaspersoft.studio.unit.height" value="cm"/>
+							<property name="com.jaspersoft.studio.unit.x" value="cm"/>
+						</reportElement>
+						<textElement textAlignment="Center" verticalAlignment="Middle">
+							<font fontName="Courier New" size="9" isBold="true" pdfFontName="Courier-Bold" pdfEncoding=""/>
+						</textElement>
+						<textFieldExpression><![CDATA[$F{NR_CONTA}]]></textFieldExpression>
+					</textField>
+					<textField isBlankWhenNull="true">
+						<reportElement x="10" y="37" width="90" height="12" uuid="52f0b59e-70ac-4e75-ad34-c6174fd998eb">
+							<property name="com.jaspersoft.studio.unit.height" value="cm"/>
+							<property name="com.jaspersoft.studio.unit.x" value="cm"/>
+						</reportElement>
+						<textElement textAlignment="Center" verticalAlignment="Middle">
+							<font fontName="Courier New" size="9" pdfFontName="Courier"/>
+						</textElement>
+						<textFieldExpression><![CDATA[new SimpleDateFormat("dd/MM/yyyy").format($F{DT_MOVIMENTO})]]></textFieldExpression>
+					</textField>
+					<textField isBlankWhenNull="true">
+						<reportElement x="10" y="78" width="90" height="80" uuid="7e227369-2448-45f8-837f-7b23cacfd2de">
+							<property name="com.jaspersoft.studio.unit.x" value="cm"/>
+							<property name="com.jaspersoft.studio.unit.height" value="cm"/>
+						</reportElement>
+						<textElement textAlignment="Left" verticalAlignment="Top">
+							<font fontName="Courier New" size="8" isBold="true" pdfFontName="Courier-Bold"/>
+						</textElement>
+						<textFieldExpression><![CDATA[$F{DS_HISTORICO}]]></textFieldExpression>
+					</textField>
+					<textField isBlankWhenNull="true">
+						<reportElement x="10" y="173" width="90" height="12" uuid="a620d874-4b9f-4110-8e4d-8aef6d1902fe">
+							<property name="com.jaspersoft.studio.unit.height" value="cm"/>
+							<property name="com.jaspersoft.studio.unit.x" value="cm"/>
+						</reportElement>
+						<textElement textAlignment="Center" verticalAlignment="Middle">
+							<font fontName="Courier New" size="10" isBold="true" isItalic="true" pdfFontName="Courier-BoldOblique"/>
+						</textElement>
+						<textFieldExpression><![CDATA[new SimpleDateFormat("dd/MM/yyyy").format($F{DT_MOVIMENTO} )]]></textFieldExpression>
+					</textField>
+					<textField isBlankWhenNull="true">
+						<reportElement x="10" y="185" width="90" height="12" uuid="02565047-3fd5-48c4-bd85-07c620a69485">
+							<property name="com.jaspersoft.studio.unit.height" value="cm"/>
+							<property name="com.jaspersoft.studio.unit.x" value="cm"/>
+						</reportElement>
+						<textElement textAlignment="Center" verticalAlignment="Middle">
+							<font fontName="Courier New" size="10" isBold="true" pdfFontName="Courier-Bold"/>
+						</textElement>
+						<textFieldExpression><![CDATA["R$ "+new DecimalFormat("###,###,##0.00", new DecimalFormatSymbols( new Locale("pt", "BR"))).format(  Double.parseDouble($F{VL_MOVIMENTO}))]]></textFieldExpression>
+					</textField>
+					<textField isBlankWhenNull="true">
+						<reportElement x="10" y="60" width="90" height="12" uuid="14a10dc8-7689-427d-86d8-e3b1c44143ea">
+							<property name="com.jaspersoft.studio.unit.height" value="cm"/>
+							<property name="com.jaspersoft.studio.unit.x" value="cm"/>
+						</reportElement>
+						<textElement textAlignment="Left" verticalAlignment="Middle">
+							<font fontName="Courier New" size="8" isBold="true" pdfFontName="Courier-Bold"/>
+						</textElement>
+						<textFieldExpression><![CDATA[$F{NM_PESSOA}]]></textFieldExpression>
+					</textField>
+				</frame>
+				<textField>
+					<reportElement x="664" y="9" width="116" height="14" uuid="65d7bbef-5590-4e09-a7f9-1d2e32e0a32e">
+						<property name="com.jaspersoft.studio.unit.x" value="cm"/>
+						<property name="com.jaspersoft.studio.unit.height" value="cm"/>
+						<property name="com.jaspersoft.studio.unit.y" value="cm"/>
+					</reportElement>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font fontName="Courier New" size="12" isBold="false" pdfFontName="Courier"/>
+					</textElement>
+					<textFieldExpression><![CDATA["#R$ "+(new DecimalFormat("###,###,##0.00", new DecimalFormatSymbols( new Locale("pt", "BR"))).format(  Double.parseDouble($F{VL_MOVIMENTO})))+"#"]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="354" y="67" width="383" height="12" uuid="91d46938-8bf1-4f9a-bcf5-e1836f35908c">
+						<property name="com.jaspersoft.studio.unit.width" value="cm"/>
+						<printWhenExpression><![CDATA[$F{LG_NOMINAL}]]></printWhenExpression>
+					</reportElement>
+					<textElement verticalAlignment="Middle">
+						<font fontName="Courier New" isBold="false" pdfFontName="Courier"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{DS_NOMINAL}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="601" y="115" width="30" height="12" uuid="eeb05c66-4be0-493b-b2cc-65ae65b5bbf4">
+						<property name="com.jaspersoft.studio.unit.height" value="cm"/>
+					</reportElement>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font fontName="Courier New" isBold="true" pdfFontName="Courier-Bold"/>
+					</textElement>
+					<textFieldExpression><![CDATA[new SimpleDateFormat("dd").format($F{DT_MOVIMENTO} )]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="753" y="115" width="35" height="12" uuid="9401b03a-65fe-4446-aebf-545062c5a537">
+						<property name="com.jaspersoft.studio.unit.height" value="cm"/>
+					</reportElement>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font fontName="Courier New" isBold="true" pdfFontName="Courier-Bold"/>
+					</textElement>
+					<textFieldExpression><![CDATA[new SimpleDateFormat("yyyy").format( $F{DT_MOVIMENTO} )]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="663" y="115" width="70" height="12" uuid="32850d6e-8582-4f73-9444-8f14713e0cd7">
+						<property name="com.jaspersoft.studio.unit.height" value="cm"/>
+						<property name="com.jaspersoft.studio.unit.y" value="cm"/>
+					</reportElement>
+					<textElement verticalAlignment="Middle">
+						<font fontName="Courier New" isBold="true" pdfFontName="Courier-Bold"/>
+					</textElement>
+					<textFieldExpression><![CDATA[new SimpleDateFormat("MMMMM", new Locale("pt","BR")).format($F{DT_MOVIMENTO} )]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="524" y="115" width="67" height="12" uuid="f69fa6e2-11f5-48dd-a14a-2ea0a04c6226">
+						<property name="com.jaspersoft.studio.unit.height" value="cm"/>
+					</reportElement>
+					<textElement verticalAlignment="Middle">
+						<font fontName="Courier New" isBold="true" pdfFontName="Courier-Bold"/>
+					</textElement>
+					<textFieldExpression><![CDATA["V/C"]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="407" y="33" width="370" height="12" uuid="882914f9-94db-4480-b207-1ead52e266b4">
+						<property name="com.jaspersoft.studio.unit.width" value="cm"/>
+						<property name="com.jaspersoft.studio.unit.y" value="cm"/>
+					</reportElement>
+					<textElement verticalAlignment="Middle">
+						<font fontName="Courier New" isBold="false" pdfFontName="Courier"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{DS_EXTENSO_1}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="354" y="51" width="383" height="12" uuid="ee50b5a0-bd51-4a5e-80da-9f8f4d301755">
+						<property name="com.jaspersoft.studio.unit.width" value="cm"/>
+					</reportElement>
+					<textElement verticalAlignment="Middle">
+						<font fontName="Courier New" isBold="false" pdfFontName="Courier"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{DS_EXTENSO_2}]]></textFieldExpression>
+				</textField>
+				<line direction="BottomUp">
+					<reportElement x="402" y="0" width="61" height="215" uuid="16b32de0-75c3-494f-ab2b-d6387d2127c6">
+						<property name="com.jaspersoft.studio.unit.width" value="cm"/>
+						<printWhenExpression><![CDATA[$F{LG_CRUZADO}]]></printWhenExpression>
+					</reportElement>
+				</line>
+				<line direction="BottomUp">
+					<reportElement x="424" y="0" width="61" height="215" uuid="60c5e9ee-775d-4ae4-a4b1-19dbbed6ee63">
+						<property name="com.jaspersoft.studio.unit.width" value="cm"/>
+						<property name="com.jaspersoft.studio.unit.height" value="cm"/>
+						<printWhenExpression><![CDATA[$F{LG_CRUZADO}]]></printWhenExpression>
+					</reportElement>
+				</line>
+			</frame>
+		</band>
+	</detail>
+</jasperReport>

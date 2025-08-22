@@ -1,0 +1,291 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.1.1.final using JasperReports Library version 6.1.1  -->
+<!-- 2024-12-17T18:03:00 -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="oficio_cetran" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="f25da58e-3fa7-4c91-b20e-bbb6537120a0">
+	<parameter name="NR_ATA" class="java.lang.String"/>
+	<parameter name="DATA_ATA" class="java.sql.Timestamp"/>
+	<parameter name="QTD_REGISTROS" class="java.lang.Integer"/>
+	<parameter name="DS_TITULO_1" class="java.lang.String"/>
+	<parameter name="NM_CIDADE" class="java.lang.String"/>
+	<parameter name="NR_CEP" class="java.lang.String"/>
+	<parameter name="NM_AUTORIDADE_TRANSITO" class="java.lang.String"/>
+	<parameter name="DS_TITULO_3" class="java.lang.String"/>
+	<parameter name="LOGO_2" class="java.lang.String"/>
+	<parameter name="LOGO_1" class="java.lang.String"/>
+	<parameter name="DS_TITULO_2" class="java.lang.String"/>
+	<parameter name="NUMERO_OFICIO" class="java.lang.String"/>
+	<parameter name="SG_DEPARTAMENTO_TRANSITO" class="java.lang.String"/>
+	<parameter name="DS_ENDERECO" class="java.lang.String"/>
+	<parameter name="NR_TELEFONE" class="java.lang.String"/>
+	<parameter name="NR_TELEFONE2" class="java.lang.String"/>
+	<parameter name="NM_EMAIL" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<field name="DT_MOVIMENTO" class="java.sql.Timestamp"/>
+	<field name="ID_ATA" class="java.lang.String"/>
+	<field name="ID_AIT" class="java.lang.String"/>
+	<field name="NR_PLACA" class="java.lang.String"/>
+	<field name="NM_SITUACAO_DOCUMENTO" class="java.lang.String"/>
+	<field name="DT_PROTOCOLO" class="java.util.Date"/>
+	<field name="NM_CONDUTOR" class="java.lang.String"/>
+	<field name="SG_ORGAO_EXTERNO" class="java.lang.String"/>
+	<field name="NM_ORGAO_EXTERNO" class="java.lang.String"/>
+	<field name="NM_REQUERENTE" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="282" splitType="Stretch">
+			<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+			<textField isBlankWhenNull="true">
+				<reportElement x="45" y="4" width="464" height="16" uuid="bb0b1a58-e3ad-4cc3-91a5-8586f9466f00">
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+					<printWhenExpression><![CDATA[$P{DS_TITULO_1}.equals("0") ? Boolean.FALSE : Boolean.TRUE]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Center">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{DS_TITULO_1}]]></textFieldExpression>
+			</textField>
+			<image onErrorType="Blank">
+				<reportElement x="10" y="4" width="45" height="45" uuid="1ba68b8a-2d1b-4577-aaf9-18a06fbf5021">
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<printWhenExpression><![CDATA[$P{LOGO_1} != null]]></printWhenExpression>
+				</reportElement>
+				<imageExpression><![CDATA[net.sf.jasperreports.engine.util.JRImageLoader.getInstance(new SimpleJasperReportsContext()).loadAwtImageFromBytes(javax.xml.bind.DatatypeConverter.parseBase64Binary($P{LOGO_1}))]]></imageExpression>
+			</image>
+			<image>
+				<reportElement x="500" y="4" width="45" height="45" uuid="f3a1ee14-cc08-4a25-b6cd-b56b37e1040a">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<printWhenExpression><![CDATA[$P{LOGO_2} != null]]></printWhenExpression>
+				</reportElement>
+				<imageExpression><![CDATA[net.sf.jasperreports.engine.util.JRImageLoader.getInstance(new SimpleJasperReportsContext()).loadAwtImageFromBytes(javax.xml.bind.DatatypeConverter.parseBase64Binary($P{LOGO_2}))]]></imageExpression>
+			</image>
+			<textField isBlankWhenNull="true">
+				<reportElement x="45" y="21" width="464" height="16" uuid="8df02eb9-08c9-4220-87e3-2b2cb0fa7919">
+					<printWhenExpression><![CDATA[$P{DS_TITULO_2}.equals("0") ? Boolean.FALSE : Boolean.TRUE]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Center">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{DS_TITULO_2}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="45" y="38" width="464" height="26" uuid="554e9437-4d06-4713-a6da-b8f07abc4e41">
+					<printWhenExpression><![CDATA[$P{DS_TITULO_3}.equals("0") ? Boolean.FALSE : Boolean.TRUE]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Center">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{DS_TITULO_3}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="-4" y="120" width="561" height="1" uuid="cdf7a408-0c2a-4d62-abb2-5922988bba7f">
+					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+				</reportElement>
+				<graphicElement>
+					<pen lineWidth="2.0"/>
+				</graphicElement>
+			</line>
+			<textField>
+				<reportElement x="212" y="187" width="320" height="20" uuid="672b9288-4a44-4494-ae1b-a2f885bb174f"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="10" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{NM_CIDADE} + ", " + new SimpleDateFormat("dd").format(new java.util.Date()) + " de " + new SimpleDateFormat("MMMM", new Locale("pt", "BR")).format(new java.util.Date()) + " de " + new SimpleDateFormat("Y").format(new java.util.Date()) + "."]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="22" y="227" width="508" height="40" uuid="90c10fb2-4434-4f7b-9046-2ccc83dc0af5">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Left" verticalAlignment="Bottom">
+					<font fontName="SansSerif" size="10" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Prezado Senhor,  \n" + 
+"Em razão da competência, encaminho a V. Exa. os processos protocolizados no " + 
+$P{SG_DEPARTAMENTO_TRANSITO} + ($P{DS_TITULO_3} != null ? " - " : "") + ($P{DS_TITULO_3} != null ? $P{DS_TITULO_3} : "") + " para análise e julgamento: "]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="22" y="137" width="535" height="40" uuid="0ca4ec90-8686-4eb3-b814-aa1b498d0df1">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Bottom">
+					<font fontName="SansSerif" size="10" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["OFÍCIO " + $P{NUMERO_OFICIO} + "\n" + $P{SG_DEPARTAMENTO_TRANSITO} + "\n" + 
+"Encaminhamento"]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="0" y="64" width="555" height="42" uuid="e25f6b74-e5b4-48d2-9e4a-4edf7ed7c79a">
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="8" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{DS_ENDERECO} + 
+"\nTelefone: " + $P{NR_TELEFONE} + 
+((($P{NR_TELEFONE2} != null) && !($P{NR_TELEFONE2}.equals("0"))) ? " / " : "") + 
+((($P{NR_TELEFONE2} != null) && !($P{NR_TELEFONE2}.equals("0"))) ? $P{NR_TELEFONE2} : "") + 
+"\nE-mail: " + $P{NM_EMAIL}]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="30" splitType="Stretch">
+			<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+			<staticText>
+				<reportElement x="96" y="0" width="109" height="30" uuid="cbf97681-fc11-462e-9034-99ef848c6bf8">
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[AIT]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="330" y="0" width="221" height="30" uuid="cbfe84fb-66dc-4887-ba2d-a7f49d805239"/>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Requerente]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="205" y="0" width="125" height="30" uuid="9bf318d9-f8d0-435a-b051-b01e1301a32f"/>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Data de recebimento]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="2" y="0" width="94" height="30" uuid="b8ea646d-875a-4610-b62f-361a119d297f"/>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Placa]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="35" splitType="Stretch">
+			<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+			<rectangle>
+				<reportElement mode="Transparent" x="2" y="0" width="94" height="35" uuid="23215fc9-9485-406a-bb83-a41b19fd4b09"/>
+			</rectangle>
+			<rectangle>
+				<reportElement mode="Transparent" x="96" y="0" width="109" height="35" uuid="eb98ead8-8c0a-4690-866d-af515f5ef2ff"/>
+			</rectangle>
+			<rectangle>
+				<reportElement mode="Transparent" x="205" y="0" width="125" height="35" uuid="871e98f3-fe9d-4432-93cf-dba29dfaafbd"/>
+			</rectangle>
+			<rectangle>
+				<reportElement mode="Transparent" x="330" y="0" width="221" height="35" uuid="a426f897-18ef-41dd-b387-a3347bbce438"/>
+			</rectangle>
+			<textField pattern="dd/MM/yyyy" isBlankWhenNull="true">
+				<reportElement x="2" y="0" width="94" height="33" uuid="80702ec2-606b-422b-8f6e-038920dbc517"/>
+				<box>
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{NR_PLACA}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="96" y="0" width="109" height="35" uuid="7d9af4b8-da26-493b-b056-1f9126b824d3"/>
+				<box>
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{ID_AIT}]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement x="205" y="0" width="125" height="35" uuid="86d19e74-8c97-4454-b561-75a07e9a91a1">
+					<printWhenExpression><![CDATA[$F{DT_PROTOCOLO} != null]]></printWhenExpression>
+				</reportElement>
+				<box>
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{DT_PROTOCOLO}]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement x="330" y="0" width="221" height="35" uuid="bbe93804-ff48-4a27-9d11-e3e14894f74d">
+					<printWhenExpression><![CDATA[$F{DT_PROTOCOLO} != null]]></printWhenExpression>
+				</reportElement>
+				<box>
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{NM_REQUERENTE}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<lastPageFooter>
+		<band height="136">
+			<textField isBlankWhenNull="true">
+				<reportElement x="26" y="10" width="499" height="40" uuid="f618af91-9d89-48c5-9c8f-d92011b8971d">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<printWhenExpression><![CDATA[$P{NM_AUTORIDADE_TRANSITO} != null]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Bottom" markup="html">
+					<font fontName="SansSerif" size="10" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["_________________________________________________ <br> SETOR DE ANÁLISE E PROCESSAMENTO DE INFRAÇÕES "]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="26" y="60" width="498" height="60" uuid="d314e99e-70d0-428f-bea7-59e686e81ed3">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Left" verticalAlignment="Bottom">
+					<font fontName="SansSerif" size="10" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Ilmo. Sr. Diretor  \n" + 
+($F{NM_ORGAO_EXTERNO} != null ? $F{NM_ORGAO_EXTERNO} : "Órgão não informado")]]></textFieldExpression>
+			</textField>
+		</band>
+	</lastPageFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>

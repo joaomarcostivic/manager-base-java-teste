@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Digitalizar</title>
+    <meta charset='utf-8'>
+    <script src="scanner.js" type="text/javascript"></script>
+
+    <script type="text/javascript">
+
+    	var imagesScanned = [];
+    	var scanning = false;
+    	
+        function scanToJpg() {
+        	imagesScanned = [];
+        	scanning = false;
+        	
+            scanner.scan(returnImages,
+                    {
+                        "output_settings": [
+                            {
+                                "type": "return-base64",
+                                "format": "jpg"
+                            }
+                        ]
+                    }
+            );
+            
+            scanning = true;
+            
+            return verifyScanning();
+        }
+        
+        function returnImages(successful, mesg, response) {
+            if(!successful) { 
+                console.error('Falha: ' + mesg);
+                scanning = false;
+                return;
+            }
+
+            if(successful && mesg != null && mesg.toLowerCase().indexOf('user cancel') >= 0) { 
+                console.info('Usuário Cancelou');
+                scanning = false;
+                return;
+            }
+
+            var scannedImages = scanner.getScannedImages(response, true, false); 
+            console.info("Recuperando Imagens: " + scannedImages.length);
+            for(var i = 0; (scannedImages instanceof Array) && i < scannedImages.length; i++) {
+            	console.info('Imagem ' + i + ':' + scannedImages[i]);
+            	imagesScanned.push(scannedImages[i]);
+            }
+
+            scanning = false;
+        }
+    	
+    	function verifyScanning() {
+    		console.info("verifyScanning: " + scanning);
+    		return scanning;
+    	}
+    	
+    	function getImagesCount() {
+            return imagesScanned.length;
+        }
+        
+    	function getImageAt(index) {
+            return imagesScanned[index].src;
+        }
+        
+        function displayImagesOnPage(successful, mesg, response) {
+            if(!successful) { 
+                console.error('Falha: ' + mesg);
+                return;
+            }
+
+            if(successful && mesg != null && mesg.toLowerCase().indexOf('user cancel') >= 0) { 
+                console.info('Usuário Cancelou');
+                return;
+            }
+
+            var scannedImages = scanner.getScannedImages(response, true, false); 
+            for(var i = 0; (scannedImages instanceof Array) && i < scannedImages.length; i++) {
+                var scannedImage = scannedImages[i];
+                processScannedImage(scannedImage);
+            }
+        }
+       
+        function processScannedImage(scannedImage) {
+            imagesScanned.push(scannedImage);
+            var elementImg = scanner.createDomElementFromModel( {
+                'name': 'img',
+                'attributes': {
+                    'class': 'scanned',
+                    'src': scannedImage.src
+                }
+            });
+            document.getElementById('images').appendChild(elementImg);
+        }
+
+    </script>
+</head>
+<body></body>
+</html>

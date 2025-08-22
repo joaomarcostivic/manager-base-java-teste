@@ -1,0 +1,215 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.1.1.final using JasperReports Library version 6.1.1  -->
+<!-- 2016-12-07T17:10:59 -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="relatorio_fechamento_caixa_subreportTransferencias" language="groovy" pageWidth="555" pageHeight="802" columnWidth="555" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="98990edc-8b09-4f16-9e88-5a38a2fd7f8c">
+	<property name="ireport.zoom" value="2.3579476910000023"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<property name="com.jaspersoft.studio.unit." value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.pageHeight" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.pageWidth" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.topMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.bottomMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.leftMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.rightMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.columnWidth" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.columnSpacing" value="pixel"/>
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<field name="CD_CONTA_DESTINO" class="java.lang.Integer"/>
+	<field name="NM_CONTA_DESTINO" class="java.lang.String"/>
+	<field name="VL_MOVIMENTO" class="java.lang.Double"/>
+	<field name="SG_TIPO_DOCUMENTO" class="java.lang.String"/>
+	<field name="nm_emissor" class="java.lang.String"/>
+	<field name="NR_INSTITUICAO_FINANCEIRA" class="java.lang.String"/>
+	<field name="NM_INSTITUICAO_FINANCEIRA" class="java.lang.String"/>
+	<field name="NR_DOCUMENTO" class="java.lang.String"/>
+	<field name="DS_HISTORICO" class="java.lang.String"/>
+	<variable name="tpDoc" class="java.lang.String">
+		<variableExpression><![CDATA[$F{SG_TIPO_DOCUMENTO} == null?"Dinheiro":$F{SG_TIPO_DOCUMENTO}]]></variableExpression>
+	</variable>
+	<variable name="subTotal" class="java.lang.Double" resetType="Group" resetGroup="cd_conta_destino" calculation="Sum">
+		<variableExpression><![CDATA[$F{VL_MOVIMENTO}]]></variableExpression>
+		<initialValueExpression><![CDATA[new Double(0)]]></initialValueExpression>
+	</variable>
+	<variable name="vlTotal" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[$F{VL_MOVIMENTO}]]></variableExpression>
+		<initialValueExpression><![CDATA[new Double(0)]]></initialValueExpression>
+	</variable>
+	<group name="cd_conta_destino">
+		<groupExpression><![CDATA[$F{CD_CONTA_DESTINO}]]></groupExpression>
+		<groupHeader>
+			<band height="26">
+				<staticText>
+					<reportElement mode="Opaque" x="5" y="13" width="101" height="13" forecolor="#000000" uuid="1dbf4487-6b5d-4cf1-8e54-f57b0e2aa372">
+						<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+					</reportElement>
+					<textElement>
+						<font size="8" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Tipo de documento]]></text>
+				</staticText>
+				<staticText>
+					<reportElement mode="Opaque" x="110" y="13" width="316" height="13" forecolor="#000000" uuid="9f075c53-07b0-4b27-9f18-00aec6f5b4e7">
+						<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+					</reportElement>
+					<textElement>
+						<font size="8" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Histórico]]></text>
+				</staticText>
+				<staticText>
+					<reportElement mode="Opaque" x="430" y="13" width="60" height="13" forecolor="#000000" uuid="a88eee63-61d2-4c85-8d1b-410f23131eb6">
+						<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+					</reportElement>
+					<textElement>
+						<font size="8" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Nr Documento]]></text>
+				</staticText>
+				<textField>
+					<reportElement mode="Transparent" x="5" y="0" width="545" height="13" forecolor="#000000" uuid="40772103-b06b-435c-90f3-2142b3537038">
+						<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+						<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					</reportElement>
+					<textElement verticalAlignment="Middle">
+						<font size="8" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{NM_CONTA_DESTINO}]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupHeader>
+		<groupFooter>
+			<band height="12">
+				<textField>
+					<reportElement x="430" y="0" width="60" height="12" uuid="a32f3c68-105d-49fd-a128-e08f9f37c89d">
+						<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					</reportElement>
+					<textElement>
+						<font fontName="SansSerif" size="8" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA["Total"]]></textFieldExpression>
+				</textField>
+				<line>
+					<reportElement x="0" y="0" width="555" height="1" uuid="fd07fab8-f0be-47ef-8297-4a82f92065f6">
+						<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+						<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					</reportElement>
+				</line>
+				<textField pattern="#,##0.00">
+					<reportElement positionType="FixRelativeToBottom" stretchType="RelativeToBandHeight" x="490" y="0" width="60" height="12" uuid="e173b459-23e9-4207-9d61-54c1d1d41676"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font size="8" isBold="true"/>
+						<paragraph lineSpacingSize="0.0"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$V{subTotal}]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupFooter>
+	</group>
+	<group name="subTotal">
+		<groupExpression><![CDATA[]]></groupExpression>
+	</group>
+	<columnHeader>
+		<band height="16" splitType="Stretch">
+			<rectangle>
+				<reportElement x="0" y="0" width="555" height="16" forecolor="#CCCCCC" backcolor="#CCCCCC" uuid="4121a6cd-d3ca-473d-9fca-07e906e0a3f7">
+					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+				<graphicElement>
+					<pen lineStyle="Solid" lineColor="#000000"/>
+				</graphicElement>
+			</rectangle>
+			<staticText>
+				<reportElement x="5" y="0" width="550" height="16" uuid="50ef43dc-15f6-4034-bb97-c129fe690735">
+					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+				<textElement verticalAlignment="Middle">
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[TRANSFERÊNCIAS]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="16" splitType="Stretch">
+			<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+			<line>
+				<reportElement mode="Opaque" x="5" y="0" width="545" height="1" uuid="c20b6417-1eaf-4cb9-949e-e87cc6b764a3">
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+				</reportElement>
+				<graphicElement>
+					<pen lineWidth="0.5" lineStyle="Solid"/>
+				</graphicElement>
+			</line>
+			<textField isBlankWhenNull="true">
+				<reportElement mode="Opaque" x="110" y="1" width="316" height="15" uuid="f639efb2-c800-4dba-96ca-1930c2bd7317"/>
+				<textElement verticalAlignment="Middle" markup="none">
+					<font size="8"/>
+					<paragraph lineSpacingSize="0.0"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{DS_HISTORICO}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement mode="Opaque" x="5" y="1" width="101" height="15" uuid="bd376491-a8c1-49da-9bac-505d8443daf9">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+				</reportElement>
+				<textElement verticalAlignment="Middle" markup="none">
+					<font size="8"/>
+					<paragraph lineSpacingSize="0.0"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{tpDoc}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement mode="Opaque" x="430" y="1" width="60" height="15" uuid="4fcef53b-c0be-4a42-ac03-0521f1dd969c"/>
+				<textElement verticalAlignment="Middle" markup="none">
+					<font size="8"/>
+					<paragraph lineSpacingSize="0.0"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{NR_DOCUMENTO}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00" isBlankWhenNull="true">
+				<reportElement mode="Opaque" x="490" y="1" width="60" height="15" uuid="02aa6734-7f70-406e-a605-9aa9f4b52374"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle" markup="none">
+					<font size="8"/>
+					<paragraph lineSpacingSize="0.0"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{VL_MOVIMENTO}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<summary>
+		<band height="13">
+			<textField>
+				<reportElement x="430" y="1" width="60" height="12" uuid="27b9426c-b821-4ec0-9c91-bafea5582b4c">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+				</reportElement>
+				<textElement>
+					<font fontName="SansSerif" size="8" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Total Geral"]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00">
+				<reportElement x="490" y="1" width="60" height="12" uuid="5b30c9e9-093a-4158-b566-d83303e17a7c"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+					<paragraph lineSpacingSize="0.0"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{vlTotal}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="430" y="0" width="120" height="1" uuid="257c0326-c794-4d12-a95d-6c687281e426">
+					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+			</line>
+		</band>
+	</summary>
+</jasperReport>

@@ -1,0 +1,283 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version last-->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="fechamento" language="groovy" pageWidth="595" pageHeight="842" whenNoDataType="AllSectionsNoDetail" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" isSummaryWithPageHeaderAndFooter="true" uuid="7c2ecfe9-048c-485b-b4e3-e22b0c6a08e0">
+	<property name="ireport.zoom" value="0.6209213230591563"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="64"/>
+	<parameter name="logoPath" class="java.lang.String"/>
+	<parameter name="nmEmpresa" class="java.lang.String"/>
+	<parameter name="dtFechamento" class="java.sql.Timestamp"/>
+	<parameter name="nmTurno" class="java.lang.String"/>
+	<parameter name="nmResponsavel" class="java.lang.String"/>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA["C:\\tivic\\manager\\web\\pcb\\"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="nmUsuario" class="java.lang.String"/>
+	<parameter name="rsmEncerrantes" class="java.util.List"/>
+	<parameter name="rsmMedicaoFisica" class="java.util.List"/>
+	<parameter name="rsmVendasBico" class="java.util.List"/>
+	<parameter name="rsmVendasProdutos" class="java.util.List"/>
+	<parameter name="rsmTitulosCredito" class="java.util.List"/>
+	<parameter name="rsmPagamentos" class="java.util.List"/>
+	<parameter name="rsmDepositos" class="java.util.List"/>
+	<parameter name="rsmCartoes" class="java.util.List"/>
+	<parameter name="rsmResumoVendas" class="java.util.List"/>
+	<parameter name="rsmResumo" class="java.util.List"/>
+	<parameter name="rsmResumoFechamento" class="java.util.List"/>
+	<parameter name="rsmChequeVista" class="java.util.List"/>
+	<parameter name="rsmChequePrazo" class="java.util.List"/>
+	<parameter name="rsmAcumuladoReceber" class="java.util.List"/>
+	<parameter name="rsmRecebimentos" class="java.util.List"/>
+	<parameter name="LG_CONSOLIDACAO" class="java.lang.Boolean">
+		<parameterDescription><![CDATA[]]></parameterDescription>
+	</parameter>
+	<parameter name="dtInicial" class="java.lang.String"/>
+	<parameter name="dtFinal" class="java.lang.String"/>
+	<parameter name="LOGO" class="java.lang.Object"/>
+	<pageHeader>
+		<band height="65">
+			<textField isBlankWhenNull="true">
+				<reportElement x="49" y="54" width="225" height="10" uuid="57b2c174-85e7-4e1b-9a77-11632e9f5335"/>
+				<textElement>
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{nmResponsavel}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="3" y="54" width="46" height="10" uuid="45354fe5-4ced-4db8-983a-0c6416b0bd41"/>
+				<textElement>
+					<font size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Responsável:]]></text>
+			</staticText>
+			<image>
+				<reportElement x="0" y="0" width="119" height="54" uuid="1e83d69e-127c-4100-bb9f-8171ffc3ac41"/>
+				<imageExpression><![CDATA[$P{logoPath}+"/imagens/logo_dna.gif"]]></imageExpression>
+			</image>
+			<textField>
+				<reportElement x="119" y="0" width="365" height="20" uuid="e67e70ba-aadb-4d83-9d12-a4fba2adab4f"/>
+				<textElement textAlignment="Center">
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{nmEmpresa}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="119" y="20" width="365" height="16" uuid="29c3b8b6-a654-4232-a5a9-be3d8e84bb91"/>
+				<textElement textAlignment="Center">
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[Fechamento de caixa]]></text>
+			</staticText>
+			<textField pattern="dd/MM/yyyy - EEE -">
+				<reportElement x="119" y="36" width="168" height="18" uuid="8cec7c84-188c-4e1b-8319-ff06992cd2bf"/>
+				<textElement textAlignment="Right">
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[( $P{LG_CONSOLIDACAO} )? $P{dtInicial}+" à "+$P{dtFinal}  :$P{dtFechamento}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="360" y="36" width="125" height="18" uuid="30951190-2d0a-4ae3-85a9-4a50453e27b8"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{nmTurno}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="310" y="36" width="49" height="18" uuid="8c8f5ee0-23e0-499e-8ad6-63ae2021c80c"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[Turno:]]></text>
+			</staticText>
+			<image scaleImage="FillFrame" hAlign="Center" vAlign="Middle" onErrorType="Blank" evaluationTime="Report">
+				<reportElement x="486" y="0" width="67" height="54" uuid="c36cb473-e1be-4192-9747-d59394005c56">
+					<property name="local_mesure_unitheight" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<imageExpression><![CDATA[net.sf.jasperreports.engine.util.JRImageLoader.loadImage((byte[]) $P{LOGO})]]></imageExpression>
+			</image>
+		</band>
+	</pageHeader>
+	<pageFooter>
+		<band height="9">
+			<textField pattern="dd/MM/yyyy HH:mm:ss">
+				<reportElement x="325" y="0" width="65" height="9" uuid="7dd6aee6-ce27-4f12-82eb-b55ed6107dd7"/>
+				<textElement>
+					<font size="7" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="518" y="0" width="25" height="9" uuid="55a21629-3953-46b8-8c22-cf5995958d8b"/>
+				<textElement>
+					<font size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Página]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="405" y="0" width="108" height="9" uuid="cb59747f-c829-4dcd-9e98-05ba0d630ef0"/>
+				<textElement>
+					<font size="7" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{nmUsuario}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="392" y="0" width="13" height="9" uuid="d7d4bf0d-5dde-4600-ad30-a00e1fa69159"/>
+				<textElement>
+					<font size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[por]]></text>
+			</staticText>
+			<textField pattern="">
+				<reportElement x="543" y="0" width="12" height="9" uuid="7834df42-e203-4aaa-bb29-9121dff4df0f"/>
+				<textElement textAlignment="Right">
+					<font size="7" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="287" y="0" width="38" height="9" uuid="b1b59fbf-6b4d-4d05-b477-8fdde51ff3f3"/>
+				<textElement>
+					<font size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Emitido em ]]></text>
+			</staticText>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="657" splitType="Stretch">
+			<subreport>
+				<reportElement positionType="Float" x="0" y="20" width="323" height="55" isRemoveLineWhenBlank="true" uuid="82b3ba1e-1d00-4917-8d76-680043ebbd71">
+					<printWhenExpression><![CDATA[$P{rsmEncerrantes}.isEmpty() != true]]></printWhenExpression>
+				</reportElement>
+				<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource($P{rsmEncerrantes})]]></dataSourceExpression>
+				<subreportExpression><![CDATA[$P{SUBREPORT_DIR}+"//fechamento_leitura_bico_tanque.jasper"]]></subreportExpression>
+			</subreport>
+			<staticText>
+				<reportElement positionType="Float" x="0" y="0" width="554" height="20" isRemoveLineWhenBlank="true" uuid="47ae53cc-0aef-4f13-abbe-18cab12b7edd">
+					<property name="local_mesure_unitx" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					<property name="local_mesure_unitwidth" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="local_mesure_unitheight" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<printWhenExpression><![CDATA[!$P{rsmEncerrantes}.isEmpty() || !$P{rsmMedicaoFisica}.isEmpty()]]></printWhenExpression>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[LEITURA DOS BICOS E DOS TANQUES]]></text>
+			</staticText>
+			<subreport>
+				<reportElement positionType="Float" x="327" y="21" width="227" height="54" isRemoveLineWhenBlank="true" uuid="3b29cf58-99c0-4266-a5b7-02574381dd23"/>
+				<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource($P{rsmMedicaoFisica})]]></dataSourceExpression>
+				<subreportExpression><![CDATA[$P{SUBREPORT_DIR}+"\\fechamento_medicao_fisica.jasper"]]></subreportExpression>
+			</subreport>
+			<subreport>
+				<reportElement positionType="Float" x="327" y="75" width="227" height="52" isRemoveLineWhenBlank="true" uuid="cdd61f56-cdb9-478d-9b2f-fcccc48d5679"/>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA[$P{SUBREPORT_DIR}+"\\fechamento_estoque.jasper"]]></subreportExpression>
+			</subreport>
+			<rectangle>
+				<reportElement positionType="Float" x="0" y="130" width="555" height="15" uuid="778474eb-0916-4851-ae34-ac349b8798ef">
+					<printWhenExpression><![CDATA[$P{rsmVendasBico}.isEmpty() != true]]></printWhenExpression>
+				</reportElement>
+			</rectangle>
+			<staticText>
+				<reportElement positionType="Float" x="1" y="131" width="553" height="13" isRemoveLineWhenBlank="true" uuid="781570d8-52eb-4c1b-b83a-f952cbe25fe4">
+					<printWhenExpression><![CDATA[$P{rsmVendasBico}.isEmpty() != true]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Center">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[RESUMO DAS VENDAS DE COMBUSTÍVEIS]]></text>
+			</staticText>
+			<subreport>
+				<reportElement positionType="Float" x="0" y="145" width="554" height="48" isRemoveLineWhenBlank="true" uuid="94882e0b-f235-46a7-a594-3e374b4f8297"/>
+				<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource($P{rsmVendasBico})]]></dataSourceExpression>
+				<subreportExpression><![CDATA[$P{SUBREPORT_DIR}+"\\fechamento_mov_bico.jasper"]]></subreportExpression>
+			</subreport>
+			<subreport>
+				<reportElement positionType="Float" x="0" y="195" width="555" height="47" isRemoveLineWhenBlank="true" uuid="9e355139-aa78-461f-a09c-023c214ca924"/>
+				<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource($P{rsmVendasProdutos})]]></dataSourceExpression>
+				<subreportExpression><![CDATA[$P{SUBREPORT_DIR}+"\\fechamento_resumo_vendas.jasper"]]></subreportExpression>
+			</subreport>
+			<subreport>
+				<reportElement positionType="Float" x="0" y="243" width="555" height="43" isRemoveLineWhenBlank="true" uuid="68f8815b-13ec-4f5b-b6af-3791785489a5"/>
+				<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource($P{rsmTitulosCredito})]]></dataSourceExpression>
+				<subreportExpression><![CDATA[$P{SUBREPORT_DIR}+"\\fechamento_titulos.jasper"]]></subreportExpression>
+			</subreport>
+			<subreport>
+				<reportElement positionType="Float" x="0" y="287" width="555" height="44" isRemoveLineWhenBlank="true" uuid="d1567d6e-309a-4d55-be07-52ed5a8e8be3"/>
+				<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource($P{rsmRecebimentos})]]></dataSourceExpression>
+				<subreportExpression><![CDATA[$P{SUBREPORT_DIR}+"\\fechamento_receitas.jasper"]]></subreportExpression>
+			</subreport>
+			<subreport>
+				<reportElement positionType="Float" x="0" y="375" width="555" height="41" isRemoveLineWhenBlank="true" uuid="283f089d-03a9-46ca-9480-c9eca944d88c"/>
+				<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource($P{rsmDepositos})]]></dataSourceExpression>
+				<subreportExpression><![CDATA[$P{SUBREPORT_DIR}+"\\fechamento_retirada.jasper"]]></subreportExpression>
+			</subreport>
+			<subreport>
+				<reportElement positionType="Float" x="0" y="506" width="555" height="42" isRemoveLineWhenBlank="true" uuid="8b541ed1-2a49-4d18-8b4a-89e6d97f7678"/>
+				<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource($P{rsmCartoes})]]></dataSourceExpression>
+				<subreportExpression><![CDATA[$P{SUBREPORT_DIR}+"\\fechamento_cartoes.jasper"]]></subreportExpression>
+			</subreport>
+			<rectangle>
+				<reportElement positionType="Float" x="0" y="550" width="555" height="15" uuid="f94839d5-f068-4a6d-a90a-9afb0606d1e3">
+					<printWhenExpression><![CDATA[$P{rsmResumoVendas}.isEmpty() != true]]></printWhenExpression>
+				</reportElement>
+			</rectangle>
+			<staticText>
+				<reportElement positionType="Float" x="1" y="551" width="554" height="13" uuid="83d6d251-0257-4a1e-862a-b01bad4ab975">
+					<printWhenExpression><![CDATA[$P{rsmResumoFechamento}.isEmpty() != true]]></printWhenExpression>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font isBold="true" pdfFontName="Times-Bold"/>
+				</textElement>
+				<text><![CDATA[RESUMO/FECHAMENTO]]></text>
+			</staticText>
+			<subreport>
+				<reportElement positionType="Float" x="0" y="566" width="270" height="44" isRemoveLineWhenBlank="true" uuid="f47b5f37-4824-4cfa-a6d4-44d05a6e3ccc"/>
+				<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource($P{rsmResumo})]]></dataSourceExpression>
+				<subreportExpression><![CDATA[$P{SUBREPORT_DIR}+"\\fechamento_subreport1.jasper"]]></subreportExpression>
+			</subreport>
+			<subreport>
+				<reportElement positionType="Float" x="275" y="566" width="280" height="44" isRemoveLineWhenBlank="true" uuid="e8358e9b-1025-4453-adc9-18696f4253d7"/>
+				<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource($P{rsmResumoFechamento})]]></dataSourceExpression>
+				<subreportExpression><![CDATA[$P{SUBREPORT_DIR}+"\\fechamento_resumo_fechamento.jasper"]]></subreportExpression>
+			</subreport>
+			<subreport>
+				<reportElement positionType="Float" x="0" y="418" width="555" height="42" isRemoveLineWhenBlank="true" uuid="ba359a15-1361-49dd-8da6-d200163b9a1a"/>
+				<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource($P{rsmChequeVista})]]></dataSourceExpression>
+				<subreportExpression><![CDATA[$P{SUBREPORT_DIR}+"\\fechamento_cheques_a_vista.jasper"]]></subreportExpression>
+			</subreport>
+			<subreport>
+				<reportElement positionType="Float" x="0" y="462" width="555" height="42" isRemoveLineWhenBlank="true" uuid="a4949310-45dc-4226-aba1-97524711b66e"/>
+				<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource($P{rsmChequePrazo})]]></dataSourceExpression>
+				<subreportExpression><![CDATA[$P{SUBREPORT_DIR}+"\\fechamento_cheque_prazo.jasper"]]></subreportExpression>
+			</subreport>
+			<subreport>
+				<reportElement positionType="Float" x="1" y="612" width="555" height="44" isRemoveLineWhenBlank="true" uuid="9ef50b0c-1636-4288-b599-9e7e98e41aca"/>
+				<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource($P{rsmAcumuladoReceber})]]></dataSourceExpression>
+				<subreportExpression><![CDATA[$P{SUBREPORT_DIR}+"\\fechamento_acumulado_receber.jasper"]]></subreportExpression>
+			</subreport>
+			<subreport>
+				<reportElement positionType="Float" x="-1" y="331" width="555" height="44" isRemoveLineWhenBlank="true" uuid="d1567d6e-309a-4d55-be07-52ed5a8e8be3"/>
+				<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource($P{rsmPagamentos})]]></dataSourceExpression>
+				<subreportExpression><![CDATA[$P{SUBREPORT_DIR}+"\\fechamento_despesas.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+	</summary>
+</jasperReport>

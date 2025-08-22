@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.0.3.final using JasperReports Library version 6.0.3  -->
+<!-- 2015-08-05T11:45:36 -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="historico_tramitacao_subreport" language="groovy" pageWidth="750" pageHeight="555" orientation="Landscape" columnWidth="750" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="12975c35-8601-42a1-868c-9d0ae58eab5c">
+	<property name="ireport.zoom" value="1.5"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<property name="com.jaspersoft.studio.layout" value="com.jaspersoft.studio.editor.layout.FreeLayout"/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
+	<property name="com.jaspersoft.studio.unit." value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.pageHeight" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.pageWidth" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.topMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.bottomMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.leftMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.rightMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.columnWidth" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.columnSpacing" value="pixel"/>
+	<field name="NM_SETOR_ORIGEM" class="java.lang.String"/>
+	<field name="DT_TRAMITACAO" class="java.util.Date"/>
+	<field name="DT_RECEBIMENTO" class="java.util.Date"/>
+	<field name="SG_SETOR_ORIGEM" class="java.lang.String"/>
+	<field name="NM_SETOR_DESTINO" class="java.lang.String"/>
+	<field name="SG_SETOR_DESTINO" class="java.lang.String"/>
+	<field name="NM_USUARIO_ORIGEM" class="java.lang.String"/>
+	<field name="NM_USUARIO_DESTINO" class="java.lang.String"/>
+	<field name="TXT_TRAMITACAO" class="java.lang.String"/>
+	<columnHeader>
+		<band height="15" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="70" height="12" uuid="3a64c7fe-c134-41c2-83c5-e9e031aab02a"/>
+				<textElement>
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Enviado em]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="80" y="0" width="70" height="12" uuid="222bbad6-6371-43d5-8193-d5b193d02b54"/>
+				<textElement>
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Recebido em]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="160" y="0" width="90" height="12" uuid="5611ae75-0faf-4cab-adec-ee37df3dff72"/>
+				<textElement>
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Setor de Origem]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="260" y="0" width="90" height="12" uuid="815b908d-ea96-4e53-a7d6-13b02b094ddd"/>
+				<textElement>
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Setor de Destino]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="360" y="0" width="70" height="12" uuid="a9275550-af3e-4261-aecf-be4aa10d3c63"/>
+				<textElement>
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Enviado por]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="440" y="0" width="70" height="12" uuid="ebe6c6e4-6ac7-4740-b8dd-16b09205ad5d"/>
+				<textElement>
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Recebido por]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="520" y="0" width="230" height="12" uuid="7eec6a82-c753-4af0-b7c8-f5a97fc02b4d"/>
+				<textElement>
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Histórico]]></text>
+			</staticText>
+			<line>
+				<reportElement positionType="Float" x="0" y="12" width="750" height="1" uuid="feb7173a-496c-45c3-82fd-0b46a9e6cf34">
+					<property name="local_mesure_unitheight" value="pixel"/>
+					<property name="local_mesure_unitx" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					<property name="local_mesure_unity" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+				</reportElement>
+				<graphicElement>
+					<pen lineWidth="0.75" lineStyle="Solid"/>
+				</graphicElement>
+			</line>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="16" splitType="Stretch">
+			<textField pattern="dd/MM/yyyy" isBlankWhenNull="true">
+				<reportElement x="1" y="2" width="69" height="11" uuid="45d47107-feaf-47a1-a3b0-2b8eff8d5961"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{DT_TRAMITACAO}]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd/MM/yyyy" isBlankWhenNull="true">
+				<reportElement x="80" y="2" width="70" height="11" uuid="6e926d9f-f701-436d-9aa9-9f4a3af9b522"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{DT_RECEBIMENTO}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="260" y="2" width="90" height="11" uuid="2f5089c7-3b64-4235-8872-2a9e94b75b47"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{SG_SETOR_DESTINO}!=null ? $F{SG_SETOR_DESTINO} : $F{NM_SETOR_DESTINO}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="360" y="2" width="70" height="11" uuid="3bc46aed-683e-4bd3-bf03-55ec111443a6"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{NM_USUARIO_ORIGEM}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="440" y="2" width="70" height="11" uuid="832da3a4-da60-4a72-a548-1afbefbb4085"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{NM_USUARIO_DESTINO}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="520" y="2" width="230" height="11" uuid="909eb92c-5df0-4e3f-9d00-4381e6e85f4c"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{TXT_TRAMITACAO}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="160" y="2" width="90" height="11" uuid="9ed726a2-4672-4fe2-8023-13a894c75071"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{SG_SETOR_ORIGEM}!=null ? $F{SG_SETOR_ORIGEM} : $F{NM_SETOR_ORIGEM}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+</jasperReport>

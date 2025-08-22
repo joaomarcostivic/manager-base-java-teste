@@ -1,0 +1,393 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version last-->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="compra_combustivel" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="6e49a0ab-bf7e-4cbc-b8a0-43d3b4812e36">
+	<property name="ireport.zoom" value="2.0"/>
+	<property name="ireport.x" value="313"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="LOGO" class="java.lang.Object"/>
+	<parameter name="nmRazaoSocial" class="java.lang.String"/>
+	<parameter name="nmFantasia" class="java.lang.String"/>
+	<parameter name="dtInicial" class="java.lang.String"/>
+	<parameter name="dtFinal" class="java.lang.String"/>
+	<parameter name="dtHoje" class="java.lang.String"/>
+	<parameter name="hrHoje" class="java.lang.String"/>
+	<parameter name="nmUsuario" class="java.lang.String"/>
+	<parameter name="nmDesenvolvedor" class="java.lang.String"/>
+	<parameter name="nmEmail" class="java.lang.String"/>
+	<parameter name="LOGO_DEV" class="java.lang.Object"/>
+	<parameter name="TOTAL_BY" class="java.lang.String">
+		<parameterDescription><![CDATA[Parametro para controle de exibição da totalização por combustivel ou por Fornecedor]]></parameterDescription>
+	</parameter>
+	<field name="tpCombustivel" class="java.lang.String"/>
+	<field name="tpTotalizacao" class="java.lang.String"/>
+	<field name="NM_COMBUSTIVEL" class="java.lang.String"/>
+	<field name="NM_TOTAL" class="java.lang.String"/>
+	<field name="DT_EMISSAO" class="java.lang.String"/>
+	<field name="QT_ENTRADA" class="java.lang.Double"/>
+	<field name="DT_MOVIMENTACAO" class="java.lang.String"/>
+	<field name="NM_FORNECEDOR" class="java.lang.String"/>
+	<field name="VL_CUSTO" class="java.lang.Double"/>
+	<field name="NR_NOTA_FISCAL" class="java.lang.String"/>
+	<field name="VL_TOTAL" class="java.lang.Double"/>
+	<field name="VL_PRECO_RET" class="java.lang.Double"/>
+	<field name="NM_LOCAL_ARMAZENAMENTO" class="java.lang.String"/>
+	<variable name="vlSubTotalCusto" class="java.lang.Double" resetType="Group" resetGroup="fornecedores" calculation="Average">
+		<variableExpression><![CDATA[$F{VL_CUSTO}]]></variableExpression>
+	</variable>
+	<variable name="qtSubTotalEntrada" class="java.lang.Double" resetType="Group" resetGroup="fornecedores" calculation="Sum">
+		<variableExpression><![CDATA[$F{QT_ENTRADA}]]></variableExpression>
+	</variable>
+	<variable name="vlSubTotal" class="java.lang.Double" resetType="Group" resetGroup="fornecedores" calculation="Sum">
+		<variableExpression><![CDATA[$F{VL_TOTAL}]]></variableExpression>
+	</variable>
+	<variable name="qtTotalEntrada" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[$F{QT_ENTRADA}]]></variableExpression>
+	</variable>
+	<variable name="vlTotal" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[$F{VL_TOTAL}]]></variableExpression>
+	</variable>
+	<variable name="vlTotalCustoFornecedor" class="java.lang.Double" resetType="Group" resetGroup="fornecedores" calculation="Sum">
+		<variableExpression><![CDATA[$F{VL_CUSTO}]]></variableExpression>
+	</variable>
+	<variable name="vlTotalQtdeFornecedor" class="java.lang.String" resetType="Group" resetGroup="fornecedores" calculation="Sum">
+		<variableExpression><![CDATA[$F{QT_ENTRADA}]]></variableExpression>
+	</variable>
+	<variable name="vlTotalValorFornecedor" class="java.lang.Double" resetType="Group" resetGroup="fornecedores" calculation="Sum">
+		<variableExpression><![CDATA[$F{VL_TOTAL}]]></variableExpression>
+	</variable>
+	<group name="fornecedores">
+		<groupExpression><![CDATA[$F{NM_COMBUSTIVEL}]]></groupExpression>
+		<groupHeader>
+			<band height="15">
+				<textField>
+					<reportElement x="1" y="0" width="552" height="13" uuid="604df7dc-9676-4cf4-a1e7-96b1f529c02e"/>
+					<textElement textAlignment="Center">
+						<font size="10"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{NM_COMBUSTIVEL}]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupHeader>
+		<groupFooter>
+			<band height="12">
+				<textField>
+					<reportElement mode="Opaque" x="385" y="1" width="47" height="11" backcolor="#999999" uuid="e8e140a9-f8e6-4b53-ab2d-021ba35296b1"/>
+					<textElement textAlignment="Right">
+						<font size="8"/>
+					</textElement>
+					<textFieldExpression><![CDATA[new DecimalFormat("#,##0.00;-#,##0.00", new java.text.DecimalFormatSymbols(new java.util.Locale("pt", "BR"))).format($V{qtSubTotalEntrada})]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement mode="Opaque" x="1" y="1" width="259" height="11" backcolor="#999999" uuid="e8e140a9-f8e6-4b53-ab2d-021ba35296b1"/>
+					<textElement>
+						<font size="8"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{NM_TOTAL}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement mode="Opaque" x="432" y="1" width="123" height="11" backcolor="#999999" uuid="e8e140a9-f8e6-4b53-ab2d-021ba35296b1"/>
+					<textElement textAlignment="Right">
+						<font size="8"/>
+					</textElement>
+					<textFieldExpression><![CDATA[new DecimalFormat("#,##0.00;-#,##0.00", new java.text.DecimalFormatSymbols(new java.util.Locale("pt", "BR"))).format($V{vlSubTotal})]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement mode="Opaque" x="260" y="1" width="47" height="11" backcolor="#999999" uuid="e8e140a9-f8e6-4b53-ab2d-021ba35296b1"/>
+					<textElement textAlignment="Right">
+						<font size="8"/>
+					</textElement>
+					<textFieldExpression><![CDATA[new DecimalFormat("#,##0.00;-#,##0.00", new java.text.DecimalFormatSymbols(new java.util.Locale("pt", "BR"))).format($V{vlSubTotalCusto})]]></textFieldExpression>
+				</textField>
+				<textField isBlankWhenNull="true">
+					<reportElement mode="Opaque" x="307" y="1" width="78" height="11" backcolor="#999999" uuid="e8e140a9-f8e6-4b53-ab2d-021ba35296b1"/>
+					<textElement>
+						<font size="8"/>
+					</textElement>
+				</textField>
+			</band>
+		</groupFooter>
+	</group>
+	<group name="Group1">
+		<groupExpression><![CDATA[$F{NM_FORNECEDOR}]]></groupExpression>
+		<groupFooter>
+			<band height="8">
+				<property name="local_mesure_unitheight" value="pixel"/>
+				<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				<printWhenExpression><![CDATA[$P{TOTAL_BY}.equals("FORNECEDOR")]]></printWhenExpression>
+				<rectangle>
+					<reportElement mode="Opaque" x="1" y="0" width="553" height="8" forecolor="#C0C0C0" backcolor="#C0C0C0" uuid="237a2953-b348-4c07-af75-ba4d42cb10af">
+						<property name="local_mesure_unitheight" value="pixel"/>
+						<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					</reportElement>
+				</rectangle>
+				<textField pattern="#,##0.00#;-#,##0.00#">
+					<reportElement x="260" y="0" width="47" height="8" uuid="825ad7b7-cedb-4e50-b0f2-4944070a9589"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font size="6"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$V{vlTotalCustoFornecedor}]]></textFieldExpression>
+				</textField>
+				<textField pattern="#,##0.00#;-#,##0.00#">
+					<reportElement x="383" y="0" width="49" height="8" uuid="1d0c6cc0-defd-444d-b02a-5ee518de1b6e"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font size="6"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$V{vlTotalCustoFornecedor}]]></textFieldExpression>
+				</textField>
+				<textField pattern="#,##0.00#;-#,##0.00#">
+					<reportElement x="506" y="0" width="49" height="8" uuid="5c32cd41-bd06-4c5e-958c-3f41a4ca20a8"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font size="6"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$V{vlTotalValorFornecedor}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="2" y="0" width="130" height="8" uuid="d1d4d03e-d625-4d96-9676-eba432bf2642"/>
+					<textElement verticalAlignment="Middle">
+						<font size="6"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{NM_FORNECEDOR}]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupFooter>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<pageHeader>
+		<band height="75">
+			<image scaleImage="FillFrame" hAlign="Center" vAlign="Middle" onErrorType="Blank" evaluationTime="Report">
+				<reportElement x="2" y="0" width="82" height="75" uuid="8c074d58-4f9a-4d93-8a2a-75274a8279a4"/>
+				<imageExpression><![CDATA[net.sf.jasperreports.engine.util.JRImageLoader.loadImage((byte[]) $P{LOGO_DEV})]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="84" y="16" width="390" height="21" uuid="b0a975cb-8cac-4013-a9ac-c49406f0d5d5"/>
+				<textElement textAlignment="Center">
+					<font size="16" isBold="true"/>
+				</textElement>
+				<text><![CDATA[COMPRA DE COMBUSTÍVEL]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="84" y="49" width="390" height="13" uuid="c6158799-fb61-41c2-8585-38acabdc702c"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[($F{tpCombustivel} == null || $F{tpCombustivel}.equals("")) ? "Combustíveis: todos" : "Combustíveis: " + $F{tpCombustivel}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="84" y="62" width="390" height="13" uuid="c6158799-fb61-41c2-8585-38acabdc702c"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[($F{tpTotalizacao} == null || $F{tpTotalizacao}.equals("")) ? "Totalizado por: Combustível" : "Totalizado por: " + $F{tpTotalizacao}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="83" y="0" width="391" height="16" uuid="d95120a9-93ca-4e71-9e3d-5c51e6d2eb66"/>
+				<textElement textAlignment="Center" verticalAlignment="Bottom" markup="none">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{nmRazaoSocial} + (($P{nmFantasia}.equals("") || $P{nmFantasia} == null) ? "" : " - " + $P{nmFantasia})]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="84" y="37" width="390" height="13" uuid="56a449de-2f82-4c52-8016-06dcb96aab9f"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA["Período de " + $P{dtInicial} + " até " + $P{dtFinal}]]></textFieldExpression>
+			</textField>
+			<image scaleImage="FillFrame" hAlign="Center" vAlign="Middle" onErrorType="Blank" evaluationTime="Report">
+				<reportElement x="474" y="0" width="82" height="75" uuid="8c074d58-4f9a-4d93-8a2a-75274a8279a4"/>
+				<imageExpression><![CDATA[net.sf.jasperreports.engine.util.JRImageLoader.loadImage((byte[]) $P{LOGO})]]></imageExpression>
+			</image>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="15" splitType="Stretch">
+			<line>
+				<reportElement x="0" y="1" width="555" height="2" uuid="6978ee43-d8c9-443b-9788-dffa5f623354"/>
+				<graphicElement>
+					<pen lineWidth="1.5"/>
+				</graphicElement>
+			</line>
+			<staticText>
+				<reportElement x="133" y="2" width="78" height="11" uuid="0eb26ccb-5c8e-4eed-9b34-f97ad899d619"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[N. FISCAL]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="2" width="49" height="11" uuid="041ea3b4-5374-4975-96fe-06f9aee1837c"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[DATA MOV.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="49" y="2" width="83" height="11" uuid="041ea3b4-5374-4975-96fe-06f9aee1837c"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[FORNECEDOR]]></text>
+			</staticText>
+			<line>
+				<reportElement x="-1" y="13" width="555" height="2" uuid="aee11a31-3b64-4f9d-acbc-a13b496e51db"/>
+				<graphicElement>
+					<pen lineWidth="1.5"/>
+				</graphicElement>
+			</line>
+			<staticText>
+				<reportElement x="214" y="2" width="46" height="11" uuid="16e51332-16ef-4fc3-a126-23e10ee70b65"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[EMISSÃO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="260" y="2" width="46" height="11" uuid="16e51332-16ef-4fc3-a126-23e10ee70b65"/>
+				<textElement textAlignment="Right">
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[CUSTO (R$)]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="307" y="2" width="76" height="11" uuid="16e51332-16ef-4fc3-a126-23e10ee70b65"/>
+				<textElement textAlignment="Right">
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[PREÇO RET. (R$)]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="383" y="2" width="49" height="11" uuid="16e51332-16ef-4fc3-a126-23e10ee70b65"/>
+				<textElement textAlignment="Right">
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[QTDE (LTS)]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="505" y="2" width="50" height="11" uuid="16e51332-16ef-4fc3-a126-23e10ee70b65"/>
+				<textElement textAlignment="Right">
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[VALOR (R$)]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="439" y="2" width="63" height="11" uuid="16e51332-16ef-4fc3-a126-23e10ee70b65"/>
+				<textElement textAlignment="Left">
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[LOCAL ARMAZ.]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="9" splitType="Stretch">
+			<textField>
+				<reportElement x="505" y="0" width="50" height="8" uuid="e8e140a9-f8e6-4b53-ab2d-021ba35296b1"/>
+				<textElement textAlignment="Right">
+					<font size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new DecimalFormat("#,##0.00;-#,##0.00", new java.text.DecimalFormatSymbols(new java.util.Locale("pt", "BR"))).format($F{VL_TOTAL})]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="49" y="0" width="83" height="8" uuid="e8e140a9-f8e6-4b53-ab2d-021ba35296b1"/>
+				<textElement>
+					<font size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{NM_FORNECEDOR}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="307" y="0" width="76" height="8" uuid="e8e140a9-f8e6-4b53-ab2d-021ba35296b1"/>
+				<textElement textAlignment="Right">
+					<font size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new DecimalFormat("#,##0.00;-#,##0.00", new java.text.DecimalFormatSymbols(new java.util.Locale("pt", "BR"))).format($F{VL_PRECO_RET})]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="260" y="0" width="47" height="8" uuid="e8e140a9-f8e6-4b53-ab2d-021ba35296b1"/>
+				<textElement textAlignment="Right">
+					<font size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new DecimalFormat("#,##0.00;-#,##0.00", new java.text.DecimalFormatSymbols(new java.util.Locale("pt", "BR"))).format($F{VL_CUSTO})]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="383" y="0" width="49" height="8" uuid="e8e140a9-f8e6-4b53-ab2d-021ba35296b1"/>
+				<textElement textAlignment="Right">
+					<font size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new DecimalFormat("#,##0.00;-#,##0.00", new java.text.DecimalFormatSymbols(new java.util.Locale("pt", "BR"))).format($F{QT_ENTRADA})]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="134" y="0" width="77" height="8" uuid="e8e140a9-f8e6-4b53-ab2d-021ba35296b1"/>
+				<textElement>
+					<font size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{NR_NOTA_FISCAL}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="2" y="0" width="47" height="8" uuid="e8e140a9-f8e6-4b53-ab2d-021ba35296b1"/>
+				<textElement>
+					<font size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{DT_MOVIMENTACAO}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="211" y="0" width="49" height="8" uuid="e8e140a9-f8e6-4b53-ab2d-021ba35296b1"/>
+				<textElement>
+					<font size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{DT_EMISSAO}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="439" y="0" width="63" height="8" uuid="e8e140a9-f8e6-4b53-ab2d-021ba35296b1"/>
+				<textElement textAlignment="Left">
+					<font size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{NM_LOCAL_ARMAZENAMENTO}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="12">
+			<line>
+				<reportElement x="1" y="1" width="554" height="1" uuid="b22cbe36-06b3-4501-a505-99c9c259cab5"/>
+				<graphicElement>
+					<pen lineStyle="Solid"/>
+				</graphicElement>
+			</line>
+			<textField>
+				<reportElement x="2" y="2" width="213" height="10" uuid="b4535353-a90a-4520-8dc4-8400a0e2fed5"/>
+				<textElement textAlignment="Left" verticalAlignment="Top">
+					<font fontName="SansSerif" size="6" isBold="false" isItalic="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{nmDesenvolvedor} + "   " + $P{nmEmail}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="215" y="2" width="341" height="10" uuid="b4535353-a90a-4520-8dc4-8400a0e2fed5"/>
+				<textElement textAlignment="Right" verticalAlignment="Top">
+					<font fontName="SansSerif" size="6" isBold="true" isItalic="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Emitido em " + $P{dtHoje} + " às " + $P{hrHoje} + " por " + $P{nmUsuario} + "   Página: " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="11" splitType="Stretch">
+			<textField>
+				<reportElement mode="Opaque" x="432" y="0" width="123" height="11" backcolor="#999999" uuid="e8e140a9-f8e6-4b53-ab2d-021ba35296b1"/>
+				<textElement textAlignment="Right">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new DecimalFormat("#,##0.00;-#,##0.00", new java.text.DecimalFormatSymbols(new java.util.Locale("pt", "BR"))).format($V{vlTotal})]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement mode="Opaque" x="383" y="0" width="49" height="11" backcolor="#999999" uuid="e8e140a9-f8e6-4b53-ab2d-021ba35296b1"/>
+				<textElement textAlignment="Right">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new DecimalFormat("#,##0.00;-#,##0.00", new java.text.DecimalFormatSymbols(new java.util.Locale("pt", "BR"))).format($V{qtTotalEntrada})]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement mode="Opaque" x="206" y="0" width="177" height="11" backcolor="#999999" uuid="31a0c345-ba10-4006-b2ea-ed331c0a2daa"/>
+				<textElement>
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[TOTAL DO PERÍODO]]></text>
+			</staticText>
+		</band>
+	</summary>
+</jasperReport>

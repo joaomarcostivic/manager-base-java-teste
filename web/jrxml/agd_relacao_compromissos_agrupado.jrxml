@@ -1,0 +1,239 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="relacao_detalhada" language="groovy" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="8ffa2e5d-944e-4d9f-b6b1-effd7da9883a">
+	<property name="ireport.zoom" value="2.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="107"/>
+	<parameter name="NM_EMPRESA" class="java.lang.String"/>
+	<parameter name="IMG_LOGOMARCA" class="byte[]" isForPrompting="false"/>
+	<parameter name="NM_RELATORIO" class="java.lang.String"/>
+	<field name="NM_GRUPO" class="java.lang.String"/>
+	<field name="DT_INICIAL" class="java.util.Date"/>
+	<field name="TP_AGENDA_ITEM" class="java.lang.Integer"/>
+	<field name="NM_PESSOA" class="java.lang.String"/>
+	<field name="NM_TIPO_PRAZO" class="java.lang.String"/>
+	<field name="DS_DETALHE" class="java.lang.String"/>
+	<field name="NM_CLIENTE" class="java.lang.String"/>
+	<field name="NM_ADVERSO" class="java.lang.String"/>
+	<field name="NM_JUIZO" class="java.lang.String"/>
+	<field name="NR_PROCESSO" class="java.lang.String"/>
+	<field name="NM_TRIBUNAL" class="java.lang.String"/>
+	<field name="DS_HORARIO" class="java.lang.String"/>
+	<group name="EVENTOS_GRUPO">
+		<groupExpression><![CDATA[$F{NM_GRUPO}]]></groupExpression>
+		<groupHeader>
+			<band height="20">
+				<textField isBlankWhenNull="true">
+					<reportElement uuid="f9f126d0-5a57-4532-a4b9-41309b7f80c2" x="0" y="3" width="801" height="17"/>
+					<textElement verticalAlignment="Middle" markup="none">
+						<font size="11" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{NM_GRUPO}]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupHeader>
+		<groupFooter>
+			<band height="19">
+				<textField>
+					<reportElement uuid="c13df065-41e9-499e-a7fd-c07dcf48ecfd" x="110" y="2" width="99" height="16"/>
+					<textElement verticalAlignment="Middle">
+						<font size="9" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$V{EVENTOS_GRUPO_COUNT}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement uuid="c2f6f56e-42a9-4076-8642-12c39be8127a" x="0" y="2" width="109" height="17"/>
+					<textElement verticalAlignment="Middle">
+						<font size="9" isBold="false"/>
+					</textElement>
+					<text><![CDATA[Qt. Compromissos:]]></text>
+				</staticText>
+				<line>
+					<reportElement uuid="bceb428f-ee0f-4365-9b27-0d2d789c96e3" x="0" y="0" width="802" height="1"/>
+					<graphicElement>
+						<pen lineStyle="Dashed" lineColor="#666666"/>
+					</graphicElement>
+				</line>
+			</band>
+		</groupFooter>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="22" splitType="Stretch">
+			<textField isBlankWhenNull="true">
+				<reportElement uuid="d95120a9-93ca-4e71-9e3d-5c51e6d2eb66" x="0" y="0" width="802" height="22"/>
+				<textElement textAlignment="Center" verticalAlignment="Bottom" markup="none">
+					<font size="16" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{NM_EMPRESA}]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="19" splitType="Stretch">
+			<textField>
+				<reportElement uuid="7701ef1d-a3e0-4326-8dcf-224de1529020" x="0" y="1" width="802" height="18"/>
+				<textElement textAlignment="Center" verticalAlignment="Top" markup="none">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{NM_RELATORIO}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="19" splitType="Stretch">
+			<line>
+				<reportElement uuid="524afa49-2e51-483d-8cfe-426fb16eac04" x="0" y="1" width="802" height="1"/>
+			</line>
+			<line>
+				<reportElement uuid="bceb428f-ee0f-4365-9b27-0d2d789c96e3" x="0" y="18" width="802" height="1"/>
+			</line>
+			<staticText>
+				<reportElement uuid="c2f6f56e-42a9-4076-8642-12c39be8127a" x="0" y="1" width="105" height="17"/>
+				<textElement verticalAlignment="Middle">
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Horário]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="c2f6f56e-42a9-4076-8642-12c39be8127a" x="105" y="1" width="77" height="17"/>
+				<textElement verticalAlignment="Middle">
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Categoria]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="c2f6f56e-42a9-4076-8642-12c39be8127a" x="182" y="1" width="214" height="17"/>
+				<textElement verticalAlignment="Middle">
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Responsável]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="c2f6f56e-42a9-4076-8642-12c39be8127a" x="404" y="1" width="180" height="17"/>
+				<textElement verticalAlignment="Middle">
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Tipo de Compromisso]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="c2f6f56e-42a9-4076-8642-12c39be8127a" x="589" y="1" width="213" height="17"/>
+				<textElement verticalAlignment="Middle">
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Informações Complementares]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="35" splitType="Stretch">
+			<textField pattern="" isBlankWhenNull="true">
+				<reportElement uuid="f9f126d0-5a57-4532-a4b9-41309b7f80c2" x="0" y="0" width="105" height="17"/>
+				<textElement verticalAlignment="Middle" markup="none">
+					<font size="9" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{DS_HORARIO}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement uuid="2aa132a1-c8cd-4da0-b262-02776700ff46" x="105" y="0" width="77" height="17"/>
+				<textElement verticalAlignment="Middle" markup="none">
+					<font size="9" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[(
+    ($F{TP_AGENDA_ITEM}==0 ? "Audiência" :
+     ($F{TP_AGENDA_ITEM}==1 ? "Prazo" :
+      ($F{TP_AGENDA_ITEM}==2 ? "Tarefa" : "Diligência")))
+)]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement uuid="2aa132a1-c8cd-4da0-b262-02776700ff46" x="182" y="0" width="214" height="17"/>
+				<textElement verticalAlignment="Middle" markup="none">
+					<font size="9" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{NM_PESSOA}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement uuid="af036d47-e010-414e-8097-aa5b0a123e65" x="404" y="0" width="180" height="17"/>
+				<textElement verticalAlignment="Middle" markup="none">
+					<font size="9" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{NM_TIPO_PRAZO}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" pattern="" isBlankWhenNull="true">
+				<reportElement uuid="5e47a37b-b51c-47dc-b50f-67bf73d9c1ba" positionType="Float" stretchType="RelativeToTallestObject" x="589" y="0" width="213" height="17"/>
+				<textElement verticalAlignment="Middle">
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{DS_DETALHE}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement uuid="81a86fcb-dd5f-4c59-a86c-f785e06f2e2c" positionType="Float" stretchType="RelativeToTallestObject" x="10" y="17" width="773" height="17" isRemoveLineWhenBlank="true">
+					<printWhenExpression><![CDATA[$F{NR_PROCESSO} != null && !$F{NR_PROCESSO}.equals("")]]></printWhenExpression>
+				</reportElement>
+				<textElement verticalAlignment="Middle" markup="none">
+					<font size="8" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[(($F{NM_CLIENTE}!=null && !$F{NM_CLIENTE}.equals("") ? $F{NM_CLIENTE} : "" ) +
+ ($F{NM_ADVERSO}!=null && !$F{NM_ADVERSO}.equals("") ? " X "+$F{NM_ADVERSO} : "" ) +
+ ($F{NM_TRIBUNAL}!=null && !$F{NM_TRIBUNAL}.equals("") ? " ("+$F{NM_TRIBUNAL} + (!$F{NM_JUIZO}.equals("")  ? ": " + $F{NM_JUIZO} : "") + ")"  : "" ) +
+ ($F{NR_PROCESSO}!=null && !$F{NR_PROCESSO}.equals("") ? " Processo Nº "+$F{NR_PROCESSO} : "" ))]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement uuid="bceb428f-ee0f-4365-9b27-0d2d789c96e3" x="0" y="0" width="802" height="1"/>
+				<graphicElement>
+					<pen lineStyle="Dashed" lineColor="#666666"/>
+				</graphicElement>
+			</line>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="19" splitType="Stretch">
+			<staticText>
+				<reportElement uuid="c53f82ae-3e06-4e76-ad44-d4b9ff2f2668" x="0" y="2" width="802" height="16"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[JurisManager - Excelência em Gestão Jurídica]]></text>
+			</staticText>
+			<textField>
+				<reportElement uuid="2c7e52e8-684b-4422-a94b-c70b55f29b80" x="0" y="3" width="85" height="16"/>
+				<textElement textAlignment="Right">
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Página "+$V{PAGE_NUMBER}+" de "]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement uuid="fef1f2d3-222b-4dc4-be73-49cac149d159" x="90" y="3" width="42" height="16"/>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement uuid="1c276587-536c-4b7b-b50b-c51c2e5a4e46" x="0" y="0" width="802" height="1"/>
+			</line>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="21" splitType="Stretch">
+			<line>
+				<reportElement uuid="524afa49-2e51-483d-8cfe-426fb16eac04" x="0" y="0" width="802" height="1"/>
+			</line>
+			<staticText>
+				<reportElement uuid="c2f6f56e-42a9-4076-8642-12c39be8127a" x="0" y="0" width="150" height="17"/>
+				<textElement verticalAlignment="Middle">
+					<font size="10" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Total de compromissos listados:]]></text>
+			</staticText>
+			<textField>
+				<reportElement uuid="c13df065-41e9-499e-a7fd-c07dcf48ecfd" x="150" y="1" width="46" height="16"/>
+				<textElement verticalAlignment="Middle">
+					<font size="10" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{REPORT_COUNT}]]></textFieldExpression>
+			</textField>
+		</band>
+	</summary>
+</jasperReport>

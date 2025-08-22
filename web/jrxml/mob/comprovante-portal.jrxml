@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.1.1.final using JasperReports Library version 6.1.1  -->
+<!-- 2024-09-13T14:03:36 -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Blank_A4_Landscape" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="c43d0932-f469-4fa3-9034-274d0996737c">
+	<property name="com.jaspersoft.studio.layout" value="com.jaspersoft.studio.editor.layout.VerticalRowLayout"/>
+	<parameter name="NR_PROTOCOLO" class="java.lang.String"/>
+	<parameter name="NR_TELEFONE" class="java.lang.String"/>
+	<parameter name="DS_TITULO_1" class="java.lang.String">
+		<parameterDescription><![CDATA[]]></parameterDescription>
+	</parameter>
+	<parameter name="DS_TITULO_2" class="java.lang.String"/>
+	<parameter name="DS_TITULO_3" class="java.lang.String"/>
+	<parameter name="LOGO_1" class="java.lang.String"/>
+	<parameter name="LOGO_2" class="java.lang.String"/>
+	<parameter name="TP_DOCUMENTO" class="java.lang.String">
+		<parameterDescription><![CDATA[]]></parameterDescription>
+	</parameter>
+	<parameter name="DS_ORIGEM" class="java.lang.String"/>
+	<parameter name="DS_MENSAGEM_RECURSO_PORTAL" class="java.lang.String">
+		<parameterDescription><![CDATA[]]></parameterDescription>
+	</parameter>
+	<parameter name="NM_EMAIL" class="java.lang.String">
+		<parameterDescription><![CDATA[]]></parameterDescription>
+	</parameter>
+	<parameter name="TP_SISTEMA" class="java.lang.String"/>
+	<parameter name="EMAIL_SOLICITANTE" class="java.lang.String"/>
+	<parameter name="CPF_SOLICITANTE" class="java.lang.String"/>
+	<parameter name="NM_LOGRADOURO" class="java.lang.String"/>
+	<parameter name="NR_ENDERECO" class="java.lang.String"/>
+	<parameter name="NM_BAIRRO" class="java.lang.String"/>
+	<parameter name="NR_CEP" class="java.lang.String"/>
+	<parameter name="NM_CIDADE" class="java.lang.String"/>
+	<parameter name="NM_COMPLEMENTO" class="java.lang.String"/>
+	<parameter name="NR_TELEFONE_2" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<field name="NR_PROTOCOLO" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="Field_1" class="java.lang.String"/>
+	<field name="NR_TELEFONE" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="189" splitType="Stretch">
+			<textField isBlankWhenNull="true">
+				<reportElement x="109" y="33" width="571" height="30" uuid="ef01129e-a5d9-4c42-af84-16b5e3457269"/>
+				<textElement textAlignment="Center">
+					<font size="20" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{DS_TITULO_1}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="109" y="64" width="571" height="30" uuid="867510fc-6fda-45e1-b3b6-699c088de2d4"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="16" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{DS_TITULO_2}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="109" y="95" width="571" height="30" uuid="11619c0a-3966-45c6-b6a8-b83796ab66e8"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="16" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{DS_TITULO_3}]]></textFieldExpression>
+			</textField>
+			<image>
+				<reportElement x="15" y="27" width="94" height="66" uuid="218a8cbf-b5e5-4955-9f35-339e85dc74ca"/>
+				<imageExpression><![CDATA[net.sf.jasperreports.engine.util.JRImageLoader.getInstance(new SimpleJasperReportsContext()).loadAwtImageFromBytes(javax.xml.bind.DatatypeConverter.parseBase64Binary($P{LOGO_1}))]]></imageExpression>
+			</image>
+			<image>
+				<reportElement x="700" y="28" width="94" height="66" uuid="c57fc1b1-f3f0-4af8-933f-8313309c857a">
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<imageExpression><![CDATA[net.sf.jasperreports.engine.util.JRImageLoader.getInstance(new SimpleJasperReportsContext()).loadAwtImageFromBytes(javax.xml.bind.DatatypeConverter.parseBase64Binary($P{LOGO_2}))]]></imageExpression>
+			</image>
+			<line>
+				<reportElement x="1" y="180" width="800" height="1" uuid="404327f7-b48a-45b4-b062-5919bbe73c6b"/>
+				<graphicElement>
+					<pen lineWidth="2.0"/>
+				</graphicElement>
+			</line>
+			<textField>
+				<reportElement x="96" y="140" width="590" height="30" uuid="0460dc94-5b4d-401b-8fcf-653309d99fbc"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="20" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[($P{TP_DOCUMENTO} != null ? ("Protocolo de " + $P{TP_DOCUMENTO}) : "")]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<detail>
+		<band height="275" splitType="Stretch">
+			<textField>
+				<reportElement x="142" y="90" width="500" height="38" uuid="bf1042a1-593c-43af-b9c5-b9a4a44d0840"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="25" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[($P{NR_PROTOCOLO} != null ? $P{NR_PROTOCOLO} : "")]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="114" y="141" width="570" height="90" uuid="17fed9ab-b459-47ac-b438-132120731c9d"/>
+				<textElement textAlignment="Justified" verticalAlignment="Middle">
+					<font size="20"/>
+				</textElement>
+				<textFieldExpression><![CDATA[($P{DS_MENSAGEM_RECURSO_PORTAL} != null ? ($P{DS_MENSAGEM_RECURSO_PORTAL} + ($P{NR_TELEFONE} != null ? (" ou " + $P{NR_TELEFONE}+"."): ".")
+) : "")]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="141" y="33" width="500" height="30" uuid="02ab3184-ee87-4aa5-8d02-e067a12c874d"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="20" isBold="false"/>
+				</textElement>
+				<text><![CDATA[O protocolo gerado para sua solicitação é:
+]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="1" y="215" width="140" height="19" uuid="6c1a26b1-3df2-4064-a2e3-c449b9735e70"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Dados do usuário:"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="1" y="233" width="309" height="19" uuid="0a69c8e2-aa00-4074-a77b-7719499f866d"/>
+				<textElement verticalAlignment="Top"/>
+				<textFieldExpression><![CDATA["E-mail: " + ($P{EMAIL_SOLICITANTE} != null ? $P{EMAIL_SOLICITANTE} : "")]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="1" y="248" width="309" height="19" uuid="c75179c4-ee6e-4615-a937-c8f7a8ea0990"/>
+				<textFieldExpression><![CDATA["CPF: " + ($P{CPF_SOLICITANTE} != null ? $P{CPF_SOLICITANTE}.substring(0, 3) + "." + 
+$P{CPF_SOLICITANTE}.substring(3, 6) + "." + 
+$P{CPF_SOLICITANTE}.substring(6, 9) + "-" + 
+$P{CPF_SOLICITANTE}.substring(9, 11) : "")]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="88" splitType="Stretch">
+			<textField pattern="MMMMM dd, yyyy">
+				<reportElement x="642" y="14" width="158" height="30" uuid="8eeae6c1-d74b-4e4f-a773-d888350e9bf2"/>
+				<textElement textAlignment="Right">
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new SimpleDateFormat("dd/MM/yyyy HH:mm").format(new java.util.Date())]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="0" y="9" width="800" height="1" uuid="3831e458-6a85-4a98-8f12-a9bcfe22a206"/>
+				<graphicElement>
+					<pen lineWidth="2.0"/>
+				</graphicElement>
+			</line>
+			<textField>
+				<reportElement x="1" y="15" width="229" height="30" uuid="c7125099-eb44-41bd-bea8-dde730a9117b"/>
+				<textElement>
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[($P{DS_ORIGEM} != null ? $P{DS_ORIGEM} : "")]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="318" y="14" width="186" height="30" uuid="f692fc9e-2bee-4c47-99c5-419e237d2327"/>
+				<textElement verticalAlignment="Top">
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[($P{NM_EMAIL} != null ? $P{NM_EMAIL} : "")]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="40" width="801" height="45" uuid="84c18ef0-8ee2-4f1b-9264-7551d5257870">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<textFieldExpression><![CDATA[$P{NM_LOGRADOURO} + ", Nº: " + $P{NR_ENDERECO} + ( $P{NM_COMPLEMENTO} != null ? ", COMPLEMENTO: " + $P{NM_COMPLEMENTO} : ""  ) +", BAIRRO: " + $P{NM_BAIRRO} + ", CEP: " +( $P{NR_CEP}.length() == 8 ? ($P{NR_CEP}.substring(0, 2) + "." + $P{NR_CEP}.substring(2, 5) + "-" + $P{NR_CEP}.substring(5, 8)) : "CEP INCORRETO" ) + ", " 
++ "Contato: " + 
+  ($P{NR_TELEFONE} != null ? $P{NR_TELEFONE} : "") + 
+  ($P{NR_TELEFONE} != null && $P{NR_TELEFONE_2} != null ? " / " : "") +
+  ($P{NR_TELEFONE_2} != null ? $P{NR_TELEFONE_2} : "")]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+</jasperReport>

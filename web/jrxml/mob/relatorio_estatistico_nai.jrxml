@@ -1,0 +1,900 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.1.1.final using JasperReports Library version 6.1.1  -->
+<!-- 2025-02-18T14:49:28 -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="certidao_ipva" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="67532319-ce5e-428f-9e38-cfe8dc401118">
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
+	<parameter name="DS_TITULO_1" class="java.lang.String"/>
+	<parameter name="DS_TITULO_2" class="java.lang.String"/>
+	<parameter name="LOGO_2" class="java.lang.Object"/>
+	<parameter name="LOGO_1" class="java.lang.Object"/>
+	<parameter name="DS_TITULO_3" class="java.lang.String"/>
+	<parameter name="DT_INICIAL" class="java.lang.String"/>
+	<parameter name="DT_FINAL" class="java.lang.String">
+		<parameterDescription><![CDATA[]]></parameterDescription>
+	</parameter>
+	<parameter name="TP_CONSULTA" class="java.lang.Integer"/>
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<field name="DT_NOTIFICACAO" class="java.util.Date"/>
+	<field name="QT_NOTIFICACAO" class="java.lang.Integer"/>
+	<field name="MES_NOTIFICACAO" class="java.lang.Integer"/>
+	<field name="ANO_NOTIFICACAO" class="java.lang.Integer"/>
+	<field name="PR_DEFERIMENTO" class="java.lang.Float"/>
+	<field name="PR_INDEFERIMENTO" class="java.lang.Float"/>
+	<field name="TEMPO_JULGAMENTO" class="java.lang.Integer"/>
+	<field name="QT_RECORRIDA" class="java.lang.Integer"/>
+	<group name="GRUPO_TP_CONSULTA" isReprintHeaderOnEachPage="true">
+		<groupHeader>
+			<band height="26">
+				<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				<printWhenExpression><![CDATA[$P{TP_CONSULTA} == 1 && $F{DT_NOTIFICACAO} != null]]></printWhenExpression>
+				<staticText>
+					<reportElement x="8" y="6" width="110" height="20" uuid="81e57032-43cb-4fcc-979b-2f1f5a3410ac">
+						<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+						<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+						<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+					</reportElement>
+					<textElement verticalAlignment="Middle">
+						<font isBold="true"/>
+						<paragraph leftIndent="2"/>
+					</textElement>
+					<text><![CDATA[Data de entrada]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="118" y="6" width="110" height="20" uuid="cce313c3-d790-4fb6-ae82-70f12895f7cb">
+						<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+						<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+						<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+					</reportElement>
+					<textElement verticalAlignment="Middle">
+						<font isBold="true"/>
+						<paragraph leftIndent="2"/>
+					</textElement>
+					<text><![CDATA[Quantidade]]></text>
+				</staticText>
+				<line>
+					<reportElement x="0" y="5" width="555" height="1" uuid="fcab7b17-c952-4361-9e9c-963ab5d9cd2e">
+						<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+						<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					</reportElement>
+					<graphicElement>
+						<pen lineWidth="1.5"/>
+					</graphicElement>
+				</line>
+				<staticText>
+					<reportElement x="228" y="6" width="140" height="20" uuid="72b49c89-345d-4421-b20b-e5bfcb870187">
+						<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+						<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+						<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+					</reportElement>
+					<textElement verticalAlignment="Middle">
+						<font isBold="true"/>
+						<paragraph leftIndent="2"/>
+					</textElement>
+					<text><![CDATA[Recorridas]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="368" y="6" width="184" height="20" uuid="571c4e69-4111-4be6-8b41-ae4bcdc8e214">
+						<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+						<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+						<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+					</reportElement>
+					<textElement verticalAlignment="Middle">
+						<font isBold="true"/>
+						<paragraph leftIndent="2"/>
+					</textElement>
+					<text><![CDATA[Porcentagem de recorridas]]></text>
+				</staticText>
+			</band>
+			<band height="26">
+				<printWhenExpression><![CDATA[$P{TP_CONSULTA} == 1 && $F{MES_NOTIFICACAO} != null && $F{MES_NOTIFICACAO} != 0]]></printWhenExpression>
+				<staticText>
+					<reportElement x="8" y="6" width="105" height="20" uuid="dcac1569-1da7-4fe8-9dc2-2e88ec78ec98">
+						<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+						<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+						<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+						<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+					</reportElement>
+					<textElement verticalAlignment="Middle">
+						<font isBold="true"/>
+						<paragraph leftIndent="2"/>
+					</textElement>
+					<text><![CDATA[Mês de entrada]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="210" y="6" width="95" height="20" uuid="4cbcdc32-2e0e-43f7-9c5c-411e5e00fb3a">
+						<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+						<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+						<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+					</reportElement>
+					<textElement verticalAlignment="Middle">
+						<font isBold="true"/>
+						<paragraph leftIndent="2"/>
+					</textElement>
+					<text><![CDATA[Quantidade]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="113" y="6" width="97" height="20" uuid="f63976ba-9556-4042-8b1d-966d46998d24">
+						<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+						<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+						<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+						<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+					</reportElement>
+					<textElement verticalAlignment="Middle">
+						<font isBold="true"/>
+						<paragraph leftIndent="2"/>
+					</textElement>
+					<text><![CDATA[Ano de entrada]]></text>
+				</staticText>
+				<line>
+					<reportElement x="0" y="5" width="555" height="1" uuid="51d8ea60-c866-447f-bbf0-e90e2299f359">
+						<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+						<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					</reportElement>
+					<graphicElement>
+						<pen lineWidth="1.5"/>
+					</graphicElement>
+				</line>
+				<staticText>
+					<reportElement x="305" y="6" width="100" height="20" uuid="660c2a8e-9355-4eb8-977c-0d75b20c27b0">
+						<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+						<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+						<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+					</reportElement>
+					<textElement verticalAlignment="Middle">
+						<font isBold="true"/>
+						<paragraph leftIndent="2"/>
+					</textElement>
+					<text><![CDATA[Recorridas]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="405" y="6" width="165" height="20" uuid="bcb11fdd-b0d4-43da-8b2f-b1874e310396">
+						<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+						<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+						<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+					</reportElement>
+					<textElement verticalAlignment="Middle">
+						<font isBold="true"/>
+						<paragraph leftIndent="2"/>
+					</textElement>
+					<text><![CDATA[Porcentagem de recorridas]]></text>
+				</staticText>
+			</band>
+			<band height="26">
+				<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				<printWhenExpression><![CDATA[$P{TP_CONSULTA} == 1 && $F{MES_NOTIFICACAO} == 0 && $F{DT_NOTIFICACAO} == null]]></printWhenExpression>
+				<line>
+					<reportElement x="0" y="5" width="555" height="1" uuid="f081320c-95fc-4599-b0f8-f10012cb22e2">
+						<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+						<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					</reportElement>
+					<graphicElement>
+						<pen lineWidth="1.5"/>
+					</graphicElement>
+				</line>
+				<staticText>
+					<reportElement x="8" y="6" width="110" height="20" uuid="f1577603-6306-417f-91f1-2e983ae61139">
+						<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+						<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+						<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+					</reportElement>
+					<textElement verticalAlignment="Middle">
+						<font isBold="true"/>
+						<paragraph leftIndent="2"/>
+					</textElement>
+					<text><![CDATA[Ano de entrada]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="118" y="6" width="110" height="20" uuid="a6f49748-95b9-4dd3-b04a-028d1d69bf99">
+						<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+						<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+						<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+					</reportElement>
+					<textElement verticalAlignment="Middle">
+						<font isBold="true"/>
+						<paragraph leftIndent="2"/>
+					</textElement>
+					<text><![CDATA[Quantidade]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="228" y="6" width="140" height="20" uuid="cac3a765-f1a8-4e8e-82ce-661c9226a0c2">
+						<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+						<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+						<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+					</reportElement>
+					<textElement verticalAlignment="Middle">
+						<font isBold="true"/>
+						<paragraph leftIndent="2"/>
+					</textElement>
+					<text><![CDATA[Recorridas]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="368" y="6" width="184" height="20" uuid="8778ed93-89a3-45d1-9e9b-76ef315374f1">
+						<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+						<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+						<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+					</reportElement>
+					<textElement verticalAlignment="Middle">
+						<font isBold="true"/>
+						<paragraph leftIndent="2"/>
+					</textElement>
+					<text><![CDATA[Porcentagem de recorridas]]></text>
+				</staticText>
+			</band>
+			<band height="26">
+				<printWhenExpression><![CDATA[$P{TP_CONSULTA} == 2 && $F{DT_NOTIFICACAO} != null]]></printWhenExpression>
+				<line>
+					<reportElement x="0" y="5" width="555" height="1" uuid="c0b2cae1-7504-4f7a-b96d-9930315e2928">
+						<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+						<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					</reportElement>
+					<graphicElement>
+						<pen lineWidth="1.5"/>
+					</graphicElement>
+				</line>
+				<staticText>
+					<reportElement x="8" y="6" width="116" height="20" uuid="7ad6f648-696b-42cc-a6a6-672df5643163">
+						<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+						<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+						<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+					</reportElement>
+					<textElement verticalAlignment="Middle">
+						<font isBold="true"/>
+						<paragraph leftIndent="2"/>
+					</textElement>
+					<text><![CDATA[Data de julgamento]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="124" y="6" width="85" height="20" uuid="402c7d0d-883e-4a8b-862d-6c3c697e976c">
+						<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+						<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+						<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+					</reportElement>
+					<textElement verticalAlignment="Middle">
+						<font isBold="true"/>
+						<paragraph leftIndent="2"/>
+					</textElement>
+					<text><![CDATA[Quantidade]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="209" y="6" width="90" height="20" uuid="6e47238f-83b1-428a-943c-7ee2d1dc915e">
+						<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+						<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+						<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+					</reportElement>
+					<textElement verticalAlignment="Middle">
+						<font isBold="true"/>
+						<paragraph leftIndent="2"/>
+					</textElement>
+					<text><![CDATA[Deferimentos]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="296" y="6" width="100" height="20" uuid="c6088e01-5263-4ccb-8aca-9cb9306db105">
+						<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+						<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+						<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+					</reportElement>
+					<textElement verticalAlignment="Middle">
+						<font isBold="true"/>
+						<paragraph leftIndent="2"/>
+					</textElement>
+					<text><![CDATA[Indeferimentos]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="388" y="6" width="164" height="20" uuid="cc47e068-874a-46bc-9361-c33a65595afe">
+						<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+						<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+						<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+					</reportElement>
+					<textElement verticalAlignment="Middle">
+						<font isBold="true"/>
+						<paragraph leftIndent="2"/>
+					</textElement>
+					<text><![CDATA[Tempo médio de julgamento]]></text>
+				</staticText>
+			</band>
+			<band height="26">
+				<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				<printWhenExpression><![CDATA[$P{TP_CONSULTA} == 2 && $F{MES_NOTIFICACAO} != null && $F{MES_NOTIFICACAO} != 0]]></printWhenExpression>
+				<line>
+					<reportElement x="0" y="5" width="555" height="1" uuid="6561102d-2dba-4224-801f-159816de0b3c">
+						<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+						<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					</reportElement>
+					<graphicElement>
+						<pen lineWidth="1.5"/>
+					</graphicElement>
+				</line>
+				<staticText>
+					<reportElement x="8" y="6" width="128" height="20" uuid="650ba568-ab85-48aa-85fb-0cf7b045504f">
+						<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+						<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+						<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+						<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+					</reportElement>
+					<textElement verticalAlignment="Middle">
+						<font isBold="true"/>
+						<paragraph leftIndent="2"/>
+					</textElement>
+					<text><![CDATA[Mês/ano de julgamento]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="136" y="6" width="75" height="20" uuid="9f1a4b7a-3a56-41c5-a56d-be3f42504f9e">
+						<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+						<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+						<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+					</reportElement>
+					<textElement verticalAlignment="Middle">
+						<font isBold="true"/>
+						<paragraph leftIndent="2"/>
+					</textElement>
+					<text><![CDATA[Quantidade]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="211" y="6" width="90" height="20" uuid="9fce20ac-f504-405b-a43b-620c5b34390e">
+						<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+						<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+						<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+					</reportElement>
+					<textElement verticalAlignment="Middle">
+						<font isBold="true"/>
+						<paragraph leftIndent="2"/>
+					</textElement>
+					<text><![CDATA[Deferimentos]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="298" y="6" width="100" height="20" uuid="816bbe98-cae7-4002-9307-6b868d3f87bb">
+						<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+						<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+						<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+					</reportElement>
+					<textElement verticalAlignment="Middle">
+						<font isBold="true"/>
+						<paragraph leftIndent="2"/>
+					</textElement>
+					<text><![CDATA[Indeferimentos]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="390" y="6" width="164" height="20" uuid="3b05d568-60e3-4435-8458-5cb55b507836">
+						<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+						<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+						<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+					</reportElement>
+					<textElement textAlignment="Left" verticalAlignment="Middle">
+						<font isBold="true"/>
+						<paragraph leftIndent="2"/>
+					</textElement>
+					<text><![CDATA[Tempo médio de julgamento]]></text>
+				</staticText>
+			</band>
+			<band height="26">
+				<printWhenExpression><![CDATA[$P{TP_CONSULTA} == 2 && $F{MES_NOTIFICACAO} == 0 && $F{DT_NOTIFICACAO} == null]]></printWhenExpression>
+				<line>
+					<reportElement x="0" y="5" width="555" height="1" uuid="217fe632-d129-4740-b265-2ab111817362">
+						<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+						<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					</reportElement>
+					<graphicElement>
+						<pen lineWidth="1.5"/>
+					</graphicElement>
+				</line>
+				<staticText>
+					<reportElement x="8" y="6" width="116" height="20" uuid="d1cbc3aa-d6c4-4353-b78b-5f8b41ba8c27">
+						<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+						<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+						<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+					</reportElement>
+					<textElement verticalAlignment="Middle">
+						<font isBold="true"/>
+						<paragraph leftIndent="2"/>
+					</textElement>
+					<text><![CDATA[Ano de julgamento]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="124" y="6" width="85" height="20" uuid="16d69f63-17c6-428a-a953-622cc8922e67">
+						<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+						<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+						<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+					</reportElement>
+					<textElement verticalAlignment="Middle">
+						<font isBold="true"/>
+						<paragraph leftIndent="2"/>
+					</textElement>
+					<text><![CDATA[Quantidade]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="209" y="6" width="90" height="20" uuid="32a70ede-f903-4c89-b5e1-85a892091e10">
+						<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+						<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+						<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+					</reportElement>
+					<textElement verticalAlignment="Middle">
+						<font isBold="true"/>
+						<paragraph leftIndent="2"/>
+					</textElement>
+					<text><![CDATA[Deferimentos]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="296" y="6" width="100" height="20" uuid="5d59253d-1906-48b9-921a-6f2f656a6422">
+						<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+						<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+						<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+					</reportElement>
+					<textElement verticalAlignment="Middle">
+						<font isBold="true"/>
+						<paragraph leftIndent="2"/>
+					</textElement>
+					<text><![CDATA[Indeferimentos]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="388" y="6" width="164" height="20" uuid="e1bec7f3-e714-4b09-8767-f920c0e28f27">
+						<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+						<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+						<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+					</reportElement>
+					<textElement verticalAlignment="Middle">
+						<font isBold="true"/>
+						<paragraph leftIndent="2"/>
+					</textElement>
+					<text><![CDATA[Tempo médio de julgamento]]></text>
+				</staticText>
+			</band>
+		</groupHeader>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="62" splitType="Stretch">
+			<textField>
+				<reportElement x="79" y="12" width="396" height="16" uuid="ef7a80e3-7214-4da0-ab84-ed24b523225e">
+					<printWhenExpression><![CDATA[$P{DS_TITULO_1} != null]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Center">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{DS_TITULO_1}]]></textFieldExpression>
+			</textField>
+			<image onErrorType="Blank">
+				<reportElement x="484" y="6" width="55" height="55" uuid="de727198-68f4-4ff6-8a17-221f79c746cd">
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+					<printWhenExpression><![CDATA[$P{LOGO_1} != null]]></printWhenExpression>
+				</reportElement>
+				<imageExpression><![CDATA[net.sf.jasperreports.engine.util.JRImageLoader.getInstance(new SimpleJasperReportsContext()).loadAwtImageFromBytes(javax.xml.bind.DatatypeConverter.parseBase64Binary($P{LOGO_2}))]]></imageExpression>
+			</image>
+			<image onErrorType="Blank">
+				<reportElement x="18" y="6" width="57" height="56" uuid="b2e7e7d3-de32-4e64-a0fb-758942a7c11b">
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<printWhenExpression><![CDATA[$P{LOGO_1} != null]]></printWhenExpression>
+				</reportElement>
+				<imageExpression><![CDATA[net.sf.jasperreports.engine.util.JRImageLoader.getInstance(new SimpleJasperReportsContext()).loadAwtImageFromBytes(javax.xml.bind.DatatypeConverter.parseBase64Binary($P{LOGO_1}))]]></imageExpression>
+			</image>
+			<textField>
+				<reportElement x="79" y="29" width="396" height="16" uuid="ad4f51c3-9160-497d-be79-4dce76335b3a">
+					<printWhenExpression><![CDATA[$P{DS_TITULO_2} != null]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Center">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{DS_TITULO_2}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="79" y="46" width="396" height="16" uuid="6a3d534a-c5f6-4feb-9cc3-9176d8405775">
+					<printWhenExpression><![CDATA[$P{DS_TITULO_3} != null]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Center">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{DS_TITULO_3}]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="70">
+			<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+			<printWhenExpression><![CDATA[new Boolean($V{PAGE_NUMBER}.intValue() == 1)]]></printWhenExpression>
+			<line>
+				<reportElement x="18" y="8" width="511" height="1" uuid="0b42b3f5-71b6-4394-9904-6d1068724048">
+					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+				</reportElement>
+				<graphicElement>
+					<pen lineWidth="2.0"/>
+				</graphicElement>
+			</line>
+			<textField>
+				<reportElement x="0" y="16" width="555" height="30" uuid="7893497e-ca7b-48a0-96c7-946a4280b4e8"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{TP_CONSULTA} == 1 ? "RELATÓRIO DE ENTRADAS DE NOTIFICAÇÕES DE INFRAÇÃO (NA)" : $P{TP_CONSULTA} == 2 ? "RELATÓRIO DE JULGAMENTOS DE DEFESA" : "RELATÓRIO DE NOTIFICAÇÕES DE INFRAÇÃO (NA)"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="8" y="49" width="531" height="21" uuid="f6b2a1f0-b10a-4c32-83ae-cb409adefb71">
+					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+				</reportElement>
+				<textElement verticalAlignment="Middle" markup="html"/>
+				<textFieldExpression><![CDATA[$P{TP_CONSULTA} == 1 ? "<b>Data inicial de entrada: </b>" + $P{DT_INICIAL} + "&nbsp;&nbsp; <b>Data final de entrada: </b>" + $P{DT_FINAL} : $P{TP_CONSULTA} == 2 ? "<b>Data inicial de julgamento: </b>" + $P{DT_INICIAL} + "&nbsp;&nbsp; <b>Data final de julgamento: </b>" + $P{DT_FINAL} : "<b>Data inicial: </b>" + $P{DT_INICIAL} + "&nbsp;&nbsp; <b>Data final: </b>" + $P{DT_FINAL}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<detail>
+		<band height="32">
+			<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+			<printWhenExpression><![CDATA[$P{TP_CONSULTA} == 1 && $F{DT_NOTIFICACAO} != null]]></printWhenExpression>
+			<rectangle>
+				<reportElement x="0" y="0" width="555" height="32" backcolor="#DEDEDE" uuid="ef10140c-3832-4cdb-8a43-cfbdab09eacd">
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+					<printWhenExpression><![CDATA[($V{REPORT_COUNT}.intValue() % 2) == 0]]></printWhenExpression>
+				</reportElement>
+				<graphicElement>
+					<pen lineColor="#FFFFFF"/>
+				</graphicElement>
+			</rectangle>
+			<textField pattern="dd/MM/yyyy" isBlankWhenNull="true">
+				<reportElement x="8" y="4" width="110" height="20" uuid="bb95f946-729b-458e-91ee-315d4cf48e3a">
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+				</reportElement>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{DT_NOTIFICACAO}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="false">
+				<reportElement x="118" y="4" width="110" height="20" uuid="8d49808a-58c8-46c6-9e27-50d41e3660ac">
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+				</reportElement>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{QT_NOTIFICACAO}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="false">
+				<reportElement x="228" y="4" width="140" height="20" uuid="7ba25121-2478-4e5f-95d6-3f73fdea0ff8">
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+				</reportElement>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{QT_RECORRIDA}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="false">
+				<reportElement x="368" y="4" width="142" height="20" uuid="b565c70c-a6a3-47a5-813e-c88ef5c6ccfc">
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+				</reportElement>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<textFieldExpression><![CDATA[String.format(new java.util.Locale("pt", "BR"), "%.2f", (($F{QT_RECORRIDA} / $F{QT_NOTIFICACAO}) * 100 )) + "%"]]></textFieldExpression>
+			</textField>
+		</band>
+		<band height="32">
+			<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+			<printWhenExpression><![CDATA[$P{TP_CONSULTA} == 1 && $F{MES_NOTIFICACAO} != null && $F{MES_NOTIFICACAO} != 0]]></printWhenExpression>
+			<rectangle>
+				<reportElement x="0" y="0" width="555" height="32" backcolor="#DEDEDE" uuid="a9b99f9a-3ca7-42c7-b269-e552035de4a6">
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+					<printWhenExpression><![CDATA[($V{REPORT_COUNT}.intValue() % 2) == 0]]></printWhenExpression>
+				</reportElement>
+				<graphicElement>
+					<pen lineColor="#FFFFFF"/>
+				</graphicElement>
+			</rectangle>
+			<textField pattern="" isBlankWhenNull="true">
+				<reportElement x="8" y="4" width="105" height="20" uuid="151a5a58-e70d-4010-ae09-788924eaaa41">
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+				</reportElement>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new java.text.DateFormatSymbols(new java.util.Locale("pt", "BR")).getMonths()[$F{MES_NOTIFICACAO} - 1]]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="false">
+				<reportElement x="113" y="4" width="97" height="20" uuid="68480f1f-6fcd-4a34-bfb5-65b75053fea2">
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+				</reportElement>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{ANO_NOTIFICACAO}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="false">
+				<reportElement x="210" y="4" width="95" height="20" uuid="89e05bdf-0c82-4158-a9c1-d5121828cbff">
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+				</reportElement>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{QT_NOTIFICACAO}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="false">
+				<reportElement x="305" y="4" width="100" height="20" uuid="2828010d-9927-4d16-befb-b3b7f28e249d">
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+				</reportElement>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{QT_RECORRIDA}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="false">
+				<reportElement x="405" y="4" width="142" height="20" uuid="cbc57ab7-4c2c-4a0e-840a-d0dc6375806b">
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+				</reportElement>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<textFieldExpression><![CDATA[String.format(new java.util.Locale("pt", "BR"), "%.2f", (($F{QT_RECORRIDA} / $F{QT_NOTIFICACAO}) * 100 )) + "%"]]></textFieldExpression>
+			</textField>
+		</band>
+		<band height="32">
+			<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+			<printWhenExpression><![CDATA[$P{TP_CONSULTA} == 1 && $F{MES_NOTIFICACAO} == 0 && $F{DT_NOTIFICACAO} == null]]></printWhenExpression>
+			<rectangle>
+				<reportElement x="0" y="0" width="555" height="32" backcolor="#DEDEDE" uuid="98500cd5-9e96-4ff6-ba87-bfefd0d13669">
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+					<printWhenExpression><![CDATA[($V{REPORT_COUNT}.intValue() % 2) == 0]]></printWhenExpression>
+				</reportElement>
+				<graphicElement>
+					<pen lineColor="#FFFFFF"/>
+				</graphicElement>
+			</rectangle>
+			<textField pattern="" isBlankWhenNull="true">
+				<reportElement x="8" y="4" width="110" height="20" uuid="d056f55c-c295-48c8-833e-388e26af08c7">
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+				</reportElement>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{ANO_NOTIFICACAO}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="false">
+				<reportElement x="118" y="4" width="110" height="20" uuid="f9674e16-50f5-435f-be45-b9b0cb772059">
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+				</reportElement>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{QT_NOTIFICACAO}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="false">
+				<reportElement x="228" y="4" width="140" height="20" uuid="bd594eca-32df-4f03-9279-c87e305fb83d">
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+				</reportElement>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{QT_RECORRIDA}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="false">
+				<reportElement x="368" y="4" width="142" height="20" uuid="91b46a5f-5637-4418-9117-c2964be6c9a0">
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+				</reportElement>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<textFieldExpression><![CDATA[String.format(new java.util.Locale("pt", "BR"), "%.2f", (($F{QT_RECORRIDA} / $F{QT_NOTIFICACAO}) * 100 )) + "%"]]></textFieldExpression>
+			</textField>
+		</band>
+		<band height="32">
+			<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+			<printWhenExpression><![CDATA[$P{TP_CONSULTA} == 2 && $F{DT_NOTIFICACAO} != null]]></printWhenExpression>
+			<rectangle>
+				<reportElement x="0" y="0" width="555" height="32" backcolor="#DEDEDE" uuid="cbdd927e-9e5f-41d6-9e6e-152b121450fe">
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+					<printWhenExpression><![CDATA[($V{REPORT_COUNT}.intValue() % 2) == 0]]></printWhenExpression>
+				</reportElement>
+				<graphicElement>
+					<pen lineColor="#FFFFFF"/>
+				</graphicElement>
+			</rectangle>
+			<textField pattern="dd/MM/yyyy" isBlankWhenNull="true">
+				<reportElement x="8" y="4" width="116" height="20" uuid="c0a6204e-0094-4994-b17a-1d15f9e95d00">
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+				</reportElement>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{DT_NOTIFICACAO}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="false">
+				<reportElement x="124" y="4" width="85" height="20" uuid="7ffff9af-f8f3-48b6-b7df-f1319adc2141">
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+				</reportElement>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{QT_NOTIFICACAO}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="false">
+				<reportElement x="209" y="4" width="90" height="20" uuid="f98e7ca1-3e07-4510-9aaa-f840535e0960">
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+				</reportElement>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<textFieldExpression><![CDATA[String.format(new java.util.Locale("pt", "BR"), "%.2f", $F{PR_DEFERIMENTO}) + "%"]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="false">
+				<reportElement x="296" y="4" width="100" height="20" uuid="6417807f-d5ea-491a-9106-8fd08d990d80">
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+				</reportElement>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<textFieldExpression><![CDATA[String.format(new java.util.Locale("pt", "BR"), "%.2f", $F{PR_INDEFERIMENTO}) + "%"]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="false">
+				<reportElement x="388" y="4" width="174" height="20" uuid="22e784f5-0ac0-4abf-8c66-9c63080a8936">
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+				</reportElement>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{TEMPO_JULGAMENTO} + " dias"]]></textFieldExpression>
+			</textField>
+		</band>
+		<band height="32">
+			<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+			<printWhenExpression><![CDATA[$P{TP_CONSULTA} == 2 && $F{MES_NOTIFICACAO} != null && $F{MES_NOTIFICACAO} != 0]]></printWhenExpression>
+			<rectangle>
+				<reportElement x="0" y="0" width="555" height="32" backcolor="#DEDEDE" uuid="7145993d-fd2b-4819-9876-836b769e8f83">
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+					<printWhenExpression><![CDATA[($V{REPORT_COUNT}.intValue() % 2) == 0]]></printWhenExpression>
+				</reportElement>
+				<graphicElement>
+					<pen lineColor="#FFFFFF"/>
+				</graphicElement>
+			</rectangle>
+			<textField pattern="" isBlankWhenNull="true">
+				<reportElement x="8" y="4" width="128" height="20" uuid="fa0f18d8-7f96-4c49-ab63-ba837fb86230">
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+				</reportElement>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new java.text.DateFormatSymbols(new java.util.Locale("pt", "BR")).getMonths()[$F{MES_NOTIFICACAO} - 1] + "/" + $F{ANO_NOTIFICACAO}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="false">
+				<reportElement x="136" y="4" width="75" height="20" uuid="698be7b0-1ea4-4928-a00e-78cc05f17424">
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+				</reportElement>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{QT_NOTIFICACAO}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="false">
+				<reportElement x="211" y="4" width="90" height="20" uuid="c39c708d-9ac7-4ec0-9aa0-4267910d39ee">
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+				</reportElement>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<textFieldExpression><![CDATA[String.format(new java.util.Locale("pt", "BR"), "%.2f", $F{PR_DEFERIMENTO}) + "%"]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="false">
+				<reportElement x="298" y="4" width="100" height="20" uuid="b7974f4e-6506-4c3d-8bc0-53d306cdc762">
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+				</reportElement>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<textFieldExpression><![CDATA[String.format(new java.util.Locale("pt", "BR"), "%.2f", $F{PR_INDEFERIMENTO}) + "%"]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="false">
+				<reportElement x="390" y="4" width="156" height="20" uuid="79cc4e7d-6d4f-4eac-8b7c-9ad5444b799d">
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+				</reportElement>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{TEMPO_JULGAMENTO} + " dias"]]></textFieldExpression>
+			</textField>
+		</band>
+		<band height="32">
+			<printWhenExpression><![CDATA[$P{TP_CONSULTA} == 2 && $F{MES_NOTIFICACAO} == 0 && $F{DT_NOTIFICACAO} == null]]></printWhenExpression>
+			<rectangle>
+				<reportElement x="0" y="0" width="555" height="32" backcolor="#DEDEDE" uuid="b7e0ac2b-fd3e-4b2a-abb4-f1233270e692">
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+					<printWhenExpression><![CDATA[($V{REPORT_COUNT}.intValue() % 2) == 0]]></printWhenExpression>
+				</reportElement>
+				<graphicElement>
+					<pen lineColor="#FFFFFF"/>
+				</graphicElement>
+			</rectangle>
+			<textField pattern="" isBlankWhenNull="true">
+				<reportElement x="8" y="4" width="116" height="20" uuid="76003bd6-995e-42e9-8c51-23cfea86f9f1">
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+				</reportElement>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{ANO_NOTIFICACAO}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="false">
+				<reportElement x="124" y="4" width="85" height="20" uuid="b91e338e-1728-4745-95af-cb2fb2afab2a">
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+				</reportElement>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{QT_NOTIFICACAO}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="false">
+				<reportElement x="209" y="4" width="90" height="20" uuid="0ade5583-f24b-4291-b2f4-5fb1522512a5">
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+				</reportElement>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<textFieldExpression><![CDATA[String.format(new java.util.Locale("pt", "BR"), "%.2f", $F{PR_DEFERIMENTO}) + "%"]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="false">
+				<reportElement x="296" y="4" width="100" height="20" uuid="040c44a6-0ba0-4888-9bbe-09a826e3eace">
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+				</reportElement>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<textFieldExpression><![CDATA[String.format(new java.util.Locale("pt", "BR"), "%.2f", $F{PR_INDEFERIMENTO}) + "%"]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="false">
+				<reportElement x="388" y="4" width="174" height="20" uuid="2974da35-5a83-40a9-9314-dfe22ebdc3f9">
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+				</reportElement>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{TEMPO_JULGAMENTO} + " dias"]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="50"/>
+	</pageFooter>
+</jasperReport>

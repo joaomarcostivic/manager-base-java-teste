@@ -1,0 +1,263 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.0.3.final using JasperReports Library version 6.0.3  -->
+<!-- 2016-06-20T05:48:03 -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="estoque_produtos" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="685b275b-3095-430e-97ff-37d9f0e15d5c">
+	<property name="ireport.zoom" value="2.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="22"/>
+	<parameter name="nmRazaoSocial" class="java.lang.String"/>
+	<parameter name="dtHoje" class="java.lang.String"/>
+	<parameter name="hrHoje" class="java.lang.String"/>
+	<parameter name="nmUsuario" class="java.lang.String"/>
+	<parameter name="dtEstoque" class="java.lang.String"/>
+	<parameter name="nmEmail" class="java.lang.String"/>
+	<parameter name="nmDesenvolvedor" class="java.lang.String"/>
+	<parameter name="NM_INSTITUICAO" class="java.lang.String"/>
+	<parameter name="NM_ALUNO" class="java.lang.String"/>
+	<parameter name="NM_LOGRADOURO" class="java.lang.String"/>
+	<parameter name="CL_FAIXA_ETARIA" class="java.lang.String"/>
+	<parameter name="NM_MODALIDADE_CURSO" class="java.lang.String"/>
+	<parameter name="CL_SEXO" class="java.lang.String"/>
+	<parameter name="CL_RACA" class="java.lang.String"/>
+	<parameter name="CL_NOME_PAI_DECLARADO" class="java.lang.String"/>
+	<parameter name="CL_RECEBE_BOLSA_FAMILIA" class="java.lang.String"/>
+	<parameter name="CL_TRANSPORTADO" class="java.lang.String"/>
+	<parameter name="NM_DEFICIENCIA" class="java.lang.String"/>
+	<parameter name="NM_DOENCA" class="java.lang.String"/>
+	<parameter name="NM_ALERGIA" class="java.lang.String"/>
+	<parameter name="NM_PERIODO_LETIVO" class="java.lang.String"/>
+	<parameter name="CL_TURNO" class="java.lang.String"/>
+	<parameter name="CL_TP_LOCALIZACAO_DIFERENCIADA" class="java.lang.String"/>
+	<parameter name="NM_TITULO_RELATORIO" class="java.lang.String"/>
+	<parameter name="CL_MODALIDADE" class="java.lang.String"/>
+	<parameter name="QT_MATRICULADOS_ZONA_URBANA" class="java.lang.Integer"/>
+	<parameter name="QT_MATRICULADOS_ZONA_RURAL" class="java.lang.Integer"/>
+	<parameter name="QT_MATRICULADOS_CRECHE" class="java.lang.Integer"/>
+	<field name="DT_NM_NASCIMENTO" class="java.lang.String"/>
+	<field name="NM_NATURALIDADE" class="java.lang.String"/>
+	<field name="NM_ALUNO" class="java.lang.String"/>
+	<field name="NM_MAE" class="java.lang.String"/>
+	<field name="NR_TELEFONE" class="java.lang.String"/>
+	<field name="NM_EMAIL" class="java.lang.String"/>
+	<field name="NM_LOGRADOURO" class="java.lang.String"/>
+	<field name="CL_ST_ALUNO" class="java.lang.String"/>
+	<field name="CL_TURMA" class="java.lang.String"/>
+	<field name="NM_MODALIDADE_CURSO" class="java.lang.String"/>
+	<field name="NM_INSTITUICAO" class="java.lang.String"/>
+	<field name="NM_ZONA" class="java.lang.String"/>
+	<field name="CL_TURNO" class="java.lang.String"/>
+	<field name="CD_CURSO" class="java.lang.String"/>
+	<field name="CL_ANO_NASCIMENTO" class="java.lang.String"/>
+	<field name="CL_SEXO" class="java.lang.String"/>
+	<field name="CL_RACA" class="java.lang.String"/>
+	<field name="CL_NOME_PAI_DECLARADO" class="java.lang.String"/>
+	<field name="NR_MATRICULA" class="java.lang.String"/>
+	<field name="TP_TURNO" class="java.lang.Integer"/>
+	<variable name="qtAlunosInstituicao" class="java.lang.Integer" resetType="Group" resetGroup="Instituicao" calculation="Count">
+		<variableExpression><![CDATA[$F{NM_INSTITUICAO}]]></variableExpression>
+	</variable>
+	<variable name="qtAlunosZona" class="java.lang.Integer" resetType="Group" resetGroup="Zona" calculation="Count">
+		<variableExpression><![CDATA[$F{NM_ZONA}]]></variableExpression>
+	</variable>
+	<variable name="qtAlunos" class="java.lang.Integer" calculation="Count">
+		<variableExpression><![CDATA[$F{NM_ALUNO}]]></variableExpression>
+	</variable>
+	<group name="Zona" isStartNewPage="true">
+		<groupExpression><![CDATA[$F{NM_ZONA}]]></groupExpression>
+		<groupHeader>
+			<band height="30">
+				<textField>
+					<reportElement x="0" y="0" width="556" height="30" uuid="fa14a8a8-c34b-45b8-8ee2-6c676601bea9">
+						<property name="local_mesure_unitheight" value="pixel"/>
+						<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					</reportElement>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="SansSerif" size="14" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA["Zona " + $F{NM_ZONA}]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupHeader>
+		<groupFooter>
+			<band height="13">
+				<textField>
+					<reportElement positionType="Float" mode="Opaque" x="0" y="0" width="555" height="13" backcolor="#A6A6A6" uuid="15579410-894d-497f-8a40-4965a4afa46f">
+						<property name="local_mesure_unitheight" value="pixel"/>
+						<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					</reportElement>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font fontName="SansSerif" size="8" isBold="false"/>
+					</textElement>
+					<textFieldExpression><![CDATA["Total de alunos na zona "+$F{NM_ZONA}+": " + $V{qtAlunosZona}]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupFooter>
+	</group>
+	<group name="Instituicao" keepTogether="true">
+		<groupExpression><![CDATA[$F{NM_INSTITUICAO}]]></groupExpression>
+		<groupHeader>
+			<band height="51">
+				<textField>
+					<reportElement x="0" y="0" width="556" height="37" uuid="f6f5d51a-0665-4622-9014-9c9e2cc88dad">
+						<property name="local_mesure_unitheight" value="pixel"/>
+						<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					</reportElement>
+					<textElement verticalAlignment="Middle">
+						<font fontName="SansSerif" size="14" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{NM_INSTITUICAO}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="46" y="40" width="155" height="10" uuid="041ea3b4-5374-4975-96fe-06f9aee1837c"/>
+					<textElement>
+						<font size="6"/>
+					</textElement>
+					<text><![CDATA[Aluno]]></text>
+				</staticText>
+				<line>
+					<reportElement x="1" y="49" width="555" height="2" uuid="aee11a31-3b64-4f9d-acbc-a13b496e51db"/>
+					<graphicElement>
+						<pen lineWidth="1.5"/>
+					</graphicElement>
+				</line>
+				<staticText>
+					<reportElement x="1" y="40" width="44" height="10" uuid="8a70e5b8-8b1b-40a4-86d3-d13aa407b33f"/>
+					<textElement>
+						<font size="6"/>
+					</textElement>
+					<text><![CDATA[Matrícula]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="281" y="40" width="272" height="10" uuid="2687f19f-055c-4fe9-bc6b-3192a14426c5"/>
+					<textElement>
+						<font size="6"/>
+					</textElement>
+					<text><![CDATA[Turma]]></text>
+				</staticText>
+				<line>
+					<reportElement x="1" y="37" width="555" height="2" uuid="6978ee43-d8c9-443b-9788-dffa5f623354"/>
+					<graphicElement>
+						<pen lineWidth="1.5"/>
+					</graphicElement>
+				</line>
+				<staticText>
+					<reportElement x="204" y="40" width="70" height="10" uuid="9326634c-2159-49a0-bec8-d051e2933a66"/>
+					<textElement>
+						<font size="6"/>
+					</textElement>
+					<text><![CDATA[Nascimento]]></text>
+				</staticText>
+			</band>
+		</groupHeader>
+		<groupFooter>
+			<band height="13">
+				<textField>
+					<reportElement positionType="Float" mode="Opaque" x="0" y="0" width="555" height="13" backcolor="#A6A6A6" uuid="7c73f2ac-4cce-4794-8f80-395a74818d76">
+						<property name="local_mesure_unitheight" value="pixel"/>
+						<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					</reportElement>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font fontName="SansSerif" size="8" isBold="false"/>
+					</textElement>
+					<textFieldExpression><![CDATA["Total de alunos na instituição "+$F{NM_INSTITUICAO}+": " + $V{qtAlunosInstituicao}]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupFooter>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="43">
+			<textField isBlankWhenNull="true">
+				<reportElement x="0" y="2" width="552" height="16" uuid="d95120a9-93ca-4e71-9e3d-5c51e6d2eb66"/>
+				<textElement textAlignment="Center" verticalAlignment="Bottom" markup="none">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{nmRazaoSocial}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="0" y="42" width="553" height="1" uuid="618e4e35-7abc-400c-af9f-30e1303885bd"/>
+			</line>
+			<textField>
+				<reportElement x="0" y="18" width="552" height="25" uuid="543e00b0-e035-4cd0-90ad-2a131880be2b">
+					<property name="local_mesure_unitheight" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="14" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{NM_TITULO_RELATORIO}]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<detail>
+		<band height="11" splitType="Stretch">
+			<textField isBlankWhenNull="true">
+				<reportElement x="44" y="1" width="155" height="8" uuid="e8e140a9-f8e6-4b53-ab2d-021ba35296b1"/>
+				<textElement>
+					<font size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{NM_ALUNO}]]></textFieldExpression>
+			</textField>
+			<textField pattern="" isBlankWhenNull="true">
+				<reportElement x="203" y="1" width="70" height="8" uuid="afd54f89-8e0a-4701-b6e1-53e9394a081a"/>
+				<textElement>
+					<font size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{DT_NM_NASCIMENTO}]]></textFieldExpression>
+			</textField>
+			<textField pattern="" isBlankWhenNull="true">
+				<reportElement x="280" y="1" width="272" height="8" uuid="128fa60a-97a4-4173-b759-923ecaeaaa65"/>
+				<textElement>
+					<font size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{NM_MODALIDADE_CURSO} + " - " + $F{CL_TURMA} + " - " + $F{CL_TURNO}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="-1" y="1" width="45" height="8" uuid="77ddd59f-190e-4171-ab78-a70bfa2ef7bd"/>
+				<textElement>
+					<font size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{NR_MATRICULA}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="-1" y="10" width="555" height="1" uuid="6eb096cd-26a0-4802-b68b-0a19eb537a24"/>
+				<graphicElement>
+					<pen lineWidth="1.0" lineStyle="Dotted"/>
+				</graphicElement>
+			</line>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="15">
+			<textField>
+				<reportElement x="214" y="2" width="339" height="13" uuid="b4535353-a90a-4520-8dc4-8400a0e2fed5"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="5" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Emitido em " + $P{dtHoje} + " às " + $P{hrHoje} + " por " + $P{nmUsuario} + "   Página: " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="-1" y="1" width="555" height="1" uuid="6978ee43-d8c9-443b-9788-dffa5f623354"/>
+				<graphicElement>
+					<pen lineWidth="1.0"/>
+				</graphicElement>
+			</line>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="48" splitType="Stretch">
+			<textField isBlankWhenNull="true">
+				<reportElement mode="Opaque" x="-1" y="0" width="557" height="48" backcolor="#CCCCCC" uuid="06aab80c-164a-4cf9-9c0c-b72ad585dba4"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["TOTAL ZONA URBANA: " + $P{QT_MATRICULADOS_ZONA_URBANA}+" \n" + 
+"TOTAL ZONA RURAL: " + $P{QT_MATRICULADOS_ZONA_RURAL}+" \n" +
+"TOTAL CRECHES: " + $P{QT_MATRICULADOS_CRECHE}+" \n" +
+"TOTAL: "+$V{qtAlunos}]]></textFieldExpression>
+			</textField>
+		</band>
+	</summary>
+</jasperReport>

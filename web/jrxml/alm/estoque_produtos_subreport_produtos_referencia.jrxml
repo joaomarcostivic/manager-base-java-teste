@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="estoque_produtos_subreport_produtos_referencia" language="groovy" pageWidth="555" pageHeight="802" columnWidth="555" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="7a70dcbe-57c3-4a6c-877a-a0242e2a60a1">
+	<property name="ireport.zoom" value="4.0"/>
+	<property name="ireport.x" value="765"/>
+	<property name="ireport.y" value="0"/>
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<field name="NM_REFERENCIA" class="java.lang.String"/>
+	<field name="QT_ENTRADA" class="java.lang.Double"/>
+	<field name="DT_VALIDADE" class="java.lang.String"/>
+	<field name="NM_LOCAL_ARMAZENAMENTO" class="java.lang.String"/>
+	<columnHeader>
+		<band height="7">
+			<staticText>
+				<reportElement uuid="7a70b4ef-7ae2-4013-aedc-ddd713a373c9" mode="Opaque" x="188" y="0" width="33" height="7" backcolor="#CCCCCC"/>
+				<textElement>
+					<font size="5" isBold="true"/>
+				</textElement>
+				<text><![CDATA[REFERÊNCIA]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="44e6bb13-b388-4260-85f0-542874da9727" mode="Opaque" x="266" y="0" width="30" height="7" isPrintWhenDetailOverflows="true" backcolor="#CCCCCC"/>
+				<textElement textAlignment="Right">
+					<font size="5" isBold="true"/>
+				</textElement>
+				<text><![CDATA[QTDE/PESO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="db0d3f5a-ed95-4134-b586-9e29509c15ac" mode="Opaque" x="407" y="0" width="18" height="7" isPrintWhenDetailOverflows="true" backcolor="#CCCCCC"/>
+				<textElement>
+					<font size="5" isBold="true"/>
+				</textElement>
+				<text><![CDATA[LOCAL]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="7503a248-be0f-44d9-9e76-0430f311f50d" mode="Opaque" x="359" y="0" width="26" height="7" backcolor="#CCCCCC"/>
+				<textElement>
+					<font size="5" isBold="true"/>
+				</textElement>
+				<text><![CDATA[VALIDADE]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="8" splitType="Stretch">
+			<textField isBlankWhenNull="true">
+				<reportElement uuid="e8e140a9-f8e6-4b53-ab2d-021ba35296b1" x="408" y="0" width="153" height="8" isPrintWhenDetailOverflows="true"/>
+				<textElement>
+					<font size="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{NM_LOCAL_ARMAZENAMENTO}]]></textFieldExpression>
+			</textField>
+			<textField pattern="###0.00" isBlankWhenNull="true">
+				<reportElement uuid="e8e140a9-f8e6-4b53-ab2d-021ba35296b1" x="254" y="0" width="42" height="8"/>
+				<textElement textAlignment="Right">
+					<font size="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new DecimalFormat("#,##0.00;-#,##0.00", new java.text.DecimalFormatSymbols(new java.util.Locale("pt", "BR"))).format($F{QT_ENTRADA})]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement uuid="e8e140a9-f8e6-4b53-ab2d-021ba35296b1" x="189" y="0" width="51" height="8"/>
+				<textElement>
+					<font size="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{NM_REFERENCIA}]]></textFieldExpression>
+			</textField>
+			<textField pattern="" isBlankWhenNull="true">
+				<reportElement uuid="e8e140a9-f8e6-4b53-ab2d-021ba35296b1" x="360" y="0" width="37" height="8"/>
+				<textElement>
+					<font size="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{DT_VALIDADE}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+</jasperReport>

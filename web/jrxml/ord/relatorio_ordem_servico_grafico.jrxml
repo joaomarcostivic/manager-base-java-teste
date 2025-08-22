@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.1.1.final using JasperReports Library version 6.1.1  -->
+<!-- 2017-08-30T18:20:11 -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="relatorio_ordem_servico_quantitativo" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="685b275b-3095-430e-97ff-37d9f0e15d5c">
+	<property name="ireport.zoom" value="2.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="22"/>
+	<property name="com.jaspersoft.studio.unit." value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.pageHeight" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.pageWidth" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.topMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.bottomMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.leftMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.rightMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.columnWidth" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.columnSpacing" value="pixel"/>
+	<parameter name="IMG_LOGOMARCA" class="byte[]" isForPrompting="false"/>
+	<parameter name="NR_ORDEM_SERVICO" class="java.lang.String"/>
+	<parameter name="NM_RELATORIO" class="java.lang.String"/>
+	<parameter name="NM_AGRUPAMENTO" class="java.lang.String"/>
+	<parameter name="QTD_TOTAL_QUANTITATIVO" class="java.lang.Integer"/>
+	<parameter name="DT_RELATORIO" class="java.lang.String"/>
+	<parameter name="HR_RELATORIO" class="java.lang.String"/>
+	<parameter name="DS_PAGE_HEADER" class="java.lang.String"/>
+	<parameter name="NM_USUARIO" class="java.lang.String"/>
+	<field name="NM_GRUPO" class="java.lang.String"/>
+	<field name="QTD_ORDEM_SERVICO" class="java.lang.Integer"/>
+	<title>
+		<band height="57" splitType="Immediate">
+			<image scaleImage="RetainShape" hAlign="Left">
+				<reportElement x="0" y="1" width="78" height="55" isRemoveLineWhenBlank="true" uuid="fe1286ce-e4e0-4542-a5c3-49b997041c31"/>
+				<imageExpression><![CDATA[net.sf.jasperreports.engine.util.JRImageLoader.loadImage((byte[]) $P{IMG_LOGOMARCA})]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="0" y="1" width="800" height="17" uuid="515d743d-de45-41a6-ba9e-ac01fd2f0cbc">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Prefeitura Municipal de Vitória da Conquista]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="18" width="799" height="16" uuid="4ae1457c-1b83-4b3a-a653-a37b888fcb15"/>
+				<box>
+					<topPen lineStyle="Solid"/>
+					<leftPen lineStyle="Solid"/>
+					<bottomPen lineStyle="Solid"/>
+					<rightPen lineStyle="Solid"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Secretaria de Educação]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="34" width="799" height="21" uuid="06d18fc3-16ca-4a3b-9a92-6d547d208a89"/>
+				<textElement textAlignment="Center">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Setor de Obras]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="41" splitType="Prevent">
+			<textField>
+				<reportElement x="0" y="4" width="800" height="19" uuid="8eafea70-c75a-4bce-9e31-b73a8db001ac"/>
+				<textElement textAlignment="Center">
+					<font size="11" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{NM_RELATORIO}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement positionType="Float" x="0" y="25" width="800" height="15" uuid="62d13059-d6d2-4fd4-94c0-f84e3560fe39">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<textElement textAlignment="Left">
+					<font size="9" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{DS_PAGE_HEADER}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="0" y="23" width="800" height="1" uuid="b427248c-f55b-4ee8-b33f-b2b6288329fe">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+			</line>
+			<line>
+				<reportElement positionType="FixRelativeToBottom" x="0" y="40" width="800" height="1" uuid="c8233f07-f868-48b0-be68-a136748f0263">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+			</line>
+		</band>
+	</pageHeader>
+	<pageFooter>
+		<band height="14">
+			<textField>
+				<reportElement x="764" y="3" width="35" height="11" uuid="751c8024-e85c-41cc-a8df-17f92a602fe2"/>
+				<textElement textAlignment="Right">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="0" y="3" width="800" height="1" uuid="2485958a-f88a-46e8-baf7-d649b527535c">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+			</line>
+		</band>
+	</pageFooter>
+	<lastPageFooter>
+		<band height="12">
+			<textField>
+				<reportElement x="764" y="1" width="35" height="11" uuid="0556c60d-0e49-4780-b25b-853b3178c2b5"/>
+				<textElement textAlignment="Right">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement positionType="FixRelativeToBottom" x="0" y="0" width="251" height="12" uuid="cc32a41c-a05e-4e22-9403-0c236ac7b6c7"/>
+				<textElement>
+					<font size="8" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Emitido por: "+$P{NM_USUARIO}+" em "+$P{DT_RELATORIO}+" às "+$P{HR_RELATORIO}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="0" y="0" width="800" height="1" uuid="e57a061a-a28d-415d-9673-84356bae65fa">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+			</line>
+		</band>
+	</lastPageFooter>
+	<summary>
+		<band height="296" splitType="Immediate">
+			<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+			<barChart>
+				<chart evaluationTime="Column">
+					<reportElement positionType="Float" x="0" y="0" width="800" height="296" uuid="3259eee6-4a19-48e0-ad46-dfdb1185a80e"/>
+					<chartTitle/>
+					<chartSubtitle/>
+					<chartLegend/>
+				</chart>
+				<categoryDataset>
+					<dataset resetType="Column"/>
+					<categorySeries>
+						<seriesExpression><![CDATA[$F{NM_GRUPO}]]></seriesExpression>
+						<categoryExpression><![CDATA[$F{NM_GRUPO}]]></categoryExpression>
+						<valueExpression><![CDATA[$F{QTD_ORDEM_SERVICO}]]></valueExpression>
+						<labelExpression><![CDATA[$F{NM_GRUPO}]]></labelExpression>
+					</categorySeries>
+				</categoryDataset>
+				<barPlot>
+					<plot labelRotation="0.0"/>
+					<itemLabel>
+						<font size="8"/>
+					</itemLabel>
+					<categoryAxisFormat labelRotation="0.0">
+						<axisFormat labelColor="#000000" tickLabelColor="#000000" verticalTickLabels="true" axisLineColor="#000000">
+							<labelFont>
+								<font size="8"/>
+							</labelFont>
+							<tickLabelFont>
+								<font size="8"/>
+							</tickLabelFont>
+						</axisFormat>
+					</categoryAxisFormat>
+					<valueAxisFormat>
+						<axisFormat labelColor="#000000" tickLabelColor="#000000" axisLineColor="#000000">
+							<labelFont>
+								<font size="8"/>
+							</labelFont>
+							<tickLabelFont>
+								<font size="8"/>
+							</tickLabelFont>
+						</axisFormat>
+					</valueAxisFormat>
+				</barPlot>
+			</barChart>
+		</band>
+	</summary>
+</jasperReport>

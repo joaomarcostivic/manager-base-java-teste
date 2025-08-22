@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="protocoloDeCadastroDeInteressado" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="30" rightMargin="30" topMargin="20" bottomMargin="20">
+	<property name="ireport.scriptlethandling" value="0"/>
+	<property name="ireport.encoding" value="UTF-8"/>
+	<property name="ireport.zoom" value="2.357947691000002"/>
+	<property name="ireport.x" value="74"/>
+	<property name="ireport.y" value="144"/>
+	<import value="net.sf.jasperreports.engine.*"/>
+	<import value="java.util.*"/>
+	<import value="net.sf.jasperreports.engine.data.*"/>
+	<parameter name="cdInteressado" class="java.lang.Integer"/>
+	<parameter name="logo" class="java.lang.String" isForPrompting="false"/>
+	<queryString>
+		<![CDATA[select cd_Interessado, nm_interessado, rg, cpf, titulo, zona, secao, endereco, bairro,
+referencia, renda_mensal, profissao, local_trabalho, fone1, fone2, nr_filhos_menores,
+nr_filhos_maiores, nr_outros_depend, tempo_resid_cidade, tempo_resid_atual, data_cadastro,
+nm_usuario, situacao_cadastro, estado_civil, nm_conjugue, rg_conjugue, cpf_conjugue, observacoes, naturalidade, data_nasc from interessado i,  usuario u where i.cd_interessado=($P{cdInteressado}) and u.cd_usuario=i.cd_usuario_cadastro;]]>
+	</queryString>
+	<field name="cd_interessado" class="java.lang.Integer"/>
+	<field name="nm_interessado" class="java.lang.String"/>
+	<field name="rg" class="java.lang.String"/>
+	<field name="cpf" class="java.lang.String"/>
+	<field name="titulo" class="java.lang.String"/>
+	<field name="zona" class="java.lang.String"/>
+	<field name="secao" class="java.lang.String"/>
+	<field name="endereco" class="java.lang.String"/>
+	<field name="bairro" class="java.lang.String"/>
+	<field name="referencia" class="java.lang.String"/>
+	<field name="renda_mensal" class="java.lang.String"/>
+	<field name="profissao" class="java.lang.String"/>
+	<field name="local_trabalho" class="java.lang.String"/>
+	<field name="fone1" class="java.lang.String"/>
+	<field name="fone2" class="java.lang.String"/>
+	<field name="nr_filhos_menores" class="java.lang.Integer"/>
+	<field name="nr_filhos_maiores" class="java.lang.Integer"/>
+	<field name="nr_outros_depend" class="java.lang.Integer"/>
+	<field name="tempo_resid_cidade" class="java.lang.Integer"/>
+	<field name="tempo_resid_atual" class="java.lang.Integer"/>
+	<field name="data_cadastro" class="java.sql.Date"/>
+	<field name="nm_usuario" class="java.lang.String"/>
+	<field name="situacao_cadastro" class="java.lang.Integer"/>
+	<field name="estado_civil" class="java.lang.Integer"/>
+	<field name="nm_conjugue" class="java.lang.String"/>
+	<field name="rg_conjugue" class="java.lang.String"/>
+	<field name="cpf_conjugue" class="java.lang.String"/>
+	<field name="observacoes" class="java.lang.String"/>
+	<field name="naturalidade" class="java.lang.String"/>
+	<field name="data_nasc" class="java.sql.Date"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="1" splitType="Stretch"/>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="1" splitType="Stretch"/>
+	</columnHeader>
+	<detail>
+		<band height="280" splitType="Stretch">
+			<rectangle>
+				<reportElement key="rectangle-10" x="0" y="78" width="264" height="26"/>
+			</rectangle>
+			<staticText>
+				<reportElement key="staticText-46" x="0" y="78" width="77" height="14"/>
+				<textElement>
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[(=)Valor Documento:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement key="staticText-46" x="2" y="216" width="71" height="14"/>
+				<textElement/>
+				<text><![CDATA[Impresso por:]]></text>
+			</staticText>
+			<line>
+				<reportElement x="76" y="6" width="1" height="20"/>
+			</line>
+			<staticText>
+				<reportElement key="staticText-7" x="3" y="6" width="70" height="14"/>
+				<textElement>
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[Logo do Banco]]></text>
+			</staticText>
+			<line>
+				<reportElement x="153" y="7" width="1" height="19"/>
+			</line>
+			<staticText>
+				<reportElement key="staticText-7" x="160" y="11" width="104" height="14"/>
+				<textElement>
+					<font size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Recibo do Sacado]]></text>
+			</staticText>
+			<line>
+				<reportElement x="160" y="26" width="1" height="26"/>
+			</line>
+			<staticText>
+				<reportElement key="staticText-7" x="161" y="27" width="68" height="14"/>
+				<textElement>
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[Cod Cedente:]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement key="rectangle-12" x="0" y="52" width="264" height="26"/>
+			</rectangle>
+			<staticText>
+				<reportElement key="staticText-7" x="2" y="52" width="74" height="14"/>
+				<textElement>
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[Nr. Documento:]]></text>
+			</staticText>
+			<line>
+				<reportElement x="88" y="52" width="1" height="78"/>
+			</line>
+			<staticText>
+				<reportElement key="staticText-7" x="91" y="52" width="74" height="14"/>
+				<textElement>
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[Vencimento:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement key="staticText-7" x="178" y="52" width="74" height="14"/>
+				<textElement>
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[Nosso Número:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement key="staticText-46" x="88" y="78" width="90" height="14"/>
+				<textElement>
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[(-)Descontos/ Abatimentos:]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement key="rectangle-12" x="0" y="26" width="264" height="26"/>
+			</rectangle>
+			<staticText>
+				<reportElement key="staticText-46" x="179" y="78" width="73" height="14"/>
+				<textElement>
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[(-)Outras Deduções:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement key="staticText-46" x="0" y="104" width="77" height="14"/>
+				<textElement>
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[(+)Mora/Multa:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement key="staticText-46" x="88" y="104" width="77" height="14"/>
+				<textElement>
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[(+)Outros Acréscimos:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement key="staticText-46" x="179" y="104" width="77" height="14"/>
+				<textElement>
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[(=)Valor Cobrado:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement key="staticText-7" x="2" y="25" width="40" height="14"/>
+				<textElement>
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[Cedente:]]></text>
+			</staticText>
+			<line>
+				<reportElement x="178" y="52" width="1" height="78"/>
+			</line>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="1" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band splitType="Stretch"/>
+	</pageFooter>
+	<lastPageFooter>
+		<band height="1" splitType="Stretch"/>
+	</lastPageFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>

@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="processo_por_advogado_responsavel" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="5ce20164-df4e-45e4-99fc-0832cdc48b29">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<title>
+		<band height="44" splitType="Stretch">
+			<staticText>
+				<reportElement uuid="c2f6f56e-42a9-4076-8642-12c39be8127a" x="0" y="0" width="555" height="28"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Processos Agrupados por Advogado Responsável]]></text>
+			</staticText>
+			<line>
+				<reportElement uuid="8995f3da-7fe3-492c-b3ee-03ce98c01479" x="0" y="43" width="555" height="1"/>
+			</line>
+		</band>
+	</title>
+	<detail>
+		<band height="125" splitType="Stretch"/>
+	</detail>
+	<columnFooter>
+		<band height="17" splitType="Stretch">
+			<staticText>
+				<reportElement uuid="c2f6f56e-42a9-4076-8642-12c39be8127a" x="350" y="0" width="98" height="17"/>
+				<textElement verticalAlignment="Middle">
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Total de Processos:]]></text>
+			</staticText>
+			<line>
+				<reportElement uuid="8995f3da-7fe3-492c-b3ee-03ce98c01479" x="1" y="0" width="555" height="1"/>
+			</line>
+		</band>
+	</columnFooter>
+	<pageFooter>
+		<band height="16" splitType="Stretch">
+			<staticText>
+				<reportElement uuid="c53f82ae-3e06-4e76-ad44-d4b9ff2f2668" x="1" y="0" width="555" height="16"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[JurisManager - Gestor de Processos Jurídicos]]></text>
+			</staticText>
+			<line>
+				<reportElement uuid="1c276587-536c-4b7b-b50b-c51c2e5a4e46" x="1" y="0" width="555" height="1"/>
+			</line>
+			<textField>
+				<reportElement uuid="2c7e52e8-684b-4422-a94b-c70b55f29b80" x="-15" y="0" width="79" height="16"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement uuid="fef1f2d3-222b-4dc4-be73-49cac149d159" x="65" y="0" width="39" height="16"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+</jasperReport>

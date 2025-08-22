@@ -1,0 +1,433 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.1.1.final using JasperReports Library version 6.1.1  -->
+<!-- 2019-11-05T18:00:47 -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="relatorio_comunicacao_interna" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="685b275b-3095-430e-97ff-37d9f0e15d5c">
+	<property name="ireport.zoom" value="2.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="22"/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
+	<property name="com.jaspersoft.studio.unit." value="pixel"/>
+	<parameter name="nmUsuario" class="java.lang.String"/>
+	<parameter name="IMG_LOGOMARCA" class="byte[]" isForPrompting="false"/>
+	<parameter name="NM_COORDENADOR" class="java.lang.String"/>
+	<parameter name="NM_USUARIO" class="java.lang.String"/>
+	<parameter name="CD_VALIDACAO" class="java.lang.String"/>
+	<parameter name="NM_TITULO" class="java.lang.String"/>
+	<field name="NM_PESSOA" class="java.lang.String"/>
+	<field name="DT_PROTOCOLO" class="java.util.Date"/>
+	<field name="NR_DOCUMENTO" class="java.lang.String"/>
+	<field name="NM_DOENCA" class="java.lang.String"/>
+	<field name="LG_ACOMPANHANTE" class="java.lang.Integer"/>
+	<field name="CD_SITUACAO_DOCUMENTO" class="java.lang.Integer"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="89">
+			<image scaleImage="RetainShape" hAlign="Center" vAlign="Middle">
+				<reportElement x="1" y="0" width="80" height="57" isRemoveLineWhenBlank="true" uuid="fe1286ce-e4e0-4542-a5c3-49b997041c31">
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+				<imageExpression><![CDATA["../../mob/imagens/logos/brasao_vdc_128px.png"]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="80" y="5" width="400" height="24" uuid="82771fad-c1f1-424b-a94a-1c18ff01b5df"/>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[PREFEITURA DE VITÓRIA DA CONQUISTA
+SECRETARIA MUNICIPAL DE MOBILIDADE - SEMOB]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="354" y="44" width="202" height="15" uuid="d3409585-c251-4fd0-bf47-e519e305f726"/>
+				<textElement textAlignment="Right">
+					<font size="10" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Emissão: " + new SimpleDateFormat("dd/MM/yyyy").format($F{DT_PROTOCOLO}) + " às " + new SimpleDateFormat("hh:mm:ss").format($F{DT_PROTOCOLO})]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="59" width="556" height="15" uuid="cf3ef98e-cdf4-434d-8121-14b223eeb5a5"/>
+				<textElement textAlignment="Right">
+					<font size="10" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["N° Documento: " + $F{NR_DOCUMENTO}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="-1" y="74" width="556" height="15" uuid="7adb4d4a-1a3b-4548-8218-770519374555"/>
+				<textElement textAlignment="Right">
+					<font size="10" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Atendente: " + $P{NM_USUARIO}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="170" y="29" width="219" height="15" uuid="a651ed94-da08-4325-91c7-6f503ca4bd30">
+					<printWhenExpression><![CDATA[$P{CD_VALIDACAO} != "2"]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Center">
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[SOLICITAÇÃO DE PERÍCIA MÉDICA]]></text>
+			</staticText>
+			<image scaleImage="RetainShape" hAlign="Center" vAlign="Middle">
+				<reportElement x="6" y="5" width="80" height="57" isRemoveLineWhenBlank="true" uuid="4842ab77-c76b-4549-8da7-347329143759">
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+				<imageExpression><![CDATA["../../mob/imagens/logos/brasao_vdc_128px.png"]]></imageExpression>
+			</image>
+		</band>
+	</title>
+	<detail>
+		<band height="682">
+			<staticText>
+				<reportElement x="0" y="0" width="555" height="26" uuid="119681c2-49be-4853-ac47-8309536258f2"/>
+				<text><![CDATA[AO
+CEMAE]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="0" y="28" width="555" height="35" uuid="ff6f0f94-1ff0-48db-bf7a-c86c081a87f1"/>
+				<textElement textAlignment="Justified"/>
+				<textFieldExpression><![CDATA["Estamos encaminhando o(a) Senhor(a) " + $F{NM_PESSOA} + " portando laudo médico, para realização de Perícia Médica e preenchimento do parecer abaixo, com o objetivo de verificar a sua condição em relação ao cartão BEM."]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="69" width="555" height="14" uuid="c6ac4188-1a1c-4bc1-87de-303fce1d2109"/>
+				<box topPadding="1" leftPadding="3"/>
+				<textElement textAlignment="Center">
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[PARA USO DO MÉDICO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="6" y="98" width="29" height="54" uuid="8eb866e2-0245-49f7-acdd-2534c8fdba1d">
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+				<box topPadding="1" leftPadding="3"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="11"/>
+				</textElement>
+				<text><![CDATA[CID:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="6" y="152" width="542" height="69" uuid="7ef5eba4-44fb-4dac-a52c-bc670ea30fad"/>
+				<box topPadding="1" leftPadding="3"/>
+				<textElement verticalAlignment="Top">
+					<font size="11"/>
+				</textElement>
+				<text><![CDATA[OBS.:___________________________________________________________________________________
+________________________________________________________________________________________
+________________________________________________________________________________________]]></text>
+			</staticText>
+			<line>
+				<reportElement x="1" y="64" width="1" height="157" uuid="056cd331-0b99-40b9-a3be-ec68929cfa88">
+					<property name="local_mesure_unitwidth" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<graphicElement>
+					<pen lineWidth="4.0"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement x="0" y="63" width="555" height="1" uuid="b36f3349-2e7c-4185-bfe6-8b3da97eee87">
+					<property name="local_mesure_unitheight" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<graphicElement>
+					<pen lineStyle="Dotted"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement x="1" y="222" width="1" height="117" uuid="651b3419-7ff6-4b1d-93c6-095c77e1236d">
+					<property name="local_mesure_unitwidth" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<graphicElement>
+					<pen lineWidth="4.0"/>
+				</graphicElement>
+			</line>
+			<staticText>
+				<reportElement x="7" y="233" width="184" height="14" uuid="45e3f184-f49d-45de-8725-0f0f13c4605f">
+					<property name="local_mesure_unitwidth" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<box topPadding="1" leftPadding="3"/>
+				<textElement textAlignment="Left">
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[TEMPO DE DURAÇÃO:]]></text>
+			</staticText>
+			<line>
+				<reportElement x="0" y="221" width="555" height="1" uuid="3bf7d603-5d36-4ef4-8fc4-5c34b3dc56b6">
+					<property name="local_mesure_unitheight" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<graphicElement>
+					<pen lineStyle="Dotted"/>
+				</graphicElement>
+			</line>
+			<staticText>
+				<reportElement x="211" y="273" width="80" height="18" uuid="43612aa6-cb03-4d1b-8524-8a6c3b0de937"/>
+				<box topPadding="1" leftPadding="3"/>
+				<textElement>
+					<font size="11"/>
+				</textElement>
+				<text><![CDATA[(     ) NÃO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="211" y="255" width="80" height="18" uuid="d1a09407-142e-4c3f-bb7c-720440d88d83"/>
+				<box topPadding="1" leftPadding="3"/>
+				<textElement>
+					<font size="11"/>
+				</textElement>
+				<text><![CDATA[(     ) SIM]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="11" y="304" width="178" height="18" uuid="a291e207-61fd-4610-82a0-22b1bd456c6e"/>
+				<box topPadding="1" leftPadding="3"/>
+				<textElement>
+					<font size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[DATA:____/____/_______]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="386" y="305" width="163" height="24" uuid="d061050a-93b0-44d1-a772-4d89a7f868b0">
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<box topPadding="1" leftPadding="3"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="9"/>
+				</textElement>
+				<text><![CDATA[Assinatura e carimbo
+do Médico(a) responsável]]></text>
+			</staticText>
+			<line>
+				<reportElement x="0" y="339" width="555" height="1" uuid="8907513e-157a-4379-b75e-68a9a535a5f5">
+					<property name="local_mesure_unitheight" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<graphicElement>
+					<pen lineStyle="Dotted"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement x="0" y="388" width="279" height="1" uuid="4906f850-0747-4d68-87a5-d7ad9f566005">
+					<property name="local_mesure_unitheight" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<graphicElement>
+					<pen lineStyle="Solid"/>
+				</graphicElement>
+			</line>
+			<staticText>
+				<reportElement x="203" y="233" width="197" height="14" uuid="1cad757d-b4c5-45c3-8ad5-df4a47f6cf09">
+					<property name="local_mesure_unitwidth" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<box topPadding="1" leftPadding="3"/>
+				<textElement textAlignment="Left">
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[NECESSIDADE DE ACOMPANHANTE:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="14" y="255" width="178" height="18" uuid="c461efd3-f6ca-4286-b508-ea8f8cb04657"/>
+				<box topPadding="1" leftPadding="3"/>
+				<textElement>
+					<font size="11"/>
+				</textElement>
+				<text><![CDATA[(        )  ANO(S).]]></text>
+			</staticText>
+			<line>
+				<reportElement x="0" y="440" width="277" height="1" uuid="6387e77b-31d3-45d0-9224-1bbf926e2e18">
+					<property name="local_mesure_unitheight" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<graphicElement>
+					<pen lineStyle="Solid"/>
+				</graphicElement>
+			</line>
+			<staticText>
+				<reportElement x="0" y="389" width="279" height="15" uuid="f9ab44af-373e-48ba-b2ba-2b6ac1fd0cc0">
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<box topPadding="1" leftPadding="3"/>
+				<textElement textAlignment="Center">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[ASSINATURA DO REQUERENTE OU RESPONSÁVEL]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="465" width="277" height="12" uuid="d4fa6419-1f6d-49be-8c33-7bf66972f0d1">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[DOCUMENTOS ANEXOS.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="477" width="350" height="53" uuid="d34d0d09-b8d0-4abf-b0ef-6302dca63ebd">
+					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+				</reportElement>
+				<textElement textAlignment="Left" verticalAlignment="Top">
+					<font size="8" isBold="false"/>
+				</textElement>
+				<text><![CDATA[- Laudo médico identificando a deficiência do requerente com CID.
+- Cópia do comprovante de endereço.
+- Cópia do RG.
+- Cópia do CPF.
+- Cópia do cartão do SUS.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="6" y="84" width="225" height="14" uuid="7595dd1b-7cfe-4cf0-ace5-fc2c7499cc33">
+					<property name="local_mesure_unitwidth" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<box topPadding="1" leftPadding="3"/>
+				<textElement textAlignment="Left">
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[TIPO DE DEFICIÊNCIA:]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="386" y="231" width="163" height="74" uuid="5b2aac65-3c34-4129-bb06-139a62155cc2"/>
+			</rectangle>
+			<line>
+				<reportElement x="554" y="65" width="1" height="156" uuid="3a3245dc-83b6-44b2-b19f-93ace487b08f"/>
+			</line>
+			<line>
+				<reportElement x="554" y="222" width="1" height="117" uuid="b678ded2-99a1-4123-875c-44805f6b28ce"/>
+			</line>
+			<line>
+				<reportElement x="2" y="581" width="553" height="1" uuid="731014a9-49b5-45fd-a6bf-ae2fe45c9447">
+					<property name="local_mesure_unitheight" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<graphicElement>
+					<pen lineStyle="Dotted"/>
+				</graphicElement>
+			</line>
+			<textField>
+				<reportElement x="35" y="98" width="513" height="54" uuid="f2ed2514-b73e-4ff0-ac42-0bc6e734c8a7">
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+				<textElement verticalAlignment="Middle">
+					<font size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{NM_DOENCA}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="46" y="198" width="80" height="18" uuid="d06a4574-a2d6-4f8d-a08c-d10650ad3ffd"/>
+				<box topPadding="1" leftPadding="3"/>
+				<textElement>
+					<font size="11"/>
+				</textElement>
+				<text><![CDATA[DEFERIDO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="238" y="198" width="178" height="18" uuid="2a901cde-f503-4ba7-8f23-4788580910b7"/>
+				<box topPadding="1" leftPadding="3"/>
+				<textElement>
+					<font size="11"/>
+				</textElement>
+				<text><![CDATA[INDEFERIDO]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="26" y="200" width="13" height="13" uuid="a8dd93ce-c03c-4506-8f64-2c9561863025">
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+			</rectangle>
+			<rectangle>
+				<reportElement x="218" y="200" width="13" height="13" uuid="6920de5e-a47b-4877-a794-1d350ccae93d">
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+			</rectangle>
+			<staticText>
+				<reportElement x="80" y="561" width="400" height="15" uuid="c8f164df-4432-4216-84ac-4161d55de161">
+					<property name="local_mesure_unitheight" value="pixel"/>
+				</reportElement>
+				<box topPadding="1" leftPadding="3"/>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font size="10" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Coordenador de Transporte Público - SEMOB]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="80" y="546" width="400" height="15" uuid="ae846d3e-c9a4-4055-b7cb-7777b7b1c2e0"/>
+				<box topPadding="1" leftPadding="3"/>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font size="10" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{NM_COORDENADOR}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="530" width="555" height="16" uuid="088b075a-2997-4b27-b2eb-cfadb5f57f8f">
+					<property name="local_mesure_unitheight" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<box topPadding="1" leftPadding="3"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="10"/>
+				</textElement>
+				<text><![CDATA[Atenciosamente,]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="0" y="441" width="278" height="15" uuid="9e933b05-ceec-4f25-b948-0baee132ef03">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<textElement textAlignment="Center">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{NM_USUARIO}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="605" width="555" height="40" uuid="53b8ae66-ecef-4af3-913d-140ee0ae8729">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<box leftPadding="2" rightPadding="2"/>
+				<textElement textAlignment="Justified">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["EU, " + $F{NM_PESSOA} + ", DECLARO QUE RECEBI OS DOCUMENTOS E O AGENDAMENTO DA PERÍCIA MÉDICA PARA O DIA ____/____/______, ESTANDO CIENTE QUE O NÃO COMPARECIMENTO A PERÍCIA NA DATA E HORÁRIO AGENDADOS, CARACTERIZA A PERDA DA MARCAÇÃO, FICANDO SUJEITO A NOVA DISPONIBILIDADE DE VAGA"]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="1" y="666" width="329" height="15" uuid="349ab482-4041-4f33-9011-90b6b15e7b9c">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[ASSINATURA DO REQUERENTE OU RESPONSÁVEL]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="330" y="651" width="225" height="15" uuid="355af630-0061-4c9d-b1ed-a72a92e9e2e5">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<textElement textAlignment="Left" verticalAlignment="Bottom">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[DATA:____/____/______]]></text>
+			</staticText>
+			<line>
+				<reportElement x="1" y="665" width="329" height="1" uuid="478274a2-9ccc-4576-a747-b8e3c2373fb0"/>
+			</line>
+			<staticText>
+				<reportElement x="2" y="588" width="553" height="17" uuid="df2be200-6f04-4d26-8575-80d4a4cc8bc7"/>
+				<textElement textAlignment="Center">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[PROTOCOLO DE RECEBIMENTO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="13" y="273" width="178" height="18" uuid="cb3589d8-6d72-4a4a-a254-087ecc98cf45"/>
+				<box topPadding="1" leftPadding="3"/>
+				<textElement>
+					<font size="11"/>
+				</textElement>
+				<text><![CDATA[(        )  MESES.]]></text>
+			</staticText>
+		</band>
+	</detail>
+</jasperReport>

@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.0.3.final using JasperReports Library version 6.0.3  -->
+<!-- 2018-11-13T11:51:02 -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="auditoria" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="b585a798-47b7-4fa6-b465-64bfb12faed5">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<property name="com.jaspersoft.studio.unit." value="pixel"/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
+	<style name="detail_style" mode="Transparent" hTextAlign="Left" vTextAlign="Middle" markup="" isBlankWhenNull="true" fontSize="8" isBold="true"/>
+	<style name="columHeader_style" hTextAlign="Left" markup="none" fontSize="8" isBold="true"/>
+	<parameter name="IMG_LOGOMARCA" class="byte[]" isForPrompting="false"/>
+	<parameter name="NM_INSTITUICAO" class="java.lang.String"/>
+	<parameter name="CL_TURNO" class="java.lang.String"/>
+	<parameter name="NM_PERIODO_LETIVO" class="java.lang.String"/>
+	<parameter name="NM_UNIDADE" class="java.lang.String"/>
+	<parameter name="NM_DISCIPLINA" class="java.lang.String"/>
+	<parameter name="NM_PROFESSOR" class="java.lang.String"/>
+	<parameter name="CL_TURMA" class="java.lang.String"/>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String"/>
+	<field name="NR_ORDEM" class="java.lang.Integer"/>
+	<field name="TXT_QUESTAO" class="java.lang.String"/>
+	<field name="TP_QUESTAO" class="java.lang.Integer"/>
+	<field name="VL_PESO" class="java.lang.Double"/>
+	<field name="TXT_ALTERNATIVAS" class="java.lang.String"/>
+	<field name="NM_ALUNO" class="java.lang.String"/>
+	<field name="NR_MATRICULA" class="java.lang.String"/>
+	<field name="RSM_QUESTOES" class="java.lang.Object"/>
+	<field name="CD_ALUNO" class="java.lang.Integer"/>
+	<group name="ALUNO" isStartNewPage="true">
+		<groupExpression><![CDATA[$F{CD_ALUNO}]]></groupExpression>
+		<groupHeader>
+			<band height="3"/>
+		</groupHeader>
+	</group>
+	<detail>
+		<band height="154" splitType="Stretch">
+			<rectangle>
+				<reportElement mode="Transparent" x="2" y="74" width="553" height="60" uuid="a26b5bda-b589-49bf-9a01-f752397758d9"/>
+				<graphicElement>
+					<pen lineWidth="1.0"/>
+				</graphicElement>
+			</rectangle>
+			<staticText>
+				<reportElement x="290" y="113" width="72" height="18" uuid="34969103-ead9-4395-a9e8-4e8753de873b"/>
+				<textElement verticalAlignment="Middle">
+					<font size="11" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Professor(a):]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true" pattern="">
+				<reportElement x="362" y="77" width="188" height="18" uuid="91625b3b-d0d7-4417-9792-211569b80cbf"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="9" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{NR_MATRICULA}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" pattern="">
+				<reportElement x="60" y="113" width="230" height="18" uuid="68238f88-2757-4806-a6b1-854cf953fb0b"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="9" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{CL_TURNO}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" pattern="">
+				<reportElement x="362" y="113" width="188" height="18" uuid="5fd1d764-c098-4fd1-8e88-ffa0638f6a70"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="9" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{NM_PROFESSOR}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="106" y="47" width="376" height="20" uuid="06c39df2-a4ef-46a7-ba03-1cfa8af456f4">
+					<property name="local_mesure_unitheight" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Center">
+					<font size="15" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{NM_UNIDADE}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement stretchType="RelativeToTallestObject" x="106" y="0" width="376" height="25" uuid="006706fc-1218-4e42-bf73-52696800b466">
+					<property name="local_mesure_unitheight" value="pixel"/>
+				</reportElement>
+				<textElement textAlignment="Center">
+					<font size="11" isBold="true"/>
+					<paragraph lineSpacing="Proportional"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{NM_INSTITUICAO}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="7" y="95" width="53" height="18" uuid="f03c5d71-61f8-4c97-98fd-e6e59fcb4eec"/>
+				<textElement verticalAlignment="Middle">
+					<font size="11" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Turma:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="290" y="95" width="72" height="18" uuid="317cffe6-28e1-4c60-a372-1e012a68669b"/>
+				<textElement verticalAlignment="Middle">
+					<font size="11" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Disciplina:]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true" pattern="">
+				<reportElement x="362" y="95" width="188" height="18" uuid="875a4fd5-5c71-4024-9e22-81363d189ef2"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="9" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{NM_DISCIPLINA}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="290" y="77" width="72" height="18" uuid="a1e1e0a5-eb00-4087-ba4e-6d7dd18694e3"/>
+				<textElement verticalAlignment="Middle">
+					<font size="11" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Matrícula:]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="106" y="27" width="376" height="20" uuid="107a21d4-6ea1-4ca0-9381-187c3811ea75">
+					<property name="local_mesure_unitheight" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Center">
+					<font size="15" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["ATIVIDADE ESCOLAR"]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" pattern="">
+				<reportElement x="60" y="77" width="230" height="18" uuid="98c76e84-3d50-419a-88ce-78fe01fd1d1f"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="9" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{NM_ALUNO}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" pattern="">
+				<reportElement x="60" y="95" width="230" height="18" uuid="0f47b0e7-3a95-4971-825d-f77682e52e86"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="9" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{CL_TURMA}]]></textFieldExpression>
+			</textField>
+			<image scaleImage="RetainShape" hAlign="Center">
+				<reportElement x="3" y="0" width="103" height="47" isRemoveLineWhenBlank="true" uuid="658c84dc-73b2-4899-bfde-b3a72fd192d9"/>
+				<imageExpression><![CDATA[net.sf.jasperreports.engine.util.JRImageLoader.loadImage((byte[]) $P{IMG_LOGOMARCA})]]></imageExpression>
+			</image>
+			<textField isStretchWithOverflow="true" pattern="">
+				<reportElement x="482" y="0" width="72" height="46" uuid="7633e5a0-9b07-403e-8344-c07971316158"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="16" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{NM_PERIODO_LETIVO}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="7" y="113" width="53" height="18" uuid="d9745bef-645e-42d0-9308-6c707e49e2b0"/>
+				<textElement verticalAlignment="Middle">
+					<font size="11" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Turno:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="7" y="77" width="53" height="18" uuid="0d35c2a5-dbcc-4b9d-859d-4c612b1e6968"/>
+				<textElement verticalAlignment="Middle">
+					<font size="11" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Aluno:]]></text>
+			</staticText>
+			<subreport>
+				<reportElement x="3" y="134" width="552" height="20" isPrintWhenDetailOverflows="true" uuid="cdac753f-e611-4c7e-a334-dac3dd3a204b"/>
+				<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource($F{RSM_QUESTOES})]]></dataSourceExpression>
+				<subreportExpression><![CDATA[$P{SUBREPORT_DIR}+"/acd/atividade_subreport.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+	</detail>
+</jasperReport>

@@ -1,0 +1,393 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version last-->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="saldo_nota_fiscal_complementar" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="e45388be-ca8b-4839-9ca9-a92fd8d04a20">
+	<property name="ireport.zoom" value="1.5"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="LOGO" class="java.lang.Object"/>
+	<parameter name="nmRazaoSocial" class="java.lang.String"/>
+	<parameter name="nmFantasia" class="java.lang.String"/>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA["C:\\TIVIC\\manager\\web\\adm\\"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="dtInicial" class="java.lang.String"/>
+	<parameter name="dtFinal" class="java.lang.String"/>
+	<parameter name="dtHoje" class="java.lang.String"/>
+	<parameter name="hrHoje" class="java.lang.String"/>
+	<parameter name="nmUsuario" class="java.lang.String"/>
+	<parameter name="nmDesenvolvedor" class="java.lang.String"/>
+	<parameter name="nmEmail" class="java.lang.String"/>
+	<parameter name="LOGO_DEV" class="java.lang.Object"/>
+	<field name="NmTurno" class="java.lang.String"/>
+	<field name="DS_GRUPO" class="java.lang.String"/>
+	<field name="NM_PRODUTO_SERVICO" class="java.lang.String"/>
+	<field name="ID_CLASSIFICACAO_FISCAL" class="java.lang.String"/>
+	<field name="PR_ALIQUOTA" class="java.lang.Double"/>
+	<field name="VL_UNITARIO" class="java.lang.Double"/>
+	<field name="VL_GERAL" class="java.lang.Double"/>
+	<field name="VL_NOTA_FISCAL" class="java.lang.Double"/>
+	<field name="VL_DIFERENCA" class="java.lang.Double"/>
+	<field name="VL_SALDO" class="java.lang.Double"/>
+	<field name="NM_GRUPO" class="java.lang.String"/>
+	<field name="VL_CP_FISCAL" class="java.lang.Double"/>
+	<variable name="vlSubTotalGeral" class="java.lang.Double" resetType="Group" resetGroup="grupoProduto" calculation="Sum">
+		<variableExpression><![CDATA[$F{VL_GERAL}]]></variableExpression>
+	</variable>
+	<variable name="vlSubTotalNotaFiscal" class="java.lang.Double" resetType="Group" resetGroup="grupoProduto" calculation="Sum">
+		<variableExpression><![CDATA[$F{VL_NOTA_FISCAL}]]></variableExpression>
+	</variable>
+	<variable name="vlSubTotalDiferenca" class="java.lang.Double" resetType="Group" resetGroup="grupoProduto" calculation="Sum">
+		<variableExpression><![CDATA[$F{VL_DIFERENCA}]]></variableExpression>
+	</variable>
+	<variable name="vlTotalGeral" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[$F{VL_GERAL}]]></variableExpression>
+	</variable>
+	<variable name="vlTotalNotaFiscal" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[$F{VL_NOTA_FISCAL}]]></variableExpression>
+	</variable>
+	<variable name="vlTotalDiferenca" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[$F{VL_DIFERENCA}]]></variableExpression>
+	</variable>
+	<variable name="vlSubTotalCupomFiscal" class="java.lang.Double" resetType="Group" resetGroup="grupoProduto" calculation="Sum">
+		<variableExpression><![CDATA[$F{VL_CP_FISCAL}]]></variableExpression>
+	</variable>
+	<variable name="vlTotalCupomFiscal" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[$F{VL_CP_FISCAL}]]></variableExpression>
+	</variable>
+	<variable name="vlSubTotalSaldo" class="java.lang.Double" resetType="Group" resetGroup="grupoProduto">
+		<variableExpression><![CDATA[$V{vlSubTotalGeral} - ($V{vlSubTotalNotaFiscal} + $V{vlSubTotalCupomFiscal} + $V{vlSubTotalDiferenca})]]></variableExpression>
+	</variable>
+	<variable name="vlTotalSaldo" class="java.lang.Double">
+		<variableExpression><![CDATA[$V{vlTotalGeral} - ($V{vlTotalNotaFiscal} + $V{vlTotalCupomFiscal} + $V{vlTotalDiferenca})]]></variableExpression>
+	</variable>
+	<group name="grupoProduto">
+		<groupExpression><![CDATA[$F{DS_GRUPO}]]></groupExpression>
+		<groupHeader>
+			<band height="10">
+				<textField isBlankWhenNull="true">
+					<reportElement x="1" y="-1" width="152" height="11" uuid="9da3f997-1d3d-4de6-a10c-232a2d80e8bd">
+						<printWhenExpression><![CDATA[!$F{NM_GRUPO}.equals("COMBUSTIVEL")]]></printWhenExpression>
+					</reportElement>
+					<textElement>
+						<font size="8" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{NM_GRUPO}]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupHeader>
+		<groupFooter>
+			<band height="11">
+				<textField isBlankWhenNull="true">
+					<reportElement mode="Opaque" x="418" y="0" width="68" height="11" backcolor="#999999" uuid="4ab4f0e5-282b-44d2-b58e-9344e1792cfc"/>
+					<textElement textAlignment="Right">
+						<font size="8" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[new DecimalFormat("#,##0.00;-#,##0.00", new java.text.DecimalFormatSymbols(new java.util.Locale("pt", "BR"))).format($V{vlSubTotalDiferenca})]]></textFieldExpression>
+				</textField>
+				<textField isBlankWhenNull="true">
+					<reportElement mode="Opaque" x="304" y="0" width="58" height="11" backcolor="#999999" uuid="042767ea-acbe-4b9b-bd2f-aafe3f970ae2"/>
+					<textElement textAlignment="Right">
+						<font size="8" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[new DecimalFormat("#,##0.00;-#,##0.00", new java.text.DecimalFormatSymbols(new java.util.Locale("pt", "BR"))).format($V{vlSubTotalNotaFiscal})]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement mode="Opaque" x="132" y="0" width="106" height="11" backcolor="#999999" uuid="fd8390a2-ff43-4964-bd3a-6a06309df1c8"/>
+					<textElement textAlignment="Right">
+						<font size="8" isBold="true"/>
+					</textElement>
+					<text><![CDATA[SUBTOTAL]]></text>
+				</staticText>
+				<textField isBlankWhenNull="true">
+					<reportElement mode="Opaque" x="486" y="0" width="69" height="11" backcolor="#999999" uuid="942734d9-c171-40fd-84c1-23ad01879277"/>
+					<textElement textAlignment="Right">
+						<font size="8" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[new DecimalFormat("#,##0.00;-#,##0.00", new java.text.DecimalFormatSymbols(new java.util.Locale("pt", "BR"))).format($V{vlSubTotalSaldo})]]></textFieldExpression>
+				</textField>
+				<textField isBlankWhenNull="true">
+					<reportElement mode="Opaque" x="238" y="0" width="66" height="11" backcolor="#999999" uuid="1e1392c2-4e08-4cd5-a9d2-07eb142dee17"/>
+					<textElement textAlignment="Right">
+						<font size="8" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[new DecimalFormat("#,##0.00;-#,##0.00", new java.text.DecimalFormatSymbols(new java.util.Locale("pt", "BR"))).format($V{vlSubTotalGeral})]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement mode="Opaque" x="0" y="0" width="133" height="11" forecolor="#666666" backcolor="#999999" uuid="01c4a641-f0a9-4a4a-afd8-b3ff4d92cab6"/>
+					<textFieldExpression><![CDATA[]]></textFieldExpression>
+				</textField>
+				<textField isBlankWhenNull="true">
+					<reportElement mode="Opaque" x="362" y="0" width="56" height="11" backcolor="#999999" uuid="042767ea-acbe-4b9b-bd2f-aafe3f970ae2"/>
+					<textElement textAlignment="Right">
+						<font size="8" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[new DecimalFormat("#,##0.00;-#,##0.00", new java.text.DecimalFormatSymbols(new java.util.Locale("pt", "BR"))).format($V{vlSubTotalCupomFiscal})]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupFooter>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<pageHeader>
+		<band height="60">
+			<textField isBlankWhenNull="true">
+				<reportElement x="75" y="1" width="404" height="16" uuid="d95120a9-93ca-4e71-9e3d-5c51e6d2eb66"/>
+				<textElement textAlignment="Center" verticalAlignment="Bottom" markup="none">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{nmFantasia}!=null && !$P{nmFantasia}.equals("")? $P{nmFantasia} : $P{nmRazaoSocial}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="75" y="16" width="404" height="18" uuid="b0a975cb-8cac-4013-a9ac-c49406f0d5d5"/>
+				<textElement textAlignment="Center">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[SALDO N.F. COMPLEMENTAR]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="75" y="33" width="404" height="14" uuid="56a449de-2f82-4c52-8016-06dcb96aab9f"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA["Periodo de " + $P{dtInicial} + " até " + $P{dtFinal} + ", Turno: " + (($F{NmTurno} == null) ? "Todos" : $F{NmTurno})]]></textFieldExpression>
+			</textField>
+			<image scaleImage="RetainShape" hAlign="Center">
+				<reportElement x="479" y="0" width="75" height="60" uuid="600a23b6-10b6-4e33-8cae-beb11fc79035"/>
+				<imageExpression><![CDATA[net.sf.jasperreports.engine.util.JRImageLoader.loadImage((byte[]) $P{LOGO})]]></imageExpression>
+			</image>
+			<image scaleImage="FillFrame" hAlign="Center" vAlign="Middle">
+				<reportElement x="0" y="0" width="75" height="60" uuid="600a23b6-10b6-4e33-8cae-beb11fc79035"/>
+				<imageExpression><![CDATA[net.sf.jasperreports.engine.util.JRImageLoader.loadImage((byte[]) $P{LOGO_DEV})]]></imageExpression>
+			</image>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="12" splitType="Stretch">
+			<staticText>
+				<reportElement x="75" y="-13" width="405" height="13" uuid="d6ec747c-deb6-4b93-bae8-a3264745858b"/>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[AGRUPADO POR PRODUTO - TOTAL AGRUPADO, D1/ECF: DATA DE EMISSÃO]]></text>
+			</staticText>
+			<line>
+				<reportElement x="0" y="0" width="555" height="1" uuid="6978ee43-d8c9-443b-9788-dffa5f623354"/>
+				<graphicElement>
+					<pen lineWidth="1.0"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement x="0" y="10" width="555" height="2" uuid="aee11a31-3b64-4f9d-acbc-a13b496e51db"/>
+				<graphicElement>
+					<pen lineWidth="1.0"/>
+				</graphicElement>
+			</line>
+			<staticText>
+				<reportElement x="0" y="0" width="131" height="11" uuid="041ea3b4-5374-4975-96fe-06f9aee1837c"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[Combustível/Produto]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="132" y="0" width="22" height="11" uuid="0eb26ccb-5c8e-4eed-9b34-f97ad899d619"/>
+				<textElement textAlignment="Center">
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[CST]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="156" y="0" width="30" height="11" uuid="16e51332-16ef-4fc3-a126-23e10ee70b65"/>
+				<textElement textAlignment="Right">
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[ICMS %]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="193" y="0" width="45" height="11" uuid="ef159d9e-b6f5-4799-9d6e-faa1f4ed3242"/>
+				<textElement textAlignment="Right">
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[UNIT.(R$)]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="237" y="0" width="67" height="11" uuid="526b3118-0ba9-4517-82be-27a1cbd433d5"/>
+				<textElement textAlignment="Right">
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[ENC./MOV(R$)]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="304" y="0" width="58" height="11" uuid="2b12f8c4-1a3f-40c9-89f6-8341314ce241"/>
+				<textElement textAlignment="Right">
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[NF M1 R$]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="360" y="0" width="56" height="11" uuid="1b9447bf-a604-460b-a27f-bcaade11598f"/>
+				<textElement textAlignment="Right">
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[D1/ECF R$]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="416" y="0" width="68" height="11" uuid="29da1150-c368-469f-beb2-f687eefc54bc"/>
+				<textElement textAlignment="Right">
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[DES/ACR R$]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="486" y="0" width="69" height="11" uuid="6a464a92-3a02-4358-ab2b-404edc30d1fa"/>
+				<textElement textAlignment="Right">
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[SALDO R$]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="11" splitType="Stretch">
+			<textField isBlankWhenNull="true">
+				<reportElement x="1" y="0" width="131" height="11" uuid="9da3f997-1d3d-4de6-a10c-232a2d80e8bd"/>
+				<textElement verticalAlignment="Middle">
+					<font size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{NM_PRODUTO_SERVICO}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="false">
+				<reportElement x="484" y="0" width="70" height="11" uuid="942734d9-c171-40fd-84c1-23ad01879277"/>
+				<textElement textAlignment="Right">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new DecimalFormat("#,##0.00;-#,##0.00", new java.text.DecimalFormatSymbols(new java.util.Locale("pt", "BR"))).format($F{VL_SALDO})]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="false">
+				<reportElement x="362" y="0" width="56" height="11" uuid="b8e7abca-6f02-42f9-92bc-5c53be7dbbac"/>
+				<textElement textAlignment="Right">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new DecimalFormat("#,##0.00;-#,##0.00", new java.text.DecimalFormatSymbols(new java.util.Locale("pt", "BR"))).format($F{VL_CP_FISCAL})]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="416" y="0" width="70" height="11" uuid="4ab4f0e5-282b-44d2-b58e-9344e1792cfc"/>
+				<textElement textAlignment="Right">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new DecimalFormat("#,##0.00;-#,##0.00", new java.text.DecimalFormatSymbols(new java.util.Locale("pt", "BR"))).format($F{VL_DIFERENCA})]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="132" y="0" width="22" height="11" uuid="b5199ac6-3394-478a-a60d-8b439b9a710c"/>
+				<textElement textAlignment="Center">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{ID_CLASSIFICACAO_FISCAL}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="304" y="0" width="58" height="11" uuid="042767ea-acbe-4b9b-bd2f-aafe3f970ae2"/>
+				<textElement textAlignment="Right">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new DecimalFormat("#,##0.00;-#,##0.00", new java.text.DecimalFormatSymbols(new java.util.Locale("pt", "BR"))).format($F{VL_NOTA_FISCAL})]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="238" y="0" width="66" height="11" uuid="1e1392c2-4e08-4cd5-a9d2-07eb142dee17"/>
+				<textElement textAlignment="Right">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new DecimalFormat("#,##0.00;-#,##0.00", new java.text.DecimalFormatSymbols(new java.util.Locale("pt", "BR"))).format($F{VL_GERAL})]]></textFieldExpression>
+			</textField>
+			<textField pattern="" isBlankWhenNull="true">
+				<reportElement x="193" y="0" width="45" height="11" uuid="5274598f-2e33-4ed1-8390-dfa906c7357e"/>
+				<textElement textAlignment="Right">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new DecimalFormat("#,##0.00;-#,##0.00", new java.text.DecimalFormatSymbols(new java.util.Locale("pt", "BR"))).format($F{VL_UNITARIO})]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="156" y="0" width="30" height="11" uuid="a18e90db-353a-4ad9-b6dc-50743a18f16d">
+					<printWhenExpression><![CDATA[$F{PR_ALIQUOTA} > 0]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Right">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new DecimalFormat("#,##0.00;", new java.text.DecimalFormatSymbols(new java.util.Locale("pt", "BR"))).format($F{PR_ALIQUOTA})]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="13">
+			<textField>
+				<reportElement x="213" y="3" width="341" height="10" uuid="b4535353-a90a-4520-8dc4-8400a0e2fed5"/>
+				<textElement textAlignment="Right" verticalAlignment="Top">
+					<font fontName="SansSerif" size="6" isBold="true" isItalic="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Emitido em " + $P{dtHoje} + " às " + $P{hrHoje} + " por " + $P{nmUsuario} + "   Página: " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="1" y="0" width="553" height="1" uuid="507005cc-8e92-4947-a3a3-75146fa8df34"/>
+			</line>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="0" y="3" width="213" height="10" uuid="b4535353-a90a-4520-8dc4-8400a0e2fed5"/>
+				<textElement textAlignment="Left" verticalAlignment="Top">
+					<font fontName="SansSerif" size="6" isBold="false" isItalic="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{nmDesenvolvedor} + "   " + $P{nmEmail}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="1" y="1" width="555" height="1" uuid="6978ee43-d8c9-443b-9788-dffa5f623354"/>
+				<graphicElement>
+					<pen lineWidth="1.0"/>
+				</graphicElement>
+			</line>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="11">
+			<textField isBlankWhenNull="true">
+				<reportElement mode="Opaque" x="418" y="0" width="68" height="11" backcolor="#999999" uuid="4ab4f0e5-282b-44d2-b58e-9344e1792cfc"/>
+				<textElement textAlignment="Right">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new DecimalFormat("#,##0.00;-#,##0.00", new java.text.DecimalFormatSymbols(new java.util.Locale("pt", "BR"))).format($V{vlTotalDiferenca})]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement mode="Opaque" x="486" y="0" width="68" height="11" backcolor="#999999" uuid="942734d9-c171-40fd-84c1-23ad01879277"/>
+				<textElement textAlignment="Right">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new DecimalFormat("#,##0.00;-#,##0.00", new java.text.DecimalFormatSymbols(new java.util.Locale("pt", "BR"))).format($V{vlTotalSaldo})]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement mode="Opaque" x="130" y="0" width="106" height="11" backcolor="#999999" uuid="fd8390a2-ff43-4964-bd3a-6a06309df1c8"/>
+				<textElement textAlignment="Right">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[TOTAL]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement mode="Opaque" x="304" y="0" width="58" height="11" backcolor="#999999" uuid="042767ea-acbe-4b9b-bd2f-aafe3f970ae2"/>
+				<textElement textAlignment="Right">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new DecimalFormat("#,##0.00;-#,##0.00", new java.text.DecimalFormatSymbols(new java.util.Locale("pt", "BR"))).format($V{vlTotalNotaFiscal})]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement mode="Opaque" x="236" y="0" width="68" height="11" backcolor="#999999" uuid="1e1392c2-4e08-4cd5-a9d2-07eb142dee17"/>
+				<textElement textAlignment="Right">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new DecimalFormat("#,##0.00;-#,##0.00", new java.text.DecimalFormatSymbols(new java.util.Locale("pt", "BR"))).format($V{vlTotalGeral})]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement mode="Opaque" x="0" y="0" width="133" height="11" forecolor="#666666" backcolor="#999999" uuid="53c182f2-a10e-4e59-9be3-af980a5dfbe6"/>
+				<textFieldExpression><![CDATA[]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement mode="Opaque" x="362" y="0" width="58" height="11" backcolor="#999999" uuid="042767ea-acbe-4b9b-bd2f-aafe3f970ae2"/>
+				<textElement textAlignment="Right">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new DecimalFormat("#,##0.00;-#,##0.00", new java.text.DecimalFormatSymbols(new java.util.Locale("pt", "BR"))).format($V{vlTotalCupomFiscal})]]></textFieldExpression>
+			</textField>
+		</band>
+	</summary>
+</jasperReport>

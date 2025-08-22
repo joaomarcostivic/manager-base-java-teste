@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.0.3.final using JasperReports Library version 6.0.3  -->
+<!-- 2018-09-17T09:00:31 -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="auditoria" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="b585a798-47b7-4fa6-b465-64bfb12faed5">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<property name="com.jaspersoft.studio.unit." value="pixel"/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
+	<style name="detail_style" mode="Transparent" hTextAlign="Left" vTextAlign="Middle" markup="" isBlankWhenNull="true" fontSize="8" isBold="true"/>
+	<style name="columHeader_style" hTextAlign="Left" markup="none" fontSize="8" isBold="true"/>
+	<field name="NR_ORDEM" class="java.lang.Integer"/>
+	<field name="TXT_QUESTAO" class="java.lang.String"/>
+	<field name="TP_QUESTAO" class="java.lang.Integer"/>
+	<field name="VL_PESO" class="java.lang.Double"/>
+	<field name="TXT_ALTERNATIVAS" class="java.lang.String"/>
+	<detail>
+		<band height="194">
+			<textField isStretchWithOverflow="true" pattern="">
+				<reportElement stretchType="RelativeToTallestObject" x="1" y="2" width="552" height="18" uuid="c650b629-78ee-4245-8a3a-6901a7ec94cb"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="11" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[($F{NR_ORDEM}+1) + ") " + $F{TXT_QUESTAO}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" pattern="">
+				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="1" y="33" width="552" height="20" uuid="460a3cc3-c27d-46db-aac9-a21af1a3a90d"/>
+				<textElement textAlignment="Left" verticalAlignment="Top" markup="html">
+					<font size="11" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{TXT_ALTERNATIVAS}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement positionType="FixRelativeToBottom" x="1" y="73" width="520" height="1" uuid="fb9a5cd7-dd45-4956-9b7d-513e82c41132">
+					<printWhenExpression><![CDATA[$F{TP_QUESTAO}==1 || $F{TP_QUESTAO}==2]]></printWhenExpression>
+				</reportElement>
+			</line>
+			<line>
+				<reportElement positionType="FixRelativeToBottom" x="0" y="103" width="520" height="1" uuid="eda4f055-c45f-49e5-8052-538b9d988cc7">
+					<printWhenExpression><![CDATA[$F{TP_QUESTAO}==1 || $F{TP_QUESTAO}==2]]></printWhenExpression>
+				</reportElement>
+			</line>
+			<line>
+				<reportElement positionType="FixRelativeToBottom" x="0" y="163" width="520" height="1" uuid="93ba0346-c20c-4c5b-9fb9-fb79093e37b9">
+					<printWhenExpression><![CDATA[$F{TP_QUESTAO}==1 || $F{TP_QUESTAO}==2]]></printWhenExpression>
+				</reportElement>
+			</line>
+			<line>
+				<reportElement positionType="FixRelativeToBottom" x="1" y="133" width="520" height="1" uuid="fffd32e0-1996-4ea4-8c5d-5bf13eb530b7">
+					<printWhenExpression><![CDATA[$F{TP_QUESTAO}==1 || $F{TP_QUESTAO}==2]]></printWhenExpression>
+				</reportElement>
+			</line>
+		</band>
+	</detail>
+</jasperReport>

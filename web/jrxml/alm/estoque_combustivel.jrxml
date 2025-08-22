@@ -1,0 +1,326 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="estoque_combustivel" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="49680453-939f-46ed-a06b-fa48ac43c27c">
+	<property name="ireport.zoom" value="2.0"/>
+	<property name="ireport.x" value="7"/>
+	<property name="ireport.y" value="38"/>
+	<parameter name="nmRazaoSocial" class="java.lang.String"/>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA["C:\\TIVIC\\manager\\web\\adm\\"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="dtHoje" class="java.lang.String"/>
+	<parameter name="hrHoje" class="java.lang.String"/>
+	<parameter name="nmUsuario" class="java.lang.String"/>
+	<parameter name="dtEstoque" class="java.lang.String"/>
+	<parameter name="LOGO" class="java.lang.Object"/>
+	<parameter name="nmDesenvolvedor" class="java.lang.String"/>
+	<parameter name="nmEmail" class="java.lang.String"/>
+	<parameter name="LOGO_DEV" class="java.lang.Object"/>
+	<field name="tpPrecoCusto" class="java.lang.String"/>
+	<field name="QT_CAPACIDADE" class="java.lang.Double"/>
+	<field name="QT_ESTOQUE_COMPLEMENTAR" class="java.lang.Double"/>
+	<field name="VL_PRECO_CUSTO" class="java.lang.Double"/>
+	<field name="QT_TANQUE" class="java.lang.Double"/>
+	<field name="VL_CONTABIL" class="java.lang.Double"/>
+	<field name="NR_TANQUE" class="java.lang.String"/>
+	<field name="NM_PRODUTO_SERVICO" class="java.lang.String"/>
+	<variable name="qtSubTotalTanque" class="java.lang.Double" resetType="Group" resetGroup="produtoTanque" calculation="Sum">
+		<variableExpression><![CDATA[$F{QT_TANQUE}]]></variableExpression>
+	</variable>
+	<variable name="vlSubTotalPrecoCusto" class="java.lang.Double" resetType="Group" resetGroup="produtoTanque" calculation="Sum">
+		<variableExpression><![CDATA[$F{VL_PRECO_CUSTO}]]></variableExpression>
+	</variable>
+	<variable name="vlSubTotalContabil" class="java.lang.Double" resetType="Group" resetGroup="produtoTanque" calculation="Sum">
+		<variableExpression><![CDATA[$F{VL_CONTABIL}]]></variableExpression>
+	</variable>
+	<variable name="qtSubTotalCapacidade" class="java.lang.Double" resetType="Group" resetGroup="produtoTanque" calculation="Sum">
+		<variableExpression><![CDATA[$F{QT_CAPACIDADE}]]></variableExpression>
+	</variable>
+	<variable name="qtSubTotalEstoqueComplementar" class="java.lang.Double" resetType="Group" resetGroup="produtoTanque" calculation="Sum">
+		<variableExpression><![CDATA[$F{QT_ESTOQUE_COMPLEMENTAR}]]></variableExpression>
+	</variable>
+	<variable name="qtTotalTanque" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[$F{QT_TANQUE}]]></variableExpression>
+	</variable>
+	<variable name="vlTotalContabil" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[$F{VL_CONTABIL}]]></variableExpression>
+	</variable>
+	<variable name="qtTotalCapacidade" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[$F{QT_CAPACIDADE}]]></variableExpression>
+	</variable>
+	<variable name="qtTotalEstoqueComplementar" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[$F{QT_ESTOQUE_COMPLEMENTAR}]]></variableExpression>
+	</variable>
+	<group name="produtoTanque">
+		<groupExpression><![CDATA[$F{NM_PRODUTO_SERVICO}]]></groupExpression>
+		<groupHeader>
+			<band height="14">
+				<textField>
+					<reportElement uuid="604df7dc-9676-4cf4-a1e7-96b1f529c02e" x="1" y="0" width="552" height="13"/>
+					<textElement textAlignment="Center">
+						<font size="10"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{NM_PRODUTO_SERVICO}]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupHeader>
+		<groupFooter>
+			<band height="13">
+				<textField>
+					<reportElement uuid="e8e140a9-f8e6-4b53-ab2d-021ba35296b1" mode="Opaque" x="466" y="1" width="87" height="12" backcolor="#CCCCCC"/>
+					<textElement textAlignment="Right">
+						<font size="8"/>
+					</textElement>
+					<textFieldExpression><![CDATA[new DecimalFormat("#,##0.0000;-#,##0.0000", new java.text.DecimalFormatSymbols(new java.util.Locale("pt", "BR"))).format($V{qtSubTotalEstoqueComplementar})]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement uuid="e8e140a9-f8e6-4b53-ab2d-021ba35296b1" mode="Opaque" x="190" y="1" width="91" height="12" backcolor="#CCCCCC"/>
+					<textElement textAlignment="Right">
+						<font size="8"/>
+					</textElement>
+					<textFieldExpression><![CDATA[new DecimalFormat("#,##0.0000;-#,##0.0000", new java.text.DecimalFormatSymbols(new java.util.Locale("pt", "BR"))).format($V{vlSubTotalPrecoCusto})]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement uuid="e8e140a9-f8e6-4b53-ab2d-021ba35296b1" mode="Opaque" x="88" y="1" width="102" height="12" backcolor="#CCCCCC"/>
+					<textElement textAlignment="Right">
+						<font size="8"/>
+					</textElement>
+					<textFieldExpression><![CDATA[new DecimalFormat("#,##0.0000;-#,##0.0000", new java.text.DecimalFormatSymbols(new java.util.Locale("pt", "BR"))).format($V{qtSubTotalTanque})]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement uuid="e8e140a9-f8e6-4b53-ab2d-021ba35296b1" mode="Opaque" x="281" y="1" width="103" height="12" backcolor="#CCCCCC"/>
+					<textElement textAlignment="Right">
+						<font size="8"/>
+					</textElement>
+					<textFieldExpression><![CDATA[new DecimalFormat("#,##0.0000;-#,##0.0000", new java.text.DecimalFormatSymbols(new java.util.Locale("pt", "BR"))).format($V{vlSubTotalContabil})]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement uuid="e8e140a9-f8e6-4b53-ab2d-021ba35296b1" mode="Opaque" x="384" y="1" width="82" height="12" backcolor="#CCCCCC"/>
+					<textElement textAlignment="Right">
+						<font size="8"/>
+					</textElement>
+					<textFieldExpression><![CDATA[new DecimalFormat("#,##0.0000;-#,##0.0000", new java.text.DecimalFormatSymbols(new java.util.Locale("pt", "BR"))).format($V{qtSubTotalCapacidade})]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement uuid="6f257788-1fa9-4a54-b4e4-6c05f32f892c" mode="Opaque" x="1" y="1" width="87" height="12" backcolor="#CCCCCC"/>
+					<textElement>
+						<font size="8" isBold="false"/>
+					</textElement>
+					<text><![CDATA[TOTAL]]></text>
+				</staticText>
+			</band>
+		</groupFooter>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<pageHeader>
+		<band height="73">
+			<staticText>
+				<reportElement uuid="b0a975cb-8cac-4013-a9ac-c49406f0d5d5" x="90" y="17" width="375" height="25"/>
+				<textElement textAlignment="Center">
+					<font size="16" isBold="true"/>
+				</textElement>
+				<text><![CDATA[ESTOQUE DE COMBUSTÍVEL]]></text>
+			</staticText>
+			<textField>
+				<reportElement uuid="b77a6be3-c465-437f-925b-5932b6d25c15" x="90" y="42" width="375" height="15"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA["Estoque: " + $P{dtEstoque}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="c6158799-fb61-41c2-8585-38acabdc702c" x="90" y="58" width="374" height="15"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[($F{tpPrecoCusto} == null || $F{tpPrecoCusto}.equals("")) ? "Preço de Custo: Última compra efetuada" : "Preço de Custo: " + $F{tpPrecoCusto}]]></textFieldExpression>
+			</textField>
+			<image scaleImage="FillFrame" hAlign="Center" vAlign="Middle" onErrorType="Blank" evaluationTime="Report">
+				<reportElement uuid="8c074d58-4f9a-4d93-8a2a-75274a8279a4" x="0" y="0" width="89" height="73"/>
+				<imageExpression><![CDATA[net.sf.jasperreports.engine.util.JRImageLoader.loadImage((byte[]) $P{LOGO_DEV})]]></imageExpression>
+			</image>
+			<textField isBlankWhenNull="true">
+				<reportElement uuid="d95120a9-93ca-4e71-9e3d-5c51e6d2eb66" x="90" y="1" width="374" height="16"/>
+				<textElement textAlignment="Center" verticalAlignment="Bottom" markup="none">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{nmRazaoSocial}]]></textFieldExpression>
+			</textField>
+			<image scaleImage="FillFrame" hAlign="Center" vAlign="Middle" onErrorType="Blank" evaluationTime="Report">
+				<reportElement uuid="8c074d58-4f9a-4d93-8a2a-75274a8279a4" x="465" y="-1" width="89" height="73"/>
+				<imageExpression><![CDATA[net.sf.jasperreports.engine.util.JRImageLoader.loadImage((byte[]) $P{LOGO})]]></imageExpression>
+			</image>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="19" splitType="Stretch">
+			<staticText>
+				<reportElement uuid="0eb26ccb-5c8e-4eed-9b34-f97ad899d619" x="279" y="5" width="103" height="12"/>
+				<textElement textAlignment="Right">
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[ESTOQUE CONTAB. (R$)]]></text>
+			</staticText>
+			<line>
+				<reportElement uuid="6978ee43-d8c9-443b-9788-dffa5f623354" x="1" y="1" width="553" height="2"/>
+				<graphicElement>
+					<pen lineWidth="1.5"/>
+				</graphicElement>
+			</line>
+			<staticText>
+				<reportElement uuid="0eb26ccb-5c8e-4eed-9b34-f97ad899d619" x="189" y="5" width="91" height="12"/>
+				<textElement textAlignment="Right">
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[PREÇO CUSTO (R$)]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="16e51332-16ef-4fc3-a126-23e10ee70b65" x="384" y="5" width="82" height="12"/>
+				<textElement textAlignment="Right">
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[CAPACIDADE (L)]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="041ea3b4-5374-4975-96fe-06f9aee1837c" x="1" y="5" width="87" height="12"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[TANQUE]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="041ea3b4-5374-4975-96fe-06f9aee1837c" x="88" y="5" width="101" height="12"/>
+				<textElement textAlignment="Right">
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[QUANTIDADE (L)]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="16e51332-16ef-4fc3-a126-23e10ee70b65" x="466" y="5" width="86" height="12"/>
+				<textElement textAlignment="Right">
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[ESTOQUE COMPL. (L)]]></text>
+			</staticText>
+			<line>
+				<reportElement uuid="aee11a31-3b64-4f9d-acbc-a13b496e51db" x="0" y="17" width="555" height="2"/>
+				<graphicElement>
+					<pen lineWidth="1.5"/>
+				</graphicElement>
+			</line>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="14" splitType="Stretch">
+			<textField>
+				<reportElement uuid="e8e140a9-f8e6-4b53-ab2d-021ba35296b1" x="467" y="2" width="86" height="12"/>
+				<textElement textAlignment="Right">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new DecimalFormat("#,##0.0000;-#,##0.0000", new java.text.DecimalFormatSymbols(new java.util.Locale("pt", "BR"))).format($F{QT_ESTOQUE_COMPLEMENTAR})]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="e8e140a9-f8e6-4b53-ab2d-021ba35296b1" x="2" y="2" width="87" height="12"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{NR_TANQUE}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="e8e140a9-f8e6-4b53-ab2d-021ba35296b1" x="190" y="2" width="91" height="12"/>
+				<textElement textAlignment="Right">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new DecimalFormat("#,##0.0000;-#,##0.0000", new java.text.DecimalFormatSymbols(new java.util.Locale("pt", "BR"))).format($F{VL_PRECO_CUSTO})]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="e8e140a9-f8e6-4b53-ab2d-021ba35296b1" x="280" y="2" width="103" height="12"/>
+				<textElement textAlignment="Right">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new DecimalFormat("#,##0.0000;-#,##0.0000", new java.text.DecimalFormatSymbols(new java.util.Locale("pt", "BR"))).format($F{VL_CONTABIL})]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="e8e140a9-f8e6-4b53-ab2d-021ba35296b1" x="385" y="2" width="82" height="12"/>
+				<textElement textAlignment="Right">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new DecimalFormat("#,##0.0000;-#,##0.0000", new java.text.DecimalFormatSymbols(new java.util.Locale("pt", "BR"))).format($F{QT_CAPACIDADE})]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="e8e140a9-f8e6-4b53-ab2d-021ba35296b1" x="89" y="2" width="101" height="12"/>
+				<textElement textAlignment="Right">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new DecimalFormat("#,##0.0000;-#,##0.0000", new java.text.DecimalFormatSymbols(new java.util.Locale("pt", "BR"))).format($F{QT_TANQUE})]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="12" splitType="Stretch">
+			<textField>
+				<reportElement uuid="b4535353-a90a-4520-8dc4-8400a0e2fed5" x="270" y="2" width="281" height="10"/>
+				<textElement textAlignment="Right" verticalAlignment="Top">
+					<font fontName="SansSerif" size="6" isBold="true" isItalic="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Emitido em " + $P{dtHoje} + " às " + $P{hrHoje} + " por " + $P{nmUsuario} + "   Página: " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="b4535353-a90a-4520-8dc4-8400a0e2fed5" x="1" y="2" width="269" height="10"/>
+				<textElement textAlignment="Left" verticalAlignment="Top">
+					<font fontName="SansSerif" size="6" isBold="false" isItalic="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{nmDesenvolvedor} + "   " + $P{nmEmail}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement uuid="b22cbe36-06b3-4501-a505-99c9c259cab5" x="1" y="0" width="554" height="1"/>
+				<graphicElement>
+					<pen lineStyle="Solid"/>
+				</graphicElement>
+			</line>
+		</band>
+	</columnFooter>
+	<summary>
+		<band height="12" splitType="Stretch">
+			<textField>
+				<reportElement uuid="e8e140a9-f8e6-4b53-ab2d-021ba35296b1" mode="Opaque" x="386" y="0" width="82" height="12" backcolor="#CCCCCC"/>
+				<textElement textAlignment="Right">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new DecimalFormat("#,##0.0000;-#,##0.0000", new java.text.DecimalFormatSymbols(new java.util.Locale("pt", "BR"))).format($V{qtTotalCapacidade})]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="e8e140a9-f8e6-4b53-ab2d-021ba35296b1" mode="Opaque" x="468" y="0" width="86" height="12" backcolor="#CCCCCC"/>
+				<textElement textAlignment="Right">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new DecimalFormat("#,##0.0000;-#,##0.0000", new java.text.DecimalFormatSymbols(new java.util.Locale("pt", "BR"))).format($V{qtTotalEstoqueComplementar})]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement uuid="e8e140a9-f8e6-4b53-ab2d-021ba35296b1" mode="Opaque" x="187" y="0" width="96" height="12" backcolor="#CCCCCC"/>
+				<textElement>
+					<font size="8" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="e8e140a9-f8e6-4b53-ab2d-021ba35296b1" mode="Opaque" x="90" y="0" width="98" height="12" backcolor="#CCCCCC"/>
+				<textElement textAlignment="Right">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new DecimalFormat("#,##0.0000;-#,##0.0000", new java.text.DecimalFormatSymbols(new java.util.Locale("pt", "BR"))).format($V{qtTotalTanque})]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="e8e140a9-f8e6-4b53-ab2d-021ba35296b1" mode="Opaque" x="283" y="0" width="103" height="12" backcolor="#CCCCCC"/>
+				<textElement textAlignment="Right">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new DecimalFormat("#,##0.0000;-#,##0.0000", new java.text.DecimalFormatSymbols(new java.util.Locale("pt", "BR"))).format($V{vlTotalContabil})]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="6f257788-1fa9-4a54-b4e4-6c05f32f892c" mode="Opaque" x="2" y="0" width="88" height="12" backcolor="#CCCCCC"/>
+				<textElement>
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[TOTAL GERAL]]></text>
+			</staticText>
+		</band>
+	</summary>
+</jasperReport>

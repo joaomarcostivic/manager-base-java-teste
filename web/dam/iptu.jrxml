@@ -1,0 +1,1207 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="iptu" language="groovy" pageWidth="595" pageHeight="842" columnWidth="468" leftMargin="127" rightMargin="0" topMargin="0" bottomMargin="0" uuid="a63f7f67-ad61-4b5d-b254-5268ba2d216b">
+	<property name="ireport.zoom" value="1.5"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="nrCodigoBarras" class="java.lang.String"/>
+	<parameter name="nrCodigoBarras1" class="java.lang.String"/>
+	<parameter name="nrCodigoBarras2" class="java.lang.String"/>
+	<parameter name="nrCodigoBarras3" class="java.lang.String"/>
+	<parameter name="nrCodigoBarras4" class="java.lang.String"/>
+	<parameter name="logoPath" class="java.lang.String"/>
+	<parameter name="nrAnoBase" class="java.lang.String"/>
+	<field name="nmContribuinte" class="java.lang.String"/>
+	<field name="nrInscricao" class="java.lang.String"/>
+	<field name="vlTerreno" class="java.lang.Float"/>
+	<field name="vlM2Terreno" class="java.lang.Float"/>
+	<field name="vlVenal" class="java.lang.Float"/>
+	<field name="vlAreaTerreno" class="java.lang.Float"/>
+	<field name="nrLote" class="java.lang.String"/>
+	<field name="nrLoteamento" class="java.lang.String"/>
+	<field name="nrQuadra" class="java.lang.String"/>
+	<field name="tpCategoria" class="java.lang.Integer"/>
+	<field name="vlM2Construcao" class="java.lang.Float"/>
+	<field name="vlConstrucao" class="java.lang.Float"/>
+	<field name="vlFatorCorrConstrucao" class="java.lang.Float"/>
+	<field name="vlParcela" class="java.lang.Float"/>
+	<field name="vlTaxaExpediente" class="java.lang.Float"/>
+	<field name="IndiceAno" class="java.lang.Integer"/>
+	<field name="IndiceParcela" class="java.lang.Integer"/>
+	<field name="dtVencimento" class="java.lang.String"/>
+	<field name="nmTipoLogradouro" class="java.lang.String"/>
+	<field name="nmLogradouro" class="java.lang.String"/>
+	<field name="nrImovel" class="java.lang.String"/>
+	<field name="nmBairro" class="java.lang.String"/>
+	<field name="nmComplemento" class="java.lang.String"/>
+	<field name="nmCidade" class="java.lang.String"/>
+	<field name="sgEstado" class="java.lang.String"/>
+	<field name="nrCep" class="java.lang.String"/>
+	<field name="vlDescontoCotaUnica" class="java.lang.Float"/>
+	<field name="prAliquota" class="java.lang.Float"/>
+	<field name="nmTipoLogradouroImovel" class="java.lang.String"/>
+	<field name="nmLogradouroImovel" class="java.lang.String"/>
+	<field name="nmBairroImovel" class="java.lang.String"/>
+	<field name="nrEndereco" class="java.lang.String"/>
+	<field name="nmComplementoImovel" class="java.lang.String"/>
+	<field name="nrSorte" class="java.lang.String"/>
+	<field name="nrSorteT" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="vlFatorCorrTerreno" class="java.lang.Float"/>
+	<field name="vlAreaConstrucao" class="java.lang.Float"/>
+	<field name="vlMulta" class="java.lang.Float"/>
+	<field name="vlJuros" class="java.lang.Float"/>
+	<field name="dsMensagem" class="java.lang.String"/>
+	<title>
+		<band height="2" splitType="Stretch"/>
+	</title>
+	<pageHeader>
+		<band height="2" splitType="Stretch"/>
+	</pageHeader>
+	<detail>
+		<band height="801">
+			<staticText>
+				<reportElement uuid="209feecf-c926-47bd-b7fd-17743fde33ae" x="258" y="183" width="81" height="9"/>
+				<textElement>
+					<font fontName="SansSerif" size="6"/>
+				</textElement>
+				<text><![CDATA[Base de Cálculo para Taxas:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="09d4817c-485b-44db-939d-f1e136f94e2f" x="242" y="70" width="84" height="8"/>
+				<textElement>
+					<font fontName="SansSerif" size="6"/>
+				</textElement>
+				<text><![CDATA[Inscrição Imobiliária:]]></text>
+			</staticText>
+			<line>
+				<reportElement uuid="39e08da2-fa53-4f28-b7d7-bbbfe5b6f259" x="21" y="205" width="1" height="67"/>
+			</line>
+			<staticText>
+				<reportElement uuid="74a91063-f112-468c-90d5-45f63fa5fe42" x="2" y="121" width="60" height="9"/>
+				<textElement>
+					<font fontName="SansSerif" size="6"/>
+				</textElement>
+				<text><![CDATA[Área do Terreno:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="dcc07524-4980-4699-8601-f98aa3586f39" x="88" y="121" width="60" height="9"/>
+				<textElement>
+					<font fontName="SansSerif" size="6"/>
+				</textElement>
+				<text><![CDATA[Fração Ideal:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="7ea21a48-f50b-46fa-9ef8-a50841f70b1f" x="2" y="141" width="81" height="9"/>
+				<textElement>
+					<font fontName="SansSerif" size="6"/>
+				</textElement>
+				<text><![CDATA[Área da Construção:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="13d30fe5-e3f3-412b-8dd3-fb828f07d822" x="2" y="162" width="60" height="9"/>
+				<textElement>
+					<font fontName="SansSerif" size="6"/>
+				</textElement>
+				<text><![CDATA[Valor do Terreno:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="9b235e59-e6c4-4fed-ae01-4c3626768c2c" x="2" y="183" width="60" height="9"/>
+				<textElement>
+					<font fontName="SansSerif" size="6"/>
+				</textElement>
+				<text><![CDATA[Nº Loteamento:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="b1a4fcaa-3668-4535-9f75-df51332859b5" x="88" y="141" width="77" height="9"/>
+				<textElement>
+					<font fontName="SansSerif" size="6"/>
+				</textElement>
+				<text><![CDATA[Categoria:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="8f9a23d0-332e-4a3e-9716-b2f512f4f090" x="88" y="183" width="60" height="9"/>
+				<textElement>
+					<font fontName="SansSerif" size="6"/>
+				</textElement>
+				<text><![CDATA[Nº Quadra Loteamento:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="732bb4e8-1bec-487e-bb25-755b5092ec7a" x="88" y="162" width="77" height="9"/>
+				<textElement>
+					<font fontName="SansSerif" size="6"/>
+				</textElement>
+				<text><![CDATA[Valor da Construção:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="43adc711-631c-4a5d-aa0b-73040f3fe023" x="173" y="121" width="79" height="9"/>
+				<textElement>
+					<font fontName="SansSerif" size="6"/>
+				</textElement>
+				<text><![CDATA[Valor M² Terreno:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="61e900af-6e76-4eea-90cd-8c49342e8292" x="173" y="141" width="79" height="9"/>
+				<textElement>
+					<font fontName="SansSerif" size="6"/>
+				</textElement>
+				<text><![CDATA[Valor M² Construção:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="3a24f0c3-79b1-4f5e-a257-0bc20b2d14b3" x="258" y="162" width="77" height="9"/>
+				<textElement>
+					<font fontName="SansSerif" size="6"/>
+				</textElement>
+				<text><![CDATA[Alíquota:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="f48189c0-4272-4398-8764-35d4d4e10ddd" x="173" y="183" width="79" height="9"/>
+				<textElement>
+					<font fontName="SansSerif" size="6"/>
+				</textElement>
+				<text><![CDATA[Nº Lote no Loteamento:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="2c18fb74-c9a5-40b1-bcbe-f47c13ff093e" x="258" y="121" width="77" height="9"/>
+				<textElement>
+					<font fontName="SansSerif" size="6"/>
+				</textElement>
+				<text><![CDATA[Fator  Correção Terreno:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="c17a34e5-0da0-46a1-95c3-59cbd1e4b69e" x="258" y="141" width="77" height="9"/>
+				<textElement>
+					<font fontName="SansSerif" size="6"/>
+				</textElement>
+				<text><![CDATA[Fator Correção Construção:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="d65847c9-2d60-4263-a1b3-9c2ba5d80830" x="174" y="162" width="79" height="9"/>
+				<textElement>
+					<font fontName="SansSerif" size="6"/>
+				</textElement>
+				<text><![CDATA[Valor Venal do Imóvel:]]></text>
+			</staticText>
+			<line>
+				<reportElement uuid="8324d335-4d09-4ed3-8ece-44d7051e3ccf" x="256" y="121" width="1" height="247"/>
+			</line>
+			<staticText>
+				<reportElement uuid="dcf6e8c6-d47a-4757-8b09-d2acdb474d1b" x="9" y="207" width="8" height="9"/>
+				<textElement>
+					<font fontName="SansSerif" size="6"/>
+				</textElement>
+				<text><![CDATA[L]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="352997a2-f61e-41d4-ae80-d2045e5b2c67" x="24" y="206" width="229" height="9"/>
+				<textElement textAlignment="Center">
+					<font fontName="SansSerif" size="6"/>
+				</textElement>
+				<text><![CDATA[DESCRIÇÃO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="2795aacc-eb3c-4004-817d-cc036bf1662f" x="258" y="206" width="81" height="9"/>
+				<textElement textAlignment="Center">
+					<font fontName="SansSerif" size="6"/>
+				</textElement>
+				<text><![CDATA[VALOR (R$)]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="49bc4acb-8212-414a-9eef-bc91600d3207" x="0" y="273" width="85" height="19"/>
+				<textElement textAlignment="Center">
+					<font fontName="SansSerif" size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[IPTU]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="28c9a2ef-1582-4fc3-b556-6ee353c202da" x="86" y="273" width="85" height="19"/>
+				<textElement textAlignment="Center">
+					<font fontName="SansSerif" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[PARCELA]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="376a487b-5ad0-496f-befb-19093f30cf74" x="171" y="273" width="85" height="19"/>
+				<textElement textAlignment="Center">
+					<font fontName="SansSerif" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[VENCIMENTO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="befbc639-86a2-4167-8e6d-eb73d794b81a" x="5" y="314" width="175" height="15"/>
+				<textElement>
+					<font fontName="SansSerif" size="8"/>
+				</textElement>
+				<text><![CDATA[Pague seu IPTU na rede bancária credenciada]]></text>
+			</staticText>
+			<line>
+				<reportElement uuid="0060884b-bf69-4491-821c-51d8f85c378a" x="256" y="345" width="85" height="1"/>
+			</line>
+			<staticText>
+				<reportElement uuid="a540a5e0-4659-4b9c-a1d3-b806ec02f5cf" x="258" y="274" width="75" height="9"/>
+				<textElement>
+					<font fontName="SansSerif" size="6" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Valor da Parcela:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="cee33ba0-1676-4b92-8cca-fa8014418558" x="258" y="293" width="75" height="9"/>
+				<textElement>
+					<font fontName="SansSerif" size="6" isBold="false"/>
+				</textElement>
+				<text><![CDATA[(-) Desconto:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="667fb6bd-b713-4f11-96cd-b2195f18578e" x="258" y="310" width="75" height="9"/>
+				<textElement>
+					<font fontName="SansSerif" size="6" isBold="false"/>
+				</textElement>
+				<text><![CDATA[(+) Multa:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="d5a432cd-019a-49b6-8114-9a17672e3dcd" x="258" y="328" width="75" height="9"/>
+				<textElement>
+					<font fontName="SansSerif" size="6" isBold="false"/>
+				</textElement>
+				<text><![CDATA[(+) Juros:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="a363a343-202f-4e93-b6ec-f74bfe92b296" x="258" y="346" width="75" height="9"/>
+				<textElement>
+					<font fontName="SansSerif" size="6" isBold="false"/>
+				</textElement>
+				<text><![CDATA[(=) Valor Cobrado:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="021c24e4-925e-440b-a2f8-2cad68cb25fe" x="261" y="369" width="80" height="8"/>
+				<textElement textAlignment="Right">
+					<font fontName="SansSerif" size="6"/>
+				</textElement>
+				<text><![CDATA[Via Contribuinte]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="ecd40af7-e4b1-450b-a114-8939e5746660" x="258" y="445" width="75" height="9"/>
+				<textElement>
+					<font fontName="SansSerif" size="6" isBold="false"/>
+				</textElement>
+				<text><![CDATA[(+) Multa:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="893d2984-1109-4a5f-9770-36b8d125a196" x="171" y="405" width="85" height="19"/>
+				<textElement textAlignment="Center">
+					<font fontName="SansSerif" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[VENCIMENTO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="f3aaf6d6-c41d-4f45-880b-0882558d494e" x="258" y="484" width="75" height="9"/>
+				<textElement>
+					<font fontName="SansSerif" size="6" isBold="false"/>
+				</textElement>
+				<text><![CDATA[(=) Valor Cobrador:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="fadab80b-7b24-4fac-8dae-bbfc779c4275" x="258" y="465" width="75" height="9"/>
+				<textElement>
+					<font fontName="SansSerif" size="6" isBold="false"/>
+				</textElement>
+				<text><![CDATA[(+) Juros:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="8a150e9b-418d-4ba9-92d9-2d59ef25e5b6" x="86" y="405" width="85" height="19"/>
+				<textElement textAlignment="Center">
+					<font fontName="SansSerif" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[PARCELA]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="e6183236-6549-43c2-9f17-e2a7f8489538" x="0" y="405" width="85" height="19"/>
+				<textElement textAlignment="Center">
+					<font fontName="SansSerif" size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[IPTU]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="99f36eb7-6186-4837-8f01-258cc5b85743" x="261" y="507" width="80" height="8"/>
+				<textElement textAlignment="Right">
+					<font fontName="SansSerif" size="6"/>
+				</textElement>
+				<text><![CDATA[Via Prefeitura]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="ca098c7d-fb8b-4e88-85f4-a3eb470d525e" x="258" y="635" width="60" height="9"/>
+				<textElement>
+					<font fontName="SansSerif" size="6" isBold="false"/>
+				</textElement>
+				<text><![CDATA[(+) Juros:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="de80f6f0-a948-4476-8e88-23b8f53c57da" x="258" y="621" width="60" height="9"/>
+				<textElement>
+					<font fontName="SansSerif" size="6" isBold="false"/>
+				</textElement>
+				<text><![CDATA[(+) Multa:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="d198bf4b-f72c-41ce-9e06-f7896cd83e90" x="258" y="587" width="60" height="9"/>
+				<textElement>
+					<font fontName="SansSerif" size="6" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Valor dos Tributos:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="545fb32a-b1e6-44da-9fa6-56e71e4b1e20" x="258" y="406" width="75" height="9"/>
+				<textElement>
+					<font fontName="SansSerif" size="6" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Valor da Parcela:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="51574a89-5629-4b3c-ac9b-7a8013a89f80" x="260" y="707" width="80" height="8"/>
+				<textElement textAlignment="Right">
+					<font fontName="SansSerif" size="6"/>
+				</textElement>
+				<text><![CDATA[Via Banco]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="1e53c095-145b-4ded-bcd1-3bc2af9b30b5" x="258" y="605" width="60" height="9"/>
+				<textElement>
+					<font fontName="SansSerif" size="6" isBold="false"/>
+				</textElement>
+				<text><![CDATA[(-) Desconto:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="b1d690fe-37f6-406e-812f-1dec30499e30" x="258" y="649" width="60" height="9"/>
+				<textElement>
+					<font fontName="SansSerif" size="6" isBold="false"/>
+				</textElement>
+				<text><![CDATA[(=) Valor Cobrado:]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement uuid="ddb969fb-986a-48d1-a76e-1f57d245b38b" x="4" y="77" width="167" height="14"/>
+				<textElement>
+					<font size="9" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{nmContribuinte}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement uuid="b02cd054-01e3-482f-ad3b-20128a5bc0f0" x="242" y="77" width="96" height="13"/>
+				<textElement textAlignment="Center">
+					<font size="9" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{nrInscricao}.substring(0,2)+"."+$F{nrInscricao}.substring(2,4)+"."+$F{nrInscricao}.substring(4,7)+"."+$F{nrInscricao}.substring(7,11)+"."+$F{nrInscricao}.substring(11,14)]]></textFieldExpression>
+			</textField>
+			<textField pattern="">
+				<reportElement uuid="20d97522-d04d-4278-8b64-3e24baab7e3b" x="177" y="128" width="74" height="13"/>
+				<textElement textAlignment="Right">
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new DecimalFormat("#,##0.00;-#,##0.00", new java.text.DecimalFormatSymbols(new java.util.Locale("pt", "BR"))).format($F{vlM2Terreno})]]></textFieldExpression>
+			</textField>
+			<textField pattern="">
+				<reportElement uuid="f0c369a4-c556-4bd2-96c5-266e8fa1b737" x="177" y="170" width="74" height="13"/>
+				<textElement textAlignment="Right">
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new DecimalFormat("#,##0.00;-#,##0.00", new java.text.DecimalFormatSymbols(new java.util.Locale("pt", "BR"))).format($F{vlVenal})]]></textFieldExpression>
+			</textField>
+			<textField pattern="">
+				<reportElement uuid="6a55aade-152e-4796-8f0a-878d9e457b59" x="177" y="149" width="74" height="13"/>
+				<textElement textAlignment="Right">
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new DecimalFormat("#,##0.00;-#,##0.00", new java.text.DecimalFormatSymbols(new java.util.Locale("pt", "BR"))).format($F{vlM2Construcao}!=null?$F{vlM2Construcao}:0)]]></textFieldExpression>
+			</textField>
+			<textField pattern="" isBlankWhenNull="true">
+				<reportElement uuid="abc79d15-8bc9-4e82-8178-3bca7403b77d" x="10" y="170" width="72" height="13"/>
+				<textElement textAlignment="Right">
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new DecimalFormat("#,##0.00;-#,##0.00", new java.text.DecimalFormatSymbols(new java.util.Locale("pt", "BR"))).format($F{vlTerreno})]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="adfce3ab-4640-4710-8ae1-4f3eb4b190d9" x="10" y="191" width="72" height="13"/>
+				<textElement textAlignment="Center">
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{nrLoteamento}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="50169374-1f0d-40d0-b029-ade29cdc2836" x="91" y="191" width="74" height="13"/>
+				<textElement textAlignment="Center">
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{nrQuadra}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="d43e0800-d123-4839-9880-8cb589ccf72e" x="177" y="191" width="74" height="13"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{nrLote}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="8388d56a-1ef2-4232-b69b-3cff5bcfba45" x="91" y="149" width="74" height="13"/>
+				<textElement textAlignment="Center">
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[($F{tpCategoria}==1 ? "SEM USO" : ($F{tpCategoria}==2 ? "RESIDENCIAL" : ($F{tpCategoria}==3 ? "COMERCIAL" : ($F{tpCategoria}==4 ? "SERVIÇOS" : ""))))]]></textFieldExpression>
+			</textField>
+			<textField pattern="" isBlankWhenNull="true">
+				<reportElement uuid="9902cb1d-2b51-4fb0-9aef-0313af0d9fcb" x="10" y="128" width="72" height="13"/>
+				<textElement textAlignment="Right">
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new DecimalFormat("#,##0.00;-#,##0.00", new java.text.DecimalFormatSymbols(new java.util.Locale("pt", "BR"))).format($F{vlAreaTerreno})]]></textFieldExpression>
+			</textField>
+			<textField pattern="">
+				<reportElement uuid="40b6c10e-8300-4fff-8c79-319f9d7fd724" x="91" y="170" width="74" height="13"/>
+				<textElement textAlignment="Right">
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new DecimalFormat("#,##0.00;-#,##0.00", new java.text.DecimalFormatSymbols(new java.util.Locale("pt", "BR"))).format($F{vlConstrucao}!=null?$F{vlConstrucao}:0)]]></textFieldExpression>
+			</textField>
+			<textField pattern="">
+				<reportElement uuid="17f2d416-a92f-48e8-ac86-d41aad240b0a" x="259" y="149" width="74" height="13"/>
+				<textElement textAlignment="Right">
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new DecimalFormat("#,##0.0000;-#,##0.0000", new java.text.DecimalFormatSymbols(new java.util.Locale("pt", "BR"))).format($F{vlFatorCorrConstrucao}!=null?$F{vlFatorCorrConstrucao}:0)]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="c3661c43-f95d-4fbb-9ce1-ea9ef8cbe209" x="6" y="216" width="15" height="14"/>
+				<textElement>
+					<font fontName="SansSerif" size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[01]]></text>
+			</staticText>
+			<textField pattern="">
+				<reportElement uuid="6e453796-ea1e-4f80-8763-9d4b462d8dfd" x="259" y="280" width="74" height="13"/>
+				<textElement textAlignment="Right">
+					<font size="9" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new DecimalFormat("#,##0.00;-#,##0.00", new java.text.DecimalFormatSymbols(new java.util.Locale("pt", "BR"))).format(($F{vlParcela}/100)+$F{vlTaxaExpediente})]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="6c49c824-d79c-4a0e-b047-a599475fe36b" x="0" y="290" width="85" height="16"/>
+				<textElement textAlignment="Center" markup="none">
+					<font fontName="SansSerif" size="12" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{IndiceAno}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="da49e080-45af-4b47-bd4f-1b35e751de58" x="86" y="290" width="85" height="16"/>
+				<textElement textAlignment="Center" markup="none">
+					<font fontName="SansSerif" size="10" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{IndiceParcela}==0 ? "ÚNICA" : $F{IndiceParcela}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="8d97f250-a0cd-4814-bbd3-af3bc908ddab" x="171" y="290" width="85" height="16"/>
+				<textElement textAlignment="Center" markup="none">
+					<font fontName="SansSerif" size="10" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{dtVencimento}.substring(0,2)+"/"+$F{dtVencimento}.substring(2,4)+"/"+$F{dtVencimento}.substring(4,8)]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="c8bca44b-3f23-48f4-9b60-66060fcf0e4a" x="86" y="426" width="85" height="16"/>
+				<textElement textAlignment="Center" markup="none">
+					<font fontName="SansSerif" size="10" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{IndiceParcela}==0 ? "ÚNICA" : $F{IndiceParcela}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="70109382-c619-43a6-a85d-b09bb57e0d6a" x="0" y="426" width="85" height="16"/>
+				<textElement textAlignment="Center" markup="none">
+					<font fontName="SansSerif" size="12" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{IndiceAno}]]></textFieldExpression>
+			</textField>
+			<textField pattern="">
+				<reportElement uuid="5a91b6df-c309-4ca9-98ef-7d256d89e0c8" x="257" y="412" width="74" height="12"/>
+				<textElement textAlignment="Right">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new DecimalFormat("#,##0.00;-#,##0.00", new java.text.DecimalFormatSymbols(new java.util.Locale("pt", "BR"))).format(($F{vlParcela}/100)+$F{vlTaxaExpediente})]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="fac39204-c357-467d-86a7-7f8aceaa490c" x="171" y="426" width="85" height="16"/>
+				<textElement textAlignment="Center" markup="none">
+					<font fontName="SansSerif" size="10" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{dtVencimento}.substring(0,2)+"/"+$F{dtVencimento}.substring(2,4)+"/"+$F{dtVencimento}.substring(4,8)]]></textFieldExpression>
+			</textField>
+			<textField pattern="">
+				<reportElement uuid="f365103e-79a8-444e-aa66-a993ce52c47b" x="257" y="593" width="76" height="12"/>
+				<textElement textAlignment="Right">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new DecimalFormat("#,##0.00;-#,##0.00", new java.text.DecimalFormatSymbols(new java.util.Locale("pt", "BR"))).format(Math.round((($F{vlParcela}/100)+$F{vlTaxaExpediente})*100)/100)]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="6c83cd3b-1eb8-4f83-b925-8aecf58e4bd1" x="0" y="720" width="341" height="20"/>
+				<textElement textAlignment="Center">
+					<font fontName="SansSerif" size="9" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{nrCodigoBarras1}+"  "+$P{nrCodigoBarras2}+"  "+$P{nrCodigoBarras3}+"  "+$P{nrCodigoBarras4}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="9cba3e0c-4253-4124-aff2-a5d965e8f1c4" x="258" y="425" width="75" height="9"/>
+				<textElement>
+					<font fontName="SansSerif" size="6" isBold="false"/>
+				</textElement>
+				<text><![CDATA[(-) Desconto:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="5b8d6d3a-f60a-41f1-a9e6-465e4b533939" x="3" y="451" width="30" height="14"/>
+				<textElement>
+					<font fontName="SansSerif" isBold="true"/>
+				</textElement>
+				<text><![CDATA[INSC:]]></text>
+			</staticText>
+			<textField>
+				<reportElement uuid="f57aeaeb-7c40-4cef-8fa4-e3c4eec9092a" x="33" y="451" width="222" height="14"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{nrInscricao}.substring(0,2)+"."+$F{nrInscricao}.substring(2,4)+"."+$F{nrInscricao}.substring(4,7)+"."+$F{nrInscricao}.substring(7,11)+"."+$F{nrInscricao}.substring(11,14)+" / "+$F{nmContribuinte}]]></textFieldExpression>
+			</textField>
+			<textField pattern="">
+				<reportElement uuid="5913d2ce-5edc-458d-92b4-d4c8470e42ca" x="108" y="610" width="67" height="14"/>
+				<textElement textAlignment="Right">
+					<font fontName="SansSerif"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new DecimalFormat("#,##0.00;-#,##0.00", new java.text.DecimalFormatSymbols(new java.util.Locale("pt", "BR"))).format($F{vlParcela}/100)]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="d67ac49d-c689-4413-af20-ee082c662d66" x="3" y="610" width="30" height="14"/>
+				<textElement>
+					<font fontName="SansSerif" isBold="true"/>
+				</textElement>
+				<text><![CDATA[IPTU]]></text>
+			</staticText>
+			<textField>
+				<reportElement uuid="9cf02ccf-6fd5-4af7-88c9-70ba5ab31351" x="47" y="668" width="287" height="11"/>
+				<textElement>
+					<font fontName="SansSerif" size="8" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{nmContribuinte}]]></textFieldExpression>
+			</textField>
+			<textField pattern="">
+				<reportElement uuid="5afe4167-c0b9-47bd-8e58-1a589634cfe0" x="10" y="149" width="72" height="13"/>
+				<textElement textAlignment="Right">
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new DecimalFormat("#,##0.00;-#,##0.00", new java.text.DecimalFormatSymbols(new java.util.Locale("pt", "BR"))).format($F{vlAreaConstrucao}!=null?$F{vlAreaConstrucao}:0)]]></textFieldExpression>
+			</textField>
+			<textField pattern="">
+				<reportElement uuid="01b4644d-7ce5-4c9b-81d7-4152a90473c0" x="91" y="128" width="74" height="13"/>
+				<textElement textAlignment="Right">
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new DecimalFormat("#,##0.00;-#,##0.00", new java.text.DecimalFormatSymbols(new java.util.Locale("pt", "BR"))).format($F{vlAreaTerreno})]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="43d93a11-a468-419f-b4da-faee830b7209" x="2" y="70" width="60" height="8"/>
+				<textElement>
+					<font fontName="SansSerif" size="6"/>
+				</textElement>
+				<text><![CDATA[Contribuinte:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="3465634b-3873-45a5-a76e-5e74a62c7d8f" x="46" y="7" width="126" height="12"/>
+				<textElement>
+					<font fontName="SansSerif" size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[PREFEITURA MUNICIPAL DE]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="50033b15-f043-4027-9bce-2cca7e626795" x="0" y="369" width="218" height="8"/>
+				<textElement>
+					<font fontName="SansSerif" size="6"/>
+				</textElement>
+				<text><![CDATA[TIVIC Tecnologia e Informação LTDA - comercial@tivic.com.br]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="60a52f11-e119-4e24-8b3a-730277c0f104" x="0" y="507" width="218" height="8"/>
+				<textElement>
+					<font fontName="SansSerif" size="6"/>
+				</textElement>
+				<text><![CDATA[TIVIC Tecnologia e Informação LTDA - comercial@tivic.com.br]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="012ceedc-8a5b-4278-83e3-d83c433fb7a9" x="1" y="707" width="218" height="8"/>
+				<textElement>
+					<font fontName="SansSerif" size="6"/>
+				</textElement>
+				<text><![CDATA[TIVIC Tecnologia e Informação LTDA - comercial@tivic.com.br]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="67bdf282-48a0-496a-b747-87a0dc670b21" x="46" y="25" width="215" height="23"/>
+				<textElement>
+					<font fontName="SansSerif" size="16" isBold="true"/>
+				</textElement>
+				<text><![CDATA[VITÓRIA DA CONQUISTA]]></text>
+			</staticText>
+			<line>
+				<reportElement uuid="1b90739c-dd82-4ed6-8604-a8af9e16f516" x="0" y="386" width="341" height="1"/>
+				<graphicElement>
+					<pen lineStyle="Dotted"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement uuid="950dc05a-9984-40ca-ac91-4974c9412a21" x="0" y="531" width="341" height="1"/>
+				<graphicElement>
+					<pen lineStyle="Dotted"/>
+				</graphicElement>
+			</line>
+			<staticText>
+				<reportElement uuid="b2945aa9-782b-4448-b011-eb4ba55a64c4" x="259" y="191" width="74" height="13"/>
+				<textElement textAlignment="Right" markup="none">
+					<font size="9"/>
+				</textElement>
+				<text><![CDATA[136,28]]></text>
+			</staticText>
+			<textField pattern="">
+				<reportElement uuid="35e91023-4b3f-43d8-bf94-7eb3498105ba" x="259" y="170" width="74" height="13"/>
+				<textElement textAlignment="Right" markup="none">
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new DecimalFormat("#,##0.0000;-#,##0.0000", new java.text.DecimalFormatSymbols(new java.util.Locale("pt", "BR"))).format($F{prAliquota}/100)]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="611df91a-d9ef-4047-8ed5-ddcc53585e96" x="259" y="128" width="74" height="13"/>
+				<textElement textAlignment="Right" markup="none">
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new DecimalFormat("#,##0.0000;-#,##0.0000", new java.text.DecimalFormatSymbols(new java.util.Locale("pt", "BR"))).format($F{vlFatorCorrTerreno}!=null?$F{vlFatorCorrTerreno}:0)]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement uuid="edb629e3-6f53-4cc4-a4e0-d6a48e0fafab" x="48" y="678" width="287" height="11"/>
+				<textElement>
+					<font fontName="SansSerif" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{nmTipoLogradouroImovel}+" "+$F{nmLogradouroImovel}+" "+$F{nrEndereco}+($F{nmComplementoImovel}!=null?" "+$F{nmComplementoImovel}:"")]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement uuid="d354c77d-7a60-4a0b-b770-c8e58b5a0210" x="48" y="690" width="287" height="11"/>
+				<textElement>
+					<font fontName="SansSerif" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[($F{nmBairroImovel}!=null?$F{nmBairroImovel}+" ":" ")+($F{nrCep}!=null?$F{nrCep}+" ":" ")+($F{nmCidade}!=null?$F{nmCidade}+" ":" ")+($F{sgEstado}!=null?$F{sgEstado}+" ":"")]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement uuid="0699f86f-0c39-40d8-9078-b0e48e34f5b0" x="0" y="53" width="341" height="1"/>
+				<graphicElement>
+					<pen lineWidth="2.5"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement uuid="377ab95d-5ef1-4a3f-b0f9-457167bce53a" x="0" y="548" width="341" height="1"/>
+			</line>
+			<staticText>
+				<reportElement uuid="3e42ad9d-90dd-47a1-b57f-4b54747f4fc3" x="2" y="549" width="89" height="9"/>
+				<textElement>
+					<font fontName="SansSerif" size="6" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Local de Pagamento:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="ca39c257-1e4a-480c-9e4a-09857484b0de" x="4" y="555" width="239" height="11"/>
+				<textElement>
+					<font fontName="SansSerif" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Pague seu IPTU na rede bancária credenciada]]></text>
+			</staticText>
+			<line>
+				<reportElement uuid="80738def-0a81-46ba-9e89-69243a1176f0" x="0" y="566" width="341" height="1"/>
+			</line>
+			<line>
+				<reportElement uuid="ece218b1-607a-4f38-ab5f-37cf66d14e04" x="0" y="586" width="341" height="1"/>
+			</line>
+			<line>
+				<reportElement uuid="ff759068-bf0f-4a80-8e9a-4c46aa5f78d2" x="255" y="548" width="1" height="120"/>
+			</line>
+			<line>
+				<reportElement uuid="61925894-b4cc-4ac3-a58f-50b686739d28" x="0" y="548" width="1" height="159"/>
+			</line>
+			<line>
+				<reportElement uuid="edb5b13c-301d-4c66-8217-eee4c87bec7a" x="0" y="604" width="341" height="1"/>
+			</line>
+			<line>
+				<reportElement uuid="32694397-2631-4b40-9f37-b762067408e1" x="0" y="706" width="341" height="1"/>
+			</line>
+			<line>
+				<reportElement uuid="df2f256e-cf73-4513-8ac6-ddeece861c07" x="0" y="668" width="341" height="1"/>
+			</line>
+			<staticText>
+				<reportElement uuid="8f05812d-6b47-4455-856b-37d301acd3d7" x="4" y="572" width="239" height="11"/>
+				<textElement>
+					<font fontName="SansSerif" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[PREFEITURA MUNICIPAL DE VITÓRIA DA CONQUISTA]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="5a05541d-14e5-4849-8214-a96ecf6b05a9" x="258" y="549" width="38" height="9"/>
+				<textElement>
+					<font fontName="SansSerif" size="6" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Vencimento:]]></text>
+			</staticText>
+			<line>
+				<reportElement uuid="fc3b60c8-3d18-4524-8b91-25f6a9c17e21" x="64" y="586" width="1" height="18"/>
+			</line>
+			<line>
+				<reportElement uuid="59fbc155-efb0-4336-bc26-628d4683570d" x="192" y="586" width="1" height="18"/>
+			</line>
+			<line>
+				<reportElement uuid="c716a202-1cb2-43a2-aea9-56983b38e132" x="128" y="586" width="1" height="18"/>
+			</line>
+			<staticText>
+				<reportElement uuid="726cd486-d65b-4b53-9fff-559a025b8107" x="2" y="587" width="23" height="9"/>
+				<textElement>
+					<font fontName="SansSerif" size="6" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Parcela:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="2608375b-700f-4480-b342-87fccc7f1320" x="66" y="587" width="60" height="9"/>
+				<textElement>
+					<font fontName="SansSerif" size="6" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Data do Documento:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="4e24bb22-28f5-45d3-8f2e-79a1d2180bdf" x="130" y="587" width="23" height="9"/>
+				<textElement>
+					<font fontName="SansSerif" size="6" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Código:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="dfb7d4ee-56e0-40bf-bbae-7a703be1becd" x="194" y="587" width="50" height="9"/>
+				<textElement>
+					<font fontName="SansSerif" size="6" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Espécie Moeda:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="9c620255-c456-4c0e-b19b-3766c0c9946b" x="258" y="567" width="75" height="9"/>
+				<textElement>
+					<font fontName="SansSerif" size="6" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Inscrição Imobiliária:]]></text>
+			</staticText>
+			<textField pattern="#,##0.00;-#,##0.00">
+				<reportElement uuid="5b906f39-3d43-4a36-9cf5-3adf8d1bd1e6" x="257" y="573" width="83" height="12"/>
+				<textElement textAlignment="Center">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{nrInscricao}.substring(0,2)+"."+$F{nrInscricao}.substring(2,4)+"."+$F{nrInscricao}.substring(4,7)+"."+$F{nrInscricao}.substring(7,11)+"."+$F{nrInscricao}.substring(11,14)]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="7d97f623-257b-4461-a232-8c4959fd036c" x="257" y="555" width="83" height="12"/>
+				<textElement textAlignment="Center" markup="none">
+					<font fontName="SansSerif" size="8" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{dtVencimento}.substring(0,2)+"/"+$F{dtVencimento}.substring(2,4)+"/"+$F{dtVencimento}.substring(4,8)]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement uuid="f99dfc88-11ee-443a-9b24-4fe55369465e" x="256" y="620" width="85" height="1"/>
+			</line>
+			<line>
+				<reportElement uuid="2eb613a0-ce55-45b2-9b95-3e1fe733c556" x="255" y="648" width="86" height="1"/>
+			</line>
+			<line>
+				<reportElement uuid="185207b6-3746-4ecc-8c69-3d9d343b41c1" x="340" y="549" width="1" height="158"/>
+			</line>
+			<staticText>
+				<reportElement uuid="3ab60170-cdf3-4741-9ba9-d843dfe28004" x="193" y="595" width="62" height="11"/>
+				<textElement textAlignment="Center">
+					<font fontName="SansSerif" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[R$]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="eebba63f-2a22-462d-a95b-33ad027ca630" x="129" y="595" width="63" height="11"/>
+				<textElement textAlignment="Center">
+					<font fontName="SansSerif" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[4785]]></text>
+			</staticText>
+			<textField>
+				<reportElement uuid="30ba0c19-afac-4d30-872b-b7716ea727b8" x="1" y="595" width="63" height="11"/>
+				<textElement textAlignment="Center" markup="none">
+					<font fontName="SansSerif" size="8" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{IndiceParcela}==0 ? "ÚNICA" : $F{IndiceParcela}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="67e68adc-28a5-43c5-a3be-9e71bcfc57c4" x="3" y="625" width="105" height="14"/>
+				<textElement>
+					<font fontName="SansSerif" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Taxa de Expediente]]></text>
+			</staticText>
+			<textField pattern="">
+				<reportElement uuid="837ca444-5c0b-49a1-8f04-f55cfe15b5d5" x="108" y="625" width="67" height="14"/>
+				<textElement textAlignment="Right">
+					<font fontName="SansSerif"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new DecimalFormat("#,##0.00;-#,##0.00", new java.text.DecimalFormatSymbols(new java.util.Locale("pt", "BR"))).format($F{vlTaxaExpediente}!=null?$F{vlTaxaExpediente}:0)]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="c8474da3-befc-4e39-9535-1fac497ef872" x="2" y="670" width="37" height="9"/>
+				<textElement>
+					<font fontName="SansSerif" size="6" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Contribuinte:]]></text>
+			</staticText>
+			<textField pattern="">
+				<reportElement uuid="6a947116-a395-40ce-b4eb-15f5e8b6e18f" x="115" y="471" width="67" height="14"/>
+				<textElement textAlignment="Right">
+					<font fontName="SansSerif"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new DecimalFormat("#,##0.00;-#,##0.00", new java.text.DecimalFormatSymbols(new java.util.Locale("pt", "BR"))).format($F{vlParcela}/100)]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="6d041d4c-c2c4-4a3d-a917-e73121502267" x="3" y="486" width="105" height="14"/>
+				<textElement>
+					<font fontName="SansSerif" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Taxa de Expediente]]></text>
+			</staticText>
+			<textField pattern="" isBlankWhenNull="true">
+				<reportElement uuid="4ce3e7ea-ed89-4121-b212-bc15f30fd566" x="115" y="486" width="67" height="14"/>
+				<textElement textAlignment="Right">
+					<font fontName="SansSerif"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new DecimalFormat("#,##0.00;-#,##0.00", new java.text.DecimalFormatSymbols(new java.util.Locale("pt", "BR"))).format($F{vlTaxaExpediente}!=null?$F{vlTaxaExpediente}:0)]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="6cc55de1-5811-436d-bb0c-646900a1ec2b" x="3" y="471" width="30" height="14"/>
+				<textElement>
+					<font fontName="SansSerif" isBold="true"/>
+				</textElement>
+				<text><![CDATA[IPTU]]></text>
+			</staticText>
+			<textField pattern="">
+				<reportElement uuid="b1bc6fb6-37ad-4c67-bdcb-213c8cc5ad20" x="259" y="216" width="74" height="13"/>
+				<textElement textAlignment="Right">
+					<font fontName="SansSerif" size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new DecimalFormat("#,##0.00;-#,##0.00", new java.text.DecimalFormatSymbols(new java.util.Locale("pt", "BR"))).format($F{vlParcela}/100)]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="be04b943-0aa9-46d3-8323-696f15230207" x="30" y="216" width="30" height="14"/>
+				<textElement>
+					<font fontName="SansSerif" isBold="true"/>
+				</textElement>
+				<text><![CDATA[IPTU]]></text>
+			</staticText>
+			<textField pattern="" isBlankWhenNull="true">
+				<reportElement uuid="7311abc4-603d-4e5d-b4d2-82198f437ac9" x="257" y="609" width="76" height="12"/>
+				<textElement textAlignment="Right">
+					<font size="8" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new DecimalFormat("#,##0.00;-#,##0.00", new java.text.DecimalFormatSymbols(new java.util.Locale("pt", "BR"))).format(Math.round(($F{vlDescontoCotaUnica}!=null?$F{vlDescontoCotaUnica}:0)*100)/100)]]></textFieldExpression>
+			</textField>
+			<textField pattern="">
+				<reportElement uuid="1b297974-a278-42e5-b9cf-1cd79219fd86" x="257" y="431" width="74" height="12"/>
+				<textElement textAlignment="Right">
+					<font size="8" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new DecimalFormat("#,##0.00;-#,##0.00", new java.text.DecimalFormatSymbols(new java.util.Locale("pt", "BR"))).format(Math.round(($F{vlDescontoCotaUnica}!=null?$F{vlDescontoCotaUnica}:0)*100)/100)]]></textFieldExpression>
+			</textField>
+			<textField pattern="">
+				<reportElement uuid="4edf7227-4db0-415b-8ddb-f4fe37a0115d" x="259" y="296" width="74" height="13"/>
+				<textElement textAlignment="Right">
+					<font size="9" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new DecimalFormat("#,##0.00;-#,##0.00", new java.text.DecimalFormatSymbols(new java.util.Locale("pt", "BR"))).format(Math.round(($F{vlDescontoCotaUnica}!=null?$F{vlDescontoCotaUnica}:0)*100)/100)]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="34f6c961-d0af-4203-b8e1-264110862a41" x="30" y="231" width="154" height="14"/>
+				<textElement>
+					<font fontName="SansSerif" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Taxa de Expediente]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="0cdcc214-502b-4230-b638-62188fc005ce" x="6" y="231" width="15" height="14"/>
+				<textElement>
+					<font fontName="SansSerif" size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[02]]></text>
+			</staticText>
+			<textField pattern="">
+				<reportElement uuid="21edf8b6-d928-4da4-a0e8-e72e1e211da0" x="259" y="231" width="74" height="13"/>
+				<textElement textAlignment="Right">
+					<font fontName="SansSerif" size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new DecimalFormat("#,##0.00;-#,##0.00", new java.text.DecimalFormatSymbols(new java.util.Locale("pt", "BR"))).format($F{vlTaxaExpediente}!=null?$F{vlTaxaExpediente}:0)]]></textFieldExpression>
+			</textField>
+			<componentElement>
+				<reportElement uuid="0aaa994d-a9df-4b7d-b05f-7c1a8890d1b0" x="0" y="735" width="341" height="50"/>
+				<jr:Interleaved2Of5 xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd" textPosition="none" wideFactor="5.0">
+					<jr:codeExpression><![CDATA[$P{nrCodigoBarras}]]></jr:codeExpression>
+				</jr:Interleaved2Of5>
+			</componentElement>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement uuid="f3e4780f-21f8-42c5-acbf-96e16e74e53a" x="65" y="595" width="63" height="11"/>
+				<textElement textAlignment="Center">
+					<font fontName="SansSerif" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="f9142b21-923e-4256-9213-0c6642de1c12" x="2" y="680" width="56" height="9"/>
+				<textElement>
+					<font fontName="SansSerif" size="6" isBold="false"/>
+				</textElement>
+				<text><![CDATA[End. do Imóvel:]]></text>
+			</staticText>
+			<line>
+				<reportElement uuid="acf019d1-616d-45d2-8904-9a28935a5bd6" x="255" y="634" width="86" height="1"/>
+			</line>
+			<line>
+				<reportElement uuid="1b334471-f47f-47d1-9bf3-7273ebd2b9d0" x="0" y="120" width="341" height="1"/>
+			</line>
+			<line>
+				<reportElement uuid="98d52f28-0e61-4b9d-bfeb-c69441573e61" x="0" y="140" width="341" height="1"/>
+			</line>
+			<line>
+				<reportElement uuid="11825b76-b9fe-4f1f-a2d7-18c01ffcd494" x="0" y="70" width="341" height="1"/>
+			</line>
+			<line>
+				<reportElement uuid="d418bd2d-b3f5-45ec-8684-4bae27797732" x="0" y="368" width="341" height="1"/>
+			</line>
+			<line>
+				<reportElement uuid="f5fe023e-530f-4280-8995-289db30a1044" x="340" y="70" width="1" height="298"/>
+			</line>
+			<line>
+				<reportElement uuid="49f2266a-b577-4d0d-98ec-7799e165c2a4" x="256" y="327" width="85" height="1"/>
+			</line>
+			<line>
+				<reportElement uuid="56b4ca2d-a621-49a1-94a2-34110e0ea632" x="256" y="292" width="85" height="1"/>
+			</line>
+			<line>
+				<reportElement uuid="321465d3-f2e1-4730-81ff-809cf0c41008" x="0" y="309" width="341" height="1"/>
+			</line>
+			<line>
+				<reportElement uuid="79af6bcb-2eec-4567-a5a7-03e9539438a0" x="86" y="273" width="1" height="37"/>
+			</line>
+			<line>
+				<reportElement uuid="3d5d35ca-b91c-42c5-ab2b-1070e79e53c0" x="171" y="273" width="1" height="37"/>
+			</line>
+			<line>
+				<reportElement uuid="612a8a8d-ffd1-4c30-9a31-2ece70aee957" x="0" y="272" width="341" height="1"/>
+			</line>
+			<line>
+				<reportElement uuid="869c1b4b-c744-4416-ae85-d844f59c4555" x="0" y="70" width="1" height="298"/>
+			</line>
+			<textField pattern="">
+				<reportElement uuid="f3303260-0aeb-4aee-91a7-0dd1d95c6f7d" x="259" y="355" width="74" height="13"/>
+				<textElement textAlignment="Right">
+					<font size="9" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new DecimalFormat("#,##0.00;-#,##0.00", new java.text.DecimalFormatSymbols(new java.util.Locale("pt", "BR"))).format(Math.round((($F{vlParcela}/100)+$F{vlTaxaExpediente}-$F{vlDescontoCotaUnica}+$F{vlMulta}+$F{vlJuros})*100)/100)]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement uuid="ea3f3f70-10e1-430d-b6ef-cc60107cfe92" x="86" y="120" width="1" height="86"/>
+			</line>
+			<line>
+				<reportElement uuid="34847552-6716-40e1-8f2e-52f11976b5ad" x="171" y="120" width="1" height="86"/>
+			</line>
+			<line>
+				<reportElement uuid="f56d683c-5c97-4b70-8dba-3a7582ebaafb" x="0" y="205" width="341" height="1"/>
+			</line>
+			<line>
+				<reportElement uuid="24e4b14e-f385-40c9-94f4-f48035039bc7" x="0" y="214" width="341" height="1"/>
+			</line>
+			<line>
+				<reportElement uuid="17617aa0-d4e5-45e6-b8f9-96b7137b4655" x="0" y="161" width="341" height="1"/>
+			</line>
+			<line>
+				<reportElement uuid="3884fbec-162a-40ee-822f-3d10601de0a3" x="0" y="182" width="341" height="1"/>
+			</line>
+			<textField pattern="">
+				<reportElement uuid="270e368e-e7f7-40d1-8d75-ab710f6802b0" x="257" y="491" width="74" height="13"/>
+				<textElement textAlignment="Right">
+					<font size="9" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new DecimalFormat("#,##0.00;-#,##0.00", new java.text.DecimalFormatSymbols(new java.util.Locale("pt", "BR"))).format(Math.round((($F{vlParcela}/100)+$F{vlTaxaExpediente}-$F{vlDescontoCotaUnica}+$F{vlMulta}+$F{vlJuros})*100)/100)]]></textFieldExpression>
+			</textField>
+			<textField pattern="">
+				<reportElement uuid="00772d7b-64d7-4c8b-8214-6926da86e3cd" x="257" y="655" width="74" height="13"/>
+				<textElement textAlignment="Right">
+					<font size="9" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new DecimalFormat("#,##0.00;-#,##0.00", new java.text.DecimalFormatSymbols(new java.util.Locale("pt", "BR"))).format(Math.round((($F{vlParcela}/100)+$F{vlTaxaExpediente}-$F{vlDescontoCotaUnica}+$F{vlMulta}+$F{vlJuros})*100)/100)]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement uuid="5c834c96-dcb5-4a63-a210-e7ac07c6a1ae" x="340" y="405" width="1" height="101"/>
+			</line>
+			<line>
+				<reportElement uuid="77ab666c-6217-4391-aca4-40e836518713" x="0" y="405" width="1" height="101"/>
+			</line>
+			<line>
+				<reportElement uuid="61e19667-251c-4f27-a65c-b3a8beed0ccf" x="0" y="506" width="341" height="1"/>
+			</line>
+			<line>
+				<reportElement uuid="ef8bd5d7-51dc-4788-b282-6bdac217491b" x="255" y="405" width="1" height="101"/>
+			</line>
+			<line>
+				<reportElement uuid="8bbc3eab-90c3-44cd-8bc8-dae714f1493c" x="256" y="464" width="85" height="1"/>
+			</line>
+			<line>
+				<reportElement uuid="e4456024-127d-4693-9c6a-6ee01044c367" x="256" y="484" width="85" height="1"/>
+			</line>
+			<line>
+				<reportElement uuid="e8443a49-5fd7-4b87-a261-eaaf99e1844d" x="0" y="404" width="341" height="1"/>
+			</line>
+			<line>
+				<reportElement uuid="eacdd299-80ff-4f5a-b1e5-6048edccdd1f" x="0" y="444" width="341" height="1"/>
+			</line>
+			<line>
+				<reportElement uuid="3ebadc82-96ca-4bd8-a26d-be3f92778a66" x="86" y="405" width="1" height="40"/>
+			</line>
+			<line>
+				<reportElement uuid="3d8ea2c0-7c11-4d2a-9bdc-a8ec446b0967" x="171" y="405" width="1" height="40"/>
+			</line>
+			<line>
+				<reportElement uuid="5b9a80f4-0ee1-49aa-bcfe-4af5b0c6a384" x="256" y="424" width="85" height="1"/>
+			</line>
+			<line>
+				<reportElement uuid="22aaf0ca-c0a3-447c-ac1d-a245437a1e70" x="275" y="90" width="1" height="30"/>
+			</line>
+			<staticText>
+				<reportElement uuid="b34c65e6-059f-4de6-91ce-54c014396bf6" x="277" y="92" width="51" height="8"/>
+				<textElement>
+					<font fontName="SansSerif" size="6"/>
+				</textElement>
+				<text><![CDATA[Nº da SORTE:]]></text>
+			</staticText>
+			<line>
+				<reportElement uuid="ad2cd29b-94fa-4e5a-8fe5-40197f0e76bb" x="239" y="70" width="1" height="20"/>
+			</line>
+			<image>
+				<reportElement uuid="4ee421e2-e0f2-4d78-a010-d4c470323c47" x="4" y="4" width="36" height="44"/>
+				<imageExpression><![CDATA[$P{logoPath}+"/imagens/brasao_pb.jpg"]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement uuid="31ff184e-dfca-491e-b708-296b2b41e078" x="2" y="91" width="64" height="9"/>
+				<textElement>
+					<font fontName="SansSerif" size="6" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Endereço do Imóvel:]]></text>
+			</staticText>
+			<textField>
+				<reportElement uuid="8e280cc9-d53d-43d6-84a1-d77468860e85" x="5" y="109" width="268" height="11"/>
+				<textElement>
+					<font fontName="SansSerif" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[($F{nmBairroImovel}!=null?$F{nmBairroImovel}+" ":" ")+($F{nrCep}!=null?$F{nrCep}+" ":" ")+($F{nmCidade}!=null?$F{nmCidade}+" ":" ")+($F{sgEstado}!=null?$F{sgEstado}+" ":"")]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="cefbd62c-d3ca-47f7-b81e-1b4d978a7e45" x="5" y="98" width="268" height="11"/>
+				<textElement>
+					<font fontName="SansSerif" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{nmTipoLogradouroImovel}+" "+$F{nmLogradouroImovel}+" "+$F{nrEndereco}+($F{nmComplementoImovel}!=null?" "+$F{nmComplementoImovel}:"")]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement uuid="7fd4712c-cd42-41b1-aeaa-d098631f1c58" x="0" y="90" width="341" height="1"/>
+			</line>
+			<textField isBlankWhenNull="true">
+				<reportElement uuid="8dd4b465-efe7-426e-b76d-3dc33e8def09" x="276" y="99" width="64" height="20"/>
+				<textElement textAlignment="Center">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{nrSorte}!=null?$F{nrSorte}:($F{nrSorteT}!=null?$F{nrSorteT}:"")]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd/MM/yyyy HH:mm">
+				<reportElement uuid="25643dff-e10c-479e-a5f7-d789351bd06d" x="58" y="57" width="189" height="15"/>
+				<textElement>
+					<font fontName="SansSerif" size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="f58b9faf-cd5f-4f53-a43b-f13d16f42ea9" x="1" y="57" width="63" height="13"/>
+				<textElement/>
+				<text><![CDATA[Emitido em ]]></text>
+			</staticText>
+			<textField pattern="">
+				<reportElement uuid="f093ba9a-678c-4325-aee4-3af912a64f48" x="259" y="316" width="74" height="13"/>
+				<textElement textAlignment="Right">
+					<font size="9" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new DecimalFormat("#,##0.00;-#,##0.00", new java.text.DecimalFormatSymbols(new java.util.Locale("pt", "BR"))).format(Math.round(($F{vlMulta}!=null?$F{vlMulta}:0)*100)/100)]]></textFieldExpression>
+			</textField>
+			<textField pattern="">
+				<reportElement uuid="fe096f2a-90b1-4004-aa4e-81d8da87d3f8" x="259" y="333" width="74" height="13"/>
+				<textElement textAlignment="Right">
+					<font size="9" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new DecimalFormat("#,##0.00;-#,##0.00", new java.text.DecimalFormatSymbols(new java.util.Locale("pt", "BR"))).format(Math.round(($F{vlJuros}!=null?$F{vlJuros}:0)*100)/100)]]></textFieldExpression>
+			</textField>
+			<textField pattern="">
+				<reportElement uuid="6a3b09f4-c37d-4a68-8672-b0eb60900709" x="257" y="473" width="74" height="13"/>
+				<textElement textAlignment="Right">
+					<font size="8" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new DecimalFormat("#,##0.00;-#,##0.00", new java.text.DecimalFormatSymbols(new java.util.Locale("pt", "BR"))).format(Math.round(($F{vlJuros}!=null?$F{vlJuros}:0)*100)/100)]]></textFieldExpression>
+			</textField>
+			<textField pattern="">
+				<reportElement uuid="8c9a967b-f9c0-47e9-a128-8abcf51b5815" x="257" y="451" width="74" height="13"/>
+				<textElement textAlignment="Right">
+					<font size="8" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new DecimalFormat("#,##0.00;-#,##0.00", new java.text.DecimalFormatSymbols(new java.util.Locale("pt", "BR"))).format(Math.round(($F{vlMulta}!=null?$F{vlMulta}:0)*100)/100)]]></textFieldExpression>
+			</textField>
+			<textField pattern="">
+				<reportElement uuid="6e4e69de-a5e8-430c-8bbb-7bf562627b40" x="257" y="624" width="76" height="13"/>
+				<textElement textAlignment="Right">
+					<font size="8" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new DecimalFormat("#,##0.00;-#,##0.00", new java.text.DecimalFormatSymbols(new java.util.Locale("pt", "BR"))).format(Math.round(($F{vlMulta}!=null?$F{vlMulta}:0)*100)/100)]]></textFieldExpression>
+			</textField>
+			<textField pattern="">
+				<reportElement uuid="2c0a599b-e509-4202-ad9a-db3faa2e5dc7" x="257" y="638" width="76" height="13"/>
+				<textElement textAlignment="Right">
+					<font size="8" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new DecimalFormat("#,##0.00;-#,##0.00", new java.text.DecimalFormatSymbols(new java.util.Locale("pt", "BR"))).format(Math.round(($F{vlJuros}!=null?$F{vlJuros}:0)*100)/100)]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="1cf646d8-12e9-45d9-bdcf-6582b9464d43" x="5" y="329" width="248" height="34"/>
+				<textElement>
+					<font size="8" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{dsMensagem}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="98b7839f-13db-4bbe-934c-f9f456c26c1c" x="4" y="641" width="248" height="27"/>
+				<textElement>
+					<font size="8" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{dsMensagem}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="dacee56a-1805-4309-9617-3bdb859d7b24" x="293" y="7" width="53" height="41"/>
+				<textElement verticalAlignment="Middle" markup="none">
+					<font fontName="SansSerif" size="20" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{IndiceAno}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="61b6c4e3-7deb-4c53-8a92-950fd3e27da7" x="243" y="7" width="53" height="41"/>
+				<textElement verticalAlignment="Middle" markup="none">
+					<font fontName="SansSerif" size="20" isBold="true"/>
+				</textElement>
+				<text><![CDATA[IPTU]]></text>
+			</staticText>
+		</band>
+	</detail>
+</jasperReport>

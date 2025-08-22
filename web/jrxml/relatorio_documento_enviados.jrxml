@@ -1,0 +1,254 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="relatorio_documento_enviados" language="groovy" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="dc99a03e-c17d-4176-809c-151753d5bd8c">
+	<property name="ireport.zoom" value="2.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="NM_EMPRESA" class="java.lang.String"/>
+	<parameter name="NM_RELATORIO" class="java.lang.String"/>
+	<parameter name="IMG_LOGOMARCA" class="java.lang.Object"/>
+	<parameter name="NM_SETOR_ORIGEM" class="java.lang.String"/>
+	<parameter name="DT_INICIAL" class="java.lang.String"/>
+	<parameter name="DT_FINAL" class="java.lang.String"/>
+	<parameter name="NM_TIPO_DOCUMENTO" class="java.lang.String"/>
+	<parameter name="NM_USUARIO" class="java.lang.String"/>
+	<parameter name="DT_RELATORIO" class="java.lang.String"/>
+	<parameter name="HR_RELATORIO" class="java.lang.String"/>
+	<field name="NR_DOCUMENTO" class="java.lang.String"/>
+	<field name="NM_TIPO_DOCUMENTO" class="java.lang.String"/>
+	<field name="DT_TRAMITACAO" class="java.lang.String"/>
+	<field name="NM_SETOR_DESTINO" class="java.lang.String"/>
+	<field name="DT_RECEBIMENTO" class="java.lang.String"/>
+	<field name="NM_SITUACAO_DOCUMENTO" class="java.lang.String"/>
+	<field name="NM_SOLICITANTES" class="java.lang.String"/>
+	<field name="NM_SETOR_ATUAL" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="53" splitType="Stretch">
+			<textField>
+				<reportElement uuid="5401a9b6-2f4e-4051-a16d-56af49c117a7" x="0" y="0" width="802" height="25"/>
+				<textElement textAlignment="Center">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{NM_EMPRESA}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="f54ae785-0160-4ad4-9b15-ed596cb9da0e" x="0" y="27" width="802" height="20"/>
+				<textElement textAlignment="Center">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{NM_RELATORIO}]]></textFieldExpression>
+			</textField>
+			<image>
+				<reportElement uuid="1b3841c4-93c8-49b7-ae41-46e306ab40c8" x="0" y="0" width="50" height="50"/>
+				<imageExpression><![CDATA[net.sf.jasperreports.engine.util.JRImageLoader.loadImage((byte[]) $P{IMG_LOGOMARCA})]]></imageExpression>
+			</image>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="17" splitType="Stretch">
+			<line>
+				<reportElement uuid="62cf1c59-a9ee-4e01-9538-f129ca43224e" x="0" y="1" width="802" height="1"/>
+			</line>
+			<textField>
+				<reportElement uuid="196b3857-fb35-4150-b40d-b2c5bc12b56a" x="200" y="4" width="210" height="11"/>
+				<textElement>
+					<font size="8" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Tipo de Documento: " + ( $P{NM_TIPO_DOCUMENTO} == null ? "Todos" : $P{NM_TIPO_DOCUMENTO} )]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement uuid="26d028f8-3336-4f6a-a312-2d437ce44cd0" x="1" y="3" width="199" height="12"/>
+				<textElement>
+					<font size="8" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Período: " + $P{DT_INICIAL} + " até " + $P{DT_FINAL}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement uuid="05434cfe-dbb5-4f87-952b-5c8b3075c556" x="1" y="16" width="801" height="1"/>
+			</line>
+			<textField>
+				<reportElement uuid="196b3857-fb35-4150-b40d-b2c5bc12b56a" x="415" y="4" width="387" height="11"/>
+				<textElement>
+					<font size="8" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Setor de Origem: "+($P{NM_SETOR_ORIGEM} == null ? "Todos" : $P{NM_SETOR_ORIGEM})]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="18" splitType="Stretch">
+			<staticText>
+				<reportElement uuid="3a64c7fe-c134-41c2-83c5-e9e031aab02a" x="0" y="4" width="45" height="12"/>
+				<textElement>
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Número]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="face7fba-c00f-4b68-b570-464166a99fb1" x="50" y="4" width="87" height="12"/>
+				<textElement>
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Documento]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="b9a0ec83-b4c6-4ce6-86cb-079b76c073ae" x="142" y="4" width="57" height="12"/>
+				<textElement>
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Data Envio]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="5cd6d3a4-2d2d-4f6a-9f9f-2db830ee4951" x="204" y="4" width="205" height="12"/>
+				<textElement>
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Setor Destino]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="89725f6f-8107-4fdf-93ba-2f4e5e7d7410" x="413" y="4" width="74" height="12"/>
+				<textElement>
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Data Recebido]]></text>
+			</staticText>
+			<line>
+				<reportElement uuid="e49a3d9f-deba-4be2-8e4e-8e877f809589" x="1" y="2" width="801" height="1"/>
+			</line>
+			<staticText>
+				<reportElement uuid="a48a55df-e99a-4fbb-9003-14b160718b1c" x="492" y="4" width="76" height="12"/>
+				<textElement>
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Situação Atual]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="ea11886b-cdcb-471b-95d7-8a0581998824" x="573" y="4" width="229" height="12"/>
+				<textElement>
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Setor Atual]]></text>
+			</staticText>
+			<line>
+				<reportElement uuid="cab9185d-be2a-429b-9be8-4b25aa8b630b" x="0" y="16" width="802" height="1"/>
+			</line>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="14" splitType="Stretch">
+			<textField isBlankWhenNull="true">
+				<reportElement uuid="3769b407-9cdd-441e-9f07-0e5e97cf87bd" x="1" y="0" width="44" height="11"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{NR_DOCUMENTO}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement uuid="d3731686-1dc7-4003-9bfa-061f9f288a1a" x="50" y="0" width="87" height="11"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{NM_TIPO_DOCUMENTO}]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd/MM/yyyy" isBlankWhenNull="true">
+				<reportElement uuid="fca7b46f-e58b-448c-b375-8996cb18e698" x="142" y="0" width="47" height="11"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{DT_TRAMITACAO}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement uuid="7b8ef467-76a1-4eb3-bed7-da524208a02c" x="204" y="0" width="205" height="11"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{NM_SETOR_DESTINO}]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd/MM/yyyy" isBlankWhenNull="true">
+				<reportElement uuid="ccee87ce-8708-4599-a9fa-ca471634b1e5" x="415" y="0" width="72" height="11"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{DT_RECEBIMENTO}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement uuid="aad0ab56-e18a-4c53-91cb-1ae55598a95c" x="492" y="0" width="76" height="11"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{NM_SITUACAO_DOCUMENTO}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement uuid="dd7b17ee-302d-4301-8486-f62d240a2c77" x="573" y="0" width="229" height="11"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{NM_SETOR_ATUAL}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement uuid="1246219b-af74-4515-97c1-54d61f8e68cb" x="0" y="11" width="802" height="1"/>
+				<graphicElement>
+					<pen lineWidth="1.0" lineStyle="Dotted"/>
+				</graphicElement>
+			</line>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="13" splitType="Stretch">
+			<line>
+				<reportElement uuid="cff954a8-5526-4c34-baab-d3bd42bee0c1" x="0" y="0" width="802" height="1"/>
+			</line>
+			<staticText>
+				<reportElement uuid="00064e63-a102-4615-98fa-112e19956694" x="1" y="1" width="97" height="12"/>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<text><![CDATA[Nº de Documentos: ]]></text>
+			</staticText>
+			<textField>
+				<reportElement uuid="1cbf3048-8f73-4df7-a75c-0d55ece77005" x="109" y="1" width="41" height="12"/>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{COLUMN_COUNT}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement uuid="196b3857-fb35-4150-b40d-b2c5bc12b56a" x="601" y="1" width="200" height="12"/>
+				<textElement>
+					<font size="8" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Emitido por: "+$P{NM_USUARIO}+" em "+$P{DT_RELATORIO}+" às "+$P{HR_RELATORIO}]]></textFieldExpression>
+			</textField>
+		</band>
+	</columnFooter>
+	<pageFooter>
+		<band height="15" splitType="Stretch">
+			<staticText>
+				<reportElement uuid="5ddaca9b-5a33-41a1-a3b3-3e7954e3e4b2" x="1" y="2" width="801" height="11"/>
+				<textElement textAlignment="Center">
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[JurisManager - Excelência em Gestão de Processos]]></text>
+			</staticText>
+			<line>
+				<reportElement uuid="03bf8d1c-bd14-4263-a2b6-6ec98932ae8e" x="0" y="0" width="802" height="1"/>
+			</line>
+			<textField evaluationTime="Report">
+				<reportElement uuid="e8d9728a-d7de-4c3b-8718-df29f5031ae7" x="65" y="2" width="19" height="11"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="d1a45167-f25b-4231-8333-9e906721998b" x="1" y="2" width="62" height="11"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Página "+$V{PAGE_NUMBER}+" de "]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+</jasperReport>

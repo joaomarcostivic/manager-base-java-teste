@@ -1,0 +1,379 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.1.1.final using JasperReports Library version 6.1.1  -->
+<!-- 2017-10-26T18:11:53 -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="relacao_detalhada" language="groovy" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="8ffa2e5d-944e-4d9f-b6b1-effd7da9883a">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="28"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="NM_EMPRESA" class="java.lang.String"/>
+	<parameter name="IMG_LOGOMARCA" class="byte[]" isForPrompting="false"/>
+	<parameter name="dtPeriodoInicial" class="java.util.Date"/>
+	<parameter name="DT_FINAL" class="java.lang.String"/>
+	<parameter name="NM_ADVOGADO" class="java.lang.String"/>
+	<parameter name="DT_INICIAL" class="java.lang.String"/>
+	<parameter name="NM_TIPO_ACAO" class="java.lang.String"/>
+	<parameter name="NM_SITUACAO" class="java.lang.String"/>
+	<parameter name="NM_TP_PERIODO" class="java.lang.String"/>
+	<parameter name="NM_JUIZO" class="java.lang.String"/>
+	<parameter name="NM_COMARCA" class="java.lang.String"/>
+	<parameter name="SG_ESTADO" class="java.lang.String"/>
+	<parameter name="NM_GRUPO_PROCESSO" class="java.lang.String"/>
+	<field name="NR_PROCESSO" class="java.lang.String"/>
+	<field name="NM_ST_PROCESSO" class="java.lang.String"/>
+	<field name="NM_CLIENTE" class="java.lang.String"/>
+	<field name="NM_TIPO_PROCESSO" class="java.lang.String"/>
+	<field name="DT_DISTRIBUICAO" class="java.util.Date"/>
+	<field name="VL_PROCESSO" class="java.lang.Double"/>
+	<field name="NM_ADVERSO" class="java.lang.String"/>
+	<field name="NM_JUIZO" class="java.lang.String"/>
+	<field name="NM_COMARCA" class="java.lang.String"/>
+	<field name="DT_ULTIMO_ANDAMENTO" class="java.util.Date"/>
+	<field name="ST_PROCESSO" class="java.lang.String"/>
+	<field name="SG_ESTADO" class="java.lang.String"/>
+	<field name="NM_CIDADE" class="java.lang.String"/>
+	<field name="NM_TP_PERDA" class="java.lang.String"/>
+	<field name="NM_GRUPO_PROCESSO" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="22" splitType="Stretch">
+			<textField isBlankWhenNull="true">
+				<reportElement x="1" y="0" width="801" height="22" uuid="d95120a9-93ca-4e71-9e3d-5c51e6d2eb66"/>
+				<textElement textAlignment="Center" verticalAlignment="Bottom" markup="none">
+					<font size="16" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{NM_EMPRESA}]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="29" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="1" width="802" height="18" uuid="c2f6f56e-42a9-4076-8642-12c39be8127a"/>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Relação dos processos]]></text>
+			</staticText>
+			<image>
+				<reportElement x="3" y="-20" width="45" height="45" uuid="515179c3-75e6-4b2e-bddb-91975ea19dce"/>
+				<imageExpression><![CDATA[net.sf.jasperreports.engine.util.JRImageLoader.loadImage((byte[]) $P{IMG_LOGOMARCA})]]></imageExpression>
+			</image>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="38" splitType="Stretch">
+			<line>
+				<reportElement x="0" y="37" width="802" height="1" uuid="bceb428f-ee0f-4365-9b27-0d2d789c96e3"/>
+			</line>
+			<staticText>
+				<reportElement x="0" y="19" width="83" height="17" uuid="c2f6f56e-42a9-4076-8642-12c39be8127a"/>
+				<box leftPadding="5"/>
+				<textElement verticalAlignment="Middle">
+					<font size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Nº do Processo:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="191" y="19" width="90" height="17" uuid="c2f6f56e-42a9-4076-8642-12c39be8127a"/>
+				<box leftPadding="5"/>
+				<textElement verticalAlignment="Middle">
+					<font size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Cliente:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="385" y="19" width="118" height="17" uuid="c2f6f56e-42a9-4076-8642-12c39be8127a"/>
+				<box leftPadding="5"/>
+				<textElement verticalAlignment="Middle">
+					<font size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Parte-Contrária - Ag:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="680" y="19" width="60" height="17" uuid="c2f6f56e-42a9-4076-8642-12c39be8127a"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Distribuição:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="720" y="19" width="82" height="17" uuid="c2f6f56e-42a9-4076-8642-12c39be8127a"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Valor da Causa (R$):]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="83" y="19" width="40" height="17" uuid="c2f6f56e-42a9-4076-8642-12c39be8127a">
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+				<box leftPadding="0"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Situação:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="281" y="19" width="104" height="17" uuid="c2f6f56e-42a9-4076-8642-12c39be8127a"/>
+				<box leftPadding="5"/>
+				<textElement verticalAlignment="Middle">
+					<font size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Juizo:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="503" y="19" width="86" height="17" uuid="c2f6f56e-42a9-4076-8642-12c39be8127a"/>
+				<box leftPadding="5"/>
+				<textElement verticalAlignment="Middle">
+					<font size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[UF - Comarca:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="589" y="19" width="91" height="17" uuid="c2f6f56e-42a9-4076-8642-12c39be8127a"/>
+				<box leftPadding="5"/>
+				<textElement verticalAlignment="Middle">
+					<font size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Tipo de Ação:]]></text>
+			</staticText>
+			<line>
+				<reportElement x="0" y="17" width="802" height="1" uuid="98a15288-82e1-4cf5-85ef-105d765d9158"/>
+			</line>
+			<line>
+				<reportElement x="0" y="2" width="802" height="1" uuid="47736fd1-d2a7-4ba7-b98b-d51e18fbe472"/>
+			</line>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="300" y="4" width="120" height="12" uuid="ff4e598f-f98b-4b73-a0a5-6b725809cd9c"/>
+				<box leftPadding="3" rightPadding="3"/>
+				<textElement>
+					<font size="7" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Situações: "+($P{NM_SITUACAO} == null || $P{NM_SITUACAO} == "" ? "Todas" : $P{NM_SITUACAO})]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement stretchType="RelativeToTallestObject" x="480" y="4" width="130" height="12" uuid="427bccab-7afa-4490-addd-5cbf78d128dd"/>
+				<box leftPadding="3" rightPadding="3"/>
+				<textElement>
+					<font size="7" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Comarca: " + ( $P{NM_COMARCA} == "**" || $P{NM_COMARCA} == "" ? "Todas" : $P{NM_COMARCA} )]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement x="1" y="4" width="219" height="12" uuid="d203a474-998c-4cdd-a0d3-aa04026a9a3c">
+					<printWhenExpression><![CDATA[$P{NM_TP_PERIODO} != null || $P{NM_TP_PERIODO} != ""]]></printWhenExpression>
+				</reportElement>
+				<box leftPadding="3" rightPadding="3"/>
+				<textElement>
+					<font size="7" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Período " + ($P{NM_TP_PERIODO} ? "por " + $P{NM_TP_PERIODO}.toLowerCase() : "") + ": " + $P{DT_INICIAL} + " até " + $P{DT_FINAL}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement stretchType="RelativeToBandHeight" x="610" y="4" width="192" height="12" uuid="897dae1b-3a05-49c1-b260-cef4a3cdec7f"/>
+				<box leftPadding="3" rightPadding="3"/>
+				<textElement>
+					<font size="7" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Juízo: " + $P{NM_JUIZO}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="220" y="4" width="80" height="12" uuid="0a17fa58-fbb2-42f0-8e63-07dd2d5540c8"/>
+				<box leftPadding="3" rightPadding="3"/>
+				<textElement>
+					<font size="7" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Tipo de ação: " + ( $P{NM_TIPO_ACAO} == "**" || $P{NM_TIPO_ACAO} == "" ? "Todos" : $P{NM_TIPO_ACAO} )]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement stretchType="RelativeToTallestObject" x="420" y="4" width="60" height="12" uuid="0c47211e-3a29-426a-83b7-dbd9d3329874"/>
+				<box leftPadding="3" rightPadding="3"/>
+				<textElement>
+					<font size="7" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["UF: " + ( $P{SG_ESTADO} == "**" || $P{SG_ESTADO} == "" ? "Todos" : $P{SG_ESTADO} )]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="123" y="19" width="87" height="17" uuid="b2f17552-f25f-41d6-a365-a4c8894677fe">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<box leftPadding="1"/>
+				<textElement verticalAlignment="Middle">
+					<font size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Grupo de processo:]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="30" splitType="Stretch">
+			<rectangle>
+				<reportElement x="0" y="17" width="110" height="8" backcolor="#DDDDDD" uuid="9d39cc9a-7663-4c0d-ad43-b69f0c01c68c"/>
+				<graphicElement>
+					<pen lineWidth="0.0"/>
+				</graphicElement>
+			</rectangle>
+			<textField isBlankWhenNull="true">
+				<reportElement x="0" y="0" width="83" height="17" uuid="f9f126d0-5a57-4532-a4b9-41309b7f80c2"/>
+				<box leftPadding="5"/>
+				<textElement verticalAlignment="Middle" markup="none">
+					<font size="6" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{NR_PROCESSO}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="191" y="0" width="90" height="17" uuid="2aa132a1-c8cd-4da0-b262-02776700ff46"/>
+				<box leftPadding="5"/>
+				<textElement verticalAlignment="Middle" markup="none">
+					<font size="6" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{NM_CLIENTE}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="589" y="0" width="91" height="17" uuid="af036d47-e010-414e-8097-aa5b0a123e65"/>
+				<box leftPadding="5"/>
+				<textElement verticalAlignment="Middle" markup="none">
+					<font size="6" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{NM_TIPO_PROCESSO}]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd/MM/yyyy" isBlankWhenNull="true">
+				<reportElement x="680" y="0" width="50" height="17" uuid="d05118fb-41d0-47f3-94c5-9ae16416f709"/>
+				<box leftPadding="5"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle" markup="none">
+					<font size="6" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{DT_DISTRIBUICAO}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00" isBlankWhenNull="true">
+				<reportElement x="730" y="0" width="71" height="17" uuid="5e47a37b-b51c-47dc-b50f-67bf73d9c1ba"/>
+				<box topPadding="5" leftPadding="5"/>
+				<textElement textAlignment="Right">
+					<font size="6" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{VL_PROCESSO}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="83" y="0" width="40" height="17" uuid="81a86fcb-dd5f-4c59-a86c-f785e06f2e2c">
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+				<box leftPadding="0"/>
+				<textElement verticalAlignment="Middle" markup="none">
+					<font size="6" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{NM_ST_PROCESSO}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="503" y="0" width="86" height="17" uuid="2aa132a1-c8cd-4da0-b262-02776700ff46"/>
+				<box leftPadding="5"/>
+				<textElement verticalAlignment="Middle" markup="none">
+					<font size="6" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{SG_ESTADO} + " - " + $F{NM_CIDADE}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="281" y="0" width="104" height="17" uuid="81a86fcb-dd5f-4c59-a86c-f785e06f2e2c"/>
+				<box leftPadding="5"/>
+				<textElement verticalAlignment="Middle" markup="none">
+					<font size="6" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{NM_JUIZO}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="385" y="0" width="118" height="17" uuid="2aa132a1-c8cd-4da0-b262-02776700ff46"/>
+				<box leftPadding="5"/>
+				<textElement verticalAlignment="Middle" markup="none">
+					<font size="6" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{NM_ADVERSO}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="17" width="45" height="8" uuid="490675f8-501a-4713-8e21-b028277157f2">
+					<property name="local_mesure_unitwidth" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<box leftPadding="5"/>
+				<textElement verticalAlignment="Middle">
+					<font size="5" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Prob. de Perda:]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="45" y="17" width="65" height="8" uuid="a9fdef96-7f11-4ee2-98ab-526ef7b6f719">
+					<property name="local_mesure_unitheight" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<box leftPadding="5"/>
+				<textElement verticalAlignment="Middle" markup="none">
+					<font size="5" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{NM_TP_PERDA}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="0" y="27" width="802" height="1" uuid="bceb428f-ee0f-4365-9b27-0d2d789c96e3"/>
+				<graphicElement>
+					<pen lineStyle="Dotted"/>
+				</graphicElement>
+			</line>
+			<textField isBlankWhenNull="true">
+				<reportElement x="123" y="1" width="68" height="16" uuid="34e8af92-987a-4aed-a40f-adc8f4bcba4e"/>
+				<box leftPadding="2"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{NM_GRUPO_PROCESSO}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="26" splitType="Stretch">
+			<line>
+				<reportElement x="0" y="-1" width="802" height="1" uuid="524afa49-2e51-483d-8cfe-426fb16eac04"/>
+			</line>
+			<staticText>
+				<reportElement x="0" y="0" width="93" height="17" uuid="c2f6f56e-42a9-4076-8642-12c39be8127a"/>
+				<textElement verticalAlignment="Middle">
+					<font size="10" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Nº de Processos:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="96" y="0" width="18" height="16" uuid="c13df065-41e9-499e-a7fd-c07dcf48ecfd"/>
+				<textElement verticalAlignment="Middle">
+					<font size="10" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{COLUMN_COUNT}]]></textFieldExpression>
+			</textField>
+		</band>
+	</columnFooter>
+	<pageFooter>
+		<band height="26" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="1" width="802" height="16" uuid="c53f82ae-3e06-4e76-ad44-d4b9ff2f2668"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[JurisManager - Gestor de Processos Jurídicos]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="-2" y="3" width="85" height="16" uuid="2c7e52e8-684b-4422-a94b-c70b55f29b80"/>
+				<textElement textAlignment="Right">
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Página "+$V{PAGE_NUMBER}+" de "]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="90" y="3" width="42" height="16" uuid="fef1f2d3-222b-4dc4-be73-49cac149d159"/>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="0" y="0" width="802" height="1" uuid="1c276587-536c-4b7b-b50b-c51c2e5a4e46"/>
+			</line>
+		</band>
+	</pageFooter>
+</jasperReport>

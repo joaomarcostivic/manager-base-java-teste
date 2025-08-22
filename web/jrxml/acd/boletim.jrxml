@@ -1,0 +1,220 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.0.3.final using JasperReports Library version 6.0.3  -->
+<!-- 2018-08-23T14:35:09 -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="auditoria" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="b585a798-47b7-4fa6-b465-64bfb12faed5">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<property name="com.jaspersoft.studio.unit." value="pixel"/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
+	<style name="detail_style" mode="Transparent" hTextAlign="Left" vTextAlign="Middle" markup="" isBlankWhenNull="true" fontSize="8" isBold="true"/>
+	<style name="columHeader_style" hTextAlign="Left" markup="none" fontSize="8" isBold="true"/>
+	<parameter name="NM_ALUNO" class="java.lang.String"/>
+	<parameter name="IMG_LOGOMARCA" class="byte[]" isForPrompting="false"/>
+	<parameter name="NM_INSTITUICAO" class="java.lang.String"/>
+	<parameter name="NM_RELATORIO" class="java.lang.String"/>
+	<parameter name="CL_TURMA" class="java.lang.String"/>
+	<parameter name="CL_TURNO" class="java.lang.String"/>
+	<parameter name="NR_MATRICULA" class="java.lang.String"/>
+	<parameter name="NM_PERIODO_LETIVO" class="java.lang.String"/>
+	<title>
+		<band height="74" splitType="Stretch">
+			<textField>
+				<reportElement stretchType="RelativeToTallestObject" x="104" y="0" width="376" height="25" uuid="006706fc-1218-4e42-bf73-52696800b466">
+					<property name="local_mesure_unitheight" value="pixel"/>
+				</reportElement>
+				<textElement textAlignment="Center">
+					<font size="11" isBold="true"/>
+					<paragraph lineSpacing="Proportional"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{NM_INSTITUICAO}]]></textFieldExpression>
+			</textField>
+			<image scaleImage="RetainShape" hAlign="Center">
+				<reportElement x="1" y="0" width="103" height="47" isRemoveLineWhenBlank="true" uuid="658c84dc-73b2-4899-bfde-b3a72fd192d9"/>
+				<imageExpression><![CDATA[net.sf.jasperreports.engine.util.JRImageLoader.loadImage((byte[]) $P{IMG_LOGOMARCA})]]></imageExpression>
+			</image>
+			<textField isBlankWhenNull="true">
+				<reportElement x="104" y="27" width="376" height="20" uuid="107a21d4-6ea1-4ca0-9381-187c3811ea75">
+					<property name="local_mesure_unitheight" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Center">
+					<font size="15" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["BOLETIM ESCOLAR"]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="73">
+			<rectangle>
+				<reportElement mode="Transparent" x="0" y="0" width="553" height="60" uuid="a26b5bda-b589-49bf-9a01-f752397758d9"/>
+				<graphicElement>
+					<pen lineWidth="1.0"/>
+				</graphicElement>
+			</rectangle>
+			<staticText>
+				<reportElement x="5" y="21" width="80" height="18" uuid="f03c5d71-61f8-4c97-98fd-e6e59fcb4eec"/>
+				<textElement verticalAlignment="Middle">
+					<font size="11" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Turma:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="5" y="3" width="80" height="18" uuid="0d35c2a5-dbcc-4b9d-859d-4c612b1e6968"/>
+				<textElement verticalAlignment="Middle">
+					<font size="11" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Aluno:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="5" y="39" width="80" height="18" uuid="d9745bef-645e-42d0-9308-6c707e49e2b0"/>
+				<textElement verticalAlignment="Middle">
+					<font size="11" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Turno:]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true" pattern="">
+				<reportElement stretchType="RelativeToTallestObject" x="90" y="3" width="280" height="18" uuid="98c76e84-3d50-419a-88ce-78fe01fd1d1f"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="11" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{NM_ALUNO}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" pattern="">
+				<reportElement stretchType="RelativeToTallestObject" x="90" y="21" width="280" height="18" uuid="0f47b0e7-3a95-4971-825d-f77682e52e86"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="11" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{CL_TURMA}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" pattern="">
+				<reportElement stretchType="RelativeToTallestObject" x="90" y="39" width="280" height="18" uuid="68238f88-2757-4806-a6b1-854cf953fb0b"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="11" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{CL_TURNO}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="379" y="3" width="80" height="18" uuid="a1e1e0a5-eb00-4087-ba4e-6d7dd18694e3"/>
+				<textElement verticalAlignment="Middle">
+					<font size="11" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Matrícula:]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true" pattern="">
+				<reportElement stretchType="RelativeToTallestObject" x="459" y="3" width="90" height="18" uuid="91625b3b-d0d7-4417-9792-211569b80cbf"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="11" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{NR_MATRICULA}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="379" y="23" width="80" height="18" uuid="905b9ffd-f394-4694-bb96-325dc8c8edd3"/>
+				<textElement verticalAlignment="Middle">
+					<font size="11" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Ano:]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true" pattern="">
+				<reportElement stretchType="RelativeToTallestObject" x="459" y="23" width="90" height="18" uuid="7633e5a0-9b07-403e-8344-c07971316158"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="11" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{NM_PERIODO_LETIVO}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="18">
+			<line>
+				<reportElement x="0" y="16" width="551" height="1" uuid="14ffeb2f-4328-48fe-b044-74d1b325ca3a">
+					<property name="local_mesure_unitwidth" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+			</line>
+			<line>
+				<reportElement x="0" y="0" width="551" height="1" uuid="43483376-aed1-435a-a60e-8ef958570164">
+					<property name="local_mesure_unitwidth" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+			</line>
+			<frame>
+				<reportElement key="DYNAMIC_COLUMNS_HEADER_KEY" style="columHeader_style" mode="Opaque" x="1" y="1" width="549" height="15" uuid="9083b785-1ae4-44c7-bf8d-2cc19de00743"/>
+			</frame>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="19">
+			<frame>
+				<reportElement key="DYNAMIC_COLUMNS_DETAIL_KEY" style="detail_style" mode="Opaque" x="0" y="0" width="551" height="17" uuid="b6b25e57-b1bf-4e16-997e-4dad196f829d"/>
+			</frame>
+			<line>
+				<reportElement x="0" y="18" width="551" height="1" uuid="74d99025-97dc-4d05-9efa-b77dd6af5126">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<graphicElement>
+					<pen lineStyle="Dotted"/>
+				</graphicElement>
+			</line>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="12" splitType="Stretch">
+			<textField pattern="dd/MM/yyyy HH:mm:ss">
+				<reportElement x="483" y="3" width="66" height="9" uuid="0d44b0be-dc37-41a9-a4da-de58394f126c"/>
+				<textElement>
+					<font size="7" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new SimpleDateFormat("dd/MM/yyyy").format(new java.util.Date())]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="35" y="3" width="13" height="9" uuid="49719f95-d9cc-4295-bfe1-4b837e61b3ec"/>
+				<textElement>
+					<font size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[ de]]></text>
+			</staticText>
+			<line>
+				<reportElement x="0" y="1" width="551" height="1" uuid="51f2970d-4e60-499f-8735-2224e3e89645">
+					<property name="local_mesure_unitheight" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<graphicElement>
+					<pen lineWidth="1.0"/>
+				</graphicElement>
+			</line>
+			<staticText>
+				<reportElement x="0" y="3" width="25" height="9" uuid="191ec61a-bf76-4c77-ac89-3daedd7cba61"/>
+				<textElement>
+					<font size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Página]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true" pattern="">
+				<reportElement stretchType="RelativeToTallestObject" x="25" y="3" width="10" height="9" uuid="34f603b7-f070-4caf-8159-d4ddd7706394"/>
+				<textElement textAlignment="Right">
+					<font size="7" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="438" y="3" width="44" height="9" uuid="dd1d733e-adf4-4c58-bd3c-35eb2d153da5"/>
+				<textElement>
+					<font size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Emitido em ]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true" evaluationTime="Report" pattern="">
+				<reportElement x="48" y="3" width="12" height="9" uuid="307ae0f9-fbea-45cb-afd3-87673abd07d0">
+					<property name="local_mesure_unitwidth" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Left">
+					<font size="7" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+</jasperReport>

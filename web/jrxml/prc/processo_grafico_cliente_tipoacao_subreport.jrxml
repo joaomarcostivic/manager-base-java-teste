@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version last-->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="processo_grafico_cliente_tipoacao_subreport" pageWidth="555" pageHeight="842" columnWidth="515" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="2c185406-f7fc-41a4-8be5-0626b149e0ec">
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
+	<property name="com.jaspersoft.studio.unit." value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.pageHeight" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.pageWidth" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.topMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.bottomMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.leftMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.rightMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.columnWidth" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.columnSpacing" value="pixel"/>
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<field name="NM_TIPO_PROCESSO" class="java.lang.String"/>
+	<field name="CD_TIPO_PROCESSO" class="java.lang.Integer"/>
+	<field name="QT_PROCESSOS" class="java.lang.Integer"/>
+	<field name="TOTAL_PROCESSOS" class="java.lang.Integer"/>
+	<title>
+		<band height="201">
+			<pieChart>
+				<chart evaluationTime="Report" renderType="image" theme="default">
+					<reportElement isPrintRepeatedValues="false" x="0" y="0" width="515" height="200" uuid="55a06626-0f5b-400b-b4d2-a6ad12e5d8e8">
+						<property name="local_mesure_unitwidth" value="pixel"/>
+						<property name="com.jaspersoft.studio.unit.width" value="px"/>
+						<property name="local_mesure_unitheight" value="pixel"/>
+						<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					</reportElement>
+					<chartTitle position="Left"/>
+					<chartSubtitle/>
+					<chartLegend position="Right">
+						<font size="7"/>
+					</chartLegend>
+				</chart>
+				<pieDataset>
+					<keyExpression><![CDATA[$F{NM_TIPO_PROCESSO}]]></keyExpression>
+					<valueExpression><![CDATA[$F{QT_PROCESSOS}]]></valueExpression>
+					<labelExpression><![CDATA[ "" + new DecimalFormat("0.0").format(((new Double($F{QT_PROCESSOS}) / new Double($F{TOTAL_PROCESSOS})) * 100)) + "%"]]></labelExpression>
+				</pieDataset>
+				<piePlot labelFormat="{2}">
+					<plot orientation="Horizontal" backgroundAlpha="0.0" foregroundAlpha="1.0"/>
+					<itemLabel>
+						<font size="12"/>
+					</itemLabel>
+				</piePlot>
+			</pieChart>
+		</band>
+	</title>
+</jasperReport>

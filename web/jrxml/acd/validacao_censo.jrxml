@@ -1,0 +1,207 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.0.3.final using JasperReports Library version 6.0.3  -->
+<!-- 2018-04-11T09:18:51 -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="estoque_produtos" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="685b275b-3095-430e-97ff-37d9f0e15d5c">
+	<property name="ireport.zoom" value="2.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="22"/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
+	<parameter name="nmRazaoSocial" class="java.lang.String"/>
+	<parameter name="dtHoje" class="java.lang.String"/>
+	<parameter name="hrHoje" class="java.lang.String"/>
+	<parameter name="nmUsuario" class="java.lang.String"/>
+	<parameter name="dtEstoque" class="java.lang.String"/>
+	<parameter name="nmEmail" class="java.lang.String"/>
+	<parameter name="nmDesenvolvedor" class="java.lang.String"/>
+	<parameter name="NM_EMPRESA" class="java.lang.String"/>
+	<parameter name="QT_ESCOLAS_VALIDADAS" class="java.lang.Integer"/>
+	<parameter name="PR_ESCOLAS_VALIDADAS" class="java.lang.Double"/>
+	<parameter name="QT_ESCOLAS_NAO_VALIDADAS" class="java.lang.Integer"/>
+	<parameter name="PR_ESCOLAS_NAO_VALIDADAS" class="java.lang.Double"/>
+	<parameter name="NM_MENSAGEM_VALIDADA" class="java.lang.String"/>
+	<field name="TXT_VALIDACAO" class="java.lang.String"/>
+	<field name="NM_TIPO" class="java.lang.String"/>
+	<field name="NM_REGISTRO" class="java.lang.String"/>
+	<field name="TXT_INSTITUICAO_PENDENCIA" class="java.lang.String"/>
+	<field name="NM_INSTITUICAO" class="java.lang.String"/>
+	<field name="CD_INSTITUICAO_PENDENCIA" class="java.lang.Integer"/>
+	<field name="DT_GERACAO" class="java.lang.String"/>
+	<variable name="qtRegistrosInstituicao" class="java.lang.Integer" resetType="Group" resetGroup="groupInstituicao" calculation="Sum">
+		<variableExpression><![CDATA[($F{CD_INSTITUICAO_PENDENCIA} > 0 ? 1 : 0)]]></variableExpression>
+	</variable>
+	<group name="groupInstituicao">
+		<groupExpression><![CDATA[$F{NM_INSTITUICAO}]]></groupExpression>
+		<groupHeader>
+			<band height="92">
+				<line>
+					<reportElement x="105" y="73" width="1" height="17" uuid="4505e6bd-a2e0-4cde-bbf2-bb3460f79a04"/>
+					<graphicElement>
+						<pen lineWidth="1.5"/>
+					</graphicElement>
+				</line>
+				<line>
+					<reportElement x="-2" y="90" width="555" height="2" uuid="407d341f-ca64-4ec5-b60f-1aa3789f8cf9"/>
+					<graphicElement>
+						<pen lineWidth="1.5"/>
+					</graphicElement>
+				</line>
+				<line>
+					<reportElement x="287" y="74" width="1" height="17" uuid="68c9f401-aebd-4dcf-91b3-4acc680f926d"/>
+					<graphicElement>
+						<pen lineWidth="1.5"/>
+					</graphicElement>
+				</line>
+				<line>
+					<reportElement x="-1" y="73" width="555" height="2" uuid="18bfafa4-880b-484e-9092-5028f3d062cd"/>
+					<graphicElement>
+						<pen lineWidth="1.5"/>
+					</graphicElement>
+				</line>
+				<staticText>
+					<reportElement x="4" y="74" width="96" height="16" uuid="f7bb2e58-cce3-4b12-ae89-ae15cec75d1f"/>
+					<textElement>
+						<font size="12"/>
+					</textElement>
+					<text><![CDATA[Tipo]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="110" y="74" width="133" height="16" uuid="1f33acb8-da64-48e6-84d4-1b608874f27a"/>
+					<textElement>
+						<font size="12"/>
+					</textElement>
+					<text><![CDATA[Nome]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="290" y="74" width="261" height="16" uuid="dc776630-8b5c-489d-8a49-a381b9290acc"/>
+					<textElement>
+						<font size="12"/>
+					</textElement>
+					<text><![CDATA[Mensagem]]></text>
+				</staticText>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement x="2" y="23" width="551" height="50" uuid="d6827f58-e57e-4116-8322-5a13d814f039"/>
+					<textElement textAlignment="Left" verticalAlignment="Middle">
+						<font size="16" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{NM_INSTITUICAO}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="0" y="0" width="555" height="20" uuid="5a562cd8-fb79-4514-9ed3-1fffa7e10ad6"/>
+					<textElement textAlignment="Left" verticalAlignment="Middle">
+						<font size="9" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA["Data de geração da validação: " + $F{DT_GERACAO}]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupHeader>
+		<groupFooter>
+			<band height="30">
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement x="2" y="0" width="551" height="30" uuid="3c8c8fdc-bb1c-4f81-accb-4c73c6c63c78"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font size="9" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA["Quantidade de validações pendentes para " + $F{NM_INSTITUICAO} + ": " + $V{qtRegistrosInstituicao}]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupFooter>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="89">
+			<textField isBlankWhenNull="true">
+				<reportElement x="0" y="20" width="553" height="16" uuid="d95120a9-93ca-4e71-9e3d-5c51e6d2eb66"/>
+				<textElement textAlignment="Center" verticalAlignment="Bottom" markup="none">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{NM_EMPRESA}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="-1" y="0" width="551" height="20" uuid="d67d89dc-3df7-4849-a985-2322532900ba"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[VALIDAÇÃO PARA O CENSO]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="20">
+			<textField>
+				<reportElement x="400" y="0" width="110" height="20" uuid="ae9b37db-75f8-45ce-9c56-ad68ae7ed419"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="9" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Páginas: " + $V{PAGE_NUMBER} + "/"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="510" y="0" width="45" height="20" uuid="0d20b667-65fa-489f-8e3d-66b2a9dab75e"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="9" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement x="0" y="-53" width="555" height="53" uuid="c8807f5d-4a8c-4d0a-8c9c-3b8d3c9c5329"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="18"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{NM_MENSAGEM_VALIDADA}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<detail>
+		<band height="60" splitType="Stretch">
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement x="2" y="0" width="100" height="58" uuid="effdcd9c-9f1c-46e4-949a-1ce535ffcf58"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{NM_TIPO}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement x="110" y="0" width="172" height="58" uuid="36ea5766-b0ed-48ee-b23e-9ce08eed84b9"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{NM_REGISTRO}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement x="290" y="0" width="263" height="58" uuid="ba2b5ba0-9a29-435b-9016-5fd7f4613d0b"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{TXT_INSTITUICAO_PENDENCIA}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="105" y="-2" width="1" height="60" uuid="987634b7-e84d-4a4e-a672-852ab69a3c24"/>
+				<graphicElement>
+					<pen lineWidth="1.5"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement x="287" y="0" width="1" height="58" uuid="b1791586-223c-4928-801d-950d3cd9bda8"/>
+				<graphicElement>
+					<pen lineWidth="1.5"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement x="0" y="58" width="555" height="2" uuid="82d786ea-a20e-4123-939f-52ea5f4902a4"/>
+				<graphicElement>
+					<pen lineWidth="1.5"/>
+				</graphicElement>
+			</line>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="15">
+			<textField>
+				<reportElement x="214" y="2" width="339" height="13" uuid="0cd593e8-eb51-4343-93e4-6a1ea78f5780"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="5" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Emitido em " + $P{dtHoje} + " às " + $P{hrHoje} + " por " + $P{nmUsuario} + "   Página: " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+</jasperReport>

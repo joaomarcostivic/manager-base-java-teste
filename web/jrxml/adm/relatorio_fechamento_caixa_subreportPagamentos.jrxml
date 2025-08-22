@@ -1,0 +1,267 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="relatorio_fechamento_caixa_subreportPagamentos" language="groovy" pageWidth="555" pageHeight="802" columnWidth="555" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="9ddfb72d-614f-4a4f-87e4-715585c2672b">
+	<property name="ireport.zoom" value="2.1435888100000016"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA["C:\\Users\\Ricardo\\TiVic\\workspace\\manager\\web\\adm\\"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="vlSaldoInicial" class="java.lang.Double"/>
+	<parameter name="vlRecebimento" class="java.lang.Double"/>
+	<parameter name="vlTotalEntradas" class="java.lang.Double"/>
+	<parameter name="vlTransferencia" class="java.lang.Double"/>
+	<parameter name="vlDespesas" class="java.lang.Double">
+		<defaultValueExpression><![CDATA[$V{vlPagoTotal}]]></defaultValueExpression>
+	</parameter>
+	<parameter name="dtFechamento" class="java.sql.Timestamp"/>
+	<parameter name="dtFechamentoFinal" class="java.sql.Timestamp"/>
+	<parameter name="cdFechamento" class="java.lang.Integer"/>
+	<queryString>
+		<![CDATA[SELECT
+FP.nm_forma_pagamento, PF.nm_pessoa, CP.dt_vencimento,
+CAST(CP.dt_pagamento AS DATE) - CAST(CP.dt_vencimento AS DATE) AS vl_atraso,
+CP.vl_conta,MCP.vl_multa,MCP.vl_juros,MCP.vl_desconto,CP.vl_pago,TP.sg_tipo_documento,CP.ds_historico
+FROM adm_conta_pagar CP
+JOIN adm_movimento_conta_pagar MCP ON(MCP.cd_conta_pagar = CP.cd_conta_pagar AND CP.cd_conta = MCP.cd_conta)
+JOIN adm_movimento_conta MC ON(MC.cd_movimento_conta = MCP.cd_movimento_conta AND MCP.cd_conta = MC.cd_conta)
+JOIN adm_forma_pagamento FP ON(FP.cd_forma_pagamento = MC.cd_forma_pagamento)
+JOIN grl_pessoa	     PF ON(CP.cd_pessoa = PF.cd_pessoa)
+JOIN adm_tipo_documento   TP ON(CP.cd_tipo_documento = TP.cd_tipo_documento)
+WHERE CP.dt_pagamento BETWEEN $P{dtFechamento} AND $P{dtFechamentoFinal}
+GROUP BY FP.nm_forma_pagamento,PF.nm_pessoa, CP.dt_vencimento, CP.dt_pagamento, CP.vl_conta,MCP.vl_multa,MCP.vl_juros,MCP.vl_desconto,CP.vl_pago,
+TP.sg_tipo_documento,CP.ds_historico]]>
+	</queryString>
+	<field name="NM_FORMA_PAGAMENTO" class="java.lang.String"/>
+	<field name="SG_TIPO_DOCUMENTO" class="java.lang.String"/>
+	<field name="NR_DOCUMENTO" class="java.lang.String"/>
+	<field name="NM_FAVORECIDO" class="java.lang.String"/>
+	<field name="DT_VENCIMENTO" class="java.sql.Timestamp"/>
+	<field name="VL_PAGO" class="java.lang.Double"/>
+	<field name="VL_CONTA" class="java.lang.Double"/>
+	<field name="DS_HISTORICO" class="java.lang.String"/>
+	<field name="VL_JUROS" class="java.lang.Double"/>
+	<field name="VL_MULTA" class="java.lang.Double"/>
+	<field name="VL_DESCONTO" class="java.lang.Double"/>
+	<variable name="vlContaPagarTotal" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[$F{VL_CONTA}]]></variableExpression>
+		<initialValueExpression><![CDATA[new Double(0)]]></initialValueExpression>
+	</variable>
+	<variable name="vlMultaPagarTotal" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[$F{VL_MULTA}]]></variableExpression>
+		<initialValueExpression><![CDATA[new Double(0)]]></initialValueExpression>
+	</variable>
+	<variable name="vlJurosPagarTotal" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[$F{VL_JUROS}]]></variableExpression>
+		<initialValueExpression><![CDATA[new Double(0)]]></initialValueExpression>
+	</variable>
+	<variable name="vlDescontoPagarTotal" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[$F{VL_DESCONTO}]]></variableExpression>
+		<initialValueExpression><![CDATA[new Double(0)]]></initialValueExpression>
+	</variable>
+	<variable name="vlPagoTotal" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[$F{VL_PAGO}]]></variableExpression>
+		<initialValueExpression><![CDATA[new Double(0)]]></initialValueExpression>
+	</variable>
+	<variable name="favorecidoHistorico" class="java.lang.String">
+		<variableExpression><![CDATA[$F{DS_HISTORICO} == null ? $F{NM_FAVORECIDO} : $F{NM_FAVORECIDO} + "/" + $F{DS_HISTORICO}]]></variableExpression>
+	</variable>
+	<group name="totalPagamentos">
+		<groupExpression><![CDATA[$V{vlPagoTotal}]]></groupExpression>
+		<groupFooter>
+			<band height="9">
+				<line>
+					<reportElement uuid="53fcf85b-cc69-455e-9b84-63d32b6c2edc" x="1" y="0" width="553" height="1"/>
+				</line>
+				<staticText>
+					<reportElement uuid="e61dc950-2947-4409-9394-5e9447211a7e" x="312" y="1" width="36" height="8"/>
+					<textElement>
+						<font size="6" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Totais:]]></text>
+				</staticText>
+				<textField pattern="#,##0.00">
+					<reportElement uuid="ef387561-2d12-4380-af1b-bc169d9a7968" x="351" y="1" width="45" height="8"/>
+					<textElement textAlignment="Right">
+						<font size="6" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$V{vlContaPagarTotal}]]></textFieldExpression>
+				</textField>
+				<textField pattern="#,##0.00">
+					<reportElement uuid="049a4731-2662-42bd-a2c8-c17f314393cf" x="399" y="1" width="28" height="8"/>
+					<textElement textAlignment="Right">
+						<font size="6" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$V{vlMultaPagarTotal}]]></textFieldExpression>
+				</textField>
+				<textField pattern="#,##0.00">
+					<reportElement uuid="8382e95b-9b65-4565-8ad5-be43c30b12d9" x="429" y="1" width="35" height="8"/>
+					<textElement textAlignment="Right">
+						<font size="6" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$V{vlJurosPagarTotal}]]></textFieldExpression>
+				</textField>
+				<textField pattern="#,##0.00">
+					<reportElement uuid="bb026021-32ca-4412-a9e6-409f9d7fb711" x="467" y="1" width="34" height="8"/>
+					<textElement textAlignment="Right">
+						<font size="6" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$V{vlDescontoPagarTotal}]]></textFieldExpression>
+				</textField>
+				<textField pattern="#,##0.00">
+					<reportElement uuid="68587f54-0a93-40bd-bde9-3c24728b07aa" x="504" y="1" width="30" height="8"/>
+					<textElement textAlignment="Right">
+						<font size="6" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$V{vlPagoTotal}]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupFooter>
+	</group>
+	<columnHeader>
+		<band height="29" splitType="Stretch">
+			<rectangle>
+				<reportElement uuid="4121a6cd-d3ca-473d-9fca-07e906e0a3f7" x="-1" y="2" width="555" height="16" forecolor="#FFFFFF" backcolor="#CCCCCC"/>
+			</rectangle>
+			<staticText>
+				<reportElement uuid="50ef43dc-15f6-4034-bb97-c129fe690735" x="7" y="4" width="266" height="16"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[PAGAMENTOS DO DIA]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="2f56e2db-5647-4b36-b6b3-c4bd7afa476a" x="2" y="20" width="73" height="8"/>
+				<textElement>
+					<font size="6" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Forma de pagamento]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="c3adbff9-cd04-4ae3-8af4-d62c8822fe68" x="80" y="20" width="232" height="8"/>
+				<textElement>
+					<font size="6" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Favorecido/Historico]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="a3e51950-f1af-419a-8a52-f5a48910d5af" x="312" y="20" width="36" height="8"/>
+				<textElement>
+					<font size="6" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Vencimento]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="7a23aebe-8003-4536-9c22-a9ec063e81ae" x="351" y="20" width="45" height="8"/>
+				<textElement textAlignment="Right">
+					<font size="6" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Valor da conta]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="96bd0201-88b7-4a9a-8f3b-21d3356b53aa" x="399" y="20" width="28" height="8"/>
+				<textElement textAlignment="Right">
+					<font size="6" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Multa]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="17013348-b3d8-4886-9b34-1d034ce55df5" x="429" y="20" width="35" height="8"/>
+				<textElement textAlignment="Right">
+					<font size="6" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Juros]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="67e7e6c8-eeea-4b29-9583-5e1a3179da33" x="467" y="20" width="34" height="8"/>
+				<textElement textAlignment="Right">
+					<font size="6" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Descontos]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="d134b03d-673c-45c6-9bb8-128c150d7432" x="504" y="20" width="30" height="8"/>
+				<textElement textAlignment="Right">
+					<font size="6" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Pago]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="95a99d3d-b74b-43ec-9ca1-ccb7ba5d3965" x="537" y="20" width="15" height="8"/>
+				<textElement textAlignment="Right">
+					<font size="6" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Doc]]></text>
+			</staticText>
+			<line>
+				<reportElement uuid="6b4aa19c-876d-4895-bacc-e4964e291479" x="3" y="28" width="552" height="1"/>
+			</line>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="8" splitType="Stretch">
+			<textField pattern="#,##0.00">
+				<reportElement uuid="67e6bb70-214f-4ffc-8557-3e609d266d62" x="467" y="0" width="34" height="8"/>
+				<textElement textAlignment="Right">
+					<font size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{VL_DESCONTO}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="dc974d0e-a1a4-4220-982b-e7d2a53b9d6f" x="80" y="0" width="232" height="8"/>
+				<textElement>
+					<font size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{favorecidoHistorico}]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement uuid="31744bd3-7b40-496b-a35a-0bd9cad243ae" x="312" y="0" width="36" height="8"/>
+				<textElement>
+					<font size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{DT_VENCIMENTO}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00">
+				<reportElement uuid="295562ac-b76d-4cda-b045-a45c13fae98f" x="351" y="0" width="45" height="8"/>
+				<textElement textAlignment="Right">
+					<font size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{VL_CONTA}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00">
+				<reportElement uuid="af1243c9-1c79-4b4a-aa4c-e5f128493123" x="504" y="0" width="30" height="8"/>
+				<textElement textAlignment="Right">
+					<font size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{VL_PAGO}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00">
+				<reportElement uuid="1196f44a-4d2e-4079-b4c3-050ba83ca723" x="429" y="0" width="35" height="8"/>
+				<textElement textAlignment="Right">
+					<font size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{VL_JUROS}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00">
+				<reportElement uuid="cde310bb-5e8f-440a-91cd-23f88439982c" x="399" y="0" width="28" height="8"/>
+				<textElement textAlignment="Right">
+					<font size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{VL_MULTA}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="7c932bf3-dd8a-432a-9ffe-9246ea26e8b9" x="537" y="0" width="15" height="8"/>
+				<textElement textAlignment="Right">
+					<font size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{SG_TIPO_DOCUMENTO}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="a122aebd-5813-4b75-975f-50532ac3495a" x="2" y="0" width="73" height="8"/>
+				<textElement>
+					<font size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{NM_FORMA_PAGAMENTO}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+</jasperReport>

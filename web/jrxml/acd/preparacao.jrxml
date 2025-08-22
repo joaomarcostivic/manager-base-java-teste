@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.2.0.final using JasperReports Library version 6.2.0  -->
+<!-- 2016-05-27T18:13:59 -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="cardapio" pageWidth="595" pageHeight="842" columnWidth="515" leftMargin="40" rightMargin="40" topMargin="30" bottomMargin="30" uuid="75c496e7-d97c-42fe-ae01-056ae651df0c">
+	<property name="net.sf.jasperreports.export.pdf.force.linebreak.policy" value="true"/>
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="96"/>
+	<property name="com.jaspersoft.studio.unit." value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.pageHeight" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.pageWidth" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.topMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.bottomMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.leftMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.rightMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.columnWidth" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.columnSpacing" value="pixel"/>
+	<parameter name="nmRazaoSocial" class="java.lang.String"/>
+	<parameter name="LOGO" class="java.lang.Object"/>
+	<parameter name="NM_SISTEMA" class="java.lang.String"/>
+	<parameter name="nmTitulo" class="java.lang.String"/>
+	<parameter name="LOGO_PATH" class="java.lang.String"/>
+	<parameter name="nrRegistros" class="java.lang.String"/>
+	<parameter name="NM_PREPARACAO" class="java.lang.String">
+		<parameterDescription><![CDATA[]]></parameterDescription>
+	</parameter>
+	<parameter name="NR_MINUTOS" class="java.lang.Integer">
+		<parameterDescription><![CDATA[]]></parameterDescription>
+	</parameter>
+	<parameter name="TXT_MODO_PREPARO" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<field name="NM_INGREDIENTE" class="java.lang.String"/>
+	<field name="VL_UTILIZADO" class="java.lang.String"/>
+	<title>
+		<band height="68">
+			<textField>
+				<reportElement x="0" y="0" width="514" height="25" uuid="cbcbd31b-dd3a-412a-beff-5d5f53f29608"/>
+				<textElement textAlignment="Center">
+					<font size="15" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{nmTitulo}]]></textFieldExpression>
+			</textField>
+			<image scaleImage="RetainShape" hAlign="Left" onErrorType="Blank">
+				<reportElement x="6" y="0" width="119" height="50" isRemoveLineWhenBlank="true" uuid="5e56db0f-5dac-47a1-90c7-7e8ad6490d4c"/>
+				<imageExpression><![CDATA[net.sf.jasperreports.engine.util.JRImageLoader.loadImage((byte[]) $P{LOGO})]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="0" y="30" width="514" height="16" uuid="defa3356-2c8c-4320-bd13-7b884b3d4845"/>
+				<textElement textAlignment="Center">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[PREFEITURA MUNICIPAL DE VITÓRIA DA CONQUISTA]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="50" width="514" height="16" uuid="2011a09b-ee01-4d73-946f-58d204093721"/>
+				<textElement textAlignment="Center">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[COORDENAÇÃO DE ALIMENTAÇÃO ESCOLAR]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="26">
+			<line>
+				<reportElement x="0" y="2" width="515" height="1" uuid="e39906ae-b44b-4db8-8115-acf83d1c9d30"/>
+			</line>
+			<textField isBlankWhenNull="true">
+				<reportElement x="0" y="6" width="260" height="15" uuid="1533dd64-cded-4f63-9492-6ee1fd6519d9">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<textFieldExpression><![CDATA[$P{NM_PREPARACAO}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="398" y="6" width="118" height="15" uuid="e93ca359-51e5-444c-af06-b6cb8c31f2e1">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<textFieldExpression><![CDATA[$P{NR_MINUTOS}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="1" y="23" width="515" height="1" uuid="b4d71d03-64b9-4f5f-87a7-be5869e40826"/>
+			</line>
+			<staticText>
+				<reportElement x="265" y="5" width="127" height="15" uuid="ca0c0efb-e0e3-4b97-8dfa-d5edc64789bb">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[Tempo de Preparo:]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="17">
+			<staticText>
+				<reportElement x="26" y="0" width="333" height="15" uuid="a06bc1b3-1500-4fc3-a8fa-de1d2c926610">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[Ingredientes]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="364" y="0" width="151" height="15" uuid="1460c570-d45d-456d-b5fa-e143176918cf">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[Quantidade Per Capta]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="23" splitType="Prevent">
+			<textField isBlankWhenNull="true">
+				<reportElement x="24" y="2" width="335" height="18" uuid="fb01f89f-6eea-478e-88e0-08693a482630"/>
+				<textFieldExpression><![CDATA[$F{NM_INGREDIENTE}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="364" y="2" width="135" height="18" uuid="ccdbf7df-8b2d-4897-a47f-18a512063773"/>
+				<textElement textAlignment="Left" markup="html">
+					<font size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{VL_UTILIZADO}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="124" splitType="Stretch">
+			<line>
+				<reportElement x="1" y="2" width="514" height="1" uuid="ec3c2b99-f918-43a2-a343-e2a8b792a9ac"/>
+			</line>
+			<staticText>
+				<reportElement x="1" y="8" width="100" height="15" uuid="738323f9-6a60-4331-b539-58a8952e631b">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Modo de Preparo]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToBandHeight" x="1" y="23" width="513" height="95" uuid="85e1d3b4-df62-4fd5-a1b8-2656d4c9aa24"/>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{TXT_MODO_PREPARO}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="0" y="123" width="516" height="1" uuid="92bbd89c-ce3e-45ba-a5b2-7fe7576c4471"/>
+			</line>
+		</band>
+	</columnFooter>
+	<pageFooter>
+		<band height="20">
+			<staticText>
+				<reportElement x="2" y="0" width="511" height="17" uuid="fb00adfa-a58b-4242-97a9-8a8cb8d34461"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Escola do Futuro]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="423" y="0" width="90" height="16" uuid="db2a96fe-460f-4b6f-86f0-1bcd07ee4188">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new SimpleDateFormat("dd/MM/yyyy hh:mm").format(new java.util.Date())]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="399" y="0" width="19" height="16" uuid="37b9df1c-763c-495c-9cae-1f3d21e0c956">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Em]]></text>
+			</staticText>
+		</band>
+	</pageFooter>
+</jasperReport>

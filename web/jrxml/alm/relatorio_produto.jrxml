@@ -1,0 +1,246 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.0.3.final using JasperReports Library version 6.0.3  -->
+<!-- 2016-04-29T15:10:37 -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="estoque_produtos" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="685b275b-3095-430e-97ff-37d9f0e15d5c">
+	<property name="ireport.zoom" value="2.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="22"/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
+	<parameter name="LOGO" class="java.lang.Object"/>
+	<parameter name="nmRazaoSocial" class="java.lang.String"/>
+	<parameter name="dtHoje" class="java.lang.String"/>
+	<parameter name="hrHoje" class="java.lang.String"/>
+	<parameter name="nmUsuario" class="java.lang.String"/>
+	<parameter name="dtEstoque" class="java.lang.String"/>
+	<parameter name="LOGO_DEV" class="java.lang.Object"/>
+	<parameter name="nmEmail" class="java.lang.String"/>
+	<parameter name="nmDesenvolvedor" class="java.lang.String"/>
+	<parameter name="NM_PRODUTO_SERVICO" class="java.lang.String"/>
+	<parameter name="CL_TP_ESTOQUE" class="java.lang.String"/>
+	<parameter name="CL_ST_ESTOQUE" class="java.lang.String"/>
+	<parameter name="CL_ST_PRODUTO_EMPRESA" class="java.lang.String"/>
+	<parameter name="ID_PRODUTO_SERVICO" class="java.lang.String"/>
+	<parameter name="NM_FORNECEDOR" class="java.lang.String"/>
+	<parameter name="NM_GRUPO" class="java.lang.String"/>
+	<field name="ID_PRODUTO_SERVICO" class="java.lang.String"/>
+	<field name="NM_PRODUTO_SERVICO" class="java.lang.String"/>
+	<field name="QT_ESTOQUE" class="java.lang.String"/>
+	<field name="NM_GRUPO_PRINCIPAL" class="java.lang.String"/>
+	<field name="CD_GRUPO_PRINCIPAL" class="java.lang.Integer"/>
+	<group name="GrupoPrincipal">
+		<groupExpression><![CDATA[$F{CD_GRUPO_PRINCIPAL}]]></groupExpression>
+		<groupHeader>
+			<band height="37">
+				<textField isBlankWhenNull="true">
+					<reportElement x="0" y="0" width="555" height="24" uuid="b22e7c97-8bdb-476b-8513-7f15c4395c0f"/>
+					<textElement textAlignment="Left" verticalAlignment="Middle">
+						<font size="9"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{NM_GRUPO_PRINCIPAL}]]></textFieldExpression>
+				</textField>
+				<line>
+					<reportElement x="1" y="24" width="555" height="2" uuid="6978ee43-d8c9-443b-9788-dffa5f623354"/>
+					<graphicElement>
+						<pen lineWidth="1.5"/>
+					</graphicElement>
+				</line>
+				<line>
+					<reportElement x="0" y="35" width="555" height="2" uuid="aee11a31-3b64-4f9d-acbc-a13b496e51db"/>
+					<graphicElement>
+						<pen lineWidth="1.5"/>
+					</graphicElement>
+				</line>
+				<staticText>
+					<reportElement x="3" y="25" width="37" height="11" uuid="a7c93f63-2f46-49dd-8f2a-53f1917abd0a"/>
+					<textElement>
+						<font size="6"/>
+					</textElement>
+					<text><![CDATA[ID]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="42" y="25" width="447" height="10" uuid="041ea3b4-5374-4975-96fe-06f9aee1837c"/>
+					<textElement>
+						<font size="6"/>
+					</textElement>
+					<text><![CDATA[Nome]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="490" y="26" width="63" height="11" uuid="0d219bf1-9a03-4a69-8892-d9be7751d0e9"/>
+					<textElement textAlignment="Right">
+						<font size="6"/>
+					</textElement>
+					<text><![CDATA[Estoque]]></text>
+				</staticText>
+			</band>
+		</groupHeader>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="76">
+			<textField isBlankWhenNull="true">
+				<reportElement x="3" y="2" width="550" height="16" uuid="d95120a9-93ca-4e71-9e3d-5c51e6d2eb66"/>
+				<textElement textAlignment="Center" verticalAlignment="Bottom" markup="none">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{nmRazaoSocial}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="3" y="18" width="552" height="21" uuid="b0a975cb-8cac-4013-a9ac-c49406f0d5d5"/>
+				<textElement textAlignment="Center">
+					<font size="16" isBold="true"/>
+				</textElement>
+				<text><![CDATA[RELATÓRIO PRODUTOS]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="34" y="44" width="146" height="8" uuid="bcbb8ea9-a929-42e7-995d-d059a4ed77ef"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA[($P{NM_PRODUTO_SERVICO} != null && !$P{NM_PRODUTO_SERVICO}.equals("")  ? $P{NM_PRODUTO_SERVICO} : "Todas")]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="4" y="44" width="30" height="8" uuid="865fcd48-463f-46f8-bfb6-36f191553d9c"/>
+				<textElement>
+					<font size="6"/>
+				</textElement>
+				<text><![CDATA[Nome:]]></text>
+			</staticText>
+			<line>
+				<reportElement x="0" y="42" width="553" height="1" uuid="ba606648-fb05-41c7-ba43-b9cf473c8ece"/>
+			</line>
+			<textField isBlankWhenNull="true">
+				<reportElement x="276" y="44" width="74" height="8" uuid="9d2530e0-5217-41f5-94ef-d59f1ee3627a"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA[($P{ID_PRODUTO_SERVICO} != null && !$P{ID_PRODUTO_SERVICO}.equals("")  ? $P{ID_PRODUTO_SERVICO} : "Ignorar")]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="186" y="54" width="110" height="8" uuid="0e0111bf-ae8f-412f-8667-5f847f5d5ba4"/>
+				<textElement>
+					<font size="6"/>
+				</textElement>
+				<text><![CDATA[Situação do Produto na Empresa:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="4" y="54" width="86" height="8" uuid="f25d76ac-6b0a-4210-934c-6e852899c916"/>
+				<textElement>
+					<font size="6"/>
+				</textElement>
+				<text><![CDATA[Situação do Estoque:]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="296" y="54" width="100" height="8" uuid="af6e269e-9804-471a-ba28-04744b88ab9f"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA[($P{CL_ST_PRODUTO_EMPRESA} != null && !$P{CL_ST_PRODUTO_EMPRESA}.equals("") ? $P{CL_ST_PRODUTO_EMPRESA} : "Todos")]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="351" y="44" width="83" height="8" uuid="7688a7f6-0dbe-49d0-837d-9620d2e188f7"/>
+				<textElement>
+					<font size="6"/>
+				</textElement>
+				<text><![CDATA[Tipo de Estoque:]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="60" y="64" width="190" height="8" uuid="9e52653f-d6d7-485a-b14f-e7c04b029fe6"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA[($P{NM_GRUPO} != null ? $P{NM_GRUPO} : "Não Informado")]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="4" y="64" width="56" height="8" uuid="1a478305-e52c-473f-a129-e8834e2b58d9"/>
+				<textElement>
+					<font size="6"/>
+				</textElement>
+				<text><![CDATA[Grupo:]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="437" y="44" width="86" height="8" uuid="ef80b1b4-f682-4495-be74-2125b48028b4"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA[($P{CL_TP_ESTOQUE} != null && !$P{CL_TP_ESTOQUE}.equals("")  ? $P{CL_TP_ESTOQUE} : "Ignorar")]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="0" y="75" width="553" height="1" uuid="b5744cfd-861f-4b88-8990-537d1fe438c7"/>
+			</line>
+			<textField isBlankWhenNull="true">
+				<reportElement x="90" y="54" width="89" height="8" uuid="031f58ca-debb-4092-a36d-fda51875dc4b"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA[($P{CL_ST_ESTOQUE} != null && !$P{CL_ST_ESTOQUE}.equals("") ? $P{CL_ST_ESTOQUE} : "Todas")]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="186" y="44" width="86" height="8" uuid="7c73c00f-ad8f-49a0-ab1d-a1bb81958d18"/>
+				<textElement>
+					<font size="6"/>
+				</textElement>
+				<text><![CDATA[ID do Produto:]]></text>
+			</staticText>
+		</band>
+	</title>
+	<detail>
+		<band height="11" splitType="Stretch">
+			<textField pattern="" isBlankWhenNull="true">
+				<reportElement x="42" y="1" width="447" height="8" uuid="e8e140a9-f8e6-4b53-ab2d-021ba35296b1"/>
+				<textElement>
+					<font size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{NM_PRODUTO_SERVICO}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="3" y="1" width="37" height="8" uuid="452eff7c-6999-426e-8d4d-25d795aaeccd"/>
+				<textElement>
+					<font size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{ID_PRODUTO_SERVICO}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="489" y="1" width="64" height="8" uuid="4ca2997d-6078-48a6-a344-c6039a18af6b"/>
+				<textElement textAlignment="Right">
+					<font size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{QT_ESTOQUE}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="-1" y="10" width="555" height="1" uuid="1e3dfad8-6f54-48b1-b7e6-9aedbf29545d"/>
+				<graphicElement>
+					<pen lineWidth="1.0" lineStyle="Dotted"/>
+				</graphicElement>
+			</line>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="15">
+			<textField>
+				<reportElement x="214" y="2" width="339" height="13" uuid="b4535353-a90a-4520-8dc4-8400a0e2fed5"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="5" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Emitido em " + $P{dtHoje} + " às " + $P{hrHoje} + " por " + $P{nmUsuario} + "   Página: " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="-1" y="1" width="555" height="1" uuid="6978ee43-d8c9-443b-9788-dffa5f623354"/>
+				<graphicElement>
+					<pen lineWidth="1.0"/>
+				</graphicElement>
+			</line>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="18" splitType="Stretch">
+			<textField isBlankWhenNull="true">
+				<reportElement mode="Opaque" x="-1" y="0" width="557" height="18" backcolor="#CCCCCC" uuid="0237cf51-141f-4931-a50b-c74998d6aaaf"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+			</textField>
+		</band>
+	</summary>
+</jasperReport>

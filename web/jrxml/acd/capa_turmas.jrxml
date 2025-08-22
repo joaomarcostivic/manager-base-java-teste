@@ -1,0 +1,207 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.1.1.final using JasperReports Library version 6.1.1  -->
+<!-- 2015-11-11T22:25:29 -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="relatorio_turmas" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="685b275b-3095-430e-97ff-37d9f0e15d5c">
+	<property name="ireport.zoom" value="2.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="22"/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
+	<property name="com.jaspersoft.studio.unit." value="pixel"/>
+	<parameter name="nmRazaoSocial" class="java.lang.String"/>
+	<parameter name="dtHoje" class="java.lang.String"/>
+	<parameter name="hrHoje" class="java.lang.String"/>
+	<parameter name="nmUsuario" class="java.lang.String"/>
+	<parameter name="dtEstoque" class="java.lang.String"/>
+	<parameter name="nmEmail" class="java.lang.String"/>
+	<parameter name="nmDesenvolvedor" class="java.lang.String"/>
+	<parameter name="IMG_LOGOMARCA" class="byte[]" isForPrompting="false"/>
+	<field name="NR_INEP" class="java.lang.String"/>
+	<field name="ID_TURMA" class="java.lang.String"/>
+	<field name="NM_TURMA" class="java.lang.String"/>
+	<field name="NM_INSTITUICAO" class="java.lang.String"/>
+	<field name="NM_TP_TURNO" class="java.lang.String"/>
+	<field name="NM_CURSO" class="java.lang.String"/>
+	<field name="QT_VAGAS" class="java.lang.String"/>
+	<field name="NR_MATRICULADOS" class="java.lang.String"/>
+	<field name="CL_TP_MODALIDADE_ENSINO" class="java.lang.String"/>
+	<field name="NM_ST_TURMA" class="java.lang.String"/>
+	<field name="NM_MODALIDADE_ENSINO" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="96">
+			<textField>
+				<reportElement x="352" y="31" width="190" height="18" uuid="4ca18439-1f1a-436c-a560-36c6024b9fe8"/>
+				<textElement textAlignment="Center">
+					<font size="14" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA["2016"]]></textFieldExpression>
+			</textField>
+			<image scaleImage="RetainShape" hAlign="Left">
+				<reportElement x="1" y="0" width="59" height="57" isRemoveLineWhenBlank="true" uuid="fe1286ce-e4e0-4542-a5c3-49b997041c31"/>
+				<imageExpression><![CDATA[net.sf.jasperreports.engine.util.JRImageLoader.loadImage((byte[]) $P{IMG_LOGOMARCA})]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="60" y="13" width="280" height="36" uuid="82771fad-c1f1-424b-a94a-1c18ff01b5df"/>
+				<textElement textAlignment="Center">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[PREFEITURA DE VITÓRIA DA CONQUISTA
+SECRETARIA MUNICIPAL DE EDUCAÇÃO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="352" y="13" width="190" height="18" uuid="9c300c89-2e3b-44fc-8422-7a2464e039c3"/>
+				<textElement textAlignment="Center">
+					<font size="14" isBold="false"/>
+				</textElement>
+				<text><![CDATA[PERÍODO LETIVO]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="1" y="70" width="555" height="20" uuid="36126c3d-b942-40e1-b27e-a1944e7d6478"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{NM_INSTITUICAO}.toUpperCase()]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<columnHeader>
+		<band height="25" splitType="Stretch">
+			<line>
+				<reportElement x="0" y="1" width="555" height="1" uuid="6978ee43-d8c9-443b-9788-dffa5f623354">
+					<property name="local_mesure_unitheight" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<graphicElement>
+					<pen lineWidth="1.5"/>
+				</graphicElement>
+			</line>
+			<staticText>
+				<reportElement x="230" y="4" width="100" height="15" uuid="16e51332-16ef-4fc3-a126-23e10ee70b65">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Left">
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Turno]]></text>
+			</staticText>
+			<line>
+				<reportElement x="0" y="21" width="555" height="1" uuid="aee11a31-3b64-4f9d-acbc-a13b496e51db">
+					<property name="local_mesure_unitheight" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<graphicElement>
+					<pen lineWidth="1.5"/>
+				</graphicElement>
+			</line>
+			<staticText>
+				<reportElement x="330" y="4" width="60" height="15" uuid="9326634c-2159-49a0-bec8-d051e2933a66">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement>
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Nome]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="4" width="230" height="15" uuid="d623d03f-439a-42be-a985-4edc07ce249f">
+					<property name="local_mesure_unitheight" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Left">
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Curso/Modalidade]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="390" y="5" width="50" height="15" uuid="0fb27c97-6e02-4800-964b-15522236fdcb">
+					<property name="local_mesure_unitheight" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Right">
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Vagas]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="440" y="5" width="60" height="15" uuid="5df6827a-22cf-41bb-9bfc-2cabddcb0e79">
+					<property name="local_mesure_unitheight" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Right">
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Matrículas]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="500" y="5" width="54" height="15" uuid="68a13e67-1608-4bcb-93c6-ada1ba2d62e4">
+					<property name="local_mesure_unitheight" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Right">
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[%]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="13" splitType="Stretch">
+			<printWhenExpression><![CDATA[Integer.valueOf($F{NR_MATRICULADOS}) > 0]]></printWhenExpression>
+			<textField pattern="" isBlankWhenNull="true">
+				<reportElement x="330" y="1" width="60" height="12" uuid="afd54f89-8e0a-4701-b6e1-53e9394a081a">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{NM_TURMA}]]></textFieldExpression>
+			</textField>
+			<textField pattern="" isBlankWhenNull="true">
+				<reportElement x="230" y="1" width="100" height="12" uuid="9990e1a5-6136-4e48-9ef6-a87e91660cd9">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{NM_TP_TURNO}]]></textFieldExpression>
+			</textField>
+			<textField pattern="" isBlankWhenNull="true">
+				<reportElement x="0" y="1" width="230" height="12" uuid="bd6deedf-171a-4a8a-9b2c-2fe50b8e37a5">
+					<property name="local_mesure_unitwidth" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="local_mesure_unitheight" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{NM_CURSO}]]></textFieldExpression>
+			</textField>
+			<textField pattern="" isBlankWhenNull="true">
+				<reportElement x="390" y="1" width="50" height="12" uuid="3a6bd6cd-98aa-4162-99e5-1b5b16fcaf6f"/>
+				<textElement textAlignment="Right">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{QT_VAGAS}]]></textFieldExpression>
+			</textField>
+			<textField pattern="" isBlankWhenNull="true">
+				<reportElement x="440" y="1" width="60" height="12" uuid="6b5704b7-a606-4ab5-8ea5-9a493d353c73"/>
+				<textElement textAlignment="Right">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{NR_MATRICULADOS}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.0" isBlankWhenNull="true">
+				<reportElement x="500" y="1" width="54" height="12" uuid="8aea6152-4e08-4d63-9348-022345210b27"/>
+				<textElement textAlignment="Right">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[(Integer.valueOf($F{NR_MATRICULADOS})) / (Integer.valueOf($F{QT_VAGAS})) * 100]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+</jasperReport>

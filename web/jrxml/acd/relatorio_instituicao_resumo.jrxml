@@ -1,0 +1,413 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.1.1.final using JasperReports Library version 6.1.1  -->
+<!-- 2017-02-06T17:46:13 -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="estoque_produtos" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="685b275b-3095-430e-97ff-37d9f0e15d5c">
+	<property name="ireport.zoom" value="2.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="22"/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
+	<parameter name="LOGO" class="java.lang.Object"/>
+	<parameter name="nmRazaoSocial" class="java.lang.String"/>
+	<parameter name="dtHoje" class="java.lang.String"/>
+	<parameter name="hrHoje" class="java.lang.String"/>
+	<parameter name="nmUsuario" class="java.lang.String"/>
+	<parameter name="dtEstoque" class="java.lang.String"/>
+	<parameter name="LOGO_DEV" class="java.lang.Object"/>
+	<parameter name="nmEmail" class="java.lang.String"/>
+	<parameter name="nmDesenvolvedor" class="java.lang.String"/>
+	<parameter name="NM_INSTITUICAO" class="java.lang.String"/>
+	<parameter name="NM_TP_LOCALIZACAO_DIFERENCIADA" class="java.lang.String"/>
+	<parameter name="CL_SITUACAO" class="java.lang.String"/>
+	<parameter name="NM_LOGRADOURO" class="java.lang.String"/>
+	<parameter name="CL_TP_LOCALIZACAO" class="java.lang.String"/>
+	<parameter name="QT_MAX_ALUNOS" class="java.lang.String"/>
+	<parameter name="CL_FAIXA_ETARIA" class="java.lang.String"/>
+	<parameter name="QT_ESCOLAS_ZONA_URBANA" class="java.lang.Integer"/>
+	<parameter name="QT_ESCOLAS_ZONA_RURAL" class="java.lang.Integer"/>
+	<parameter name="QT_ESCOLAS_MATRICULADOS_ZONA_URBANA" class="java.lang.Integer"/>
+	<parameter name="QT_ESCOLAS_MATRICULADOS_ZONA_RURAL" class="java.lang.Integer"/>
+	<parameter name="QT_ESCOLAS_CRECHE" class="java.lang.Integer"/>
+	<parameter name="QT_ESCOLAS_MATRICULADOS_CRECHE" class="java.lang.Integer"/>
+	<field name="NM_INSTITUICAO" class="java.lang.String"/>
+	<field name="NM_LOCALIZACAO" class="java.lang.String"/>
+	<field name="NM_LOGRADOURO" class="java.lang.String"/>
+	<field name="QT_MAX_ALUNOS" class="java.lang.String"/>
+	<field name="TP_ZONA" class="java.lang.String"/>
+	<field name="LG_INTERNET" class="java.lang.String"/>
+	<field name="LG_BANDA_LARGA" class="java.lang.String"/>
+	<field name="QT_COMPUTADOR_ADMINISTRATIVO" class="java.lang.String"/>
+	<field name="QT_COMPUTADOR_ALUNOS" class="java.lang.String"/>
+	<field name="CD_TIPO_DEPENDENCIA" class="java.lang.String"/>
+	<variable name="qtMatriculadosZona" class="java.lang.Integer" resetType="Group" resetGroup="Zona" calculation="Sum">
+		<variableExpression><![CDATA[$F{NR_MATRICULADOS}]]></variableExpression>
+	</variable>
+	<variable name="qtMatriculados" class="java.lang.Integer" calculation="Sum">
+		<variableExpression><![CDATA[$F{NR_MATRICULADOS}]]></variableExpression>
+	</variable>
+	<variable name="qtEscolas" class="java.lang.Integer" calculation="Count">
+		<variableExpression><![CDATA[$F{NM_INSTITUICAO}]]></variableExpression>
+	</variable>
+	<group name="Zona">
+		<groupExpression><![CDATA[$F{TP_LOCALIZACAO}]]></groupExpression>
+		<groupHeader>
+			<band height="34">
+				<textField isBlankWhenNull="true">
+					<reportElement x="0" y="2" width="555" height="18" uuid="f61f9e9e-835b-415b-8a99-88ca6edfad7a"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="13"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{NM_LOCALIZACAO}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="121" y="22" width="54" height="10" uuid="041ea3b4-5374-4975-96fe-06f9aee1837c"/>
+					<textElement>
+						<font size="6"/>
+					</textElement>
+					<text><![CDATA[Zona]]></text>
+				</staticText>
+				<line>
+					<reportElement x="0" y="20" width="555" height="1" uuid="6978ee43-d8c9-443b-9788-dffa5f623354"/>
+					<graphicElement>
+						<pen lineWidth="1.5"/>
+					</graphicElement>
+				</line>
+				<staticText>
+					<reportElement x="0" y="22" width="120" height="10" uuid="16ed1c0a-5529-4cfe-b259-e2f2c5668127"/>
+					<textElement>
+						<font size="6"/>
+					</textElement>
+					<text><![CDATA[Instituição]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="176" y="22" width="104" height="10" uuid="38c33daf-d96a-499e-9918-cbd54f4e7d2b"/>
+					<textElement>
+						<font size="6"/>
+					</textElement>
+					<text><![CDATA[Logradouro]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="281" y="22" width="50" height="10" uuid="8f3bcf9a-751d-4c6f-8f58-9d5452f581e6"/>
+					<textElement>
+						<font size="6"/>
+					</textElement>
+					<text><![CDATA[Internet]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="332" y="22" width="50" height="10" uuid="2cc7b7c6-0df7-4b19-b940-96d316901c53"/>
+					<textElement>
+						<font size="6"/>
+					</textElement>
+					<text><![CDATA[Tipo (Banda Larga):]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="505" y="22" width="50" height="10" uuid="53abe3d2-c5b6-416e-9856-736bcab190f7"/>
+					<textElement>
+						<font size="6"/>
+					</textElement>
+					<text><![CDATA[Dependência]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="383" y="22" width="70" height="10" uuid="aa36e66e-49cd-4e8c-aad3-3515ada00b7d"/>
+					<textElement>
+						<font size="6"/>
+					</textElement>
+					<text><![CDATA[Comp. Administrativo]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="454" y="22" width="50" height="10" uuid="54bfaf6e-24b4-4919-b632-74a37c3f49d2"/>
+					<textElement>
+						<font size="6"/>
+					</textElement>
+					<text><![CDATA[Comp. p/alunos]]></text>
+				</staticText>
+				<line>
+					<reportElement x="0" y="33" width="555" height="1" uuid="aee11a31-3b64-4f9d-acbc-a13b496e51db"/>
+					<graphicElement>
+						<pen lineWidth="1.5"/>
+					</graphicElement>
+				</line>
+			</band>
+		</groupHeader>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="93">
+			<textField isBlankWhenNull="true">
+				<reportElement x="0" y="2" width="555" height="16" uuid="d95120a9-93ca-4e71-9e3d-5c51e6d2eb66"/>
+				<textElement textAlignment="Center" verticalAlignment="Bottom" markup="none">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{nmRazaoSocial}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="18" width="555" height="21" uuid="b0a975cb-8cac-4013-a9ac-c49406f0d5d5"/>
+				<textElement textAlignment="Center">
+					<font size="16" isBold="true"/>
+				</textElement>
+				<text><![CDATA[RELATÓRIO DE TELEFONES DOS ALUNOS]]></text>
+			</staticText>
+			<line>
+				<reportElement x="0" y="40" width="555" height="1" uuid="ba606648-fb05-41c7-ba43-b9cf473c8ece"/>
+			</line>
+			<staticText>
+				<reportElement x="384" y="55" width="43" height="10" uuid="e006b98e-52c0-4f46-8349-bf53453ad0e8">
+					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+				<textElement>
+					<font size="6"/>
+				</textElement>
+				<text><![CDATA[Período Letivo:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="37" y="43" width="136" height="10" uuid="33b1ef14-3552-43cd-95e5-6cdddece4e8c"/>
+				<textElement>
+					<font size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA[($P{NM_INSTITUICAO} != null && !$P{NM_INSTITUICAO}.equals("")  ? $P{NM_INSTITUICAO} : "Todas")]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="0" y="92" width="555" height="1" uuid="dc4542c6-9e1d-49e6-a81f-66f5ce0f28fd"/>
+			</line>
+			<staticText>
+				<reportElement x="0" y="43" width="35" height="10" uuid="29f5e69b-098a-4c8b-a742-ebdd0b11ed7c">
+					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+				<textElement>
+					<font size="6"/>
+				</textElement>
+				<text><![CDATA[Instituição:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="384" y="43" width="43" height="10" uuid="271af08c-9863-4020-aba0-75587a7da35c">
+					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+				<textElement>
+					<font size="6"/>
+				</textElement>
+				<text><![CDATA[Faixa etária:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="67" width="35" height="10" uuid="a946dbef-7c12-42bf-989c-7e6ff5bfd713">
+					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+				<textElement>
+					<font size="6"/>
+				</textElement>
+				<text><![CDATA[Localização:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="55" width="35" height="10" uuid="aaf89fb6-3d63-41b1-824b-3cb9d500cfa4">
+					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+				<textElement>
+					<font size="6"/>
+				</textElement>
+				<text><![CDATA[Logradouro:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="79" width="35" height="10" uuid="ed07f30a-44eb-49e8-b531-b2d6386ec5da">
+					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+				<textElement>
+					<font size="6"/>
+				</textElement>
+				<text><![CDATA[Situação:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="384" y="67" width="43" height="10" uuid="6e0eb33a-0c30-431a-9dc8-2fdbfacd3560">
+					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+				<textElement>
+					<font size="6"/>
+				</textElement>
+				<text><![CDATA[Máx. alunos:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="180" y="55" width="70" height="10" uuid="59a374eb-b01f-4fb3-96a2-dc3083720f21">
+					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+				<textElement>
+					<font size="6"/>
+				</textElement>
+				<text><![CDATA[Localização diferenciada:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="180" y="43" width="60" height="10" uuid="9434f96f-185b-488c-ade5-6c4821458140">
+					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+				<textElement>
+					<font size="6"/>
+				</textElement>
+				<text><![CDATA[Tipo de atendimento:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="180" y="67" width="100" height="10" uuid="e54c3620-55e2-4629-8ae8-5f4efdee532c">
+					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+				<textElement>
+					<font size="6"/>
+				</textElement>
+				<text><![CDATA[Regulamentação/Credenciamento:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="242" y="43" width="138" height="10" uuid="5f5b46dc-6ab5-415f-bf8c-81994930b145"/>
+				<textElement>
+					<font size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Text Field"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="37" y="55" width="136" height="10" uuid="0de22bbf-d458-4d72-af1c-28ff785fdfa8"/>
+				<textElement>
+					<font size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA[($P{NM_LOGRADOURO} != null && !$P{NM_LOGRADOURO}.equals("")  ? $P{NM_LOGRADOURO} : "Todas")]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="37" y="67" width="136" height="10" uuid="a14f754e-c394-4cac-a1f0-5db3e62665cd"/>
+				<textElement>
+					<font size="6"/>
+				</textElement>
+			</textField>
+			<textField>
+				<reportElement x="252" y="55" width="128" height="10" uuid="aa62200b-c6fb-403c-b76b-b7746523be8a"/>
+				<textElement>
+					<font size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Text Field"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="282" y="67" width="98" height="10" uuid="35bdf1b0-530a-4bae-bd6f-63733f17dd88"/>
+				<textElement>
+					<font size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Text Field"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="431" y="55" width="124" height="10" uuid="5ccfc420-4271-4984-8bf4-94a6946a0af0"/>
+				<textElement>
+					<font size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Text Field"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="431" y="67" width="124" height="10" uuid="962c57be-5a21-4b03-940e-dac356163b1d"/>
+				<textElement>
+					<font size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Text Field"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="431" y="43" width="124" height="10" uuid="0529fb22-ef85-4f17-822c-d15a14d5350c"/>
+				<textElement>
+					<font size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Text Field"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="37" y="79" width="136" height="10" uuid="f3e14b01-edc0-409e-90ba-f6180441d14a"/>
+				<textElement>
+					<font size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Text Field"]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<detail>
+		<band height="12" splitType="Stretch">
+			<textField pattern="" isBlankWhenNull="true">
+				<reportElement x="0" y="1" width="120" height="10" uuid="e8e140a9-f8e6-4b53-ab2d-021ba35296b1">
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+				<textElement>
+					<font size="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{NM_INSTITUICAO}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="1" y="11" width="554" height="1" uuid="1e3dfad8-6f54-48b1-b7e6-9aedbf29545d"/>
+				<graphicElement>
+					<pen lineWidth="1.0" lineStyle="Dotted"/>
+				</graphicElement>
+			</line>
+			<textField>
+				<reportElement x="121" y="1" width="54" height="10" uuid="b0154a52-4967-40de-a032-f2a9cfab5a00"/>
+				<textElement>
+					<font size="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{TP_ZONA}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="281" y="1" width="50" height="10" uuid="ff3a0f8a-eaa5-4109-b52b-a44917b1df82"/>
+				<textElement>
+					<font size="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{LG_INTERNET}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="176" y="1" width="104" height="10" uuid="ec5d9520-a4cc-4c73-9245-b1d951cc6bd3"/>
+				<textElement>
+					<font size="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{NM_LOGRADOURO}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="332" y="1" width="50" height="10" uuid="95131a1e-d62f-4ad1-a3a6-392bb255ee7b"/>
+				<textElement>
+					<font size="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{LG_BANDA_LARGA}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="454" y="1" width="50" height="10" uuid="bcaf8d63-d32d-4ae3-8342-b7c237431465"/>
+				<textElement>
+					<font size="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{QT_COMPUTADOR_ALUNOS}"Text Field"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="505" y="1" width="50" height="10" uuid="21912746-d960-4ba3-b9cf-9ec03425f3a8"/>
+				<textElement>
+					<font size="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{CD_TIPO_DEPENDENCIA}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="383" y="1" width="70" height="10" uuid="3218ceb7-eacc-4b12-b4f5-446c51e20fd8"/>
+				<textElement>
+					<font size="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{QT_COMPUTADOR_ADMINISTRATIVO}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="15">
+			<textField>
+				<reportElement x="214" y="2" width="341" height="13" uuid="b4535353-a90a-4520-8dc4-8400a0e2fed5"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="5" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Emitido em " + $P{dtHoje} + " às " + $P{hrHoje} + " por " + $P{nmUsuario} + "   Página: " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="0" y="1" width="555" height="1" uuid="6978ee43-d8c9-443b-9788-dffa5f623354"/>
+				<graphicElement>
+					<pen lineWidth="1.0"/>
+				</graphicElement>
+			</line>
+		</band>
+	</pageFooter>
+</jasperReport>

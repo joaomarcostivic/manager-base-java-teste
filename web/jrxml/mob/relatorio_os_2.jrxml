@@ -1,0 +1,272 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.1.1.final using JasperReports Library version 6.1.1  -->
+<!-- 2017-12-07T16:12:55 -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="relatorio_os" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" whenResourceMissingType="Error" uuid="685b275b-3095-430e-97ff-37d9f0e15d5c">
+	<property name="ireport.zoom" value="2.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="22"/>
+	<property name="com.jaspersoft.studio.unit." value="pixel"/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
+	<parameter name="NM_USUARIO" class="java.lang.String"/>
+	<parameter name="IMG_LOGOMARCA" class="byte[]" isForPrompting="false"/>
+	<parameter name="nmRazaoSocial" class="java.lang.String"/>
+	<parameter name="NR_CI" class="java.lang.String"/>
+	<parameter name="LG_FOTO" class="java.lang.Integer"/>
+	<parameter name="LG_DEFERIDO" class="java.lang.Integer"/>
+	<parameter name="RSM_TABELA_HORARIO_ROTA" class="java.lang.String"/>
+	<parameter name="NM_LINHA" class="java.lang.String"/>
+	<parameter name="NR_LINHA" class="java.lang.String"/>
+	<parameter name="NR_OS" class="java.lang.String"/>
+	<parameter name="DT_INICIO_VIGENCIA" class="java.util.Date"/>
+	<parameter name="DT_FIM_VIGENCIA" class="java.util.Date"/>
+	<parameter name="NM_CONCESSIONARIO" class="java.lang.String"/>
+	<parameter name="NM_TP_OPERACAO" class="java.lang.String"/>
+	<parameter name="TP_ATENDIMENTO" class="java.lang.String"/>
+	<parameter name="NM_TERMINAL_PRINCIPAL" class="java.lang.String"/>
+	<parameter name="NM_TERMINAL_SECUNDARIO" class="java.lang.String"/>
+	<parameter name="NM_ENDERECO_PRINCIPAL" class="java.lang.String"/>
+	<parameter name="NM_ENDERECO_SECUNDARIO" class="java.lang.String"/>
+	<parameter name="NM_SECRETARIO" class="java.lang.String"/>
+	<parameter name="NM_DIRETOR" class="java.lang.String"/>
+	<parameter name="NM_ROTA" class="java.lang.String"/>
+	<parameter name="TXT_TRAJETO" class="java.lang.String"/>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String"/>
+	<field name="RSM_SECAO_TIPO_TABELA" class="java.util.Collection"/>
+	<field name="RSM_SECAO_DETALHE" class="java.util.Collection"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="65">
+			<image scaleImage="RetainShape" hAlign="Center" vAlign="Middle">
+				<reportElement x="1" y="0" width="80" height="60" isRemoveLineWhenBlank="true" uuid="fe1286ce-e4e0-4542-a5c3-49b997041c31">
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<imageExpression><![CDATA["../../mob/imagens/logos/brasao_vdc_256px.png"]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="81" y="0" width="393" height="27" uuid="82771fad-c1f1-424b-a94a-1c18ff01b5df"/>
+				<textElement textAlignment="Center">
+					<font size="20" isBold="true"/>
+				</textElement>
+				<text><![CDATA[PREFEITURA MUNICIPAL DE VITÓRIA DA CONQUISTA]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="81" y="27" width="393" height="20" uuid="8448b6a8-cac5-43c9-862a-fc803afaa8d0">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<textElement textAlignment="Center">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[SECRETARIA DE MOBILIDADE URBANA]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="81" y="48" width="393" height="17" uuid="c497e8b9-9566-46aa-8c09-a37de79207f3">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<textElement textAlignment="Center">
+					<font size="12" isBold="false"/>
+				</textElement>
+				<text><![CDATA[www.pmvc.ba.gov.br]]></text>
+			</staticText>
+		</band>
+	</title>
+	<detail>
+		<band height="144">
+			<staticText>
+				<reportElement x="0" y="14" width="81" height="16" uuid="24c22281-a38e-4365-aaff-3d7388aad0c6">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+				<box padding="1">
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="1.5"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[DIA - IDA]]></text>
+			</staticText>
+			<line>
+				<reportElement x="0" y="10" width="554" height="1" uuid="fcc0c399-a3f8-43c2-8eab-f49dbb6cbdea"/>
+			</line>
+			<staticText>
+				<reportElement x="280" y="14" width="100" height="16" uuid="59b953b3-282a-4039-9f17-ee594aa9ed88">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+				<box padding="1">
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="1.5"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[DIA - VOLTA]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="0" y="39" width="200" height="16" forecolor="#FFFFFF" backcolor="#203AE6" uuid="111f412a-0c38-4b53-a10d-8b23f5d2844f">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+				<box padding="1">
+					<topPen lineWidth="1.5" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.5" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.5" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.5" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[NOME DA TABELA]]></text>
+			</staticText>
+			<subreport>
+				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="281" y="71" width="199" height="56" uuid="03ec8bf7-c8cc-4aab-a6d9-974e4366f4a5"/>
+				<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource($F{RSM_SECAO_DETALHE})]]></dataSourceExpression>
+				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "\\mob\\subreport_relatorio_os_campo_horario_volta.jasper"]]></subreportExpression>
+			</subreport>
+			<subreport>
+				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="1" y="71" width="199" height="56" uuid="793949ad-3aa4-448c-beb3-3d70bcd9a8e1"/>
+				<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource($F{RSM_SECAO_DETALHE})]]></dataSourceExpression>
+				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "\\mob\\subreport_relatorio_os_campo_horario_ida.jasper"]]></subreportExpression>
+			</subreport>
+			<staticText>
+				<reportElement mode="Opaque" x="0" y="55" width="63" height="16" forecolor="#FFFFFF" backcolor="#1E22EB" uuid="40e60ae4-ddc8-4f87-a03f-a498de3d2328">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+				<box padding="1">
+					<topPen lineWidth="1.5" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.5" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.5" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.5" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[BAIRRO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="63" y="55" width="70" height="16" forecolor="#FFFFFF" backcolor="#1C2DEB" uuid="dffa87e6-156b-4308-9f1a-dc9460707aa1">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+				<box padding="1">
+					<topPen lineWidth="1.5" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.5" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.5" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.5" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[CENTRO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="133" y="55" width="67" height="16" forecolor="#FFFFFF" backcolor="#1739E3" uuid="6f380ea0-f852-4e90-a9eb-872396694d69">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+				<box padding="1">
+					<topPen lineWidth="1.5" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.5" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.5" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.5" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[VARIAÇÃO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="281" y="39" width="200" height="16" forecolor="#FFFFFF" backcolor="#203AE6" uuid="a3389e5b-ffd2-4353-8956-8881957182cf">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+				<box padding="1">
+					<topPen lineWidth="1.5" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.5" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.5" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.5" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[NOME DA TABELA]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="281" y="55" width="63" height="16" forecolor="#FFFFFF" backcolor="#1E22EB" uuid="2832e825-b0bd-4f67-88e9-19f546daada2">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+				<box padding="1">
+					<topPen lineWidth="1.5" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.5" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.5" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.5" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[CENTRO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="344" y="55" width="70" height="16" forecolor="#FFFFFF" backcolor="#1C2DEB" uuid="84dbd336-7ed5-4e5b-bd6a-a37bc44bb5dd">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+				<box padding="1">
+					<topPen lineWidth="1.5" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.5" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.5" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.5" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[BAIRRO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="414" y="55" width="67" height="16" forecolor="#FFFFFF" backcolor="#1739E3" uuid="25abb7b9-9d75-467c-87af-eda43aff348c">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+				<box padding="1">
+					<topPen lineWidth="1.5" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.5" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.5" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.5" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[VARIAÇÃO]]></text>
+			</staticText>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="70">
+			<staticText>
+				<reportElement x="16" y="13" width="393" height="57" uuid="5e992eb8-86ed-4ba7-9eb8-be326527d5e4">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<textElement textAlignment="Left">
+					<font size="9" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Rua Carlécio Santos Sande, 109-B - Cruzeiro
+Fone: (77) 3429-73-52
+CEP 45040-390 - Vitória da Conquista - Bahia
+mobilidadeurbana@pmvca.ba.gov.br
+www.pmvc.ba.gov.br]]></text>
+			</staticText>
+			<line>
+				<reportElement x="0" y="6" width="554" height="1" uuid="ab7f3ce4-fe9f-42b4-a5f0-0c7eb8fd48e0"/>
+			</line>
+		</band>
+	</pageFooter>
+</jasperReport>

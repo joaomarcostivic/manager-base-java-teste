@@ -1,0 +1,256 @@
+package com.tivic.manager.ptc;
+
+import java.sql.*;
+import com.tivic.sol.connection.Conexao;
+import sol.dao.ResultSetMap;
+import sol.dao.ItemComparator;
+import sol.dao.Search;
+import java.util.ArrayList;
+
+public class TipoPrazoDAO{
+
+	public static int insert(TipoPrazo objeto) {
+		return insert(objeto, null);
+	}
+
+	public static int insert(TipoPrazo objeto, Connection connect){
+		boolean isConnectionNull = connect==null;
+		try {
+			if (isConnectionNull)
+				connect = Conexao.conectar();
+			int code = Conexao.getSequenceCode("PTC_TIPO_PRAZO", connect);
+			if (code <= 0) {
+				if (isConnectionNull)
+					Conexao.rollback(connect);
+				return -1;
+			}
+			objeto.setCdTipoPrazo(code);
+			PreparedStatement pstmt = connect.prepareStatement("INSERT INTO PTC_TIPO_PRAZO (CD_TIPO_PRAZO,"+
+			                                  "NM_TIPO_PRAZO,"+
+			                                  "TP_AGENDA_ITEM,"+
+			                                  "LG_DOCUMENTO_OBRIGATORIO,"+
+			                                  "CD_MODELO,"+
+			                                  "LG_UTILIZA_MODELO,"+
+			                                  "LG_EMAIL) VALUES (?, ?, ?, ?, ?, ?, ?)");
+			pstmt.setInt(1, code);
+			pstmt.setString(2,objeto.getNmTipoPrazo());
+			pstmt.setInt(3,objeto.getTpAgendaItem());
+			pstmt.setInt(4,objeto.getLgDocumentoObrigatorio());
+			if(objeto.getCdModelo()==0)
+				pstmt.setNull(5, Types.INTEGER);
+			else
+				pstmt.setInt(5,objeto.getCdModelo());
+			pstmt.setInt(6,objeto.getLgUtilizaModelo());
+			pstmt.setInt(7,objeto.getLgEmail());
+			pstmt.executeUpdate();
+			return code;
+		}
+		catch(SQLException sqlExpt){
+			sqlExpt.printStackTrace(System.out);
+			System.err.println("Erro! TipoPrazoDAO.insert: " + sqlExpt);
+			return (-1)*sqlExpt.getErrorCode();
+		}
+		catch(Exception e){
+			e.printStackTrace(System.out);
+			System.err.println("Erro! TipoPrazoDAO.insert: " +  e);
+			return -1;
+		}
+		finally{
+			if (isConnectionNull)
+				Conexao.desconectar(connect);
+		}
+	}
+
+	public static int update(TipoPrazo objeto) {
+		return update(objeto, 0, null);
+	}
+
+	public static int update(TipoPrazo objeto, int cdTipoPrazoOld) {
+		return update(objeto, cdTipoPrazoOld, null);
+	}
+
+	public static int update(TipoPrazo objeto, Connection connect) {
+		return update(objeto, 0, connect);
+	}
+
+	public static int update(TipoPrazo objeto, int cdTipoPrazoOld, Connection connect){
+		boolean isConnectionNull = connect==null;
+		try {
+			if (isConnectionNull)
+				connect = Conexao.conectar();
+			PreparedStatement pstmt = connect.prepareStatement("UPDATE PTC_TIPO_PRAZO SET CD_TIPO_PRAZO=?,"+
+												      		   "NM_TIPO_PRAZO=?,"+
+												      		   "TP_AGENDA_ITEM=?,"+
+												      		   "LG_DOCUMENTO_OBRIGATORIO=?,"+
+												      		   "CD_MODELO=?,"+
+												      		   "LG_UTILIZA_MODELO=?,"+
+												      		   "LG_EMAIL=? WHERE CD_TIPO_PRAZO=?");
+			pstmt.setInt(1,objeto.getCdTipoPrazo());
+			pstmt.setString(2,objeto.getNmTipoPrazo());
+			pstmt.setInt(3,objeto.getTpAgendaItem());
+			pstmt.setInt(4,objeto.getLgDocumentoObrigatorio());
+			if(objeto.getCdModelo()==0)
+				pstmt.setNull(5, Types.INTEGER);
+			else
+				pstmt.setInt(5,objeto.getCdModelo());
+			pstmt.setInt(6,objeto.getLgUtilizaModelo());
+			pstmt.setInt(7,objeto.getLgEmail());
+			pstmt.setInt(8, cdTipoPrazoOld!=0 ? cdTipoPrazoOld : objeto.getCdTipoPrazo());
+			pstmt.executeUpdate();
+			return 1;
+		}
+		catch(SQLException sqlExpt){
+			sqlExpt.printStackTrace(System.out);
+			System.err.println("Erro! TipoPrazoDAO.update: " + sqlExpt);
+			return (-1)*sqlExpt.getErrorCode();
+		}
+		catch(Exception e){
+			e.printStackTrace(System.out);
+			System.err.println("Erro! TipoPrazoDAO.update: " +  e);
+			return -1;
+		}
+		finally{
+			if (isConnectionNull)
+				Conexao.desconectar(connect);
+		}
+	}
+
+	public static int delete(int cdTipoPrazo) {
+		return delete(cdTipoPrazo, null);
+	}
+
+	public static int delete(int cdTipoPrazo, Connection connect){
+		boolean isConnectionNull = connect==null;
+		try {
+			if (isConnectionNull)
+				connect = Conexao.conectar();
+			PreparedStatement pstmt = connect.prepareStatement("DELETE FROM PTC_TIPO_PRAZO WHERE CD_TIPO_PRAZO=?");
+			pstmt.setInt(1, cdTipoPrazo);
+			pstmt.executeUpdate();
+			return 1;
+		}
+		catch(SQLException sqlExpt){
+			sqlExpt.printStackTrace(System.out);
+			System.err.println("Erro! TipoPrazoDAO.delete: " + sqlExpt);
+			return (-1)*sqlExpt.getErrorCode();
+		}
+		catch(Exception e){
+			e.printStackTrace(System.out);
+			System.err.println("Erro! TipoPrazoDAO.delete: " +  e);
+			return -1;
+		}
+		finally{
+			if (isConnectionNull)
+				Conexao.desconectar(connect);
+		}
+	}
+
+	public static TipoPrazo get(int cdTipoPrazo) {
+		return get(cdTipoPrazo, null);
+	}
+
+	public static TipoPrazo get(int cdTipoPrazo, Connection connect){
+		boolean isConnectionNull = connect==null;
+		if (isConnectionNull)
+			connect = Conexao.conectar();
+		PreparedStatement pstmt;
+		ResultSet rs;
+		try {
+			pstmt = connect.prepareStatement("SELECT * FROM PTC_TIPO_PRAZO WHERE CD_TIPO_PRAZO=?");
+			pstmt.setInt(1, cdTipoPrazo);
+			rs = pstmt.executeQuery();
+			if(rs.next()){
+				return new TipoPrazo(rs.getInt("CD_TIPO_PRAZO"),
+						rs.getString("NM_TIPO_PRAZO"),
+						rs.getInt("TP_AGENDA_ITEM"),
+						rs.getInt("LG_DOCUMENTO_OBRIGATORIO"),
+						rs.getInt("CD_MODELO"),
+						rs.getInt("LG_UTILIZA_MODELO"),
+						rs.getInt("LG_EMAIL"));
+			}
+			else{
+				return null;
+			}
+		}
+		catch(SQLException sqlExpt) {
+			sqlExpt.printStackTrace(System.out);
+			System.err.println("Erro! TipoPrazoDAO.get: " + sqlExpt);
+			return null;
+		}
+		catch(Exception e) {
+			e.printStackTrace(System.out);
+			System.err.println("Erro! TipoPrazoDAO.get: " + e);
+			return null;
+		}
+		finally {
+			if (isConnectionNull)
+				Conexao.desconectar(connect);
+		}
+	}
+
+	public static ResultSetMap getAll() {
+		return getAll(null);
+	}
+
+	public static ResultSetMap getAll(Connection connect) {
+		boolean isConnectionNull = connect==null;
+		if (isConnectionNull)
+			connect = Conexao.conectar();
+		PreparedStatement pstmt;
+		try {
+			pstmt = connect.prepareStatement("SELECT * FROM PTC_TIPO_PRAZO");
+			return new ResultSetMap(pstmt.executeQuery());
+		}
+		catch(SQLException sqlExpt) {
+			sqlExpt.printStackTrace(System.out);
+			System.err.println("Erro! TipoPrazoDAO.getAll: " + sqlExpt);
+			return null;
+		}
+		catch(Exception e) {
+			e.printStackTrace(System.out);
+			System.err.println("Erro! TipoPrazoDAO.getAll: " + e);
+			return null;
+		}
+		finally {
+			if (isConnectionNull)
+				Conexao.desconectar(connect);
+		}
+	}
+
+	public static ArrayList<TipoPrazo> getList() {
+		return getList(null);
+	}
+
+	public static ArrayList<TipoPrazo> getList(Connection connect) {
+		boolean isConnectionNull = connect==null;
+		if (isConnectionNull)
+			connect = Conexao.conectar();
+		try {
+			ArrayList<TipoPrazo> list = new ArrayList<TipoPrazo>();
+			ResultSetMap rsm = getAll(connect);
+			while(rsm.next()){
+				TipoPrazo obj = TipoPrazoDAO.get(rsm.getInt("CD_TIPO_PRAZO"), connect);
+				list.add(obj);
+			}
+			return list;
+		}
+		catch(Exception e) {
+			e.printStackTrace(System.out);
+			System.err.println("Erro! TipoPrazoDAO.getList: " + e);
+			return null;
+		}
+		finally {
+			if (isConnectionNull)
+				Conexao.desconectar(connect);
+		}
+	}
+
+	public static ResultSetMap find(ArrayList<ItemComparator> criterios) {
+		return find(criterios, null);
+	}
+
+	public static ResultSetMap find(ArrayList<ItemComparator> criterios, Connection connect) {
+		return Search.find("SELECT * FROM PTC_TIPO_PRAZO", criterios, true, connect!=null ? connect : Conexao.conectar(), connect==null);
+	}
+
+}

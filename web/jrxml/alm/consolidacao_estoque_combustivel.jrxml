@@ -1,0 +1,337 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version last-->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="consolidacao_estoque_combustivel" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="685b275b-3095-430e-97ff-37d9f0e15d5c">
+	<property name="ireport.zoom" value="2.0"/>
+	<property name="ireport.x" value="189"/>
+	<property name="ireport.y" value="0"/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
+	<style name="Currency" hAlign="Right" vAlign="Middle" pattern="¤ #,##0.00#;¤ -#,##0.00#" isBlankWhenNull="true" fontSize="6">
+		<box>
+			<topPen lineWidth="0.0"/>
+			<leftPen lineWidth="0.0"/>
+			<bottomPen lineWidth="0.0"/>
+			<rightPen lineWidth="0.0"/>
+		</box>
+	</style>
+	<style name="DynamicDefault" hAlign="Center" vAlign="Middle" isBlankWhenNull="true" fontSize="5">
+		<box>
+			<topPen lineWidth="0.0"/>
+			<leftPen lineWidth="0.0"/>
+			<bottomPen lineWidth="0.0"/>
+			<rightPen lineWidth="0.0"/>
+		</box>
+	</style>
+	<style name="HeaderCurrency" hAlign="Right" vAlign="Top" fontSize="6">
+		<box>
+			<topPen lineWidth="0.0"/>
+			<leftPen lineWidth="0.0"/>
+			<bottomPen lineWidth="0.0"/>
+			<rightPen lineWidth="0.0"/>
+		</box>
+	</style>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA["C:\\TIVIC\\manager\\web\\jrxml\\alm\\"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="LOGO" class="java.lang.Object"/>
+	<parameter name="nmRazaoSocial" class="java.lang.String"/>
+	<parameter name="dtHoje" class="java.lang.String"/>
+	<parameter name="hrHoje" class="java.lang.String"/>
+	<parameter name="nmUsuario" class="java.lang.String"/>
+	<parameter name="LOGO_DEV" class="java.lang.Object"/>
+	<parameter name="nmEmail" class="java.lang.String"/>
+	<parameter name="nmDesenvolvedor" class="java.lang.String"/>
+	<parameter name="dataMovimentoInicio" class="java.lang.String"/>
+	<parameter name="dataMovimentoFim" class="java.lang.String"/>
+	<parameter name="localArmazenamento" class="java.lang.String"/>
+	<parameter name="tipoCombustivel" class="java.lang.String"/>
+	<field name="NM_PRODUTO_SERVICO" class="java.lang.String"/>
+	<field name="DT_FECHAMENTO" class="java.sql.Timestamp"/>
+	<field name="QT_COMPRAS" class="java.lang.Double"/>
+	<field name="QT_ABERTURA" class="java.lang.Double"/>
+	<field name="QT_VENDAS" class="java.lang.Double"/>
+	<field name="VL_DIFERENCA" class="java.lang.Double"/>
+	<field name="QT_FECHAMENTO" class="java.lang.String"/>
+	<variable name="totalCompras" class="java.lang.Double" resetType="Group" resetGroup="grupoProduto" calculation="Sum">
+		<variableExpression><![CDATA[$F{QT_COMPRAS}]]></variableExpression>
+	</variable>
+	<variable name="totalVendas" class="java.lang.Double" resetType="Group" resetGroup="grupoProduto" calculation="Sum">
+		<variableExpression><![CDATA[$F{QT_VENDAS}]]></variableExpression>
+	</variable>
+	<variable name="totalDiferenca" class="java.lang.Double" resetType="Group" resetGroup="grupoProduto" calculation="Sum">
+		<variableExpression><![CDATA[$F{VL_DIFERENCA}]]></variableExpression>
+	</variable>
+	<variable name="totalGeralCompras" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[$F{QT_COMPRAS}]]></variableExpression>
+	</variable>
+	<variable name="totalGeralVendas" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[$F{QT_VENDAS}]]></variableExpression>
+	</variable>
+	<variable name="totalGeralDiferenca" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[$F{VL_DIFERENCA}]]></variableExpression>
+	</variable>
+	<group name="grupoProduto">
+		<groupExpression><![CDATA[$F{NM_PRODUTO_SERVICO}]]></groupExpression>
+		<groupHeader>
+			<band height="24">
+				<textField>
+					<reportElement x="0" y="0" width="555" height="24" uuid="584ff478-d5d8-4b1e-8116-930ff5cd1088"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="12" isBold="true" isItalic="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{NM_PRODUTO_SERVICO}]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupHeader>
+		<groupFooter>
+			<band height="17">
+				<rectangle>
+					<reportElement mode="Opaque" x="-1" y="2" width="555" height="12" forecolor="#FFFFFF" backcolor="#C0C0C0" uuid="3eeecba4-df50-41c9-b06d-97f11b7ea5fa"/>
+					<graphicElement>
+						<pen lineWidth="0.0" lineColor="#000000"/>
+					</graphicElement>
+				</rectangle>
+				<textField>
+					<reportElement x="0" y="0" width="150" height="16" uuid="a02eb0a3-e0e2-4d8f-8435-eed5057c1c34"/>
+					<textElement textAlignment="Left" verticalAlignment="Middle">
+						<font size="6" isBold="true" isItalic="false"/>
+					</textElement>
+					<textFieldExpression><![CDATA["TOTAL " + $F{NM_PRODUTO_SERVICO}]]></textFieldExpression>
+				</textField>
+				<textField isBlankWhenNull="true">
+					<reportElement x="180" y="3" width="60" height="8" uuid="9a0cd07c-1325-4aa0-b714-148a71ea7171"/>
+					<textElement textAlignment="Right">
+						<font size="6"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$V{totalCompras}]]></textFieldExpression>
+				</textField>
+				<textField isBlankWhenNull="true">
+					<reportElement x="280" y="3" width="60" height="8" uuid="ebcc3361-f0c2-49f6-b859-da2d20af43fd"/>
+					<textElement textAlignment="Right">
+						<font size="6"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$V{totalVendas}]]></textFieldExpression>
+				</textField>
+				<textField isBlankWhenNull="true">
+					<reportElement x="380" y="4" width="60" height="8" uuid="cefd4a1f-021b-4aee-beec-bacda00b8a4b"/>
+					<textElement textAlignment="Right">
+						<font size="6"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$V{totalDiferenca}]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupFooter>
+	</group>
+	<pageHeader>
+		<band height="85">
+			<image scaleImage="FillFrame" hAlign="Center" vAlign="Middle" onErrorType="Blank" evaluationTime="Report">
+				<reportElement x="0" y="0" width="85" height="74" uuid="8c074d58-4f9a-4d93-8a2a-75274a8279a4"/>
+				<imageExpression><![CDATA[net.sf.jasperreports.engine.util.JRImageLoader.loadImage((byte[]) $P{LOGO_DEV})]]></imageExpression>
+			</image>
+			<textField isBlankWhenNull="true">
+				<reportElement x="85" y="0" width="383" height="16" uuid="d95120a9-93ca-4e71-9e3d-5c51e6d2eb66"/>
+				<textElement textAlignment="Center" verticalAlignment="Bottom" markup="none">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{nmRazaoSocial}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="85" y="16" width="385" height="21" uuid="b0a975cb-8cac-4013-a9ac-c49406f0d5d5"/>
+				<textElement textAlignment="Center">
+					<font size="15" isBold="true"/>
+				</textElement>
+				<text><![CDATA[CONSOLIDAÇÃO DE ESTOQUE DE COMBUSTÍVEL]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="85" y="49" width="382" height="12" uuid="c6158799-fb61-41c2-8585-38acabdc702c"/>
+				<textElement textAlignment="Center">
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Período de " + $P{dataMovimentoInicio}+ " à " + $P{dataMovimentoFim}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="85" y="61" width="382" height="12" uuid="c6158799-fb61-41c2-8585-38acabdc702c"/>
+				<textElement textAlignment="Center">
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Combustíveis: " + $P{tipoCombustivel}]]></textFieldExpression>
+			</textField>
+			<image scaleImage="FillFrame" hAlign="Center" vAlign="Middle" onErrorType="Blank" evaluationTime="Report">
+				<reportElement x="470" y="0" width="86" height="74" uuid="8c074d58-4f9a-4d93-8a2a-75274a8279a4"/>
+				<imageExpression><![CDATA[net.sf.jasperreports.engine.util.JRImageLoader.loadImage((byte[]) $P{LOGO})]]></imageExpression>
+			</image>
+			<textField>
+				<reportElement x="85" y="73" width="382" height="12" uuid="7388674f-43f6-485c-b656-0f4076ba37d5"/>
+				<textElement textAlignment="Center">
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Local de Armaz.: " + $P{localArmazenamento}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="27" splitType="Stretch">
+			<line>
+				<reportElement x="1" y="0" width="555" height="2" uuid="6978ee43-d8c9-443b-9788-dffa5f623354"/>
+				<graphicElement>
+					<pen lineWidth="1.5"/>
+				</graphicElement>
+			</line>
+			<staticText>
+				<reportElement x="90" y="1" width="60" height="18" uuid="0eb26ccb-5c8e-4eed-9b34-f97ad899d619"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="6"/>
+				</textElement>
+				<text><![CDATA[ABERTURA (L)]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="12" y="2" width="60" height="17" uuid="041ea3b4-5374-4975-96fe-06f9aee1837c"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="6"/>
+				</textElement>
+				<text><![CDATA[DAT. MOVIMENTO]]></text>
+			</staticText>
+			<line>
+				<reportElement x="0" y="21" width="555" height="2" uuid="aee11a31-3b64-4f9d-acbc-a13b496e51db"/>
+				<graphicElement>
+					<pen lineWidth="1.5"/>
+				</graphicElement>
+			</line>
+			<staticText>
+				<reportElement x="180" y="1" width="60" height="18" uuid="4012bd2a-db3a-4f06-99db-ca4b355f0935"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="6"/>
+				</textElement>
+				<text><![CDATA[COMPRA (L)]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="280" y="1" width="60" height="18" uuid="d89906f6-4854-4bf2-81bb-cedff08c9dcd"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="6"/>
+				</textElement>
+				<text><![CDATA[VENDA (L)]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="380" y="1" width="60" height="18" uuid="3b5784b8-1f7b-417c-af57-b881c3d20904"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="6"/>
+				</textElement>
+				<text><![CDATA[PERDA/SOBRA (L)]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="470" y="1" width="71" height="18" uuid="5825665d-25a6-4c84-bd11-f287abc73058"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="6"/>
+				</textElement>
+				<text><![CDATA[FECHAMENTO (L)]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="10" splitType="Stretch">
+			<textField isBlankWhenNull="true">
+				<reportElement x="12" y="1" width="60" height="8" uuid="e8e140a9-f8e6-4b53-ab2d-021ba35296b1"/>
+				<textElement textAlignment="Center">
+					<font size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new java.text.SimpleDateFormat("dd/MM/yyyy").format($F{DT_FECHAMENTO})]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="180" y="1" width="60" height="8" uuid="2f05de3a-8e77-4ba7-a941-a461271c98ee"/>
+				<textElement textAlignment="Right">
+					<font size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{QT_COMPRAS}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="90" y="1" width="60" height="8" uuid="d88c7bba-ecb6-42c1-b328-1269135432ca"/>
+				<textElement textAlignment="Right">
+					<font size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{QT_ABERTURA}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="280" y="1" width="60" height="8" uuid="a0af9cc9-0572-4121-a943-f116427c7dab"/>
+				<textElement textAlignment="Right">
+					<font size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{QT_VENDAS}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="380" y="1" width="60" height="8" uuid="6aee67f0-f223-40d9-9324-a9276c352515"/>
+				<textElement textAlignment="Right">
+					<font size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{VL_DIFERENCA}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="470" y="1" width="70" height="8" uuid="398f6af5-8676-431f-9c0d-2fedc7b15a9f"/>
+				<textElement textAlignment="Right">
+					<font size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{QT_FECHAMENTO}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="15">
+			<textField>
+				<reportElement x="214" y="2" width="340" height="13" uuid="b4535353-a90a-4520-8dc4-8400a0e2fed5"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="5" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Emitido em " + $P{dtHoje} + " às " + $P{hrHoje} + " por " + $P{nmUsuario} + "   Página: " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement mode="Transparent" x="2" y="2" width="263" height="13" uuid="b4535353-a90a-4520-8dc4-8400a0e2fed5"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="5" isBold="false" isItalic="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{nmDesenvolvedor} + "   " + $P{nmEmail}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="-1" y="1" width="555" height="1" uuid="6978ee43-d8c9-443b-9788-dffa5f623354"/>
+				<graphicElement>
+					<pen lineWidth="1.0"/>
+				</graphicElement>
+			</line>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="18" splitType="Stretch">
+			<rectangle>
+				<reportElement mode="Opaque" x="-1" y="3" width="555" height="12" forecolor="#FFFFFF" backcolor="#C0C0C0" uuid="e1c6df0d-5395-4135-b972-ecb9ef6f003f"/>
+				<graphicElement>
+					<pen lineWidth="0.0" lineColor="#000000"/>
+				</graphicElement>
+			</rectangle>
+			<staticText>
+				<reportElement mode="Transparent" x="1" y="3" width="178" height="12" backcolor="#FFFFFF" uuid="39a16980-83b3-4a79-bd4d-1d323f80eae2"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[TOTAL DO PERÍODO]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="170" y="5" width="70" height="8" uuid="fe9ae74d-152d-49b9-9d76-bd7e0a90656d"/>
+				<textElement textAlignment="Right">
+					<font size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{totalGeralCompras}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="261" y="5" width="79" height="8" uuid="2da9600c-3fbd-41ad-be3c-46236a99f97c"/>
+				<textElement textAlignment="Right">
+					<font size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{totalGeralVendas}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="370" y="5" width="70" height="8" uuid="ccbb1c02-cec4-4adb-a609-ba1dbe791674"/>
+				<textElement textAlignment="Right">
+					<font size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{totalGeralDiferenca}]]></textFieldExpression>
+			</textField>
+		</band>
+	</summary>
+</jasperReport>

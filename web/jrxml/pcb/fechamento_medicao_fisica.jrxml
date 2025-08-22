@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="fechamento_medicao_fisica" language="groovy" pageWidth="228" pageHeight="55" columnWidth="228" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="1446ae01-e150-4bc4-8ac8-ca98fd8ff260">
+	<property name="ireport.zoom" value="5.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<field name="CD_LOCAL_ARMAZENAMENTO" class="java.lang.String"/>
+	<field name="NM_LOCAL_ARMAZENAMENTO" class="java.lang.String"/>
+	<field name="VL_REGUA" class="java.lang.String"/>
+	<field name="QT_VOLUME" class="java.lang.String"/>
+	<columnHeader>
+		<band height="28" splitType="Stretch">
+			<staticText>
+				<reportElement uuid="480969e2-3fbf-45ce-a7b4-962a12636d7f" x="1" y="0" width="226" height="13"/>
+				<textElement textAlignment="Center">
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[MEDIÇÃO FÍSICA]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="d1a17c28-cd01-4c7b-922b-c71058f7a78e" x="155" y="14" width="70" height="13"/>
+				<textElement textAlignment="Right">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Litros]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="a58cd5a7-853c-46e8-ab37-395cc25c6a0a" x="93" y="14" width="59" height="13"/>
+				<textElement textAlignment="Right">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Regua]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="dd7def07-d62b-44ab-9307-e0108e7566eb" x="3" y="14" width="89" height="13"/>
+				<textElement verticalAlignment="Top">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Tanque]]></text>
+			</staticText>
+			<line>
+				<reportElement uuid="efa55f95-8b3d-4ef9-af78-01baa0b3b9df" x="0" y="27" width="228" height="1"/>
+			</line>
+			<line>
+				<reportElement uuid="9585bb86-258d-4d87-9522-494248bc2dff" x="92" y="14" width="1" height="13"/>
+			</line>
+			<line>
+				<reportElement uuid="29cfb008-ae20-450d-b268-36266edd8e29" x="0" y="13" width="228" height="1"/>
+			</line>
+			<line>
+				<reportElement uuid="7344350f-3152-4391-bcbe-c384b6c0847d" x="154" y="14" width="1" height="13"/>
+			</line>
+			<line>
+				<reportElement uuid="8e6ad814-ddd4-44fa-9c12-26e674307335" x="0" y="14" width="1" height="13"/>
+			</line>
+			<line>
+				<reportElement uuid="2a3210cd-09f5-40b0-82bc-16a6ae7c4971" x="227" y="14" width="1" height="13"/>
+			</line>
+			<line>
+				<reportElement uuid="8e6ad814-ddd4-44fa-9c12-26e674307335" x="0" y="0" width="1" height="13"/>
+			</line>
+			<line>
+				<reportElement uuid="8e6ad814-ddd4-44fa-9c12-26e674307335" x="227" y="0" width="1" height="13"/>
+			</line>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="8" splitType="Stretch">
+			<textField pattern="#,##0.0##" isBlankWhenNull="true">
+				<reportElement uuid="a03e9a4a-e72e-413c-a9a6-cc40971e9458" x="98" y="0" width="51" height="8"/>
+				<textElement textAlignment="Right">
+					<font size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{VL_REGUA}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="9eb14f1d-4efc-4436-96cc-24e8a552bcbc" x="7" y="0" width="79" height="8"/>
+				<textElement>
+					<font size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{NM_LOCAL_ARMAZENAMENTO}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.0##" isBlankWhenNull="true">
+				<reportElement uuid="1541b669-a958-445c-80a2-f89326b7694e" x="160" y="0" width="61" height="8"/>
+				<textElement textAlignment="Right">
+					<font size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{QT_VOLUME}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement uuid="8e6ad814-ddd4-44fa-9c12-26e674307335" x="0" y="0" width="1" height="8"/>
+			</line>
+			<line>
+				<reportElement uuid="8e6ad814-ddd4-44fa-9c12-26e674307335" x="92" y="0" width="1" height="8"/>
+			</line>
+			<line>
+				<reportElement uuid="8e6ad814-ddd4-44fa-9c12-26e674307335" x="154" y="0" width="1" height="8"/>
+			</line>
+			<line>
+				<reportElement uuid="8e6ad814-ddd4-44fa-9c12-26e674307335" x="227" y="0" width="1" height="8"/>
+			</line>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="1">
+			<line>
+				<reportElement uuid="efa55f95-8b3d-4ef9-af78-01baa0b3b9df" x="0" y="0" width="228" height="1"/>
+			</line>
+		</band>
+	</columnFooter>
+</jasperReport>

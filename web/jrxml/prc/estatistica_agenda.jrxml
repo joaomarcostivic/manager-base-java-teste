@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.1.1.final using JasperReports Library version 6.1.1  -->
+<!-- 2016-07-15T15:38:34 -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="estatistica_agenda" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="8c10ff26-1412-42a0-b71e-790b9a847b29">
+	<parameter name="NM_EMPRESA" class="java.lang.String"/>
+	<parameter name="NM_RELATORIO" class="java.lang.String"/>
+	<parameter name="IMG_LOGOMARCA" class="byte[]">
+		<parameterDescription><![CDATA[]]></parameterDescription>
+	</parameter>
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<field name="TP_AGENDA_ITEM" class="java.lang.Integer"/>
+	<field name="NM_TIPO_PRAZO" class="java.lang.String"/>
+	<field name="QTD_AGENDA_ITEM" class="java.lang.Integer"/>
+	<variable name="vlTotal" class="java.lang.Integer" calculation="Sum">
+		<variableExpression><![CDATA[new Integer($F{QTD_AGENDA_ITEM})]]></variableExpression>
+		<initialValueExpression><![CDATA[0]]></initialValueExpression>
+	</variable>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="53" splitType="Stretch">
+			<textField>
+				<reportElement x="104" y="0" width="372" height="25" uuid="119426a3-64d0-4c1c-bea3-bf22adbc09b4"/>
+				<textElement textAlignment="Center">
+					<font size="15" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{NM_EMPRESA}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="104" y="27" width="372" height="20" uuid="b7580e8c-1c26-47e2-9a92-19a50e24b872">
+					<property name="local_mesure_unitheight" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Center">
+					<font size="15" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{NM_RELATORIO}]]></textFieldExpression>
+			</textField>
+			<image scaleImage="RetainShape" hAlign="Center">
+				<reportElement stretchType="RelativeToBandHeight" x="1" y="0" width="103" height="47" isRemoveLineWhenBlank="true" uuid="48eb8bd1-0c21-468a-aa60-b702dc39cf4f"/>
+				<imageExpression><![CDATA[net.sf.jasperreports.engine.util.JRImageLoader.loadImage((byte[]) $P{IMG_LOGOMARCA})]]></imageExpression>
+			</image>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="7" splitType="Stretch">
+			<line>
+				<reportElement x="0" y="0" width="555" height="1" uuid="64016cb9-b970-475e-b261-825d7e72a3e9">
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+			</line>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="16" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="130" height="15" uuid="1ebc0231-1837-4aac-b2c3-3feddfd9d189">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Categoria]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="140" y="0" width="320" height="15" uuid="9400f425-58df-4069-9ded-126aa1782ba0">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Tipo de Compromisso]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="470" y="0" width="84" height="15" uuid="0b2f6040-f900-4181-bbc3-65e07fc7e56e">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Quantidade]]></text>
+			</staticText>
+			<line>
+				<reportElement x="0" y="15" width="555" height="1" uuid="b30b9024-557b-4926-9a5d-83fbc04d3996">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+			</line>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="26" splitType="Stretch">
+			<textField isBlankWhenNull="true">
+				<reportElement x="1" y="0" width="129" height="17" uuid="346692dd-c939-4481-b16a-364a384764f8">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<textElement textAlignment="Left">
+					<font fontName="SansSerif" size="9" isItalic="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{TP_AGENDA_ITEM}==0 ? "AUDIÊNCIA" : 
+($F{TP_AGENDA_ITEM}==1 ? "PRAZO" : (
+	$F{TP_AGENDA_ITEM}==2 ? "TAREFA" : "DILIGÊNCIA"
+)
+)]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="0" y="19" width="555" height="1" uuid="31d617bf-b16f-4fd4-ac01-a1d370e2d2f9">
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<graphicElement>
+					<pen lineStyle="Dotted"/>
+				</graphicElement>
+			</line>
+			<textField isBlankWhenNull="false">
+				<reportElement x="140" y="0" width="320" height="17" uuid="e03241b5-140a-49aa-a4a8-1f99ba3a3824">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<textElement textAlignment="Left">
+					<font fontName="SansSerif" size="9" isItalic="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{NM_TIPO_PRAZO}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="470" y="1" width="74" height="17" uuid="03f5520f-dabd-4531-a2de-8114c7ecca3c">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<textElement textAlignment="Right">
+					<font fontName="SansSerif" size="9" isItalic="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{QTD_AGENDA_ITEM}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<lastPageFooter>
+		<band height="35">
+			<textField isBlankWhenNull="true">
+				<reportElement x="470" y="2" width="85" height="15" uuid="b779926f-4097-4215-9554-9cf587cf3c67">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA[$V{vlTotal}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="0" y="0" width="555" height="1" uuid="750934da-a15e-470b-9408-7c4bf00c013e">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+			</line>
+			<staticText>
+				<reportElement x="434" y="2" width="26" height="15" uuid="13c7adfd-dbae-4727-a5c0-28c8e76c93be">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Total:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="21" width="555" height="13" uuid="a98998a0-445c-42eb-93b8-a26da207cc16">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[JurisManager - Excelência em gestão jurídica]]></text>
+			</staticText>
+			<line>
+				<reportElement x="0" y="1" width="555" height="1" uuid="4957d560-e54d-46d3-8ff4-eaa133459a65">
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+			</line>
+			<line>
+				<reportElement x="0" y="20" width="555" height="1" uuid="a7aa7a48-d424-4412-9103-79b994944d6e">
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+			</line>
+		</band>
+	</lastPageFooter>
+</jasperReport>

@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version last-->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="dre_subreport_receita_bruta" language="groovy" pageWidth="555" pageHeight="802" columnWidth="555" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="9ddfb72d-614f-4a4f-87e4-715585c2672b">
+	<property name="ireport.zoom" value="2.1435888100000016"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
+	<style name="titulo1" fontSize="10">
+		<conditionalStyle>
+			<conditionExpression><![CDATA[$F{NR_NIVEL}.equals(0)]]></conditionExpression>
+			<style fontSize="12" isBold="true"/>
+		</conditionalStyle>
+		<conditionalStyle>
+			<conditionExpression><![CDATA[$F{NR_NIVEL}.equals(1)]]></conditionExpression>
+			<style fontSize="11" isBold="true"/>
+		</conditionalStyle>
+		<conditionalStyle>
+			<conditionExpression><![CDATA[$F{NR_NIVEL}.equals(2)]]></conditionExpression>
+			<style fontSize="10" isBold="true"/>
+		</conditionalStyle>
+		<conditionalStyle>
+			<conditionExpression><![CDATA[$F{NR_NIVEL}.equals(3)]]></conditionExpression>
+			<style fontSize="9" isBold="true"/>
+		</conditionalStyle>
+		<conditionalStyle>
+			<conditionExpression><![CDATA[$F{NR_NIVEL}.equals(4)]]></conditionExpression>
+			<style fontSize="8"/>
+		</conditionalStyle>
+	</style>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA["\\TiVic\\workspace\\manager\\web\\adm\\"]]></defaultValueExpression>
+	</parameter>
+	<field name="NR_CATEGORIA_ECONOMICA" class="java.lang.String"/>
+	<field name="NM_CATEGORIA_ECONOMICA" class="java.lang.String"/>
+	<field name="QT_ITENS" class="java.lang.Double"/>
+	<field name="VL_TOTAL_CATEGORIA" class="java.lang.Double"/>
+	<field name="NR_NIVEL" class="java.lang.Integer"/>
+	<field name="NM_CATEGORIA_SUPERIOR" class="java.lang.String"/>
+	<field name="NR_CATEGORIA_SUPERIOR" class="java.lang.String"/>
+	<group name="categoria_superior">
+		<groupExpression><![CDATA[$F{NM_CATEGORIA_SUPERIOR}]]></groupExpression>
+		<groupHeader>
+			<band height="19">
+				<textField isBlankWhenNull="true">
+					<reportElement style="titulo1" x="1" y="0" width="70" height="17" isRemoveLineWhenBlank="true" uuid="3030b945-7179-4b25-bdbc-7f1bae9bf0b8">
+						<printWhenExpression><![CDATA[$F{NR_CATEGORIA_SUPERIOR} != null]]></printWhenExpression>
+					</reportElement>
+					<textElement verticalAlignment="Middle">
+						<font size="10" isBold="true"/>
+						<paragraph leftIndent="5"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{NR_CATEGORIA_SUPERIOR}]]></textFieldExpression>
+				</textField>
+				<textField isBlankWhenNull="true">
+					<reportElement style="titulo1" x="71" y="0" width="259" height="17" isRemoveLineWhenBlank="true" uuid="a370a309-c70f-4f09-bc76-fc1eb57fcbe8">
+						<printWhenExpression><![CDATA[$F{NR_CATEGORIA_SUPERIOR} != null]]></printWhenExpression>
+					</reportElement>
+					<textElement verticalAlignment="Middle">
+						<font size="10" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{NM_CATEGORIA_SUPERIOR}.toUpperCase()]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupHeader>
+	</group>
+	<pageHeader>
+		<band height="13">
+			<staticText>
+				<reportElement x="1" y="0" width="70" height="10" uuid="78666923-9901-49e6-8d56-b7d04433ac2b"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" size="8"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<text><![CDATA[Conta]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="71" y="0" width="70" height="10" uuid="0e813b59-0921-45f4-9507-a8fe32ca69c6"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" size="8"/>
+				</textElement>
+				<text><![CDATA[Descrição]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="330" y="1" width="70" height="10" uuid="a114ec55-7c94-44c6-87e3-5689b4e80312"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Arial" size="8"/>
+				</textElement>
+				<text><![CDATA[Quantidade]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="420" y="1" width="40" height="10" uuid="b0d8917e-d2a8-4295-abde-0b115eb01b73"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Arial" size="8"/>
+				</textElement>
+				<text><![CDATA[Valor]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="460" y="1" width="40" height="10" uuid="655987ed-b41c-4079-8eae-f7c2d94f0ab5"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Arial" size="8"/>
+				</textElement>
+				<text><![CDATA[%]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
+	<detail>
+		<band height="18" splitType="Stretch">
+			<property name="local_mesure_unitheight" value="pixel"/>
+			<property name="com.jaspersoft.studio.unit.height" value="px"/>
+			<textField>
+				<reportElement style="titulo1" x="1" y="0" width="70" height="17" uuid="da739e4c-511c-4304-adab-53329278718e"/>
+				<textElement verticalAlignment="Middle">
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{NR_CATEGORIA_ECONOMICA}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="titulo1" x="71" y="0" width="259" height="17" uuid="98f8684b-c420-4dbc-a783-7e30f5bacbc1"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{NM_CATEGORIA_ECONOMICA}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.###;(#,##0.###)">
+				<reportElement style="titulo1" x="330" y="0" width="70" height="17" uuid="00c19db5-6ec7-4f37-b6b0-a516979c61d0"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{QT_ITENS} != null ? $F{QT_ITENS} : 0]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00;#,##0.00">
+				<reportElement style="titulo1" x="400" y="0" width="60" height="17" uuid="b6a0f113-6b75-47fc-bd16-42d5f880c9ed"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{VL_TOTAL_CATEGORIA} != null ? $F{VL_TOTAL_CATEGORIA} : 0]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<lastPageFooter>
+		<band height="20">
+			<staticText>
+				<reportElement x="71" y="0" width="259" height="20" forecolor="#004000" uuid="c086461d-a6c4-4ae9-b54a-bd56ffe4ff12"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[RESULTADO LUCRO ANTES I.R./C. SOCIAL]]></text>
+			</staticText>
+		</band>
+	</lastPageFooter>
+</jasperReport>

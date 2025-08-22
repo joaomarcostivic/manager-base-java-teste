@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.1.1.final using JasperReports Library version 6.1.1  -->
+<!-- 2019-03-28T16:00:21 -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="agendamento_vistoria" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="f16b1605-0383-4106-982a-151063fe48ed">
+	<parameter name="LOGO" class="java.lang.Object">
+		<parameterDescription><![CDATA[]]></parameterDescription>
+	</parameter>
+	<parameter name="NM_USUARIO" class="java.lang.String"/>
+	<parameter name="NR_ORDEM" class="java.lang.String">
+		<parameterDescription><![CDATA[]]></parameterDescription>
+	</parameter>
+	<parameter name="NR_PONTO" class="java.lang.String"/>
+	<parameter name="NM_COORDENADOR" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<field name="NM_CONCESSIONARIO" class="java.lang.String"/>
+	<field name="HR_AGENDAMENTO" class="java.lang.String"/>
+	<field name="NR_PLACA" class="java.lang.String"/>
+	<field name="DT_AGENDAMENTO" class="java.lang.String"/>
+	<field name="NM_TIPO_CONTRATO" class="java.lang.String"/>
+	<field name="SEMESTRE_AGENDAMENTO" class="java.lang.String"/>
+	<field name="NR_ANO" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<detail>
+		<band height="395" splitType="Stretch">
+			<staticText>
+				<reportElement x="36" y="166" width="488" height="20" uuid="128fb332-2aac-4138-b92a-63c366b6ecf7"/>
+				<textElement textAlignment="Left">
+					<font size="12" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Vistoriador]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="36" y="184" width="488" height="20" uuid="2bdcb48c-c9ce-4747-a10c-10d6ef64cd09"/>
+				<textElement textAlignment="Left">
+					<font size="12" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Sr. José Braz Rodrigues de Rezende,]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="0" width="554" height="20" uuid="5c8e76a7-0681-419a-b8f5-b69aded0bf03"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[PREFEITURA MUNICIPAL DE VITÓRIA DA CONQUISTA]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="20" width="554" height="20" uuid="5331b165-fddb-4497-9b97-a9af0766e3c7"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Secretaria de Mobilidade Urbana]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="199" y="57" width="160" height="20" uuid="7c9081cb-5eee-402e-90bd-b297d4511ccf"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[www.pmvc.ba.gov.br]]></text>
+			</staticText>
+			<textField pattern="" isBlankWhenNull="true">
+				<reportElement x="36" y="200" width="488" height="72" uuid="5046ecfc-6c9a-4c50-9834-08109f5cd72b"/>
+				<textElement textAlignment="Justified" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Estamos encaminhando o veículo de placa " + $F{NR_PLACA} + " em nome de " + $F{NM_CONCESSIONARIO} + " para vistoria,"+ " em: "+$F{DT_AGENDAMENTO}+" às " + $F{HR_AGENDAMENTO} + "h." + " N° de ordem e ponto: " + $P{NR_ORDEM} + "-" + $P{NR_PONTO}]]></textFieldExpression>
+			</textField>
+			<rectangle>
+				<reportElement x="370" y="81" width="172" height="35" uuid="aacfaa5d-a594-4362-892f-19cf83ac0f12"/>
+				<graphicElement>
+					<pen lineStyle="Solid"/>
+				</graphicElement>
+			</rectangle>
+			<line>
+				<reportElement x="0" y="368" width="554" height="1" uuid="eb216f6f-2d4f-4c5e-86d8-c81d3802321a"/>
+			</line>
+			<textField isBlankWhenNull="true">
+				<reportElement x="370" y="80" width="173" height="33" uuid="e48b3d09-9c5d-47e2-8ac8-d4fb39156075"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{NM_TIPO_CONTRATO}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="135" width="554" height="20" uuid="dc0a9d08-4e8f-424c-81ac-5cba907515c5"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA["AUTORIZAÇÃO DE VISTORIA TÉCNICA - " +$F{SEMESTRE_AGENDAMENTO}+" VISTORIA " +$F{NR_ANO}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="38" width="554" height="20" uuid="efb4f533-827e-4c78-918f-4c42833df770"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Coordenação de Transporte Público]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="15" y="105" width="280" height="18" uuid="2d663a30-fded-468d-b062-add81ded77a3">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Em: "+new SimpleDateFormat("dd/MM/yyyy 'às' HH:mm").format(new Date()) + "h"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="15" y="87" width="280" height="18" uuid="f48d1dd2-3891-4e29-9c02-2293afbf6d2d">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Emitido pelo usuário: "+$P{NM_USUARIO}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="280" width="554" height="21" uuid="3c953f7c-8d6d-4ac4-92f7-a6e29573554a"/>
+				<textElement textAlignment="Center">
+					<font size="13" isBold="true"/>
+				</textElement>
+				<text><![CDATA[PERMITIDA SOMENTE A ENTRADA DO CONDUTOR NO ATO DA VISTORIA.]]></text>
+			</staticText>
+			<image scaleImage="RetainShape" hAlign="Center" vAlign="Middle">
+				<reportElement x="14" y="5" width="58" height="58" isRemoveLineWhenBlank="true" uuid="99b5ecbd-7314-48e7-9878-45308212be41"/>
+				<imageExpression><![CDATA["../../mob/imagens/logos/brasao_vdc_128px.png"]]></imageExpression>
+			</image>
+			<textField>
+				<reportElement x="36" y="314" width="488" height="53" uuid="422c0f83-0d8f-4af3-943e-dd8bf152d3bd"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="12" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Atenciosamente,\n"
++ $P{NM_COORDENADOR} + "\n"
++ "Coordenador de Transporte Público"]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+</jasperReport>

@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version last-->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="dre_subreport_passivos" language="groovy" pageWidth="555" pageHeight="802" columnWidth="555" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="9ddfb72d-614f-4a4f-87e4-715585c2672b">
+	<property name="ireport.zoom" value="2.1435888100000016"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<style name="titulo1" fontSize="10">
+		<conditionalStyle>
+			<conditionExpression><![CDATA[$F{NR_NIVEL}.equals(1)]]></conditionExpression>
+			<style fontSize="12" isBold="true"/>
+		</conditionalStyle>
+		<conditionalStyle>
+			<conditionExpression><![CDATA[$F{NR_NIVEL}.equals(2)]]></conditionExpression>
+			<style fontSize="11" isBold="true"/>
+		</conditionalStyle>
+		<conditionalStyle>
+			<conditionExpression><![CDATA[$F{NR_NIVEL}.equals(3)]]></conditionExpression>
+			<style fontSize="10" isBold="true"/>
+		</conditionalStyle>
+		<conditionalStyle>
+			<conditionExpression><![CDATA[$F{NR_NIVEL}.equals(4)]]></conditionExpression>
+			<style fontSize="9" isBold="true"/>
+		</conditionalStyle>
+		<conditionalStyle>
+			<conditionExpression><![CDATA[$F{NR_NIVEL}.equals(5)]]></conditionExpression>
+			<style fontSize="8"/>
+		</conditionalStyle>
+	</style>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA["\\TiVic\\workspace\\manager\\web\\adm\\"]]></defaultValueExpression>
+	</parameter>
+	<field name="VL_TOTAL" class="java.lang.Double"/>
+	<field name="ID_CONTA" class="java.lang.String"/>
+	<field name="QT_CONTAS" class="java.lang.Double"/>
+	<field name="NM_FORNECEDOR" class="java.lang.String"/>
+	<field name="NR_NIVEL" class="java.lang.Integer"/>
+	<pageHeader>
+		<band height="12">
+			<staticText>
+				<reportElement x="1" y="0" width="70" height="12" uuid="78666923-9901-49e6-8d56-b7d04433ac2b"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" size="8"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<text><![CDATA[Conta]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="71" y="0" width="248" height="12" uuid="0e813b59-0921-45f4-9507-a8fe32ca69c6"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" size="8"/>
+				</textElement>
+				<text><![CDATA[Descrição]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="390" y="0" width="60" height="12" uuid="b0d8917e-d2a8-4295-abde-0b115eb01b73">
+					<property name="local_mesure_unitwidth" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Arial" size="8"/>
+				</textElement>
+				<text><![CDATA[Valor]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="480" y="0" width="20" height="12" uuid="655987ed-b41c-4079-8eae-f7c2d94f0ab5"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Arial" size="8"/>
+				</textElement>
+				<text><![CDATA[%]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="320" y="0" width="70" height="12" uuid="03fa4bf2-cecc-47bb-a3ec-3f9be998fe53">
+					<property name="local_mesure_unitx" value="pixel"/>
+				</reportElement>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Arial" size="8"/>
+				</textElement>
+				<text><![CDATA[Quantidade]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
+	<detail>
+		<band height="17" splitType="Stretch">
+			<property name="local_mesure_unitheight" value="pixel"/>
+			<textField>
+				<reportElement key="" style="titulo1" mode="Opaque" x="0" y="0" width="70" height="17" backcolor="#692F16" uuid="da739e4c-511c-4304-adab-53329278718e">
+					<property name="local_mesure_unitx" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					<printWhenExpression><![CDATA[!$F{NM_FORNECEDOR}.equals( null )]]></printWhenExpression>
+				</reportElement>
+				<textElement verticalAlignment="Middle">
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{ID_CONTA}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement key="" style="titulo1" mode="Opaque" x="70" y="0" width="250" height="17" backcolor="#692F16" uuid="98f8684b-c420-4dbc-a783-7e30f5bacbc1">
+					<property name="local_mesure_unitx" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					<property name="local_mesure_unitwidth" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<printWhenExpression><![CDATA[!$F{NM_FORNECEDOR}.equals( null )]]></printWhenExpression>
+				</reportElement>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{NM_FORNECEDOR}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.##;#,##0.##">
+				<reportElement key="" style="titulo1" mode="Opaque" x="390" y="0" width="60" height="17" backcolor="#692F16" uuid="b6a0f113-6b75-47fc-bd16-42d5f880c9ed">
+					<property name="local_mesure_unitwidth" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<printWhenExpression><![CDATA[!$F{NM_FORNECEDOR}.equals( null )]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Right" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{VL_TOTAL} != null ? $F{VL_TOTAL} : 0]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.###;(#,##0.###-)">
+				<reportElement key="" style="titulo1" mode="Opaque" x="320" y="0" width="71" height="17" backcolor="#692F16" uuid="3060937c-275b-4586-a998-152481aa27c4">
+					<property name="local_mesure_unitx" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					<printWhenExpression><![CDATA[!$F{NM_FORNECEDOR}.equals( null )]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Right" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{QT_CONTAS} != null ? $F{QT_CONTAS} : 0]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+</jasperReport>

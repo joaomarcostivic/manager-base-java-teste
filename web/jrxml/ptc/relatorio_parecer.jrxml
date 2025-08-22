@@ -1,0 +1,283 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.1.1.final using JasperReports Library version 6.1.1  -->
+<!-- 2025-04-30T11:12:25 -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="relatorio_parecer" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="67532319-ce5e-428f-9e38-cfe8dc401118">
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
+	<parameter name="DS_TITULO_1" class="java.lang.String"/>
+	<parameter name="DS_TITULO_2" class="java.lang.String"/>
+	<parameter name="LOGO_2" class="java.lang.Object"/>
+	<parameter name="LOGO_1" class="java.lang.Object"/>
+	<parameter name="NM_CIDADE" class="java.lang.String"/>
+	<parameter name="DT_DOCUMENTO" class="java.lang.String"/>
+	<parameter name="NM_COORDENADOR" class="java.lang.String"/>
+	<parameter name="PRAZO_LEGAL" class="java.lang.String"/>
+	<parameter name="TIPO_CONSISTENCIA" class="java.lang.String"/>
+	<parameter name="NM_TITULO" class="java.lang.String"/>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String"/>
+	<parameter name="DATASET_LISTA_RELATORES" class="net.sf.jasperreports.engine.data.JRBeanCollectionDataSource"/>
+	<parameter name="PRESIDENTE_JARI" class="java.lang.String"/>
+	<parameter name="LG_LISTA" class="java.lang.String"/>
+	<parameter name="NM_AUTORIDADE_TRANSITO" class="java.lang.String"/>
+	<parameter name="DETERMINA_ASSINATURA" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<field name="ID_AIT" class="java.lang.String"/>
+	<field name="NM_REQUERENTE" class="java.lang.String"/>
+	<field name="NR_PLACA" class="java.lang.String"/>
+	<field name="DT_PROTOCOLO" class="java.util.Date"/>
+	<field name="DT_OCORRENCIA" class="java.util.Date"/>
+	<field name="DS_ASSUNTO" class="java.lang.String"/>
+	<field name="TXT_OCORRENCIA" class="java.lang.String"/>
+	<field name="CD_SITUACAO_DOCUMENTO" class="java.lang.Integer"/>
+	<field name="NM_SITUACAO_DOCUMENTO" class="java.lang.String"/>
+	<field name="TP_CONSISTENCIA" class="java.lang.String"/>
+	<field name="CD_TIPO_DOCUMENTO" class="java.lang.Integer"/>
+	<field name="NR_DOCUMENTO" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="62" splitType="Stretch">
+			<textField>
+				<reportElement x="79" y="15" width="396" height="16" uuid="ef7a80e3-7214-4da0-ab84-ed24b523225e">
+					<printWhenExpression><![CDATA[$P{DS_TITULO_1} != null]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Center">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{DS_TITULO_1}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="79" y="31" width="396" height="29" uuid="1e1cf9c4-97cc-47dd-b434-87ba73ab7d81">
+					<printWhenExpression><![CDATA[$P{DS_TITULO_2} != null]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Center">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{DS_TITULO_2}]]></textFieldExpression>
+			</textField>
+			<image onErrorType="Blank">
+				<reportElement x="484" y="6" width="55" height="55" uuid="de727198-68f4-4ff6-8a17-221f79c746cd">
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+					<printWhenExpression><![CDATA[$P{LOGO_1} != null]]></printWhenExpression>
+				</reportElement>
+				<imageExpression><![CDATA[net.sf.jasperreports.engine.util.JRImageLoader.getInstance(new SimpleJasperReportsContext()).loadAwtImageFromBytes(javax.xml.bind.DatatypeConverter.parseBase64Binary($P{LOGO_2}))]]></imageExpression>
+			</image>
+			<image onErrorType="Blank">
+				<reportElement x="18" y="6" width="57" height="56" uuid="b2e7e7d3-de32-4e64-a0fb-758942a7c11b">
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<printWhenExpression><![CDATA[$P{LOGO_1} != null]]></printWhenExpression>
+				</reportElement>
+				<imageExpression><![CDATA[net.sf.jasperreports.engine.util.JRImageLoader.getInstance(new SimpleJasperReportsContext()).loadAwtImageFromBytes(javax.xml.bind.DatatypeConverter.parseBase64Binary($P{LOGO_1}))]]></imageExpression>
+			</image>
+		</band>
+	</title>
+	<detail>
+		<band height="136">
+			<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+			<line>
+				<reportElement x="18" y="10" width="511" height="1" uuid="0b42b3f5-71b6-4394-9904-6d1068724048">
+					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+				</reportElement>
+				<graphicElement>
+					<pen lineWidth="2.0"/>
+				</graphicElement>
+			</line>
+			<textField>
+				<reportElement x="18" y="16" width="521" height="30" uuid="7893497e-ca7b-48a0-96c7-946a4280b4e8"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="15" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{NM_TITULO}]]></textFieldExpression>
+			</textField>
+			<textField pattern="">
+				<reportElement x="18" y="50" width="202" height="15" uuid="502e63f2-6ccb-4226-b012-2d87861de14a">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<textElement verticalAlignment="Middle" markup="styled">
+					<font isBold="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA["<b>AIT: </b>" + $F{ID_AIT}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="18" y="67" width="521" height="15" uuid="24588f42-8ffa-4610-9aee-9ad326c63aac">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<textElement verticalAlignment="Middle" markup="styled"/>
+				<textFieldExpression><![CDATA["<b>Recorrente: </b>" + $F{NM_REQUERENTE}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="18" y="84" width="521" height="15" uuid="1295d5c4-1540-40d1-a4d2-0d56a526993e">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<textElement verticalAlignment="Middle" markup="styled"/>
+				<textFieldExpression><![CDATA["<b>Placa: </b>" + $F{NR_PLACA}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="18" y="101" width="132" height="15" uuid="e423d350-b2c1-481e-9524-54a7384572b2">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+				<textElement verticalAlignment="Middle" markup="styled"/>
+				<textFieldExpression><![CDATA["<b>Data do protocolo: </b>"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="220" y="101" width="138" height="15" uuid="76d59763-714a-44fd-8167-bb7fe0057e54">
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+				<textElement verticalAlignment="Middle" markup="styled"/>
+				<textFieldExpression><![CDATA["<b>Data do julgamento: </b>"]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd/MM/yyyy" isBlankWhenNull="true">
+				<reportElement x="110" y="101" width="110" height="15" uuid="ba88eaa2-4fc2-4059-89db-a03ae22b6912"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{DT_PROTOCOLO}]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement x="319" y="101" width="110" height="15" uuid="af51ced0-1bd2-4997-9d90-96802e840d5e"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{DT_OCORRENCIA}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement stretchType="RelativeToBandHeight" x="429" y="121" width="130" height="15" uuid="05c6922d-70f6-4477-8ab7-30ee2138f4d2"/>
+				<textElement markup="html"/>
+				<textFieldExpression><![CDATA["<b>Prazo legal: </b>" + ($P{PRAZO_LEGAL} != null ? $P{PRAZO_LEGAL} : "")]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="18" y="120" width="520" height="15" uuid="70ece448-185d-412a-abc7-6e9194eadb18">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<textElement markup="html"/>
+				<textFieldExpression><![CDATA[($P{TIPO_CONSISTENCIA} != null ? ("<b>Consistência: </b>" + $P{TIPO_CONSISTENCIA}) : "")]]></textFieldExpression>
+			</textField>
+			<textField pattern="">
+				<reportElement x="221" y="50" width="259" height="15" uuid="e45da3b7-bd66-4357-ad0c-738929365c27">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<textElement verticalAlignment="Middle" markup="styled">
+					<font isBold="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA["<b>Processo: </b>" + $F{NR_DOCUMENTO}]]></textFieldExpression>
+			</textField>
+		</band>
+		<band height="60" splitType="Stretch">
+			<textField>
+				<reportElement x="18" y="4" width="520" height="20" uuid="173d7087-e091-4c22-a034-ae2298bf422e">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{DS_ASSUNTO} == null && $F{TXT_OCORRENCIA} == null ? "" : 
+($F{DS_ASSUNTO} == null && $F{TXT_OCORRENCIA} != null ? "PARECER: " : "SÍNTESE DO RECURSO: ")]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement positionType="Float" stretchType="RelativeToBandHeight" x="40" y="30" width="498" height="30" uuid="42984b5f-06f8-4ca8-9bcc-c2ab6c1c11a0"/>
+				<textElement textAlignment="Justified"/>
+				<textFieldExpression><![CDATA[$F{DS_ASSUNTO} == null ? $F{TXT_OCORRENCIA} : $F{DS_ASSUNTO}]]></textFieldExpression>
+			</textField>
+		</band>
+		<band height="60" splitType="Stretch">
+			<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+			<textField>
+				<reportElement positionType="Float" x="18" y="3" width="520" height="20" uuid="5fe36129-89a7-4803-96ae-12ca5d5c21b7">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					<printWhenExpression><![CDATA[$F{TXT_OCORRENCIA} != null]]></printWhenExpression>
+				</reportElement>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{DS_ASSUNTO} != null && $F{TXT_OCORRENCIA} != null ? "PARECER: " : ""]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement positionType="Float" x="40" y="30" width="498" height="30" uuid="f71c20a1-7c21-4d05-a4d9-221ad1c4cc2d">
+					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					<printWhenExpression><![CDATA[$F{TXT_OCORRENCIA} != null]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Justified"/>
+				<textFieldExpression><![CDATA[$F{DS_ASSUNTO} == null && $F{TXT_OCORRENCIA} != null ? "" : $F{TXT_OCORRENCIA}]]></textFieldExpression>
+			</textField>
+		</band>
+		<band height="65" splitType="Stretch">
+			<textField>
+				<reportElement positionType="Float" x="18" y="3" width="520" height="20" uuid="2c1fa4b7-b890-4772-a4c4-e349dd2a4e8a">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+				</reportElement>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{TXT_OCORRENCIA} != null ? "DECISÃO: " : ""]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement positionType="Float" x="40" y="31" width="498" height="34" uuid="2a4ab800-5e65-48bf-b83e-e9ef2b783b51">
+					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+				</reportElement>
+				<textElement textAlignment="Justified" markup="html"/>
+				<textFieldExpression><![CDATA["Diante de todo o exposto, declaro o pleito <b>" + ($F{NM_SITUACAO_DOCUMENTO}.toUpperCase()) + "</b>."]]></textFieldExpression>
+			</textField>
+		</band>
+		<band height="126">
+			<property name="com.jaspersoft.studio.layout" value="com.jaspersoft.studio.editor.layout.FreeLayout"/>
+			<printWhenExpression><![CDATA[$P{LG_LISTA}.equals('1') && $P{DETERMINA_ASSINATURA}.equals('1')]]></printWhenExpression>
+			<subreport>
+				<reportElement x="0" y="102" width="555" height="24" isRemoveLineWhenBlank="true" uuid="7b4a189e-d46b-4276-a798-54426bb0e468">
+					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					<printWhenExpression><![CDATA[$P{LG_LISTA}.equals('1')]]></printWhenExpression>
+				</reportElement>
+				<dataSourceExpression><![CDATA[$P{DATASET_LISTA_RELATORES}]]></dataSourceExpression>
+				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "//relatores_jari_resumo_subreport.jasper"]]></subreportExpression>
+			</subreport>
+			<textField>
+				<reportElement x="98" y="75" width="356" height="25" uuid="a3c768e7-a758-44bf-9e3a-e0a805a64c47"/>
+				<textElement textAlignment="Center" verticalAlignment="Top" markup="none">
+					<font size="9" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{PRESIDENTE_JARI} == null || $P{PRESIDENTE_JARI}.equals('0') ? "\nPresidente" : $P{PRESIDENTE_JARI} + "\nPresidente"]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="151" y="54" width="260" height="24" uuid="fcdf4e44-f37f-495f-a60e-e0238cd77cd6"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="html"/>
+				<text><![CDATA[_________________________________________
+]]></text>
+			</staticText>
+		</band>
+		<band height="58">
+			<printWhenExpression><![CDATA[$P{LG_LISTA}.equals('0') || $P{DETERMINA_ASSINATURA}.equals('0')]]></printWhenExpression>
+			<textField>
+				<reportElement x="98" y="33" width="356" height="25" uuid="5442f692-0ec9-4cda-bd5f-f188012c0675"/>
+				<textElement textAlignment="Center" verticalAlignment="Top" markup="none">
+					<font size="9" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{NM_AUTORIDADE_TRANSITO} == null || $P{NM_AUTORIDADE_TRANSITO}.equals('0') ? "\nAutoridade Municipal de Trânsito" : $P{NM_AUTORIDADE_TRANSITO} + "\nAutoridade Municipal de Trânsito"]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="151" y="12" width="260" height="24" uuid="d968a399-7c2a-4989-83c4-326b2d488314"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="html"/>
+				<text><![CDATA[_________________________________________
+]]></text>
+			</staticText>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="40">
+			<textField pattern="dd/MM/yyyy">
+				<reportElement x="3" y="2" width="550" height="38" isRemoveLineWhenBlank="true" uuid="e23fd7c3-5944-4eeb-afd5-58d1c3e31111"/>
+				<textElement textAlignment="Center" verticalAlignment="Top" markup="none"/>
+				<textFieldExpression><![CDATA["Junta Administrativa de Recursos de Infrações \n" +
+"Departamento Municipal de Trânsito - " + $P{NM_CIDADE} + ", " + new SimpleDateFormat("dd").format($F{DT_PROTOCOLO}) + " de " + new SimpleDateFormat("MMMM", new Locale("pt", "BR")).format($F{DT_PROTOCOLO}) + " de " + new SimpleDateFormat("Y").format($F{DT_PROTOCOLO})]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+</jasperReport>

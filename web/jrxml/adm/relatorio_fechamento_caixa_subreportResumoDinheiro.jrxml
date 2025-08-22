@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.1.1.final using JasperReports Library version 6.1.1  -->
+<!-- 2016-09-15T14:22:07 -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="relatorio_fechamento_caixa_subreportResumoDinheiro" language="groovy" pageWidth="555" pageHeight="802" whenNoDataType="AllSectionsNoDetail" columnWidth="555" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="f6291ca3-8799-44fc-90e7-fbd94d8a77e9">
+	<property name="ireport.zoom" value="1.4641000000000008"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA["C:\\Users\\Ricardo\\TiVic\\workspace\\manager\\web\\adm\\"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="vlSaldoInicial" class="java.lang.String"/>
+	<parameter name="vlTransferencia" class="java.lang.String"/>
+	<parameter name="vlTotalEntradas" class="java.lang.String"/>
+	<parameter name="vlRecebimento" class="java.lang.String" isForPrompting="false"/>
+	<parameter name="vlDespesas" class="java.lang.String"/>
+	<variable name="vlVendas" class="java.lang.Float">
+		<variableExpression><![CDATA[$P{vlTotalEntradas}-$P{vlRecebimento}]]></variableExpression>
+		<initialValueExpression><![CDATA[new Double(0.0)]]></initialValueExpression>
+	</variable>
+	<variable name="vlTotalDespesas" class="java.lang.Float">
+		<variableExpression><![CDATA[$P{vlTransferencia}+$P{vlDespesas}]]></variableExpression>
+		<initialValueExpression><![CDATA[new Double(0.0)]]></initialValueExpression>
+	</variable>
+	<variable name="vlSaldoFinal" class="java.lang.Float">
+		<variableExpression><![CDATA[($P{vlSaldoInicial}+$P{vlTotalEntradas})-$V{vlTotalDespesas}]]></variableExpression>
+		<initialValueExpression><![CDATA[new Double(0.0)]]></initialValueExpression>
+	</variable>
+	<columnHeader>
+		<band height="54" splitType="Stretch">
+			<rectangle>
+				<reportElement mode="Opaque" x="0" y="1" width="554" height="16" forecolor="#FFFFFF" backcolor="#CCCCCC" uuid="4121a6cd-d3ca-473d-9fca-07e906e0a3f7">
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+				<graphicElement>
+					<pen lineStyle="Solid" lineColor="#000000"/>
+				</graphicElement>
+			</rectangle>
+			<staticText>
+				<reportElement x="6" y="1" width="394" height="16" uuid="50ef43dc-15f6-4034-bb97-c129fe690735">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<textElement verticalAlignment="Middle">
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[RESUMO DA MOVIMENTAÇÃO EM DINHEIRO]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="0" y="17" width="554" height="36" uuid="c974f482-6bbc-4abe-a6f2-3ecf544c3e79"/>
+			</rectangle>
+			<line>
+				<reportElement x="1" y="35" width="553" height="1" uuid="34ac416a-31ef-4ee9-9eb6-713f188efd2e"/>
+			</line>
+			<staticText>
+				<reportElement x="1" y="20" width="75" height="13" uuid="f541c17c-3fed-432e-9668-458c68f10382"/>
+				<textElement textAlignment="Center">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Saldo Inicial]]></text>
+			</staticText>
+			<line>
+				<reportElement x="76" y="17" width="1" height="35" uuid="6beec0ec-23e8-4698-afa2-4ee811b9d437"/>
+			</line>
+			<staticText>
+				<reportElement x="77" y="20" width="87" height="13" forecolor="#0033FF" uuid="f541c17c-3fed-432e-9668-458c68f10382"/>
+				<textElement textAlignment="Center">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Recebimentos]]></text>
+			</staticText>
+			<line>
+				<reportElement x="164" y="17" width="1" height="35" uuid="6beec0ec-23e8-4698-afa2-4ee811b9d437"/>
+			</line>
+			<staticText>
+				<reportElement x="165" y="20" width="52" height="13" forecolor="#0033FF" uuid="f541c17c-3fed-432e-9668-458c68f10382"/>
+				<textElement textAlignment="Center">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Vendas]]></text>
+			</staticText>
+			<line>
+				<reportElement x="217" y="17" width="1" height="36" uuid="6beec0ec-23e8-4698-afa2-4ee811b9d437"/>
+			</line>
+			<staticText>
+				<reportElement x="218" y="20" width="69" height="13" forecolor="#0033FF" uuid="f541c17c-3fed-432e-9668-458c68f10382"/>
+				<textElement textAlignment="Center">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Total]]></text>
+			</staticText>
+			<line>
+				<reportElement x="287" y="17" width="1" height="36" uuid="6beec0ec-23e8-4698-afa2-4ee811b9d437"/>
+			</line>
+			<staticText>
+				<reportElement x="288" y="20" width="77" height="13" forecolor="#FF0000" uuid="f541c17c-3fed-432e-9668-458c68f10382"/>
+				<textElement textAlignment="Center">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Transferências]]></text>
+			</staticText>
+			<line>
+				<reportElement x="365" y="17" width="1" height="36" uuid="6beec0ec-23e8-4698-afa2-4ee811b9d437"/>
+			</line>
+			<staticText>
+				<reportElement x="366" y="20" width="48" height="13" forecolor="#FF0000" uuid="f541c17c-3fed-432e-9668-458c68f10382"/>
+				<textElement textAlignment="Center">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Despesas]]></text>
+			</staticText>
+			<line>
+				<reportElement x="414" y="17" width="1" height="36" uuid="6beec0ec-23e8-4698-afa2-4ee811b9d437"/>
+			</line>
+			<staticText>
+				<reportElement x="414" y="20" width="69" height="13" forecolor="#FF0000" uuid="f541c17c-3fed-432e-9668-458c68f10382"/>
+				<textElement textAlignment="Center">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Total]]></text>
+			</staticText>
+			<line>
+				<reportElement x="483" y="17" width="1" height="36" uuid="6beec0ec-23e8-4698-afa2-4ee811b9d437"/>
+			</line>
+			<staticText>
+				<reportElement x="483" y="20" width="71" height="13" uuid="f541c17c-3fed-432e-9668-458c68f10382"/>
+				<textElement textAlignment="Center">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Saldo Final]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToTallestObject" x="0" y="37" width="76" height="13" uuid="de75b1cf-6803-4d6c-9d3f-2a5f31529641"/>
+				<box rightPadding="5"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="10" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{vlSaldoInicial}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="288" y="37" width="77" height="13" uuid="88be0dbb-fe35-4ace-b22b-d4c79a93d403"/>
+				<box rightPadding="5"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{vlTransferencia}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="366" y="37" width="48" height="13" uuid="8aafb8a6-f13d-4126-a146-405410380af1"/>
+				<box rightPadding="5"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{vlDespesas}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="218" y="37" width="69" height="13" uuid="0aa2ac0c-7cf8-4a0e-b76b-81a971b83a86"/>
+				<box rightPadding="5"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{vlTotalEntradas}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="77" y="37" width="87" height="13" uuid="37e04793-9606-4a24-bc50-e77d5ba4d7c1"/>
+				<box rightPadding="5"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{vlRecebimento}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="165" y="37" width="52" height="13" uuid="471e1ee0-78f5-44ea-8eff-8ac9e7362a39"/>
+				<box rightPadding="5"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{vlVendas}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="484" y="37" width="70" height="13" uuid="bae187e9-be6e-4122-859e-b9ac25b92725"/>
+				<box rightPadding="5"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{vlSaldoFinal}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="414" y="37" width="69" height="13" uuid="caac3cb0-0b26-4dca-a8c7-4fc22e4d8fe5"/>
+				<box rightPadding="5"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{vlTotalDespesas}]]></textFieldExpression>
+			</textField>
+		</band>
+	</columnHeader>
+</jasperReport>

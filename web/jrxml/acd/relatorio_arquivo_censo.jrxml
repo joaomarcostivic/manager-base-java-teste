@@ -1,0 +1,481 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.0.3.final using JasperReports Library version 6.0.3  -->
+<!-- 2016-10-16T08:15:59 -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="estoque_produtos" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="685b275b-3095-430e-97ff-37d9f0e15d5c">
+	<property name="ireport.zoom" value="2.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="22"/>
+	<parameter name="nmRazaoSocial" class="java.lang.String"/>
+	<parameter name="dtHoje" class="java.lang.String"/>
+	<parameter name="hrHoje" class="java.lang.String"/>
+	<parameter name="nmUsuario" class="java.lang.String"/>
+	<parameter name="dtEstoque" class="java.lang.String"/>
+	<parameter name="nmEmail" class="java.lang.String"/>
+	<parameter name="nmDesenvolvedor" class="java.lang.String"/>
+	<parameter name="NM_INSTITUICAO" class="java.lang.String"/>
+	<parameter name="NM_GESTOR" class="java.lang.String"/>
+	<parameter name="NM_GESTOR_EMAIL" class="java.lang.String"/>
+	<parameter name="NM_GESTOR_CPF" class="java.lang.String"/>
+	<parameter name="NM_INICIO_PERIODO" class="java.lang.String"/>
+	<parameter name="NM_TERMINO_PERIODO" class="java.lang.String"/>
+	<parameter name="NM_TELEFONE_ESCOLA" class="java.lang.String"/>
+	<parameter name="NM_TELEFONE_OUTRO_CONTATO_ESCOLA" class="java.lang.String"/>
+	<parameter name="NM_TELEFONE_FAX_ESCOLA" class="java.lang.String"/>
+	<parameter name="NM_EMAIL_ESCOLA" class="java.lang.String"/>
+	<parameter name="NM_LOCALIZACAO_ESCOLA" class="java.lang.String"/>
+	<parameter name="NR_INEP_ESCOLA" class="java.lang.String"/>
+	<parameter name="NM_LOCAIS_FUNCIONAMENTO" class="java.lang.String"/>
+	<parameter name="NM_ABASTECIMENTO_AGUA" class="java.lang.String"/>
+	<parameter name="NM_ABASTECIMENTO_ENERGIA" class="java.lang.String"/>
+	<parameter name="NM_DESTINACAO_LIXO" class="java.lang.String"/>
+	<parameter name="NM_ESGOTO_SANITARIO" class="java.lang.String"/>
+	<parameter name="NM_DEPENDENCIAS" class="java.lang.String"/>
+	<parameter name="NM_EQUIPAMENTOS" class="java.lang.String"/>
+	<parameter name="QT_COMPUTADORES_ADM" class="java.lang.String"/>
+	<parameter name="QT_COMPUTADORES_ALUNOS" class="java.lang.String"/>
+	<parameter name="POSSUI_INTERNET" class="java.lang.String"/>
+	<parameter name="POSSUI_BANDA_LARGA" class="java.lang.String"/>
+	<parameter name="QT_TURMAS_REGULAR" class="java.lang.String"/>
+	<parameter name="QT_TURMAS_MAIS_EDUCACAO" class="java.lang.String"/>
+	<parameter name="QT_TURMAS_AEE" class="java.lang.String"/>
+	<parameter name="QT_TURMAS" class="java.lang.String"/>
+	<parameter name="QT_PROFESSOR" class="java.lang.String"/>
+	<parameter name="QT_PROFESSOR_DEFICIENCIA" class="java.lang.String"/>
+	<parameter name="QT_ALUNO" class="java.lang.String"/>
+	<parameter name="QT_ALUNO_DEFICIENCIA" class="java.lang.String"/>
+	<parameter name="NM_INSTITUICAO_CENSO" class="java.lang.String"/>
+	<field name="TESTE" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="28">
+			<textField>
+				<reportElement x="0" y="3" width="552" height="25" uuid="543e00b0-e035-4cd0-90ad-2a131880be2b">
+					<property name="local_mesure_unitheight" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="14" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["LANÇAMENTO DO ARQUIVO DO EDUCACENSO"]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<columnHeader>
+		<band height="758">
+			<rectangle>
+				<reportElement x="2" y="14" width="554" height="546" uuid="cd254c2f-e50d-40f7-8ca6-4fd78d7f07fe"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="2" y="572" width="554" height="186" uuid="15fb5a82-7452-4873-b953-e211e70295b8"/>
+			</rectangle>
+			<line>
+				<reportElement x="2" y="596" width="553" height="1" uuid="101ae9bf-7ebd-4fd5-b2d8-9e1f1922a421"/>
+			</line>
+			<staticText>
+				<reportElement x="294" y="664" width="202" height="16" uuid="51506222-3525-4f9f-8ff8-9d732a2e8763"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[Quantidade de Professores (com Deficiência):]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToBandHeight" x="499" y="664" width="54" height="16" uuid="a252d45a-57cd-4020-8e34-47d3dc430a58"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$P{QT_PROFESSOR_DEFICIENCIA}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="295" y="599" width="201" height="16" uuid="c939af2d-25c6-4ddf-b199-d3385997d1de"/>
+				<textElement verticalAlignment="Middle">
+					<font size="10"/>
+				</textElement>
+				<text><![CDATA[Quantidade de Alunos:]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToBandHeight" x="243" y="600" width="48" height="16" uuid="5c71ad13-6974-4a03-8917-7c9bf38606d4"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$P{QT_TURMAS_REGULAR}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="295" y="617" width="201" height="16" uuid="c1e0b983-7aa5-4113-a4e9-94ab7bf05bc3"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[Quantidade de Alunos (com Deficiência):]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToBandHeight" x="500" y="617" width="53" height="16" uuid="2438b2ca-b42c-4367-93e6-ce1d9e987445"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$P{QT_ALUNO_DEFICIENCIA}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="10" y="641" width="228" height="16" uuid="15feadeb-d7bc-47d7-aa95-1c49465a34ad"/>
+				<textElement verticalAlignment="Middle">
+					<font size="10"/>
+				</textElement>
+				<text><![CDATA[Quantidade de Turmas (AEE):]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="10" y="600" width="228" height="16" uuid="6db99ec0-d807-4e13-a7a6-4519f600c587"/>
+				<textElement verticalAlignment="Middle">
+					<font size="10"/>
+				</textElement>
+				<text><![CDATA[Quantidade de Turmas (Regulares):]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToBandHeight" x="243" y="620" width="48" height="16" uuid="a6605bed-8cda-44a8-9e81-cfb02c1130a5"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$P{QT_TURMAS_MAIS_EDUCACAO}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToBandHeight" x="243" y="641" width="48" height="16" uuid="af324315-9a3e-46c3-9234-6785802c13f4"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$P{QT_TURMAS_AEE}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToBandHeight" x="500" y="599" width="53" height="16" uuid="d5d4ce0f-3378-47d6-b43f-56fc2574eb6a"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$P{QT_ALUNO}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="294" y="647" width="202" height="16" uuid="b9cbf22a-2622-4f4d-8100-4ca1f5435692"/>
+				<textElement verticalAlignment="Middle">
+					<font size="10"/>
+				</textElement>
+				<text><![CDATA[Quantidade de Professores:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="9" y="572" width="540" height="24" uuid="eb0e09e9-2550-45fc-b179-d98420af69b1"/>
+				<textElement verticalAlignment="Middle">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Estatísticas]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="10" y="620" width="228" height="16" uuid="58f62459-9ab7-40c3-a9eb-32a1e47c9613"/>
+				<textElement verticalAlignment="Middle">
+					<font size="10"/>
+				</textElement>
+				<text><![CDATA[Quantidade de Turmas (Mais Educação):]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="10" y="663" width="228" height="16" uuid="7a4ca08b-4f9a-438e-ad6f-6c424e0afc51"/>
+				<textElement verticalAlignment="Middle">
+					<font size="10"/>
+				</textElement>
+				<text><![CDATA[Quantidade de Turmas (Total):]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToBandHeight" x="243" y="663" width="48" height="16" uuid="6a9d081d-2a07-478f-987b-e7d8c1d3a25c"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$P{QT_TURMAS}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToBandHeight" x="499" y="647" width="54" height="16" uuid="a582063f-e69e-4217-b29a-1f33e41a768b"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$P{QT_PROFESSOR}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToBandHeight" x="220" y="537" width="71" height="16" uuid="992337d9-facb-4dc4-81aa-a6a55aeae1cc"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$P{QT_COMPUTADORES_ALUNOS}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="8" y="517" width="212" height="16" uuid="5ea82fd2-8178-425a-a18e-89f99b6dbf5f"/>
+				<textElement verticalAlignment="Middle">
+					<font size="10"/>
+				</textElement>
+				<text><![CDATA[Quant. de Computadores Adm.:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="8" y="537" width="212" height="16" uuid="fd4fb407-4c53-479c-aa89-86aed2246e09"/>
+				<textElement verticalAlignment="Middle">
+					<font size="10"/>
+				</textElement>
+				<text><![CDATA[Quant. de Computadores Alunos.:]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="416" y="517" width="136" height="16" uuid="7dbee500-b8f7-46b3-a04a-ec8aecbd379a"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$P{POSSUI_INTERNET}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="295" y="517" width="118" height="16" uuid="267c292f-a437-474e-97d3-45fe10c3d672"/>
+				<textElement verticalAlignment="Middle">
+					<font size="10"/>
+				</textElement>
+				<text><![CDATA[Possui Internet:]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToBandHeight" x="220" y="517" width="71" height="16" uuid="f415a293-7974-469b-bd83-b0e936f6054a"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$P{QT_COMPUTADORES_ADM}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="416" y="537" width="136" height="16" uuid="6879e9b4-e8a3-4014-b7c1-a57215314d99"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$P{POSSUI_BANDA_LARGA}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="295" y="537" width="118" height="16" uuid="68417776-42f7-4a66-8e8a-95e33fef5955"/>
+				<textElement verticalAlignment="Middle">
+					<font size="10"/>
+				</textElement>
+				<text><![CDATA[Banda Larga:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="10" y="315" width="162" height="16" uuid="5a811c28-ede5-471c-8d16-5d8196e0841f"/>
+				<textElement verticalAlignment="Middle">
+					<font size="10"/>
+				</textElement>
+				<text><![CDATA[Esgoto Sanitário:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="11" y="335" width="162" height="16" uuid="b4afefdd-31ea-4fa5-9319-4d3e563c682d"/>
+				<textElement verticalAlignment="Middle">
+					<font size="10"/>
+				</textElement>
+				<text><![CDATA[Destinação Lixo:]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToBandHeight" x="174" y="440" width="380" height="70" uuid="b832006e-e573-40dc-bc5a-3733932c5eb1"/>
+				<textElement verticalAlignment="Top"/>
+				<textFieldExpression><![CDATA[$P{NM_EQUIPAMENTOS}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToBandHeight" x="173" y="315" width="380" height="16" uuid="0f11ba5b-4291-4db9-975a-2a2790e06113"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$P{NM_ESGOTO_SANITARIO}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToBandHeight" x="174" y="335" width="380" height="16" uuid="4c75f350-3457-4296-94fc-75cd7c0917bd"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$P{NM_DESTINACAO_LIXO}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="11" y="440" width="162" height="16" uuid="2ee4a9be-c770-44df-b2ba-6cdab991fbb1"/>
+				<textElement verticalAlignment="Middle">
+					<font size="10"/>
+				</textElement>
+				<text><![CDATA[Equipamentos:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="11" y="356" width="162" height="16" uuid="fede329c-3255-4d61-ac33-1cd4a8692b9b"/>
+				<textElement verticalAlignment="Middle">
+					<font size="10"/>
+				</textElement>
+				<text><![CDATA[Dependências:]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="174" y="356" width="380" height="74" uuid="5dddc192-4b3c-4d95-9543-773d03ae6bbf"/>
+				<textElement verticalAlignment="Top">
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{NM_DEPENDENCIAS}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToBandHeight" x="172" y="295" width="380" height="16" uuid="d6263378-a329-48d8-8cf2-4e421df3a5ba"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$P{NM_ABASTECIMENTO_ENERGIA}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="8" y="255" width="162" height="16" uuid="be4323eb-8e0e-429f-92dd-ba0962dd429b"/>
+				<textElement verticalAlignment="Middle">
+					<font size="10"/>
+				</textElement>
+				<text><![CDATA[Locais de Funcionamento:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="9" y="295" width="162" height="16" uuid="675eba66-2906-41f5-9d9a-31699361c28e"/>
+				<textElement verticalAlignment="Middle">
+					<font size="10"/>
+				</textElement>
+				<text><![CDATA[Abastecimento de Energia:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="9" y="275" width="162" height="16" uuid="98726c61-a23e-4101-9ab8-3c25722a108b"/>
+				<textElement verticalAlignment="Middle">
+					<font size="10"/>
+				</textElement>
+				<text><![CDATA[Abastecimento de Água:]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToBandHeight" x="172" y="275" width="380" height="16" uuid="717c4397-57ec-49e6-9f37-4e6d5503fe66"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$P{NM_ABASTECIMENTO_AGUA}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="171" y="254" width="380" height="16" uuid="f42b020b-588c-4d18-b00a-845831d638b9"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$P{NM_LOCAIS_FUNCIONAMENTO}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="89" y="211" width="169" height="16" uuid="62faabd7-9a8d-4027-bf85-c454203ec3ff"/>
+				<textFieldExpression><![CDATA[$P{NM_TELEFONE_FAX_ESCOLA}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="10" y="211" width="78" height="16" uuid="03ef433e-6c0d-457d-939f-63adf26ce174"/>
+				<textElement verticalAlignment="Middle">
+					<font size="10"/>
+				</textElement>
+				<text><![CDATA[Fax:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="8" y="150" width="249" height="23" uuid="6b1a31fe-4274-491e-b403-ce394df6095b"/>
+				<textElement verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Telefones]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="279" y="194" width="78" height="16" uuid="e30008c6-5cf6-400d-8af3-91a53d98158b"/>
+				<textElement verticalAlignment="Middle">
+					<font size="10"/>
+				</textElement>
+				<text><![CDATA[Localização:]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="88" y="193" width="169" height="16" uuid="6115d898-fe16-43d6-9041-d42892ecdf2b"/>
+				<textFieldExpression><![CDATA[$P{NM_TELEFONE_OUTRO_CONTATO_ESCOLA}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="358" y="175" width="194" height="16" uuid="addfff62-948b-4494-8078-d26dbbabd18b"/>
+				<textFieldExpression><![CDATA[$P{NM_EMAIL_ESCOLA}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="9" y="193" width="78" height="16" uuid="ee7ce44a-2468-4dc1-acc8-98e16e3f1897"/>
+				<textElement verticalAlignment="Middle">
+					<font size="10"/>
+				</textElement>
+				<text><![CDATA[Outro contato:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="279" y="175" width="78" height="16" uuid="a67c3a4f-32b9-4109-9efc-953df6647c76"/>
+				<textElement verticalAlignment="Middle">
+					<font size="10"/>
+				</textElement>
+				<text><![CDATA[Email:]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="358" y="194" width="194" height="16" uuid="2caaec70-d9d6-416a-bef0-d8bafe6f1d3e"/>
+				<textFieldExpression><![CDATA[$P{NM_LOCALIZACAO_ESCOLA}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="8" y="175" width="78" height="16" uuid="28d5e89e-dbf8-4495-92ff-3f0e368f5423"/>
+				<textElement verticalAlignment="Middle">
+					<font size="10"/>
+				</textElement>
+				<text><![CDATA[Telefone:]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="87" y="175" width="169" height="16" uuid="bada63b0-c307-4fc2-8cc4-00a9ebb4033d"/>
+				<textFieldExpression><![CDATA[$P{NM_TELEFONE_ESCOLA}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="63" y="106" width="194" height="16" uuid="13768603-fc54-4587-bfe1-04fef8c7985d"/>
+				<textFieldExpression><![CDATA[$P{NM_GESTOR_CPF}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="279" y="89" width="54" height="16" uuid="2e10d5b2-0774-4795-8642-4dcc29b5e112"/>
+				<textElement verticalAlignment="Middle">
+					<font size="10"/>
+				</textElement>
+				<text><![CDATA[Inicio:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="279" y="107" width="54" height="16" uuid="3859435c-1770-4f03-b39a-d78141b3719b"/>
+				<textElement verticalAlignment="Middle">
+					<font size="10"/>
+				</textElement>
+				<text><![CDATA[Término:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="9" y="64" width="249" height="22" uuid="f0edb7ab-4565-4b4e-b8d3-c07eb3411f37"/>
+				<textElement verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Gestor]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="63" y="86" width="194" height="16" uuid="0120299a-b7ac-453e-88f0-55994697dc43"/>
+				<textFieldExpression><![CDATA[$P{NM_GESTOR}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="3" y="7" width="553" height="1" uuid="9c1a6f9d-ee72-43fc-9fe5-7fe7b27911ef"/>
+			</line>
+			<textField isBlankWhenNull="true">
+				<reportElement x="333" y="107" width="219" height="16" uuid="c44e81c8-f4a7-4882-9063-0e2b46d59988"/>
+				<textFieldExpression><![CDATA[$P{NM_TERMINO_PERIODO}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="9" y="106" width="54" height="16" uuid="b78e6c1e-a376-4fcd-bc9d-0d68c9342eb6"/>
+				<textElement verticalAlignment="Middle">
+					<font size="10"/>
+				</textElement>
+				<text><![CDATA[CPF:]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="9" y="20" width="542" height="40" uuid="e2e68996-17e6-4c7d-b34a-82157d60403b"/>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{NM_INSTITUICAO_CENSO} + " - " + $P{NR_INEP_ESCOLA}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="279" y="63" width="272" height="23" uuid="c89d0327-e063-43d8-8974-7d984bc639d2"/>
+				<textElement verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Periodo Letivo]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="64" y="125" width="194" height="16" uuid="ccf030a5-9828-4645-b187-b77b894ca0c4"/>
+				<textFieldExpression><![CDATA[$P{NM_GESTOR_EMAIL}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="9" y="86" width="54" height="16" uuid="0162b207-454c-4ee1-8bcd-37dbd7416f2a"/>
+				<textElement verticalAlignment="Middle">
+					<font size="10"/>
+				</textElement>
+				<text><![CDATA[Nome:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="9" y="125" width="54" height="16" uuid="9cab3cb3-7df6-4f68-aa00-93af8db095a2"/>
+				<textElement verticalAlignment="Middle">
+					<font size="10"/>
+				</textElement>
+				<text><![CDATA[Email:]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="333" y="89" width="219" height="16" uuid="8cf9921c-7118-40ef-9da7-a4b650cfa81e"/>
+				<textFieldExpression><![CDATA[$P{NM_INICIO_PERIODO}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="278" y="150" width="274" height="23" uuid="99f7ffa9-fc46-4e6b-8886-485134d44b0d"/>
+				<textElement verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Outros Dados da Escola]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="9" y="230" width="543" height="23" uuid="fe3023e0-5e9c-4ba0-99ca-ee152acd521c"/>
+				<textElement verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Outros dados do Educacenso]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<pageFooter>
+		<band height="15">
+			<textField>
+				<reportElement x="0" y="2" width="553" height="13" uuid="b4535353-a90a-4520-8dc4-8400a0e2fed5"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="5" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Emitido em " + $P{dtHoje} + " às " + $P{hrHoje} + " por " + $P{nmUsuario} + "   Página: " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+</jasperReport>

@@ -1,0 +1,375 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.15.0.final using JasperReports Library version 6.15.0-dd49bfb94918336b8321d5507193f0169ead4e95  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="relatorio_processos" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="a1277020-2935-42c9-afae-2b42d785aea9">
+	<parameter name="Apresentação de Condutor" class="java.lang.Integer"/>
+	<parameter name="Defesa Prévia" class="java.lang.Integer"/>
+	<parameter name="Recurso JARI" class="java.lang.Integer"/>
+	<parameter name="Recurso CETRAN" class="java.lang.Integer"/>
+	<parameter name="Pendente" class="java.lang.Integer"/>
+	<parameter name="Deferido" class="java.lang.Integer"/>
+	<parameter name="Deferido com Advertência" class="java.lang.Integer"/>
+	<parameter name="Indeferido" class="java.lang.Integer"/>
+	<parameter name="LOGO_1" class="java.lang.String"/>
+	<parameter name="LOGO_2" class="java.lang.String"/>
+	<parameter name="DS_TITULO_1" class="java.lang.String"/>
+	<parameter name="DS_TITULO_2" class="java.lang.String"/>
+	<parameter name="DS_TITULO_3" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<field name="ID_AIT" class="java.lang.String"/>
+	<field name="NR_PLACA" class="java.lang.String"/>
+	<field name="NR_DOCUMENTO" class="java.lang.String"/>
+	<field name="DT_PROTOCOLO" class="java.util.Date"/>
+	<field name="NM_TIPO_DOCUMENTO" class="java.lang.String"/>
+	<field name="NM_FASE" class="java.lang.String"/>
+	<field name="DT_INFRACAO" class="java.util.Date"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="67" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="554" height="36" uuid="268b7138-2af2-4af2-9f95-2bbcaf86241e"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<image>
+				<reportElement x="10" y="8" width="50" height="50" uuid="c844c85c-858b-4ea4-8543-713330840ad8"/>
+				<imageExpression><![CDATA[net.sf.jasperreports.engine.util.JRImageLoader.getInstance(new SimpleJasperReportsContext()).loadAwtImageFromBytes(javax.xml.bind.DatatypeConverter.parseBase64Binary($P{LOGO_1}))]]></imageExpression>
+			</image>
+			<textField>
+				<reportElement x="80" y="1" width="400" height="16" uuid="9ef10e79-a95d-429b-baf4-f22e54ff39b5"/>
+				<textElement textAlignment="Center">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{DS_TITULO_1}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="80" y="20" width="400" height="16" uuid="51977aae-b9fa-4825-be3e-2d9f51c6d77a"/>
+				<textElement textAlignment="Center">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{DS_TITULO_2}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="80" y="40" width="400" height="16" uuid="a6c08fcc-d9f5-48ca-a64b-3217409b64a8"/>
+				<textElement textAlignment="Center">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{DS_TITULO_3}]]></textFieldExpression>
+			</textField>
+			<image>
+				<reportElement x="490" y="3" width="50" height="50" uuid="09921fc9-9509-405a-a731-7cb018f950b1"/>
+				<imageExpression><![CDATA[net.sf.jasperreports.engine.util.JRImageLoader.getInstance(new SimpleJasperReportsContext()).loadAwtImageFromBytes(javax.xml.bind.DatatypeConverter.parseBase64Binary($P{LOGO_2}))]]></imageExpression>
+			</image>
+		</band>
+	</title>
+	<columnHeader>
+		<band height="27" splitType="Stretch">
+			<staticText>
+				<reportElement x="33" y="-2" width="80" height="29" uuid="c0fb9057-7416-491c-bfc5-72f1105c6e00"/>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Nº Ait]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="113" y="-2" width="48" height="29" uuid="7dd6ef9a-e704-4e16-b555-79b7fc953246">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Nº Placa]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="161" y="-2" width="100" height="29" uuid="6dc2a943-52a0-4420-bd36-a99aae822428">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Nº Processo]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="321" y="-2" width="60" height="29" uuid="2e3cffb1-eea0-40c8-a678-1995f9efcb5c">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Data Infração]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="381" y="-2" width="99" height="29" uuid="62fd826b-45f2-489e-ae2b-73f755e130ee">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Tipo de Processo]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="480" y="-2" width="75" height="29" uuid="1e37bc82-0421-4cc4-b7da-ecb055a158b5">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Resultado do Processo]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="-2" width="33" height="29" uuid="cf3bd694-a032-410d-a6b7-47b9f65b4891">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[#]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="261" y="-2" width="60" height="29" uuid="368dddd3-6292-4938-bdd4-1e71ef3c4c8a">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Data Processo]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="21" splitType="Stretch">
+			<textField>
+				<reportElement x="33" y="0" width="80" height="20" uuid="d2e18dfe-cf14-4af8-b317-f48e62123299"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{ID_AIT}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="113" y="0" width="48" height="20" uuid="32fd2ab0-2584-4ece-937c-ed43972b3011">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{NR_PLACA}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="161" y="0" width="100" height="20" uuid="02f175d1-f1c3-4441-8f79-88bddefd9bc8">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{NR_DOCUMENTO}]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement x="321" y="0" width="60" height="20" uuid="149bc524-8ffb-4fbf-91b3-24fbf15cd62d">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{DT_INFRACAO}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="381" y="0" width="99" height="20" uuid="18b48eb2-f877-461f-9e3f-ab8981908e1c">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{NM_TIPO_DOCUMENTO}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="480" y="0" width="75" height="20" uuid="bfd050d3-baea-46e2-bf74-b6741a04417d"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{NM_FASE}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="0" width="33" height="20" uuid="8a432172-3cf8-4923-86c5-839887b4f670"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{REPORT_COUNT}]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement x="261" y="0" width="60" height="20" uuid="daef8aa6-608d-4a51-ae42-e1296c5ef714">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{DT_PROTOCOLO}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="2" splitType="Stretch">
+			<rectangle>
+				<reportElement x="0" y="0" width="555" height="1" backcolor="#000000" uuid="b8989e92-ade2-41e2-be0a-3ec681491a68">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+			</rectangle>
+		</band>
+	</columnFooter>
+	<pageFooter>
+		<band height="20" splitType="Stretch">
+			<textField>
+				<reportElement x="460" y="0" width="50" height="20" uuid="88566fce-7f11-4aa3-b309-b576b0e929d2"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA["Página " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="510" y="0" width="45" height="20" uuid="b8feeffd-df71-45ac-86e4-5ac14ceb2580"/>
+				<textElement textAlignment="Left"/>
+				<textFieldExpression><![CDATA[" de " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="130" splitType="Stretch">
+			<textField>
+				<reportElement x="180" y="20" width="80" height="20" uuid="3fa07d24-032c-41e0-abf6-9e6b70f488d6"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$V{REPORT_COUNT}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="180" y="40" width="80" height="20" uuid="3c7e4074-42b8-495b-9d56-04822507b8a3"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$P{Apresentação de Condutor} != null ? $P{Apresentação de Condutor}: 0]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="180" y="60" width="80" height="20" uuid="ad622e5e-ff80-4cd5-b661-977384ae94a8"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$P{Defesa Prévia} != null ? $P{Defesa Prévia} : 0]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="180" y="80" width="80" height="20" uuid="0eaa6363-e828-49f4-a15a-598a92c9c54d"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$P{Recurso JARI} != null ? $P{Recurso JARI} : 0]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="180" y="100" width="80" height="20" uuid="59ccac7f-8597-4ce0-a620-d34282a370ac"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$P{Recurso CETRAN} != null ? $P{Recurso CETRAN} : 0]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="20" width="180" height="20" uuid="f271841e-bc43-45ae-8a52-01c9f3d8171c"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Quantidade de Processos: ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="40" width="180" height="20" uuid="7aa39758-b49a-48b1-a4ac-152cbf2950db"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Apresentações de Condutor: ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="60" width="180" height="20" uuid="2114de89-80e2-40cd-9fe6-e1c05719470f"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Defesas Prévias: ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="80" width="180" height="20" uuid="c40a430d-d19d-445c-b098-16d441a1a499"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Recursos na JARI: ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="100" width="180" height="20" uuid="5a738f62-f193-412b-834d-96807bf69f12"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Recursos CETRAN: ]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="0" y="0" width="555" height="1" backcolor="#000000" uuid="737ad574-f0d6-4a76-af80-5e71d525095f">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+			</rectangle>
+			<staticText>
+				<reportElement x="280" y="40" width="180" height="20" uuid="9bb0a36b-b5de-4f58-a1b5-9684fde9dcde"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Pendentes (Em julgamento): ]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="460" y="40" width="95" height="20" uuid="236dea88-6615-47ad-83fb-f391e0982b93"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$P{Pendente} != null ? $P{Pendente} : 0]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="280" y="60" width="180" height="20" uuid="d232a6d0-6720-4010-8e09-19b9e274a27f"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Deferidos: ]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="460" y="60" width="95" height="20" uuid="8636e555-ca66-456d-ad55-c615ebd36c19"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$P{Deferido} != null ? $P{Deferido} : 0]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="280" y="80" width="180" height="20" uuid="809d3e19-3855-4ee9-801a-3ad225f5102f"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Deferidos com Advertência: ]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="460" y="80" width="95" height="20" uuid="34832b3b-0078-404e-add3-2b96343acf05"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$P{Deferido com Advertência} != null ? $P{Deferido com Advertência} : 0]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="280" y="100" width="180" height="20" uuid="33d45627-ee6b-4f96-9cf6-4d4d9ed72c2c"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Indeferidos: ]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="460" y="100" width="95" height="20" uuid="62c4db9e-021b-43f5-acd3-bf5a20cb6988"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$P{Indeferido} != null ? $P{Indeferido} : 0]]></textFieldExpression>
+			</textField>
+		</band>
+	</summary>
+</jasperReport>

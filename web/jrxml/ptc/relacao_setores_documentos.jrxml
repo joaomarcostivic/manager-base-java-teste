@@ -1,0 +1,203 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="relação_setores_documentos" language="groovy" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="545ee84e-58dc-4962-aecf-dddb0b5c3b70">
+	<property name="ireport.zoom" value="1.5"/>
+	<property name="ireport.x" value="232"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="IMG_LOGOMARCA" class="java.lang.Object"/>
+	<parameter name="NM_EMPRESA" class="java.lang.String"/>
+	<parameter name="NM_RELATORIO" class="java.lang.String"/>
+	<parameter name="NM_USUARIO" class="java.lang.String"/>
+	<parameter name="DT_RELATORIO" class="java.lang.String"/>
+	<parameter name="HR_RELATORIO" class="java.lang.String"/>
+	<field name="NM_SETOR" class="java.lang.String"/>
+	<field name="SG_SETOR" class="java.lang.String"/>
+	<field name="QT_TRAMITADOS" class="java.lang.String"/>
+	<field name="DS_DT_MAIS_ANTIGO" class="java.lang.String"/>
+	<field name="QT_DIAS" class="java.lang.String"/>
+	<field name="QT_PARADOS" class="java.lang.String"/>
+	<field name="QT_TOTAL" class="java.lang.String"/>
+	<field name="NR_DOCUMENTO_ANTIGO" class="java.lang.String"/>
+	<field name="NM_TIPO_DOCUMENTO_ANTIGO" class="java.lang.String"/>
+	<title>
+		<band height="54" splitType="Stretch">
+			<textField>
+				<reportElement uuid="5e891866-e0bc-4696-b40b-e515f4c5e210" x="0" y="0" width="802" height="28"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="15" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{NM_EMPRESA}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="e2042d8e-e4da-4ff5-9ad8-ade612c3c7c1" x="-1" y="31" width="803" height="19"/>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{NM_RELATORIO}]]></textFieldExpression>
+			</textField>
+			<image>
+				<reportElement uuid="baa9b4cd-f3cf-41c4-944e-50328c68657e" x="0" y="0" width="45" height="45"/>
+				<imageExpression><![CDATA[net.sf.jasperreports.engine.util.JRImageLoader.loadImage((byte[]) $P{IMG_LOGOMARCA})]]></imageExpression>
+			</image>
+		</band>
+	</title>
+	<columnHeader>
+		<band height="19" splitType="Stretch">
+			<staticText>
+				<reportElement uuid="845aa099-1990-4bdf-aec1-accb635d02c1" x="137" y="2" width="111" height="16"/>
+				<textElement>
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Total de Documentos]]></text>
+			</staticText>
+			<line>
+				<reportElement uuid="5065d831-00a0-41c0-90cd-91ede2923dd1" x="0" y="2" width="802" height="1"/>
+			</line>
+			<line>
+				<reportElement uuid="74974638-8522-4134-a111-d05e682199fd" x="0" y="17" width="802" height="1"/>
+			</line>
+			<staticText>
+				<reportElement uuid="a1f1c823-1fe3-4201-bddc-ef805d471810" x="0" y="4" width="129" height="14"/>
+				<textElement>
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Setor]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="b8e87a1d-6bd5-4d56-b195-1d7850586bf4" x="335" y="3" width="75" height="14"/>
+				<textElement>
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Qtd. a receber]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="b8e87a1d-6bd5-4d56-b195-1d7850586bf4" x="254" y="3" width="75" height="14"/>
+				<textElement>
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Qtd. recebida]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="355634d3-95ec-4524-912b-9ffd2f11d2ff" x="416" y="3" width="91" height="14"/>
+				<textElement>
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Dt. mais Antigo]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="85887ea4-85a8-45b6-9a1b-94d22be85e70" x="757" y="3" width="45" height="14"/>
+				<textElement>
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Qtd. dias]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="5a616f98-78b8-4e7c-9569-369447597831" x="512" y="3" width="229" height="14"/>
+				<textElement>
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Documento mais Antigo a Receber]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="16" splitType="Stretch">
+			<textField isBlankWhenNull="true">
+				<reportElement uuid="95089ebe-83f0-41e4-b69c-34b698d8522a" x="254" y="1" width="64" height="11"/>
+				<textElement textAlignment="Right">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{QT_PARADOS}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="b6d40f68-4cc6-437c-934e-f6f558a1de71" x="0" y="1" width="129" height="12"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{SG_SETOR}!=null?$F{SG_SETOR}:$F{NM_SETOR}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement uuid="95089ebe-83f0-41e4-b69c-34b698d8522a" x="335" y="1" width="64" height="12"/>
+				<textElement textAlignment="Right">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{QT_TRAMITADOS}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="72d17f99-ecc7-4a07-8664-c1768ea7ed78" x="416" y="0" width="91" height="12"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{DS_DT_MAIS_ANTIGO}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement uuid="99518d56-2136-4dca-abd1-b4d552990fba" x="757" y="0" width="40" height="12"/>
+				<textElement textAlignment="Right">
+					<font size="8" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{QT_DIAS}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement uuid="bf6f1b1d-1e8f-4529-a739-2be6f513e131" x="0" y="12" width="802" height="1"/>
+				<graphicElement>
+					<pen lineStyle="Dotted"/>
+				</graphicElement>
+			</line>
+			<textField>
+				<reportElement uuid="2ebf4f86-0e4b-4711-9d37-01b8570143ee" x="137" y="0" width="99" height="12"/>
+				<textElement textAlignment="Right">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{QT_TOTAL}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement uuid="76159c10-63c4-4b02-8288-62cc7effb266" x="522" y="1" width="54" height="11"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{NR_DOCUMENTO_ANTIGO}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement uuid="a484d7f8-dd92-4a65-8f99-1abe9beb2c9f" x="581" y="1" width="160" height="11"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{NM_TIPO_DOCUMENTO_ANTIGO}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="12" splitType="Stretch">
+			<textField isBlankWhenNull="true">
+				<reportElement uuid="196b3857-fb35-4150-b40d-b2c5bc12b56a" x="606" y="1" width="196" height="11"/>
+				<textElement>
+					<font size="8" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Emitido por: "+$P{NM_USUARIO}+" em "+$P{DT_RELATORIO}+" às "+$P{HR_RELATORIO}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="5ddaca9b-5a33-41a1-a3b3-3e7954e3e4b2" x="0" y="0" width="802" height="11"/>
+				<textElement textAlignment="Center">
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[JurisManager - Excelência em Gestão de Processos]]></text>
+			</staticText>
+			<line>
+				<reportElement uuid="c150b982-ef9a-448b-9497-2c623e196aa5" x="0" y="-1" width="802" height="1"/>
+			</line>
+			<textField>
+				<reportElement uuid="d1a45167-f25b-4231-8333-9e906721998b" x="0" y="0" width="67" height="11"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Página "+$V{PAGE_NUMBER}+" de "]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement uuid="e8d9728a-d7de-4c3b-8718-df29f5031ae7" x="68" y="0" width="19" height="11"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+</jasperReport>

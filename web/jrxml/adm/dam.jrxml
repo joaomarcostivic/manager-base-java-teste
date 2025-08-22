@@ -1,0 +1,937 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.3.1.final using JasperReports Library version 6.3.1  -->
+<!-- 2018-04-25T09:52:13 -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="dam" pageWidth="595" pageHeight="842" whenNoDataType="BlankPage" columnWidth="468" leftMargin="127" rightMargin="0" topMargin="0" bottomMargin="0" whenResourceMissingType="Empty" uuid="a63f7f67-ad61-4b5d-b254-5268ba2d216b">
+	<property name="ireport.zoom" value="1.5"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="347"/>
+	<parameter name="nrCodigoBarras" class="java.lang.String"/>
+	<parameter name="nrCodigoBarras1" class="java.lang.String"/>
+	<parameter name="nrCodigoBarras2" class="java.lang.String"/>
+	<parameter name="nrCodigoBarras3" class="java.lang.String"/>
+	<parameter name="nrCodigoBarras4" class="java.lang.String"/>
+	<parameter name="logoPath" class="java.lang.String"/>
+	<parameter name="nrAnoBase" class="java.lang.Integer"/>
+	<parameter name="nmContribuinte" class="java.lang.String"/>
+	<parameter name="nrInscricaoMunicipal" class="java.lang.String"/>
+	<parameter name="nmTipoLogradouro" class="java.lang.String"/>
+	<parameter name="nmLogradouro" class="java.lang.String"/>
+	<parameter name="nrEndereco" class="java.lang.String"/>
+	<parameter name="nmBairro" class="java.lang.String"/>
+	<parameter name="nmComplemento" class="java.lang.String"/>
+	<parameter name="nrCep" class="java.lang.String"/>
+	<parameter name="vlTotalTributos" class="java.lang.Float"/>
+	<parameter name="nmCidade" class="java.lang.String"/>
+	<parameter name="sgEstado" class="java.lang.String"/>
+	<parameter name="vlTaxaExpediente" class="java.lang.String"/>
+	<parameter name="vlJuros" class="java.lang.String"/>
+	<parameter name="vlMulta" class="java.lang.String"/>
+	<parameter name="vlTotal" class="java.lang.String"/>
+	<parameter name="dtVencimento" class="java.lang.String"/>
+	<parameter name="dsMensagem" class="java.lang.String"/>
+	<parameter name="nrServico1" class="java.lang.String"/>
+	<parameter name="dsServico1" class="java.lang.String"/>
+	<parameter name="nrServico2" class="java.lang.String"/>
+	<parameter name="dsServico2" class="java.lang.String"/>
+	<parameter name="rsmServicos" class="java.util.Collection"/>
+	<parameter name="rsmTributos" class="java.util.Collection"/>
+	<parameter name="vlTotalGeral" class="java.lang.String"/>
+	<parameter name="rsmTributosR" class="java.util.Collection"/>
+	<parameter name="nrParcela" class="java.lang.Integer"/>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String"/>
+	<parameter name="nmServicos" class="java.lang.String"/>
+	<parameter name="nrCodMovimento" class="java.lang.String"/>
+	<title>
+		<band height="2" splitType="Stretch"/>
+	</title>
+	<pageHeader>
+		<band height="2" splitType="Stretch"/>
+	</pageHeader>
+	<detail>
+		<band height="785">
+			<staticText>
+				<reportElement x="242" y="82" width="84" height="8" uuid="09d4817c-485b-44db-939d-f1e136f94e2f"/>
+				<textElement>
+					<font fontName="SansSerif" size="6"/>
+				</textElement>
+				<text><![CDATA[Inscrição Municipal:]]></text>
+			</staticText>
+			<line>
+				<reportElement x="21" y="201" width="1" height="67" uuid="39e08da2-fa53-4f28-b7d7-bbbfe5b6f259"/>
+			</line>
+			<line>
+				<reportElement x="256" y="202" width="1" height="162" uuid="8324d335-4d09-4ed3-8ece-44d7051e3ccf"/>
+			</line>
+			<staticText>
+				<reportElement x="9" y="203" width="8" height="9" uuid="dcf6e8c6-d47a-4757-8b09-d2acdb474d1b"/>
+				<textElement>
+					<font fontName="SansSerif" size="6"/>
+				</textElement>
+				<text><![CDATA[L]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="24" y="202" width="229" height="9" uuid="352997a2-f61e-41d4-ae80-d2045e5b2c67"/>
+				<textElement textAlignment="Center">
+					<font fontName="SansSerif" size="6"/>
+				</textElement>
+				<text><![CDATA[DESCRIÇÃO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="258" y="202" width="81" height="9" uuid="2795aacc-eb3c-4004-817d-cc036bf1662f"/>
+				<textElement textAlignment="Center">
+					<font fontName="SansSerif" size="6"/>
+				</textElement>
+				<text><![CDATA[VALOR (R$)]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="269" width="85" height="19" uuid="49bc4acb-8212-414a-9eef-bc91600d3207"/>
+				<textElement textAlignment="Center">
+					<font fontName="SansSerif" size="14" isBold="true" pdfFontName="Helvetica"/>
+				</textElement>
+				<text><![CDATA[TRIBUTOS]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="86" y="269" width="85" height="19" uuid="28c9a2ef-1582-4fc3-b556-6ee353c202da"/>
+				<textElement textAlignment="Center">
+					<font fontName="SansSerif" size="12" isBold="true" pdfFontName="Helvetica"/>
+				</textElement>
+				<text><![CDATA[PARCELA]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="171" y="269" width="85" height="19" uuid="376a487b-5ad0-496f-befb-19093f30cf74"/>
+				<textElement textAlignment="Center">
+					<font fontName="SansSerif" size="12" isBold="true" pdfFontName="Helvetica"/>
+				</textElement>
+				<text><![CDATA[VENCIMENTO]]></text>
+			</staticText>
+			<line>
+				<reportElement x="256" y="341" width="85" height="1" uuid="0060884b-bf69-4491-821c-51d8f85c378a"/>
+			</line>
+			<staticText>
+				<reportElement x="258" y="270" width="75" height="9" uuid="a540a5e0-4659-4b9c-a1d3-b806ec02f5cf"/>
+				<textElement>
+					<font fontName="SansSerif" size="6" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Valor da Parcela:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="258" y="289" width="75" height="9" uuid="cee33ba0-1676-4b92-8cca-fa8014418558"/>
+				<textElement>
+					<font fontName="SansSerif" size="6" isBold="false"/>
+				</textElement>
+				<text><![CDATA[(+) Juros:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="258" y="306" width="75" height="9" uuid="667fb6bd-b713-4f11-96cd-b2195f18578e"/>
+				<textElement>
+					<font fontName="SansSerif" size="6" isBold="false"/>
+				</textElement>
+				<text><![CDATA[(+) Multa:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="258" y="324" width="75" height="9" uuid="d5a432cd-019a-49b6-8114-9a17672e3dcd"/>
+				<textElement>
+					<font fontName="SansSerif" size="6" isBold="false"/>
+				</textElement>
+				<text><![CDATA[(-) Desconto:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="258" y="342" width="75" height="9" uuid="a363a343-202f-4e93-b6ec-f74bfe92b296"/>
+				<textElement>
+					<font fontName="SansSerif" size="6" isBold="false"/>
+				</textElement>
+				<text><![CDATA[(=) Valor Cobrado:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="261" y="365" width="80" height="8" uuid="021c24e4-925e-440b-a2f8-2cad68cb25fe"/>
+				<textElement textAlignment="Right">
+					<font fontName="SansSerif" size="6"/>
+				</textElement>
+				<text><![CDATA[Via Contribuinte]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="258" y="461" width="75" height="9" uuid="ecd40af7-e4b1-450b-a114-8939e5746660"/>
+				<textElement>
+					<font fontName="SansSerif" size="6" isBold="false"/>
+				</textElement>
+				<text><![CDATA[(+) Multa:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="171" y="421" width="85" height="19" uuid="893d2984-1109-4a5f-9770-36b8d125a196"/>
+				<textElement textAlignment="Center">
+					<font fontName="SansSerif" size="12" isBold="true" pdfFontName="Helvetica"/>
+				</textElement>
+				<text><![CDATA[VENCIMENTO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="259" y="501" width="75" height="9" uuid="f3aaf6d6-c41d-4f45-880b-0882558d494e"/>
+				<textElement>
+					<font fontName="SansSerif" size="6" isBold="false"/>
+				</textElement>
+				<text><![CDATA[(=) Valor Cobrador:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="258" y="481" width="75" height="9" uuid="fadab80b-7b24-4fac-8dae-bbfc779c4275"/>
+				<textElement>
+					<font fontName="SansSerif" size="6" isBold="false"/>
+				</textElement>
+				<text><![CDATA[(-) Desconto:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="86" y="421" width="85" height="19" uuid="8a150e9b-418d-4ba9-92d9-2d59ef25e5b6"/>
+				<textElement textAlignment="Center">
+					<font fontName="SansSerif" size="12" isBold="true" pdfFontName="Helvetica"/>
+				</textElement>
+				<text><![CDATA[PARCELA]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="421" width="85" height="19" uuid="e6183236-6549-43c2-9f17-e2a7f8489538"/>
+				<textElement textAlignment="Center">
+					<font fontName="SansSerif" size="14" isBold="true" pdfFontName="Helvetica"/>
+				</textElement>
+				<text><![CDATA[TRIBUTOS]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="261" y="523" width="80" height="8" uuid="99f36eb7-6186-4837-8f01-258cc5b85743"/>
+				<textElement textAlignment="Right">
+					<font fontName="SansSerif" size="6"/>
+				</textElement>
+				<text><![CDATA[Via Prefeitura]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="258" y="632" width="60" height="9" uuid="ca098c7d-fb8b-4e88-85f4-a3eb470d525e"/>
+				<textElement>
+					<font fontName="SansSerif" size="6" isBold="false"/>
+				</textElement>
+				<text><![CDATA[(-) Desconto:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="258" y="618" width="60" height="9" uuid="de80f6f0-a948-4476-8e88-23b8f53c57da"/>
+				<textElement>
+					<font fontName="SansSerif" size="6" isBold="false"/>
+				</textElement>
+				<text><![CDATA[(+) Multa:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="258" y="422" width="75" height="9" uuid="545fb32a-b1e6-44da-9fa6-56e71e4b1e20"/>
+				<textElement>
+					<font fontName="SansSerif" size="6" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Valor da Parcela:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="260" y="704" width="80" height="8" uuid="51574a89-5629-4b3c-ac9b-7a8013a89f80"/>
+				<textElement textAlignment="Right">
+					<font fontName="SansSerif" size="6"/>
+				</textElement>
+				<text><![CDATA[Via Banco]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="258" y="602" width="60" height="9" uuid="1e53c095-145b-4ded-bcd1-3bc2af9b30b5"/>
+				<textElement>
+					<font fontName="SansSerif" size="6" isBold="false"/>
+				</textElement>
+				<text><![CDATA[(+) Juros:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="258" y="646" width="60" height="9" uuid="b1d690fe-37f6-406e-812f-1dec30499e30"/>
+				<textElement>
+					<font fontName="SansSerif" size="6" isBold="false"/>
+				</textElement>
+				<text><![CDATA[(=) Valor Cobrado:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="86" y="286" width="85" height="16" uuid="da49e080-45af-4b47-bd4f-1b35e751de58"/>
+				<textElement textAlignment="Center" markup="none">
+					<font fontName="SansSerif" size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new DecimalFormat("00", new java.text.DecimalFormatSymbols(new java.util.Locale("pt", "BR"))).format($P{nrParcela})]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="441" width="85" height="16" uuid="70109382-c619-43a6-a85d-b09bb57e0d6a"/>
+				<textElement textAlignment="Center" markup="none">
+					<font fontName="SansSerif" size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{nrAnoBase}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="718" width="341" height="20" uuid="6c83cd3b-1eb8-4f83-b925-8aecf58e4bd1"/>
+				<textElement textAlignment="Center">
+					<font fontName="SansSerif" size="9" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{nrCodigoBarras1}+"  "+$P{nrCodigoBarras2}+"  "+$P{nrCodigoBarras3}+"  "+$P{nrCodigoBarras4}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="258" y="441" width="75" height="9" uuid="9cba3e0c-4253-4124-aff2-a5d965e8f1c4"/>
+				<textElement>
+					<font fontName="SansSerif" size="6" isBold="false"/>
+				</textElement>
+				<text><![CDATA[(+) Juros:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="3" y="461" width="250" height="16" uuid="f7cf569a-4b77-4015-afff-9df4e8b548e4"/>
+				<textElement markup="none">
+					<font fontName="SansSerif" size="8" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{nmContribuinte}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="2" y="82" width="60" height="8" uuid="43d93a11-a468-419f-b4da-faee830b7209"/>
+				<textElement>
+					<font fontName="SansSerif" size="6"/>
+				</textElement>
+				<text><![CDATA[Contribuinte:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="46" y="7" width="126" height="12" uuid="3465634b-3873-45a5-a76e-5e74a62c7d8f"/>
+				<textElement>
+					<font fontName="SansSerif" size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[PREFEITURA MUNICIPAL DE]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="365" width="341" height="8" uuid="50033b15-f043-4027-9bce-2cca7e626795"/>
+				<textElement>
+					<font fontName="SansSerif" size="6"/>
+				</textElement>
+				<text><![CDATA[Prefeitura Municipal de Vitória da Conquista - (77) 3424-8523 - www.pmvc.ba.gov.br]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="523" width="340" height="8" uuid="60a52f11-e119-4e24-8b3a-730277c0f104"/>
+				<textElement>
+					<font fontName="SansSerif" size="6"/>
+				</textElement>
+				<text><![CDATA[Prefeitura Municipal de Vitória da Conquista - (77) 3424-8523 - www.pmvc.ba.gov.br]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="703" width="340" height="9" uuid="012ceedc-8a5b-4278-83e3-d83c433fb7a9"/>
+				<textElement>
+					<font fontName="SansSerif" size="6"/>
+				</textElement>
+				<text><![CDATA[Prefeitura Municipal de Vitória da Conquista - (77) 3424-8523 - www.pmvc.ba.gov.br]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="46" y="25" width="215" height="23" uuid="67bdf282-48a0-496a-b747-87a0dc670b21"/>
+				<textElement>
+					<font fontName="SansSerif" size="16" isBold="true"/>
+				</textElement>
+				<text><![CDATA[VITÓRIA DA CONQUISTA]]></text>
+			</staticText>
+			<line>
+				<reportElement x="0" y="378" width="341" height="1" uuid="1b90739c-dd82-4ed6-8604-a8af9e16f516"/>
+				<graphicElement>
+					<pen lineStyle="Dotted"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement x="0" y="533" width="341" height="1" uuid="950dc05a-9984-40ca-ac91-4974c9412a21"/>
+				<graphicElement>
+					<pen lineStyle="Dotted"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement x="0" y="53" width="341" height="1" uuid="0699f86f-0c39-40d8-9078-b0e48e34f5b0"/>
+				<graphicElement>
+					<pen lineWidth="2.5"/>
+				</graphicElement>
+			</line>
+			<staticText>
+				<reportElement x="2" y="563" width="89" height="9" uuid="3e42ad9d-90dd-47a1-b57f-4b54747f4fc3"/>
+				<textElement>
+					<font fontName="SansSerif" size="6" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Local de Pagamento:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="4" y="571" width="239" height="11" uuid="ca39c257-1e4a-480c-9e4a-09857484b0de"/>
+				<textElement>
+					<font fontName="SansSerif" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Pague seu DAM nas agencias bancarias credenciadas]]></text>
+			</staticText>
+			<line>
+				<reportElement x="0" y="563" width="341" height="1" uuid="80738def-0a81-46ba-9e89-69243a1176f0"/>
+			</line>
+			<line>
+				<reportElement x="0" y="583" width="341" height="1" uuid="ece218b1-607a-4f38-ab5f-37cf66d14e04"/>
+			</line>
+			<line>
+				<reportElement x="255" y="563" width="2" height="102" uuid="ff759068-bf0f-4a80-8e9a-4c46aa5f78d2"/>
+			</line>
+			<line>
+				<reportElement x="0" y="563" width="1" height="141" uuid="61925894-b4cc-4ac3-a58f-50b686739d28"/>
+			</line>
+			<line>
+				<reportElement x="0" y="601" width="341" height="1" uuid="edb5b13c-301d-4c66-8217-eee4c87bec7a"/>
+			</line>
+			<line>
+				<reportElement x="0" y="703" width="341" height="1" uuid="32694397-2631-4b40-9f37-b762067408e1"/>
+			</line>
+			<line>
+				<reportElement x="0" y="665" width="341" height="1" uuid="df2f256e-cf73-4513-8ac6-ddeece861c07"/>
+			</line>
+			<staticText>
+				<reportElement x="258" y="564" width="38" height="9" uuid="5a05541d-14e5-4849-8214-a96ecf6b05a9"/>
+				<textElement>
+					<font fontName="SansSerif" size="6" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Vencimento:]]></text>
+			</staticText>
+			<line>
+				<reportElement x="64" y="583" width="1" height="18" uuid="fc3b60c8-3d18-4524-8b91-25f6a9c17e21"/>
+			</line>
+			<line>
+				<reportElement x="192" y="583" width="1" height="18" uuid="59fbc155-efb0-4336-bc26-628d4683570d"/>
+			</line>
+			<line>
+				<reportElement x="128" y="583" width="1" height="18" uuid="c716a202-1cb2-43a2-aea9-56983b38e132"/>
+			</line>
+			<staticText>
+				<reportElement x="2" y="584" width="23" height="9" uuid="726cd486-d65b-4b53-9fff-559a025b8107"/>
+				<textElement>
+					<font fontName="SansSerif" size="6" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Parcela:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="66" y="584" width="60" height="9" uuid="2608375b-700f-4480-b342-87fccc7f1320"/>
+				<textElement>
+					<font fontName="SansSerif" size="6" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Data do Documento:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="130" y="584" width="23" height="9" uuid="4e24bb22-28f5-45d3-8f2e-79a1d2180bdf"/>
+				<textElement>
+					<font fontName="SansSerif" size="6" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Código:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="194" y="584" width="50" height="9" uuid="dfb7d4ee-56e0-40bf-bbae-7a703be1becd"/>
+				<textElement>
+					<font fontName="SansSerif" size="6" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Espécie Moeda:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="258" y="584" width="75" height="9" uuid="9c620255-c456-4c0e-b19b-3766c0c9946b"/>
+				<textElement>
+					<font fontName="SansSerif" size="6" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Valor da Parcela:]]></text>
+			</staticText>
+			<line>
+				<reportElement x="256" y="617" width="85" height="1" uuid="f99dfc88-11ee-443a-9b24-4fe55369465e"/>
+			</line>
+			<line>
+				<reportElement x="257" y="645" width="84" height="1" uuid="2eb613a0-ce55-45b2-9b95-3e1fe733c556"/>
+			</line>
+			<line>
+				<reportElement x="340" y="563" width="1" height="141" uuid="185207b6-3746-4ecc-8c69-3d9d343b41c1"/>
+			</line>
+			<staticText>
+				<reportElement x="193" y="591" width="62" height="11" uuid="3ab60170-cdf3-4741-9ba9-d843dfe28004"/>
+				<textElement textAlignment="Center">
+					<font fontName="SansSerif" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[R$]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="129" y="591" width="63" height="11" uuid="eebba63f-2a22-462d-a95b-33ad027ca630"/>
+				<textElement textAlignment="Center">
+					<font fontName="SansSerif" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[4785]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="2" y="667" width="37" height="9" uuid="c8474da3-befc-4e39-9535-1fac497ef872"/>
+				<textElement>
+					<font fontName="SansSerif" size="6" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Contribuinte:]]></text>
+			</staticText>
+			<componentElement>
+				<reportElement x="0" y="733" width="341" height="50" uuid="0aaa994d-a9df-4b7d-b05f-7c1a8890d1b0"/>
+				<jr:Interleaved2Of5 xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd" wideFactor="5.0">
+					<jr:codeExpression><![CDATA[$P{nrCodigoBarras}]]></jr:codeExpression>
+				</jr:Interleaved2Of5>
+			</componentElement>
+			<staticText>
+				<reportElement x="2" y="677" width="56" height="9" uuid="f9142b21-923e-4256-9213-0c6642de1c12"/>
+				<textElement>
+					<font fontName="SansSerif" size="6" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Endereço Tributário:]]></text>
+			</staticText>
+			<line>
+				<reportElement x="257" y="631" width="83" height="1" uuid="acf019d1-616d-45d2-8904-9a28935a5bd6"/>
+			</line>
+			<line>
+				<reportElement x="0" y="131" width="341" height="1" uuid="1b334471-f47f-47d1-9bf3-7273ebd2b9d0"/>
+			</line>
+			<line>
+				<reportElement x="0" y="81" width="341" height="1" uuid="11825b76-b9fe-4f1f-a2d7-18c01ffcd494"/>
+			</line>
+			<line>
+				<reportElement x="0" y="364" width="341" height="1" uuid="d418bd2d-b3f5-45ec-8684-4bae27797732"/>
+			</line>
+			<line>
+				<reportElement x="340" y="81" width="1" height="283" uuid="f5fe023e-530f-4280-8995-289db30a1044"/>
+			</line>
+			<line>
+				<reportElement x="256" y="323" width="85" height="1" uuid="49f2266a-b577-4d0d-98ec-7799e165c2a4"/>
+			</line>
+			<line>
+				<reportElement x="256" y="288" width="85" height="1" uuid="56b4ca2d-a621-49a1-94a2-34110e0ea632"/>
+			</line>
+			<line>
+				<reportElement x="0" y="305" width="341" height="1" uuid="321465d3-f2e1-4730-81ff-809cf0c41008"/>
+			</line>
+			<line>
+				<reportElement x="86" y="269" width="1" height="37" uuid="79af6bcb-2eec-4567-a5a7-03e9539438a0"/>
+			</line>
+			<line>
+				<reportElement x="171" y="269" width="1" height="37" uuid="3d5d35ca-b91c-42c5-ab2b-1070e79e53c0"/>
+			</line>
+			<line>
+				<reportElement x="0" y="268" width="341" height="1" uuid="612a8a8d-ffd1-4c30-9a31-2ece70aee957"/>
+			</line>
+			<line>
+				<reportElement x="0" y="81" width="1" height="283" uuid="869c1b4b-c744-4416-ae85-d844f59c4555"/>
+			</line>
+			<line>
+				<reportElement x="0" y="201" width="341" height="1" uuid="f56d683c-5c97-4b70-8dba-3a7582ebaafb"/>
+			</line>
+			<line>
+				<reportElement x="0" y="210" width="341" height="1" uuid="24e4b14e-f385-40c9-94f4-f48035039bc7"/>
+			</line>
+			<line>
+				<reportElement x="340" y="421" width="1" height="101" uuid="5c834c96-dcb5-4a63-a210-e7ac07c6a1ae"/>
+			</line>
+			<line>
+				<reportElement x="0" y="421" width="1" height="101" uuid="77ab666c-6217-4391-aca4-40e836518713"/>
+			</line>
+			<line>
+				<reportElement x="0" y="522" width="341" height="1" uuid="61e19667-251c-4f27-a65c-b3a8beed0ccf"/>
+			</line>
+			<line>
+				<reportElement x="255" y="421" width="1" height="101" uuid="ef8bd5d7-51dc-4788-b282-6bdac217491b"/>
+			</line>
+			<line>
+				<reportElement x="256" y="480" width="85" height="1" uuid="8bbc3eab-90c3-44cd-8bc8-dae714f1493c"/>
+			</line>
+			<line>
+				<reportElement x="256" y="500" width="85" height="1" uuid="e4456024-127d-4693-9c6a-6ee01044c367"/>
+			</line>
+			<line>
+				<reportElement x="0" y="421" width="341" height="1" uuid="e8443a49-5fd7-4b87-a261-eaaf99e1844d"/>
+			</line>
+			<line>
+				<reportElement x="0" y="460" width="341" height="1" uuid="eacdd299-80ff-4f5a-b1e5-6048edccdd1f"/>
+			</line>
+			<line>
+				<reportElement x="86" y="421" width="1" height="40" uuid="3ebadc82-96ca-4bd8-a26d-be3f92778a66"/>
+			</line>
+			<line>
+				<reportElement x="171" y="421" width="1" height="40" uuid="3d8ea2c0-7c11-4d2a-9bdc-a8ec446b0967"/>
+			</line>
+			<line>
+				<reportElement x="256" y="440" width="85" height="1" uuid="5b9a80f4-0ee1-49aa-bcfe-4af5b0c6a384"/>
+			</line>
+			<line>
+				<reportElement x="239" y="81" width="1" height="20" uuid="ad2cd29b-94fa-4e5a-8fe5-40197f0e76bb"/>
+			</line>
+			<image>
+				<reportElement x="4" y="4" width="36" height="44" uuid="4ee421e2-e0f2-4d78-a010-d4c470323c47"/>
+				<imageExpression><![CDATA[$P{logoPath}+"brasao_pmvc.jpg"]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="2" y="102" width="64" height="9" uuid="31ff184e-dfca-491e-b708-296b2b41e078"/>
+				<textElement>
+					<font fontName="SansSerif" size="6" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Endereço Tributário:]]></text>
+			</staticText>
+			<line>
+				<reportElement x="0" y="101" width="341" height="1" uuid="7fd4712c-cd42-41b1-aeaa-d098631f1c58"/>
+			</line>
+			<textField pattern="dd/MM/yyyy HH:mm">
+				<reportElement x="295" y="57" width="45" height="11" uuid="25643dff-e10c-479e-a5f7-d789351bd06d">
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+				<textElement textAlignment="Right">
+					<font fontName="SansSerif" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new SimpleDateFormat("dd/MM/yyyy").format(new Date().getTime())]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="3" y="132" width="123" height="9" uuid="31ff184e-dfca-491e-b708-296b2b41e078"/>
+				<textElement>
+					<font fontName="SansSerif" size="6" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Endereço para Correspondência:]]></text>
+			</staticText>
+			<line>
+				<reportElement x="0" y="160" width="341" height="1" uuid="1b334471-f47f-47d1-9bf3-7273ebd2b9d0"/>
+			</line>
+			<staticText>
+				<reportElement x="37" y="162" width="133" height="9" uuid="352997a2-f61e-41d4-ae80-d2045e5b2c67"/>
+				<textElement>
+					<font fontName="SansSerif" size="5"/>
+				</textElement>
+				<text><![CDATA[Descrição da Atividade
+]]></text>
+			</staticText>
+			<line>
+				<reportElement x="1" y="171" width="339" height="1" uuid="1b334471-f47f-47d1-9bf3-7273ebd2b9d0"/>
+			</line>
+			<staticText>
+				<reportElement x="3" y="162" width="42" height="9" uuid="352997a2-f61e-41d4-ae80-d2045e5b2c67"/>
+				<textElement>
+					<font fontName="SansSerif" size="5"/>
+				</textElement>
+				<text><![CDATA[Cód.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="315" y="162" width="23" height="9" uuid="352997a2-f61e-41d4-ae80-d2045e5b2c67"/>
+				<textElement textAlignment="Right">
+					<font fontName="SansSerif" size="5"/>
+				</textElement>
+				<text><![CDATA[Alíquota]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="3" y="603" width="253" height="14" uuid="16c6ec1d-0031-4cd5-b9f7-c8d82f5f23ba"/>
+				<textElement markup="none">
+					<font fontName="SansSerif" size="8" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[($P{nrInscricaoMunicipal}==null?"":"INSC: "+$P{nrInscricaoMunicipal}+" / ")+$P{nmContribuinte}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="2" y="551" width="162" height="11" uuid="ca39c257-1e4a-480c-9e4a-09857484b0de"/>
+				<textElement>
+					<font fontName="SansSerif" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Documento de Arrecadação Municipal Nº]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="540" width="341" height="11" uuid="ca39c257-1e4a-480c-9e4a-09857484b0de"/>
+				<textElement textAlignment="Center">
+					<font fontName="SansSerif" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[PREFEITURA MUNICIPAL DE VITÓRIA DA CONQUISTA - BAHIA]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="385" width="341" height="11" uuid="ca39c257-1e4a-480c-9e4a-09857484b0de"/>
+				<textElement textAlignment="Center">
+					<font fontName="SansSerif" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[PREFEITURA MUNICIPAL DE VITÓRIA DA CONQUISTA - BAHIA]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="10" y="88" width="229" height="14" uuid="ddb969fb-986a-48d1-a76e-1f57d245b38b"/>
+				<textElement>
+					<font size="9" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{nmContribuinte}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="8" y="109" width="327" height="11" uuid="cefbd62c-d3ca-47f7-b81e-1b4d978a7e45"/>
+				<textElement>
+					<font fontName="SansSerif" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[($P{nmTipoLogradouro} != null ? $P{nmTipoLogradouro} : "")+" "+$P{nmLogradouro}+", "+$P{nrEndereco}+($P{nmComplemento}!=null && !$P{nmComplemento}.equals("")?" - "+$P{nmComplemento}:"")]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="8" y="118" width="327" height="11" uuid="8e280cc9-d53d-43d6-84a1-d77468860e85"/>
+				<textElement>
+					<font fontName="SansSerif" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[($P{nmBairro}!=null?$P{nmBairro}+" - ":" ")+($P{nmCidade}!=null?$P{nmCidade}+" - ":" ")+($P{sgEstado}!=null?$P{sgEstado}:"")]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="172" y="286" width="85" height="16" uuid="8d97f250-a0cd-4814-bbd3-af3bc908ddab"/>
+				<textElement textAlignment="Center" markup="none">
+					<font fontName="SansSerif" size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{dtVencimento}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="172" y="441" width="84" height="16" uuid="8d97f250-a0cd-4814-bbd3-af3bc908ddab"/>
+				<textElement textAlignment="Center" markup="none">
+					<font fontName="SansSerif" size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{dtVencimento}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="87" y="441" width="85" height="16" uuid="da49e080-45af-4b47-bd4f-1b35e751de58"/>
+				<textElement textAlignment="Center" markup="none">
+					<font fontName="SansSerif" size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new DecimalFormat("00", new java.text.DecimalFormatSymbols(new java.util.Locale("pt", "BR"))).format($P{nrParcela})]]></textFieldExpression>
+			</textField>
+			<textField pattern="">
+				<reportElement x="264" y="274" width="74" height="13" uuid="b1bc6fb6-37ad-4c67-bdcb-213c8cc5ad20"/>
+				<textElement textAlignment="Right">
+					<font fontName="SansSerif" size="8" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new DecimalFormat("#,##0.00;-#,##0.00", new java.text.DecimalFormatSymbols(new java.util.Locale("pt", "BR"))).format(Double.parseDouble($P{vlTotalGeral}))]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="257" y="572" width="84" height="12" uuid="8d97f250-a0cd-4814-bbd3-af3bc908ddab"/>
+				<textElement textAlignment="Center" markup="none">
+					<font fontName="SansSerif" size="8" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{dtVencimento}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="8" y="138" width="331" height="11" uuid="cefbd62c-d3ca-47f7-b81e-1b4d978a7e45"/>
+				<textElement>
+					<font fontName="SansSerif" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[($P{nmTipoLogradouro} != null ? $P{nmTipoLogradouro} : "")+" "+$P{nmLogradouro}+", "+$P{nrEndereco}+($P{nmComplemento}!=null && !$P{nmComplemento}.equals("")?" - "+$P{nmComplemento}:"")]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="8" y="148" width="327" height="11" uuid="8e280cc9-d53d-43d6-84a1-d77468860e85"/>
+				<textElement>
+					<font fontName="SansSerif" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[($P{nmBairro}!=null?$P{nmBairro}+" - ":" ")+($P{nmCidade}!=null?$P{nmCidade}+" - ":" ")+($P{sgEstado}!=null?$P{sgEstado}:"")+($P{nrCep}!=null?" - CEP: "+$P{nrCep}:"")]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="591" width="65" height="11" uuid="da49e080-45af-4b47-bd4f-1b35e751de58"/>
+				<textElement textAlignment="Center" markup="none">
+					<font fontName="SansSerif" size="8" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new DecimalFormat("00", new java.text.DecimalFormatSymbols(new java.util.Locale("pt", "BR"))).format($P{nrParcela})]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="243" y="162" width="54" height="9" uuid="352997a2-f61e-41d4-ae80-d2045e5b2c67"/>
+				<textElement>
+					<font fontName="SansSerif" size="5"/>
+				</textElement>
+				<text><![CDATA[Início da Atividade]]></text>
+			</staticText>
+			<textField pattern="">
+				<reportElement x="264" y="428" width="74" height="13" uuid="b1bc6fb6-37ad-4c67-bdcb-213c8cc5ad20"/>
+				<textElement textAlignment="Right">
+					<font fontName="SansSerif" size="8" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new DecimalFormat("#,##0.00;-#,##0.00", new java.text.DecimalFormatSymbols(new java.util.Locale("pt", "BR"))).format(Double.parseDouble($P{vlTotal}))]]></textFieldExpression>
+			</textField>
+			<textField pattern="">
+				<reportElement x="264" y="590" width="74" height="13" uuid="b1bc6fb6-37ad-4c67-bdcb-213c8cc5ad20"/>
+				<textElement textAlignment="Right">
+					<font fontName="SansSerif" size="8" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new DecimalFormat("#,##0.00;-#,##0.00", new java.text.DecimalFormatSymbols(new java.util.Locale("pt", "BR"))).format(Double.parseDouble($P{vlTotal}))]]></textFieldExpression>
+			</textField>
+			<textField pattern="" isBlankWhenNull="true">
+				<reportElement x="264" y="448" width="74" height="13" uuid="b1bc6fb6-37ad-4c67-bdcb-213c8cc5ad20"/>
+				<textElement textAlignment="Right">
+					<font fontName="SansSerif" size="8" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{vlJuros}]]></textFieldExpression>
+			</textField>
+			<textField pattern="" isBlankWhenNull="true">
+				<reportElement x="264" y="467" width="74" height="13" uuid="b1bc6fb6-37ad-4c67-bdcb-213c8cc5ad20"/>
+				<textElement textAlignment="Right">
+					<font fontName="SansSerif" size="8" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{vlMulta}]]></textFieldExpression>
+			</textField>
+			<textField pattern="" isBlankWhenNull="true">
+				<reportElement x="264" y="509" width="74" height="13" uuid="b1bc6fb6-37ad-4c67-bdcb-213c8cc5ad20"/>
+				<textElement textAlignment="Right">
+					<font fontName="SansSerif" size="8" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new DecimalFormat("#,##0.00;-#,##0.00", new java.text.DecimalFormatSymbols(new java.util.Locale("pt", "BR"))).format(Double.parseDouble($P{vlTotalGeral}))]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="41" y="664" width="294" height="11" uuid="ddb969fb-986a-48d1-a76e-1f57d245b38b"/>
+				<textElement verticalAlignment="Bottom">
+					<font size="7" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{nmContribuinte}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="2" y="693" width="327" height="11" uuid="8e280cc9-d53d-43d6-84a1-d77468860e85"/>
+				<textElement>
+					<font fontName="SansSerif" size="7"/>
+				</textElement>
+				<textFieldExpression><![CDATA[($P{nmBairro}!=null?$P{nmBairro}+" - ":" ")+($P{nmCidade}!=null?$P{nmCidade}+" - ":" ")+($P{sgEstado}!=null?$P{sgEstado}:"")]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="2" y="684" width="327" height="11" uuid="cefbd62c-d3ca-47f7-b81e-1b4d978a7e45"/>
+				<textElement>
+					<font fontName="SansSerif" size="7"/>
+				</textElement>
+				<textFieldExpression><![CDATA[($P{nmTipoLogradouro} != null ? $P{nmTipoLogradouro} : "")+" "+$P{nmLogradouro}+", "+$P{nrEndereco}+($P{nmComplemento}!=null && !$P{nmComplemento}.equals("")?" - "+$P{nmComplemento}:"")]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="257" y="57" width="38" height="11" uuid="ca39c257-1e4a-480c-9e4a-09857484b0de"/>
+				<textElement>
+					<font fontName="SansSerif" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Emissão:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="57" width="165" height="11" uuid="ca39c257-1e4a-480c-9e4a-09857484b0de">
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+				<box padding="0"/>
+				<textElement textAlignment="Right">
+					<font fontName="SansSerif" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Documento de Arrecadação Municipal Nº]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="2" y="396" width="163" height="11" uuid="ca39c257-1e4a-480c-9e4a-09857484b0de"/>
+				<textElement>
+					<font fontName="SansSerif" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Documento de Arrecadação Municipal Nº]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="255" y="396" width="40" height="11" uuid="ca39c257-1e4a-480c-9e4a-09857484b0de">
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+				<textElement>
+					<font fontName="SansSerif" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Emissão:]]></text>
+			</staticText>
+			<textField pattern="dd/MM/yyyy HH:mm">
+				<reportElement x="295" y="396" width="45" height="11" uuid="25643dff-e10c-479e-a5f7-d789351bd06d">
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+				<textElement textAlignment="Right">
+					<font fontName="SansSerif" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new SimpleDateFormat("dd/MM/yyyy").format(new Date().getTime())]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="255" y="551" width="40" height="11" uuid="ca39c257-1e4a-480c-9e4a-09857484b0de">
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+				<textElement>
+					<font fontName="SansSerif" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Emissão:]]></text>
+			</staticText>
+			<textField pattern="dd/MM/yyyy HH:mm">
+				<reportElement x="295" y="551" width="45" height="11" uuid="25643dff-e10c-479e-a5f7-d789351bd06d">
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+				<textElement>
+					<font fontName="SansSerif" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new SimpleDateFormat("dd/MM/yyyy").format(new Date().getTime())]]></textFieldExpression>
+			</textField>
+			<textField pattern="" isBlankWhenNull="true">
+				<reportElement x="264" y="606" width="74" height="13" uuid="b1bc6fb6-37ad-4c67-bdcb-213c8cc5ad20"/>
+				<textElement textAlignment="Right">
+					<font fontName="SansSerif" size="8" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{vlJuros}]]></textFieldExpression>
+			</textField>
+			<textField pattern="" isBlankWhenNull="true">
+				<reportElement x="264" y="654" width="74" height="13" uuid="b1bc6fb6-37ad-4c67-bdcb-213c8cc5ad20"/>
+				<textElement textAlignment="Right">
+					<font fontName="SansSerif" size="8" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new DecimalFormat("#,##0.00;-#,##0.00", new java.text.DecimalFormatSymbols(new java.util.Locale("pt", "BR"))).format(Double.parseDouble($P{vlTotalGeral}))]]></textFieldExpression>
+			</textField>
+			<textField pattern="" isBlankWhenNull="true">
+				<reportElement x="264" y="620" width="74" height="13" uuid="b1bc6fb6-37ad-4c67-bdcb-213c8cc5ad20"/>
+				<textElement textAlignment="Right">
+					<font fontName="SansSerif" size="8" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{vlMulta}]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement x="65" y="591" width="64" height="15" uuid="25643dff-e10c-479e-a5f7-d789351bd06d"/>
+				<textElement textAlignment="Center">
+					<font fontName="SansSerif" size="8" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="279" y="162" width="34" height="9" uuid="352997a2-f61e-41d4-ae80-d2045e5b2c67"/>
+				<textElement textAlignment="Right">
+					<font fontName="SansSerif" size="5"/>
+				</textElement>
+				<text><![CDATA[Cód. IBGE]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="0" y="288" width="85" height="16" uuid="e413edf7-4257-4814-9ffd-bd7db34d8196"/>
+				<textElement textAlignment="Center" markup="none">
+					<font fontName="SansSerif" size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{nrAnoBase}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="211" width="341" height="9" uuid="45c68a05-490b-4eb8-bc20-d24c2e275fd8"/>
+				<textElement>
+					<font fontName="SansSerif" size="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{nmServicos}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement x="3" y="619" width="253" height="14" uuid="7f0433d1-d0ac-47fe-9388-8337864076b3"/>
+				<textElement markup="none">
+					<font fontName="SansSerif" size="7" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{dsMensagem}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement x="3" y="477" width="253" height="14" uuid="621493e6-c303-445a-81cd-cc05ce48c9e5"/>
+				<textElement markup="none">
+					<font fontName="SansSerif" size="7" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{dsMensagem}]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd/MM/yyyy HH:mm" isBlankWhenNull="true">
+				<reportElement x="170" y="57" width="62" height="11" uuid="4f7fb7f1-d594-49d0-b270-9259d436c173"/>
+				<textElement>
+					<font fontName="SansSerif" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{nrCodMovimento}]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd/MM/yyyy HH:mm" isBlankWhenNull="true">
+				<reportElement x="165" y="551" width="66" height="11" uuid="3e65201a-db96-4286-a656-af5ce0b82010"/>
+				<textElement>
+					<font fontName="SansSerif" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{nrCodMovimento}]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd/MM/yyyy HH:mm" isBlankWhenNull="true">
+				<reportElement x="165" y="396" width="66" height="11" uuid="73e24d33-c516-4331-b806-f6de28582e1e"/>
+				<textElement>
+					<font fontName="SansSerif" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{nrCodMovimento}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="71" width="341" height="10" uuid="b9c9bce4-bae0-48e5-bfe7-5b049d46fb4f">
+					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<textElement textAlignment="Right">
+					<font fontName="SansSerif" size="7" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{nrCodigoBarras1}+"  "+$P{nrCodigoBarras2}+"  "+$P{nrCodigoBarras3}+"  "+$P{nrCodigoBarras4}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="411" width="341" height="10" uuid="848a09f6-4c24-42ab-ba82-322044136b39">
+					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<textElement textAlignment="Right">
+					<font fontName="SansSerif" size="7" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{nrCodigoBarras1}+"  "+$P{nrCodigoBarras2}+"  "+$P{nrCodigoBarras3}+"  "+$P{nrCodigoBarras4}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+</jasperReport>

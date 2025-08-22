@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version last-->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="subreport_processo_correspondente" language="groovy" pageWidth="555" pageHeight="842" columnWidth="555" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="b585a798-47b7-4fa6-b465-64bfb12faed5">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<property name="com.jaspersoft.studio.unit." value="pixel"/>
+	<parameter name="NM_CLIENTE" class="java.lang.String"/>
+	<parameter name="DT_INICIAL" class="java.lang.String"/>
+	<parameter name="IMG_LOGOMARCA" class="byte[]" isForPrompting="false"/>
+	<parameter name="NM_TP_PERIODO" class="java.lang.String"/>
+	<parameter name="NM_EMPRESA" class="java.lang.String"/>
+	<parameter name="DT_FINAL" class="java.lang.String"/>
+	<parameter name="NM_SITUACAO" class="java.lang.String"/>
+	<parameter name="NM_TIPO_ACAO" class="java.lang.String"/>
+	<parameter name="NM_RELATORIO" class="java.lang.String"/>
+	<parameter name="TP_RELATORIO" class="java.lang.Integer"/>
+	<field name="NM_ENDERECO" class="java.lang.String"/>
+	<field name="NM_ORGAO" class="java.lang.String"/>
+	<field name="NR_CELULAR" class="java.lang.String"/>
+	<field name="NM_EMAIL" class="java.lang.String"/>
+	<field name="NM_CIDADE" class="java.lang.String"/>
+	<field name="SG_ESTADO" class="java.lang.String"/>
+	<field name="CD_ORGAO" class="java.lang.Integer"/>
+	<field name="CD_CIDADE" class="java.lang.Integer"/>
+	<field name="NM_BAIRRO" class="java.lang.String"/>
+	<variable name="RowCount" class="java.lang.Integer" calculation="Count">
+		<variableExpression><![CDATA[$F{NR_CELULAR}]]></variableExpression>
+		<initialValueExpression><![CDATA[new Integer(1)]]></initialValueExpression>
+	</variable>
+	<group name="NM_GROUP" keepTogether="true">
+		<groupExpression><![CDATA[$F{CD_ORGAO}]]></groupExpression>
+		<groupHeader>
+			<band height="35" splitType="Stretch">
+				<property name="com.jaspersoft.studio.layout" value="com.jaspersoft.studio.editor.layout.VerticalRowLayout"/>
+				<textField>
+					<reportElement x="0" y="0" width="555" height="35" uuid="6ff0cefc-0f8a-4f18-b598-fcae6317543b">
+						<property name="local_mesure_unitheight" value="pixel"/>
+						<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					</reportElement>
+					<box padding="2"/>
+					<textElement textAlignment="Center">
+						<font size="7" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{NM_ORGAO}]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupHeader>
+	</group>
+	<columnHeader>
+		<band height="16">
+			<staticText>
+				<reportElement mode="Transparent" x="429" y="0" width="123" height="14" forecolor="#000000" backcolor="#FFFFFF" uuid="46c60444-ef44-446f-a872-fdb6e39c97d4">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<property name="local_mesure_unitwidth" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<box padding="0" topPadding="2" leftPadding="5" bottomPadding="0" rightPadding="0"/>
+				<textElement textAlignment="Left" verticalAlignment="Top" rotation="None" markup="none">
+					<font fontName="SansSerif" size="7" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single" lineSpacingSize="1.0" firstLineIndent="0" leftIndent="0" rightIndent="0" spacingBefore="0" spacingAfter="0" tabStopWidth="40"/>
+				</textElement>
+				<text><![CDATA[Celular	]]></text>
+			</staticText>
+			<line>
+				<reportElement x="0" y="14" width="555" height="1" uuid="14ffeb2f-4328-48fe-b044-74d1b325ca3a"/>
+			</line>
+			<line>
+				<reportElement x="0" y="0" width="555" height="1" uuid="43483376-aed1-435a-a60e-8ef958570164"/>
+			</line>
+			<staticText>
+				<reportElement mode="Transparent" x="288" y="1" width="141" height="14" forecolor="#000000" backcolor="#FFFFFF" uuid="507d5d2b-2592-494a-b327-e2f401212618">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<property name="local_mesure_unitwidth" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<box padding="0" topPadding="2" leftPadding="5" bottomPadding="0" rightPadding="0"/>
+				<textElement textAlignment="Left" verticalAlignment="Top" rotation="None" markup="none">
+					<font fontName="SansSerif" size="7" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single" lineSpacingSize="1.0" firstLineIndent="0" leftIndent="0" rightIndent="0" spacingBefore="0" spacingAfter="0" tabStopWidth="40"/>
+				</textElement>
+				<text><![CDATA[E-mail]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Transparent" x="1" y="0" width="138" height="14" forecolor="#000000" backcolor="#FFFFFF" uuid="01641cc1-5e2d-4300-8803-cd6cf2dca819"/>
+				<box padding="0" topPadding="2" leftPadding="5" bottomPadding="0" rightPadding="0"/>
+				<textElement textAlignment="Left" verticalAlignment="Top" rotation="None" markup="none">
+					<font fontName="SansSerif" size="7" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single" lineSpacingSize="1.0" firstLineIndent="0" leftIndent="0" rightIndent="0" spacingBefore="0" spacingAfter="0" tabStopWidth="40"/>
+				</textElement>
+				<text><![CDATA[Comarcas Atendidas]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Transparent" x="139" y="0" width="149" height="14" forecolor="#000000" backcolor="#FFFFFF" uuid="92ea984e-873a-4b7f-877c-9724c6387768"/>
+				<box padding="0" topPadding="2" leftPadding="5" bottomPadding="0" rightPadding="0"/>
+				<textElement textAlignment="Left" verticalAlignment="Top" rotation="None" markup="none">
+					<font fontName="SansSerif" size="7" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single" lineSpacingSize="1.0" firstLineIndent="0" leftIndent="0" rightIndent="0" spacingBefore="0" spacingAfter="0" tabStopWidth="40"/>
+				</textElement>
+				<text><![CDATA[Sede do Correspondente]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="16" splitType="Immediate">
+			<property name="local_mesure_unitheight" value="pixel"/>
+			<property name="com.jaspersoft.studio.unit.height" value="px"/>
+			<textField>
+				<reportElement x="1" y="-21" width="138" height="15" uuid="5bcb8dab-11fb-44d0-badc-32b7b87793fe">
+					<property name="local_mesure_unitheight" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<box padding="2"/>
+				<textElement>
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{NM_CIDADE} + "/" + $F{SG_ESTADO}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="139" y="-21" width="149" height="15" uuid="a7fc4449-82ee-4554-b655-cb89afc54e5e">
+					<property name="local_mesure_unitheight" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<box padding="2"/>
+				<textElement>
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{NM_ENDERECO}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="288" y="-21" width="141" height="15" uuid="3e438082-fd7a-494d-8293-bedaeb22852a">
+					<property name="local_mesure_unitheight" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<box padding="2"/>
+				<textElement>
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{NM_EMAIL}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="430" y="-21" width="122" height="15" uuid="1d514cd9-2d45-4924-b8d9-abde521a79a1">
+					<property name="local_mesure_unitheight" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<box padding="2"/>
+				<textElement>
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{NR_CELULAR} == null ? "Não informado" : $F{NR_CELULAR}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+</jasperReport>

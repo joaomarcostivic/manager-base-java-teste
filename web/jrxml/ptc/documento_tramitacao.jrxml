@@ -1,0 +1,346 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.1.1.final using JasperReports Library version 6.1.1  -->
+<!-- 2017-05-15T16:56:59 -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="documento_tramitacao" language="groovy" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="12975c35-8601-42a1-868c-9d0ae58eab5c">
+	<property name="ireport.zoom" value="1.5"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="NM_EMPRESA" class="java.lang.String"/>
+	<parameter name="NM_RELATORIO" class="java.lang.String"/>
+	<parameter name="IMG_LOGOMARCA" class="java.lang.Object"/>
+	<parameter name="NM_SETOR_ORIGEM" class="java.lang.String"/>
+	<parameter name="NM_SETOR_DESTINO" class="java.lang.String"/>
+	<parameter name="DT_INICIAL" class="java.lang.String"/>
+	<parameter name="DT_FINAL" class="java.lang.String"/>
+	<parameter name="NM_TIPO_DOCUMENTO" class="java.lang.String"/>
+	<parameter name="NM_USUARIO" class="java.lang.String"/>
+	<parameter name="DT_RELATORIO" class="java.lang.String"/>
+	<parameter name="HR_RELATORIO" class="java.lang.String"/>
+	<parameter name="ID_RELATORIO" class="java.lang.String"/>
+	<field name="NM_ULTIMO_SETOR_ORIGEM" class="java.lang.String"/>
+	<field name="NR_DOCUMENTO" class="java.lang.String"/>
+	<field name="NM_TIPO_DOCUMENTO" class="java.lang.String"/>
+	<field name="DS_DT_ULTIMA_TRAMITACAO" class="java.lang.String"/>
+	<field name="NM_ULTIMO_SETOR_DESTINO" class="java.lang.String"/>
+	<field name="DS_DT_ULTIMO_RECEBIMENTO" class="java.lang.String"/>
+	<field name="NM_SITUACAO_DOCUMENTO" class="java.lang.String"/>
+	<field name="NM_SOLICITANTES" class="java.lang.String"/>
+	<field name="NM_SETOR_ATUAL" class="java.lang.String"/>
+	<field name="SG_SETOR_ATUAL" class="java.lang.String"/>
+	<field name="SG_ULTIMO_SETOR_DESTINO" class="java.lang.String"/>
+	<field name="SG_ULTIMO_SETOR_ORIGEM" class="java.lang.String"/>
+	<field name="NM_FASE" class="java.lang.String"/>
+	<field name="NM_SETOR" class="java.lang.String"/>
+	<field name="DS_ASSUNTO" class="java.lang.String"/>
+	<field name="SG_SETOR" class="java.lang.String"/>
+	<field name="DS_DT_PROTOCOLO" class="java.lang.String"/>
+	<field name="DS_NR_DOCUMENTO" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="47" splitType="Stretch">
+			<textField>
+				<reportElement x="1" y="0" width="801" height="28" uuid="5e891866-e0bc-4696-b40b-e515f4c5e210"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="15" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{NM_EMPRESA}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="28" width="802" height="19" uuid="e2042d8e-e4da-4ff5-9ad8-ade612c3c7c1"/>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font size="13" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{ID_RELATORIO}=="1"?"Relatório "+$P{NM_RELATORIO}:$P{NM_RELATORIO}]]></textFieldExpression>
+			</textField>
+			<image>
+				<reportElement x="1" y="0" width="45" height="45" uuid="baa9b4cd-f3cf-41c4-944e-50328c68657e"/>
+				<imageExpression><![CDATA[net.sf.jasperreports.engine.util.JRImageLoader.loadImage((byte[]) $P{IMG_LOGOMARCA})]]></imageExpression>
+			</image>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="17" splitType="Stretch">
+			<textField isBlankWhenNull="true">
+				<reportElement x="1" y="4" width="199" height="12" uuid="26d028f8-3336-4f6a-a312-2d437ce44cd0"/>
+				<textElement>
+					<font size="8" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Período: " + $P{DT_INICIAL} + " até " + $P{DT_FINAL}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="204" y="4" width="194" height="12" uuid="196b3857-fb35-4150-b40d-b2c5bc12b56a"/>
+				<textElement>
+					<font size="8" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Tipo de Documento: " + ( $P{NM_TIPO_DOCUMENTO} == null ? "Todos" : $P{NM_TIPO_DOCUMENTO} )]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="398" y="4" width="404" height="12" uuid="596dadec-7dad-4115-84db-b164a244cc71"/>
+				<textElement>
+					<font size="8" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{ID_RELATORIO}=="3" ?
+"Setor Destino: "+($P{NM_SETOR_DESTINO}!=null?$P{NM_SETOR_DESTINO}:"Todos"):
+"Setor de Origem: "+($P{NM_SETOR_ORIGEM}!=null?$P{NM_SETOR_ORIGEM}:"Todos")]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="0" y="2" width="803" height="1" uuid="25838f6f-bd04-4c94-b7bd-6155611b7e1e"/>
+			</line>
+			<line>
+				<reportElement x="0" y="16" width="803" height="1" uuid="0392801a-251c-454b-95b8-63ba2e03fcbd"/>
+			</line>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="17" splitType="Stretch">
+			<staticText>
+				<reportElement x="225" y="4" width="75" height="12" uuid="4fd89d19-c115-471b-a054-bc2e97445771">
+					<property name="local_mesure_unitwidth" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="local_mesure_unitx" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+				</reportElement>
+				<textElement>
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Setor Emitente]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="1" y="4" width="50" height="12" uuid="3a64c7fe-c134-41c2-83c5-e9e031aab02a"/>
+				<textElement>
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Número]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="55" y="4" width="66" height="12" uuid="8ef517c9-89dc-42f3-ba15-98401cd9e12a">
+					<property name="local_mesure_unitwidth" value="pixel"/>
+					<property name="local_mesure_unitx" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+				</reportElement>
+				<textElement>
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Dt. Protocolo]]></text>
+			</staticText>
+			<line>
+				<reportElement x="0" y="2" width="803" height="1" uuid="e49a3d9f-deba-4be2-8e4e-8e877f809589"/>
+			</line>
+			<staticText>
+				<reportElement x="680" y="4" width="123" height="12" uuid="ea11886b-cdcb-471b-95d7-8a0581998824"/>
+				<textElement>
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Solicitante]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="465" y="4" width="66" height="12" uuid="89725f6f-8107-4fdf-93ba-2f4e5e7d7410">
+					<property name="local_mesure_unitwidth" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="local_mesure_unitx" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+				</reportElement>
+				<textElement>
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Dt. Recebido]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="370" y="4" width="90" height="12" uuid="8f8f654d-fdd5-4591-9adc-8f84625cd6a8">
+					<property name="local_mesure_unitx" value="pixel"/>
+				</reportElement>
+				<textElement>
+					<font size="9" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{ID_RELATORIO}=="3" ? "Setor de Origem" : "Setor Destino"]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="305" y="4" width="61" height="12" uuid="b9a0ec83-b4c6-4ce6-86cb-079b76c073ae">
+					<property name="local_mesure_unitwidth" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="local_mesure_unitx" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+				</reportElement>
+				<textElement>
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Dt. Envio]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="126" y="4" width="94" height="12" uuid="face7fba-c00f-4b68-b570-464166a99fb1"/>
+				<textElement>
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Documento]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="610" y="4" width="66" height="12" uuid="a48a55df-e99a-4fbb-9003-14b160718b1c"/>
+				<textElement>
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Situação Atual]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="535" y="4" width="70" height="12" uuid="a48a55df-e99a-4fbb-9003-14b160718b1c">
+					<property name="local_mesure_unitx" value="pixel"/>
+				</reportElement>
+				<textElement>
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Fase]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="35" splitType="Stretch">
+			<textField isBlankWhenNull="true">
+				<reportElement x="1" y="2" width="50" height="11" uuid="3769b407-9cdd-441e-9f07-0e5e97cf87bd"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{DS_NR_DOCUMENTO}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="126" y="2" width="94" height="11" uuid="d3731686-1dc7-4003-9bfa-061f9f288a1a"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{NM_TIPO_DOCUMENTO}]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd/MM/yyyy" isBlankWhenNull="true">
+				<reportElement x="305" y="2" width="61" height="11" uuid="fca7b46f-e58b-448c-b375-8996cb18e698"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{DS_DT_ULTIMA_TRAMITACAO}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="370" y="2" width="90" height="11" uuid="7b8ef467-76a1-4eb3-bed7-da524208a02c"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{ID_RELATORIO}=="3" ? ($F{SG_ULTIMO_SETOR_ORIGEM}!=null?$F{SG_ULTIMO_SETOR_ORIGEM}:$F{NM_ULTIMO_SETOR_ORIGEM}) :
+                        ($F{SG_ULTIMO_SETOR_DESTINO}!=null?$F{SG_ULTIMO_SETOR_DESTINO}:$F{NM_ULTIMO_SETOR_DESTINO})]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd/MM/yyyy" isBlankWhenNull="true">
+				<reportElement x="465" y="2" width="65" height="11" uuid="ccee87ce-8708-4599-a9fa-ca471634b1e5"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{DS_DT_ULTIMO_RECEBIMENTO}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="610" y="2" width="66" height="11" uuid="aad0ab56-e18a-4c53-91cb-1ae55598a95c"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{NM_SITUACAO_DOCUMENTO}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="0" y="32" width="802" height="1" uuid="1246219b-af74-4515-97c1-54d61f8e68cb">
+					<property name="local_mesure_unity" value="pixel"/>
+				</reportElement>
+				<graphicElement>
+					<pen lineWidth="1.0" lineStyle="Dotted"/>
+				</graphicElement>
+			</line>
+			<textField isBlankWhenNull="true">
+				<reportElement x="535" y="2" width="70" height="11" uuid="aad0ab56-e18a-4c53-91cb-1ae55598a95c"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{NM_FASE}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="680" y="2" width="122" height="11" uuid="dd7b17ee-302d-4301-8486-f62d240a2c77"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{NM_SOLICITANTES}]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd/MM/yyyy" isBlankWhenNull="true">
+				<reportElement x="225" y="2" width="75" height="11" uuid="07bf29e8-59bd-411b-a447-af079d958c8f"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{SG_SETOR}!=null ? $F{SG_SETOR} : $F{NM_SETOR}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="30" y="18" width="772" height="11" uuid="7d158236-8f97-47e0-817e-c8dcc257d289">
+					<property name="local_mesure_unitheight" value="pixel"/>
+					<property name="local_mesure_unity" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+				</reportElement>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{DS_ASSUNTO}]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd/MM/yyyy" isBlankWhenNull="true">
+				<reportElement x="55" y="2" width="66" height="11" uuid="f920c6e9-0819-4519-8448-deee4370f09e"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{DS_DT_PROTOCOLO}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="13" splitType="Stretch">
+			<staticText>
+				<reportElement x="1" y="2" width="801" height="11" uuid="5ddaca9b-5a33-41a1-a3b3-3e7954e3e4b2"/>
+				<textElement textAlignment="Center">
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[JurisManager - Excelência em Gestão de Processos]]></text>
+			</staticText>
+			<line>
+				<reportElement x="0" y="1" width="802" height="1" uuid="c150b982-ef9a-448b-9497-2c623e196aa5"/>
+			</line>
+			<textField>
+				<reportElement x="1" y="2" width="67" height="11" uuid="d1a45167-f25b-4231-8333-9e906721998b"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Página "+$V{PAGE_NUMBER}+" de "]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="69" y="2" width="19" height="11" uuid="e8d9728a-d7de-4c3b-8718-df29f5031ae7"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="15">
+			<staticText>
+				<reportElement x="0" y="1" width="101" height="12" uuid="00064e63-a102-4615-98fa-112e19956694"/>
+				<textElement>
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Nº de Documentos: ]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="102" y="1" width="24" height="12" uuid="1cbf3048-8f73-4df7-a75c-0d55ece77005"/>
+				<textElement>
+					<font size="9" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{REPORT_COUNT}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="596" y="1" width="206" height="12" uuid="196b3857-fb35-4150-b40d-b2c5bc12b56a"/>
+				<textElement>
+					<font size="8" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Emitido por: "+$P{NM_USUARIO}+" em "+$P{DT_RELATORIO}+" às "+$P{HR_RELATORIO}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="0" y="0" width="803" height="1" uuid="b9eebc09-e56c-45d1-826a-c0828c03e2a9"/>
+			</line>
+		</band>
+	</summary>
+</jasperReport>

@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="anexo_documentos" language="groovy" pageWidth="595" pageHeight="842" whenNoDataType="AllSectionsNoDetail" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" whenResourceMissingType="Empty" uuid="d7d6ee47-429e-4d71-a4f4-a17ec27db8f7">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="129"/>
+	<parameter name="NM_SOLICITANTES" class="java.lang.String"/>
+	<parameter name="NR_DOCUMENTO" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<field name="NM_TIPO_PENDENCIA" class="java.lang.String"/>
+	<field name="DT_PENDENCIA" class="java.util.Date"/>
+	<field name="NM_USUARIO_REGISTRO" class="java.lang.String"/>
+	<field name="NM_USUARIO_BAIXA" class="java.lang.String"/>
+	<field name="DT_BAIXA" class="java.util.Date"/>
+	<field name="TXT_PENDENCIA" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<columnHeader>
+		<band height="339" splitType="Stretch">
+			<staticText>
+				<reportElement uuid="4e58b399-3ae0-4c1e-a1ff-5af697bfe977" x="0" y="15" width="555" height="21"/>
+				<textElement textAlignment="Center">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[PREFEITURA MUNICIPAL DE VITÓRIA DA CONQUISTA]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="1c595144-3d4a-4b52-abb3-ef2c6570a277" x="145" y="60" width="275" height="28"/>
+				<textElement textAlignment="Center">
+					<font size="10"/>
+				</textElement>
+				<text><![CDATA[SECRETARIA MUNICIPAL DE TRANSPORTE, TRÂNSITO E INFRA-ESTRUTURA URBANA]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="1c595144-3d4a-4b52-abb3-ef2c6570a277" x="0" y="36" width="555" height="24"/>
+				<textElement textAlignment="Center">
+					<font size="10" isBold="true" isUnderline="false"/>
+				</textElement>
+				<text><![CDATA[www.pmvc.com.br]]></text>
+			</staticText>
+			<line>
+				<reportElement uuid="71f27fc5-edff-47f6-8d54-08bf720310fd" x="0" y="100" width="555" height="1"/>
+			</line>
+			<staticText>
+				<reportElement uuid="e55110c9-4600-4a0a-abe6-f7048a51e5a6" x="331" y="112" width="100" height="24"/>
+				<textElement/>
+				<text><![CDATA[Vitória da Conquista,]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="c8928e89-98ac-4ee9-ac60-dbd4b64fd176" x="5" y="210" width="545" height="61"/>
+				<textElement textAlignment="Justified">
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[	A Secretaria Municipal de Transporte, Trânsito e Infra-Estrutura Urbana - SIMTRANS, através da Coordenação de Urbanismo e Gerência de Análise de Projetos, em cumprimento as Leis vigentes e normas da A.B.N.T expede o presente Relatório de Análise do Projeto.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="51f1a962-817e-48af-983b-057551432f28" x="5" y="271" width="545" height="52"/>
+				<textElement textAlignment="Justified">
+					<font size="12" isBold="false" isStrikeThrough="false"/>
+				</textElement>
+				<text><![CDATA[	Na hipótese do interessado não prestar as informações ou anexar os documentos requisitados, abandonando o processo por mais de 30 (trinta) dias, este será arquivado, sem prejuízo das sanções cabíveis e penalidades previstas na Lei.]]></text>
+			</staticText>
+			<textField>
+				<reportElement uuid="ed88e3f9-db15-40b1-9f6a-f7f2614f2081" x="162" y="148" width="388" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$P{NM_SOLICITANTES}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="12e0717b-f6e0-48d5-87b5-389a05cca616" x="162" y="168" width="388" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{NR_DOCUMENTO}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="73619c96-07e6-4700-abe8-d1bb6ed3f58a" x="5" y="148" width="157" height="20"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[NOME DO(S) REQUERENTE(S):]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="2c10d571-8c73-4565-92a7-cf3c4eb24ae9" x="5" y="168" width="157" height="20"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[PROCESSO DE REGISTRO Nº:]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="186" splitType="Stretch">
+			<textField pattern="dd/MM/yyyy h.mm a" isBlankWhenNull="true">
+				<reportElement uuid="20b2cb60-87d9-4203-b0e4-631ca6746e0e" x="284" y="19" width="100" height="19"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{DT_PENDENCIA}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement uuid="827d8f64-114b-4ce6-9a9a-bca6b5c8397a" x="384" y="19" width="163" height="19"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{NM_USUARIO_REGISTRO}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement uuid="72cb33a2-187b-499a-a592-170542406c7a" x="50" y="19" width="234" height="19"/>
+				<textElement>
+					<font isBold="true" pdfFontName="Courier-Bold"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{NM_TIPO_PENDENCIA}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement uuid="cba62831-113e-4492-95e3-e24d8521dfee" x="50" y="82" width="231" height="19"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{NM_USUARIO_BAIXA}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement uuid="b20b9e80-898e-48f0-aa13-ba9deeea977d" x="5" y="185" width="540" height="1"/>
+				<graphicElement>
+					<pen lineStyle="Dashed"/>
+				</graphicElement>
+			</line>
+			<textField pattern="dd/MM/yyyy h.mm a" isBlankWhenNull="true">
+				<reportElement uuid="f96cb5fe-0254-4df8-8010-5249818c7d0a" x="281" y="82" width="266" height="19"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{DT_BAIXA}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="25026719-fdea-4247-a100-0edf59e0e6b2" x="7" y="0" width="32" height="19"/>
+				<textElement>
+					<font isBold="true" pdfFontName="Courier-Bold"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{COLUMN_COUNT}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement uuid="29c03770-fb18-4729-a17d-e7323b1ccc92" stretchType="RelativeToBandHeight" x="47" y="142" width="498" height="15"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{TXT_PENDENCIA}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="80e2a8d4-4d38-432d-9df6-ad279d00a5b7" x="50" y="0" width="234" height="20"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[TIPO DE PENDÊNCIA]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="2106d9a4-7b45-4563-a82c-4a09392a0d15" x="284" y="0" width="100" height="20"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[DATA]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="fd49ceca-1c1a-46eb-8069-6957344e2487" x="384" y="0" width="163" height="20"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[USUÁRIO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="03b9abd3-98a6-4ce4-8e27-8ac639120f51" x="284" y="62" width="263" height="20"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[DATA]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="8978932f-2ff0-4bd4-90f7-a9a048d39962" x="50" y="62" width="234" height="20"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[USUÁRIO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="d7d2ef26-eef3-445f-8054-4c7968c3de2b" x="47" y="122" width="500" height="20"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[DESCRISSÃO]]></text>
+			</staticText>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="112" splitType="Stretch">
+			<line>
+				<reportElement uuid="2b2593d4-4485-4ebc-951b-0ff27e9c3f99" x="5" y="34" width="545" height="1"/>
+			</line>
+			<staticText>
+				<reportElement uuid="c7b1697a-2772-4568-91af-770f017ddbc0" x="0" y="35" width="555" height="15"/>
+				<textElement textAlignment="Center">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[COORDENAÇÃO DE URBANISMO - GERÊNCIA DE ANÁLISE DE PROJETOS]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="917f095d-66f3-42a1-b181-44fc8e2e12c9" x="0" y="50" width="555" height="16"/>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[PRAÇA JOAQUIM CORREIA, Nº 55 - CENTRO - VITÓRIA DA CONQUISTA - BAHIA]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="4242761b-3508-49fd-a820-8ab905dd28d0" x="0" y="66" width="555" height="15"/>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[CEP: 45040-901 - FONE: (77) 34248954]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="1f79728c-9f3f-4c7c-9fa8-d8a483766a7f" x="0" y="81" width="555" height="14"/>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[FISCALIZAÇÃO DE OBRAS (77) 3424-8983 - TELEFAX (77) 342489-52]]></text>
+			</staticText>
+		</band>
+	</pageFooter>
+</jasperReport>

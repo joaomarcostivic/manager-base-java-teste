@@ -1,0 +1,224 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="compra_produto" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="373958c3-b6da-40d9-9a37-03db86411872">
+	<property name="ireport.zoom" value="2.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="LOGO" class="java.lang.Object"/>
+	<parameter name="nmRazaoSocial" class="java.lang.String"/>
+	<parameter name="nmFantasia" class="java.lang.String"/>
+	<parameter name="nmUsuario" class="java.lang.String"/>
+	<parameter name="nmDesenvolvedor" class="java.lang.String"/>
+	<parameter name="nmEmail" class="java.lang.String"/>
+	<parameter name="LOGO_DEV" class="java.lang.Object"/>
+	<parameter name="nmGrupo" class="java.lang.String"/>
+	<parameter name="stProdutoEmpresa" class="java.lang.String"/>
+	<parameter name="nmClassificacaoFiscal" class="java.lang.String"/>
+	<parameter name="nmNcm" class="java.lang.String"/>
+	<parameter name="dtHoje" class="java.lang.String"/>
+	<parameter name="hrHoje" class="java.lang.String"/>
+	<field name="NR_NCM" class="java.lang.String"/>
+	<field name="NM_NCM" class="java.lang.String"/>
+	<field name="SG_UNIDADE_MEDIDA" class="java.lang.String"/>
+	<field name="QT_PRODUTOS" class="java.lang.Integer"/>
+	<field name="NM_CLASSIFICACAO_FISCAL" class="java.lang.String"/>
+	<field name="CD_CLASSIFICACAO_FISCAL" class="java.lang.Integer"/>
+	<variable name="qtSubQuantProdutos" class="java.lang.Integer" resetType="Group" resetGroup="ncmPorClassificacao" calculation="Sum">
+		<variableExpression><![CDATA[$F{QT_PRODUTOS}]]></variableExpression>
+	</variable>
+	<variable name="qtTotalQuantProdutos" class="java.lang.Integer" calculation="Sum">
+		<variableExpression><![CDATA[$F{QT_PRODUTOS}]]></variableExpression>
+	</variable>
+	<group name="ncmPorClassificacao">
+		<groupExpression><![CDATA[$F{CD_CLASSIFICACAO_FISCAL}]]></groupExpression>
+		<groupHeader>
+			<band height="17">
+				<textField isBlankWhenNull="true">
+					<reportElement uuid="604df7dc-9676-4cf4-a1e7-96b1f529c02e" mode="Opaque" x="1" y="1" width="552" height="16" backcolor="#999999"/>
+					<textElement textAlignment="Left">
+						<font size="12"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{NM_CLASSIFICACAO_FISCAL}]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupHeader>
+		<groupFooter>
+			<band height="9">
+				<textField>
+					<reportElement uuid="e8e140a9-f8e6-4b53-ab2d-021ba35296b1" mode="Opaque" x="452" y="1" width="101" height="8" backcolor="#999999"/>
+					<textElement textAlignment="Right">
+						<font size="6"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$V{qtSubQuantProdutos}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement uuid="e8e140a9-f8e6-4b53-ab2d-021ba35296b1" mode="Opaque" x="1" y="1" width="191" height="8" backcolor="#999999"/>
+					<textElement>
+						<font size="6"/>
+					</textElement>
+					<textFieldExpression><![CDATA["TOTAL DE NCMs - " + $V{ncmPorClassificacao_COUNT}]]></textFieldExpression>
+				</textField>
+				<textField isBlankWhenNull="true">
+					<reportElement uuid="e8e140a9-f8e6-4b53-ab2d-021ba35296b1" mode="Opaque" x="192" y="1" width="260" height="8" backcolor="#999999"/>
+					<textElement textAlignment="Right">
+						<font size="6"/>
+					</textElement>
+					<textFieldExpression><![CDATA[]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupFooter>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<pageHeader>
+		<band height="63">
+			<staticText>
+				<reportElement uuid="b0a975cb-8cac-4013-a9ac-c49406f0d5d5" x="66" y="16" width="418" height="35"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="16" isBold="true"/>
+				</textElement>
+				<text><![CDATA[RELATÓRIO DE NCM]]></text>
+			</staticText>
+			<textField>
+				<reportElement uuid="c6158799-fb61-41c2-8585-38acabdc702c" x="1" y="51" width="552" height="10"/>
+				<textElement textAlignment="Center">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression><![CDATA[(($P{nmGrupo} == null || $P{nmGrupo}.equals("")) ? "Grupo: qualquer" : "Grupo: " + $P{nmGrupo}) + "    " + (($P{stProdutoEmpresa} == null || $P{stProdutoEmpresa}.equals("")) ? "Situação: qualquer" : "Situação: " + $P{stProdutoEmpresa}) + "    " + (($P{nmClassificacaoFiscal} == null || $P{nmClassificacaoFiscal}.equals("")) ? "Classificação: qualquer" : "Classificação: " + $P{nmClassificacaoFiscal}) + "    " + (($P{nmNcm} == null || $P{nmNcm}.equals("")) ? "Ncm: qualquer" : "Ncm: " + $P{nmNcm})]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement uuid="d95120a9-93ca-4e71-9e3d-5c51e6d2eb66" x="66" y="0" width="418" height="16"/>
+				<textElement textAlignment="Center" verticalAlignment="Bottom" markup="none">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{nmRazaoSocial} + (($P{nmFantasia}.equals("") || $P{nmFantasia} == null) ? "" : " - " + $P{nmFantasia})]]></textFieldExpression>
+			</textField>
+			<image scaleImage="FillFrame" hAlign="Center" vAlign="Middle" onErrorType="Blank" evaluationTime="Report">
+				<reportElement uuid="8c074d58-4f9a-4d93-8a2a-75274a8279a4" x="0" y="0" width="66" height="51"/>
+				<imageExpression><![CDATA[net.sf.jasperreports.engine.util.JRImageLoader.loadImage((byte[]) $P{LOGO_DEV})]]></imageExpression>
+			</image>
+			<image scaleImage="FillFrame" hAlign="Center" vAlign="Middle" onErrorType="Blank" evaluationTime="Report">
+				<reportElement uuid="8c074d58-4f9a-4d93-8a2a-75274a8279a4" x="484" y="0" width="70" height="51"/>
+				<imageExpression><![CDATA[net.sf.jasperreports.engine.util.JRImageLoader.loadImage((byte[]) $P{LOGO})]]></imageExpression>
+			</image>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="16" splitType="Stretch">
+			<staticText>
+				<reportElement uuid="0eb26ccb-5c8e-4eed-9b34-f97ad899d619" x="402" y="4" width="150" height="9"/>
+				<textElement textAlignment="Right">
+					<font size="6"/>
+				</textElement>
+				<text><![CDATA[QUANTIDADE DE PRODUTOS]]></text>
+			</staticText>
+			<line>
+				<reportElement uuid="6978ee43-d8c9-443b-9788-dffa5f623354" x="1" y="2" width="555" height="2"/>
+				<graphicElement>
+					<pen lineWidth="1.5"/>
+				</graphicElement>
+			</line>
+			<staticText>
+				<reportElement uuid="0eb26ccb-5c8e-4eed-9b34-f97ad899d619" x="380" y="4" width="20" height="9"/>
+				<textElement>
+					<font size="6"/>
+				</textElement>
+				<text><![CDATA[UND]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="041ea3b4-5374-4975-96fe-06f9aee1837c" x="1" y="4" width="121" height="9"/>
+				<textElement>
+					<font size="6"/>
+				</textElement>
+				<text><![CDATA[Nº NCM]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="041ea3b4-5374-4975-96fe-06f9aee1837c" x="122" y="4" width="258" height="9"/>
+				<textElement>
+					<font size="6"/>
+				</textElement>
+				<text><![CDATA[NCM]]></text>
+			</staticText>
+			<line>
+				<reportElement uuid="aee11a31-3b64-4f9d-acbc-a13b496e51db" x="0" y="14" width="555" height="2"/>
+				<graphicElement>
+					<pen lineWidth="1.5"/>
+				</graphicElement>
+			</line>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="8" splitType="Stretch">
+			<textField isBlankWhenNull="true">
+				<reportElement uuid="e8e140a9-f8e6-4b53-ab2d-021ba35296b1" x="1" y="0" width="121" height="8"/>
+				<textElement>
+					<font size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{NR_NCM}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement uuid="e8e140a9-f8e6-4b53-ab2d-021ba35296b1" x="122" y="0" width="258" height="8"/>
+				<textElement>
+					<font size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{NM_NCM}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement uuid="e8e140a9-f8e6-4b53-ab2d-021ba35296b1" x="402" y="0" width="150" height="8"/>
+				<textElement textAlignment="Right">
+					<font size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{QT_PRODUTOS}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement uuid="e8e140a9-f8e6-4b53-ab2d-021ba35296b1" x="380" y="0" width="20" height="8"/>
+				<textElement>
+					<font size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{SG_UNIDADE_MEDIDA}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="12">
+			<line>
+				<reportElement uuid="b22cbe36-06b3-4501-a505-99c9c259cab5" x="1" y="1" width="554" height="1"/>
+				<graphicElement>
+					<pen lineStyle="Solid"/>
+				</graphicElement>
+			</line>
+			<textField>
+				<reportElement uuid="b4535353-a90a-4520-8dc4-8400a0e2fed5" x="213" y="2" width="341" height="10"/>
+				<textElement textAlignment="Right" verticalAlignment="Top">
+					<font fontName="SansSerif" size="6" isBold="true" isItalic="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Emitido em " + $P{dtHoje} + " às " + $P{hrHoje} + " por " + $P{nmUsuario} + "   Página: " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="b4535353-a90a-4520-8dc4-8400a0e2fed5" x="0" y="2" width="213" height="10"/>
+				<textElement textAlignment="Left" verticalAlignment="Top">
+					<font fontName="SansSerif" size="6" isBold="false" isItalic="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{nmDesenvolvedor} + "   " + $P{nmEmail}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="8" splitType="Stretch">
+			<textField>
+				<reportElement uuid="e8e140a9-f8e6-4b53-ab2d-021ba35296b1" x="455" y="0" width="98" height="8"/>
+				<textElement textAlignment="Right">
+					<font size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{qtTotalQuantProdutos}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="e876addd-e868-4cb0-9257-53a544fc4c0f" x="0" y="0" width="455" height="8"/>
+				<textElement>
+					<font size="6"/>
+				</textElement>
+				<text><![CDATA[TOTAL GERAL]]></text>
+			</staticText>
+		</band>
+	</summary>
+</jasperReport>

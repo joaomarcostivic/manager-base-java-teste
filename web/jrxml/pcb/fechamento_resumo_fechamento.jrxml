@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version last-->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="fechamento_resumo_fechamento" language="groovy" pageWidth="280" pageHeight="802" columnWidth="280" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="5e74b53f-7c29-453f-91e7-77b083712bee">
+	<property name="ireport.zoom" value="3.1384283767210035"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<field name="NM_FORMA_PAGAMENTO" class="java.lang.String"/>
+	<field name="VL_PAGAMENTO" class="java.lang.Double"/>
+	<field name="PR_PAGAMENTO" class="java.lang.Float"/>
+	<variable name="subTotal" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[$F{VL_PAGAMENTO}]]></variableExpression>
+		<initialValueExpression><![CDATA[new Double(0)]]></initialValueExpression>
+	</variable>
+	<variable name="porcentagem" class="java.lang.Double">
+		<variableExpression><![CDATA[($F{VL_PAGAMENTO}*100)/$V{subTotal}]]></variableExpression>
+	</variable>
+	<columnHeader>
+		<band height="14" splitType="Stretch">
+			<line>
+				<reportElement x="0" y="0" width="1" height="13" uuid="67f24e60-dd82-4003-83ab-df53185a5362"/>
+			</line>
+			<staticText>
+				<reportElement x="1" y="0" width="278" height="13" uuid="18e92725-79bc-4571-b7bb-11605f728efe"/>
+				<textElement textAlignment="Center">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Saídas]]></text>
+			</staticText>
+			<line>
+				<reportElement x="279" y="0" width="1" height="14" uuid="8929752c-81e1-4008-b7c2-cec779e0527b"/>
+			</line>
+			<line>
+				<reportElement x="0" y="13" width="279" height="1" uuid="f5b87c4b-b763-47c2-b528-16729fa2b518"/>
+			</line>
+			<line>
+				<reportElement x="0" y="0" width="279" height="1" uuid="77d244a1-dad9-47fb-8a1c-6ee25f7a25c5"/>
+			</line>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="11" splitType="Stretch">
+			<textField>
+				<reportElement x="3" y="0" width="167" height="11" uuid="e5e39ca6-4aef-4b68-bcad-b3b541e588d3"/>
+				<box>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{NM_FORMA_PAGAMENTO}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.000">
+				<reportElement x="170" y="0" width="70" height="11" uuid="c6287bb7-3157-4e19-b9b1-1f7baa43b1aa">
+					<property name="local_mesure_unitwidth" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="local_mesure_unitx" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+				</reportElement>
+				<box>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Right">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{VL_PAGAMENTO}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="279" y="0" width="1" height="11" uuid="663fd748-817f-4f09-832f-b6796d45a15b"/>
+			</line>
+			<line>
+				<reportElement x="0" y="0" width="1" height="11" uuid="426eb3aa-ff63-491a-ab71-3ca767dd6785"/>
+			</line>
+			<textField evaluationTime="Auto" pattern="#,##0.00">
+				<reportElement mode="Opaque" x="240" y="0" width="29" height="11" uuid="78d3c51d-faaf-43a2-90aa-707357c387a6">
+					<property name="local_mesure_unitheight" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<property name="local_mesure_unity" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="8"/>
+					<paragraph leftIndent="1" rightIndent="1"/>
+				</textElement>
+				<textFieldExpression><![CDATA[($F{VL_PAGAMENTO}*100)/$V{subTotal}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="269" y="0" width="10" height="11" uuid="d93e1b43-4bb6-44bb-80d7-fdde149267d8">
+					<property name="local_mesure_unitwidth" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="local_mesure_unity" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					<property name="local_mesure_unitx" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[%]]></text>
+			</staticText>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="12" splitType="Stretch">
+			<property name="local_mesure_unitheight" value="pixel"/>
+			<property name="com.jaspersoft.studio.unit.height" value="px"/>
+			<staticText>
+				<reportElement x="3" y="0" width="167" height="11" uuid="aa534018-0a53-41db-a449-c67094a8a8bf"/>
+				<box>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement>
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Total]]></text>
+			</staticText>
+			<line>
+				<reportElement x="279" y="0" width="1" height="11" uuid="0cf0d128-e74b-444a-98c2-ff90eb7750c9"/>
+			</line>
+			<line>
+				<reportElement x="0" y="11" width="279" height="1" uuid="d5324b44-4255-443f-8a60-01238e3c9ca9"/>
+			</line>
+			<line>
+				<reportElement x="0" y="0" width="1" height="11" uuid="426eb3aa-ff63-491a-ab71-3ca767dd6785"/>
+			</line>
+			<line>
+				<reportElement x="0" y="-1" width="279" height="1" uuid="901a31f7-600e-430a-ac55-a171defff78d"/>
+			</line>
+			<textField evaluationTime="Auto" pattern="#,##0.000">
+				<reportElement x="170" y="0" width="107" height="11" uuid="e8e2611f-81e3-42eb-b8ec-c9ca5a9f5d24"/>
+				<textElement textAlignment="Right">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{subTotal}]]></textFieldExpression>
+			</textField>
+		</band>
+	</columnFooter>
+</jasperReport>

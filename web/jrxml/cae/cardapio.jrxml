@@ -1,0 +1,446 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.1.1.final using JasperReports Library version 6.1.1  -->
+<!-- 2016-12-27T16:54:08 -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="cardapio" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="762" leftMargin="40" rightMargin="40" topMargin="30" bottomMargin="30" uuid="75c496e7-d97c-42fe-ae01-056ae651df0c">
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
+	<property name="net.sf.jasperreports.export.pdf.force.linebreak.policy" value="true"/>
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="96"/>
+	<property name="com.jaspersoft.studio.unit." value="pixel"/>
+	<parameter name="nmRazaoSocial" class="java.lang.String"/>
+	<parameter name="LOGO" class="java.lang.Object"/>
+	<parameter name="NM_SISTEMA" class="java.lang.String"/>
+	<parameter name="nmTitulo" class="java.lang.String"/>
+	<parameter name="LOGO_PATH" class="java.lang.String"/>
+	<parameter name="nrRegistros" class="java.lang.String"/>
+	<parameter name="NM_CARDAPIO" class="java.lang.String"/>
+	<parameter name="NM_MODALIDADE" class="java.lang.String"/>
+	<parameter name="DS_DT_INICIAL_VALIDADE" class="java.lang.String"/>
+	<parameter name="DS_DT_FINAL_VALIDADE" class="java.lang.String"/>
+	<parameter name="VL_KCAL" class="java.lang.String"/>
+	<parameter name="VL_PER_CAPTA" class="java.lang.String"/>
+	<parameter name="VL_CHO" class="java.lang.String"/>
+	<parameter name="VL_PTN" class="java.lang.String"/>
+	<parameter name="VL_LIP" class="java.lang.String"/>
+	<parameter name="VL_FIBRAS" class="java.lang.String"/>
+	<parameter name="VL_VIT_A" class="java.lang.String"/>
+	<parameter name="VL_VIT_C" class="java.lang.String"/>
+	<parameter name="VL_CA" class="java.lang.String"/>
+	<parameter name="VL_FE" class="java.lang.String"/>
+	<parameter name="VL_MG" class="java.lang.String"/>
+	<parameter name="VL_ZN" class="java.lang.String"/>
+	<parameter name="DS_NUTRICIONISTA" class="java.lang.String"/>
+	<parameter name="TXT_OBSERVACAO" class="java.lang.String"/>
+	<field name="DS_TP_REFEICAO" class="java.lang.String"/>
+	<field name="NM_REFEICAO_SEG" class="java.lang.String"/>
+	<field name="NM_REFEICAO_TER" class="java.lang.String"/>
+	<field name="NM_REFEICAO_QUA" class="java.lang.String"/>
+	<field name="NM_REFEICAO_QUI" class="java.lang.String"/>
+	<field name="NM_REFEICAO_SEX" class="java.lang.String"/>
+	<title>
+		<band height="68">
+			<textField>
+				<reportElement x="0" y="0" width="762" height="25" uuid="cbcbd31b-dd3a-412a-beff-5d5f53f29608"/>
+				<textElement textAlignment="Center">
+					<font size="15" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{nmTitulo}]]></textFieldExpression>
+			</textField>
+			<image scaleImage="RetainShape" hAlign="Left" onErrorType="Blank">
+				<reportElement x="6" y="0" width="119" height="50" isRemoveLineWhenBlank="true" uuid="5e56db0f-5dac-47a1-90c7-7e8ad6490d4c"/>
+				<imageExpression><![CDATA[net.sf.jasperreports.engine.util.JRImageLoader.loadImage((byte[]) $P{LOGO})]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="0" y="30" width="762" height="16" uuid="defa3356-2c8c-4320-bd13-7b884b3d4845"/>
+				<textElement textAlignment="Center">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[PREFEITURA MUNICIPAL DE VITÓRIA DA CONQUISTA]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="50" width="762" height="16" uuid="2011a09b-ee01-4d73-946f-58d204093721"/>
+				<textElement textAlignment="Center">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[COORDENAÇÃO DE ALIMENTAÇÃO ESCOLAR]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="26">
+			<line>
+				<reportElement x="0" y="2" width="762" height="1" uuid="e39906ae-b44b-4db8-8115-acf83d1c9d30"/>
+			</line>
+			<textField isBlankWhenNull="true">
+				<reportElement x="0" y="6" width="350" height="15" uuid="1533dd64-cded-4f63-9492-6ee1fd6519d9">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<textFieldExpression><![CDATA[$P{NM_CARDAPIO}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="360" y="6" width="209" height="15" uuid="e93ca359-51e5-444c-af06-b6cb8c31f2e1">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<textFieldExpression><![CDATA[$P{NM_MODALIDADE}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="576" y="5" width="80" height="15" uuid="5dbdb9af-3474-4ad0-a23e-e375b58e4c21">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<textFieldExpression><![CDATA[$P{DS_DT_INICIAL_VALIDADE}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="682" y="6" width="80" height="15" uuid="3a361457-b088-4643-83e2-99d5d203e254">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<textFieldExpression><![CDATA[$P{DS_DT_FINAL_VALIDADE}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="658" y="5" width="21" height="15" uuid="6b5976af-7e4c-489d-b94d-feaa645aa62a">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<textElement>
+					<font isBold="false"/>
+				</textElement>
+				<text><![CDATA[ATÉ]]></text>
+			</staticText>
+			<line>
+				<reportElement x="1" y="23" width="762" height="1" uuid="b4d71d03-64b9-4f5f-87a7-be5869e40826"/>
+			</line>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="17">
+			<staticText>
+				<reportElement x="1" y="0" width="167" height="15" uuid="a06bc1b3-1500-4fc3-a8fa-de1d2c926610">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[Refeição]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="645" y="0" width="118" height="15" uuid="54f36d40-f55b-41ea-a6bd-e38a5e052497">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[Sexta-feira]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="526" y="0" width="119" height="15" uuid="6b93873f-5b5d-4d2e-b005-8c7fb797619c">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[Quinta-feira]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="168" y="0" width="120" height="15" uuid="1460c570-d45d-456d-b5fa-e143176918cf">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[Segunda-feira]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="288" y="0" width="119" height="15" uuid="1f5e375f-493f-45e8-8f25-887b96c763f6">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[Terça-feira]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="407" y="0" width="119" height="15" uuid="4b5ba2e5-4d7c-45cb-980a-4490b6cfffdb">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[Quarta-feira]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="51">
+			<textField isBlankWhenNull="true">
+				<reportElement positionType="FixRelativeToBottom" x="0" y="0" width="168" height="50" uuid="3b41e04c-2f83-4e20-8f78-68f06f2c16e2">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{DS_TP_REFEICAO}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement positionType="FixRelativeToBottom" x="168" y="0" width="120" height="50" uuid="a1933f69-6e70-4739-a01e-e395333d19c9">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{NM_REFEICAO_SEG}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement positionType="FixRelativeToBottom" x="288" y="0" width="119" height="50" uuid="b5f1d3ed-9699-486a-9e94-eeb86d6c3373">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{NM_REFEICAO_TER}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement positionType="FixRelativeToBottom" x="407" y="0" width="119" height="50" uuid="1054f7de-fd7d-42ec-974d-d8cbb95bbf0f">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{NM_REFEICAO_QUA}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement positionType="FixRelativeToBottom" x="526" y="0" width="119" height="50" uuid="693ebe1b-fbb9-4613-96e4-835ea59c5f36">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{NM_REFEICAO_QUI}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement positionType="FixRelativeToBottom" x="645" y="0" width="118" height="50" uuid="e8035c36-109f-4f49-95c4-af16a02d63fd">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{NM_REFEICAO_SEX}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="153">
+			<staticText>
+				<reportElement x="1" y="2" width="133" height="30" uuid="e6751f48-b46f-46db-a082-6d4b7768d14e"/>
+				<textElement textAlignment="Center">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Composição nutricional (média mensal)]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="248" y="2" width="57" height="30" uuid="3c0c8229-3aa1-482a-96b3-059239196f12">
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+				<textElement>
+					<font size="8" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["PTN(g)\n" + $P{VL_PTN}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="305" y="2" width="57" height="30" uuid="91ef7ecc-1bbe-40f3-8dab-d05ce2a93e1e">
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+				<textElement>
+					<font size="8" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["LIP(g)\n" + $P{VL_LIP}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="191" y="2" width="57" height="30" uuid="6c9c8572-0e62-4fa2-af4f-c703244afe3c">
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+				<textElement>
+					<font size="8" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["CHO(g)\n" + $P{VL_CHO}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="134" y="2" width="57" height="30" uuid="66ddc718-296d-46f4-8c52-900590344858">
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+				<textElement textAlignment="Center">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Energia (kcal)\n"+$P{VL_KCAL}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="533" y="2" width="57" height="30" uuid="17c263c0-33b9-41a8-bdd0-55d863c67849">
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+				<textElement>
+					<font size="8" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Ca (mg)\n" + $P{VL_CA}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="476" y="2" width="57" height="30" uuid="1e1521a1-7817-45e2-8eac-93117c3d27b4">
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+				<textElement>
+					<font size="8" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Vita C (mg)\n" + $P{VL_VIT_C}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="419" y="2" width="57" height="30" uuid="05664677-d5ce-4ecd-82cb-43ccebd955a5">
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+				<textElement>
+					<font size="8" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Vita A (mg)\n" + $P{VL_VIT_A}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="362" y="2" width="57" height="30" uuid="e0776423-0090-4a83-9fbe-9ecc60396bac">
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+				<textElement>
+					<font size="8" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Fibras(g)\n" + $P{VL_FIBRAS}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="704" y="2" width="57" height="30" uuid="6b32acef-7fdf-4715-97a5-74a4dd272376">
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+				<textElement>
+					<font size="8" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Zn (mg)\n" + $P{VL_ZN}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="647" y="2" width="57" height="30" uuid="efdd9944-df23-4ed0-a2d8-a5736a20796b">
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+				<textElement>
+					<font size="8" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Mg (mg)\n" + $P{VL_MG}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="590" y="2" width="57" height="30" uuid="6b98920c-b28b-4820-b8ab-979cc65547b4">
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+				<textElement>
+					<font size="8" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Fe (mg)\n" + $P{VL_FE}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="1" y="34" width="761" height="1" uuid="ec3c2b99-f918-43a2-a343-e2a8b792a9ac"/>
+			</line>
+			<staticText>
+				<reportElement x="1" y="40" width="100" height="15" uuid="738323f9-6a60-4331-b539-58a8952e631b">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Nutricionistas]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="1" y="55" width="349" height="95" uuid="85e1d3b4-df62-4fd5-a1b8-2656d4c9aa24"/>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{DS_NUTRICIONISTA}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="410" y="55" width="349" height="95" uuid="550a0d66-cb75-4bcd-b2bf-b9dd29a3ba61"/>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{TXT_OBSERVACAO}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="410" y="38" width="100" height="15" uuid="5d40bc28-5d2b-4ca2-b5be-bd4c757a9966">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Observações]]></text>
+			</staticText>
+			<line>
+				<reportElement x="0" y="152" width="761" height="1" uuid="92bbd89c-ce3e-45ba-a5b2-7fe7576c4471"/>
+			</line>
+		</band>
+	</columnFooter>
+	<pageFooter>
+		<band height="54">
+			<textField pattern="dd/MM/yyyy HH:mm:ss">
+				<reportElement x="696" y="24" width="64" height="9" uuid="fa64f976-17f4-435b-880d-6b05a8d1e720"/>
+				<textElement>
+					<font size="7" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new SimpleDateFormat("dd/MM/yyyy").format(new java.util.Date())]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="678" y="24" width="11" height="9" uuid="a4619d54-93ef-4084-b108-b405f706d59e"/>
+				<textElement>
+					<font size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Emitido em ]]></text>
+			</staticText>
+		</band>
+	</pageFooter>
+</jasperReport>
