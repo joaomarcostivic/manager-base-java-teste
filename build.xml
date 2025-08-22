@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="manager-base-java" default="build" basedir=".">
+	<property name="src.dir" value="src" />
+	<property name="web.dir" value="web" />
+	<property name="build.dir" value="${web.dir}/WEB-INF/classes" />
+	<property name="encoding" value="UTF-8" />
+	<property name="source" value="1.8" />
+	<property name="target" value="1.8" />
+	<property environment="env" />
+	<property name="debuglevel" value="source,lines,vars" />
+	<!-- ECJ Correto -->
+	<property name="ecj.jar" value="${web.dir}/WEB-INF/compile/ecj-4.6.1.jar" />
+	
+	<!-- Classpath ajustado -->
+	<path id="project.classpath">
+		<pathelement location="${ecj.jar}" />
+		<fileset dir="${web.dir}/WEB-INF/lib">
+			<include name="**/*.jar" />
+		</fileset>
+	</path>
+	<target name="init">
+		<mkdir dir="${build.dir}" />
+	</target>
+	<target name="clean">
+		<delete dir="${build.dir}" />
+	</target>
+	<target name="cleanall" depends="clean" />
+	<target name="compile" depends="init">
+		<javac 
+            compiler="org.eclipse.jdt.core.JDTCompilerAdapter" 
+            encoding="${encoding}" 
+            srcdir="${src.dir}" 
+            destdir="${build.dir}" 
+            includeantruntime="false" 
+            debug="true" 
+            debuglevel="${debuglevel}" 
+            source="${source}" 
+            target="${target}" 
+            nowarn="true"
+            failonerror="true"
+        >
+			<classpath refid="project.classpath" />
+		</javac>
+	</target>
+	<target name="copy-resources">
+		<copy todir="${build.dir}">
+			<fileset dir="${src.dir}">
+				<exclude name="**/*.java" />
+			</fileset>
+		</copy>
+	</target>
+	<target name="build" depends="clean,compile,copy-resources" />
+</project>

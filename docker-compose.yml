@@ -1,0 +1,31 @@
+services:
+  tomcat:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8080:8080"
+    restart: always
+    container_name: manager-base-java
+    shm_size: 10gb
+    deploy:
+      resources:
+        limits:
+          memory: 10g
+          cpus: "2.0"
+        reservations:
+          memory: 8g
+          cpus: "1.0"
+    environment:
+      - APP_CONTEXT=mob
+      - CATALINA_OPTS=-Xms512m -Xmx1024m -XX:+UseG1GC
+      - TZ=America/Sao_Paulo
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    network_mode: "bridge"
+    volumes:
+      - "/etc/timezone:/etc/timezone:ro"
+      - "/etc/localtime:/etc/localtime:ro"
+      - "/tivic/itabirito/docker_files/Aplicacao/ServerSide/conf/logs:/usr/local/tomcat/logs"
+      - "/tivic/itabirito/docker_files/Aplicacao/ServerSide/conf/logs/BackupDetran:/usr/src/app/manager-base-java/web/BACKUP DETRAN"
+      - "/tivic/itabirito/docker_files/Aplicacao/ServerSide/conf/manager.conf:/usr/src/app/manager-base-java/web/WEB-INF/classes/com/tivic/manager/conf/manager.conf"
