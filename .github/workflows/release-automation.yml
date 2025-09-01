@@ -1,0 +1,54 @@
+name: Git-flow Release Automation
+
+on:
+  pull_request:
+    types: [closed]
+    branches:
+      - main  # A branch para a qual o PR da release será mergeado
+
+jobs:
+  finish_release:
+    if: github.event.pull_request.merged == true && startsWith(github.head_ref, 'release/')
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v2
+        with:
+          # Para que o git tenha acesso completo ao histórico para os merges
+          fetch-depth: 0 
+
+      - name: Configure Git
+        run: |
+          git config --global user.name "github-actions"
+          git config --global user.email "actions@github.com"
+          
+      - name: Perform Merges and Tagging
+        id: merge_and_tag
+        run: |
+          # Pega o nome da branch da release (ex: release/1.1.0)
+          RELEASE_BRANCH="${{ github.head_ref }}"
+          
+          # Pega o número da versão
+          VERSION="${RELEASE_BRANCH#release/}"
+
+          # Faz o merge para main (se ainda não foi feito pelo PR)
+          git checkout main
+          git pull origin main
+          git merge --no-ff "$RELEASE_BRANCH"
+          
+          # Cria a tag (ex: v1.1.0)
+          git tag "v$VERSION"
+          
+          # Faz o merge para develop
+          git checkout develop
+          git pull origin develop
+          git merge --no-ff "$RELEASE_BRANCH"
+          
+          # Envia tudo para o GitHub
+          git push origin main
+          git push origin develop
+          git push origin "v$VERSION"
+          
+          # Limpa a branch da release
+          git push origin --delete "$RELEASE_BRANCH"

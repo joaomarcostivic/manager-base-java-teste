@@ -1,0 +1,29 @@
+name: Check Git-flow
+
+# Define o evento que vai disparar a Action. Neste caso, é um push.
+on: push
+
+jobs:
+  check-branch-rules:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v2
+
+      - name: Verify Git-flow Rules
+        run: |
+          # A branch que foi alterada no push
+          BRANCH_NAME="${GITHUB_REF##*/}"
+
+          # Se o push for para main ou develop...
+          if [[ "$BRANCH_NAME" == "main" || "$BRANCH_NAME" == "develop" ]]; then
+            # ...e não for de um Pull Request, a Action falha.
+            # Isso impede que alguém dê push direto nessas branches.
+            if [[ -z "${{ github.event.pull_request }}" ]]; then
+              echo "Erro: Não é permitido fazer push direto para a branch '$BRANCH_NAME'."
+              echo "Use um pull request a partir de uma branch feature ou hotfix."
+              exit 1
+            else
+              echo "Pull Request para a branch '$BRANCH_NAME' detectado. OK."
+            fi
+          fi
